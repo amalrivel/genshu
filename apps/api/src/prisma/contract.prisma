@@ -8,12 +8,17 @@ model User {
   updatedAt temporal.updatedAtString()
 }
 
-// model Post {
-//   id        Int      @id @default(autoincrement())
-//   title     String
-//   content   String?
-//   author    User     @relation(fields: [authorId], references: [id])
-//   authorId  Int
-//   createdAt TimestamptzString @default(now())
-//   updatedAt temporal.updatedAtString()
-// }
+model Topic {
+  id        Int @id @default(autoincrement())
+  title     String
+  createdAt TimestamptzString @default(now())
+  updatedAt temporal.updatedAtString()
+}
+
+model Material {
+  id      Int @id @default(autoincrement())
+  title   String
+  content String
+  topicId Int
+  topic   Topic @relation(fields: [topicId], references: [id])
+}
