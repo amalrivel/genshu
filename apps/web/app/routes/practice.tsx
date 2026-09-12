@@ -24,7 +24,9 @@ export default function PracticeSets({ loaderData }: Route.ComponentProps) {
       </nav>
       <h1>Practice</h1>
       <p>Choose a practice set to begin.</p>
-      {!loaderData.length && <p>No practice sets are available yet.</p>}
+      {!loaderData.length && (
+        <p>No practice content exists yet. An Admin needs to create a Practice Set.</p>
+      )}
       <ul className="practice-set-list">
         {loaderData.map((practiceSet) => (
           <li key={practiceSet.id}>

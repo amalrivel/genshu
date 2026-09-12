@@ -77,11 +77,30 @@ Resetting a password revokes all existing sessions for that user.
 Topics, materials, questions, and Practice Set management require Admin.
 Participant Practice routes require an authenticated session.
 
+## Local demo data
+
+Apply the existing Prisma migrations to the local `DATABASE_URL`, then bootstrap
+an Admin and seed the synthetic demo content:
+
+```bash
+ADMIN_EMAIL=admin@example.com ADMIN_PASSWORD='a password of at least 12 characters' \
+  pnpm --filter api run bootstrap:admin
+pnpm --filter api run seed:demo
+pnpm dev
+```
+
+Sign in and open `http://localhost:5173/practice` (or the equivalent
+`127.0.0.1` URL). The seed creates two `[DEMO]` topics, 12 questions, and the
+`[DEMO] Gentsuki Basic Practice` set. It is idempotent and only updates its own
+`[DEMO]` records; it does not delete user-created data. Demo content is
+synthetic product-test data and is not intended for production or authoritative
+driving instruction.
+
 ## Checks
 
 - `pnpm --filter api typecheck`
 - `pnpm --filter api test` (requires the running API and development database;
-  creates temporary records and cleans up only its own records)
+  creates temporary records and seeds/reuses the `[DEMO]` records)
 - `pnpm --filter web typecheck`
 - `pnpm --filter web build`
 

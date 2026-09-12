@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { after, before, test } from "node:test";
 import { hashPassword } from "./auth.ts";
 import { db } from "./prisma/db.ts";
+import { demoPracticeSetTitle, demoQuestions, demoTopics, seedDemo } from "./seed-demo.ts";
 
 const base = "http://localhost:3000";
 let adminCookie = "";
@@ -77,6 +78,54 @@ test("Local Vite development ports can read API responses", async () => {
   assert.equal(
     response.headers.get("access-control-allow-origin"),
     "http://localhost:5174",
+  );
+});
+
+test("Demo seed creates reusable content without duplicates", async () => {
+  const first = await seedDemo();
+  const second = await seedDemo();
+  assert.deepEqual(
+    second.topics.map((topic) => topic.id),
+    first.topics.map((topic) => topic.id),
+  );
+  assert.deepEqual(
+    second.questions.map((question) => question.id),
+    first.questions.map((question) => question.id),
+  );
+  assert.equal(first.topics.length, demoTopics.length);
+  assert.equal(first.questions.length, demoQuestions.length);
+  assert.equal(second.practiceSet.id, first.practiceSet.id);
+  const links = await db.orm.public.PracticeSetQuestion.where({
+    practiceSetId: first.practiceSet.id,
+  })
+    .orderBy([(link) => link.position.asc()])
+    .all();
+  assert.deepEqual(
+    links.map((link) => link.questionId),
+    first.questions.map((question) => question.id),
+  );
+  assert.equal(
+    (await db.orm.public.PracticeSet.where({ title: demoPracticeSetTitle }).all()).length,
+    1,
+  );
+  assert.ok(
+    (await request("/practice")).some(
+      (set: { id: number }) => set.id === first.practiceSet.id,
+    ),
+  );
+  const practice = await request(
+    `/practice-sets/${first.practiceSet.id}/practice`,
+  );
+  assert.equal(practice.questions.length, demoQuestions.length);
+  assert.equal(JSON.stringify(practice).includes("correctAnswer"), false);
+  const result = await request(
+    `/practice-sets/${first.practiceSet.id}/submit`,
+    "POST",
+    { answers: [] },
+  );
+  assert.deepEqual(
+    { total: result.total, correct: result.correct, unanswered: result.unanswered },
+    { total: demoQuestions.length, correct: 0, unanswered: demoQuestions.length },
   );
 });
 
