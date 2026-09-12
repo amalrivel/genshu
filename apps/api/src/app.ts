@@ -5,7 +5,7 @@ import { content, contentError } from './content.ts';
 const app: Express = express();
 
 var corsOptions = {
-  origin: 'http://localhost:5173',
+  origin: /^http:\/\/127.0.0.1:\d+$/,
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 

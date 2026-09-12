@@ -95,6 +95,35 @@ async function practiceSetDetail(practiceSet: { id: number }) {
   return { ...practiceSet, questions: links.map((link) => ({ ...byId.get(link.questionId)!, position: link.position })) };
 }
 
+async function practiceSetForPractice(practiceSet: { id: number }) {
+  const links = await db.orm.public.PracticeSetQuestion.where({ practiceSetId: practiceSet.id })
+    .orderBy([(link) => link.position.asc(), (link) => link.id.asc()]).all();
+  const questions = links.length
+    ? await db.orm.public.Question.where((q) => q.id.in(links.map((link) => link.questionId))).all()
+    : [];
+  const byId = new Map(questions.map((question) => [question.id, question]));
+  return {
+    ...practiceSet,
+    questions: links.map((link) => {
+      const question = byId.get(link.questionId)!;
+      return {
+        id: question.id,
+        japaneseText: question.japaneseText,
+        indonesianTranslation: question.indonesianTranslation,
+        furigana: question.furigana,
+        position: link.position,
+      };
+    }),
+  };
+}
+
+function submittedAnswer(body: unknown) {
+  if (!body || typeof body !== 'object' || Array.isArray(body) || typeof (body as Record<string, unknown>).answer !== 'boolean') {
+    invalid('Answer must be a boolean.');
+  }
+  return (body as { answer: boolean }).answer;
+}
+
 content.get('/topics', async (_req, res) => {
   res.json(await db.orm.public.Topic.orderBy([(t) => t.title.asc(), (t) => t.id.asc()]).all());
 });
@@ -200,6 +229,28 @@ content.delete('/questions/:id', async (req, res) => {
 
 content.get('/practice-sets', async (_req, res) => {
   res.json(await db.orm.public.PracticeSet.orderBy([(set) => set.title.asc(), (set) => set.id.asc()]).all());
+});
+content.get('/practice-sets/:id/practice', async (req, res) => {
+  const practiceSet = await db.orm.public.PracticeSet.where({ id: id(req.params.id) }).first();
+  if (!practiceSet) { res.status(404).json({ error: 'Practice set not found.' }); return; }
+  res.json(await practiceSetForPractice(practiceSet));
+});
+content.post('/practice-sets/:id/questions/:questionId/check-answer', async (req, res) => {
+  const practiceSetId = id(req.params.id);
+  const questionId = id(req.params.questionId);
+  const answer = submittedAnswer(req.body);
+  const practiceSet = await db.orm.public.PracticeSet.where({ id: practiceSetId }).first();
+  if (!practiceSet) { res.status(404).json({ error: 'Practice set not found.' }); return; }
+  const link = await db.orm.public.PracticeSetQuestion.where({ practiceSetId, questionId }).first();
+  if (!link) { res.status(404).json({ error: 'Question not found in this practice set.' }); return; }
+  const question = await db.orm.public.Question.where({ id: questionId }).first();
+  if (!question) { res.status(404).json({ error: 'Question not found.' }); return; }
+  res.json({
+    isCorrect: answer === question.correctAnswer,
+    correctAnswer: question.correctAnswer,
+    japaneseExplanation: question.japaneseExplanation,
+    indonesianExplanation: question.indonesianExplanation,
+  });
 });
 content.get('/practice-sets/:id', async (req, res) => {
   const practiceSet = await db.orm.public.PracticeSet.where({ id: id(req.params.id) }).first();

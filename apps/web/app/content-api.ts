@@ -9,6 +9,13 @@ export type PracticeSetSummary = {
   id: number; title: string; description: string | null; createdAt: string; updatedAt: string;
 };
 export type PracticeSet = PracticeSetSummary & { questions: Array<Question & { position: number }> };
+export type PracticeQuestion = {
+  id: number; japaneseText: string; indonesianTranslation: string; furigana: string | null; position: number;
+};
+export type PracticeSetForPractice = PracticeSetSummary & { questions: PracticeQuestion[] };
+export type AnswerFeedback = {
+  isCorrect: boolean; correctAnswer: boolean; japaneseExplanation: string; indonesianExplanation: string;
+};
 
 const base = import.meta.env.VITE_API_URL || "http://localhost:3000";
 

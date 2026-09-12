@@ -13,6 +13,12 @@ async function request(path: string, method = 'GET', body?: unknown, status = 20
   return data;
 }
 
+test('Local Vite development ports can read API responses', async () => {
+  const response = await fetch(base + '/topics', { headers: { Origin: 'http://localhost:5174' } });
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get('access-control-allow-origin'), 'http://localhost:5174');
+});
+
 test('Topic → Material CRUD, validation, filtering and safe deletion', async () => {
   const topics: number[] = [];
   const materials: number[] = [];
@@ -180,6 +186,58 @@ test('Practice set CRUD, ordered questions, validation and safe question deletio
     practiceSets.splice(practiceSets.indexOf(practiceSet.id), 1);
     await request(`/questions/${firstQuestion}`, 'DELETE', undefined, 204);
     questions.splice(questions.indexOf(firstQuestion), 1);
+  } finally {
+    for (const id of practiceSets) await fetch(`${base}/practice-sets/${id}`, { method: 'DELETE' });
+    for (const id of questions) await fetch(`${base}/questions/${id}`, { method: 'DELETE' });
+    for (const id of topics) await fetch(`${base}/topics/${id}`, { method: 'DELETE' });
+  }
+});
+
+test('Participant practice payload hides answers and checks selected questions', async () => {
+  const topics: number[] = [];
+  const questions: number[] = [];
+  const practiceSets: number[] = [];
+  const title = `Participant practice ${Date.now()}`;
+  try {
+    const topic = await request('/topics', 'POST', { title }, 201);
+    topics.push(topic.id);
+    const first = await request('/questions', 'POST', {
+      japaneseText: '日本では左側を走る。', indonesianTranslation: 'Di Jepang, berkendara di sisi kiri.',
+      furigana: 'にほんではひだりがわをはしる。', correctAnswer: true,
+      japaneseExplanation: '日本では左側通行です。', indonesianExplanation: 'Di Jepang kendaraan berjalan di sisi kiri.', topicId: topic.id,
+    }, 201);
+    const outside = await request('/questions', 'POST', {
+      japaneseText: 'これは別の問題です。', indonesianTranslation: 'Ini pertanyaan lain.',
+      correctAnswer: false, japaneseExplanation: '別の問題です。', indonesianExplanation: 'Pertanyaan lain.', topicId: topic.id,
+    }, 201);
+    questions.push(first.id, outside.id);
+    const practiceSet = await request('/practice-sets', 'POST', { title, questionIds: [first.id] }, 201);
+    practiceSets.push(practiceSet.id);
+
+    const practice = await request(`/practice-sets/${practiceSet.id}/practice`);
+    assert.equal(practice.questions.length, 1);
+    assert.deepEqual(practice.questions[0], {
+      id: first.id, japaneseText: first.japaneseText, indonesianTranslation: first.indonesianTranslation,
+      furigana: first.furigana, position: 0,
+    });
+    assert.equal(JSON.stringify(practice).includes('correctAnswer'), false);
+    assert.equal(JSON.stringify(practice).includes('japaneseExplanation'), false);
+    assert.equal(JSON.stringify(practice).includes('indonesianExplanation'), false);
+
+    const correct = await request(`/practice-sets/${practiceSet.id}/questions/${first.id}/check-answer`, 'POST', { answer: true });
+    assert.deepEqual(correct, {
+      isCorrect: true, correctAnswer: true,
+      japaneseExplanation: first.japaneseExplanation, indonesianExplanation: first.indonesianExplanation,
+    });
+    const incorrect = await request(`/practice-sets/${practiceSet.id}/questions/${first.id}/check-answer`, 'POST', { answer: false });
+    assert.equal(incorrect.isCorrect, false);
+    assert.equal(incorrect.correctAnswer, true);
+    await request(`/practice-sets/${practiceSet.id}/questions/${first.id}/check-answer`, 'POST', { answer: 'true' }, 400);
+    await request('/practice-sets/abc/practice', 'GET', undefined, 400);
+    await request(`/practice-sets/${practiceSet.id}/questions/abc/check-answer`, 'POST', { answer: true }, 400);
+    await request('/practice-sets/2147483647/practice', 'GET', undefined, 404);
+    await request(`/practice-sets/${practiceSet.id}/questions/2147483647/check-answer`, 'POST', { answer: true }, 404);
+    await request(`/practice-sets/${practiceSet.id}/questions/${outside.id}/check-answer`, 'POST', { answer: false }, 404);
   } finally {
     for (const id of practiceSets) await fetch(`${base}/practice-sets/${id}`, { method: 'DELETE' });
     for (const id of questions) await fetch(`${base}/questions/${id}`, { method: 'DELETE' });
