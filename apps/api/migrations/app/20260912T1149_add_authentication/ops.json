@@ -16,9 +16,7 @@
       {
         "description": "ensure table \"invitation\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
-        "params": [
-          "\"public\".\"invitation\""
-        ]
+        "params": ["\"public\".\"invitation\""]
       }
     ],
     "execute": [
@@ -32,9 +30,7 @@
       {
         "description": "verify table \"invitation\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
-        "params": [
-          "\"public\".\"invitation\""
-        ]
+        "params": ["\"public\".\"invitation\""]
       }
     ]
   },
@@ -55,9 +51,7 @@
       {
         "description": "ensure table \"passwordReset\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
-        "params": [
-          "\"public\".\"passwordReset\""
-        ]
+        "params": ["\"public\".\"passwordReset\""]
       }
     ],
     "execute": [
@@ -71,9 +65,7 @@
       {
         "description": "verify table \"passwordReset\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
-        "params": [
-          "\"public\".\"passwordReset\""
-        ]
+        "params": ["\"public\".\"passwordReset\""]
       }
     ]
   },
@@ -94,9 +86,7 @@
       {
         "description": "ensure table \"session\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
-        "params": [
-          "\"public\".\"session\""
-        ]
+        "params": ["\"public\".\"session\""]
       }
     ],
     "execute": [
@@ -110,9 +100,7 @@
       {
         "description": "verify table \"session\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
-        "params": [
-          "\"public\".\"session\""
-        ]
+        "params": ["\"public\".\"session\""]
       }
     ]
   },
@@ -133,11 +121,7 @@
       {
         "description": "ensure column \"isActive\" is missing",
         "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
-        "params": [
-          "public",
-          "user",
-          "isActive"
-        ]
+        "params": ["public", "user", "isActive"]
       }
     ],
     "execute": [
@@ -150,11 +134,7 @@
       {
         "description": "verify column \"isActive\" exists",
         "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
-        "params": [
-          "public",
-          "user",
-          "isActive"
-        ]
+        "params": ["public", "user", "isActive"]
       }
     ]
   },
@@ -175,11 +155,7 @@
       {
         "description": "ensure column \"passwordHash\" is missing",
         "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
-        "params": [
-          "public",
-          "user",
-          "passwordHash"
-        ]
+        "params": ["public", "user", "passwordHash"]
       }
     ],
     "execute": [
@@ -192,11 +168,7 @@
       {
         "description": "verify column \"passwordHash\" exists",
         "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
-        "params": [
-          "public",
-          "user",
-          "passwordHash"
-        ]
+        "params": ["public", "user", "passwordHash"]
       }
     ]
   },
@@ -217,11 +189,7 @@
       {
         "description": "ensure column \"role\" is missing",
         "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
-        "params": [
-          "public",
-          "user",
-          "role"
-        ]
+        "params": ["public", "user", "role"]
       }
     ],
     "execute": [
@@ -234,11 +202,7 @@
       {
         "description": "verify column \"role\" exists",
         "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
-        "params": [
-          "public",
-          "user",
-          "role"
-        ]
+        "params": ["public", "user", "role"]
       }
     ]
   },
@@ -343,11 +307,7 @@
       {
         "description": "ensure constraint \"session_tokenHash_key\" does not exist",
         "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
-        "params": [
-          "session_tokenHash_key",
-          "public",
-          "\"public\".\"session\""
-        ]
+        "params": ["session_tokenHash_key", "public", "\"public\".\"session\""]
       }
     ],
     "execute": [
@@ -360,11 +320,7 @@
       {
         "description": "verify constraint \"session_tokenHash_key\" exists",
         "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
-        "params": [
-          "session_tokenHash_key",
-          "public",
-          "\"public\".\"session\""
-        ]
+        "params": ["session_tokenHash_key", "public", "\"public\".\"session\""]
       }
     ]
   },
@@ -385,11 +341,7 @@
       {
         "description": "ensure constraint \"user_role_check_50a9063e\" does not exist",
         "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
-        "params": [
-          "user_role_check_50a9063e",
-          "public",
-          "\"public\".\"user\""
-        ]
+        "params": ["user_role_check_50a9063e", "public", "\"public\".\"user\""]
       }
     ],
     "execute": [
@@ -402,11 +354,7 @@
       {
         "description": "verify constraint \"user_role_check_50a9063e\" exists",
         "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
-        "params": [
-          "user_role_check_50a9063e",
-          "public",
-          "\"public\".\"user\""
-        ]
+        "params": ["user_role_check_50a9063e", "public", "\"public\".\"user\""]
       }
     ]
   },
@@ -427,9 +375,7 @@
       {
         "description": "ensure index \"invitation_userId_idx_a489d58a\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
-        "params": [
-          "\"public\".\"invitation_userId_idx_a489d58a\""
-        ]
+        "params": ["\"public\".\"invitation_userId_idx_a489d58a\""]
       }
     ],
     "execute": [
@@ -443,9 +389,7 @@
       {
         "description": "verify index \"invitation_userId_idx_a489d58a\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
-        "params": [
-          "\"public\".\"invitation_userId_idx_a489d58a\""
-        ]
+        "params": ["\"public\".\"invitation_userId_idx_a489d58a\""]
       }
     ]
   },
@@ -466,9 +410,7 @@
       {
         "description": "ensure index \"passwordReset_userId_idx_a489d58a\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
-        "params": [
-          "\"public\".\"passwordReset_userId_idx_a489d58a\""
-        ]
+        "params": ["\"public\".\"passwordReset_userId_idx_a489d58a\""]
       }
     ],
     "execute": [
@@ -482,9 +424,7 @@
       {
         "description": "verify index \"passwordReset_userId_idx_a489d58a\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
-        "params": [
-          "\"public\".\"passwordReset_userId_idx_a489d58a\""
-        ]
+        "params": ["\"public\".\"passwordReset_userId_idx_a489d58a\""]
       }
     ]
   },
@@ -505,9 +445,7 @@
       {
         "description": "ensure index \"session_userId_idx_a489d58a\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
-        "params": [
-          "\"public\".\"session_userId_idx_a489d58a\""
-        ]
+        "params": ["\"public\".\"session_userId_idx_a489d58a\""]
       }
     ],
     "execute": [
@@ -521,9 +459,7 @@
       {
         "description": "verify index \"session_userId_idx_a489d58a\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
-        "params": [
-          "\"public\".\"session_userId_idx_a489d58a\""
-        ]
+        "params": ["\"public\".\"session_userId_idx_a489d58a\""]
       }
     ]
   },
@@ -628,11 +564,7 @@
       {
         "description": "ensure FK \"session_userId_fkey\" does not exist",
         "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
-        "params": [
-          "session_userId_fkey",
-          "public",
-          "\"public\".\"session\""
-        ]
+        "params": ["session_userId_fkey", "public", "\"public\".\"session\""]
       }
     ],
     "execute": [
@@ -645,11 +577,7 @@
       {
         "description": "verify FK \"session_userId_fkey\" exists",
         "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
-        "params": [
-          "session_userId_fkey",
-          "public",
-          "\"public\".\"session\""
-        ]
+        "params": ["session_userId_fkey", "public", "\"public\".\"session\""]
       }
     ]
   }

@@ -16,9 +16,7 @@
       {
         "description": "ensure table \"material\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
-        "params": [
-          "\"public\".\"material\""
-        ]
+        "params": ["\"public\".\"material\""]
       }
     ],
     "execute": [
@@ -32,9 +30,7 @@
       {
         "description": "verify table \"material\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
-        "params": [
-          "\"public\".\"material\""
-        ]
+        "params": ["\"public\".\"material\""]
       }
     ]
   },
@@ -55,9 +51,7 @@
       {
         "description": "ensure table \"topic\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
-        "params": [
-          "\"public\".\"topic\""
-        ]
+        "params": ["\"public\".\"topic\""]
       }
     ],
     "execute": [
@@ -71,9 +65,7 @@
       {
         "description": "verify table \"topic\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
-        "params": [
-          "\"public\".\"topic\""
-        ]
+        "params": ["\"public\".\"topic\""]
       }
     ]
   },
@@ -94,9 +86,7 @@
       {
         "description": "ensure index \"material_topicId_idx_6f05808f\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
-        "params": [
-          "\"public\".\"material_topicId_idx_6f05808f\""
-        ]
+        "params": ["\"public\".\"material_topicId_idx_6f05808f\""]
       }
     ],
     "execute": [
@@ -110,9 +100,7 @@
       {
         "description": "verify index \"material_topicId_idx_6f05808f\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
-        "params": [
-          "\"public\".\"material_topicId_idx_6f05808f\""
-        ]
+        "params": ["\"public\".\"material_topicId_idx_6f05808f\""]
       }
     ]
   },
@@ -133,11 +121,7 @@
       {
         "description": "ensure FK \"material_topicId_fkey\" does not exist",
         "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
-        "params": [
-          "material_topicId_fkey",
-          "public",
-          "\"public\".\"material\""
-        ]
+        "params": ["material_topicId_fkey", "public", "\"public\".\"material\""]
       }
     ],
     "execute": [
@@ -150,11 +134,7 @@
       {
         "description": "verify FK \"material_topicId_fkey\" exists",
         "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
-        "params": [
-          "material_topicId_fkey",
-          "public",
-          "\"public\".\"material\""
-        ]
+        "params": ["material_topicId_fkey", "public", "\"public\".\"material\""]
       }
     ]
   }

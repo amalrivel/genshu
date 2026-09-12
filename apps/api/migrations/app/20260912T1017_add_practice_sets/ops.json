@@ -16,9 +16,7 @@
       {
         "description": "ensure table \"practiceSet\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
-        "params": [
-          "\"public\".\"practiceSet\""
-        ]
+        "params": ["\"public\".\"practiceSet\""]
       }
     ],
     "execute": [
@@ -32,9 +30,7 @@
       {
         "description": "verify table \"practiceSet\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
-        "params": [
-          "\"public\".\"practiceSet\""
-        ]
+        "params": ["\"public\".\"practiceSet\""]
       }
     ]
   },
@@ -55,9 +51,7 @@
       {
         "description": "ensure table \"practiceSetQuestion\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
-        "params": [
-          "\"public\".\"practiceSetQuestion\""
-        ]
+        "params": ["\"public\".\"practiceSetQuestion\""]
       }
     ],
     "execute": [
@@ -71,9 +65,7 @@
       {
         "description": "verify table \"practiceSetQuestion\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
-        "params": [
-          "\"public\".\"practiceSetQuestion\""
-        ]
+        "params": ["\"public\".\"practiceSetQuestion\""]
       }
     ]
   },
@@ -217,9 +209,7 @@
       {
         "description": "ensure index \"practiceSetQuestion_questionId_idx_fdb42076\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
-        "params": [
-          "\"public\".\"practiceSetQuestion_questionId_idx_fdb42076\""
-        ]
+        "params": ["\"public\".\"practiceSetQuestion_questionId_idx_fdb42076\""]
       }
     ],
     "execute": [
@@ -233,9 +223,7 @@
       {
         "description": "verify index \"practiceSetQuestion_questionId_idx_fdb42076\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
-        "params": [
-          "\"public\".\"practiceSetQuestion_questionId_idx_fdb42076\""
-        ]
+        "params": ["\"public\".\"practiceSetQuestion_questionId_idx_fdb42076\""]
       }
     ]
   },

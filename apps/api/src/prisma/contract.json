@@ -116,12 +116,8 @@
               "user": {
                 "cardinality": "N:1",
                 "on": {
-                  "localFields": [
-                    "userId"
-                  ],
-                  "targetFields": [
-                    "id"
-                  ]
+                  "localFields": ["userId"],
+                  "targetFields": ["id"]
                 },
                 "to": {
                   "model": "User",
@@ -192,12 +188,8 @@
               "topic": {
                 "cardinality": "N:1",
                 "on": {
-                  "localFields": [
-                    "topicId"
-                  ],
-                  "targetFields": [
-                    "id"
-                  ]
+                  "localFields": ["topicId"],
+                  "targetFields": ["id"]
                 },
                 "to": {
                   "model": "Topic",
@@ -280,12 +272,8 @@
               "user": {
                 "cardinality": "N:1",
                 "on": {
-                  "localFields": [
-                    "userId"
-                  ],
-                  "targetFields": [
-                    "id"
-                  ]
+                  "localFields": ["userId"],
+                  "targetFields": ["id"]
                 },
                 "to": {
                   "model": "User",
@@ -417,12 +405,8 @@
               "practiceSet": {
                 "cardinality": "N:1",
                 "on": {
-                  "localFields": [
-                    "practiceSetId"
-                  ],
-                  "targetFields": [
-                    "id"
-                  ]
+                  "localFields": ["practiceSetId"],
+                  "targetFields": ["id"]
                 },
                 "to": {
                   "model": "PracticeSet",
@@ -432,12 +416,8 @@
               "question": {
                 "cardinality": "N:1",
                 "on": {
-                  "localFields": [
-                    "questionId"
-                  ],
-                  "targetFields": [
-                    "id"
-                  ]
+                  "localFields": ["questionId"],
+                  "targetFields": ["id"]
                 },
                 "to": {
                   "model": "Question",
@@ -541,12 +521,8 @@
               "topic": {
                 "cardinality": "N:1",
                 "on": {
-                  "localFields": [
-                    "topicId"
-                  ],
-                  "targetFields": [
-                    "id"
-                  ]
+                  "localFields": ["topicId"],
+                  "targetFields": ["id"]
                 },
                 "to": {
                   "model": "Topic",
@@ -640,12 +616,8 @@
               "user": {
                 "cardinality": "N:1",
                 "on": {
-                  "localFields": [
-                    "userId"
-                  ],
-                  "targetFields": [
-                    "id"
-                  ]
+                  "localFields": ["userId"],
+                  "targetFields": ["id"]
                 },
                 "to": {
                   "model": "User",
@@ -885,16 +857,12 @@
                 {
                   "onDelete": "cascade",
                   "source": {
-                    "columns": [
-                      "userId"
-                    ],
+                    "columns": ["userId"],
                     "namespaceId": "public",
                     "tableName": "invitation"
                   },
                   "target": {
-                    "columns": [
-                      "id"
-                    ],
+                    "columns": ["id"],
                     "namespaceId": "public",
                     "tableName": "user"
                   }
@@ -902,24 +870,18 @@
               ],
               "indexes": [
                 {
-                  "columns": [
-                    "userId"
-                  ],
+                  "columns": ["userId"],
                   "name": "invitation_userId_idx_a489d58a",
                   "prefix": "invitation_userId_idx",
                   "unique": false
                 }
               ],
               "primaryKey": {
-                "columns": [
-                  "id"
-                ]
+                "columns": ["id"]
               },
               "uniques": [
                 {
-                  "columns": [
-                    "tokenHash"
-                  ]
+                  "columns": ["tokenHash"]
                 }
               ]
             },
@@ -953,16 +915,12 @@
               "foreignKeys": [
                 {
                   "source": {
-                    "columns": [
-                      "topicId"
-                    ],
+                    "columns": ["topicId"],
                     "namespaceId": "public",
                     "tableName": "material"
                   },
                   "target": {
-                    "columns": [
-                      "id"
-                    ],
+                    "columns": ["id"],
                     "namespaceId": "public",
                     "tableName": "topic"
                   }
@@ -970,18 +928,14 @@
               ],
               "indexes": [
                 {
-                  "columns": [
-                    "topicId"
-                  ],
+                  "columns": ["topicId"],
                   "name": "material_topicId_idx_6f05808f",
                   "prefix": "material_topicId_idx",
                   "unique": false
                 }
               ],
               "primaryKey": {
-                "columns": [
-                  "id"
-                ]
+                "columns": ["id"]
               },
               "uniques": []
             },
@@ -1035,16 +989,12 @@
                 {
                   "onDelete": "cascade",
                   "source": {
-                    "columns": [
-                      "userId"
-                    ],
+                    "columns": ["userId"],
                     "namespaceId": "public",
                     "tableName": "passwordReset"
                   },
                   "target": {
-                    "columns": [
-                      "id"
-                    ],
+                    "columns": ["id"],
                     "namespaceId": "public",
                     "tableName": "user"
                   }
@@ -1052,24 +1002,18 @@
               ],
               "indexes": [
                 {
-                  "columns": [
-                    "userId"
-                  ],
+                  "columns": ["userId"],
                   "name": "passwordReset_userId_idx_a489d58a",
                   "prefix": "passwordReset_userId_idx",
                   "unique": false
                 }
               ],
               "primaryKey": {
-                "columns": [
-                  "id"
-                ]
+                "columns": ["id"]
               },
               "uniques": [
                 {
-                  "columns": [
-                    "tokenHash"
-                  ]
+                  "columns": ["tokenHash"]
                 }
               ]
             },
@@ -1112,9 +1056,7 @@
               "foreignKeys": [],
               "indexes": [],
               "primaryKey": {
-                "columns": [
-                  "id"
-                ]
+                "columns": ["id"]
               },
               "uniques": []
             },
@@ -1149,32 +1091,24 @@
                 {
                   "onDelete": "cascade",
                   "source": {
-                    "columns": [
-                      "practiceSetId"
-                    ],
+                    "columns": ["practiceSetId"],
                     "namespaceId": "public",
                     "tableName": "practiceSetQuestion"
                   },
                   "target": {
-                    "columns": [
-                      "id"
-                    ],
+                    "columns": ["id"],
                     "namespaceId": "public",
                     "tableName": "practiceSet"
                   }
                 },
                 {
                   "source": {
-                    "columns": [
-                      "questionId"
-                    ],
+                    "columns": ["questionId"],
                     "namespaceId": "public",
                     "tableName": "practiceSetQuestion"
                   },
                   "target": {
-                    "columns": [
-                      "id"
-                    ],
+                    "columns": ["id"],
                     "namespaceId": "public",
                     "tableName": "question"
                   }
@@ -1182,39 +1116,27 @@
               ],
               "indexes": [
                 {
-                  "columns": [
-                    "practiceSetId"
-                  ],
+                  "columns": ["practiceSetId"],
                   "name": "practiceSetQuestion_practiceSetId_idx_991c1578",
                   "prefix": "practiceSetQuestion_practiceSetId_idx",
                   "unique": false
                 },
                 {
-                  "columns": [
-                    "questionId"
-                  ],
+                  "columns": ["questionId"],
                   "name": "practiceSetQuestion_questionId_idx_fdb42076",
                   "prefix": "practiceSetQuestion_questionId_idx",
                   "unique": false
                 }
               ],
               "primaryKey": {
-                "columns": [
-                  "id"
-                ]
+                "columns": ["id"]
               },
               "uniques": [
                 {
-                  "columns": [
-                    "practiceSetId",
-                    "questionId"
-                  ]
+                  "columns": ["practiceSetId", "questionId"]
                 },
                 {
-                  "columns": [
-                    "practiceSetId",
-                    "position"
-                  ]
+                  "columns": ["practiceSetId", "position"]
                 }
               ]
             },
@@ -1282,16 +1204,12 @@
               "foreignKeys": [
                 {
                   "source": {
-                    "columns": [
-                      "topicId"
-                    ],
+                    "columns": ["topicId"],
                     "namespaceId": "public",
                     "tableName": "question"
                   },
                   "target": {
-                    "columns": [
-                      "id"
-                    ],
+                    "columns": ["id"],
                     "namespaceId": "public",
                     "tableName": "topic"
                   }
@@ -1299,18 +1217,14 @@
               ],
               "indexes": [
                 {
-                  "columns": [
-                    "topicId"
-                  ],
+                  "columns": ["topicId"],
                   "name": "question_topicId_idx_6f05808f",
                   "prefix": "question_topicId_idx",
                   "unique": false
                 }
               ],
               "primaryKey": {
-                "columns": [
-                  "id"
-                ]
+                "columns": ["id"]
               },
               "uniques": []
             },
@@ -1359,16 +1273,12 @@
                 {
                   "onDelete": "cascade",
                   "source": {
-                    "columns": [
-                      "userId"
-                    ],
+                    "columns": ["userId"],
                     "namespaceId": "public",
                     "tableName": "session"
                   },
                   "target": {
-                    "columns": [
-                      "id"
-                    ],
+                    "columns": ["id"],
                     "namespaceId": "public",
                     "tableName": "user"
                   }
@@ -1376,24 +1286,18 @@
               ],
               "indexes": [
                 {
-                  "columns": [
-                    "userId"
-                  ],
+                  "columns": ["userId"],
                   "name": "session_userId_idx_a489d58a",
                   "prefix": "session_userId_idx",
                   "unique": false
                 }
               ],
               "primaryKey": {
-                "columns": [
-                  "id"
-                ]
+                "columns": ["id"]
               },
               "uniques": [
                 {
-                  "columns": [
-                    "tokenHash"
-                  ]
+                  "columns": ["tokenHash"]
                 }
               ]
             },
@@ -1431,9 +1335,7 @@
               "foreignKeys": [],
               "indexes": [],
               "primaryKey": {
-                "columns": [
-                  "id"
-                ]
+                "columns": ["id"]
               },
               "uniques": []
             },
@@ -1512,15 +1414,11 @@
               "foreignKeys": [],
               "indexes": [],
               "primaryKey": {
-                "columns": [
-                  "id"
-                ]
+                "columns": ["id"]
               },
               "uniques": [
                 {
-                  "columns": [
-                    "email"
-                  ]
+                  "columns": ["email"]
                 }
               ]
             }
@@ -1528,10 +1426,7 @@
           "valueSet": {
             "UserRole": {
               "kind": "valueSet",
-              "values": [
-                "Participant",
-                "Admin"
-              ]
+              "values": ["Participant", "Admin"]
             }
           }
         },

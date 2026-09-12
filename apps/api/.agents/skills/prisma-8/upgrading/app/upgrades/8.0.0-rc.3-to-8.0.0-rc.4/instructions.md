@@ -113,15 +113,17 @@ call directly; it is now the lane, whose `sql` key holds the statement tag:
 
 ```ts
 // Before: `raw` is a tag
-const upper = db.raw`UPPER(${email})`.returns('pg/text@1');
+const upper = db.raw`UPPER(${email})`.returns("pg/text@1");
 
 // After, inside a builder callback — where fragments belong
 const rows = db.sql.public.users
-  .select((f, fns) => ({ upper: fns.raw`UPPER(${f.email})`.returns('pg/text@1') }))
+  .select((f, fns) => ({
+    upper: fns.raw`UPPER(${f.email})`.returns("pg/text@1"),
+  }))
   .build();
 
 // After, from the lane, for a fragment you hold on its own
-const upper = db.raw.sql`UPPER(${email})`.returns('pg/text@1');
+const upper = db.raw.sql`UPPER(${email})`.returns("pg/text@1");
 ```
 
 The detector looks for the old address and for `raw` used as a tag. It skips the receiver `fns`

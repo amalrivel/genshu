@@ -53,7 +53,7 @@ changes:
       glob: "**/*.{ts,mts,cts}"
       regex:
         - 'createRawSql\('
-        - 'RawSqlTag'
+        - "RawSqlTag"
         # `fns.raw` is a fragment call site and is deliberately excluded:
         # fragments are unchanged by this release.
         - '(?<!(?<![\w$])fns)\.raw`'
@@ -89,11 +89,14 @@ changes:
 and exposes it as the raw lane:
 
 ```ts
-import { createRawLane, sql } from '@internal/sql-builder/runtime';
-import type { Db, RawLane } from '@internal/sql-builder/types';
+import { createRawLane, sql } from "@internal/sql-builder/runtime";
+import type { Db, RawLane } from "@internal/sql-builder/types";
 
 const sqlDb: Db<TContract> = sql<TContract>({ context, rawCodecInferer });
-const raw: RawLane<TContract> = createRawLane<TContract>({ context, rawCodecInferer });
+const raw: RawLane<TContract> = createRawLane<TContract>({
+  context,
+  rawCodecInferer,
+});
 ```
 
 Callers reach the tag at `client.raw.sql`. A client that binds per role or per scope builds one
@@ -110,7 +113,10 @@ export interface YourStaticContext<TContract extends Contract<SqlStorage>> {
   // …context, contract, enums
 }
 
-const raw: RawLane<TContract> = createRawLane<TContract>({ context, rawCodecInferer });
+const raw: RawLane<TContract> = createRawLane<TContract>({
+  context,
+  rawCodecInferer,
+});
 ```
 
 Its `raw` property changes type from the contract-free tag to `RawLane<TContract>`, the same

@@ -50,7 +50,7 @@ changes:
     detection:
       glob: "**/migrations/**/*.ts"
       contains:
-        - 'addCheckConstraint'
+        - "addCheckConstraint"
       anyMatch: true
   - id: specifier-default-control-policy-requires-create-namespace
     summary: |
@@ -68,8 +68,8 @@ changes:
     detection:
       glob: "**/*.{ts,mts,cts}"
       contains:
-        - 'typescriptContract'
-        - 'defaultControlPolicy'
+        - "typescriptContract"
+        - "defaultControlPolicy"
       anyMatch: false
   - id: int-backed-enums-fail-at-authoring
     summary: |
@@ -83,7 +83,7 @@ changes:
     detection:
       glob: "**/*.{ts,mts,cts,prisma}"
       contains:
-        - 'enumType'
+        - "enumType"
       anyMatch: true
   - id: aggregate-methods-come-from-the-emitted-contract
     summary: |
@@ -198,7 +198,7 @@ changes:
     detection:
       glob: "**/*.{prisma,ts}"
       contains:
-        - '@@check'
+        - "@@check"
       anyMatch: true
   - id: runtime-query-execute-hard-cut
     summary: |
@@ -271,7 +271,7 @@ changes:
       contains:
         - "prepare({"
         - ".returns('pg/"
-        - ".returns(\"pg/"
+        - '.returns("pg/'
       anyMatch: true
 ---
 
@@ -281,13 +281,13 @@ changes:
 
 Which aggregate methods exist is now the contract's answer rather than a fixed list in the client. The emitted `contract.d.ts` carries an `AggregateTypes` block naming every operation your target and extensions declare, and each surface below is derived from it:
 
-| Surface | What it offers |
-| --- | --- |
-| `db.orm.User.aggregate((a) => …)` | one selector method per declared operation |
-| `db.orm.User.groupBy('kind').aggregate((a) => …)` | the same |
-| `db.orm.User.groupBy('kind').having((h) => …)` | the same, restricted to `count` / `sum` / `avg` / `min` / `max` |
-| `db.orm.User.include('posts', (posts) => posts.count())` | one reducer per declared operation |
-| `db.sql.public.user.select('n', (f, fns) => fns.count())` | one function per declared operation |
+| Surface                                                   | What it offers                                                  |
+| --------------------------------------------------------- | --------------------------------------------------------------- |
+| `db.orm.User.aggregate((a) => …)`                         | one selector method per declared operation                      |
+| `db.orm.User.groupBy('kind').aggregate((a) => …)`         | the same                                                        |
+| `db.orm.User.groupBy('kind').having((h) => …)`            | the same, restricted to `count` / `sum` / `avg` / `min` / `max` |
+| `db.orm.User.include('posts', (posts) => posts.count())`  | one reducer per declared operation                              |
+| `db.sql.public.user.select('n', (f, fns) => fns.count())` | one function per declared operation                             |
 
 **If your contract is emitted, re-emit it — and keep reading.** Deriving the surface takes nothing away on its own: whatever the composed targets and extensions declare is what the block names. But the built-in targets changed what they declare in this same release. PostgreSQL now contributes eight operations and SQLite seven, and the bare results over integer columns moved — `count`, `sum`, and `avg`. `min` / `max` did not, nor did `sum` and `avg` over a float, `numeric`, or temporal column, nor `sum` over an `UnboundedInt` column. Two entries below carry those changes, and a re-emitted contract lands you in both: [`count-over-a-field-counts-that-field`](#count-over-a-field-counts-that-field) and [`aggregate-defaults-are-js-native-numbers`](#aggregate-defaults-are-js-native-numbers).
 
@@ -315,17 +315,20 @@ and type the client from the emitted `Contract`. That gives you the whole aggreg
 **Alternative, where the contract is deliberately un-emitted:** cast the builder and dispatch by name.
 
 ```ts
-import type { AggregateSpec } from '@prisma/orm-postgres/orm-client';
+import type { AggregateSpec } from "@prisma/orm-postgres/orm-client";
 
-type DynamicAggregates = Record<string, (field?: string) => AggregateSpec[string]>;
+type DynamicAggregates = Record<
+  string,
+  (field?: string) => AggregateSpec[string]
+>;
 
 const stats = await db.User.aggregate((aggregate) => {
   const dynamic = aggregate as DynamicAggregates;
-  return { total: dynamic['sum']!('views'), peak: dynamic['max']!('views') };
+  return { total: dynamic["sum"]!("views"), peak: dynamic["max"]!("views") };
 });
 ```
 
-If you previously widened the *argument* instead — `aggregate.sum('views' as never)`, which compiled because the admitted field names were already `never` for such a contract — move the cast from the argument to the builder and pass the field name as a plain string.
+If you previously widened the _argument_ instead — `aggregate.sum('views' as never)`, which compiled because the admitted field names were already `never` for such a contract — move the cast from the argument to the builder and pass the field name as a plain string.
 
 ## `count-over-a-field-counts-that-field`
 
@@ -333,7 +336,9 @@ If you previously widened the *argument* instead — `aggregate.sum('views' as n
 await db.User.aggregate((aggregate) => ({ all: aggregate.count() }));
 // SELECT COUNT(*) …
 
-await db.User.aggregate((aggregate) => ({ withEmail: aggregate.count('email') }));
+await db.User.aggregate((aggregate) => ({
+  withEmail: aggregate.count("email"),
+}));
 // SELECT COUNT("email") … — rows whose email is NULL are not counted
 ```
 
@@ -351,14 +356,14 @@ For each, decide which count you meant: `count()` for rows, `count(field)` for t
 
 The aggregate vocabulary is split in two. The bare operations answer in the type a JS developer expects; three new suffixed operations answer losslessly.
 
-| Call | Reads as | Empty input set |
-| --- | --- | --- |
-| `count()` | `number` | `0` |
-| `countBigInt()` | `bigint` | `0n` |
-| `sum(field)` over `Int` / `BigInt` / `BigIntNumber` | `number \| null` | `null` |
-| `sumBigInt(field)` over any integer column | `bigint \| null` | `null` |
-| `avg(field)` over any integer column | `number \| null` | `null` |
-| `avgDecimal(field)` over any integer or `Decimal` column | decimal `string \| null` | `null` |
+| Call                                                     | Reads as                 | Empty input set |
+| -------------------------------------------------------- | ------------------------ | --------------- |
+| `count()`                                                | `number`                 | `0`             |
+| `countBigInt()`                                          | `bigint`                 | `0n`            |
+| `sum(field)` over `Int` / `BigInt` / `BigIntNumber`      | `number \| null`         | `null`          |
+| `sumBigInt(field)` over any integer column               | `bigint \| null`         | `null`          |
+| `avg(field)` over any integer column                     | `number \| null`         | `null`          |
+| `avgDecimal(field)` over any integer or `Decimal` column | decimal `string \| null` | `null`          |
 
 These do not move: `min` / `max` keep the column's own type; `sum` and `avg` over a float column stay `number`; `sum` over `Decimal` stays a decimal string; `sum` over `UnboundedInt` stays a `bigint`; and the ORM's `having(...)` operands stay plain numbers, because the ORM types a HAVING comparand as `number` whatever result type the aggregate carries.
 
@@ -383,10 +388,10 @@ SQLite states the same policy in its own terms — `count`, integer `sum`, and `
    ```ts
    const { total } = await db.User.aggregate((a) => ({ total: a.count() }));
 
-   total === 2n              // ← was needed; now `total === 2`
-   Number(total)             // ← was needed; `total` is already a number
-   String(total)             // ← was needed for JSON; JSON.stringify handles it now
-   JSON.stringify(rows, (_k, v) => typeof v === 'bigint' ? String(v) : v)
+   total === 2n; // ← was needed; now `total === 2`
+   Number(total); // ← was needed; `total` is already a number
+   String(total); // ← was needed for JSON; JSON.stringify handles it now
+   JSON.stringify(rows, (_k, v) => (typeof v === "bigint" ? String(v) : v));
    //                        ↑ the replacer can go
    ```
 
@@ -433,7 +438,6 @@ No typed call site changes, because a `BigInt` column's application type has alw
 Convert each to the column's own type — `BigInt(value)` for a `bigint` column, and a plain number for a `BigIntNumber` one.
 
 Schema-written defaults need nothing. `BigInt @default(0)` still emits and still migrates: the JSON side of these codecs accepts a safe-integer number, because a schema language writes no `bigint` literal, and only the query-parameter side requires the exact type.
-
 
 ## `config-file-is-prisma-config-with-an-orm-section`
 
@@ -483,6 +487,7 @@ PR #30031: `changes: []`. Dependabot's weekly runtime-dependency bumps (`esbuild
 and mints the wire names every later step refers to. Do it before editing migration files, so
 the constraint names you paste into `addCheckConstraint` / `checkExpression` are the ones the
 contract actually declares.
+
 ## What the first plan after upgrading looks like
 
 For each enum-restricted column: a DROP of the old unsuffixed constraint and an ADD of the
@@ -514,12 +519,12 @@ these constraints.
 
 Runtime operations state whether the caller expects rows or statement statistics. Do not apply a global `execute` → `query` replacement: an insert, update, or delete that does not return rows belongs on `execute`, while a select, a returning write, a Mongo command-result plan, or any plan whose result is iterated, awaited as an array, indexed, decoded, or otherwise read belongs on `query`.
 
-| 8.0.0-rc.1 | 8.0.0-rc.2 |
-| --- | --- |
-| `await runtime.execute(rowPlan)` | `await runtime.query(rowPlan)` |
-| `runtime.execute(rowPlan).toArray()` | `runtime.query(rowPlan).toArray()` |
-| `await target.queryPrepared(prepared, params, options?)` | `await prepared.query(target, params, options?)` |
-| `await runtime.execute(nonReturningWrite)` with ignored rows | `await runtime.execute(nonReturningWrite)` and ignore the returned statistics |
+| 8.0.0-rc.1                                                            | 8.0.0-rc.2                                                                    |
+| --------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `await runtime.execute(rowPlan)`                                      | `await runtime.query(rowPlan)`                                                |
+| `runtime.execute(rowPlan).toArray()`                                  | `runtime.query(rowPlan).toArray()`                                            |
+| `await target.queryPrepared(prepared, params, options?)`              | `await prepared.query(target, params, options?)`                              |
+| `await runtime.execute(nonReturningWrite)` with ignored rows          | `await runtime.execute(nonReturningWrite)` and ignore the returned statistics |
 | A count or status derived from rows returned by a non-returning write | `const stats = await runtime.execute(writePlan)` and use `stats.affectedRows` |
 
 Apply the same classification to connection and transaction scopes. `query()` and `prepared.query(target, params, options?)` remain lazy row results, so consume them inside the scope when their connection or transaction must remain valid. `execute()` is eager and resolves to `{ affectedRows: number }`; it does not return an iterable, and `affectedRows` must not be synthesized from a row array's length.

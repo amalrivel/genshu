@@ -10,8 +10,6 @@
     "skipLibCheck": true,
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    "types": [
-      "node"
-    ]
+    "types": ["node"]
   }
 }

@@ -34,7 +34,7 @@ changes:
     detection:
       glob: "**/*.{json,ts,tsx,mts,cts,js,mjs,cjs}"
       contains:
-        - '@prisma-next/'
+        - "@prisma-next/"
       anyMatch: true
   - id: strip-sha256-hash-prefixes
     summary: |
@@ -55,7 +55,7 @@ changes:
     detection:
       glob: "**/*.{json,ts,tsx}"
       contains:
-        - 'sha256:'
+        - "sha256:"
       anyMatch: true
     script: ./strip-sha256-hash-prefixes.ts
   - id: migration-contract-snapshots-moved-to-content-addressed-store
@@ -668,12 +668,12 @@ prisma-next contract emit
 
 ### What changed about physical index names
 
-| Authoring input | 0.16 physical name | 0.17 physical name |
-| --- | --- | --- |
-| PSL `@@index([a, b])` / TS `constraints.index([cols.a, cols.b])` (unnamed) | `<table>_<a>_<b>_idx` | `<table>_<a>_<b>_idx_<8hex>` (wire-named) |
-| FK-backing index (derived from a relation) | `<table>_<col>_idx` | `<table>_<col>_idx_<8hex>` (wire-named) |
-| TS `constraints.index([...], { name: "x" })` | `x` | `x_<8hex>` — the name is now a wire *prefix* |
-| PSL `@@index([...], map: "x")` | `x` | `x` — an exact physical name, now verified against the live catalog |
+| Authoring input                                                            | 0.16 physical name    | 0.17 physical name                                                  |
+| -------------------------------------------------------------------------- | --------------------- | ------------------------------------------------------------------- |
+| PSL `@@index([a, b])` / TS `constraints.index([cols.a, cols.b])` (unnamed) | `<table>_<a>_<b>_idx` | `<table>_<a>_<b>_idx_<8hex>` (wire-named)                           |
+| FK-backing index (derived from a relation)                                 | `<table>_<col>_idx`   | `<table>_<col>_idx_<8hex>` (wire-named)                             |
+| TS `constraints.index([...], { name: "x" })`                               | `x`                   | `x_<8hex>` — the name is now a wire _prefix_                        |
+| PSL `@@index([...], map: "x")`                                             | `x`                   | `x` — an exact physical name, now verified against the live catalog |
 
 The `<8hex>` suffix is a content hash over the index definition (element list, predicate, uniqueness, access method, options), so an unchanged definition always produces the same name.
 
@@ -686,7 +686,7 @@ No index is rebuilt. After re-emitting the contract, the first plan that allows 
 
 Inspect the plan before applying — for a schema whose only drift is the index naming, it contains nothing but renames.
 
-Under an **additive-only** policy (e.g. `db init`'s class set) the rename pairing is skipped: the plan creates the new wire-named index beside the old one. Once both indexes exist, a later widening plan has nothing left to pair — the new name is already present, and the rename op's own precheck requires its target name to be absent — so after the additive create the old index is removed **only** by a destructive-allowed plan dropping it. A rename happens only when a widening-allowed plan is the *first* convergence, before any create. This degradation is deliberate — an additive-only run never emits an op class it is not allowed to execute; if you want renames instead of create-then-drop, run the widening plan first.
+Under an **additive-only** policy (e.g. `db init`'s class set) the rename pairing is skipped: the plan creates the new wire-named index beside the old one. Once both indexes exist, a later widening plan has nothing left to pair — the new name is already present, and the rename op's own precheck requires its target name to be absent — so after the additive create the old index is removed **only** by a destructive-allowed plan dropping it. A rename happens only when a widening-allowed plan is the _first_ convergence, before any create. This degradation is deliberate — an additive-only run never emits an op class it is not allowed to execute; if you want renames instead of create-then-drop, run the widening plan first.
 
 ### Hard-coded names
 
@@ -698,17 +698,25 @@ Generated migrations that create an RLS policy carry the policy as a literal. Wh
 
 ```ts
 // 0.16
-this.createRlsPolicy({ schema: "public", table: "post", policy: {
-  name: "post_owner_a1b2c3d4",
-  prefix: "post_owner",
-  // …
-} })
+this.createRlsPolicy({
+  schema: "public",
+  table: "post",
+  policy: {
+    name: "post_owner_a1b2c3d4",
+    prefix: "post_owner",
+    // …
+  },
+});
 
 // 0.17
-this.createRlsPolicy({ schema: "public", table: "post", policy: {
-  naming: { kind: "wire", prefix: "post_owner", hash: "a1b2c3d4" },
-  // …
-} })
+this.createRlsPolicy({
+  schema: "public",
+  table: "post",
+  policy: {
+    naming: { kind: "wire", prefix: "post_owner", hash: "a1b2c3d4" },
+    // …
+  },
+});
 ```
 
 A policy whose name the author owns (adopted through `@@map`) carries `naming: { kind: "exact", name: "Tenant members can read" }` instead. Every other key of the literal is unchanged.
@@ -743,7 +751,7 @@ TypeScript does not implicitly convert between `number` and `bigint`, so `pnpm t
 
 - **Row-type annotations.** A counted column is `bigint`: `SqlQueryPlan<{ name: string; postCount: bigint }>`.
 - **Comparison literals.** `fns.gt(fns.count(), 5)` becomes `fns.gt(fns.count(), 5n)`.
-- **Values read from a driver.** A raw `pg` query returns an `int8` as a decimal *string*; convert with `BigInt(row.id)` rather than annotating it `number`.
+- **Values read from a driver.** A raw `pg` query returns an `int8` as a decimal _string_; convert with `BigInt(row.id)` rather than annotating it `number`.
 
 Arithmetic mixing the two throws at runtime rather than coercing, so a site that typechecks after a cast is worth reading again.
 
@@ -753,11 +761,11 @@ An interval is not a duration. PostgreSQL stores three independent fields — mo
 
 ```ts
 // before
-const gap: string = row.gap;              // "{\"days\":1}"
+const gap: string = row.gap; // "{\"days\":1}"
 
 // after
-const gap = row.gap;                      // { months: 0, days: 1, micros: 0n }
-const totalDays = gap.days + gap.months * 30;   // your calendar rule, not ours
+const gap = row.gap; // { months: 0, days: 1, micros: 0n }
+const totalDays = gap.days + gap.months * 30; // your calendar rule, not ours
 ```
 
 The representation is separate from the value, as it is for `pg/bytea@1` (a `Uint8Array` carried as base64) and `pg/int8@1` (a `bigint` carried as decimal text). A contract holds the ISO-8601 duration string, so re-emit to pick up the spelling — `P1M`, `P1Y2M3DT4H5M6S`, `PT0S` for zero, each component carrying its own sign.

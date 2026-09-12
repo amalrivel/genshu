@@ -53,10 +53,10 @@ Two things make building here fast and hard to get wrong — lean on both:
 
 Two packages, and only two, appear in your `package.json`:
 
-| Package | Provides |
-| --- | --- |
-| `@prisma/composer` | Core authoring: `module`, `secret`, `isSecretString`, `/arktype` (the `secretString()` schema leaf), `/rpc`, `/node`, `/nextjs`, `/config`, `/testing`, the `prisma-composer` CLI |
-| `@prisma/composer-prisma-cloud` | The Prisma Cloud target: `compute`, `postgres`, `envSecret`, `envParam`, `/control`, `/testing`, and the shared `/cron`, `/storage`, `/streams`, `/prisma-next` modules |
+| Package                         | Provides                                                                                                                                                                          |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `@prisma/composer`              | Core authoring: `module`, `secret`, `isSecretString`, `/arktype` (the `secretString()` schema leaf), `/rpc`, `/node`, `/nextjs`, `/config`, `/testing`, the `prisma-composer` CLI |
+| `@prisma/composer-prisma-cloud` | The Prisma Cloud target: `compute`, `postgres`, `envSecret`, `envParam`, `/control`, `/testing`, and the shared `/cron`, `/storage`, `/streams`, `/prisma-next` modules           |
 
 ## tsconfig and import specifiers
 
@@ -76,9 +76,9 @@ A minimal tsconfig:
     "noEmit": true,
     "strict": true,
     "skipLibCheck": true,
-    "types": ["bun"]
+    "types": ["bun"],
   },
-  "include": ["module.ts", "src"]
+  "include": ["module.ts", "src"],
 }
 ```
 
@@ -93,11 +93,14 @@ validator types the messages; arktype is the house choice:
 
 ```ts
 // auth/src/contract.ts
-import { contract, rpc } from '@prisma/composer/service-rpc';
-import { type } from 'arktype';
+import { contract, rpc } from "@prisma/composer/service-rpc";
+import { type } from "arktype";
 
 export const authContract = contract({
-  verify: rpc({ input: type({ token: 'string' }), output: type({ ok: 'boolean' }) }),
+  verify: rpc({
+    input: type({ token: "string" }),
+    output: type({ ok: "boolean" }),
+  }),
 });
 ```
 
@@ -106,14 +109,14 @@ ports. No behavior, no platform keys:
 
 ```ts
 // auth/src/service.ts
-import node from '@prisma/composer/node';
-import { compute, postgres } from '@prisma/composer-prisma-cloud';
-import { authContract } from './contract.ts';
+import node from "@prisma/composer/node";
+import { compute, postgres } from "@prisma/composer-prisma-cloud";
+import { authContract } from "./contract.ts";
 
 export default compute({
-  name: 'auth',
+  name: "auth",
   deps: { db: postgres() },
-  build: node({ module: import.meta.url, entry: '../dist/server.mjs' }),
+  build: node({ module: import.meta.url, entry: "../dist/server.mjs" }),
   expose: { rpc: authContract },
 });
 ```
@@ -125,12 +128,12 @@ exhaustive at compile time:
 
 ```ts
 // auth/src/server.ts
-import { serve } from '@prisma/composer/service-rpc';
-import { SQL } from 'bun';
-import service from './service.ts';
+import { serve } from "@prisma/composer/service-rpc";
+import { SQL } from "bun";
+import service from "./service.ts";
 
 const { db } = service.load(); // { url } — you build your own client
-const port = service.port();   // the reserved port, resolved (default 3000)
+const port = service.port(); // the reserved port, resolved (default 3000)
 
 const sql = new SQL({ url: db.url, max: 1, idleTimeout: 10 });
 
@@ -143,7 +146,7 @@ export default handler;
 
 // Bind all interfaces — Compute routes external HTTP to the VM; a
 // loopback-only listener is unreachable.
-Bun.serve({ port, hostname: '0.0.0.0', fetch: handler });
+Bun.serve({ port, hostname: "0.0.0.0", fetch: handler });
 ```
 
 **The consumer** declares the dependency as `rpc(contract)` and gets a typed
@@ -151,29 +154,29 @@ client back from `load()`:
 
 ```ts
 // storefront/src/service.ts
-import nextjs from '@prisma/composer/nextjs';
-import { rpc } from '@prisma/composer/service-rpc';
-import { compute } from '@prisma/composer-prisma-cloud';
-import { authContract } from '@my-app/auth/contract';
+import nextjs from "@prisma/composer/nextjs";
+import { rpc } from "@prisma/composer/service-rpc";
+import { compute } from "@prisma/composer-prisma-cloud";
+import { authContract } from "@my-app/auth/contract";
 
 export default compute({
-  name: 'storefront',
+  name: "storefront",
   deps: { auth: rpc(authContract) },
-  build: nextjs({ module: import.meta.url, appDir: '..' }),
+  build: nextjs({ module: import.meta.url, appDir: ".." }),
 });
 ```
 
 ```tsx
 // storefront/app/page.tsx
-import service from '../src/service.ts';
+import service from "../src/service.ts";
 
 // load() reads the runtime environment, which doesn't exist at build time —
 // render per request instead of prerendering.
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const { auth } = service.load();
-  const { ok } = await auth.verify({ token: 'demo-token' });
+  const { ok } = await auth.verify({ token: "demo-token" });
   return <p>Signed in: {String(ok)}</p>;
 }
 ```
@@ -181,7 +184,7 @@ export default async function Home() {
 **Service-to-service calls are authenticated for you.** At deploy the
 framework mints a distinct, unguessable **service key** per consumer→provider
 binding: the consumer's client sends it on every call, and `serve()` returns
-`401` to anything else *before* the handler runs. Nothing declares it — no key
+`401` to anything else _before_ the handler runs. Nothing declares it — no key
 in the contract, the service, the module, or the app's code.
 
 Two rules follow for you specifically: **don't build your own
@@ -203,13 +206,13 @@ beyond one instance's memory (most don't); and a request without the header is
 served once without deduplication rather than rejected, so a hand-rolled probe
 works but gets no retry safety.
 
-| | |
-| --- | --- |
-| Locally / in tests | nothing is provisioned, so `serve()` passes every call through — never supply a key in `inputs` |
-| Per binding | two consumers of one provider hold different keys, so one leaking can't impersonate the other |
-| Scope | service-level — any valid key reaches every method that service exposes; split into two services to gate separately |
-| Rotation | remove the binding (or destroy the stack) and redeploy — a plain redeploy is a no-op, not a rotation |
-| Storage | `COMPOSER_*` variables the deploy owns and rewrites; never hand-edit one |
+|                    |                                                                                                                     |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| Locally / in tests | nothing is provisioned, so `serve()` passes every call through — never supply a key in `inputs`                     |
+| Per binding        | two consumers of one provider hold different keys, so one leaking can't impersonate the other                       |
+| Scope              | service-level — any valid key reaches every method that service exposes; split into two services to gate separately |
+| Rotation           | remove the binding (or destroy the stack) and redeploy — a plain redeploy is a no-op, not a rotation                |
+| Storage            | `COMPOSER_*` variables the deploy owns and rewrites; never hand-edit one                                            |
 
 It's a capability token ("I'm a service this app wired to you"), not a secret,
 and its value lives in deploy state — deliberately unlike `secret()`, whose
@@ -223,11 +226,11 @@ slots. It is the app — `prisma-composer deploy` loads its default export:
 
 ```ts
 // module.ts
-import { module } from '@prisma/composer';
-import authModule from '@my-app/auth';
-import storefrontService from '@my-app/storefront';
+import { module } from "@prisma/composer";
+import authModule from "@my-app/auth";
+import storefrontService from "@my-app/storefront";
 
-export default module('my-app', ({ provision }) => {
+export default module("my-app", ({ provision }) => {
   const auth = provision(authModule);
   provision(storefrontService, { deps: { auth: auth.rpc } });
 });
@@ -261,7 +264,11 @@ bundle, CSS and images it serves, as Bun's HTML import produces — name the
 directory with `dir` and the booting file inside it with `entry`:
 
 ```ts
-build: node({ module: import.meta.url, dir: '../dist/server', entry: 'server.js' })
+build: node({
+  module: import.meta.url,
+  dir: "../dist/server",
+  entry: "server.js",
+});
 ```
 
 `dir` resolves relative to the service module; `entry` resolves inside `dir`
@@ -291,9 +298,12 @@ TypeScript ES-module spelling. Within one directory `.ts` wins, then `.mts`,
 
 ```ts
 // prisma-composer.config.ts
-import { defineConfig } from '@prisma/composer/config';
-import { nodeBuild } from '@prisma/composer/node/control';
-import { prismaCloud, prismaState } from '@prisma/composer-prisma-cloud/control';
+import { defineConfig } from "@prisma/composer/config";
+import { nodeBuild } from "@prisma/composer/node/control";
+import {
+  prismaCloud,
+  prismaState,
+} from "@prisma/composer-prisma-cloud/control";
 
 export default defineConfig({
   extensions: [prismaCloud(), nodeBuild()],
@@ -319,9 +329,9 @@ wrapped once, referenced by both ends:
 
 ```ts
 // src/data.ts — the ONE value both ends reference
-import { pnContract } from '@prisma/composer-prisma-cloud/prisma-next';
-import type { Contract } from '../contract.d.ts';
-import contractJson from '../contract.json' with { type: 'json' };
+import { pnContract } from "@prisma/composer-prisma-cloud/prisma-next";
+import type { Contract } from "../contract.d.ts";
+import contractJson from "../contract.json" with { type: "json" };
 
 export const catalogData = pnContract<Contract>(contractJson);
 ```
@@ -333,7 +343,11 @@ end (inside the module that owns the database) also names the
 
 ```ts
 const db = provision(
-  pnPostgres({ name: 'database', contract: catalogData, config: './prisma-next.config.ts' }),
+  pnPostgres({
+    name: "database",
+    contract: catalogData,
+    config: "./prisma-next.config.ts",
+  }),
 );
 ```
 
@@ -348,13 +362,13 @@ complete pattern.
 `bucket` is a raw S3-compatible object-store bucket, imported alongside `postgres`:
 
 ```ts
-import { bucket, compute } from '@prisma/composer-prisma-cloud';
+import { bucket, compute } from "@prisma/composer-prisma-cloud";
 
 // service.ts — dependency end: receives { url, bucket, accessKeyId, secretAccessKey }
-export default compute({ name: 'uploads', deps: { store: bucket() } });
+export default compute({ name: "uploads", deps: { store: bucket() } });
 
 // module.ts — resource end: provisions the bucket and mints a keypair
-const store = provision(bucket({ name: 'uploads' }));
+const store = provision(bucket({ name: "uploads" }));
 provision(uploadsService, { deps: { store } });
 ```
 
@@ -371,18 +385,18 @@ argument; wire internals in the builder; return the exposed ports:
 
 ```ts
 // auth/src/module.ts — a Module that owns its own Postgres
-import { module, secret } from '@prisma/composer';
-import { postgres } from '@prisma/composer-prisma-cloud';
-import { authContract } from './contract.ts';
-import authService from './service.ts';
+import { module, secret } from "@prisma/composer";
+import { postgres } from "@prisma/composer-prisma-cloud";
+import { authContract } from "./contract.ts";
+import authService from "./service.ts";
 
 export default module(
-  'auth',
+  "auth",
   { secrets: { signingKey: secret() }, expose: { rpc: authContract } },
   ({ secrets, provision }) => {
-    const db = provision(postgres({ name: 'database' }));
+    const db = provision(postgres({ name: "database" }));
     const service = provision(authService, {
-      id: 'service',
+      id: "service",
       deps: { db },
       input: { signingKey: secrets.signingKey }, // forwarded ref as a binding leaf
     });
@@ -406,11 +420,11 @@ you're done — you never reimplement what a Module already owns. The
 first-party set ships inside `@prisma/composer-prisma-cloud`. It's small, and
 growing:
 
-| Import | What it provisions | Exposes |
-| --- | --- | --- |
-| `cron` from `/cron` | An always-on scheduler firing your schedule at your runner service | nothing |
-| `storage` from `/storage` | An S3-backed blob store (own Postgres + minted credentials) | `store` |
-| `streams` from `/streams` | Durable append-only event streams over a `store` | `streams` |
+| Import                    | What it provisions                                                 | Exposes   |
+| ------------------------- | ------------------------------------------------------------------ | --------- |
+| `cron` from `/cron`       | An always-on scheduler firing your schedule at your runner service | nothing   |
+| `storage` from `/storage` | An S3-backed blob store (own Postgres + minted credentials)        | `store`   |
+| `streams` from `/streams` | Durable append-only event streams over a `store`                   | `streams` |
 
 **Finding more.** A Composer extension — a package that brings its own
 Modules, resources, or deploy target — is published on npm under the name
@@ -424,27 +438,32 @@ exhaustive over its job ids at compile time:
 
 ```ts
 // service.ts
-import { defineSchedule, triggerContract } from '@prisma/composer-prisma-cloud/cron';
-export const schedule = defineSchedule({ tick: '60s' });
+import {
+  defineSchedule,
+  triggerContract,
+} from "@prisma/composer-prisma-cloud/cron";
+export const schedule = defineSchedule({ tick: "60s" });
 // the runner service exposes { trigger: triggerContract }
 
 // server.ts
-import { serveSchedule } from '@prisma/composer-prisma-cloud/cron';
+import { serveSchedule } from "@prisma/composer-prisma-cloud/cron";
 const handler = serveSchedule(service, schedule, {
   tick: (deps) => deps.worker.tick({}),
 });
 
 // module.ts — the cron module's boundary deps mirror the runner's own
-provision(cron({ schedule, runner: runnerService }), { deps: { worker: worker.rpc } });
+provision(cron({ schedule, runner: runnerService }), {
+  deps: { worker: worker.rpc },
+});
 ```
 
 ## Service input
 
 Choosing the channel is most of the decision:
 
-| The value is… | Declare | Provide | Read |
-| --- | --- | --- | --- |
-| produced by another node | `deps: { db: postgres() }` | wire at `provision()` | `load()` |
+| The value is…                        | Declare                         | Provide                                                        | Read      |
+| ------------------------------------ | ------------------------------- | -------------------------------------------------------------- | --------- |
+| produced by another node             | `deps: { db: postgres() }`      | wire at `provision()`                                          | `load()`  |
 | anything else — config or credential | one field of the `input` schema | bind at `provision()`: literal, `envParam()`, or `envSecret()` | `input()` |
 
 The service declares its whole incoming configuration — plain values and
@@ -456,26 +475,26 @@ schema union:
 
 ```ts
 // service.ts — the shapes that are legal
-import { secretString } from '@prisma/composer/arktype';
-import { type } from 'arktype';
+import { secretString } from "@prisma/composer/arktype";
+import { type } from "arktype";
 
 compute({
-  name: 'scheduler',
+  name: "scheduler",
   input: type({
-    jobs: type({ jobId: 'string', every: 'string' }).array(),
-    'region?': 'string',
+    jobs: type({ jobId: "string", every: "string" }).array(),
+    "region?": "string",
     apiKey: secretString(),
   }),
   // ...
 });
 
 // module.ts — where each value comes from; the binding mirrors the schema's shape
-import { envParam, envSecret } from '@prisma/composer-prisma-cloud';
+import { envParam, envSecret } from "@prisma/composer-prisma-cloud";
 provision(scheduler, {
   input: {
-    jobs: [{ jobId: 'tick', every: '60s' }],   // a literal
-    region: envParam('REGION'),                 // a per-stage platform variable
-    apiKey: envSecret('SCHEDULER_API_KEY'),     // a credential — name only, never the value
+    jobs: [{ jobId: "tick", every: "60s" }], // a literal
+    region: envParam("REGION"), // a per-stage platform variable
+    apiKey: envSecret("SCHEDULER_API_KEY"), // a credential — name only, never the value
   },
 });
 
@@ -495,7 +514,7 @@ Rules that bite:
   naming the variable, when both lack it). Changing the platform value needs
   a redeploy.
 - **Absence is the schema's call**: an env-bound field whose variable is
-  unset (or empty) resolves to *key omitted* — legal only if the schema says
+  unset (or empty) resolves to _key omitted_ — legal only if the schema says
   so (optional field, union arm). The deploy report prints the serialized
   input document (secret-free: secrets ride as `{"$secret":"VAR"}` pointers)
   and every key that resolved absent.
@@ -514,9 +533,9 @@ repo are the working versions.
 You test by deciding what `load()` gives the code, never by editing the code
 under test:
 
-| You want to… | Use | From |
-| --- | --- | --- |
-| Test a page / action / handler in isolation | `mockService` | `@prisma/composer/testing` |
+| You want to…                                               | Use                | From                                    |
+| ---------------------------------------------------------- | ------------------ | --------------------------------------- |
+| Test a page / action / handler in isolation                | `mockService`      | `@prisma/composer/testing`              |
 | Run the real boot + request path against a fake dependency | `bootstrapService` | `@prisma/composer-prisma-cloud/testing` |
 
 **Unit — `mockService`.** Returns a copy of the service whose `load()` yields
@@ -528,17 +547,17 @@ job (`vi.mock` in Vitest, `mock.module` in bun test):
 
 ```tsx
 // page.test.tsx
-import { mockService } from '@prisma/composer/testing';
-import realService from '../src/service.ts';
+import { mockService } from "@prisma/composer/testing";
+import realService from "../src/service.ts";
 
-vi.mock('../src/service.ts', () => ({
+vi.mock("../src/service.ts", () => ({
   default: mockService(realService, {
     auth: { verify: async () => ({ ok: true }) }, // wrong shape = compile error
   }),
 }));
 
-import Page from './page.tsx';
-expect(renderToString(await Page())).toContain('Signed in: true');
+import Page from "./page.tsx";
+expect(renderToString(await Page())).toContain("Signed in: true");
 ```
 
 **Integration — `bootstrapService`.** Boots the service's real built entry
@@ -546,9 +565,9 @@ in-process against a config you choose, exactly as a deployed boot would;
 drive it over real HTTP. Run under `bun test`:
 
 ```ts
-import { bootstrapService } from '@prisma/composer-prisma-cloud/testing';
-import fakeAuth from '@my-app/auth/fake'; // in-memory handler, no db
-import storefront from '../src/service.ts';
+import { bootstrapService } from "@prisma/composer-prisma-cloud/testing";
+import fakeAuth from "@my-app/auth/fake"; // in-memory handler, no db
+import storefront from "../src/service.ts";
 
 const fake = Bun.serve({ port: 0, fetch: fakeAuth });
 
@@ -599,13 +618,13 @@ instances and data first.
 `dev` does **not** print service logs — that would bury the front door once
 several services run. Logs are their own command:
 
-| You want to… | Run |
-| --- | --- |
-| Run the app locally | `prisma-composer dev module.ts` |
-| Start clean (wipe local data) | `prisma-composer dev module.ts --fresh` |
-| Tail every service's logs | `prisma-composer log module.ts` |
-| Tail one service | `prisma-composer log module.ts <address>` |
-| Show more history first | `prisma-composer log module.ts --tail <n>` |
+| You want to…                  | Run                                        |
+| ----------------------------- | ------------------------------------------ |
+| Run the app locally           | `prisma-composer dev module.ts`            |
+| Start clean (wipe local data) | `prisma-composer dev module.ts --fresh`    |
+| Tail every service's logs     | `prisma-composer log module.ts`            |
+| Tail one service              | `prisma-composer log module.ts <address>`  |
+| Show more history first       | `prisma-composer log module.ts --tail <n>` |
 
 `prisma-composer log` follows the merged logs of the already-running app, each
 line prefixed with its service (`[catalog.service] …`); pass a dotted address
@@ -622,13 +641,13 @@ Requires exactly two environment variables: `PRISMA_SERVICE_TOKEN` and
 `PRISMA_WORKSPACE_ID`. The target environment — a **stage** — is chosen on the
 command line, never in code:
 
-| You want to… | Run |
-| --- | --- |
-| Deploy to production | `prisma-composer deploy module.ts` |
-| Deploy an isolated environment | `prisma-composer deploy module.ts --stage <name>` |
-| Override the app name for one run | `prisma-composer deploy module.ts --name demo-42` |
+| You want to…                      | Run                                                |
+| --------------------------------- | -------------------------------------------------- |
+| Deploy to production              | `prisma-composer deploy module.ts`                 |
+| Deploy an isolated environment    | `prisma-composer deploy module.ts --stage <name>`  |
+| Override the app name for one run | `prisma-composer deploy module.ts --name demo-42`  |
 | Tear down an isolated environment | `prisma-composer destroy module.ts --stage <name>` |
-| Tear down production's resources | `prisma-composer destroy module.ts --production` |
+| Tear down production's resources  | `prisma-composer destroy module.ts --production`   |
 
 A Prisma App is one Project; a stage is a Branch of it — its
 own compute, its own empty database, its own configuration. Deploys are
@@ -692,7 +711,7 @@ genuinely legal (the consumer then reads `undefined`).
 
 This is a deploy-time refusal, not a broken deploy — and it can appear on an
 app whose code didn't change. The gap used to pass silently: the value reached
-the consumer as `undefined`, went into its environment, and crashed *that*
+the consumer as `undefined`, went into its environment, and crashed _that_
 service at boot, blaming the reader instead of the supplier. Don't route around
 it by making the param optional unless absent really is valid; that reinstates
 the silent `undefined`.
@@ -709,8 +728,8 @@ output can still reach the host terminal). The CLI itself is a renderer over
 them.
 
 ```ts
-import { deploy } from '@prisma/composer/control';
-const result = await deploy({ entry: 'module.ts', stage: 'pr-42' });
+import { deploy } from "@prisma/composer/control";
+const result = await deploy({ entry: "module.ts", stage: "pr-42" });
 // result: { ok: true, value: { summary? } } | { ok: false, failure }
 ```
 
@@ -747,7 +766,7 @@ const result = await deploy({ entry: 'module.ts', stage: 'pr-42' });
   log `uncaughtException`/`unhandledRejection` instead of dying.
 - **Bind `0.0.0.0`**, not loopback — Compute routes external HTTP to the VM.
 - **Next.js pages that call `load()` need `export const dynamic =
-  'force-dynamic'`** — the runtime environment doesn't exist at build time,
+'force-dynamic'`** — the runtime environment doesn't exist at build time,
   and Next ignores runtime env for prerendered routes.
 - **A deployed `/rpc/<method>` returns `401` to anything but a wired peer.**
   Every RPC binding carries an auto-provisioned service key, so a hand-rolled

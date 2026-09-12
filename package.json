@@ -20,6 +20,7 @@
   "packageManager": "pnpm@12.3.4",
   "type": "module",
   "devDependencies": {
-    "concurrently": "^10.0.5"
+    "concurrently": "^10.0.5",
+    "prettier": "3.9.6"
   }
 }

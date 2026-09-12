@@ -32,7 +32,11 @@ Start the development server with HMR:
 npm run dev
 ```
 
-Your application will be available at `http://localhost:5173`.
+Your application will be available at `http://localhost:5173` and
+`http://127.0.0.1:5173`. During development, `/api` is proxied to the API on
+port 3000 so HTTP-only authentication cookies stay same-origin. Set
+`VITE_API_URL` when the browser must use an explicitly configured API URL,
+such as a production deployment.
 
 ## Building for Production
 

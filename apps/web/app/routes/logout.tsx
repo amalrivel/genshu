@@ -6,4 +6,6 @@ export async function clientAction({}: Route.ClientActionArgs) {
   await api("/auth/logout", { method: "POST" });
   return redirect("/login");
 }
-export default function Logout() { return null; }
+export default function Logout() {
+  return null;
+}

@@ -466,6 +466,7 @@ changes:
         - "@internal/extension-supabase"
       anyMatch: true
 ---
+
 <!--
 Release bump to 0.15.0 (PR #988): the version bump itself. Every
 `packages/3-extensions/*/package.json` advances to 0.15.0 (version field +

@@ -16,9 +16,7 @@
       {
         "description": "ensure table \"question\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
-        "params": [
-          "\"public\".\"question\""
-        ]
+        "params": ["\"public\".\"question\""]
       }
     ],
     "execute": [
@@ -32,9 +30,7 @@
       {
         "description": "verify table \"question\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
-        "params": [
-          "\"public\".\"question\""
-        ]
+        "params": ["\"public\".\"question\""]
       }
     ]
   },
@@ -55,9 +51,7 @@
       {
         "description": "ensure index \"question_topicId_idx_6f05808f\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
-        "params": [
-          "\"public\".\"question_topicId_idx_6f05808f\""
-        ]
+        "params": ["\"public\".\"question_topicId_idx_6f05808f\""]
       }
     ],
     "execute": [
@@ -71,9 +65,7 @@
       {
         "description": "verify index \"question_topicId_idx_6f05808f\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
-        "params": [
-          "\"public\".\"question_topicId_idx_6f05808f\""
-        ]
+        "params": ["\"public\".\"question_topicId_idx_6f05808f\""]
       }
     ]
   },
@@ -94,11 +86,7 @@
       {
         "description": "ensure FK \"question_topicId_fkey\" does not exist",
         "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
-        "params": [
-          "question_topicId_fkey",
-          "public",
-          "\"public\".\"question\""
-        ]
+        "params": ["question_topicId_fkey", "public", "\"public\".\"question\""]
       }
     ],
     "execute": [
@@ -111,11 +99,7 @@
       {
         "description": "verify FK \"question_topicId_fkey\" exists",
         "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
-        "params": [
-          "question_topicId_fkey",
-          "public",
-          "\"public\".\"question\""
-        ]
+        "params": ["question_topicId_fkey", "public", "\"public\".\"question\""]
       }
     ]
   }

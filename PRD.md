@@ -17,17 +17,17 @@ The product must not claim official affiliation with Asahi Shimbun unless formal
 
 ## 2\. MVP Scope
 
-|Area             |MVP Requirement                                                                                  |
-|-----------------|-------------------------------------------------------------------------------------------------|
-|Access           |Admin-created or invited accounts; no public registration                                        |
-|Content language |Japanese with Indonesian translation                                                             |
-|Furigana         |User-selectable furigana display for Japanese questions and text                                  |
-|Question types   |Text and illustrated Maru/Batsu questions                                                        |
-|Practice         |Admin-curated practice sets                                                                      |
-|Mock exams       |Exam-inspired format with admin-configurable question count                                      |
-|Results          |Scores, attempt history, and incorrect-answer review                                             |
-|Admin            |Manage topics, materials, questions, answer keys, explanations, illustrations, users, and results|
-|Content structure|Topic → Material; no Course entity required                                                      |
+| Area              | MVP Requirement                                                                                   |
+| ----------------- | ------------------------------------------------------------------------------------------------- |
+| Access            | Admin-created or invited accounts; no public registration                                         |
+| Content language  | Japanese with Indonesian translation                                                              |
+| Furigana          | User-selectable furigana display for Japanese questions and text                                  |
+| Question types    | Text and illustrated Maru/Batsu questions                                                         |
+| Practice          | Admin-curated practice sets                                                                       |
+| Mock exams        | Exam-inspired format with admin-configurable question count                                       |
+| Results           | Scores, attempt history, and incorrect-answer review                                              |
+| Admin             | Manage topics, materials, questions, answer keys, explanations, illustrations, users, and results |
+| Content structure | Topic → Material; no Course entity required                                                       |
 
 ## 3\. Core User Flows
 
