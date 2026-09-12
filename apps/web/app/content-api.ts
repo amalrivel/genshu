@@ -16,16 +16,28 @@ export type PracticeSetForPractice = PracticeSetSummary & { questions: PracticeQ
 export type AnswerFeedback = {
   isCorrect: boolean; correctAnswer: boolean; japaneseExplanation: string; indonesianExplanation: string;
 };
+export type AuthUser = { id: number; email: string; name: string | null; role: "Participant" | "Admin"; isActive: boolean };
+export class ApiError extends Error { constructor(public status: number, message: string) { super(message); } }
 
 const base = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 export async function api<T>(path: string, init?: RequestInit): Promise<T> {
-  const response = await fetch(`${base}${path}`, init);
+  const response = await fetch(`${base}${path}`, { credentials: "include", ...init });
   if (!response.ok) {
     const body = await response.json().catch(() => null);
-    throw new Error(body?.error || `Request failed (${response.status}).`);
+    throw new ApiError(response.status, body?.error || `Request failed (${response.status}).`);
   }
   return response.status === 204 ? undefined as T : response.json();
+}
+export async function currentUser() { return (await api<{ user: AuthUser }>("/auth/session")).user; }
+export async function requireAuth() {
+  try { return await currentUser(); }
+  catch (error) { if (error instanceof ApiError && error.status === 401) throw redirect("/login"); throw error; }
+}
+export async function requireAdmin() {
+  const user = await requireAuth();
+  if (user.role !== "Admin") throw redirect("/practice");
+  return user;
 }
 
 export async function saveContent(request: Request, resource: "topics" | "materials" | "questions", topicId?: string) {
@@ -73,3 +85,4 @@ export async function savePracticeSet(request: Request) {
     return { ok: false, error: error instanceof Error ? error.message : "Request failed.", intent: "" };
   }
 }
+import { redirect } from "react-router";

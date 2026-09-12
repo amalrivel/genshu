@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node --watch src/app.ts",
     "test": "node --test src/content.test.ts",
+    "bootstrap:admin": "node src/bootstrap-admin.ts",
     "contract:emit": "prisma contract emit",
     "typecheck": "tsc --noEmit"
   },

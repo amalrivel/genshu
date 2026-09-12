@@ -1,11 +1,11 @@
 # Graph Report - genshu  (2026-09-12)
 
 ## Corpus Check
-- 316 files · ~520,900 words
+- 319 files · ~521,178 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 4379 nodes · 5147 edges · 334 communities (274 shown, 43 thin omitted)
+- 4419 nodes · 5188 edges · 340 communities (278 shown, 44 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 46 edges (avg confidence: 0.87)
 - Token cost: 0 input · 0 output
 
@@ -89,7 +89,7 @@
 - .agents/skills/prisma-8/upgrading/extension/upgrades/0.9-to-0.10/stamp-storage-types-kind.ts
 - Writing apps with Prisma Composer
 - shadcn/ui Theming & Customization
-- test_design_system_mode.py
+- _style_is_dark_primary
 - api/.agents/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-domain-namespaced-contracts.ts
 - api/.agents/skills/prisma-8/upgrading/app/upgrades/0.9-to-0.10/stamp-storage-types-kind.ts
 - api/.agents/skills/prisma-8/upgrading/extension/upgrades/0.9-to-0.10/stamp-storage-types-kind.ts
@@ -122,7 +122,6 @@
 - .agents/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/regenerate-extension-public-baseline.ts
 - .agents/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/strip-migration-labels-hints.ts
 - CatalogRefreshTest
-- api/.agents/skills/prisma-8/SKILL.md
 - api/.agents/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-closed-mongo-contracts.ts
 - api/.agents/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/strip-migration-labels-hints.ts
 - 0.12 → 0.13 — User upgrade instructions
@@ -146,7 +145,7 @@
 - 0.10 → 0.11 — Extension-author upgrade instructions
 - Copywriting Formulas
 - detect_domain
-- _palette_is_dark
+- test_design_system_mode.py
 - Prisma Next — Supabase
 - 0.10 → 0.11 — Extension-author upgrade instructions
 - Banner Design - Multi-Format Creative Banner System
@@ -321,16 +320,22 @@
 - 8
 - M
 - M
-- _select_palette_for_mode
+- components.json
 - content.ts
 - app.ts
+- dependencies
 - 6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts
+- devDependencies
 - devDependencies
 - generate_design_system
 - dependencies
 - scripts
+- button.tsx
 - Content API
 - M
+- Prisma Next (Prisma 8)
+- scripts
+- vite.config.ts
 - M
 
 ## God Nodes (most connected - your core abstractions)
@@ -360,15 +365,15 @@
 ## Import Cycles
 - None detected.
 
-## Communities (334 total, 43 thin omitted)
+## Communities (340 total, 44 thin omitted)
 
 ### Community 0 - "api/package.json"
 Cohesion: 0.11
 Nodes (16): author, description, @types/node, typescript, keywords, license, main, name (+8 more)
 
 ### Community 1 - "web/package.json"
-Cohesion: 0.05
-Nodes (36): dependencies, isbot, react, react-dom, react-router, @react-router/node, @react-router/serve, devDependencies (+28 more)
+Cohesion: 0.11
+Nodes (18): @types/node, typescript, name, private, type, @base-ui/react, @fontsource-variable/inter, isbot (+10 more)
 
 ### Community 2 - "package.json"
 Cohesion: 0.10
@@ -392,7 +397,7 @@ Nodes (12): compilerOptions, erasableSyntaxOnly, module, moduleResolution, noEmi
 
 ### Community 7 - "validate_data.py"
 Cohesion: 0.07
-Nodes (48): Semantic quality contracts for the core UI/UX datasets., read_rows(), TestAccessibilityGuidance, TestChartsTypographyAndIcons, TestCurrentReactGuidance, TestSemanticColors, _catalog_date(), _check_app_interface_contract() (+40 more)
+Nodes (47): Semantic quality contracts for the core UI/UX datasets., read_rows(), TestAccessibilityGuidance, TestChartsTypographyAndIcons, TestCurrentReactGuidance, TestSemanticColors, _catalog_date(), _check_app_interface_contract() (+39 more)
 
 ### Community 8 - "search"
 Cohesion: 0.06
@@ -411,8 +416,8 @@ Cohesion: 0.04
 Nodes (46): 0.11 → 0.12 — Extension-author upgrade instructions, `any-expression-exhaustive-switch-add-window-func-case`, Before 0.12, Before 0.12, Before 0.12, Before 0.12 — `createRuntime(...)` call inside the wrapper, Before 0.12 — type import and options interface, Confirm every manifest is migrated (+38 more)
 
 ### Community 12 - ".generate"
-Cohesion: 0.18
-Nodes (6): Execute searches across multiple domains., Select best matching result based on priority keywords., Extract results list from search result dict., Generate complete design system recommendation. variance/motion/density are…, Bucket a 1-10 dial value into its tier config. Returns None if value is None., _resolve_dial()
+Cohesion: 0.16
+Nodes (8): _filter_anti_patterns_for_mode(), Drop "avoid dark mode" advice once dark mode is the resolved answer., Execute searches across multiple domains., Extract results list from search result dict., Generate complete design system recommendation. variance/motion/density are…, Bucket a 1-10 dial value into its tier config. Returns None if value is None., _resolve_dial(), TestAntiPatternGating
 
 ### Community 13 - "slide_search_core.py"
 Cohesion: 0.08
@@ -443,8 +448,8 @@ Cohesion: 0.09
 Nodes (22): $type, $value, $type, $value, $type, $value, $type, $value (+14 more)
 
 ### Community 24 - "DesignSystemGenerator"
-Cohesion: 0.17
-Nodes (5): DesignSystemGenerator, Generates design system recommendations from aggregated searches., Load reasoning rules from CSV., TestReasoningMatch, TestReasoningContract
+Cohesion: 0.13
+Nodes (8): DesignSystemGenerator, Generates design system recommendations from aggregated searches., Load reasoning rules from CSV., Find matching reasoning rule for a category., Apply reasoning rules to search results., Select best matching result based on priority keywords., TestReasoningMatch, TestReasoningContract
 
 ### Community 25 - "Form & Input Components"
 Cohesion: 0.06
@@ -543,8 +548,8 @@ Cohesion: 0.08
 Nodes (24): Accessibility Patterns, Alternative: Tailwind-Only Setup, Best Practices, Common Patterns, Component Layer: shadcn/ui, Component Library Guide, Component + Styling Setup, Core Stack (+16 more)
 
 ### Community 49 - "design_system.py"
-Cohesion: 0.11
-Nodes (24): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_master_md(), format_page_override_md(), _generate_intelligent_overrides(), hex_to_ansi(), persist_design_system() (+16 more)
+Cohesion: 0.10
+Nodes (26): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), _generate_intelligent_overrides(), hex_to_ansi() (+18 more)
 
 ### Community 50 - "Workflow"
 Cohesion: 0.08
@@ -650,9 +655,9 @@ Nodes (19): Anatomy of a service, Builds are yours, Databases, Deploy config, De
 Cohesion: 0.10
 Nodes (19): Base Color Presets, Best Practices, Color Customization, Color Format, Component Customization, CSS Variable System, Customize Styles, Customize Variants (+11 more)
 
-### Community 76 - "test_design_system_mode.py"
-Cohesion: 0.14
-Nodes (11): _filter_anti_patterns_for_mode(), _query_wants_dark(), True when a styles.csv row describes itself as dark-first., True when the query explicitly asks for a dark theme., Resolve the mode the rest of the output has to agree with., Drop "avoid dark mode" advice once dark mode is the resolved answer., _resolve_color_mode(), _style_is_dark_primary() (+3 more)
+### Community 76 - "_style_is_dark_primary"
+Cohesion: 0.21
+Nodes (7): _query_wants_dark(), True when a styles.csv row describes itself as dark-first., True when the query explicitly asks for a dark theme., Resolve the mode the rest of the output has to agree with., _resolve_color_mode(), _style_is_dark_primary(), TestModeResolution
 
 ### Community 77 - "api/.agents/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-domain-namespaced-contracts.ts"
 Cohesion: 0.16
@@ -778,10 +783,6 @@ Nodes (13): dryRun, execFileAsync, ExtensionRoot, extensionRoots, findMigrationD
 Cohesion: 0.18
 Nodes (15): canonicalizeJson(), computeMigrationHash(), dryRun, findMigrationManifests(), isJsonObject(), processFile(), projectRoot, removeTopLevelKey() (+7 more)
 
-### Community 109 - "api/.agents/skills/prisma-8/SKILL.md"
-Cohesion: 0.16
-Nodes (5): Checklist, Prisma Next (Prisma 8), Routing rules, Routing table, The canonical model (one paragraph)
-
 ### Community 110 - "api/.agents/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-closed-mongo-contracts.ts"
 Cohesion: 0.17
 Nodes (14): contractJsonCandidates(), contractLooksClosed(), isClosed(), dryRun, execFileAsync, findPrismaNextConfigDirs(), isJsonObject(), mongoDirs (+6 more)
@@ -874,9 +875,9 @@ Nodes (14): AIDA (Attention-Interest-Desire-Action), Before-After-Bridge, Contra
 Cohesion: 0.23
 Nodes (3): detect_domain(), Auto-detect the most relevant domain from query. Matches are weighted by…, TestDomainDetection
 
-### Community 133 - "_palette_is_dark"
-Cohesion: 0.18
-Nodes (7): _palette_is_dark(), WCAG relative luminance of a #RRGGBB string, or None if unparseable., True when a colors.csv row's Background is a dark surface., _relative_luminance(), The exact reproduction from issue #428., TestEndToEndCoherence, TestLuminance
+### Community 133 - "test_design_system_mode.py"
+Cohesion: 0.11
+Nodes (15): _contrast_ratio(), _derive_dark_palette(), _palette_is_dark(), WCAG relative luminance of a #RRGGBB string, or None if unparseable., True when a colors.csv row's Background is a dark surface., WCAG contrast ratio for two hex colors, or None if either is invalid., Keep product brand tokens while deriving accessible dark surfaces., Pick the highest-ranked palette matching the resolved mode. Only the dark case… (+7 more)
 
 ### Community 134 - "Prisma Next — Supabase"
 Cohesion: 0.13
@@ -971,8 +972,8 @@ Cohesion: 0.12
 Nodes (16): AggregateTypes, CodecTypes, Contract, ContractBase, DefaultLiteralValue, ExecutionHash, FieldInputTypes, FieldOutputTypes (+8 more)
 
 ### Community 157 - "parse_decision_rules"
-Cohesion: 0.17
-Nodes (9): Find matching reasoning rule for a category., Apply reasoning rules to search results., apply_decision_rules(), _object_without_duplicates(), parse_decision_rules(), Return deterministic mutations and an audit trail; never execute data., Closed, non-executable grammar for design-system decision rules., Parse the canonical condition -> action-array representation. (+1 more)
+Cohesion: 0.19
+Nodes (8): apply_decision_rules(), _object_without_duplicates(), parse_decision_rules(), Return deterministic mutations and an audit trail; never execute data., Closed, non-executable grammar for design-system decision rules., Parse the canonical condition -> action-array representation., _validate_action(), _check_reasoning_contract()
 
 ### Community 158 - "0.13 → 0.14 — Extension-author upgrade instructions"
 Cohesion: 0.15
@@ -1426,9 +1427,9 @@ Nodes (3): $type, $value, 3
 Cohesion: 0.67
 Nodes (3): $type, $value, 8
 
-### Community 322 - "_select_palette_for_mode"
-Cohesion: 0.22
-Nodes (7): _contrast_ratio(), _derive_dark_palette(), WCAG contrast ratio for two hex colors, or None if either is invalid., Keep product brand tokens while deriving accessible dark surfaces., Pick the highest-ranked palette matching the resolved mode. Only the dark case…, _select_palette_for_mode(), TestPaletteSelection
+### Community 322 - "components.json"
+Cohesion: 0.09
+Nodes (21): aliases, components, hooks, lib, ui, utils, iconLibrary, menuAccent (+13 more)
 
 ### Community 323 - "content.ts"
 Cohesion: 0.33
@@ -1438,6 +1439,10 @@ Nodes (9): fields(), id(), invalid(), practiceSetFields(), questionFields(), que
 Cohesion: 0.33
 Nodes (5): app, content, contentError(), cors, express
 
+### Community 325 - "dependencies"
+Cohesion: 0.14
+Nodes (14): dependencies, @base-ui/react, class-variance-authority, cn, @fontsource-variable/inter, isbot, lucide-react, react (+6 more)
+
 ### Community 326 - "6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts"
 Cohesion: 0.12
 Nodes (16): AggregateTypes, CodecTypes, Contract, ContractBase, DefaultLiteralValue, ExecutionHash, FieldInputTypes, FieldOutputTypes (+8 more)
@@ -1446,9 +1451,13 @@ Nodes (16): AggregateTypes, CodecTypes, Contract, ContractBase, DefaultLiteralVa
 Cohesion: 0.29
 Nodes (7): devDependencies, prisma, @prisma/cli-engine, @types/cors, @types/express, @types/node, typescript
 
+### Community 328 - "devDependencies"
+Cohesion: 0.22
+Nodes (9): devDependencies, @react-router/dev, tailwindcss, @tailwindcss/vite, @types/node, @types/react, @types/react-dom, typescript (+1 more)
+
 ### Community 329 - "generate_design_system"
-Cohesion: 0.18
-Nodes (8): format_markdown(), generate_design_system(), Format design system as markdown., Main entry point for design system generation. Args: query: Search query (e.g.,…, format_output(), UI/UX Pro Max Search - BM25 search engine for UI/UX style guides Usage: python…, Format results for Claude consumption (token-optimized), TestPersistence
+Cohesion: 0.22
+Nodes (6): generate_design_system(), Main entry point for design system generation. Args: query: Search query (e.g.,…, format_output(), UI/UX Pro Max Search - BM25 search engine for UI/UX style guides Usage: python…, Format results for Claude consumption (token-optimized), TestPersistence
 
 ### Community 330 - "dependencies"
 Cohesion: 0.40
@@ -1458,17 +1467,29 @@ Nodes (5): dependencies, cors, dotenv, express, @prisma/orm-postgres
 Cohesion: 0.40
 Nodes (5): scripts, contract:emit, start, test, typecheck
 
+### Community 332 - "button.tsx"
+Cohesion: 0.40
+Nodes (4): Button(), buttonVariants, class-variance-authority, cn
+
+### Community 336 - "Prisma Next (Prisma 8)"
+Cohesion: 0.40
+Nodes (5): Checklist, Prisma Next (Prisma 8), Routing rules, Routing table, The canonical model (one paragraph)
+
+### Community 337 - "scripts"
+Cohesion: 0.40
+Nodes (5): scripts, build, dev, start, typecheck
+
 ## Knowledge Gaps
-- **2267 isolated node(s):** `fs`, `path`, `fs`, `path`, `fs` (+2262 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 2797 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **43 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **2298 isolated node(s):** `fs`, `path`, `fs`, `path`, `fs` (+2293 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 2829 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **44 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `ShadcnInstaller` connect `ShadcnInstaller` to `.check_shadcn_config`, `.test_get_installed_components_empty`, `.__init__`, `patch`, `.test_add_components_no_config`, `.test_add_components_dry_run`, `.test_list_installed_no_config`, `.test_init_dry_run`, `.test_check_shadcn_config_not_exists`, `TestShadcnInstaller`, `.test_get_installed_components_with_files`, `.test_add_components_no_components`?**
   _High betweenness centrality (0.005) - this node is a cross-community bridge._
-- **Why does `DesignSystemGenerator` connect `DesignSystemGenerator` to `_select_palette_for_mode`, `BM25`, `_palette_is_dark`, `generate_design_system`, `.generate`, `test_design_system_mode.py`, `design_system.py`, `test_data_contracts.py`, `parse_decision_rules`?**
+- **Why does `DesignSystemGenerator` connect `DesignSystemGenerator` to `BM25`, `test_design_system_mode.py`, `generate_design_system`, `.generate`, `design_system.py`, `test_data_contracts.py`?**
   _High betweenness centrality (0.004) - this node is a cross-community bridge._
 - **Why does `search()` connect `search` to `detect_domain`, `scripts/core.py`, `BM25`, `validate_data.py`, `generate_design_system`, `.generate`, `design_system.py`, `test_text_layout_resilience.py`, `_row_identities`, `search_stack`?**
   _High betweenness centrality (0.003) - this node is a cross-community bridge._
@@ -1477,6 +1498,6 @@ _Questions this graph is uniquely positioned to answer:_
 - **Are the 3 inferred relationships involving `DesignSystemGenerator` (e.g. with `TestReasoningMatch` and `TestReasoningContract`) actually correct?**
   _`DesignSystemGenerator` has 3 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `fs`, `path`, `fs` to the rest of the system?**
-  _2267 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _2298 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `api/package.json` be split into smaller, more focused modules?**
   _Cohesion score 0.1111111111111111 - nodes in this community are weakly interconnected._

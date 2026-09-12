@@ -1,6 +1,7 @@
 import type { Route } from "./+types/home";
-import { Link } from "react-router";
+import { Form, Link } from "react-router";
 import { Welcome } from "../welcome/welcome";
+import { requireAuth } from "../content-api";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -8,7 +9,9 @@ export function meta({}: Route.MetaArgs) {
     { name: "description", content: "Welcome to React Router!" },
   ];
 }
+export async function clientLoader() { return { user: await requireAuth() }; }
 
-export default function Home() {
-  return <><nav className="content-admin"><Link to="/practice">Start practice</Link> · <Link to="/topics">Manage topics and materials</Link> · <Link to="/practice-sets">Manage practice sets</Link></nav><Welcome /></>;
+export default function Home({ loaderData }: Route.ComponentProps) {
+  const { user } = loaderData;
+  return <><nav className="content-admin"><Link to="/practice">Start practice</Link>{user.role === "Admin" && <> · <Link to="/topics">Manage topics and materials</Link> · <Link to="/practice-sets">Manage practice sets</Link> · <Link to="/users">Participants</Link></>} · <Form method="post" action="/logout" className="inline"><button type="submit">Log out</button></Form></nav><Welcome /></>;
 }

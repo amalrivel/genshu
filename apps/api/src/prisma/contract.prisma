@@ -1,11 +1,58 @@
 // use prisma-next
 
+enum UserRole {
+  @@type("pg/text@1")
+  Participant = "Participant"
+  Admin       = "Admin"
+}
+
 model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  name         String?
+  role         UserRole @default(Participant)
+  passwordHash String?
+  isActive     Boolean  @default(false)
+  createdAt    TimestamptzString @default(now())
+  updatedAt    temporal.updatedAtString()
+}
+
+model Session {
   id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String?
+  userId    Int
+  tokenHash String   @unique
+  expiresAt TimestamptzString
+  revokedAt TimestamptzString?
   createdAt TimestamptzString @default(now())
-  updatedAt temporal.updatedAtString()
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Invitation {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  tokenHash String   @unique
+  expiresAt TimestamptzString
+  consumedAt TimestamptzString?
+  revokedAt TimestamptzString?
+  createdAt TimestamptzString @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model PasswordReset {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  tokenHash String   @unique
+  expiresAt TimestamptzString
+  consumedAt TimestamptzString?
+  revokedAt TimestamptzString?
+  createdAt TimestamptzString @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model Topic {

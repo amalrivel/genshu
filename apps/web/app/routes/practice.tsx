@@ -1,11 +1,12 @@
 import { Link } from "react-router";
 import type { Route } from "./+types/practice";
-import { api, type PracticeSetSummary } from "../content-api";
+import { api, requireAuth, type PracticeSetSummary } from "../content-api";
 import { ContentError } from "../content-form";
 
 export const meta = () => [{ title: "Practice · Genshu" }];
 export async function clientLoader() {
-  return api<PracticeSetSummary[]>("/practice-sets");
+  await requireAuth();
+  return api<PracticeSetSummary[]>("/practice");
 }
 export function HydrateFallback() { return <main className="practice-page"><p role="status">Loading practice sets…</p></main>; }
 

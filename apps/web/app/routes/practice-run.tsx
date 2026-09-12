@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import type { Route } from "./+types/practice-run";
-import { api, type AnswerFeedback, type PracticeSetForPractice } from "../content-api";
+import { api, requireAuth, type AnswerFeedback, type PracticeSetForPractice } from "../content-api";
 import { ContentError } from "../content-form";
 
 type Answer = { questionId: number; isCorrect: boolean };
 
 export const meta = () => [{ title: "Practice runner · Genshu" }];
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
+  await requireAuth();
   return api<PracticeSetForPractice>(`/practice-sets/${encodeURIComponent(params.practiceSetId)}/practice`);
 }
 export function HydrateFallback() { return <main className="practice-page"><p role="status">Loading practice…</p></main>; }

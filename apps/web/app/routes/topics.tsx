@@ -1,10 +1,11 @@
 import { Link } from "react-router";
 import type { Route } from "./+types/topics";
-import { api, saveContent, type Topic } from "../content-api";
+import { api, requireAdmin, saveContent, type Topic } from "../content-api";
 import { ContentForm } from "../content-form";
 
 export const meta = () => [{ title: "Topics · Genshu" }];
 export async function clientLoader() {
+  await requireAdmin();
   return { topics: await api<Topic[]>("/topics") };
 }
 export async function clientAction({ request }: Route.ClientActionArgs) {

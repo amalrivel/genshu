@@ -1,10 +1,31 @@
 // Run against the local development API: node --test src/content.test.ts
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { after, before, test } from 'node:test';
+import { hashPassword } from './auth.ts';
+import { db } from './prisma/db.ts';
 
 const base = 'http://localhost:3000';
+let adminCookie = '';
+let adminId = 0;
+async function raw(path: string, init: RequestInit = {}) {
+  return fetch(base + path, { ...init, headers: { 'Content-Type': 'application/json', Cookie: adminCookie, ...init.headers } });
+}
+async function publicRequest(path: string, method = 'GET', body?: unknown, status = 200) {
+  const response = await fetch(base + path, { method, headers: { 'Content-Type': 'application/json' }, body: body === undefined ? undefined : JSON.stringify(body) });
+  const data = response.status === 204 ? null : await response.json();
+  assert.equal(response.status, status, JSON.stringify(data));
+  return { data, response };
+}
+before(async () => {
+  const user = await db.orm.public.User.create({ email: `admin-${Date.now()}@example.com`, name: 'Test Admin', role: 'Admin', isActive: true, passwordHash: await hashPassword('Test password 123!') });
+  adminId = user.id;
+  const response = await fetch(base + '/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: user.email, password: 'Test password 123!' }) });
+  assert.equal(response.status, 200);
+  adminCookie = response.headers.getSetCookie()[0]!.split(';')[0]!;
+});
+after(async () => { await db.orm.public.User.where({ id: adminId }).delete(); await db.close(); });
 async function request(path: string, method = 'GET', body?: unknown, status = 200) {
-  const response = await fetch(base + path, {
+  const response = await raw(path, {
     method, headers: { 'Content-Type': 'application/json' },
     body: body === undefined ? undefined : JSON.stringify(body),
   });
@@ -14,7 +35,7 @@ async function request(path: string, method = 'GET', body?: unknown, status = 20
 }
 
 test('Local Vite development ports can read API responses', async () => {
-  const response = await fetch(base + '/topics', { headers: { Origin: 'http://localhost:5174' } });
+  const response = await raw('/topics', { headers: { Origin: 'http://localhost:5174' } });
   assert.equal(response.status, 200);
   assert.equal(response.headers.get('access-control-allow-origin'), 'http://localhost:5174');
 });
@@ -120,12 +141,12 @@ test('Topic → Material CRUD, validation, filtering and safe deletion', async (
       await request(`/topics/${id}`, 'PUT', { title: 'Gone' }, 404);
       await request(`/topics/${id}`, 'DELETE', undefined, 404);
     }
-    const malformed = await fetch(base + '/topics', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{' });
+    const malformed = await raw('/topics', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{' });
     assert.equal(malformed.status, 400);
   } finally {
-    for (const id of materials) await fetch(`${base}/materials/${id}`, { method: 'DELETE' });
-    for (const id of questions) await fetch(`${base}/questions/${id}`, { method: 'DELETE' });
-    for (const id of topics) await fetch(`${base}/topics/${id}`, { method: 'DELETE' });
+    for (const id of materials) await raw(`/materials/${id}`, { method: 'DELETE' });
+    for (const id of questions) await raw(`/questions/${id}`, { method: 'DELETE' });
+    for (const id of topics) await raw(`/topics/${id}`, { method: 'DELETE' });
   }
 });
 
@@ -187,9 +208,9 @@ test('Practice set CRUD, ordered questions, validation and safe question deletio
     await request(`/questions/${firstQuestion}`, 'DELETE', undefined, 204);
     questions.splice(questions.indexOf(firstQuestion), 1);
   } finally {
-    for (const id of practiceSets) await fetch(`${base}/practice-sets/${id}`, { method: 'DELETE' });
-    for (const id of questions) await fetch(`${base}/questions/${id}`, { method: 'DELETE' });
-    for (const id of topics) await fetch(`${base}/topics/${id}`, { method: 'DELETE' });
+    for (const id of practiceSets) await raw(`/practice-sets/${id}`, { method: 'DELETE' });
+    for (const id of questions) await raw(`/questions/${id}`, { method: 'DELETE' });
+    for (const id of topics) await raw(`/topics/${id}`, { method: 'DELETE' });
   }
 });
 
@@ -239,8 +260,72 @@ test('Participant practice payload hides answers and checks selected questions',
     await request(`/practice-sets/${practiceSet.id}/questions/2147483647/check-answer`, 'POST', { answer: true }, 404);
     await request(`/practice-sets/${practiceSet.id}/questions/${outside.id}/check-answer`, 'POST', { answer: false }, 404);
   } finally {
-    for (const id of practiceSets) await fetch(`${base}/practice-sets/${id}`, { method: 'DELETE' });
-    for (const id of questions) await fetch(`${base}/questions/${id}`, { method: 'DELETE' });
-    for (const id of topics) await fetch(`${base}/topics/${id}`, { method: 'DELETE' });
+    for (const id of practiceSets) await raw(`/practice-sets/${id}`, { method: 'DELETE' });
+    for (const id of questions) await raw(`/questions/${id}`, { method: 'DELETE' });
+    for (const id of topics) await raw(`/topics/${id}`, { method: 'DELETE' });
+  }
+});
+
+test('Authentication, invitation, reset, session revocation and authorization', async () => {
+  const users: number[] = [];
+  try {
+    await publicRequest('/auth/register', 'POST', { email: 'public@example.com', password: 'Test password 123!' }, 401);
+    await publicRequest('/auth/login', 'POST', { email: 'unknown@example.com', password: 'Test password 123!' }, 401);
+    const inactive = await request('/admin/users', 'POST', { email: `inactive-${Date.now()}@example.com`, name: 'Inactive' }, 201);
+    users.push(inactive.id);
+    assert.equal(inactive.role, 'Participant');
+    await publicRequest('/auth/login', 'POST', { email: inactive.email, password: 'Test password 123!' }, 401);
+
+    const firstInvite = await request(`/admin/users/${inactive.id}/invitations`, 'POST');
+    assert.match(firstInvite.url, /^http:\/\/localhost:5173\/invite\//);
+    assert.ok(Math.abs(new Date(firstInvite.expiresAt).getTime() - (Date.now() + 72 * 60 * 60 * 1000)) < 10_000);
+    const secondInvite = await request(`/admin/users/${inactive.id}/invitations`, 'POST');
+    const firstToken = firstInvite.url.split('/').at(-1)!;
+    const secondToken = secondInvite.url.split('/').at(-1)!;
+    assert.equal((await publicRequest(`/auth/invitations/${firstToken}`)).data.valid, false);
+    assert.equal((await publicRequest(`/auth/invitations/${secondToken}`)).data.valid, true);
+    const invitation = (await db.orm.public.Invitation.where({ userId: inactive.id }).all()).at(-1)!;
+    assert.notEqual(invitation.tokenHash, secondToken);
+    assert.equal(invitation.tokenHash.includes(secondToken), false);
+    await publicRequest(`/auth/invitations/${secondToken}`, 'POST', { password: 'Initial password 123!' }, 204);
+    await publicRequest(`/auth/invitations/${secondToken}`, 'POST', { password: 'Initial password 123!' }, 400);
+    await publicRequest('/auth/login', 'POST', { email: inactive.email, password: 'bad password' }, 401);
+    const login = await publicRequest('/auth/login', 'POST', { email: inactive.email, password: 'Initial password 123!' });
+    const participantCookie = login.response.headers.getSetCookie()[0]!.split(';')[0]!;
+    const participantAdmin = await fetch(base + '/admin/users', { headers: { Cookie: participantCookie } });
+    assert.equal(participantAdmin.status, 403);
+    const participantPractice = await fetch(base + '/practice', { headers: { Cookie: participantCookie } });
+    assert.equal(participantPractice.status, 200);
+    const logout = await fetch(base + '/auth/logout', { method: 'POST', headers: { Cookie: participantCookie } });
+    assert.equal(logout.status, 204);
+    assert.match(logout.headers.getSetCookie()[0]!, /Max-Age=0/);
+    assert.equal((await fetch(base + '/auth/session', { headers: { Cookie: participantCookie } })).status, 401);
+
+    const expired = await request('/admin/users', 'POST', { email: `expired-${Date.now()}@example.com` }, 201);
+    users.push(expired.id);
+    const expiredInvite = await request(`/admin/users/${expired.id}/invitations`, 'POST');
+    const expiredRecord = (await db.orm.public.Invitation.where({ userId: expired.id }).all()).at(-1)!;
+    await db.orm.public.Invitation.where({ id: expiredRecord.id }).update({ expiresAt: new Date(Date.now() - 1000).toISOString() });
+    assert.equal((await publicRequest(`/auth/invitations/${expiredInvite.url.split('/').at(-1)!}`)).data.valid, false);
+
+    const activeLogin = await publicRequest('/auth/login', 'POST', { email: inactive.email, password: 'Initial password 123!' });
+    const activeCookie = activeLogin.response.headers.getSetCookie()[0]!.split(';')[0]!;
+    const firstReset = await request(`/admin/users/${inactive.id}/password-resets`, 'POST');
+    assert.ok(Math.abs(new Date(firstReset.expiresAt).getTime() - (Date.now() + 60 * 60 * 1000)) < 10_000);
+    const secondReset = await request(`/admin/users/${inactive.id}/password-resets`, 'POST');
+    assert.equal((await publicRequest(`/auth/password-resets/${firstReset.url.split('/').at(-1)!}`)).data.valid, false);
+    const resetToken = secondReset.url.split('/').at(-1)!;
+    await publicRequest(`/auth/password-resets/${resetToken}`, 'POST', { password: 'Changed password 123!' }, 204);
+    await publicRequest(`/auth/password-resets/${resetToken}`, 'POST', { password: 'Changed password 123!' }, 400);
+    assert.equal((await fetch(base + '/auth/session', { headers: { Cookie: activeCookie } })).status, 401);
+    await publicRequest('/auth/login', 'POST', { email: inactive.email, password: 'Initial password 123!' }, 401);
+    await publicRequest('/auth/login', 'POST', { email: inactive.email, password: 'Changed password 123!' }, 200);
+
+    const resetExpiry = await request(`/admin/users/${inactive.id}/password-resets`, 'POST');
+    const resetRecord = (await db.orm.public.PasswordReset.where({ userId: inactive.id }).all()).at(-1)!;
+    await db.orm.public.PasswordReset.where({ id: resetRecord.id }).update({ expiresAt: new Date(Date.now() - 1000).toISOString() });
+    assert.equal((await publicRequest(`/auth/password-resets/${resetExpiry.url.split('/').at(-1)!}`)).data.valid, false);
+  } finally {
+    for (const id of users) await db.orm.public.User.where({ id }).delete();
   }
 });

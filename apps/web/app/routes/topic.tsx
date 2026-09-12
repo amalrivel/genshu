@@ -1,10 +1,11 @@
 import { Link } from "react-router";
 import type { Route } from "./+types/topic";
-import { api, saveContent, type Topic, type Material, type Question } from "../content-api";
+import { api, requireAdmin, saveContent, type Topic, type Material, type Question } from "../content-api";
 import { ContentForm, QuestionForm } from "../content-form";
 
 export const meta = () => [{ title: "Materials · Genshu" }];
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
+  await requireAdmin();
   const id = encodeURIComponent(params.topicId);
   const [topic, materials, questions] = await Promise.all([
     api<Topic>(`/topics/${id}`), api<Material[]>(`/materials?topicId=${id}`), api<Question[]>(`/questions?topicId=${id}`),

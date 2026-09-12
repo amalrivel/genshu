@@ -1,11 +1,12 @@
 import { Link } from "react-router";
 import type { Route } from "./+types/practice-sets";
-import { api, savePracticeSet, type PracticeSetSummary, type Question } from "../content-api";
+import { api, requireAdmin, savePracticeSet, type PracticeSetSummary, type Question } from "../content-api";
 import { PracticeSetForm } from "../practice-set-form";
 import { ContentError } from "../content-form";
 
 export const meta = () => [{ title: "Practice sets · Genshu" }];
 export async function clientLoader() {
+  await requireAdmin();
   const [practiceSets, questions] = await Promise.all([
     api<PracticeSetSummary[]>("/practice-sets"), api<Question[]>("/questions"),
   ]);

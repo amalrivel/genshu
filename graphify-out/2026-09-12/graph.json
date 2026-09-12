@@ -147,6 +147,19 @@
       "source_location": "L247"
     },
     {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testantipatterngating",
+      "label": "TestAntiPatternGating",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 12,
+      "community_name": ".generate",
+      "file_type": "code",
+      "norm_label": "testantipatterngating",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+      "source_location": "L120"
+    },
+    {
       "id": "agents_skills_ui_styling_scripts_tests_test_shadcn_add_testshadcninstaller",
       "label": "TestShadcnInstaller",
       "_callable": true,
@@ -192,7 +205,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 133,
-      "community_name": "_palette_is_dark",
+      "community_name": "test_design_system_mode.py",
       "file_type": "code",
       "norm_label": "testendtoendcoherence",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
@@ -205,11 +218,24 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 133,
-      "community_name": "_palette_is_dark",
+      "community_name": "test_design_system_mode.py",
       "file_type": "code",
       "norm_label": "testluminance",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
       "source_location": "L54"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testpaletteselection",
+      "label": "TestPaletteSelection",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 133,
+      "community_name": "test_design_system_mode.py",
+      "file_type": "code",
+      "norm_label": "testpaletteselection",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+      "source_location": "L94"
     },
     {
       "id": "agents_skills_ui_styling_scripts_tests_test_tailwind_config_gen_testgeneratedconfigisvalidjs",
@@ -1460,19 +1486,6 @@
       "source_location": "L6"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testpaletteselection",
-      "label": "TestPaletteSelection",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 322,
-      "community_name": "_select_palette_for_mode",
-      "file_type": "code",
-      "norm_label": "testpaletteselection",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
-      "source_location": "L94"
-    },
-    {
       "id": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_aggregatetypes",
       "label": "AggregateTypes",
       "_callable": true,
@@ -2227,26 +2240,13 @@
       "source_location": "L128"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testantipatterngating",
-      "label": "TestAntiPatternGating",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "test_design_system_mode.py",
-      "file_type": "code",
-      "norm_label": "testantipatterngating",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
-      "source_location": "L120"
-    },
-    {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testmoderesolution",
       "label": "TestModeResolution",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 76,
-      "community_name": "test_design_system_mode.py",
+      "community_name": "_style_is_dark_primary",
       "file_type": "code",
       "norm_label": "testmoderesolution",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
@@ -3937,28 +3937,16 @@
       "source_location": "L319"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_designsystemgenerator_resolve_style",
-      "label": "._resolve_style()",
+      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_filter_anti_patterns_for_mode",
+      "label": "_filter_anti_patterns_for_mode()",
       "_callable": true,
       "_origin": "ast",
       "community": 12,
       "community_name": ".generate",
       "file_type": "code",
-      "norm_label": "._resolve_style()",
+      "norm_label": "_filter_anti_patterns_for_mode()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
-      "source_location": "L307"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_designsystemgenerator_select_best_match",
-      "label": "._select_best_match()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 12,
-      "community_name": ".generate",
-      "file_type": "code",
-      "norm_label": "._select_best_match()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
-      "source_location": "L408"
+      "source_location": "L246"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_resolve_dial",
@@ -3971,6 +3959,54 @@
       "norm_label": "_resolve_dial()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
       "source_location": "L90"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testantipatterngating_test_dark_clause_dropped_others_kept",
+      "label": ".test_dark_clause_dropped_others_kept()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 12,
+      "community_name": ".generate",
+      "file_type": "code",
+      "norm_label": ".test_dark_clause_dropped_others_kept()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+      "source_location": "L121"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testantipatterngating_test_empty_input",
+      "label": ".test_empty_input()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 12,
+      "community_name": ".generate",
+      "file_type": "code",
+      "norm_label": ".test_empty_input()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+      "source_location": "L134"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testantipatterngating_test_light_mode_is_a_no_op",
+      "label": ".test_light_mode_is_a_no_op()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 12,
+      "community_name": ".generate",
+      "file_type": "code",
+      "norm_label": ".test_light_mode_is_a_no_op()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+      "source_location": "L126"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testantipatterngating_test_unrelated_anti_patterns_survive_dark_mode",
+      "label": ".test_unrelated_anti_patterns_survive_dark_mode()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 12,
+      "community_name": ".generate",
+      "file_type": "code",
+      "norm_label": ".test_unrelated_anti_patterns_survive_dark_mode()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+      "source_location": "L130"
     },
     {
       "id": "agents_skills_ui_styling_scripts_tests_test_shadcn_add_testshadcninstaller_test_add_all_components_dry_run",
@@ -4453,12 +4489,36 @@
       "source_location": "L203"
     },
     {
+      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_contrast_ratio",
+      "label": "_contrast_ratio()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 133,
+      "community_name": "test_design_system_mode.py",
+      "file_type": "code",
+      "norm_label": "_contrast_ratio()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "source_location": "L153"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_derive_dark_palette",
+      "label": "_derive_dark_palette()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 133,
+      "community_name": "test_design_system_mode.py",
+      "file_type": "code",
+      "norm_label": "_derive_dark_palette()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "source_location": "L193"
+    },
+    {
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_palette_is_dark",
       "label": "_palette_is_dark()",
       "_callable": true,
       "_origin": "ast",
       "community": 133,
-      "community_name": "_palette_is_dark",
+      "community_name": "test_design_system_mode.py",
       "file_type": "code",
       "norm_label": "_palette_is_dark()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
@@ -4470,11 +4530,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 133,
-      "community_name": "_palette_is_dark",
+      "community_name": "test_design_system_mode.py",
       "file_type": "code",
       "norm_label": "_relative_luminance()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
       "source_location": "L129"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_select_palette_for_mode",
+      "label": "_select_palette_for_mode()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 133,
+      "community_name": "test_design_system_mode.py",
+      "file_type": "code",
+      "norm_label": "_select_palette_for_mode()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "source_location": "L220"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testendtoendcoherence_test_dark_query_does_not_advise_against_dark_mode",
@@ -4482,7 +4554,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 133,
-      "community_name": "_palette_is_dark",
+      "community_name": "test_design_system_mode.py",
       "file_type": "code",
       "norm_label": ".test_dark_query_does_not_advise_against_dark_mode()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
@@ -4494,7 +4566,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 133,
-      "community_name": "_palette_is_dark",
+      "community_name": "test_design_system_mode.py",
       "file_type": "code",
       "norm_label": ".test_dark_query_foreground_is_lighter_than_background()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
@@ -4506,11 +4578,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 133,
-      "community_name": "_palette_is_dark",
+      "community_name": "test_design_system_mode.py",
       "file_type": "code",
       "norm_label": ".test_dark_query_gets_a_dark_background()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
       "source_location": "L143"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testendtoendcoherence_test_generator_exports_every_semantic_foreground_pair",
+      "label": ".test_generator_exports_every_semantic_foreground_pair()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 133,
+      "community_name": "test_design_system_mode.py",
+      "file_type": "code",
+      "norm_label": ".test_generator_exports_every_semantic_foreground_pair()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+      "source_location": "L151"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testendtoendcoherence_test_light_query_keeps_a_light_background",
@@ -4518,7 +4602,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 133,
-      "community_name": "_palette_is_dark",
+      "community_name": "test_design_system_mode.py",
       "file_type": "code",
       "norm_label": ".test_light_query_keeps_a_light_background()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
@@ -4530,7 +4614,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 133,
-      "community_name": "_palette_is_dark",
+      "community_name": "test_design_system_mode.py",
       "file_type": "code",
       "norm_label": ".test_classifies_backgrounds_from_the_shipped_data()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
@@ -4542,7 +4626,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 133,
-      "community_name": "_palette_is_dark",
+      "community_name": "test_design_system_mode.py",
       "file_type": "code",
       "norm_label": ".test_missing_background_is_not_dark()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
@@ -4554,7 +4638,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 133,
-      "community_name": "_palette_is_dark",
+      "community_name": "test_design_system_mode.py",
       "file_type": "code",
       "norm_label": ".test_parses_six_and_three_digit_hex()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
@@ -4566,11 +4650,71 @@
       "_callable": true,
       "_origin": "ast",
       "community": 133,
-      "community_name": "_palette_is_dark",
+      "community_name": "test_design_system_mode.py",
       "file_type": "code",
       "norm_label": ".test_returns_none_for_unparseable()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
       "source_location": "L60"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testpaletteselection_test_category_identity_wins_over_unrelated_dark_palette",
+      "label": ".test_category_identity_wins_over_unrelated_dark_palette()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 133,
+      "community_name": "test_design_system_mode.py",
+      "file_type": "code",
+      "norm_label": ".test_category_identity_wins_over_unrelated_dark_palette()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+      "source_location": "L110"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testpaletteselection_test_dark_mode_falls_back_to_top_hit_when_no_dark_ramp_exists",
+      "label": ".test_dark_mode_falls_back_to_top_hit_when_no_dark_ramp_exists()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 133,
+      "community_name": "test_design_system_mode.py",
+      "file_type": "code",
+      "norm_label": ".test_dark_mode_falls_back_to_top_hit_when_no_dark_ramp_exists()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+      "source_location": "L99"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testpaletteselection_test_dark_mode_skips_light_palettes",
+      "label": ".test_dark_mode_skips_light_palettes()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 133,
+      "community_name": "test_design_system_mode.py",
+      "file_type": "code",
+      "norm_label": ".test_dark_mode_skips_light_palettes()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+      "source_location": "L95"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testpaletteselection_test_empty_results",
+      "label": ".test_empty_results()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 133,
+      "community_name": "test_design_system_mode.py",
+      "file_type": "code",
+      "norm_label": ".test_empty_results()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+      "source_location": "L107"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testpaletteselection_test_light_mode_keeps_the_existing_top_hit_behaviour",
+      "label": ".test_light_mode_keeps_the_existing_top_hit_behaviour()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 133,
+      "community_name": "test_design_system_mode.py",
+      "file_type": "code",
+      "norm_label": ".test_light_mode_keeps_the_existing_top_hit_behaviour()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+      "source_location": "L103"
     },
     {
       "id": "agents_skills_brand_scripts_extract_colors_calculatecompliance",
@@ -4921,30 +5065,6 @@
       "source_location": "L504"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_designsystemgenerator_apply_reasoning",
-      "label": "._apply_reasoning()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 157,
-      "community_name": "parse_decision_rules",
-      "file_type": "code",
-      "norm_label": "._apply_reasoning()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
-      "source_location": "L365"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_designsystemgenerator_find_reasoning_rule",
-      "label": "._find_reasoning_rule()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 157,
-      "community_name": "parse_decision_rules",
-      "file_type": "code",
-      "norm_label": "._find_reasoning_rule()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
-      "source_location": "L357"
-    },
-    {
       "id": "agents_skills_ui_ux_pro_max_scripts_reasoning_contract_apply_decision_rules",
       "label": "apply_decision_rules()",
       "_callable": true,
@@ -5005,6 +5125,18 @@
       "source_location": "L101"
     },
     {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testreasoningcontract_test_duplicate_semantic_reasoning_labels_fail_validation",
+      "label": ".test_duplicate_semantic_reasoning_labels_fail_validation()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 157,
+      "community_name": "parse_decision_rules",
+      "file_type": "code",
+      "norm_label": ".test_duplicate_semantic_reasoning_labels_fail_validation()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "source_location": "L218"
+    },
+    {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testreasoningcontract_test_duplicate_unknown_keys_and_unknown_actions_fail_closed",
       "label": ".test_duplicate_unknown_keys_and_unknown_actions_fail_closed()",
       "_callable": true,
@@ -5027,6 +5159,18 @@
       "norm_label": ".test_must_have_and_explicit_signals_are_applied_and_reported()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
       "source_location": "L119"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_validate_data_check_reasoning_contract",
+      "label": "_check_reasoning_contract()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 157,
+      "community_name": "parse_decision_rules",
+      "file_type": "code",
+      "norm_label": "_check_reasoning_contract()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/validate_data.py",
+      "source_location": "L331"
     },
     {
       "id": "agents_skills_design_system_scripts_validate_tokens_formatreport",
@@ -6937,6 +7081,18 @@
       "source_location": "L20"
     },
     {
+      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_designsystemgenerator_apply_reasoning",
+      "label": "._apply_reasoning()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "DesignSystemGenerator",
+      "file_type": "code",
+      "norm_label": "._apply_reasoning()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "source_location": "L365"
+    },
+    {
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_designsystemgenerator_build_style_lookup",
       "label": "._build_style_lookup()",
       "_callable": true,
@@ -6947,6 +7103,18 @@
       "norm_label": "._build_style_lookup()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
       "source_location": "L297"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_designsystemgenerator_find_reasoning_rule",
+      "label": "._find_reasoning_rule()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "DesignSystemGenerator",
+      "file_type": "code",
+      "norm_label": "._find_reasoning_rule()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "source_location": "L357"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_designsystemgenerator_init",
@@ -6997,6 +7165,30 @@
       "source_location": "L275"
     },
     {
+      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_designsystemgenerator_resolve_style",
+      "label": "._resolve_style()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "DesignSystemGenerator",
+      "file_type": "code",
+      "norm_label": "._resolve_style()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "source_location": "L307"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_designsystemgenerator_select_best_match",
+      "label": "._select_best_match()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "DesignSystemGenerator",
+      "file_type": "code",
+      "norm_label": "._select_best_match()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "source_location": "L408"
+    },
+    {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_core_testreasoningmatch_test_known_category_matches_exactly",
       "label": ".test_known_category_matches_exactly()",
       "_callable": true,
@@ -7043,18 +7235,6 @@
       "norm_label": ".test_constraints_reach_domain_queries()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
       "source_location": "L187"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testreasoningcontract_test_duplicate_semantic_reasoning_labels_fail_validation",
-      "label": ".test_duplicate_semantic_reasoning_labels_fail_validation()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 24,
-      "community_name": "DesignSystemGenerator",
-      "file_type": "code",
-      "norm_label": ".test_duplicate_semantic_reasoning_labels_fail_validation()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
-      "source_location": "L218"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testreasoningcontract_test_every_exact_product_label_resolves_to_itself",
@@ -8065,114 +8245,6 @@
       "source_location": "L9"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_contrast_ratio",
-      "label": "_contrast_ratio()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 322,
-      "community_name": "_select_palette_for_mode",
-      "file_type": "code",
-      "norm_label": "_contrast_ratio()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
-      "source_location": "L153"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_derive_dark_palette",
-      "label": "_derive_dark_palette()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 322,
-      "community_name": "_select_palette_for_mode",
-      "file_type": "code",
-      "norm_label": "_derive_dark_palette()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
-      "source_location": "L193"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_select_palette_for_mode",
-      "label": "_select_palette_for_mode()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 322,
-      "community_name": "_select_palette_for_mode",
-      "file_type": "code",
-      "norm_label": "_select_palette_for_mode()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
-      "source_location": "L220"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testendtoendcoherence_test_generator_exports_every_semantic_foreground_pair",
-      "label": ".test_generator_exports_every_semantic_foreground_pair()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 322,
-      "community_name": "_select_palette_for_mode",
-      "file_type": "code",
-      "norm_label": ".test_generator_exports_every_semantic_foreground_pair()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
-      "source_location": "L151"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testpaletteselection_test_category_identity_wins_over_unrelated_dark_palette",
-      "label": ".test_category_identity_wins_over_unrelated_dark_palette()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 322,
-      "community_name": "_select_palette_for_mode",
-      "file_type": "code",
-      "norm_label": ".test_category_identity_wins_over_unrelated_dark_palette()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
-      "source_location": "L110"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testpaletteselection_test_dark_mode_falls_back_to_top_hit_when_no_dark_ramp_exists",
-      "label": ".test_dark_mode_falls_back_to_top_hit_when_no_dark_ramp_exists()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 322,
-      "community_name": "_select_palette_for_mode",
-      "file_type": "code",
-      "norm_label": ".test_dark_mode_falls_back_to_top_hit_when_no_dark_ramp_exists()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
-      "source_location": "L99"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testpaletteselection_test_dark_mode_skips_light_palettes",
-      "label": ".test_dark_mode_skips_light_palettes()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 322,
-      "community_name": "_select_palette_for_mode",
-      "file_type": "code",
-      "norm_label": ".test_dark_mode_skips_light_palettes()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
-      "source_location": "L95"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testpaletteselection_test_empty_results",
-      "label": ".test_empty_results()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 322,
-      "community_name": "_select_palette_for_mode",
-      "file_type": "code",
-      "norm_label": ".test_empty_results()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
-      "source_location": "L107"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testpaletteselection_test_light_mode_keeps_the_existing_top_hit_behaviour",
-      "label": ".test_light_mode_keeps_the_existing_top_hit_behaviour()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 322,
-      "community_name": "_select_palette_for_mode",
-      "file_type": "code",
-      "norm_label": ".test_light_mode_keeps_the_existing_top_hit_behaviour()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
-      "source_location": "L103"
-    },
-    {
       "id": "apps_api_src_content_fields",
       "label": "fields()",
       "_callable": true,
@@ -8317,18 +8389,6 @@
       "source_location": "L315"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_format_markdown",
-      "label": "format_markdown()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 329,
-      "community_name": "generate_design_system",
-      "file_type": "code",
-      "norm_label": "format_markdown()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
-      "source_location": "L791"
-    },
-    {
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_generate_design_system",
       "label": "generate_design_system()",
       "_callable": true,
@@ -8387,6 +8447,18 @@
       "norm_label": ".test_persist_writes_only_under_output_dir()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_core.py",
       "source_location": "L306"
+    },
+    {
+      "id": "apps_web_app_components_ui_button_button",
+      "label": "Button()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 332,
+      "community_name": "button.tsx",
+      "file_type": "code",
+      "norm_label": "button()",
+      "source_file": "apps/web/app/components/ui/button.tsx",
+      "source_location": "L40"
     },
     {
       "id": "apps_api_src_content_test_request",
@@ -9155,6 +9227,18 @@
       "norm_label": "format_ascii_box()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
       "source_location": "L640"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_format_markdown",
+      "label": "format_markdown()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "design_system.py",
+      "file_type": "code",
+      "norm_label": "format_markdown()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "source_location": "L791"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_format_master_md",
@@ -10849,18 +10933,6 @@
       "source_location": "L743"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_validate_data_check_reasoning_contract",
-      "label": "_check_reasoning_contract()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "validate_data.py",
-      "file_type": "code",
-      "norm_label": "_check_reasoning_contract()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/validate_data.py",
-      "source_location": "L331"
-    },
-    {
       "id": "agents_skills_ui_ux_pro_max_scripts_validate_data_check_stack_freshness_contract",
       "label": "_check_stack_freshness_contract()",
       "_callable": true,
@@ -11485,24 +11557,12 @@
       "source_location": "L184"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_filter_anti_patterns_for_mode",
-      "label": "_filter_anti_patterns_for_mode()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "test_design_system_mode.py",
-      "file_type": "code",
-      "norm_label": "_filter_anti_patterns_for_mode()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
-      "source_location": "L246"
-    },
-    {
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_query_wants_dark",
       "label": "_query_wants_dark()",
       "_callable": true,
       "_origin": "ast",
       "community": 76,
-      "community_name": "test_design_system_mode.py",
+      "community_name": "_style_is_dark_primary",
       "file_type": "code",
       "norm_label": "_query_wants_dark()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
@@ -11514,7 +11574,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 76,
-      "community_name": "test_design_system_mode.py",
+      "community_name": "_style_is_dark_primary",
       "file_type": "code",
       "norm_label": "_resolve_color_mode()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
@@ -11526,59 +11586,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 76,
-      "community_name": "test_design_system_mode.py",
+      "community_name": "_style_is_dark_primary",
       "file_type": "code",
       "norm_label": "_style_is_dark_primary()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
       "source_location": "L164"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testantipatterngating_test_dark_clause_dropped_others_kept",
-      "label": ".test_dark_clause_dropped_others_kept()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "test_design_system_mode.py",
-      "file_type": "code",
-      "norm_label": ".test_dark_clause_dropped_others_kept()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
-      "source_location": "L121"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testantipatterngating_test_empty_input",
-      "label": ".test_empty_input()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "test_design_system_mode.py",
-      "file_type": "code",
-      "norm_label": ".test_empty_input()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
-      "source_location": "L134"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testantipatterngating_test_light_mode_is_a_no_op",
-      "label": ".test_light_mode_is_a_no_op()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "test_design_system_mode.py",
-      "file_type": "code",
-      "norm_label": ".test_light_mode_is_a_no_op()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
-      "source_location": "L126"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testantipatterngating_test_unrelated_anti_patterns_survive_dark_mode",
-      "label": ".test_unrelated_anti_patterns_survive_dark_mode()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "test_design_system_mode.py",
-      "file_type": "code",
-      "norm_label": ".test_unrelated_anti_patterns_survive_dark_mode()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
-      "source_location": "L130"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testmoderesolution_test_dark_primary_style_detected",
@@ -11586,7 +11598,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 76,
-      "community_name": "test_design_system_mode.py",
+      "community_name": "_style_is_dark_primary",
       "file_type": "code",
       "norm_label": ".test_dark_primary_style_detected()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
@@ -11598,7 +11610,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 76,
-      "community_name": "test_design_system_mode.py",
+      "community_name": "_style_is_dark_primary",
       "file_type": "code",
       "norm_label": ".test_dual_mode_style_is_not_dark_primary()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
@@ -11610,7 +11622,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 76,
-      "community_name": "test_design_system_mode.py",
+      "community_name": "_style_is_dark_primary",
       "file_type": "code",
       "norm_label": ".test_either_signal_resolves_dark()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
@@ -11622,7 +11634,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 76,
-      "community_name": "test_design_system_mode.py",
+      "community_name": "_style_is_dark_primary",
       "file_type": "code",
       "norm_label": ".test_query_keywords()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
@@ -11634,7 +11646,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 76,
-      "community_name": "test_design_system_mode.py",
+      "community_name": "_style_is_dark_primary",
       "file_type": "code",
       "norm_label": ".test_claim_fields_use_controlled_non_guarantee_language()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_style_taxonomy.py",
@@ -13122,182 +13134,6 @@
       "source_location": "L1"
     },
     {
-      "id": "apps_web_package_dependencies",
-      "label": "dependencies",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "web/package.json",
-      "file_type": "code",
-      "norm_label": "dependencies",
-      "source_file": "apps/web/package.json",
-      "source_location": "L11"
-    },
-    {
-      "id": "apps_web_package_dependencies_isbot",
-      "label": "isbot",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "web/package.json",
-      "file_type": "code",
-      "norm_label": "isbot",
-      "source_file": "apps/web/package.json",
-      "source_location": "L14"
-    },
-    {
-      "id": "apps_web_package_dependencies_react",
-      "label": "react",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "web/package.json",
-      "file_type": "code",
-      "norm_label": "react",
-      "source_file": "apps/web/package.json",
-      "source_location": "L15"
-    },
-    {
-      "id": "apps_web_package_dependencies_react_dom",
-      "label": "react-dom",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "web/package.json",
-      "file_type": "code",
-      "norm_label": "react-dom",
-      "source_file": "apps/web/package.json",
-      "source_location": "L16"
-    },
-    {
-      "id": "apps_web_package_dependencies_react_router",
-      "label": "react-router",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "web/package.json",
-      "file_type": "code",
-      "norm_label": "react-router",
-      "source_file": "apps/web/package.json",
-      "source_location": "L17"
-    },
-    {
-      "id": "apps_web_package_dependencies_react_router_node",
-      "label": "@react-router/node",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "web/package.json",
-      "file_type": "code",
-      "norm_label": "@react-router/node",
-      "source_file": "apps/web/package.json",
-      "source_location": "L12"
-    },
-    {
-      "id": "apps_web_package_dependencies_react_router_serve",
-      "label": "@react-router/serve",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "web/package.json",
-      "file_type": "code",
-      "norm_label": "@react-router/serve",
-      "source_file": "apps/web/package.json",
-      "source_location": "L13"
-    },
-    {
-      "id": "apps_web_package_devdependencies",
-      "label": "devDependencies",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "web/package.json",
-      "file_type": "code",
-      "norm_label": "devdependencies",
-      "source_file": "apps/web/package.json",
-      "source_location": "L19"
-    },
-    {
-      "id": "apps_web_package_devdependencies_react_router_dev",
-      "label": "@react-router/dev",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "web/package.json",
-      "file_type": "code",
-      "norm_label": "@react-router/dev",
-      "source_file": "apps/web/package.json",
-      "source_location": "L20"
-    },
-    {
-      "id": "apps_web_package_devdependencies_tailwindcss",
-      "label": "tailwindcss",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "web/package.json",
-      "file_type": "code",
-      "norm_label": "tailwindcss",
-      "source_file": "apps/web/package.json",
-      "source_location": "L25"
-    },
-    {
-      "id": "apps_web_package_devdependencies_tailwindcss_vite",
-      "label": "@tailwindcss/vite",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "web/package.json",
-      "file_type": "code",
-      "norm_label": "@tailwindcss/vite",
-      "source_file": "apps/web/package.json",
-      "source_location": "L21"
-    },
-    {
-      "id": "apps_web_package_devdependencies_types_node",
-      "label": "@types/node",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "web/package.json",
-      "file_type": "code",
-      "norm_label": "@types/node",
-      "source_file": "apps/web/package.json",
-      "source_location": "L22"
-    },
-    {
-      "id": "apps_web_package_devdependencies_types_react",
-      "label": "@types/react",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "web/package.json",
-      "file_type": "code",
-      "norm_label": "@types/react",
-      "source_file": "apps/web/package.json",
-      "source_location": "L23"
-    },
-    {
-      "id": "apps_web_package_devdependencies_types_react_dom",
-      "label": "@types/react-dom",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "web/package.json",
-      "file_type": "code",
-      "norm_label": "@types/react-dom",
-      "source_file": "apps/web/package.json",
-      "source_location": "L24"
-    },
-    {
-      "id": "apps_web_package_devdependencies_typescript",
-      "label": "typescript",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "web/package.json",
-      "file_type": "code",
-      "norm_label": "typescript",
-      "source_file": "apps/web/package.json",
-      "source_location": "L26"
-    },
-    {
-      "id": "apps_web_package_devdependencies_vite",
-      "label": "vite",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "web/package.json",
-      "file_type": "code",
-      "norm_label": "vite",
-      "source_file": "apps/web/package.json",
-      "source_location": "L27"
-    },
-    {
       "id": "apps_web_package_name",
       "label": "name",
       "_origin": "ast",
@@ -13320,61 +13156,6 @@
       "source_location": "L3"
     },
     {
-      "id": "apps_web_package_scripts",
-      "label": "scripts",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "web/package.json",
-      "file_type": "code",
-      "norm_label": "scripts",
-      "source_file": "apps/web/package.json",
-      "source_location": "L5"
-    },
-    {
-      "id": "apps_web_package_scripts_build",
-      "label": "build",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "web/package.json",
-      "file_type": "code",
-      "norm_label": "build",
-      "source_file": "apps/web/package.json",
-      "source_location": "L6"
-    },
-    {
-      "id": "apps_web_package_scripts_dev",
-      "label": "dev",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "web/package.json",
-      "file_type": "code",
-      "norm_label": "dev",
-      "source_file": "apps/web/package.json",
-      "source_location": "L7"
-    },
-    {
-      "id": "apps_web_package_scripts_start",
-      "label": "start",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "web/package.json",
-      "file_type": "code",
-      "norm_label": "start",
-      "source_file": "apps/web/package.json",
-      "source_location": "L8"
-    },
-    {
-      "id": "apps_web_package_scripts_typecheck",
-      "label": "typecheck",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "web/package.json",
-      "file_type": "code",
-      "norm_label": "typecheck",
-      "source_file": "apps/web/package.json",
-      "source_location": "L9"
-    },
-    {
       "id": "apps_web_package_type",
       "label": "type",
       "_origin": "ast",
@@ -13386,17 +13167,6 @@
       "source_location": "L4"
     },
     {
-      "id": "apps_web_vite_config",
-      "label": "vite.config.ts",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "web/package.json",
-      "file_type": "code",
-      "norm_label": "vite.config.ts",
-      "source_file": "apps/web/vite.config.ts",
-      "source_location": "L1"
-    },
-    {
       "id": "apps_web_package_json_ref_types_node",
       "label": "@types/node",
       "_origin": "ast",
@@ -13405,7 +13175,7 @@
       "file_type": "concept",
       "norm_label": "@types/node",
       "source_file": "apps/web/package.json",
-      "source_location": "L22"
+      "source_location": "L29"
     },
     {
       "id": "apps_web_package_json_ref_typescript",
@@ -13416,7 +13186,29 @@
       "file_type": "concept",
       "norm_label": "typescript",
       "source_file": "apps/web/package.json",
-      "source_location": "L26"
+      "source_location": "L33"
+    },
+    {
+      "id": "ref_base_ui_react",
+      "label": "@base-ui/react",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "web/package.json",
+      "file_type": "concept",
+      "norm_label": "@base-ui/react",
+      "source_file": "apps/web/package.json",
+      "source_location": "L12"
+    },
+    {
+      "id": "ref_fontsource_variable_inter",
+      "label": "@fontsource-variable/inter",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "web/package.json",
+      "file_type": "concept",
+      "norm_label": "@fontsource-variable/inter",
+      "source_file": "apps/web/package.json",
+      "source_location": "L13"
     },
     {
       "id": "ref_isbot",
@@ -13427,7 +13219,18 @@
       "file_type": "concept",
       "norm_label": "isbot",
       "source_file": "apps/web/package.json",
-      "source_location": "L14"
+      "source_location": "L18"
+    },
+    {
+      "id": "ref_lucide_react",
+      "label": "lucide-react",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "web/package.json",
+      "file_type": "concept",
+      "norm_label": "lucide-react",
+      "source_file": "apps/web/package.json",
+      "source_location": "L19"
     },
     {
       "id": "ref_react_dom",
@@ -13438,7 +13241,7 @@
       "file_type": "concept",
       "norm_label": "react-dom",
       "source_file": "apps/web/package.json",
-      "source_location": "L16"
+      "source_location": "L21"
     },
     {
       "id": "ref_react_router_dev",
@@ -13449,7 +13252,7 @@
       "file_type": "concept",
       "norm_label": "@react-router/dev",
       "source_file": "apps/web/package.json",
-      "source_location": "L20"
+      "source_location": "L27"
     },
     {
       "id": "ref_react_router_node",
@@ -13460,7 +13263,7 @@
       "file_type": "concept",
       "norm_label": "@react-router/node",
       "source_file": "apps/web/package.json",
-      "source_location": "L12"
+      "source_location": "L14"
     },
     {
       "id": "ref_react_router_serve",
@@ -13471,7 +13274,18 @@
       "file_type": "concept",
       "norm_label": "@react-router/serve",
       "source_file": "apps/web/package.json",
-      "source_location": "L13"
+      "source_location": "L15"
+    },
+    {
+      "id": "ref_shadcn",
+      "label": "shadcn",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "web/package.json",
+      "file_type": "concept",
+      "norm_label": "shadcn",
+      "source_file": "apps/web/package.json",
+      "source_location": "L23"
     },
     {
       "id": "ref_tailwindcss",
@@ -13482,18 +13296,18 @@
       "file_type": "concept",
       "norm_label": "tailwindcss",
       "source_file": "apps/web/package.json",
-      "source_location": "L25"
+      "source_location": "L32"
     },
     {
-      "id": "ref_tailwindcss_vite",
-      "label": "@tailwindcss/vite",
+      "id": "ref_tw_animate_css",
+      "label": "tw-animate-css",
       "_origin": "ast",
       "community": 1,
       "community_name": "web/package.json",
       "file_type": "concept",
-      "norm_label": "@tailwindcss/vite",
+      "norm_label": "tw-animate-css",
       "source_file": "apps/web/package.json",
-      "source_location": "L21"
+      "source_location": "L24"
     },
     {
       "id": "ref_types_react",
@@ -13504,7 +13318,7 @@
       "file_type": "concept",
       "norm_label": "@types/react",
       "source_file": "apps/web/package.json",
-      "source_location": "L23"
+      "source_location": "L30"
     },
     {
       "id": "ref_types_react_dom",
@@ -13515,18 +13329,7 @@
       "file_type": "concept",
       "norm_label": "@types/react-dom",
       "source_file": "apps/web/package.json",
-      "source_location": "L24"
-    },
-    {
-      "id": "ref_vite",
-      "label": "vite",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "web/package.json",
-      "file_type": "concept",
-      "norm_label": "vite",
-      "source_file": "apps/web/package.json",
-      "source_location": "L27"
+      "source_location": "L31"
     },
     {
       "id": "agents_skills_prisma_8_upgrading_extension_upgrades_0_11_to_0_12_instructions",
@@ -15076,6 +14879,18 @@
       "source_location": "L1"
     },
     {
+      "id": "apps_api_agents_skills_prisma_8_references_migration_model",
+      "label": "api/.agents/skills/prisma-8/references/migration-model.md",
+      "_origin": "ast",
+      "community": 109,
+      "community_name": "api/.agents/skills/prisma-8/SKILL.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "api/.agents/skills/prisma-8/references/migration-model.md",
+      "source_file": "apps/api/.agents/skills/prisma-8/references/migration-model.md",
+      "source_location": "L1"
+    },
+    {
       "id": "apps_api_agents_skills_prisma_8_references_migrations",
       "label": "api/.agents/skills/prisma-8/references/migrations.md",
       "_origin": "ast",
@@ -15170,66 +14985,6 @@
       "norm_label": "api/.agents/skills/prisma-8/references/upgrade-extension.md",
       "source_file": "apps/api/.agents/skills/prisma-8/references/upgrade-extension.md",
       "source_location": "L1"
-    },
-    {
-      "id": "apps_api_agents_skills_prisma_8_skill_checklist",
-      "label": "Checklist",
-      "_origin": "ast",
-      "community": 109,
-      "community_name": "api/.agents/skills/prisma-8/SKILL.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "checklist",
-      "source_file": "apps/api/.agents/skills/prisma-8/SKILL.md",
-      "source_location": "L82"
-    },
-    {
-      "id": "apps_api_agents_skills_prisma_8_skill_prisma_next_prisma_8",
-      "label": "Prisma Next (Prisma 8)",
-      "_origin": "ast",
-      "community": 109,
-      "community_name": "api/.agents/skills/prisma-8/SKILL.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "prisma next (prisma 8)",
-      "source_file": "apps/api/.agents/skills/prisma-8/SKILL.md",
-      "source_location": "L23"
-    },
-    {
-      "id": "apps_api_agents_skills_prisma_8_skill_routing_rules",
-      "label": "Routing rules",
-      "_origin": "ast",
-      "community": 109,
-      "community_name": "api/.agents/skills/prisma-8/SKILL.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "routing rules",
-      "source_file": "apps/api/.agents/skills/prisma-8/SKILL.md",
-      "source_location": "L65"
-    },
-    {
-      "id": "apps_api_agents_skills_prisma_8_skill_routing_table",
-      "label": "Routing table",
-      "_origin": "ast",
-      "community": 109,
-      "community_name": "api/.agents/skills/prisma-8/SKILL.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "routing table",
-      "source_file": "apps/api/.agents/skills/prisma-8/SKILL.md",
-      "source_location": "L45"
-    },
-    {
-      "id": "apps_api_agents_skills_prisma_8_skill_the_canonical_model_one_paragraph",
-      "label": "The canonical model (one paragraph)",
-      "_origin": "ast",
-      "community": 109,
-      "community_name": "api/.agents/skills/prisma-8/SKILL.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "the canonical model (one paragraph)",
-      "source_file": "apps/api/.agents/skills/prisma-8/SKILL.md",
-      "source_location": "L31"
     },
     {
       "id": "apps_api_agents_skills_prisma_8_upgrading_extension_upgrades_0_11_to_0_12_instructions",
@@ -17073,6 +16828,17 @@
       "source_location": "L53"
     },
     {
+      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_247",
+      "label": "Drop \"avoid dark mode\" advice once dark mode is the resolved answer.",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": ".generate",
+      "file_type": "rationale",
+      "norm_label": "drop \"avoid dark mode\" advice once dark mode is the resolved answer.",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "source_location": "L247"
+    },
+    {
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_321",
       "label": "Execute searches across multiple domains.",
       "_origin": "ast",
@@ -17082,17 +16848,6 @@
       "norm_label": "execute searches across multiple domains.",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
       "source_location": "L321"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_409",
-      "label": "Select best matching result based on priority keywords.",
-      "_origin": "ast",
-      "community": 12,
-      "community_name": ".generate",
-      "file_type": "rationale",
-      "norm_label": "select best matching result based on priority keywords.",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
-      "source_location": "L409"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_446",
@@ -17790,18 +17545,6 @@
       "norm_label": "workflow \u2014 vite (the supported path)",
       "source_file": "apps/api/.agents/skills/prisma-8/references/build.md",
       "source_location": "L30"
-    },
-    {
-      "id": "apps_api_agents_skills_prisma_8_references_migration_model",
-      "label": "api/.agents/skills/prisma-8/references/migration-model.md",
-      "_origin": "ast",
-      "community": 124,
-      "community_name": "Prisma Next \u2014 The Migration Graph and Refs (Mental Model)",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "api/.agents/skills/prisma-8/references/migration-model.md",
-      "source_file": "apps/api/.agents/skills/prisma-8/references/migration-model.md",
-      "source_location": "L1"
     },
     {
       "id": "apps_api_agents_skills_prisma_8_references_migration_model_checklist",
@@ -19536,11 +19279,22 @@
       "source_location": "L629"
     },
     {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode",
+      "label": "test_design_system_mode.py",
+      "_origin": "ast",
+      "community": 133,
+      "community_name": "test_design_system_mode.py",
+      "file_type": "code",
+      "norm_label": "test_design_system_mode.py",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+      "source_location": "L1"
+    },
+    {
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_130",
       "label": "WCAG relative luminance of a #RRGGBB string, or None if unparseable.",
       "_origin": "ast",
       "community": 133,
-      "community_name": "_palette_is_dark",
+      "community_name": "test_design_system_mode.py",
       "file_type": "rationale",
       "norm_label": "wcag relative luminance of a #rrggbb string, or none if unparseable.",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
@@ -19551,22 +19305,66 @@
       "label": "True when a colors.csv row's Background is a dark surface.",
       "_origin": "ast",
       "community": 133,
-      "community_name": "_palette_is_dark",
+      "community_name": "test_design_system_mode.py",
       "file_type": "rationale",
       "norm_label": "true when a colors.csv row's background is a dark surface.",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
       "source_location": "L148"
     },
     {
+      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_154",
+      "label": "WCAG contrast ratio for two hex colors, or None if either is invalid.",
+      "_origin": "ast",
+      "community": 133,
+      "community_name": "test_design_system_mode.py",
+      "file_type": "rationale",
+      "norm_label": "wcag contrast ratio for two hex colors, or none if either is invalid.",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "source_location": "L154"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_194",
+      "label": "Keep product brand tokens while deriving accessible dark surfaces.",
+      "_origin": "ast",
+      "community": 133,
+      "community_name": "test_design_system_mode.py",
+      "file_type": "rationale",
+      "norm_label": "keep product brand tokens while deriving accessible dark surfaces.",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "source_location": "L194"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_222",
+      "label": "Pick the highest-ranked palette matching the resolved mode. Only the dark case\u2026",
+      "_origin": "ast",
+      "community": 133,
+      "community_name": "test_design_system_mode.py",
+      "file_type": "rationale",
+      "norm_label": "pick the highest-ranked palette matching the resolved mode. only the dark case...",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "source_location": "L222"
+    },
+    {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_rationale_139",
       "label": "The exact reproduction from issue #428.",
       "_origin": "ast",
       "community": 133,
-      "community_name": "_palette_is_dark",
+      "community_name": "test_design_system_mode.py",
       "file_type": "rationale",
       "norm_label": "the exact reproduction from issue #428.",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
       "source_location": "L139"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_rationale_3",
+      "label": "Regression tests for color-mode coherence in design_system.py (issue #428).\u2026",
+      "_origin": "ast",
+      "community": 133,
+      "community_name": "test_design_system_mode.py",
+      "file_type": "rationale",
+      "norm_label": "regression tests for color-mode coherence in design_system.py (issue #428)....",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+      "source_location": "L3"
     },
     {
       "id": "apps_api_agents_skills_prisma_8_references_supabase_checklist",
@@ -22882,28 +22680,6 @@
       "norm_label": "reasoning_contract.py",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/reasoning_contract.py",
       "source_location": "L1"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_358",
-      "label": "Find matching reasoning rule for a category.",
-      "_origin": "ast",
-      "community": 157,
-      "community_name": "parse_decision_rules",
-      "file_type": "rationale",
-      "norm_label": "find matching reasoning rule for a category.",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
-      "source_location": "L358"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_366",
-      "label": "Apply reasoning rules to search results.",
-      "_origin": "ast",
-      "community": 157,
-      "community_name": "parse_decision_rules",
-      "file_type": "rationale",
-      "norm_label": "apply reasoning rules to search results.",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
-      "source_location": "L366"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_reasoning_contract_rationale_102",
@@ -28263,7 +28039,7 @@
       "file_type": "concept",
       "norm_label": "react",
       "source_file": "apps/web/package.json",
-      "source_location": "L15"
+      "source_location": "L20"
     },
     {
       "id": "ref_react_router",
@@ -28274,7 +28050,7 @@
       "file_type": "concept",
       "norm_label": "react-router",
       "source_file": "apps/web/package.json",
-      "source_location": "L17"
+      "source_location": "L22"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_skill",
@@ -31972,6 +31748,39 @@
       "norm_label": "load reasoning rules from csv.",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
       "source_location": "L268"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_358",
+      "label": "Find matching reasoning rule for a category.",
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "DesignSystemGenerator",
+      "file_type": "rationale",
+      "norm_label": "find matching reasoning rule for a category.",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "source_location": "L358"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_366",
+      "label": "Apply reasoning rules to search results.",
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "DesignSystemGenerator",
+      "file_type": "rationale",
+      "norm_label": "apply reasoning rules to search results.",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "source_location": "L366"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_409",
+      "label": "Select best matching result based on priority keywords.",
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "DesignSystemGenerator",
+      "file_type": "rationale",
+      "norm_label": "select best matching result based on priority keywords.",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "source_location": "L409"
     },
     {
       "id": "agents_skills_prisma_8_upgrading_app_upgrades_0_10_to_0_11_instructions",
@@ -36631,37 +36440,246 @@
       "source_location": "L1"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_154",
-      "label": "WCAG contrast ratio for two hex colors, or None if either is invalid.",
+      "id": "apps_web_components",
+      "label": "components.json",
       "_origin": "ast",
       "community": 322,
-      "community_name": "_select_palette_for_mode",
-      "file_type": "rationale",
-      "norm_label": "wcag contrast ratio for two hex colors, or none if either is invalid.",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
-      "source_location": "L154"
+      "community_name": "components.json",
+      "file_type": "code",
+      "norm_label": "components.json",
+      "source_file": "apps/web/components.json",
+      "source_location": "L1"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_194",
-      "label": "Keep product brand tokens while deriving accessible dark surfaces.",
+      "id": "apps_web_components_aliases",
+      "label": "aliases",
       "_origin": "ast",
       "community": 322,
-      "community_name": "_select_palette_for_mode",
-      "file_type": "rationale",
-      "norm_label": "keep product brand tokens while deriving accessible dark surfaces.",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
-      "source_location": "L194"
+      "community_name": "components.json",
+      "file_type": "code",
+      "norm_label": "aliases",
+      "source_file": "apps/web/components.json",
+      "source_location": "L15"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_222",
-      "label": "Pick the highest-ranked palette matching the resolved mode. Only the dark case\u2026",
+      "id": "apps_web_components_aliases_components",
+      "label": "components",
       "_origin": "ast",
       "community": 322,
-      "community_name": "_select_palette_for_mode",
-      "file_type": "rationale",
-      "norm_label": "pick the highest-ranked palette matching the resolved mode. only the dark case...",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
-      "source_location": "L222"
+      "community_name": "components.json",
+      "file_type": "code",
+      "norm_label": "components",
+      "source_file": "apps/web/components.json",
+      "source_location": "L16"
+    },
+    {
+      "id": "apps_web_components_aliases_hooks",
+      "label": "hooks",
+      "_origin": "ast",
+      "community": 322,
+      "community_name": "components.json",
+      "file_type": "code",
+      "norm_label": "hooks",
+      "source_file": "apps/web/components.json",
+      "source_location": "L20"
+    },
+    {
+      "id": "apps_web_components_aliases_lib",
+      "label": "lib",
+      "_origin": "ast",
+      "community": 322,
+      "community_name": "components.json",
+      "file_type": "code",
+      "norm_label": "lib",
+      "source_file": "apps/web/components.json",
+      "source_location": "L19"
+    },
+    {
+      "id": "apps_web_components_aliases_ui",
+      "label": "ui",
+      "_origin": "ast",
+      "community": 322,
+      "community_name": "components.json",
+      "file_type": "code",
+      "norm_label": "ui",
+      "source_file": "apps/web/components.json",
+      "source_location": "L18"
+    },
+    {
+      "id": "apps_web_components_aliases_utils",
+      "label": "utils",
+      "_origin": "ast",
+      "community": 322,
+      "community_name": "components.json",
+      "file_type": "code",
+      "norm_label": "utils",
+      "source_file": "apps/web/components.json",
+      "source_location": "L17"
+    },
+    {
+      "id": "apps_web_components_iconlibrary",
+      "label": "iconLibrary",
+      "_origin": "ast",
+      "community": 322,
+      "community_name": "components.json",
+      "file_type": "code",
+      "norm_label": "iconlibrary",
+      "source_file": "apps/web/components.json",
+      "source_location": "L13"
+    },
+    {
+      "id": "apps_web_components_menuaccent",
+      "label": "menuAccent",
+      "_origin": "ast",
+      "community": 322,
+      "community_name": "components.json",
+      "file_type": "code",
+      "norm_label": "menuaccent",
+      "source_file": "apps/web/components.json",
+      "source_location": "L23"
+    },
+    {
+      "id": "apps_web_components_menucolor",
+      "label": "menuColor",
+      "_origin": "ast",
+      "community": 322,
+      "community_name": "components.json",
+      "file_type": "code",
+      "norm_label": "menucolor",
+      "source_file": "apps/web/components.json",
+      "source_location": "L22"
+    },
+    {
+      "id": "apps_web_components_registries",
+      "label": "registries",
+      "_origin": "ast",
+      "community": 322,
+      "community_name": "components.json",
+      "file_type": "code",
+      "norm_label": "registries",
+      "source_file": "apps/web/components.json",
+      "source_location": "L24"
+    },
+    {
+      "id": "apps_web_components_rsc",
+      "label": "rsc",
+      "_origin": "ast",
+      "community": 322,
+      "community_name": "components.json",
+      "file_type": "code",
+      "norm_label": "rsc",
+      "source_file": "apps/web/components.json",
+      "source_location": "L4"
+    },
+    {
+      "id": "apps_web_components_rtl",
+      "label": "rtl",
+      "_origin": "ast",
+      "community": 322,
+      "community_name": "components.json",
+      "file_type": "code",
+      "norm_label": "rtl",
+      "source_file": "apps/web/components.json",
+      "source_location": "L14"
+    },
+    {
+      "id": "apps_web_components_schema",
+      "label": "$schema",
+      "_origin": "ast",
+      "community": 322,
+      "community_name": "components.json",
+      "file_type": "code",
+      "norm_label": "$schema",
+      "source_file": "apps/web/components.json",
+      "source_location": "L2"
+    },
+    {
+      "id": "apps_web_components_style",
+      "label": "style",
+      "_origin": "ast",
+      "community": 322,
+      "community_name": "components.json",
+      "file_type": "code",
+      "norm_label": "style",
+      "source_file": "apps/web/components.json",
+      "source_location": "L3"
+    },
+    {
+      "id": "apps_web_components_tailwind",
+      "label": "tailwind",
+      "_origin": "ast",
+      "community": 322,
+      "community_name": "components.json",
+      "file_type": "code",
+      "norm_label": "tailwind",
+      "source_file": "apps/web/components.json",
+      "source_location": "L6"
+    },
+    {
+      "id": "apps_web_components_tailwind_basecolor",
+      "label": "baseColor",
+      "_origin": "ast",
+      "community": 322,
+      "community_name": "components.json",
+      "file_type": "code",
+      "norm_label": "basecolor",
+      "source_file": "apps/web/components.json",
+      "source_location": "L9"
+    },
+    {
+      "id": "apps_web_components_tailwind_config",
+      "label": "config",
+      "_origin": "ast",
+      "community": 322,
+      "community_name": "components.json",
+      "file_type": "code",
+      "norm_label": "config",
+      "source_file": "apps/web/components.json",
+      "source_location": "L7"
+    },
+    {
+      "id": "apps_web_components_tailwind_css",
+      "label": "css",
+      "_origin": "ast",
+      "community": 322,
+      "community_name": "components.json",
+      "file_type": "code",
+      "norm_label": "css",
+      "source_file": "apps/web/components.json",
+      "source_location": "L8"
+    },
+    {
+      "id": "apps_web_components_tailwind_cssvariables",
+      "label": "cssVariables",
+      "_origin": "ast",
+      "community": 322,
+      "community_name": "components.json",
+      "file_type": "code",
+      "norm_label": "cssvariables",
+      "source_file": "apps/web/components.json",
+      "source_location": "L10"
+    },
+    {
+      "id": "apps_web_components_tailwind_prefix",
+      "label": "prefix",
+      "_origin": "ast",
+      "community": 322,
+      "community_name": "components.json",
+      "file_type": "code",
+      "norm_label": "prefix",
+      "source_file": "apps/web/components.json",
+      "source_location": "L11"
+    },
+    {
+      "id": "apps_web_components_tsx",
+      "label": "tsx",
+      "_origin": "ast",
+      "community": 322,
+      "community_name": "components.json",
+      "file_type": "code",
+      "norm_label": "tsx",
+      "source_file": "apps/web/components.json",
+      "source_location": "L5"
     },
     {
       "id": "apps_api_src_content",
@@ -36728,6 +36746,160 @@
       "norm_label": "express",
       "source_file": "apps/api/package.json",
       "source_location": "L20"
+    },
+    {
+      "id": "apps_web_package_dependencies",
+      "label": "dependencies",
+      "_origin": "ast",
+      "community": 325,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "dependencies",
+      "source_file": "apps/web/package.json",
+      "source_location": "L11"
+    },
+    {
+      "id": "apps_web_package_dependencies_base_ui_react",
+      "label": "@base-ui/react",
+      "_origin": "ast",
+      "community": 325,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "@base-ui/react",
+      "source_file": "apps/web/package.json",
+      "source_location": "L12"
+    },
+    {
+      "id": "apps_web_package_dependencies_class_variance_authority",
+      "label": "class-variance-authority",
+      "_origin": "ast",
+      "community": 325,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "class-variance-authority",
+      "source_file": "apps/web/package.json",
+      "source_location": "L16"
+    },
+    {
+      "id": "apps_web_package_dependencies_cn",
+      "label": "cn",
+      "_origin": "ast",
+      "community": 325,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "cn",
+      "source_file": "apps/web/package.json",
+      "source_location": "L17"
+    },
+    {
+      "id": "apps_web_package_dependencies_fontsource_variable_inter",
+      "label": "@fontsource-variable/inter",
+      "_origin": "ast",
+      "community": 325,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "@fontsource-variable/inter",
+      "source_file": "apps/web/package.json",
+      "source_location": "L13"
+    },
+    {
+      "id": "apps_web_package_dependencies_isbot",
+      "label": "isbot",
+      "_origin": "ast",
+      "community": 325,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "isbot",
+      "source_file": "apps/web/package.json",
+      "source_location": "L18"
+    },
+    {
+      "id": "apps_web_package_dependencies_lucide_react",
+      "label": "lucide-react",
+      "_origin": "ast",
+      "community": 325,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "lucide-react",
+      "source_file": "apps/web/package.json",
+      "source_location": "L19"
+    },
+    {
+      "id": "apps_web_package_dependencies_react",
+      "label": "react",
+      "_origin": "ast",
+      "community": 325,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "react",
+      "source_file": "apps/web/package.json",
+      "source_location": "L20"
+    },
+    {
+      "id": "apps_web_package_dependencies_react_dom",
+      "label": "react-dom",
+      "_origin": "ast",
+      "community": 325,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "react-dom",
+      "source_file": "apps/web/package.json",
+      "source_location": "L21"
+    },
+    {
+      "id": "apps_web_package_dependencies_react_router",
+      "label": "react-router",
+      "_origin": "ast",
+      "community": 325,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "react-router",
+      "source_file": "apps/web/package.json",
+      "source_location": "L22"
+    },
+    {
+      "id": "apps_web_package_dependencies_react_router_node",
+      "label": "@react-router/node",
+      "_origin": "ast",
+      "community": 325,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "@react-router/node",
+      "source_file": "apps/web/package.json",
+      "source_location": "L14"
+    },
+    {
+      "id": "apps_web_package_dependencies_react_router_serve",
+      "label": "@react-router/serve",
+      "_origin": "ast",
+      "community": 325,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "@react-router/serve",
+      "source_file": "apps/web/package.json",
+      "source_location": "L15"
+    },
+    {
+      "id": "apps_web_package_dependencies_shadcn",
+      "label": "shadcn",
+      "_origin": "ast",
+      "community": 325,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "shadcn",
+      "source_file": "apps/web/package.json",
+      "source_location": "L23"
+    },
+    {
+      "id": "apps_web_package_dependencies_tw_animate_css",
+      "label": "tw-animate-css",
+      "_origin": "ast",
+      "community": 325,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "tw-animate-css",
+      "source_file": "apps/web/package.json",
+      "source_location": "L24"
     },
     {
       "id": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d",
@@ -36818,6 +36990,105 @@
       "source_location": "L28"
     },
     {
+      "id": "apps_web_package_devdependencies",
+      "label": "devDependencies",
+      "_origin": "ast",
+      "community": 328,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "devdependencies",
+      "source_file": "apps/web/package.json",
+      "source_location": "L26"
+    },
+    {
+      "id": "apps_web_package_devdependencies_react_router_dev",
+      "label": "@react-router/dev",
+      "_origin": "ast",
+      "community": 328,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "@react-router/dev",
+      "source_file": "apps/web/package.json",
+      "source_location": "L27"
+    },
+    {
+      "id": "apps_web_package_devdependencies_tailwindcss",
+      "label": "tailwindcss",
+      "_origin": "ast",
+      "community": 328,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "tailwindcss",
+      "source_file": "apps/web/package.json",
+      "source_location": "L32"
+    },
+    {
+      "id": "apps_web_package_devdependencies_tailwindcss_vite",
+      "label": "@tailwindcss/vite",
+      "_origin": "ast",
+      "community": 328,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "@tailwindcss/vite",
+      "source_file": "apps/web/package.json",
+      "source_location": "L28"
+    },
+    {
+      "id": "apps_web_package_devdependencies_types_node",
+      "label": "@types/node",
+      "_origin": "ast",
+      "community": 328,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "@types/node",
+      "source_file": "apps/web/package.json",
+      "source_location": "L29"
+    },
+    {
+      "id": "apps_web_package_devdependencies_types_react",
+      "label": "@types/react",
+      "_origin": "ast",
+      "community": 328,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "@types/react",
+      "source_file": "apps/web/package.json",
+      "source_location": "L30"
+    },
+    {
+      "id": "apps_web_package_devdependencies_types_react_dom",
+      "label": "@types/react-dom",
+      "_origin": "ast",
+      "community": 328,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "@types/react-dom",
+      "source_file": "apps/web/package.json",
+      "source_location": "L31"
+    },
+    {
+      "id": "apps_web_package_devdependencies_typescript",
+      "label": "typescript",
+      "_origin": "ast",
+      "community": 328,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "typescript",
+      "source_file": "apps/web/package.json",
+      "source_location": "L33"
+    },
+    {
+      "id": "apps_web_package_devdependencies_vite",
+      "label": "vite",
+      "_origin": "ast",
+      "community": 328,
+      "community_name": "devDependencies",
+      "file_type": "code",
+      "norm_label": "vite",
+      "source_file": "apps/web/package.json",
+      "source_location": "L34"
+    },
+    {
       "id": "agents_skills_ui_ux_pro_max_scripts_search",
       "label": "scripts/search.py",
       "_origin": "ast",
@@ -36827,17 +37098,6 @@
       "norm_label": "scripts/search.py",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/search.py",
       "source_location": "L1"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_792",
-      "label": "Format design system as markdown.",
-      "_origin": "ast",
-      "community": 329,
-      "community_name": "generate_design_system",
-      "file_type": "rationale",
-      "norm_label": "format design system as markdown.",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
-      "source_location": "L792"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_923",
@@ -37331,6 +37591,61 @@
       "source_location": "L10"
     },
     {
+      "id": "apps_web_app_components_ui_button",
+      "label": "button.tsx",
+      "_origin": "ast",
+      "community": 332,
+      "community_name": "button.tsx",
+      "file_type": "code",
+      "norm_label": "button.tsx",
+      "source_file": "apps/web/app/components/ui/button.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "apps_web_app_components_ui_button_buttonvariants",
+      "label": "buttonVariants",
+      "_origin": "ast",
+      "community": 332,
+      "community_name": "button.tsx",
+      "file_type": "code",
+      "norm_label": "buttonvariants",
+      "source_file": "apps/web/app/components/ui/button.tsx",
+      "source_location": "L5"
+    },
+    {
+      "id": "apps_web_app_lib_utils",
+      "label": "utils.ts",
+      "_origin": "ast",
+      "community": 332,
+      "community_name": "button.tsx",
+      "file_type": "code",
+      "norm_label": "utils.ts",
+      "source_file": "apps/web/app/lib/utils.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "ref_class_variance_authority",
+      "label": "class-variance-authority",
+      "_origin": "ast",
+      "community": 332,
+      "community_name": "button.tsx",
+      "file_type": "concept",
+      "norm_label": "class-variance-authority",
+      "source_file": "apps/web/package.json",
+      "source_location": "L16"
+    },
+    {
+      "id": "ref_cn",
+      "label": "cn",
+      "_origin": "ast",
+      "community": 332,
+      "community_name": "button.tsx",
+      "file_type": "concept",
+      "norm_label": "cn",
+      "source_file": "apps/web/package.json",
+      "source_location": "L17"
+    },
+    {
       "id": "apps_api_readme",
       "label": "README.md",
       "_origin": "ast",
@@ -37387,6 +37702,154 @@
       "norm_label": "20260912t0920_add_questions/migration.ts",
       "source_file": "apps/api/migrations/app/20260912T0920_add_questions/migration.ts",
       "source_location": "L1"
+    },
+    {
+      "id": "apps_api_agents_skills_prisma_8_skill_checklist",
+      "label": "Checklist",
+      "_origin": "ast",
+      "community": 336,
+      "community_name": "Prisma Next (Prisma 8)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "checklist",
+      "source_file": "apps/api/.agents/skills/prisma-8/SKILL.md",
+      "source_location": "L82"
+    },
+    {
+      "id": "apps_api_agents_skills_prisma_8_skill_prisma_next_prisma_8",
+      "label": "Prisma Next (Prisma 8)",
+      "_origin": "ast",
+      "community": 336,
+      "community_name": "Prisma Next (Prisma 8)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "prisma next (prisma 8)",
+      "source_file": "apps/api/.agents/skills/prisma-8/SKILL.md",
+      "source_location": "L23"
+    },
+    {
+      "id": "apps_api_agents_skills_prisma_8_skill_routing_rules",
+      "label": "Routing rules",
+      "_origin": "ast",
+      "community": 336,
+      "community_name": "Prisma Next (Prisma 8)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "routing rules",
+      "source_file": "apps/api/.agents/skills/prisma-8/SKILL.md",
+      "source_location": "L65"
+    },
+    {
+      "id": "apps_api_agents_skills_prisma_8_skill_routing_table",
+      "label": "Routing table",
+      "_origin": "ast",
+      "community": 336,
+      "community_name": "Prisma Next (Prisma 8)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "routing table",
+      "source_file": "apps/api/.agents/skills/prisma-8/SKILL.md",
+      "source_location": "L45"
+    },
+    {
+      "id": "apps_api_agents_skills_prisma_8_skill_the_canonical_model_one_paragraph",
+      "label": "The canonical model (one paragraph)",
+      "_origin": "ast",
+      "community": 336,
+      "community_name": "Prisma Next (Prisma 8)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "the canonical model (one paragraph)",
+      "source_file": "apps/api/.agents/skills/prisma-8/SKILL.md",
+      "source_location": "L31"
+    },
+    {
+      "id": "apps_web_package_scripts",
+      "label": "scripts",
+      "_origin": "ast",
+      "community": 337,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "scripts",
+      "source_file": "apps/web/package.json",
+      "source_location": "L5"
+    },
+    {
+      "id": "apps_web_package_scripts_build",
+      "label": "build",
+      "_origin": "ast",
+      "community": 337,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "build",
+      "source_file": "apps/web/package.json",
+      "source_location": "L6"
+    },
+    {
+      "id": "apps_web_package_scripts_dev",
+      "label": "dev",
+      "_origin": "ast",
+      "community": 337,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "dev",
+      "source_file": "apps/web/package.json",
+      "source_location": "L7"
+    },
+    {
+      "id": "apps_web_package_scripts_start",
+      "label": "start",
+      "_origin": "ast",
+      "community": 337,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "start",
+      "source_file": "apps/web/package.json",
+      "source_location": "L8"
+    },
+    {
+      "id": "apps_web_package_scripts_typecheck",
+      "label": "typecheck",
+      "_origin": "ast",
+      "community": 337,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "typecheck",
+      "source_file": "apps/web/package.json",
+      "source_location": "L9"
+    },
+    {
+      "id": "apps_web_vite_config",
+      "label": "vite.config.ts",
+      "_origin": "ast",
+      "community": 338,
+      "community_name": "vite.config.ts",
+      "file_type": "code",
+      "norm_label": "vite.config.ts",
+      "source_file": "apps/web/vite.config.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "ref_tailwindcss_vite",
+      "label": "@tailwindcss/vite",
+      "_origin": "ast",
+      "community": 338,
+      "community_name": "vite.config.ts",
+      "file_type": "concept",
+      "norm_label": "@tailwindcss/vite",
+      "source_file": "apps/web/package.json",
+      "source_location": "L28"
+    },
+    {
+      "id": "ref_vite",
+      "label": "vite",
+      "_origin": "ast",
+      "community": 338,
+      "community_name": "vite.config.ts",
+      "file_type": "concept",
+      "norm_label": "vite",
+      "source_file": "apps/web/package.json",
+      "source_location": "L34"
     },
     {
       "id": "apps_api_migrations_app_20260912t1017_add_practice_sets_migration",
@@ -41842,6 +42305,17 @@
       "norm_label": "format design system as unicode box with ansi color swatches.",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
       "source_location": "L641"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_792",
+      "label": "Format design system as markdown.",
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "design_system.py",
+      "file_type": "rationale",
+      "norm_label": "format design system as markdown.",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "source_location": "L792"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_962",
@@ -46883,22 +47357,11 @@
       "source_location": "L76"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode",
-      "label": "test_design_system_mode.py",
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "test_design_system_mode.py",
-      "file_type": "code",
-      "norm_label": "test_design_system_mode.py",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
-      "source_location": "L1"
-    },
-    {
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_165",
       "label": "True when a styles.csv row describes itself as dark-first.",
       "_origin": "ast",
       "community": 76,
-      "community_name": "test_design_system_mode.py",
+      "community_name": "_style_is_dark_primary",
       "file_type": "rationale",
       "norm_label": "true when a styles.csv row describes itself as dark-first.",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
@@ -46909,7 +47372,7 @@
       "label": "True when the query explicitly asks for a dark theme.",
       "_origin": "ast",
       "community": 76,
-      "community_name": "test_design_system_mode.py",
+      "community_name": "_style_is_dark_primary",
       "file_type": "rationale",
       "norm_label": "true when the query explicitly asks for a dark theme.",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
@@ -46920,33 +47383,11 @@
       "label": "Resolve the mode the rest of the output has to agree with.",
       "_origin": "ast",
       "community": 76,
-      "community_name": "test_design_system_mode.py",
+      "community_name": "_style_is_dark_primary",
       "file_type": "rationale",
       "norm_label": "resolve the mode the rest of the output has to agree with.",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
       "source_location": "L187"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_247",
-      "label": "Drop \"avoid dark mode\" advice once dark mode is the resolved answer.",
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "test_design_system_mode.py",
-      "file_type": "rationale",
-      "norm_label": "drop \"avoid dark mode\" advice once dark mode is the resolved answer.",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
-      "source_location": "L247"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_rationale_3",
-      "label": "Regression tests for color-mode coherence in design_system.py (issue #428).\u2026",
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "test_design_system_mode.py",
-      "file_type": "rationale",
-      "norm_label": "regression tests for color-mode coherence in design_system.py (issue #428)....",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
-      "source_location": "L3"
     },
     {
       "id": "apps_api_agents_skills_prisma_8_upgrading_app_upgrades_0_11_to_0_12_re_emit_domain_namespaced_contracts",
@@ -61162,6 +61603,18 @@
       "weight": 1.0
     },
     {
+      "source": "apps_web_app_components_ui_button_button",
+      "target": "apps_web_app_components_ui_button_buttonvariants",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "apps/web/app/components/ui/button.tsx",
+      "source_location": "L49",
+      "weight": 1.0
+    },
+    {
       "source": "apps_web_app_content_api_savecontent",
       "target": "apps_web_app_content_api_api",
       "relation": "calls",
@@ -63167,7 +63620,7 @@
     },
     {
       "source": "apps_web_package",
-      "target": "ref_react_router_node",
+      "target": "ref_base_ui_react",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -63179,7 +63632,7 @@
     },
     {
       "source": "apps_web_package",
-      "target": "ref_react_router_serve",
+      "target": "ref_fontsource_variable_inter",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -63191,7 +63644,7 @@
     },
     {
       "source": "apps_web_package",
-      "target": "ref_isbot",
+      "target": "ref_react_router_node",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -63203,7 +63656,7 @@
     },
     {
       "source": "apps_web_package",
-      "target": "ref_react",
+      "target": "ref_react_router_serve",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -63215,7 +63668,7 @@
     },
     {
       "source": "apps_web_package",
-      "target": "ref_react_dom",
+      "target": "ref_class_variance_authority",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -63227,7 +63680,7 @@
     },
     {
       "source": "apps_web_package",
-      "target": "ref_react_router",
+      "target": "ref_cn",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -63239,7 +63692,31 @@
     },
     {
       "source": "apps_web_package",
-      "target": "ref_react_router_dev",
+      "target": "ref_isbot",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "apps/web/package.json",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_package",
+      "target": "ref_lucide_react",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "apps/web/package.json",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_package",
+      "target": "ref_react",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -63251,7 +63728,7 @@
     },
     {
       "source": "apps_web_package",
-      "target": "ref_tailwindcss_vite",
+      "target": "ref_react_dom",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -63263,7 +63740,7 @@
     },
     {
       "source": "apps_web_package",
-      "target": "apps_web_package_json_ref_types_node",
+      "target": "ref_react_router",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -63275,7 +63752,7 @@
     },
     {
       "source": "apps_web_package",
-      "target": "ref_types_react",
+      "target": "ref_shadcn",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -63287,7 +63764,7 @@
     },
     {
       "source": "apps_web_package",
-      "target": "ref_types_react_dom",
+      "target": "ref_tw_animate_css",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -63299,6 +63776,66 @@
     },
     {
       "source": "apps_web_package",
+      "target": "ref_react_router_dev",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "apps/web/package.json",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_package",
+      "target": "ref_tailwindcss_vite",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "apps/web/package.json",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_package",
+      "target": "apps_web_package_json_ref_types_node",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "apps/web/package.json",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_package",
+      "target": "ref_types_react",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "apps/web/package.json",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_package",
+      "target": "ref_types_react_dom",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "apps/web/package.json",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_package",
       "target": "ref_tailwindcss",
       "relation": "imports",
       "_origin": "ast",
@@ -63306,7 +63843,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "apps/web/package.json",
-      "source_location": "L25",
+      "source_location": "L32",
       "weight": 1.0
     },
     {
@@ -63318,7 +63855,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "apps/web/package.json",
-      "source_location": "L26",
+      "source_location": "L33",
       "weight": 1.0
     },
     {
@@ -63330,7 +63867,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "apps/web/package.json",
-      "source_location": "L27",
+      "source_location": "L34",
       "weight": 1.0
     },
     {
@@ -63608,6 +64145,30 @@
       "source_file": "apps/api/src/prisma/db.ts",
       "source_location": "L3",
       "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_app_components_ui_button",
+      "target": "ref_class_variance_authority",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "apps/web/app/components/ui/button.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_app_components_ui_button",
+      "target": "ref_cn",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "apps/web/app/components/ui/button.tsx",
+      "source_location": "L3",
       "weight": 1.0
     },
     {
@@ -64006,6 +64567,18 @@
       "context": "parameter_type",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
       "source_location": "L972",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_app_lib_utils",
+      "target": "ref_cn",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "re-export",
+      "source_file": "apps/web/app/lib/utils.ts",
+      "source_location": "L1",
       "weight": 1.0
     },
     {
@@ -100951,6 +101524,28 @@
       "weight": 1.0
     },
     {
+      "source": "apps_web_app_components_ui_button",
+      "target": "apps_web_app_components_ui_button_button",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/app/components/ui/button.tsx",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_app_components_ui_button",
+      "target": "apps_web_app_components_ui_button_buttonvariants",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/app/components/ui/button.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
       "source": "apps_web_app_content_api",
       "target": "apps_web_app_content_api_topic",
       "relation": "contains",
@@ -101589,6 +102184,237 @@
       "weight": 1.0
     },
     {
+      "source": "apps_web_components",
+      "target": "apps_web_components_iconlibrary",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/components.json",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_components",
+      "target": "apps_web_components_rtl",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/components.json",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_components",
+      "target": "apps_web_components_aliases",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/components.json",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_components",
+      "target": "apps_web_components_schema",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/components.json",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_components",
+      "target": "apps_web_components_menucolor",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/components.json",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_components",
+      "target": "apps_web_components_menuaccent",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/components.json",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_components",
+      "target": "apps_web_components_registries",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/components.json",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_components",
+      "target": "apps_web_components_style",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/components.json",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_components",
+      "target": "apps_web_components_rsc",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/components.json",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_components",
+      "target": "apps_web_components_tsx",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/components.json",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_components",
+      "target": "apps_web_components_tailwind",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/components.json",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_components_aliases",
+      "target": "apps_web_components_aliases_components",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/components.json",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_components_aliases",
+      "target": "apps_web_components_aliases_utils",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/components.json",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_components_aliases",
+      "target": "apps_web_components_aliases_ui",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/components.json",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_components_aliases",
+      "target": "apps_web_components_aliases_lib",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/components.json",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_components_aliases",
+      "target": "apps_web_components_aliases_hooks",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/components.json",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_components_tailwind",
+      "target": "apps_web_components_tailwind_cssvariables",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/components.json",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_components_tailwind",
+      "target": "apps_web_components_tailwind_prefix",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/components.json",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_components_tailwind",
+      "target": "apps_web_components_tailwind_config",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/components.json",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_components_tailwind",
+      "target": "apps_web_components_tailwind_css",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/components.json",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_components_tailwind",
+      "target": "apps_web_components_tailwind_basecolor",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/components.json",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
       "source": "apps_web_package",
       "target": "apps_web_package_dependencies",
       "relation": "contains",
@@ -101601,17 +102427,6 @@
     },
     {
       "source": "apps_web_package",
-      "target": "apps_web_package_devdependencies",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "apps/web/package.json",
-      "source_location": "L19",
-      "weight": 1.0
-    },
-    {
-      "source": "apps_web_package",
       "target": "apps_web_package_name",
       "relation": "contains",
       "_origin": "ast",
@@ -101619,6 +102434,17 @@
       "confidence_score": 1.0,
       "source_file": "apps/web/package.json",
       "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_package",
+      "target": "apps_web_package_devdependencies",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/package.json",
+      "source_location": "L26",
       "weight": 1.0
     },
     {
@@ -101656,7 +102482,7 @@
     },
     {
       "source": "apps_web_package_dependencies",
-      "target": "apps_web_package_dependencies_react_router_node",
+      "target": "apps_web_package_dependencies_base_ui_react",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -101667,7 +102493,7 @@
     },
     {
       "source": "apps_web_package_dependencies",
-      "target": "apps_web_package_dependencies_react_router_serve",
+      "target": "apps_web_package_dependencies_fontsource_variable_inter",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -101678,7 +102504,7 @@
     },
     {
       "source": "apps_web_package_dependencies",
-      "target": "apps_web_package_dependencies_isbot",
+      "target": "apps_web_package_dependencies_react_router_node",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -101689,7 +102515,7 @@
     },
     {
       "source": "apps_web_package_dependencies",
-      "target": "apps_web_package_dependencies_react",
+      "target": "apps_web_package_dependencies_react_router_serve",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -101700,7 +102526,7 @@
     },
     {
       "source": "apps_web_package_dependencies",
-      "target": "apps_web_package_dependencies_react_dom",
+      "target": "apps_web_package_dependencies_class_variance_authority",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -101711,7 +102537,7 @@
     },
     {
       "source": "apps_web_package_dependencies",
-      "target": "apps_web_package_dependencies_react_router",
+      "target": "apps_web_package_dependencies_cn",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -101721,8 +102547,30 @@
       "weight": 1.0
     },
     {
-      "source": "apps_web_package_devdependencies",
-      "target": "apps_web_package_devdependencies_react_router_dev",
+      "source": "apps_web_package_dependencies",
+      "target": "apps_web_package_dependencies_isbot",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/package.json",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_package_dependencies",
+      "target": "apps_web_package_dependencies_lucide_react",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/package.json",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_package_dependencies",
+      "target": "apps_web_package_dependencies_react",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -101732,8 +102580,8 @@
       "weight": 1.0
     },
     {
-      "source": "apps_web_package_devdependencies",
-      "target": "apps_web_package_devdependencies_tailwindcss_vite",
+      "source": "apps_web_package_dependencies",
+      "target": "apps_web_package_dependencies_react_dom",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -101743,8 +102591,8 @@
       "weight": 1.0
     },
     {
-      "source": "apps_web_package_devdependencies",
-      "target": "apps_web_package_devdependencies_types_node",
+      "source": "apps_web_package_dependencies",
+      "target": "apps_web_package_dependencies_react_router",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -101754,8 +102602,8 @@
       "weight": 1.0
     },
     {
-      "source": "apps_web_package_devdependencies",
-      "target": "apps_web_package_devdependencies_types_react",
+      "source": "apps_web_package_dependencies",
+      "target": "apps_web_package_dependencies_shadcn",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -101765,8 +102613,8 @@
       "weight": 1.0
     },
     {
-      "source": "apps_web_package_devdependencies",
-      "target": "apps_web_package_devdependencies_types_react_dom",
+      "source": "apps_web_package_dependencies",
+      "target": "apps_web_package_dependencies_tw_animate_css",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -101777,13 +102625,68 @@
     },
     {
       "source": "apps_web_package_devdependencies",
+      "target": "apps_web_package_devdependencies_react_router_dev",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/package.json",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_package_devdependencies",
+      "target": "apps_web_package_devdependencies_tailwindcss_vite",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/package.json",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_package_devdependencies",
+      "target": "apps_web_package_devdependencies_types_node",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/package.json",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_package_devdependencies",
+      "target": "apps_web_package_devdependencies_types_react",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/package.json",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_package_devdependencies",
+      "target": "apps_web_package_devdependencies_types_react_dom",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/package.json",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_package_devdependencies",
       "target": "apps_web_package_devdependencies_tailwindcss",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "apps/web/package.json",
-      "source_location": "L25",
+      "source_location": "L32",
       "weight": 1.0
     },
     {
@@ -101794,7 +102697,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "apps/web/package.json",
-      "source_location": "L26",
+      "source_location": "L33",
       "weight": 1.0
     },
     {
@@ -101805,7 +102708,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "apps/web/package.json",
-      "source_location": "L27",
+      "source_location": "L34",
       "weight": 1.0
     },
     {
