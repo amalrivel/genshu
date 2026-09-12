@@ -58,3 +58,5 @@ graphify-out/.needs_update
 graphify-out/cache/
 
 # Keep lockfiles, workspace/config files, and Prisma contracts/migrations.
+# Playwright CLI output (may contain credentials)
+.playwright-cli/

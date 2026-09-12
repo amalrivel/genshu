@@ -1998,9 +1998,9 @@
     "semantic_hash": ""
   },
   "apps/web/app/routes/login.tsx": {
-    "mtime": 1789216455.8730526,
-    "seen": 1789217170.754108,
-    "ast_hash": "f08d1bcd37921bc521c59a6b543be53d",
+    "mtime": 1789246149.2320163,
+    "seen": 1789246243.8538933,
+    "ast_hash": "c1806aef7675ce290cb3b6e1a1f97821",
     "semantic_hash": ""
   },
   "apps/web/app/routes/logout.tsx": {
@@ -2019,6 +2019,72 @@
     "mtime": 1789215858.5505083,
     "seen": 1789217170.7541156,
     "ast_hash": "26cbc6722d0a233c1d5ed25fe4480e33",
+    "semantic_hash": ""
+  },
+  ".playwright/cli.config.json": {
+    "mtime": 1789245989.02223,
+    "seen": 1789246243.8538408,
+    "ast_hash": "4e481842f3d0c9a34175cae0a55192d5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playwright-cli/SKILL.md": {
+    "mtime": 1789246000.1909645,
+    "seen": 1789246243.8539348,
+    "ast_hash": "1c358c2bc1bb77b322a6dfebb28ef375",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playwright-cli/references/element-attributes.md": {
+    "mtime": 1789246000.188868,
+    "seen": 1789246243.8539357,
+    "ast_hash": "8b8ffc48e38a5b4a04baec18a2732cd7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playwright-cli/references/playwright-tests.md": {
+    "mtime": 1789246000.1865957,
+    "seen": 1789246243.8539362,
+    "ast_hash": "99970dceff6228941c8f994e7dd71d27",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playwright-cli/references/request-mocking.md": {
+    "mtime": 1789246000.1901176,
+    "seen": 1789246243.8539367,
+    "ast_hash": "3b74af1fc908062c9c7f2cef04be6a24",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playwright-cli/references/running-code.md": {
+    "mtime": 1789246000.1896777,
+    "seen": 1789246243.8539402,
+    "ast_hash": "971c216502efd1af848fe0711e2cffc7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playwright-cli/references/session-management.md": {
+    "mtime": 1789246000.1880128,
+    "seen": 1789246243.8539407,
+    "ast_hash": "82975a2a618d15314a5c4397b6245a7c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playwright-cli/references/storage-state.md": {
+    "mtime": 1789246000.1876373,
+    "seen": 1789246243.8539412,
+    "ast_hash": "128ea37ea2ddc5022920718d0f9ab96d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playwright-cli/references/test-generation.md": {
+    "mtime": 1789246000.188361,
+    "seen": 1789246243.8539417,
+    "ast_hash": "10d3d7de2b5b8e7053d5023feebb606d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playwright-cli/references/tracing.md": {
+    "mtime": 1789246000.187162,
+    "seen": 1789246243.8539422,
+    "ast_hash": "ef8d17a2e59f58c77800ddde72f7ce51",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playwright-cli/references/video-recording.md": {
+    "mtime": 1789246000.189247,
+    "seen": 1789246243.853944,
+    "ast_hash": "3b384a256080e9c4d791d4660da4c369",
     "semantic_hash": ""
   }
 }

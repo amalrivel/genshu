@@ -23,7 +23,6 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
         password: form.get("password"),
       }),
     });
-    console.log("success")
     return redirect("/practice");
   } catch (error) {
     return {
