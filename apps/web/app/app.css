@@ -13,3 +13,24 @@ body {
     color-scheme: dark;
   }
 }
+
+.content-admin { max-width: 52rem; margin: 0 auto; padding: 2rem 1rem; overflow-wrap: anywhere; }
+.content-admin h1 { font-size: 2rem; font-weight: 700; margin: 1rem 0; }
+.content-admin h2 { font-size: 1.5rem; font-weight: 600; margin: 1.5rem 0 .75rem; }
+.content-admin h3 { font-size: 1.2rem; font-weight: 600; }
+.content-admin a { text-decoration: underline; text-underline-offset: .2em; }
+.content-list { display: grid; gap: 1rem; }
+.content-list > li { border: 1px solid #888; border-radius: .5rem; padding: 1rem; }
+.content-form { margin: 1rem 0; }
+.content-form fieldset { min-width: 0; }
+.content-form legend { font-weight: 600; }
+.content-form label { display: grid; gap: .35rem; margin: .75rem 0; }
+.content-form input, .content-form textarea { width: 100%; border: 1px solid #888; border-radius: .25rem; padding: .6rem; background: transparent; }
+.content-form textarea { font-family: monospace; resize: vertical; }
+.content-form .actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+.content-form button { padding: .6rem 1rem; border: 1px solid currentColor; border-radius: .25rem; cursor: pointer; }
+.content-form button:hover { background: #8882; }
+.content-form fieldset:disabled { opacity: .65; }
+.content-form button:disabled { cursor: wait; }
+.content-form .danger, .content-form [role=alert] { color: light-dark(#a01818, #ffa6a6); }
+.content-admin :focus-visible { outline: 3px solid #608ee0; outline-offset: 3px; }

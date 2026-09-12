@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node --watch src/app.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "contract:emit": "prisma contract emit"
+    "test": "node --test src/content.test.ts",
+    "contract:emit": "prisma contract emit",
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",

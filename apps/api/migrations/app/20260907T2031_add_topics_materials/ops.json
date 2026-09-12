@@ -1,0 +1,161 @@
+[
+  {
+    "id": "table.material",
+    "label": "Create table \"material\"",
+    "summary": "Creates table \"material\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "material"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"material\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"material\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"material\"",
+        "sql": "CREATE TABLE \"public\".\"material\" (\n  \"content\" text NOT NULL,\n  \"id\" SERIAL NOT NULL,\n  \"title\" text NOT NULL,\n  \"topicId\" int4 NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"material\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"material\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.topic",
+    "label": "Create table \"topic\"",
+    "summary": "Creates table \"topic\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "topic"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"topic\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"topic\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"topic\"",
+        "sql": "CREATE TABLE \"public\".\"topic\" (\n  \"createdAt\" timestamptz DEFAULT (now()) NOT NULL,\n  \"id\" SERIAL NOT NULL,\n  \"title\" text NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"topic\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"topic\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.material.material_topicId_idx_6f05808f",
+    "label": "Create index \"material_topicId_idx_6f05808f\" on \"material\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "material_topicId_idx_6f05808f",
+        "table": "material"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"material_topicId_idx_6f05808f\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"material_topicId_idx_6f05808f\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"material_topicId_idx_6f05808f\"",
+        "sql": "CREATE INDEX \"material_topicId_idx_6f05808f\" ON \"public\".\"material\" (\"topicId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"material_topicId_idx_6f05808f\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"material_topicId_idx_6f05808f\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.material.material_topicId_fkey",
+    "label": "Add foreign key \"material_topicId_fkey\" on \"material\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "foreignKey",
+        "name": "material_topicId_fkey",
+        "table": "material"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"material_topicId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "material_topicId_fkey",
+          "public",
+          "\"public\".\"material\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"material_topicId_fkey\"",
+        "sql": "ALTER TABLE \"public\".\"material\"\nADD CONSTRAINT \"material_topicId_fkey\"\nFOREIGN KEY (\"topicId\")\nREFERENCES \"public\".\"topic\" (\"id\")"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"material_topicId_fkey\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "material_topicId_fkey",
+          "public",
+          "\"public\".\"material\""
+        ]
+      }
+    ]
+  }
+]
