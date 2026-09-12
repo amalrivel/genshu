@@ -1,12 +1,12 @@
-# Graph Report - genshu  (2026-09-08)
+# Graph Report - genshu  (2026-09-12)
 
 ## Corpus Check
-- 293 files · ~501,809 words
+- 301 files · ~505,108 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 4240 nodes · 4932 edges · 322 communities (265 shown, 41 thin omitted)
-- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 44 edges (avg confidence: 0.87)
+- 4292 nodes · 5010 edges · 335 communities (275 shown, 43 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 45 edges (avg confidence: 0.87)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
@@ -27,7 +27,7 @@
 - gray
 - 0.11 → 0.12 — Extension-author upgrade instructions
 - 0.11 → 0.12 — Extension-author upgrade instructions
-- home.tsx
+- react-router
 - slide_search_core.py
 - Graphify knowledge graph
 - React Router dark-theme logo
@@ -68,7 +68,7 @@
 - 0.16 → 0.17 — User upgrade instructions
 - Design System
 - Tailwind CSS Customization
-- test_data_contracts.py
+- TestGeneratedCatalogContract
 - Prisma Next — Contract Authoring
 - Prisma Next — Quickstart (Adoption)
 - .agents/skills/prisma-8/upgrading/app/upgrades/0.16-to-0.17/strip-sha256-hash-prefixes.ts
@@ -89,7 +89,7 @@
 - .agents/skills/prisma-8/upgrading/extension/upgrades/0.9-to-0.10/stamp-storage-types-kind.ts
 - Writing apps with Prisma Composer
 - shadcn/ui Theming & Customization
-- _style_is_dark_primary
+- test_design_system_mode.py
 - api/.agents/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-domain-namespaced-contracts.ts
 - api/.agents/skills/prisma-8/upgrading/app/upgrades/0.9-to-0.10/stamp-storage-types-kind.ts
 - api/.agents/skills/prisma-8/upgrading/extension/upgrades/0.9-to-0.10/stamp-storage-types-kind.ts
@@ -146,7 +146,7 @@
 - 0.10 → 0.11 — Extension-author upgrade instructions
 - Copywriting Formulas
 - detect_domain
-- test_design_system_mode.py
+- _palette_is_dark
 - Prisma Next — Supabase
 - 0.10 → 0.11 — Extension-author upgrade instructions
 - Banner Design - Multi-Format Creative Banner System
@@ -161,7 +161,7 @@
 - Prisma Next — Queries (Postgres)
 - Layout Patterns
 - test_tailwind_config_gen.py
-- generate_design_system
+- topic.tsx
 - Prisma Next — Debug
 - Prisma Next — Queries (Postgres)
 - update.md
@@ -170,7 +170,7 @@
 - design-tokens-starter.json
 - 0.13 → 0.14 — Extension-author upgrade instructions
 - 4afc7b0d7d11f178e53f9cc94ef6d1ecd6dba10716d25ddd6e90e690b02d14ea/contract.d.ts
-- parse_decision_rules
+- test_data_contracts.py
 - 0.13 → 0.14 — Extension-author upgrade instructions
 - Primitive Tokens
 - validate-tokens.cjs
@@ -251,7 +251,7 @@
 - slide-token-validator.py
 - padding-y
 - xl
-- Workflow — First-touch orientation
+- Genshu — Executive MVP PRD
 - none
 - 0.10 → 0.11 — User upgrade instructions
 - .agents/skills/prisma-8/upgrading/app/upgrades/0.13-to-0.14/uuid-preset-rename.ts
@@ -321,6 +321,18 @@
 - 8
 - M
 - M
+- _select_palette_for_mode
+- content.ts
+- _normalize
+- devDependencies
+- Key Concepts — the navigation model
+- devDependencies
+- dependencies
+- TestLandingAndStackContract
+- dependencies
+- scripts
+- scripts
+- Content API
 
 ## God Nodes (most connected - your core abstractions)
 1. `TailwindConfigGenerator` - 58 edges
@@ -349,15 +361,15 @@
 ## Import Cycles
 - None detected.
 
-## Communities (322 total, 41 thin omitted)
+## Communities (335 total, 43 thin omitted)
 
 ### Community 0 - "api/package.json"
-Cohesion: 0.05
-Nodes (35): author, dependencies, cors, dotenv, express, @prisma/orm-postgres, description, devDependencies (+27 more)
+Cohesion: 0.11
+Nodes (16): author, description, @types/node, typescript, keywords, license, main, name (+8 more)
 
 ### Community 1 - "web/package.json"
-Cohesion: 0.05
-Nodes (38): dependencies, isbot, react, react-dom, react-router, @react-router/node, @react-router/serve, devDependencies (+30 more)
+Cohesion: 0.12
+Nodes (15): @types/node, typescript, name, private, type, isbot, react-dom, @react-router/dev (+7 more)
 
 ### Community 2 - "package.json"
 Cohesion: 0.10
@@ -399,6 +411,10 @@ Nodes (46): 0.11 → 0.12 — Extension-author upgrade instructions, `any-expres
 Cohesion: 0.04
 Nodes (46): 0.11 → 0.12 — Extension-author upgrade instructions, `any-expression-exhaustive-switch-add-window-func-case`, Before 0.12, Before 0.12, Before 0.12, Before 0.12 — `createRuntime(...)` call inside the wrapper, Before 0.12 — type import and options interface, Confirm every manifest is migrated (+38 more)
 
+### Community 12 - "react-router"
+Cohesion: 0.18
+Nodes (3): resources, Welcome(), react-router
+
 ### Community 13 - "slide_search_core.py"
 Cohesion: 0.08
 Nodes (38): format_context(), format_result(), main(), Format a single search result for display, Slide Search CLI - Search slide design databases for strategies, layouts, copy,…, Format contextual recommendations for display., BM25, calculate_pattern_break() (+30 more)
@@ -428,8 +444,8 @@ Cohesion: 0.09
 Nodes (22): $type, $value, $type, $value, $type, $value, $type, $value (+14 more)
 
 ### Community 24 - "DesignSystemGenerator"
-Cohesion: 0.13
-Nodes (8): DesignSystemGenerator, Generates design system recommendations from aggregated searches., Load reasoning rules from CSV., Find matching reasoning rule for a category., Apply reasoning rules to search results., Select best matching result based on priority keywords., TestReasoningMatch, TestReasoningContract
+Cohesion: 0.16
+Nodes (6): DesignSystemGenerator, Generates design system recommendations from aggregated searches., Load reasoning rules from CSV., TestReasoningMatch, read_rows(), TestReasoningContract
 
 ### Community 25 - "Form & Input Components"
 Cohesion: 0.06
@@ -444,12 +460,12 @@ Cohesion: 0.06
 Nodes (31): 0.11 → 0.12 — User upgrade instructions, After re-emit, Application code, Apply the validator migration, Before 0.12, Before 0.12, Confirm every manifest is migrated, Contract artefacts (+23 more)
 
 ### Community 28 - "search"
-Cohesion: 0.11
-Nodes (9): _project_row(), Resolve a deprecated in-domain alias, or expose a cross-domain redirect., Main search function with auto-domain detection, search(), _style_search_destination(), TestSearchDomains, Regression tests for the public style taxonomy and search contract., read_rows() (+1 more)
+Cohesion: 0.13
+Nodes (6): Resolve a deprecated in-domain alias, or expose a cross-domain redirect., Main search function with auto-domain detection, search(), _style_search_destination(), TestSearchDomains, TestStyleTaxonomy
 
 ### Community 29 - "search_stack"
-Cohesion: 0.09
-Nodes (11): _exact_stack_identifier(), Resolve a standalone API identifier even when its BM25 IDF is low., Search stack-specific guidelines, search_stack(), _valid_max_results(), Freshness and migration contracts for native, desktop, and 3D stacks., _rows(), TestNativeDesktopStackFreshness (+3 more)
+Cohesion: 0.10
+Nodes (8): Search stack-specific guidelines, search_stack(), Freshness and migration contracts for native, desktop, and 3D stacks., _rows(), TestNativeDesktopStackFreshness, Freshness and generation-isolation contracts for web stack guidance., _rows(), TestWebStackFreshness
 
 ### Community 30 - "0.11 → 0.12 — User upgrade instructions"
 Cohesion: 0.06
@@ -480,8 +496,8 @@ Cohesion: 0.07
 Nodes (15): Test adding custom fonts., Test adding custom breakpoints., Test TailwindConfigGenerator class., Test plugin recommendations., Test generating TypeScript configuration., Test generating JavaScript configuration., Test validating valid configuration., Test validating config with no content paths. (+7 more)
 
 ### Community 37 - "scripts/core.py"
-Cohesion: 0.10
-Nodes (33): _contains_phrase(), _domain_keywords(), _exact_match_diagnostic(), _file_signature(), _get_bm25(), _legacy_successor_guidance(), _load_csv(), _load_csv_snapshot() (+25 more)
+Cohesion: 0.11
+Nodes (28): _contains_phrase(), _domain_keywords(), _exact_stack_identifier(), _file_signature(), _get_bm25(), _load_csv(), _load_csv_snapshot(), _load_product_keywords() (+20 more)
 
 ### Community 38 - "Prisma Next — Feedback (Bug Reports, Feature Requests, Team Q&A)"
 Cohesion: 0.07
@@ -528,8 +544,8 @@ Cohesion: 0.08
 Nodes (24): Accessibility Patterns, Alternative: Tailwind-Only Setup, Best Practices, Common Patterns, Component Layer: shadcn/ui, Component Library Guide, Component + Styling Setup, Core Stack (+16 more)
 
 ### Community 49 - "design_system.py"
-Cohesion: 0.10
-Nodes (26): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), _generate_intelligent_overrides(), hex_to_ansi() (+18 more)
+Cohesion: 0.08
+Nodes (32): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), generate_design_system(), _generate_intelligent_overrides() (+24 more)
 
 ### Community 50 - "Workflow"
 Cohesion: 0.08
@@ -551,16 +567,12 @@ Nodes (22): Best Practices, Chart.js Integration, Command, Component Spec Patter
 Cohesion: 0.09
 Nodes (22): @apply Directive, Best Practices, Color Customization, Complete Tailwind Config, Configuration Examples, Content Configuration, Custom Color Palette, Custom Font Sizes (+14 more)
 
-### Community 55 - "test_data_contracts.py"
-Cohesion: 0.14
-Nodes (7): Cross-file semantic contracts for curated design data., read_rows(), split_values(), style_identities(), TestGeneratedCatalogContract, TestLandingAndStackContract, TestStyleIdentityContract
-
 ### Community 56 - "Prisma Next — Contract Authoring"
 Cohesion: 0.09
 Nodes (22): Checklist, Common Pitfalls, Diagnostic codes you route on, Key Concepts, Prisma Next — Contract Authoring, Reference, What Prisma Next doesn't do yet, When Not to Use (+14 more)
 
 ### Community 57 - "Prisma Next — Quickstart (Adoption)"
-Cohesion: 0.10
+Cohesion: 0.09
 Nodes (21): Anti-patterns on this path, Canonical on-disk layout, Checklist, Commands you'll use day-to-day, Common Pitfalls, Concept — what to communicate first, Decision — PSL vs TypeScript authoring, Key Concepts (+13 more)
 
 ### Community 58 - ".agents/skills/prisma-8/upgrading/app/upgrades/0.16-to-0.17/strip-sha256-hash-prefixes.ts"
@@ -584,12 +596,12 @@ Cohesion: 0.09
 Nodes (22): Checklist, Common Pitfalls, Diagnostic codes you route on, Key Concepts, Prisma Next — Contract Authoring, Reference, What Prisma Next doesn't do yet, When Not to Use (+14 more)
 
 ### Community 63 - "Prisma Next — Migration Review (Deployment + Concurrency)"
-Cohesion: 0.09
+Cohesion: 0.10
 Nodes (21): Checklist, Common Pitfalls, Concept — concurrent migrations on the same branch point, Concept — ref-mismatch on CI / deploy, Destination, Diagnostic codes, Graph-tree output, Key Concepts — the navigation model (+13 more)
 
 ### Community 64 - "Prisma Next — Quickstart (Adoption)"
-Cohesion: 0.14
-Nodes (14): Canonical on-disk layout, Checklist, Commands you'll use day-to-day, Common Pitfalls, Decision — PSL vs TypeScript authoring, Key Concepts, Prisma Next — Quickstart (Adoption), Reference Files (+6 more)
+Cohesion: 0.09
+Nodes (21): Anti-patterns on this path, Canonical on-disk layout, Checklist, Commands you'll use day-to-day, Common Pitfalls, Concept — what to communicate first, Decision — PSL vs TypeScript authoring, Key Concepts (+13 more)
 
 ### Community 65 - "api/.agents/skills/prisma-8/upgrading/app/upgrades/0.16-to-0.17/strip-sha256-hash-prefixes.ts"
 Cohesion: 0.15
@@ -635,9 +647,9 @@ Nodes (19): Anatomy of a service, Builds are yours, Databases, Deploy config, De
 Cohesion: 0.10
 Nodes (19): Base Color Presets, Best Practices, Color Customization, Color Format, Component Customization, CSS Variable System, Customize Styles, Customize Variants (+11 more)
 
-### Community 76 - "_style_is_dark_primary"
-Cohesion: 0.21
-Nodes (7): _query_wants_dark(), True when a styles.csv row describes itself as dark-first., True when the query explicitly asks for a dark theme., Resolve the mode the rest of the output has to agree with., _resolve_color_mode(), _style_is_dark_primary(), TestModeResolution
+### Community 76 - "test_design_system_mode.py"
+Cohesion: 0.15
+Nodes (10): _query_wants_dark(), True when a styles.csv row describes itself as dark-first., True when the query explicitly asks for a dark theme., Resolve the mode the rest of the output has to agree with., _resolve_color_mode(), _style_is_dark_primary(), Regression tests for color-mode coherence in design_system.py (issue #428).…, TestModeResolution (+2 more)
 
 ### Community 77 - "api/.agents/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-domain-namespaced-contracts.ts"
 Cohesion: 0.16
@@ -859,9 +871,9 @@ Nodes (14): AIDA (Attention-Interest-Desire-Action), Before-After-Bridge, Contra
 Cohesion: 0.23
 Nodes (3): detect_domain(), Auto-detect the most relevant domain from query. Matches are weighted by…, TestDomainDetection
 
-### Community 133 - "test_design_system_mode.py"
-Cohesion: 0.11
-Nodes (15): _contrast_ratio(), _derive_dark_palette(), _palette_is_dark(), WCAG relative luminance of a #RRGGBB string, or None if unparseable., True when a colors.csv row's Background is a dark surface., WCAG contrast ratio for two hex colors, or None if either is invalid., Keep product brand tokens while deriving accessible dark surfaces., Pick the highest-ranked palette matching the resolved mode. Only the dark case… (+7 more)
+### Community 133 - "_palette_is_dark"
+Cohesion: 0.18
+Nodes (7): _palette_is_dark(), WCAG relative luminance of a #RRGGBB string, or None if unparseable., True when a colors.csv row's Background is a dark surface., _relative_luminance(), The exact reproduction from issue #428., TestEndToEndCoherence, TestLuminance
 
 ### Community 134 - "Prisma Next — Supabase"
 Cohesion: 0.13
@@ -904,8 +916,8 @@ Cohesion: 0.14
 Nodes (13): Asking for help when the envelope doesn't route, Checklist, Common Pitfalls, How to ask for the full envelope, Key Concepts, Prisma Next — Debug, Routing — script teardown and closed client, Routing — symptom and code → next move (+5 more)
 
 ### Community 144 - "Prisma Next — Migration Review (Deployment + Concurrency)"
-Cohesion: 0.09
-Nodes (21): Checklist, Common Pitfalls, Concept — concurrent migrations on the same branch point, Concept — ref-mismatch on CI / deploy, Destination, Diagnostic codes, Graph-tree output, Key Concepts — the navigation model (+13 more)
+Cohesion: 0.14
+Nodes (14): Checklist, Common Pitfalls, Concept — concurrent migrations on the same branch point, Concept — ref-mismatch on CI / deploy, Prisma Next — Migration Review (Deployment + Concurrency), Reference Files, What Prisma Next doesn't do yet, When Not to Use (+6 more)
 
 ### Community 145 - "Prisma Next — Queries (Postgres)"
 Cohesion: 0.14
@@ -919,9 +931,9 @@ Nodes (13): Card Styles, Component Variants, CSS Structures, Feature Grid (3 col
 Cohesion: 0.16
 Nodes (10): main(), Tailwind CSS Configuration Generator Generate tailwind.config.js/ts with custom…, Tests for tailwind_config_gen.py, Reduce a generated TS/JS config to a bare assignable object so it can be handed…, Regression guard for the missing-comma bug between the ``theme`` block and…, The property preceding ``plugins`` must end with a comma (pure-Python check, so…, The emitted config parses as valid JS via ``node --check``., _strip_to_object() (+2 more)
 
-### Community 148 - "generate_design_system"
-Cohesion: 0.22
-Nodes (6): generate_design_system(), Main entry point for design system generation. Args: query: Search query (e.g.,…, format_output(), UI/UX Pro Max Search - BM25 search engine for UI/UX style guides Usage: python…, Format results for Claude consumption (token-optimized), TestPersistence
+### Community 148 - "topic.tsx"
+Cohesion: 0.17
+Nodes (11): api(), Material, saveContent(), Topic, ContentError(), ContentForm(), Props, clientAction() (+3 more)
 
 ### Community 149 - "Prisma Next — Debug"
 Cohesion: 0.14
@@ -955,9 +967,9 @@ Nodes (12): 0.13 → 0.14 — Extension-author upgrade instructions, `contract-m
 Cohesion: 0.12
 Nodes (16): AggregateTypes, CodecTypes, Contract, ContractBase, DefaultLiteralValue, ExecutionHash, FieldInputTypes, FieldOutputTypes (+8 more)
 
-### Community 157 - "parse_decision_rules"
-Cohesion: 0.19
-Nodes (8): apply_decision_rules(), _object_without_duplicates(), parse_decision_rules(), Return deterministic mutations and an audit trail; never execute data., Closed, non-executable grammar for design-system decision rules., Parse the canonical condition -> action-array representation., _validate_action(), _check_reasoning_contract()
+### Community 157 - "test_data_contracts.py"
+Cohesion: 0.15
+Nodes (12): apply_decision_rules(), _object_without_duplicates(), parse_decision_rules(), Return deterministic mutations and an audit trail; never execute data., Closed, non-executable grammar for design-system decision rules., Parse the canonical condition -> action-array representation., _validate_action(), Cross-file semantic contracts for curated design data. (+4 more)
 
 ### Community 158 - "0.13 → 0.14 — Extension-author upgrade instructions"
 Cohesion: 0.15
@@ -1152,8 +1164,8 @@ Cohesion: 0.29
 Nodes (6): Animation Classes, Background Images, Base Structure, Chart.js Integration, CSS Variables Reference, HTML Slide Template
 
 ### Community 206 - ".generate"
-Cohesion: 0.16
-Nodes (8): _filter_anti_patterns_for_mode(), Drop "avoid dark mode" advice once dark mode is the resolved answer., Execute searches across multiple domains., Extract results list from search result dict., Generate complete design system recommendation. variance/motion/density are…, Bucket a 1-10 dial value into its tier config. Returns None if value is None., _resolve_dial(), TestAntiPatternGating
+Cohesion: 0.11
+Nodes (11): _filter_anti_patterns_for_mode(), Drop "avoid dark mode" advice once dark mode is the resolved answer., Execute searches across multiple domains., Find matching reasoning rule for a category., Apply reasoning rules to search results., Select best matching result based on priority keywords., Extract results list from search result dict., Generate complete design system recommendation. variance/motion/density are… (+3 more)
 
 ### Community 207 - ".agents/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/migrate-contract-testing-imports.ts"
 Cohesion: 0.29
@@ -1279,9 +1291,9 @@ Nodes (4): padding-y, padding-y, $type, $value
 Cohesion: 0.67
 Nodes (4): xl, xl, $type, $value
 
-### Community 238 - "Workflow — First-touch orientation"
-Cohesion: 0.29
-Nodes (7): Anti-patterns on this path, Concept — what to communicate first, Step 1 — Read the project, name the contract, Step 2 — Get the user's app connected and round-tripping, Step 3 — Round-trip a row, Step 4 — Hand off to the next move, Workflow — First-touch orientation
+### Community 238 - "Genshu — Executive MVP PRD"
+Cohesion: 0.11
+Nodes (18): 10\. Open Decisions, 11\. Development Guidance, 1\. Product Overview, 2\. MVP Scope, 3\. Core User Flows, 4\. Functional Requirements, 5\. Quality and Operational Requirements, 6\. Content and Launch Readiness (+10 more)
 
 ### Community 239 - "none"
 Cohesion: 0.67
@@ -1411,25 +1423,65 @@ Nodes (3): $type, $value, 3
 Cohesion: 0.67
 Nodes (3): $type, $value, 8
 
+### Community 322 - "_select_palette_for_mode"
+Cohesion: 0.22
+Nodes (7): _contrast_ratio(), _derive_dark_palette(), WCAG contrast ratio for two hex colors, or None if either is invalid., Keep product brand tokens while deriving accessible dark surfaces., Pick the highest-ranked palette matching the resolved mode. Only the dark case…, _select_palette_for_mode(), TestPaletteSelection
+
+### Community 323 - "content.ts"
+Cohesion: 0.31
+Nodes (8): app, content, contentError(), fields(), id(), invalid(), cors, express
+
+### Community 324 - "_normalize"
+Cohesion: 0.25
+Nodes (9): _exact_match_diagnostic(), _legacy_successor_guidance(), _normalize(), Apply longest-first synonym substitution at token boundaries., Whether a stack query explicitly targets an older framework generation., Choose one coherent applicability generation for stack retrieval., Prefer the explicit successor row for a brand-new app on legacy-only stacks., _stack_query_requests_legacy() (+1 more)
+
+### Community 325 - "devDependencies"
+Cohesion: 0.22
+Nodes (9): devDependencies, @react-router/dev, tailwindcss, @tailwindcss/vite, @types/node, @types/react, @types/react-dom, typescript (+1 more)
+
+### Community 326 - "Key Concepts — the navigation model"
+Cohesion: 0.29
+Nodes (7): Destination, Diagnostic codes, Graph-tree output, Key Concepts — the navigation model, Origin, Plan- and apply-time diagnostics, The migration graph
+
+### Community 327 - "devDependencies"
+Cohesion: 0.29
+Nodes (7): devDependencies, prisma, @prisma/cli-engine, @types/cors, @types/express, @types/node, typescript
+
+### Community 328 - "dependencies"
+Cohesion: 0.29
+Nodes (7): dependencies, isbot, react, react-dom, react-router, @react-router/node, @react-router/serve
+
+### Community 330 - "dependencies"
+Cohesion: 0.40
+Nodes (5): dependencies, cors, dotenv, express, @prisma/orm-postgres
+
+### Community 331 - "scripts"
+Cohesion: 0.40
+Nodes (5): scripts, contract:emit, start, test, typecheck
+
+### Community 332 - "scripts"
+Cohesion: 0.40
+Nodes (5): scripts, build, dev, start, typecheck
+
 ## Knowledge Gaps
-- **2215 isolated node(s):** `fs`, `path`, `fs`, `path`, `fs` (+2210 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 2712 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **41 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **2232 isolated node(s):** `fs`, `path`, `fs`, `path`, `fs` (+2227 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 2740 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **43 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `ShadcnInstaller` connect `ShadcnInstaller` to `.check_shadcn_config`, `.test_get_installed_components_empty`, `.__init__`, `patch`, `.test_add_components_no_config`, `.test_add_components_dry_run`, `.test_list_installed_no_config`, `.test_init_dry_run`, `.test_check_shadcn_config_not_exists`, `TestShadcnInstaller`, `.test_get_installed_components_with_files`, `.test_add_components_no_components`?**
   _High betweenness centrality (0.005) - this node is a cross-community bridge._
-- **Why does `DesignSystemGenerator` connect `DesignSystemGenerator` to `BM25`, `test_design_system_mode.py`, `.generate`, `design_system.py`, `generate_design_system`, `test_data_contracts.py`?**
+- **Why does `DesignSystemGenerator` connect `DesignSystemGenerator` to `_select_palette_for_mode`, `BM25`, `_palette_is_dark`, `test_design_system_mode.py`, `.generate`, `design_system.py`, `test_data_contracts.py`?**
   _High betweenness centrality (0.004) - this node is a cross-community bridge._
-- **Why does `search()` connect `search` to `detect_domain`, `scripts/core.py`, `BM25`, `validate_data.py`, `_row_identities`, `.generate`, `design_system.py`, `test_text_layout_resilience.py`, `generate_design_system`, `search_stack`?**
+- **Why does `search()` connect `search` to `detect_domain`, `scripts/core.py`, `_normalize`, `BM25`, `validate_data.py`, `_row_identities`, `test_design_system_mode.py`, `.generate`, `design_system.py`, `test_text_layout_resilience.py`?**
   _High betweenness centrality (0.004) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `TailwindConfigGenerator` (e.g. with `TestGeneratedConfigIsValidJs` and `TestTailwindConfigGenerator`) actually correct?**
   _`TailwindConfigGenerator` has 2 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 3 inferred relationships involving `DesignSystemGenerator` (e.g. with `TestReasoningMatch` and `TestReasoningContract`) actually correct?**
   _`DesignSystemGenerator` has 3 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `fs`, `path`, `fs` to the rest of the system?**
-  _2215 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _2232 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `api/package.json` be split into smaller, more focused modules?**
-  _Cohesion score 0.05405405405405406 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.1111111111111111 - nodes in this community are weakly interconnected._

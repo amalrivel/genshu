@@ -16,6 +16,11 @@ Run `pnpm run dev` from the workspace root. The API uses `apps/api/.env` for
 | POST | /materials | `{ "title": "Stop", "content": "# Stop", "topicId": 1 }` |
 | PUT | /materials/:id | Required title/content; optional topicId to move material |
 | DELETE | /materials/:id | Deletes only the specified material |
+| GET | /questions | Questions sorted by Japanese text, then ID; optional `?topicId=1` |
+| GET | /questions/:id | One question |
+| POST | /questions | `{ "japaneseText": "…", "indonesianTranslation": "…", "furigana": "…", "correctAnswer": true, "japaneseExplanation": "…", "indonesianExplanation": "…", "topicId": 1 }` |
+| PUT | /questions/:id | Required question fields; optional topicId to move the question |
+| DELETE | /questions/:id | Deletes only the specified question |
 
 Creates return 201, reads/updates 200, and deletes 204. Errors return
 `{ "error": "message" }`: invalid input 400, missing record 404, foreign-key
@@ -34,5 +39,5 @@ environment until access control is implemented.
 - `pnpm --filter web typecheck`
 - `pnpm --filter web build`
 
-The schema/contract is unchanged by this milestone. Existing migrations must be
-applied to the development database before using the API.
+The Question migration must be applied to the development database before using
+the new endpoints.

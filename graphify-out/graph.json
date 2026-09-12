@@ -238,6 +238,19 @@
       "source_location": "L2"
     },
     {
+      "id": "apps_web_app_content_api_question",
+      "label": "Question",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "topic.tsx",
+      "file_type": "code",
+      "norm_label": "question",
+      "source_file": "apps/web/app/content-api.ts",
+      "source_location": "L3"
+    },
+    {
       "id": "apps_web_app_content_api_topic",
       "label": "Topic",
       "_callable": true,
@@ -470,19 +483,6 @@
       "norm_label": "typemaps",
       "source_file": "apps/api/migrations/snapshots/4afc7b0d7d11f178e53f9cc94ef6d1ecd6dba10716d25ddd6e90e690b02d14ea/contract.d.ts",
       "source_location": "L286"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_teststyleidentitycontract",
-      "label": "TestStyleIdentityContract",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 157,
-      "community_name": "test_data_contracts.py",
-      "file_type": "code",
-      "norm_label": "teststyleidentitycontract",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
-      "source_location": "L41"
     },
     {
       "id": "agents_skills_prisma_8_upgrading_app_upgrades_0_8_to_0_9_strip_inline_contracts_result",
@@ -836,19 +836,6 @@
       "source_location": "L334"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testantipatterngating",
-      "label": "TestAntiPatternGating",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 206,
-      "community_name": ".generate",
-      "file_type": "code",
-      "norm_label": "testantipatterngating",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
-      "source_location": "L120"
-    },
-    {
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_designsystemgenerator",
       "label": "DesignSystemGenerator",
       "_callable": true,
@@ -914,6 +901,19 @@
       "source_location": "L24"
     },
     {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_core_testdiagnosticscontracts",
+      "label": "TestDiagnosticsContracts",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "search_stack",
+      "file_type": "code",
+      "norm_label": "testdiagnosticscontracts",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_core.py",
+      "source_location": "L326"
+    },
+    {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_native_desktop_stack_freshness_testnativedesktopstackfreshness",
       "label": "TestNativeDesktopStackFreshness",
       "_callable": true,
@@ -976,7 +976,7 @@
       "file_type": "code",
       "norm_label": "contract",
       "source_file": "apps/api/src/prisma/contract.d.ts",
-      "source_location": "L669"
+      "source_location": "L889"
     },
     {
       "id": "apps_api_src_prisma_contract_d_contractbase",
@@ -989,7 +989,7 @@
       "file_type": "code",
       "norm_label": "contractbase",
       "source_file": "apps/api/src/prisma/contract.d.ts",
-      "source_location": "L344"
+      "source_location": "L392"
     },
     {
       "id": "apps_api_src_prisma_contract_d_defaultliteralvalue",
@@ -1028,7 +1028,7 @@
       "file_type": "code",
       "norm_label": "fieldinputtypes",
       "source_file": "apps/api/src/prisma/contract.d.ts",
-      "source_location": "L265"
+      "source_location": "L277"
     },
     {
       "id": "apps_api_src_prisma_contract_d_fieldoutputtypes",
@@ -1067,7 +1067,7 @@
       "file_type": "code",
       "norm_label": "namespaces",
       "source_file": "apps/api/src/prisma/contract.d.ts",
-      "source_location": "L671"
+      "source_location": "L891"
     },
     {
       "id": "apps_api_src_prisma_contract_d_profilehash",
@@ -1106,7 +1106,7 @@
       "file_type": "code",
       "norm_label": "storagecolumninputtypes",
       "source_file": "apps/api/src/prisma/contract.d.ts",
-      "source_location": "L311"
+      "source_location": "L347"
     },
     {
       "id": "apps_api_src_prisma_contract_d_storagecolumntypes",
@@ -1119,7 +1119,7 @@
       "file_type": "code",
       "norm_label": "storagecolumntypes",
       "source_file": "apps/api/src/prisma/contract.d.ts",
-      "source_location": "L288"
+      "source_location": "L312"
     },
     {
       "id": "apps_api_src_prisma_contract_d_storagehash",
@@ -1145,7 +1145,7 @@
       "file_type": "code",
       "norm_label": "typemaps",
       "source_file": "apps/api/src/prisma/contract.d.ts",
-      "source_location": "L334"
+      "source_location": "L382"
     },
     {
       "id": "apps_api_migrations_app_20260907t2031_add_topics_materials_migration_m",
@@ -1187,17 +1187,238 @@
       "source_location": "L94"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testlandingandstackcontract",
-      "label": "TestLandingAndStackContract",
+      "id": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_aggregatetypes",
+      "label": "AggregateTypes",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 326,
+      "community_name": "6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "file_type": "code",
+      "norm_label": "aggregatetypes",
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L45"
+    },
+    {
+      "id": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_codectypes",
+      "label": "CodecTypes",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 326,
+      "community_name": "6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "file_type": "code",
+      "norm_label": "codectypes",
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L42"
+    },
+    {
+      "id": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_contract",
+      "label": "Contract",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 326,
+      "community_name": "6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "file_type": "code",
+      "norm_label": "contract",
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L889"
+    },
+    {
+      "id": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_contractbase",
+      "label": "ContractBase",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 326,
+      "community_name": "6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "file_type": "code",
+      "norm_label": "contractbase",
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L392"
+    },
+    {
+      "id": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_defaultliteralvalue",
+      "label": "DefaultLiteralValue",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 326,
+      "community_name": "6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "file_type": "code",
+      "norm_label": "defaultliteralvalue",
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L236"
+    },
+    {
+      "id": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_executionhash",
+      "label": "ExecutionHash",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 326,
+      "community_name": "6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "file_type": "code",
+      "norm_label": "executionhash",
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L37"
+    },
+    {
+      "id": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_fieldinputtypes",
+      "label": "FieldInputTypes",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 326,
+      "community_name": "6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "file_type": "code",
+      "norm_label": "fieldinputtypes",
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L277"
+    },
+    {
+      "id": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_fieldoutputtypes",
+      "label": "FieldOutputTypes",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 326,
+      "community_name": "6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "file_type": "code",
+      "norm_label": "fieldoutputtypes",
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L242"
+    },
+    {
+      "id": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_lanecodectypes",
+      "label": "LaneCodecTypes",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 326,
+      "community_name": "6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "file_type": "code",
+      "norm_label": "lanecodectypes",
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L43"
+    },
+    {
+      "id": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_namespaces",
+      "label": "Namespaces",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 326,
+      "community_name": "6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "file_type": "code",
+      "norm_label": "namespaces",
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L891"
+    },
+    {
+      "id": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_profilehash",
+      "label": "ProfileHash",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 326,
+      "community_name": "6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "file_type": "code",
+      "norm_label": "profilehash",
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L39"
+    },
+    {
+      "id": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_queryoperationtypes",
+      "label": "QueryOperationTypes",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 326,
+      "community_name": "6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "file_type": "code",
+      "norm_label": "queryoperationtypes",
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L44"
+    },
+    {
+      "id": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_storagecolumninputtypes",
+      "label": "StorageColumnInputTypes",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 326,
+      "community_name": "6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "file_type": "code",
+      "norm_label": "storagecolumninputtypes",
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L347"
+    },
+    {
+      "id": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_storagecolumntypes",
+      "label": "StorageColumnTypes",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 326,
+      "community_name": "6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "file_type": "code",
+      "norm_label": "storagecolumntypes",
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L312"
+    },
+    {
+      "id": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_storagehash",
+      "label": "StorageHash",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 326,
+      "community_name": "6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "file_type": "code",
+      "norm_label": "storagehash",
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L35"
+    },
+    {
+      "id": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_typemaps",
+      "label": "TypeMaps",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 326,
+      "community_name": "6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "file_type": "code",
+      "norm_label": "typemaps",
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L382"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_core_testpersistence",
+      "label": "TestPersistence",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 329,
-      "community_name": "TestLandingAndStackContract",
+      "community_name": "test_core.py",
       "file_type": "code",
-      "norm_label": "testlandingandstackcontract",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
-      "source_location": "L261"
+      "norm_label": "testpersistence",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_core.py",
+      "source_location": "L252"
+    },
+    {
+      "id": "apps_api_migrations_app_20260912t0920_add_questions_migration_m",
+      "label": "M",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 335,
+      "community_name": "M",
+      "file_type": "code",
+      "norm_label": "m",
+      "source_file": "apps/api/migrations/app/20260912T0920_add_questions/migration.ts",
+      "source_location": "L8"
     },
     {
       "id": "agents_skills_design_system_scripts_html_token_validator_validationresult",
@@ -1239,30 +1460,43 @@
       "source_location": "L37"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_core_testpersistence",
-      "label": "TestPersistence",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "design_system.py",
-      "file_type": "code",
-      "norm_label": "testpersistence",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_core.py",
-      "source_location": "L252"
-    },
-    {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testgeneratedcatalogcontract",
       "label": "TestGeneratedCatalogContract",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 55,
-      "community_name": "TestGeneratedCatalogContract",
+      "community_name": "test_data_contracts.py",
       "file_type": "code",
       "norm_label": "testgeneratedcatalogcontract",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
       "source_location": "L355"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testlandingandstackcontract",
+      "label": "TestLandingAndStackContract",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "test_data_contracts.py",
+      "file_type": "code",
+      "norm_label": "testlandingandstackcontract",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "source_location": "L261"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_teststyleidentitycontract",
+      "label": "TestStyleIdentityContract",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "test_data_contracts.py",
+      "file_type": "code",
+      "norm_label": "teststyleidentitycontract",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "source_location": "L41"
     },
     {
       "id": "agents_skills_prisma_8_upgrading_app_upgrades_0_16_to_0_17_strip_sha256_hash_prefixes_result",
@@ -1458,19 +1692,6 @@
       "norm_label": "testbm25corebehavior",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_core.py",
       "source_location": "L65"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_core_testdiagnosticscontracts",
-      "label": "TestDiagnosticsContracts",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 69,
-      "community_name": "BM25",
-      "file_type": "code",
-      "norm_label": "testdiagnosticscontracts",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_core.py",
-      "source_location": "L326"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_core_testtokenizer",
@@ -1692,6 +1913,19 @@
       "norm_label": "untaggedcodectriple",
       "source_file": ".agents/skills/prisma-8/upgrading/extension/upgrades/0.9-to-0.10/stamp-storage-types-kind.ts",
       "source_location": "L128"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testantipatterngating",
+      "label": "TestAntiPatternGating",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "test_design_system_mode.py",
+      "file_type": "code",
+      "norm_label": "testantipatterngating",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+      "source_location": "L120"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testmoderesolution",
@@ -4348,7 +4582,7 @@
       "file_type": "code",
       "norm_label": "api()",
       "source_file": "apps/web/app/content-api.ts",
-      "source_location": "L6"
+      "source_location": "L11"
     },
     {
       "id": "apps_web_app_content_api_savecontent",
@@ -4360,7 +4594,7 @@
       "file_type": "code",
       "norm_label": "savecontent()",
       "source_file": "apps/web/app/content-api.ts",
-      "source_location": "L15"
+      "source_location": "L20"
     },
     {
       "id": "apps_web_app_content_form_contenterror",
@@ -4385,6 +4619,18 @@
       "norm_label": "contentform()",
       "source_file": "apps/web/app/content-form.tsx",
       "source_location": "L10"
+    },
+    {
+      "id": "apps_web_app_content_form_questionform",
+      "label": "QuestionForm()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "topic.tsx",
+      "file_type": "code",
+      "norm_label": "questionform()",
+      "source_file": "apps/web/app/content-form.tsx",
+      "source_location": "L55"
     },
     {
       "id": "apps_web_app_routes_topic_clientaction",
@@ -4420,7 +4666,7 @@
       "file_type": "code",
       "norm_label": "hydratefallback()",
       "source_file": "apps/web/app/routes/topic.tsx",
-      "source_location": "L17"
+      "source_location": "L18"
     },
     {
       "id": "apps_web_app_routes_topic_meta",
@@ -4444,7 +4690,7 @@
       "file_type": "code",
       "norm_label": "topicpage()",
       "source_file": "apps/web/app/routes/topic.tsx",
-      "source_location": "L19"
+      "source_location": "L20"
     },
     {
       "id": "apps_web_app_routes_topics_clientaction",
@@ -4512,7 +4758,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 157,
-      "community_name": "test_data_contracts.py",
+      "community_name": "parse_decision_rules",
       "file_type": "code",
       "norm_label": "apply_decision_rules()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/reasoning_contract.py",
@@ -4524,7 +4770,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 157,
-      "community_name": "test_data_contracts.py",
+      "community_name": "parse_decision_rules",
       "file_type": "code",
       "norm_label": "_object_without_duplicates()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/reasoning_contract.py",
@@ -4536,7 +4782,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 157,
-      "community_name": "test_data_contracts.py",
+      "community_name": "parse_decision_rules",
       "file_type": "code",
       "norm_label": "parse_decision_rules()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/reasoning_contract.py",
@@ -4548,35 +4794,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 157,
-      "community_name": "test_data_contracts.py",
+      "community_name": "parse_decision_rules",
       "file_type": "code",
       "norm_label": "_validate_action()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/reasoning_contract.py",
       "source_location": "L87"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_split_values",
-      "label": "split_values()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 157,
-      "community_name": "test_data_contracts.py",
-      "file_type": "code",
-      "norm_label": "split_values()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
-      "source_location": "L30"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_style_identities",
-      "label": "style_identities()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 157,
-      "community_name": "test_data_contracts.py",
-      "file_type": "code",
-      "norm_label": "style_identities()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
-      "source_location": "L34"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testreasoningcontract_test_decision_rules_use_closed_array_grammar",
@@ -4584,23 +4806,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 157,
-      "community_name": "test_data_contracts.py",
+      "community_name": "parse_decision_rules",
       "file_type": "code",
       "norm_label": ".test_decision_rules_use_closed_array_grammar()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
       "source_location": "L101"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testreasoningcontract_test_duplicate_semantic_reasoning_labels_fail_validation",
-      "label": ".test_duplicate_semantic_reasoning_labels_fail_validation()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 157,
-      "community_name": "test_data_contracts.py",
-      "file_type": "code",
-      "norm_label": ".test_duplicate_semantic_reasoning_labels_fail_validation()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
-      "source_location": "L218"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testreasoningcontract_test_duplicate_unknown_keys_and_unknown_actions_fail_closed",
@@ -4608,7 +4818,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 157,
-      "community_name": "test_data_contracts.py",
+      "community_name": "parse_decision_rules",
       "file_type": "code",
       "norm_label": ".test_duplicate_unknown_keys_and_unknown_actions_fail_closed()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
@@ -4620,47 +4830,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 157,
-      "community_name": "test_data_contracts.py",
+      "community_name": "parse_decision_rules",
       "file_type": "code",
       "norm_label": ".test_must_have_and_explicit_signals_are_applied_and_reported()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
       "source_location": "L119"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_teststyleidentitycontract_test_every_product_and_reasoning_style_reference_resolves",
-      "label": ".test_every_product_and_reasoning_style_reference_resolves()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 157,
-      "community_name": "test_data_contracts.py",
-      "file_type": "code",
-      "norm_label": ".test_every_product_and_reasoning_style_reference_resolves()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
-      "source_location": "L66"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_teststyleidentitycontract_test_ids_aliases_status_and_parents_are_unambiguous",
-      "label": ".test_ids_aliases_status_and_parents_are_unambiguous()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 157,
-      "community_name": "test_data_contracts.py",
-      "file_type": "code",
-      "norm_label": ".test_ids_aliases_status_and_parents_are_unambiguous()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
-      "source_location": "L45"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_validate_data_check_reasoning_contract",
-      "label": "_check_reasoning_contract()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 157,
-      "community_name": "test_data_contracts.py",
-      "file_type": "code",
-      "norm_label": "_check_reasoning_contract()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/validate_data.py",
-      "source_location": "L331"
     },
     {
       "id": "agents_skills_design_system_scripts_validate_tokens_formatreport",
@@ -6079,18 +6253,6 @@
       "source_location": "L408"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_filter_anti_patterns_for_mode",
-      "label": "_filter_anti_patterns_for_mode()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 206,
-      "community_name": ".generate",
-      "file_type": "code",
-      "norm_label": "_filter_anti_patterns_for_mode()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
-      "source_location": "L246"
-    },
-    {
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_resolve_dial",
       "label": "_resolve_dial()",
       "_callable": true,
@@ -6101,54 +6263,6 @@
       "norm_label": "_resolve_dial()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
       "source_location": "L90"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testantipatterngating_test_dark_clause_dropped_others_kept",
-      "label": ".test_dark_clause_dropped_others_kept()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 206,
-      "community_name": ".generate",
-      "file_type": "code",
-      "norm_label": ".test_dark_clause_dropped_others_kept()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
-      "source_location": "L121"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testantipatterngating_test_empty_input",
-      "label": ".test_empty_input()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 206,
-      "community_name": ".generate",
-      "file_type": "code",
-      "norm_label": ".test_empty_input()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
-      "source_location": "L134"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testantipatterngating_test_light_mode_is_a_no_op",
-      "label": ".test_light_mode_is_a_no_op()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 206,
-      "community_name": ".generate",
-      "file_type": "code",
-      "norm_label": ".test_light_mode_is_a_no_op()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
-      "source_location": "L126"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testantipatterngating_test_unrelated_anti_patterns_survive_dark_mode",
-      "label": ".test_unrelated_anti_patterns_survive_dark_mode()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 206,
-      "community_name": ".generate",
-      "file_type": "code",
-      "norm_label": ".test_unrelated_anti_patterns_survive_dark_mode()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
-      "source_location": "L130"
     },
     {
       "id": "agents_skills_prisma_8_upgrading_extension_upgrades_0_11_to_0_12_migrate_contract_testing_imports_findsourcefiles",
@@ -6295,18 +6409,6 @@
       "source_location": "L319"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_read_rows",
-      "label": "read_rows()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 24,
-      "community_name": "DesignSystemGenerator",
-      "file_type": "code",
-      "norm_label": "read_rows()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
-      "source_location": "L25"
-    },
-    {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testreasoningcontract_test_canonical_style_priority_is_not_limited_to_bm25_top_three",
       "label": ".test_canonical_style_priority_is_not_limited_to_bm25_top_three()",
       "_callable": true,
@@ -6329,6 +6431,18 @@
       "norm_label": ".test_constraints_reach_domain_queries()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
       "source_location": "L187"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testreasoningcontract_test_duplicate_semantic_reasoning_labels_fail_validation",
+      "label": ".test_duplicate_semantic_reasoning_labels_fail_validation()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "DesignSystemGenerator",
+      "file_type": "code",
+      "norm_label": ".test_duplicate_semantic_reasoning_labels_fail_validation()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "source_location": "L218"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testreasoningcontract_test_every_exact_product_label_resolves_to_itself",
@@ -6367,30 +6481,6 @@
       "source_location": "L133"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testreasoningcontract_test_known_product_sets_match_exactly",
-      "label": ".test_known_product_sets_match_exactly()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 24,
-      "community_name": "DesignSystemGenerator",
-      "file_type": "code",
-      "norm_label": ".test_known_product_sets_match_exactly()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
-      "source_location": "L88"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testreasoningcontract_test_reasoning_patterns_reference_landing_identities",
-      "label": ".test_reasoning_patterns_reference_landing_identities()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 24,
-      "community_name": "DesignSystemGenerator",
-      "file_type": "code",
-      "norm_label": ".test_reasoning_patterns_reference_landing_identities()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
-      "source_location": "L142"
-    },
-    {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testreasoningcontract_test_representative_new_products_generate_traceable_sources",
       "label": ".test_representative_new_products_generate_traceable_sources()",
       "_callable": true,
@@ -6413,18 +6503,6 @@
       "norm_label": ".test_style_aliases_have_one_exact_owner()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
       "source_location": "L248"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_teststyleidentitycontract_setup",
-      "label": ".setUp()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 24,
-      "community_name": "DesignSystemGenerator",
-      "file_type": "code",
-      "norm_label": ".setup()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
-      "source_location": "L42"
     },
     {
       "id": "agents_skills_brand_scripts_tests_test_sync_brand_to_tokens_test_sync_parses_bundled_starter_template",
@@ -6655,6 +6733,30 @@
       "source_location": "L133"
     },
     {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_style_taxonomy_read_rows",
+      "label": "read_rows()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "search",
+      "file_type": "code",
+      "norm_label": "read_rows()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_style_taxonomy.py",
+      "source_location": "L19"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_style_taxonomy_teststyletaxonomy_setupclass",
+      "label": ".setUpClass()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "search",
+      "file_type": "code",
+      "norm_label": ".setupclass()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_style_taxonomy.py",
+      "source_location": "L26"
+    },
+    {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_style_taxonomy_teststyletaxonomy_test_curated_state_distribution_is_explicit",
       "label": ".test_curated_state_distribution_is_explicit()",
       "_callable": true,
@@ -6859,6 +6961,18 @@
       "source_location": "L19"
     },
     {
+      "id": "agents_skills_ui_ux_pro_max_scripts_core_exact_stack_identifier",
+      "label": "_exact_stack_identifier()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "search_stack",
+      "file_type": "code",
+      "norm_label": "_exact_stack_identifier()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/core.py",
+      "source_location": "L925"
+    },
+    {
       "id": "agents_skills_ui_ux_pro_max_scripts_core_search_stack",
       "label": "search_stack()",
       "_callable": true,
@@ -6869,6 +6983,30 @@
       "norm_label": "search_stack()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/core.py",
       "source_location": "L951"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_core_testdiagnosticscontracts_test_diagnostics_opt_in_is_additive_for_domain_search",
+      "label": ".test_diagnostics_opt_in_is_additive_for_domain_search()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "search_stack",
+      "file_type": "code",
+      "norm_label": ".test_diagnostics_opt_in_is_additive_for_domain_search()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_core.py",
+      "source_location": "L327"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_core_testdiagnosticscontracts_test_diagnostics_opt_in_is_additive_for_stack_search",
+      "label": ".test_diagnostics_opt_in_is_additive_for_stack_search()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "search_stack",
+      "file_type": "code",
+      "norm_label": ".test_diagnostics_opt_in_is_additive_for_stack_search()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_core.py",
+      "source_location": "L335"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_core_testsearchdomains_test_every_stack_file_exists_and_is_searchable",
@@ -7432,7 +7570,7 @@
       "file_type": "code",
       "norm_label": "contenterror()",
       "source_file": "apps/api/src/content.ts",
-      "source_location": "L88"
+      "source_location": "L159"
     },
     {
       "id": "apps_api_src_content_fields",
@@ -7469,6 +7607,30 @@
       "norm_label": "invalid()",
       "source_file": "apps/api/src/content.ts",
       "source_location": "L6"
+    },
+    {
+      "id": "apps_api_src_content_questionfields",
+      "label": "questionFields()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 323,
+      "community_name": "content.ts",
+      "file_type": "code",
+      "norm_label": "questionfields()",
+      "source_file": "apps/api/src/content.ts",
+      "source_location": "L41"
+    },
+    {
+      "id": "apps_api_src_content_questiontext",
+      "label": "questionText()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 323,
+      "community_name": "content.ts",
+      "file_type": "code",
+      "norm_label": "questiontext()",
+      "source_file": "apps/api/src/content.ts",
+      "source_location": "L30"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_core_exact_match_diagnostic",
@@ -7531,64 +7693,76 @@
       "source_location": "L888"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testlandingandstackcontract_test_dataset_provenance_scope_binds_real_rows_and_fields",
-      "label": ".test_dataset_provenance_scope_binds_real_rows_and_fields()",
+      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_format_markdown",
+      "label": "format_markdown()",
       "_callable": true,
       "_origin": "ast",
       "community": 329,
-      "community_name": "TestLandingAndStackContract",
+      "community_name": "test_core.py",
       "file_type": "code",
-      "norm_label": ".test_dataset_provenance_scope_binds_real_rows_and_fields()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
-      "source_location": "L328"
+      "norm_label": "format_markdown()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "source_location": "L791"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testlandingandstackcontract_test_landing_sections_use_one_delimiter",
-      "label": ".test_landing_sections_use_one_delimiter()",
+      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_generate_design_system",
+      "label": "generate_design_system()",
       "_callable": true,
       "_origin": "ast",
       "community": 329,
-      "community_name": "TestLandingAndStackContract",
+      "community_name": "test_core.py",
       "file_type": "code",
-      "norm_label": ".test_landing_sections_use_one_delimiter()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
-      "source_location": "L262"
+      "norm_label": "generate_design_system()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "source_location": "L919"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testlandingandstackcontract_test_provenance_rejects_bad_shapes_enums_and_hosts_without_crashing",
-      "label": ".test_provenance_rejects_bad_shapes_enums_and_hosts_without_crashing()",
+      "id": "agents_skills_ui_ux_pro_max_scripts_search_format_output",
+      "label": "format_output()",
       "_callable": true,
       "_origin": "ast",
       "community": 329,
-      "community_name": "TestLandingAndStackContract",
+      "community_name": "test_core.py",
       "file_type": "code",
-      "norm_label": ".test_provenance_rejects_bad_shapes_enums_and_hosts_without_crashing()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
-      "source_location": "L290"
+      "norm_label": "format_output()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/search.py",
+      "source_location": "L44"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testlandingandstackcontract_test_provenance_sidecar_has_stable_shape",
-      "label": ".test_provenance_sidecar_has_stable_shape()",
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_core_testpersistence_test_concurrent_non_force_persist_has_one_writer",
+      "label": ".test_concurrent_non_force_persist_has_one_writer()",
       "_callable": true,
       "_origin": "ast",
       "community": 329,
-      "community_name": "TestLandingAndStackContract",
+      "community_name": "test_core.py",
       "file_type": "code",
-      "norm_label": ".test_provenance_sidecar_has_stable_shape()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
-      "source_location": "L279"
+      "norm_label": ".test_concurrent_non_force_persist_has_one_writer()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_core.py",
+      "source_location": "L253"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testlandingandstackcontract_test_stack_schema_is_additive_and_uniform",
-      "label": ".test_stack_schema_is_additive_and_uniform()",
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_core_testpersistence_test_persist_then_skip_then_force",
+      "label": ".test_persist_then_skip_then_force()",
       "_callable": true,
       "_origin": "ast",
       "community": 329,
-      "community_name": "TestLandingAndStackContract",
+      "community_name": "test_core.py",
       "file_type": "code",
-      "norm_label": ".test_stack_schema_is_additive_and_uniform()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
-      "source_location": "L270"
+      "norm_label": ".test_persist_then_skip_then_force()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_core.py",
+      "source_location": "L271"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_core_testpersistence_test_persist_writes_only_under_output_dir",
+      "label": ".test_persist_writes_only_under_output_dir()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 329,
+      "community_name": "test_core.py",
+      "file_type": "code",
+      "norm_label": ".test_persist_writes_only_under_output_dir()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_core.py",
+      "source_location": "L306"
     },
     {
       "id": "apps_api_src_content_test_request",
@@ -7601,6 +7775,18 @@
       "norm_label": "request()",
       "source_file": "apps/api/src/content.test.ts",
       "source_location": "L6"
+    },
+    {
+      "id": "apps_api_migrations_app_20260912t0920_add_questions_migration_m_operations",
+      "label": ".operations()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 335,
+      "community_name": "M",
+      "file_type": "code",
+      "norm_label": ".operations()",
+      "source_file": "apps/api/migrations/app/20260912T0920_add_questions/migration.ts",
+      "source_location": "L12"
     },
     {
       "id": "agents_skills_design_system_scripts_html_token_validator_get_context",
@@ -7963,18 +8149,6 @@
       "source_location": "L564"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_core_exact_stack_identifier",
-      "label": "_exact_stack_identifier()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 37,
-      "community_name": "scripts/core.py",
-      "file_type": "code",
-      "norm_label": "_exact_stack_identifier()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/core.py",
-      "source_location": "L925"
-    },
-    {
       "id": "agents_skills_ui_ux_pro_max_scripts_core_file_signature",
       "label": "_file_signature()",
       "_callable": true,
@@ -8311,18 +8485,6 @@
       "source_location": "L640"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_format_markdown",
-      "label": "format_markdown()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "design_system.py",
-      "file_type": "code",
-      "norm_label": "format_markdown()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
-      "source_location": "L791"
-    },
-    {
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_format_master_md",
       "label": "format_master_md()",
       "_callable": true,
@@ -8345,18 +8507,6 @@
       "norm_label": "format_page_override_md()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
       "source_location": "L1381"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_generate_design_system",
-      "label": "generate_design_system()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "design_system.py",
-      "file_type": "code",
-      "norm_label": "generate_design_system()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
-      "source_location": "L919"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_generate_intelligent_overrides",
@@ -8431,52 +8581,40 @@
       "source_location": "L972"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_search_format_output",
-      "label": "format_output()",
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_read_rows",
+      "label": "read_rows()",
       "_callable": true,
       "_origin": "ast",
-      "community": 49,
-      "community_name": "design_system.py",
+      "community": 55,
+      "community_name": "test_data_contracts.py",
       "file_type": "code",
-      "norm_label": "format_output()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/search.py",
-      "source_location": "L44"
+      "norm_label": "read_rows()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "source_location": "L25"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_core_testpersistence_test_concurrent_non_force_persist_has_one_writer",
-      "label": ".test_concurrent_non_force_persist_has_one_writer()",
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_split_values",
+      "label": "split_values()",
       "_callable": true,
       "_origin": "ast",
-      "community": 49,
-      "community_name": "design_system.py",
+      "community": 55,
+      "community_name": "test_data_contracts.py",
       "file_type": "code",
-      "norm_label": ".test_concurrent_non_force_persist_has_one_writer()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_core.py",
-      "source_location": "L253"
+      "norm_label": "split_values()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "source_location": "L30"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_core_testpersistence_test_persist_then_skip_then_force",
-      "label": ".test_persist_then_skip_then_force()",
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_style_identities",
+      "label": "style_identities()",
       "_callable": true,
       "_origin": "ast",
-      "community": 49,
-      "community_name": "design_system.py",
+      "community": 55,
+      "community_name": "test_data_contracts.py",
       "file_type": "code",
-      "norm_label": ".test_persist_then_skip_then_force()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_core.py",
-      "source_location": "L271"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_core_testpersistence_test_persist_writes_only_under_output_dir",
-      "label": ".test_persist_writes_only_under_output_dir()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "design_system.py",
-      "file_type": "code",
-      "norm_label": ".test_persist_writes_only_under_output_dir()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_core.py",
-      "source_location": "L306"
+      "norm_label": "style_identities()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "source_location": "L34"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testgeneratedcatalogcontract_load_json",
@@ -8484,7 +8622,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 55,
-      "community_name": "TestGeneratedCatalogContract",
+      "community_name": "test_data_contracts.py",
       "file_type": "code",
       "norm_label": ".load_json()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
@@ -8496,7 +8634,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 55,
-      "community_name": "TestGeneratedCatalogContract",
+      "community_name": "test_data_contracts.py",
       "file_type": "code",
       "norm_label": ".test_canonical_catalogs_and_provenance_are_release_ready()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
@@ -8508,7 +8646,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 55,
-      "community_name": "TestGeneratedCatalogContract",
+      "community_name": "test_data_contracts.py",
       "file_type": "code",
       "norm_label": ".test_curated_icon_and_summary_drift_fail_closed()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
@@ -8520,7 +8658,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 55,
-      "community_name": "TestGeneratedCatalogContract",
+      "community_name": "test_data_contracts.py",
       "file_type": "code",
       "norm_label": ".test_font_license_and_typography_drift_fail_closed()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
@@ -8532,11 +8670,131 @@
       "_callable": true,
       "_origin": "ast",
       "community": 55,
-      "community_name": "TestGeneratedCatalogContract",
+      "community_name": "test_data_contracts.py",
       "file_type": "code",
       "norm_label": ".test_font_source_revision_and_exclusion_policy_fail_closed()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
       "source_location": "L383"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testlandingandstackcontract_test_dataset_provenance_scope_binds_real_rows_and_fields",
+      "label": ".test_dataset_provenance_scope_binds_real_rows_and_fields()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "test_data_contracts.py",
+      "file_type": "code",
+      "norm_label": ".test_dataset_provenance_scope_binds_real_rows_and_fields()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "source_location": "L328"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testlandingandstackcontract_test_landing_sections_use_one_delimiter",
+      "label": ".test_landing_sections_use_one_delimiter()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "test_data_contracts.py",
+      "file_type": "code",
+      "norm_label": ".test_landing_sections_use_one_delimiter()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "source_location": "L262"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testlandingandstackcontract_test_provenance_rejects_bad_shapes_enums_and_hosts_without_crashing",
+      "label": ".test_provenance_rejects_bad_shapes_enums_and_hosts_without_crashing()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "test_data_contracts.py",
+      "file_type": "code",
+      "norm_label": ".test_provenance_rejects_bad_shapes_enums_and_hosts_without_crashing()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "source_location": "L290"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testlandingandstackcontract_test_provenance_sidecar_has_stable_shape",
+      "label": ".test_provenance_sidecar_has_stable_shape()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "test_data_contracts.py",
+      "file_type": "code",
+      "norm_label": ".test_provenance_sidecar_has_stable_shape()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "source_location": "L279"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testlandingandstackcontract_test_stack_schema_is_additive_and_uniform",
+      "label": ".test_stack_schema_is_additive_and_uniform()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "test_data_contracts.py",
+      "file_type": "code",
+      "norm_label": ".test_stack_schema_is_additive_and_uniform()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "source_location": "L270"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testreasoningcontract_test_known_product_sets_match_exactly",
+      "label": ".test_known_product_sets_match_exactly()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "test_data_contracts.py",
+      "file_type": "code",
+      "norm_label": ".test_known_product_sets_match_exactly()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "source_location": "L88"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_testreasoningcontract_test_reasoning_patterns_reference_landing_identities",
+      "label": ".test_reasoning_patterns_reference_landing_identities()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "test_data_contracts.py",
+      "file_type": "code",
+      "norm_label": ".test_reasoning_patterns_reference_landing_identities()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "source_location": "L142"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_teststyleidentitycontract_setup",
+      "label": ".setUp()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "test_data_contracts.py",
+      "file_type": "code",
+      "norm_label": ".setup()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "source_location": "L42"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_teststyleidentitycontract_test_every_product_and_reasoning_style_reference_resolves",
+      "label": ".test_every_product_and_reasoning_style_reference_resolves()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "test_data_contracts.py",
+      "file_type": "code",
+      "norm_label": ".test_every_product_and_reasoning_style_reference_resolves()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "source_location": "L66"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_teststyleidentitycontract_test_ids_aliases_status_and_parents_are_unambiguous",
+      "label": ".test_ids_aliases_status_and_parents_are_unambiguous()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "test_data_contracts.py",
+      "file_type": "code",
+      "norm_label": ".test_ids_aliases_status_and_parents_are_unambiguous()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "source_location": "L45"
     },
     {
       "id": "agents_skills_prisma_8_upgrading_app_upgrades_0_16_to_0_17_strip_sha256_hash_prefixes_canonicalizejson",
@@ -9511,30 +9769,6 @@
       "source_location": "L87"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_core_testdiagnosticscontracts_test_diagnostics_opt_in_is_additive_for_domain_search",
-      "label": ".test_diagnostics_opt_in_is_additive_for_domain_search()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 69,
-      "community_name": "BM25",
-      "file_type": "code",
-      "norm_label": ".test_diagnostics_opt_in_is_additive_for_domain_search()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_core.py",
-      "source_location": "L327"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_core_testdiagnosticscontracts_test_diagnostics_opt_in_is_additive_for_stack_search",
-      "label": ".test_diagnostics_opt_in_is_additive_for_stack_search()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 69,
-      "community_name": "BM25",
-      "file_type": "code",
-      "norm_label": ".test_diagnostics_opt_in_is_additive_for_stack_search()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_core.py",
-      "source_location": "L335"
-    },
-    {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_core_testtokenizer_test_boundary_safe_nav_normalization_preserves_existing_words",
       "label": ".test_boundary_safe_nav_normalization_preserves_existing_words()",
       "_callable": true,
@@ -9917,6 +10151,18 @@
       "norm_label": "_check_react_contract()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/validate_data.py",
       "source_location": "L743"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_validate_data_check_reasoning_contract",
+      "label": "_check_reasoning_contract()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "validate_data.py",
+      "file_type": "code",
+      "norm_label": "_check_reasoning_contract()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/validate_data.py",
+      "source_location": "L331"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_validate_data_check_stack_freshness_contract",
@@ -10543,6 +10789,18 @@
       "source_location": "L184"
     },
     {
+      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_filter_anti_patterns_for_mode",
+      "label": "_filter_anti_patterns_for_mode()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "test_design_system_mode.py",
+      "file_type": "code",
+      "norm_label": "_filter_anti_patterns_for_mode()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "source_location": "L246"
+    },
+    {
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_query_wants_dark",
       "label": "_query_wants_dark()",
       "_callable": true,
@@ -10577,6 +10835,54 @@
       "norm_label": "_style_is_dark_primary()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
       "source_location": "L164"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testantipatterngating_test_dark_clause_dropped_others_kept",
+      "label": ".test_dark_clause_dropped_others_kept()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "test_design_system_mode.py",
+      "file_type": "code",
+      "norm_label": ".test_dark_clause_dropped_others_kept()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+      "source_location": "L121"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testantipatterngating_test_empty_input",
+      "label": ".test_empty_input()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "test_design_system_mode.py",
+      "file_type": "code",
+      "norm_label": ".test_empty_input()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+      "source_location": "L134"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testantipatterngating_test_light_mode_is_a_no_op",
+      "label": ".test_light_mode_is_a_no_op()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "test_design_system_mode.py",
+      "file_type": "code",
+      "norm_label": ".test_light_mode_is_a_no_op()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+      "source_location": "L126"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testantipatterngating_test_unrelated_anti_patterns_survive_dark_mode",
+      "label": ".test_unrelated_anti_patterns_survive_dark_mode()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "test_design_system_mode.py",
+      "file_type": "code",
+      "norm_label": ".test_unrelated_anti_patterns_survive_dark_mode()",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+      "source_location": "L130"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_testmoderesolution_test_dark_primary_style_detected",
@@ -10625,30 +10931,6 @@
       "norm_label": ".test_query_keywords()",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
       "source_location": "L82"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_style_taxonomy_read_rows",
-      "label": "read_rows()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "test_design_system_mode.py",
-      "file_type": "code",
-      "norm_label": "read_rows()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_style_taxonomy.py",
-      "source_location": "L19"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_style_taxonomy_teststyletaxonomy_setupclass",
-      "label": ".setUpClass()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "test_design_system_mode.py",
-      "file_type": "code",
-      "norm_label": ".setupclass()",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_style_taxonomy.py",
-      "source_location": "L26"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_style_taxonomy_teststyletaxonomy_test_claim_fields_use_controlled_non_guarantee_language",
@@ -13867,18 +14149,6 @@
       "source_location": "L1"
     },
     {
-      "id": "apps_api_agents_skills_prisma_8_references_migration_review",
-      "label": "api/.agents/skills/prisma-8/references/migration-review.md",
-      "_origin": "ast",
-      "community": 109,
-      "community_name": "api/.agents/skills/prisma-8/SKILL.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "api/.agents/skills/prisma-8/references/migration-review.md",
-      "source_file": "apps/api/.agents/skills/prisma-8/references/migration-review.md",
-      "source_location": "L1"
-    },
-    {
       "id": "apps_api_agents_skills_prisma_8_references_migrations",
       "label": "api/.agents/skills/prisma-8/references/migrations.md",
       "_origin": "ast",
@@ -13924,6 +14194,18 @@
       "node_kind": "page",
       "norm_label": "api/.agents/skills/prisma-8/references/queries-postgres.md",
       "source_file": "apps/api/.agents/skills/prisma-8/references/queries-postgres.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "apps_api_agents_skills_prisma_8_references_quickstart",
+      "label": "api/.agents/skills/prisma-8/references/quickstart.md",
+      "_origin": "ast",
+      "community": 109,
+      "community_name": "api/.agents/skills/prisma-8/SKILL.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "api/.agents/skills/prisma-8/references/quickstart.md",
+      "source_file": "apps/api/.agents/skills/prisma-8/references/quickstart.md",
       "source_location": "L1"
     },
     {
@@ -19875,6 +20157,78 @@
       "source_location": "L160"
     },
     {
+      "id": "agents_skills_prisma_8_references_migration_review_destination",
+      "label": "Destination",
+      "_origin": "ast",
+      "community": 144,
+      "community_name": "Prisma Next \u2014 Migration Review (Deployment + Concurrency)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "destination",
+      "source_file": ".agents/skills/prisma-8/references/migration-review.md",
+      "source_location": "L34"
+    },
+    {
+      "id": "agents_skills_prisma_8_references_migration_review_diagnostic_codes",
+      "label": "Diagnostic codes",
+      "_origin": "ast",
+      "community": 144,
+      "community_name": "Prisma Next \u2014 Migration Review (Deployment + Concurrency)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "diagnostic codes",
+      "source_file": ".agents/skills/prisma-8/references/migration-review.md",
+      "source_location": "L55"
+    },
+    {
+      "id": "agents_skills_prisma_8_references_migration_review_graph_tree_output",
+      "label": "Graph-tree output",
+      "_origin": "ast",
+      "community": 144,
+      "community_name": "Prisma Next \u2014 Migration Review (Deployment + Concurrency)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "graph-tree output",
+      "source_file": ".agents/skills/prisma-8/references/migration-review.md",
+      "source_location": "L70"
+    },
+    {
+      "id": "agents_skills_prisma_8_references_migration_review_key_concepts_the_navigation_model",
+      "label": "Key Concepts \u2014 the navigation model",
+      "_origin": "ast",
+      "community": 144,
+      "community_name": "Prisma Next \u2014 Migration Review (Deployment + Concurrency)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "key concepts \u2014 the navigation model",
+      "source_file": ".agents/skills/prisma-8/references/migration-review.md",
+      "source_location": "L24"
+    },
+    {
+      "id": "agents_skills_prisma_8_references_migration_review_origin",
+      "label": "Origin",
+      "_origin": "ast",
+      "community": 144,
+      "community_name": "Prisma Next \u2014 Migration Review (Deployment + Concurrency)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "origin",
+      "source_file": ".agents/skills/prisma-8/references/migration-review.md",
+      "source_location": "L28"
+    },
+    {
+      "id": "agents_skills_prisma_8_references_migration_review_plan_and_apply_time_diagnostics",
+      "label": "Plan- and apply-time diagnostics",
+      "_origin": "ast",
+      "community": 144,
+      "community_name": "Prisma Next \u2014 Migration Review (Deployment + Concurrency)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "plan- and apply-time diagnostics",
+      "source_file": ".agents/skills/prisma-8/references/migration-review.md",
+      "source_location": "L79"
+    },
+    {
       "id": "agents_skills_prisma_8_references_migration_review_prisma_next_migration_review_deployment_concurrency",
       "label": "Prisma Next \u2014 Migration Review (Deployment + Concurrency)",
       "_origin": "ast",
@@ -19897,6 +20251,18 @@
       "norm_label": "reference files",
       "source_file": ".agents/skills/prisma-8/references/migration-review.md",
       "source_location": "L212"
+    },
+    {
+      "id": "agents_skills_prisma_8_references_migration_review_the_migration_graph",
+      "label": "The migration graph",
+      "_origin": "ast",
+      "community": 144,
+      "community_name": "Prisma Next \u2014 Migration Review (Deployment + Concurrency)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "the migration graph",
+      "source_file": ".agents/skills/prisma-8/references/migration-review.md",
+      "source_location": "L43"
     },
     {
       "id": "agents_skills_prisma_8_references_migration_review_what_prisma_next_doesn_t_do_yet",
@@ -21607,21 +21973,10 @@
       "label": "reasoning_contract.py",
       "_origin": "ast",
       "community": 157,
-      "community_name": "test_data_contracts.py",
+      "community_name": "parse_decision_rules",
       "file_type": "code",
       "norm_label": "reasoning_contract.py",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/reasoning_contract.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts",
-      "label": "test_data_contracts.py",
-      "_origin": "ast",
-      "community": 157,
-      "community_name": "test_data_contracts.py",
-      "file_type": "code",
-      "norm_label": "test_data_contracts.py",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
       "source_location": "L1"
     },
     {
@@ -21629,7 +21984,7 @@
       "label": "Return deterministic mutations and an audit trail; never execute data.",
       "_origin": "ast",
       "community": 157,
-      "community_name": "test_data_contracts.py",
+      "community_name": "parse_decision_rules",
       "file_type": "rationale",
       "norm_label": "return deterministic mutations and an audit trail; never execute data.",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/reasoning_contract.py",
@@ -21640,7 +21995,7 @@
       "label": "Closed, non-executable grammar for design-system decision rules.",
       "_origin": "ast",
       "community": 157,
-      "community_name": "test_data_contracts.py",
+      "community_name": "parse_decision_rules",
       "file_type": "rationale",
       "norm_label": "closed, non-executable grammar for design-system decision rules.",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/reasoning_contract.py",
@@ -21651,22 +22006,11 @@
       "label": "Parse the canonical condition -> action-array representation.",
       "_origin": "ast",
       "community": 157,
-      "community_name": "test_data_contracts.py",
+      "community_name": "parse_decision_rules",
       "file_type": "rationale",
       "norm_label": "parse the canonical condition -> action-array representation.",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/reasoning_contract.py",
       "source_location": "L68"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_rationale_2",
-      "label": "Cross-file semantic contracts for curated design data.",
-      "_origin": "ast",
-      "community": 157,
-      "community_name": "test_data_contracts.py",
-      "file_type": "rationale",
-      "norm_label": "cross-file semantic contracts for curated design data.",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
-      "source_location": "L2"
     },
     {
       "id": "apps_api_agents_skills_prisma_8_upgrading_extension_upgrades_0_13_to_0_14_instructions",
@@ -27152,17 +27496,6 @@
       "norm_label": "html slide template",
       "source_file": ".agents/skills/design/references/slides-html-template.md",
       "source_location": "L1"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_247",
-      "label": "Drop \"avoid dark mode\" advice once dark mode is the resolved answer.",
-      "_origin": "ast",
-      "community": 206,
-      "community_name": ".generate",
-      "file_type": "rationale",
-      "norm_label": "drop \"avoid dark mode\" advice once dark mode is the resolved answer.",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
-      "source_location": "L247"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_321",
@@ -33429,6 +33762,17 @@
       "source_location": "L240"
     },
     {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_style_taxonomy",
+      "label": "test_style_taxonomy.py",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "search",
+      "file_type": "code",
+      "norm_label": "test_style_taxonomy.py",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_style_taxonomy.py",
+      "source_location": "L1"
+    },
+    {
       "id": "agents_skills_ui_ux_pro_max_scripts_core_rationale_737",
       "label": "Resolve a deprecated in-domain alias, or expose a cross-domain redirect.",
       "_origin": "ast",
@@ -33449,6 +33793,17 @@
       "norm_label": "main search function with auto-domain detection",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/core.py",
       "source_location": "L756"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_style_taxonomy_rationale_2",
+      "label": "Regression tests for the public style taxonomy and search contract.",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "search",
+      "file_type": "rationale",
+      "norm_label": "regression tests for the public style taxonomy and search contract.",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_style_taxonomy.py",
+      "source_location": "L2"
     },
     {
       "id": "agents_skills_ui_styling_scripts_tests_test_shadcn_add_rationale_56",
@@ -33581,6 +33936,17 @@
       "norm_label": "test_web_stack_freshness.py",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_web_stack_freshness.py",
       "source_location": "L1"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_core_rationale_926",
+      "label": "Resolve a standalone API identifier even when its BM25 IDF is low.",
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "search_stack",
+      "file_type": "rationale",
+      "norm_label": "resolve a standalone api identifier even when its bm25 idf is low.",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/core.py",
+      "source_location": "L926"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_core_rationale_952",
@@ -35526,88 +35892,15 @@
       "source_location": "L27"
     },
     {
-      "id": "agents_skills_prisma_8_references_migration_review_destination",
-      "label": "Destination",
+      "id": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d",
+      "label": "6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
       "_origin": "ast",
       "community": 326,
-      "community_name": "Key Concepts \u2014 the navigation model",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "destination",
-      "source_file": ".agents/skills/prisma-8/references/migration-review.md",
-      "source_location": "L34"
-    },
-    {
-      "id": "agents_skills_prisma_8_references_migration_review_diagnostic_codes",
-      "label": "Diagnostic codes",
-      "_origin": "ast",
-      "community": 326,
-      "community_name": "Key Concepts \u2014 the navigation model",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "diagnostic codes",
-      "source_file": ".agents/skills/prisma-8/references/migration-review.md",
-      "source_location": "L55"
-    },
-    {
-      "id": "agents_skills_prisma_8_references_migration_review_graph_tree_output",
-      "label": "Graph-tree output",
-      "_origin": "ast",
-      "community": 326,
-      "community_name": "Key Concepts \u2014 the navigation model",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "graph-tree output",
-      "source_file": ".agents/skills/prisma-8/references/migration-review.md",
-      "source_location": "L70"
-    },
-    {
-      "id": "agents_skills_prisma_8_references_migration_review_key_concepts_the_navigation_model",
-      "label": "Key Concepts \u2014 the navigation model",
-      "_origin": "ast",
-      "community": 326,
-      "community_name": "Key Concepts \u2014 the navigation model",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "key concepts \u2014 the navigation model",
-      "source_file": ".agents/skills/prisma-8/references/migration-review.md",
-      "source_location": "L24"
-    },
-    {
-      "id": "agents_skills_prisma_8_references_migration_review_origin",
-      "label": "Origin",
-      "_origin": "ast",
-      "community": 326,
-      "community_name": "Key Concepts \u2014 the navigation model",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "origin",
-      "source_file": ".agents/skills/prisma-8/references/migration-review.md",
-      "source_location": "L28"
-    },
-    {
-      "id": "agents_skills_prisma_8_references_migration_review_plan_and_apply_time_diagnostics",
-      "label": "Plan- and apply-time diagnostics",
-      "_origin": "ast",
-      "community": 326,
-      "community_name": "Key Concepts \u2014 the navigation model",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "plan- and apply-time diagnostics",
-      "source_file": ".agents/skills/prisma-8/references/migration-review.md",
-      "source_location": "L79"
-    },
-    {
-      "id": "agents_skills_prisma_8_references_migration_review_the_migration_graph",
-      "label": "The migration graph",
-      "_origin": "ast",
-      "community": 326,
-      "community_name": "Key Concepts \u2014 the navigation model",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "the migration graph",
-      "source_file": ".agents/skills/prisma-8/references/migration-review.md",
-      "source_location": "L43"
+      "community_name": "6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "file_type": "code",
+      "norm_label": "6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L1"
     },
     {
       "id": "apps_api_package_devdependencies",
@@ -35762,6 +36055,83 @@
       "norm_label": "@react-router/serve",
       "source_file": "apps/web/package.json",
       "source_location": "L13"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_search",
+      "label": "scripts/search.py",
+      "_origin": "ast",
+      "community": 329,
+      "community_name": "test_core.py",
+      "file_type": "code",
+      "norm_label": "scripts/search.py",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/search.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_core",
+      "label": "test_core.py",
+      "_origin": "ast",
+      "community": 329,
+      "community_name": "test_core.py",
+      "file_type": "code",
+      "norm_label": "test_core.py",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_core.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_792",
+      "label": "Format design system as markdown.",
+      "_origin": "ast",
+      "community": 329,
+      "community_name": "test_core.py",
+      "file_type": "rationale",
+      "norm_label": "format design system as markdown.",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "source_location": "L792"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_923",
+      "label": "Main entry point for design system generation. Args: query: Search query (e.g.,\u2026",
+      "_origin": "ast",
+      "community": 329,
+      "community_name": "test_core.py",
+      "file_type": "rationale",
+      "norm_label": "main entry point for design system generation. args: query: search query (e.g.,...",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "source_location": "L923"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_search_rationale_3",
+      "label": "UI/UX Pro Max Search - BM25 search engine for UI/UX style guides Usage: python\u2026",
+      "_origin": "ast",
+      "community": 329,
+      "community_name": "test_core.py",
+      "file_type": "rationale",
+      "norm_label": "ui/ux pro max search - bm25 search engine for ui/ux style guides usage: python...",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/search.py",
+      "source_location": "L3"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_search_rationale_45",
+      "label": "Format results for Claude consumption (token-optimized)",
+      "_origin": "ast",
+      "community": 329,
+      "community_name": "test_core.py",
+      "file_type": "rationale",
+      "norm_label": "format results for claude consumption (token-optimized)",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/search.py",
+      "source_location": "L45"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_core_rationale_3",
+      "label": "Stdlib-only regression tests for core.py / design_system.py (unittest, not\u2026",
+      "_origin": "ast",
+      "community": 329,
+      "community_name": "test_core.py",
+      "file_type": "rationale",
+      "norm_label": "stdlib-only regression tests for core.py / design_system.py (unittest, not...",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_core.py",
+      "source_location": "L3"
     },
     {
       "id": "agents_skills_design_system_references_component_specs",
@@ -36298,7 +36668,7 @@
       "node_kind": "heading",
       "norm_label": "checks",
       "source_file": "apps/api/README.md",
-      "source_location": "L29"
+      "source_location": "L34"
     },
     {
       "id": "apps_api_readme_content_api",
@@ -36321,6 +36691,17 @@
       "file_type": "code",
       "norm_label": "content.test.ts",
       "source_file": "apps/api/src/content.test.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "apps_api_migrations_app_20260912t0920_add_questions_migration",
+      "label": "20260912T0920_add_questions/migration.ts",
+      "_origin": "ast",
+      "community": 335,
+      "community_name": "M",
+      "file_type": "code",
+      "norm_label": "20260912t0920_add_questions/migration.ts",
+      "source_file": "apps/api/migrations/app/20260912T0920_add_questions/migration.ts",
       "source_location": "L1"
     },
     {
@@ -37099,17 +37480,6 @@
       "norm_label": "load rows for optional identity routing, leaving search to report i/o errors.",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/core.py",
       "source_location": "L706"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_core_rationale_926",
-      "label": "Resolve a standalone API identifier even when its BM25 IDF is low.",
-      "_origin": "ast",
-      "community": 37,
-      "community_name": "scripts/core.py",
-      "file_type": "rationale",
-      "norm_label": "resolve a standalone api identifier even when its bm25 idf is low.",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/core.py",
-      "source_location": "L926"
     },
     {
       "id": "agents_skills_prisma_8_references_feedback_1_pick_the_channel",
@@ -40636,17 +41006,6 @@
       "source_location": ""
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_search",
-      "label": "scripts/search.py",
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "design_system.py",
-      "file_type": "code",
-      "norm_label": "scripts/search.py",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/search.py",
-      "source_location": "L1"
-    },
-    {
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_1077",
       "label": "Format design system as MASTER.md with hierarchical override logic.",
       "_origin": "ast",
@@ -40746,28 +41105,6 @@
       "source_location": "L641"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_792",
-      "label": "Format design system as markdown.",
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "design_system.py",
-      "file_type": "rationale",
-      "norm_label": "format design system as markdown.",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
-      "source_location": "L792"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_923",
-      "label": "Main entry point for design system generation. Args: query: Search query (e.g.,\u2026",
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "design_system.py",
-      "file_type": "rationale",
-      "norm_label": "main entry point for design system generation. args: query: search query (e.g.,...",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
-      "source_location": "L923"
-    },
-    {
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_962",
       "label": "Slugify a name into a single safe path segment. Only [a-z0-9_-] survives; every\u2026",
       "_origin": "ast",
@@ -40799,28 +41136,6 @@
       "norm_label": "persist design system to design-system/<project>/ folder using master +...",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
       "source_location": "L997"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_search_rationale_3",
-      "label": "UI/UX Pro Max Search - BM25 search engine for UI/UX style guides Usage: python\u2026",
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "design_system.py",
-      "file_type": "rationale",
-      "norm_label": "ui/ux pro max search - bm25 search engine for ui/ux style guides usage: python...",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/search.py",
-      "source_location": "L3"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_search_rationale_45",
-      "label": "Format results for Claude consumption (token-optimized)",
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "design_system.py",
-      "file_type": "rationale",
-      "norm_label": "format results for claude consumption (token-optimized)",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/search.py",
-      "source_location": "L45"
     },
     {
       "id": "agents_skills_design_references_social_photos_design",
@@ -42243,6 +42558,28 @@
       "norm_label": "typography customization",
       "source_file": ".agents/skills/ui-styling/references/tailwind-customization.md",
       "source_location": "L86"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts",
+      "label": "test_data_contracts.py",
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "test_data_contracts.py",
+      "file_type": "code",
+      "norm_label": "test_data_contracts.py",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_data_contracts_rationale_2",
+      "label": "Cross-file semantic contracts for curated design data.",
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "test_data_contracts.py",
+      "file_type": "rationale",
+      "norm_label": "cross-file semantic contracts for curated design data.",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "source_location": "L2"
     },
     {
       "id": "agents_skills_prisma_8_references_contract_checklist",
@@ -43697,6 +44034,18 @@
       "source_location": "L225"
     },
     {
+      "id": "apps_api_agents_skills_prisma_8_references_migration_review",
+      "label": "api/.agents/skills/prisma-8/references/migration-review.md",
+      "_origin": "ast",
+      "community": 63,
+      "community_name": "Prisma Next \u2014 Migration Review (Deployment + Concurrency)",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "api/.agents/skills/prisma-8/references/migration-review.md",
+      "source_file": "apps/api/.agents/skills/prisma-8/references/migration-review.md",
+      "source_location": "L1"
+    },
+    {
       "id": "apps_api_agents_skills_prisma_8_references_migration_review_checklist",
       "label": "Checklist",
       "_origin": "ast",
@@ -43947,18 +44296,6 @@
       "norm_label": "workflow \u2014 *\"what state is each environment at?\"*",
       "source_file": "apps/api/.agents/skills/prisma-8/references/migration-review.md",
       "source_location": "L115"
-    },
-    {
-      "id": "apps_api_agents_skills_prisma_8_references_quickstart",
-      "label": "api/.agents/skills/prisma-8/references/quickstart.md",
-      "_origin": "ast",
-      "community": 64,
-      "community_name": "Prisma Next \u2014 Quickstart (Adoption)",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "api/.agents/skills/prisma-8/references/quickstart.md",
-      "source_file": "apps/api/.agents/skills/prisma-8/references/quickstart.md",
-      "source_location": "L1"
     },
     {
       "id": "apps_api_agents_skills_prisma_8_references_quickstart_anti_patterns_on_this_path",
@@ -44719,17 +45056,6 @@
       "source_location": "L638"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_core",
-      "label": "test_core.py",
-      "_origin": "ast",
-      "community": 69,
-      "community_name": "BM25",
-      "file_type": "code",
-      "norm_label": "test_core.py",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_core.py",
-      "source_location": "L1"
-    },
-    {
       "id": "agents_skills_ui_ux_pro_max_scripts_core_rationale_283",
       "label": "BM25 ranking algorithm for text search",
       "_origin": "ast",
@@ -44783,17 +45109,6 @@
       "norm_label": "all indexed terms, for suggestion/typo-recovery purposes.",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/core.py",
       "source_location": "L346"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_core_rationale_3",
-      "label": "Stdlib-only regression tests for core.py / design_system.py (unittest, not\u2026",
-      "_origin": "ast",
-      "community": 69,
-      "community_name": "BM25",
-      "file_type": "rationale",
-      "norm_label": "stdlib-only regression tests for core.py / design_system.py (unittest, not...",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_core.py",
-      "source_location": "L3"
     },
     {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_core_data_quality",
@@ -45806,17 +46121,6 @@
       "source_location": "L1"
     },
     {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_style_taxonomy",
-      "label": "test_style_taxonomy.py",
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "test_design_system_mode.py",
-      "file_type": "code",
-      "norm_label": "test_style_taxonomy.py",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_style_taxonomy.py",
-      "source_location": "L1"
-    },
-    {
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_165",
       "label": "True when a styles.csv row describes itself as dark-first.",
       "_origin": "ast",
@@ -45850,6 +46154,17 @@
       "source_location": "L187"
     },
     {
+      "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_247",
+      "label": "Drop \"avoid dark mode\" advice once dark mode is the resolved answer.",
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "test_design_system_mode.py",
+      "file_type": "rationale",
+      "norm_label": "drop \"avoid dark mode\" advice once dark mode is the resolved answer.",
+      "source_file": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "source_location": "L247"
+    },
+    {
       "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_design_system_mode_rationale_3",
       "label": "Regression tests for color-mode coherence in design_system.py (issue #428).\u2026",
       "_origin": "ast",
@@ -45859,17 +46174,6 @@
       "norm_label": "regression tests for color-mode coherence in design_system.py (issue #428)....",
       "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
       "source_location": "L3"
-    },
-    {
-      "id": "agents_skills_ui_ux_pro_max_scripts_tests_test_style_taxonomy_rationale_2",
-      "label": "Regression tests for the public style taxonomy and search contract.",
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "test_design_system_mode.py",
-      "file_type": "rationale",
-      "norm_label": "regression tests for the public style taxonomy and search contract.",
-      "source_file": ".agents/skills/ui-ux-pro-max/scripts/tests/test_style_taxonomy.py",
-      "source_location": "L2"
     },
     {
       "id": "apps_api_agents_skills_prisma_8_upgrading_app_upgrades_0_11_to_0_12_re_emit_domain_namespaced_contracts",
@@ -59989,6 +60293,42 @@
       "weight": 1.0
     },
     {
+      "source": "apps_api_src_content_questionfields",
+      "target": "apps_api_src_content_invalid",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "apps/api/src/content.ts",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_src_content_questionfields",
+      "target": "apps_api_src_content_questiontext",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "apps/api/src/content.ts",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_src_content_questiontext",
+      "target": "apps_api_src_content_invalid",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "apps/api/src/content.ts",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
       "source": "apps_web_app_content_api_savecontent",
       "target": "apps_web_app_content_api_api",
       "relation": "calls",
@@ -59997,7 +60337,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "apps/web/app/content-api.ts",
-      "source_location": "L20",
+      "source_location": "L25",
       "weight": 1.0
     },
     {
@@ -60009,7 +60349,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "apps/web/app/routes/topic.tsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "weight": 1.0
     },
     {
@@ -60489,7 +60829,7 @@
       "confidence_score": 1.0,
       "context": "export",
       "source_file": "apps/web/app/routes/topic.tsx",
-      "source_location": "L35",
+      "source_location": "L48",
       "weight": 1.0
     },
     {
@@ -61418,6 +61758,18 @@
     },
     {
       "source": "apps_web_app_content_form",
+      "target": "apps_web_app_content_api_question",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "apps/web/app/content-form.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_app_content_form",
       "target": "apps_web_app_content_api_savecontent",
       "relation": "imports",
       "_origin": "ast",
@@ -61466,6 +61818,18 @@
     },
     {
       "source": "apps_web_app_routes_topic",
+      "target": "apps_web_app_content_api_question",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "apps/web/app/routes/topic.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_app_routes_topic",
       "target": "apps_web_app_content_api_savecontent",
       "relation": "imports",
       "_origin": "ast",
@@ -61491,6 +61855,18 @@
     {
       "source": "apps_web_app_routes_topic",
       "target": "apps_web_app_content_form_contentform",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "apps/web/app/routes/topic.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_app_routes_topic",
+      "target": "apps_web_app_content_form_questionform",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -62231,7 +62607,7 @@
       "confidence_score": 1.0,
       "context": "re-export",
       "source_file": "apps/web/app/routes/topic.tsx",
-      "source_location": "L35",
+      "source_location": "L48",
       "weight": 1.0
     },
     {
@@ -97658,6 +98034,17 @@
       "weight": 1.0
     },
     {
+      "source": "apps_api_migrations_app_20260912t0920_add_questions_migration",
+      "target": "apps_api_migrations_app_20260912t0920_add_questions_migration_m",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/migrations/app/20260912T0920_add_questions/migration.ts",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
       "source": "apps_api_migrations_snapshots_4afc7b0d7d11f178e53f9cc94ef6d1ecd6dba10716d25ddd6e90e690b02d14ea_contract_d",
       "target": "apps_api_migrations_snapshots_4afc7b0d7d11f178e53f9cc94ef6d1ecd6dba10716d25ddd6e90e690b02d14ea_contract_d_defaultliteralvalue",
       "relation": "contains",
@@ -97831,6 +98218,182 @@
       "confidence_score": 1.0,
       "source_file": "apps/api/migrations/snapshots/4afc7b0d7d11f178e53f9cc94ef6d1ecd6dba10716d25ddd6e90e690b02d14ea/contract.d.ts",
       "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d",
+      "target": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_defaultliteralvalue",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L236",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d",
+      "target": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_fieldoutputtypes",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L242",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d",
+      "target": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_fieldinputtypes",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L277",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d",
+      "target": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_storagecolumntypes",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L312",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d",
+      "target": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_storagecolumninputtypes",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L347",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d",
+      "target": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_storagehash",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d",
+      "target": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_executionhash",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d",
+      "target": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_typemaps",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L382",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d",
+      "target": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_profilehash",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L39",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d",
+      "target": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_contractbase",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L392",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d",
+      "target": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_codectypes",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d",
+      "target": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_lanecodectypes",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L43",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d",
+      "target": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_queryoperationtypes",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d",
+      "target": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_aggregatetypes",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d",
+      "target": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_contract",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L889",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d",
+      "target": "apps_api_migrations_snapshots_6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98_contract_d_namespaces",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/migrations/snapshots/6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts",
+      "source_location": "L891",
       "weight": 1.0
     },
     {
@@ -98303,7 +98866,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "apps/api/README.md",
-      "source_location": "L29",
+      "source_location": "L34",
       "weight": 1.0
     },
     {
@@ -98330,6 +98893,17 @@
     },
     {
       "source": "apps_api_src_content",
+      "target": "apps_api_src_content_contenterror",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/src/content.ts",
+      "source_location": "L159",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_src_content",
       "target": "apps_api_src_content_fields",
       "relation": "contains",
       "_origin": "ast",
@@ -98337,6 +98911,17 @@
       "confidence_score": 1.0,
       "source_file": "apps/api/src/content.ts",
       "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_src_content",
+      "target": "apps_api_src_content_questiontext",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/src/content.ts",
+      "source_location": "L30",
       "weight": 1.0
     },
     {
@@ -98352,6 +98937,17 @@
     },
     {
       "source": "apps_api_src_content",
+      "target": "apps_api_src_content_questionfields",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/src/content.ts",
+      "source_location": "L41",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_src_content",
       "target": "apps_api_src_content_invalid",
       "relation": "contains",
       "_origin": "ast",
@@ -98359,17 +98955,6 @@
       "confidence_score": 1.0,
       "source_file": "apps/api/src/content.ts",
       "source_location": "L6",
-      "weight": 1.0
-    },
-    {
-      "source": "apps_api_src_content",
-      "target": "apps_api_src_content_contenterror",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "apps/api/src/content.ts",
-      "source_location": "L88",
       "weight": 1.0
     },
     {
@@ -98413,7 +98998,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "apps/api/src/prisma/contract.d.ts",
-      "source_location": "L265",
+      "source_location": "L277",
       "weight": 1.0
     },
     {
@@ -98424,7 +99009,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "apps/api/src/prisma/contract.d.ts",
-      "source_location": "L288",
+      "source_location": "L312",
       "weight": 1.0
     },
     {
@@ -98435,29 +99020,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "apps/api/src/prisma/contract.d.ts",
-      "source_location": "L311",
-      "weight": 1.0
-    },
-    {
-      "source": "apps_api_src_prisma_contract_d",
-      "target": "apps_api_src_prisma_contract_d_typemaps",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "apps/api/src/prisma/contract.d.ts",
-      "source_location": "L334",
-      "weight": 1.0
-    },
-    {
-      "source": "apps_api_src_prisma_contract_d",
-      "target": "apps_api_src_prisma_contract_d_contractbase",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "apps/api/src/prisma/contract.d.ts",
-      "source_location": "L344",
+      "source_location": "L347",
       "weight": 1.0
     },
     {
@@ -98484,6 +99047,17 @@
     },
     {
       "source": "apps_api_src_prisma_contract_d",
+      "target": "apps_api_src_prisma_contract_d_typemaps",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/src/prisma/contract.d.ts",
+      "source_location": "L382",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_src_prisma_contract_d",
       "target": "apps_api_src_prisma_contract_d_profilehash",
       "relation": "contains",
       "_origin": "ast",
@@ -98491,6 +99065,17 @@
       "confidence_score": 1.0,
       "source_file": "apps/api/src/prisma/contract.d.ts",
       "source_location": "L39",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_src_prisma_contract_d",
+      "target": "apps_api_src_prisma_contract_d_contractbase",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/src/prisma/contract.d.ts",
+      "source_location": "L392",
       "weight": 1.0
     },
     {
@@ -98545,7 +99130,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "apps/api/src/prisma/contract.d.ts",
-      "source_location": "L669",
+      "source_location": "L889",
       "weight": 1.0
     },
     {
@@ -98556,7 +99141,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "apps/api/src/prisma/contract.d.ts",
-      "source_location": "L671",
+      "source_location": "L891",
       "weight": 1.0
     },
     {
@@ -98715,13 +99300,13 @@
     },
     {
       "source": "apps_web_app_content_api",
-      "target": "apps_web_app_content_api_savecontent",
+      "target": "apps_web_app_content_api_api",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "apps/web/app/content-api.ts",
-      "source_location": "L15",
+      "source_location": "L11",
       "weight": 1.0
     },
     {
@@ -98737,13 +99322,24 @@
     },
     {
       "source": "apps_web_app_content_api",
-      "target": "apps_web_app_content_api_api",
+      "target": "apps_web_app_content_api_savecontent",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "apps/web/app/content-api.ts",
-      "source_location": "L6",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_app_content_api",
+      "target": "apps_web_app_content_api_question",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/app/content-api.ts",
+      "source_location": "L3",
       "weight": 1.0
     },
     {
@@ -98777,6 +99373,17 @@
       "confidence_score": 1.0,
       "source_file": "apps/web/app/content-form.tsx",
       "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_web_app_content_form",
+      "target": "apps_web_app_content_form_questionform",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/web/app/content-form.tsx",
+      "source_location": "L55",
       "weight": 1.0
     },
     {
@@ -98864,7 +99471,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "apps/web/app/routes/topic.tsx",
-      "source_location": "L17",
+      "source_location": "L18",
       "weight": 1.0
     },
     {
@@ -98875,7 +99482,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "apps/web/app/routes/topic.tsx",
-      "source_location": "L19",
+      "source_location": "L20",
       "weight": 1.0
     },
     {
@@ -102869,6 +103476,17 @@
       "confidence_score": 1.0,
       "source_file": "apps/api/migrations/app/20260907T2031_baseline_user/migration.ts",
       "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "apps_api_migrations_app_20260912t0920_add_questions_migration_m",
+      "target": "apps_api_migrations_app_20260912t0920_add_questions_migration_m_operations",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/api/migrations/app/20260912T0920_add_questions/migration.ts",
+      "source_location": "L12",
       "weight": 1.0
     },
     {
@@ -107196,5 +107814,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "acb2360fa877082b01d4618f37af299c19910294"
+  "built_at_commit": "18ed6ddd859ada3753469befb2daa77574d168c7"
 }

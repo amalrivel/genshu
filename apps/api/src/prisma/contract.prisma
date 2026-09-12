@@ -22,3 +22,17 @@ model Material {
   topicId Int
   topic   Topic @relation(fields: [topicId], references: [id])
 }
+
+model Question {
+  id                    Int      @id @default(autoincrement())
+  japaneseText          String
+  indonesianTranslation String
+  furigana              String?
+  correctAnswer         Boolean
+  japaneseExplanation   String
+  indonesianExplanation String
+  topicId               Int
+  topic                 Topic    @relation(fields: [topicId], references: [id])
+  createdAt             TimestamptzString @default(now())
+  updatedAt             temporal.updatedAtString()
+}

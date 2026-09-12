@@ -26,7 +26,9 @@ body {
 .content-form legend { font-weight: 600; }
 .content-form label { display: grid; gap: .35rem; margin: .75rem 0; }
 .content-form input, .content-form textarea { width: 100%; border: 1px solid #888; border-radius: .25rem; padding: .6rem; background: transparent; }
+.content-form select { width: 100%; border: 1px solid #888; border-radius: .25rem; padding: .6rem; background: transparent; }
 .content-form textarea { font-family: monospace; resize: vertical; }
+.question-form { border-top: 1px solid #888; padding-top: 1rem; }
 .content-form .actions { display: flex; flex-wrap: wrap; gap: .75rem; }
 .content-form button { padding: .6rem 1rem; border: 1px solid currentColor; border-radius: .25rem; cursor: pointer; }
 .content-form button:hover { background: #8882; }

@@ -1,5 +1,10 @@
 export type Topic = { id: number; title: string; createdAt: string; updatedAt: string };
 export type Material = { id: number; title: string; content: string; topicId: number };
+export type Question = {
+  id: number; japaneseText: string; indonesianTranslation: string; furigana: string | null;
+  correctAnswer: boolean; japaneseExplanation: string; indonesianExplanation: string;
+  topicId: number; createdAt: string; updatedAt: string;
+};
 
 const base = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
@@ -12,7 +17,7 @@ export async function api<T>(path: string, init?: RequestInit): Promise<T> {
   return response.status === 204 ? undefined as T : response.json();
 }
 
-export async function saveContent(request: Request, resource: "topics" | "materials", topicId?: string) {
+export async function saveContent(request: Request, resource: "topics" | "materials" | "questions", topicId?: string) {
   const form = await request.formData();
   const id = form.get("id");
   const deleting = form.get("intent") === "delete";
@@ -20,7 +25,15 @@ export async function saveContent(request: Request, resource: "topics" | "materi
     await api(`/${resource}${id ? `/${encodeURIComponent(String(id))}` : ""}`, {
       method: deleting ? "DELETE" : id ? "PUT" : "POST",
       headers: { "Content-Type": "application/json" },
-      body: deleting ? undefined : JSON.stringify({
+      body: deleting ? undefined : JSON.stringify(resource === "questions" ? {
+        japaneseText: form.get("japaneseText"),
+        indonesianTranslation: form.get("indonesianTranslation"),
+        furigana: form.get("furigana"),
+        correctAnswer: form.get("correctAnswer") === "true",
+        japaneseExplanation: form.get("japaneseExplanation"),
+        indonesianExplanation: form.get("indonesianExplanation"),
+        topicId: Number(topicId),
+      } : {
         title: form.get("title"),
         ...(resource === "materials" ? { content: form.get("content"), topicId: Number(topicId) } : {}),
       }),
