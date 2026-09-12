@@ -22,9 +22,6 @@ export function HydrateFallback() {
 export default function Topics({ loaderData }: Route.ComponentProps) {
   return (
     <main className="content-admin">
-      <nav>
-        <Link to="/">Genshu home</Link>
-      </nav>
       <h1>Topics</h1>
       <p>
         Manage study topics and their materials. Topics are listed

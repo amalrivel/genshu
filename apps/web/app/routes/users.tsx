@@ -1,4 +1,4 @@
-import { Form, Link, useActionData } from "react-router";
+import { Form, useActionData } from "react-router";
 import type { Route } from "./+types/users";
 import { api, requireAdmin, type AuthUser } from "../content-api";
 
@@ -46,9 +46,6 @@ export default function Users({ loaderData }: Route.ComponentProps) {
   const data = useActionData<typeof clientAction>();
   return (
     <main className="content-admin">
-      <nav>
-        <Link to="/">Genshu home</Link>
-      </nav>
       <h1>Participants</h1>
       <Form method="post" className="content-form">
         <fieldset>

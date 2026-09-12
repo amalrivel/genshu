@@ -1,16 +1,16 @@
 # Graph Report - genshu  (2026-09-13)
 
 ## Corpus Check
-- 343 files · ~547,836 words
+- 383 files · ~587,431 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 4679 nodes · 5535 edges · 363 communities (300 shown, 46 thin omitted)
-- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 50 edges (avg confidence: 0.87)
+- 5262 nodes · 6239 edges · 393 communities (334 shown, 43 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 47 edges (avg confidence: 0.86)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `4bc0a496`
+- Built from commit: `b6d7a6c1`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -20,7 +20,7 @@
 - package.json
 - prisma/contract.d.ts
 - compilerOptions
-- React Router Framework Mode
+- Prisma Next
 - compilerOptions
 - validate_data.py
 - search
@@ -30,8 +30,8 @@
 - auth.ts
 - slide_search_core.py
 - Graphify knowledge graph
-- React Router dark-theme logo
-- React Router light-theme logo
+- test_core_data_quality.py
+- _normalize
 - Tailwind CSS Utility Reference
 - Brand Guidelines v1.0
 - Design
@@ -68,7 +68,7 @@
 - 0.16 → 0.17 — User upgrade instructions
 - Design System
 - Tailwind CSS Customization
-- TestGeneratedCatalogContract
+- dropdown-menu (Radix `DropdownMenu` → Base UI `Menu`)
 - Prisma Next — Contract Authoring
 - Prisma Next — Quickstart (Adoption)
 - .agents/skills/prisma-8/upgrading/app/upgrades/0.16-to-0.17/strip-sha256-hash-prefixes.ts
@@ -89,7 +89,7 @@
 - .agents/skills/prisma-8/upgrading/extension/upgrades/0.9-to-0.10/stamp-storage-types-kind.ts
 - Writing apps with Prisma Composer
 - shadcn/ui Theming & Customization
-- test_design_system_mode.py
+- _style_is_dark_primary
 - api/.agents/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-domain-namespaced-contracts.ts
 - api/.agents/skills/prisma-8/upgrading/app/upgrades/0.9-to-0.10/stamp-storage-types-kind.ts
 - api/.agents/skills/prisma-8/upgrading/extension/upgrades/0.9-to-0.10/stamp-storage-types-kind.ts
@@ -122,7 +122,7 @@
 - .agents/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/regenerate-extension-public-baseline.ts
 - .agents/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/strip-migration-labels-hints.ts
 - CatalogRefreshTest
-- api/.agents/skills/prisma-8/SKILL.md
+- Prisma Next — Queries
 - api/.agents/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-closed-mongo-contracts.ts
 - api/.agents/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/strip-migration-labels-hints.ts
 - 0.12 → 0.13 — User upgrade instructions
@@ -146,7 +146,7 @@
 - 0.10 → 0.11 — Extension-author upgrade instructions
 - Copywriting Formulas
 - detect_domain
-- _palette_is_dark
+- test_design_system_mode.py
 - Prisma Next — Supabase
 - 0.10 → 0.11 — Extension-author upgrade instructions
 - Banner Design - Multi-Format Creative Banner System
@@ -170,7 +170,7 @@
 - design-tokens-starter.json
 - 0.13 → 0.14 — Extension-author upgrade instructions
 - 4afc7b0d7d11f178e53f9cc94ef6d1ecd6dba10716d25ddd6e90e690b02d14ea/contract.d.ts
-- parse_decision_rules
+- content-api.ts
 - 0.13 → 0.14 — Extension-author upgrade instructions
 - Primitive Tokens
 - validate-tokens.cjs
@@ -192,7 +192,7 @@
 - patch
 - test_text_layout_resilience.py
 - Quick Reference
-- Commands
+- .generate
 - Brand
 - Slide Strategies
 - Component Tokens
@@ -215,7 +215,7 @@
 - Upgrade Prisma 8 (extension)
 - input
 - radius
-- practice-set.tsx
+- Commands
 - ui-ux-pro-max
 - Slides Reference
 - HTML Slide Template
@@ -324,32 +324,28 @@
 - components.json
 - content.ts
 - api
-- dependencies
+- Cookies
 - 6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts
 - devDependencies
-- devDependencies
+- 3. Heal
 - Browser Automation with playwright-cli
 - dependencies
 - scripts
-- button.tsx
+- practice-run.tsx
 - Content API
 - content.test.ts
 - M
-- topic.tsx
-- scripts
-- vite.config.ts
+- react-router
+- root.tsx
+- Storage State
 - M
-- content-api.ts
-- requireAuth
-- _select_palette_for_mode
-- requireAdmin
-- Workflow — First-touch orientation
+- dashboard.tsx
+- toolbar
+- select
 - Prisma Next — Queries
-- 3. Heal
-- practice-run.tsx
+- sidebar.tsx
 - M
-- Cookies
-- .generate
+- Local Storage
 - Browser Session Management
 - Test generation (plan → generate → heal)
 - Tracing
@@ -357,10 +353,45 @@
 - playwright-cli/SKILL.md
 - Video Recording
 - Advanced Mocking with run-code
-- Attaching to a Running Browser
-- Prisma Next (Prisma 8)
 - test_data_contracts.py
-- test_style_taxonomy.py
+- Per-component notes
+- Commands
+- Framework Mode
+- shadcn/SKILL.md
+- Customization & Theming
+- Component Composition
+- Styling & Customization
+- alert-dialog
+- Tools
+- toast
+- popover
+- shadcn/ui
+- api/.agents/skills/prisma-8/SKILL.md
+- tooltip
+- dialog
+- Target wrapper shapes (golden-derived specifics)
+- Data Mode
+- Identify the Mode
+- scroll-area
+- hover-card → preview-card
+- React Server Components (RSC)
+- Registry Authoring and Addresses
+- Base vs Radix
+- Chat & Messaging
+- form
+- Declarative Mode
+- Forms & Inputs
+- Critical Rules
+- Class-string rewrites (layer 2)
+- display-misc.md
+- avatar
+- Radix UI -> Base UI migration
+- Consumer-side prop changes (call sites, not wrappers)
+- Progress.Indicator → Progress.Indicator
+- Separator.Root → Separator
+- (new) Fieldset.Root and Fieldset.Legend
+- React Router application template
+- overlays.md
 
 ## God Nodes (most connected - your core abstractions)
 1. `TailwindConfigGenerator` - 58 edges
@@ -369,8 +400,8 @@
 4. `search_stack()` - 35 edges
 5. `DesignSystemGenerator` - 35 edges
 6. `ShadcnInstaller` - 34 edges
-7. `TestShadcnInstaller` - 26 edges
-8. `api()` - 26 edges
+7. `api()` - 29 edges
+8. `TestShadcnInstaller` - 26 edges
 9. `Prisma Next — Migration Authoring` - 25 edges
 10. `Prisma Next — Migration Authoring` - 25 edges
 
@@ -389,15 +420,15 @@
 ## Import Cycles
 - None detected.
 
-## Communities (363 total, 46 thin omitted)
+## Communities (393 total, 43 thin omitted)
 
 ### Community 0 - "api/package.json"
 Cohesion: 0.11
 Nodes (16): author, description, @types/node, typescript, keywords, license, main, name (+8 more)
 
 ### Community 1 - "web/package.json"
-Cohesion: 0.11
-Nodes (18): @types/node, typescript, name, private, type, @base-ui/react, @fontsource-variable/inter, isbot (+10 more)
+Cohesion: 0.04
+Nodes (47): dependencies, @base-ui/react, class-variance-authority, cn, @fontsource-variable/inter, isbot, lucide-react, react (+39 more)
 
 ### Community 2 - "package.json"
 Cohesion: 0.09
@@ -411,17 +442,17 @@ Nodes (16): AggregateTypes, CodecTypes, Contract, ContractBase, DefaultLiteralVa
 Cohesion: 0.12
 Nodes (16): compilerOptions, esModuleInterop, jsx, lib, module, moduleResolution, noEmit, paths (+8 more)
 
-### Community 5 - "React Router Framework Mode"
-Cohesion: 0.12
-Nodes (22): Prisma data contract, Generated contract JSON and TypeScript declarations, pnpm catalogs and overrides, PostgreSQL 15 or newer, Prisma Next, React Router Data Mode, Forms and fetchers, Route loaders and actions (+14 more)
+### Community 5 - "Prisma Next"
+Cohesion: 0.33
+Nodes (6): Prisma data contract, Generated contract JSON and TypeScript declarations, pnpm catalogs and overrides, PostgreSQL 15 or newer, Prisma Next, pnpm apps workspace
 
 ### Community 6 - "compilerOptions"
 Cohesion: 0.15
 Nodes (12): compilerOptions, erasableSyntaxOnly, module, moduleResolution, noEmit, resolveJsonModule, rewriteRelativeImportExtensions, skipLibCheck (+4 more)
 
 ### Community 7 - "validate_data.py"
-Cohesion: 0.07
-Nodes (47): Semantic quality contracts for the core UI/UX datasets., read_rows(), TestAccessibilityGuidance, TestChartsTypographyAndIcons, TestCurrentReactGuidance, TestSemanticColors, _catalog_date(), _check_app_interface_contract() (+39 more)
+Cohesion: 0.11
+Nodes (37): _catalog_date(), _check_app_interface_contract(), _check_catalog_contract(), _check_catalog_summary(), _check_chart_contract(), _check_color_contract(), _check_core_data_contract(), _check_file() (+29 more)
 
 ### Community 8 - "search"
 Cohesion: 0.06
@@ -451,6 +482,14 @@ Nodes (38): format_context(), format_result(), main(), Format a single search re
 Cohesion: 0.67
 Nodes (3): Graphify knowledge graph, AST-only graph update, Scoped graph queries
 
+### Community 15 - "test_core_data_quality.py"
+Cohesion: 0.16
+Nodes (11): Semantic quality contracts for the core UI/UX datasets., read_rows(), TestAccessibilityGuidance, TestChartsTypographyAndIcons, TestCurrentReactGuidance, TestSemanticColors, _check_typography_contract(), _configured_font_names() (+3 more)
+
+### Community 16 - "_normalize"
+Cohesion: 0.25
+Nodes (9): _exact_match_diagnostic(), _legacy_successor_guidance(), _normalize(), Apply longest-first synonym substitution at token boundaries., Whether a stack query explicitly targets an older framework generation., Choose one coherent applicability generation for stack retrieval., Prefer the explicit successor row for a brand-new app on legacy-only stacks., _stack_query_requests_legacy() (+1 more)
+
 ### Community 19 - "Tailwind CSS Utility Reference"
 Cohesion: 0.05
 Nodes (43): Arbitrary Values, Aspect Ratio, Background Colors, Border Color, Border Radius, Border Style, Border Width, Borders (+35 more)
@@ -472,8 +511,8 @@ Cohesion: 0.09
 Nodes (22): $type, $value, $type, $value, $type, $value, $type, $value (+14 more)
 
 ### Community 24 - "DesignSystemGenerator"
-Cohesion: 0.16
-Nodes (6): DesignSystemGenerator, Generates design system recommendations from aggregated searches., Load reasoning rules from CSV., TestReasoningMatch, read_rows(), TestReasoningContract
+Cohesion: 0.11
+Nodes (8): DesignSystemGenerator, Generates design system recommendations from aggregated searches., Load reasoning rules from CSV., Select best matching result based on priority keywords., TestReasoningMatch, read_rows(), TestGeneratedCatalogContract, TestReasoningContract
 
 ### Community 25 - "Form & Input Components"
 Cohesion: 0.06
@@ -488,12 +527,12 @@ Cohesion: 0.06
 Nodes (31): 0.11 → 0.12 — User upgrade instructions, After re-emit, Application code, Apply the validator migration, Before 0.12, Before 0.12, Confirm every manifest is migrated, Contract artefacts (+23 more)
 
 ### Community 28 - "search"
-Cohesion: 0.12
-Nodes (6): Resolve a deprecated in-domain alias, or expose a cross-domain redirect., Main search function with auto-domain detection, search(), _style_search_destination(), TestSearchDomains, TestStyleTaxonomy
+Cohesion: 0.11
+Nodes (8): Resolve a deprecated in-domain alias, or expose a cross-domain redirect., Main search function with auto-domain detection, search(), _style_search_destination(), TestSearchDomains, Regression tests for the public style taxonomy and search contract., read_rows(), TestStyleTaxonomy
 
 ### Community 29 - "search_stack"
 Cohesion: 0.10
-Nodes (10): _exact_stack_identifier(), Resolve a standalone API identifier even when its BM25 IDF is low., Search stack-specific guidelines, search_stack(), Freshness and migration contracts for native, desktop, and 3D stacks., _rows(), TestNativeDesktopStackFreshness, Freshness and generation-isolation contracts for web stack guidance. (+2 more)
+Nodes (8): Search stack-specific guidelines, search_stack(), Freshness and migration contracts for native, desktop, and 3D stacks., _rows(), TestNativeDesktopStackFreshness, Freshness and generation-isolation contracts for web stack guidance., _rows(), TestWebStackFreshness
 
 ### Community 30 - "0.11 → 0.12 — User upgrade instructions"
 Cohesion: 0.06
@@ -524,8 +563,8 @@ Cohesion: 0.07
 Nodes (15): Test adding custom fonts., Test adding custom breakpoints., Test TailwindConfigGenerator class., Test plugin recommendations., Test generating TypeScript configuration., Test generating JavaScript configuration., Test validating valid configuration., Test validating config with no content paths. (+7 more)
 
 ### Community 37 - "scripts/core.py"
-Cohesion: 0.09
-Nodes (35): _contains_phrase(), _domain_keywords(), _exact_match_diagnostic(), _file_signature(), _get_bm25(), _legacy_successor_guidance(), _load_csv(), _load_csv_snapshot() (+27 more)
+Cohesion: 0.11
+Nodes (28): _contains_phrase(), _domain_keywords(), _exact_stack_identifier(), _file_signature(), _get_bm25(), _load_csv(), _load_csv_snapshot(), _load_product_keywords() (+20 more)
 
 ### Community 38 - "Workflow"
 Cohesion: 0.11
@@ -595,13 +634,17 @@ Nodes (22): Best Practices, Chart.js Integration, Command, Component Spec Patter
 Cohesion: 0.09
 Nodes (22): @apply Directive, Best Practices, Color Customization, Complete Tailwind Config, Configuration Examples, Content Configuration, Custom Color Palette, Custom Font Sizes (+14 more)
 
+### Community 55 - "dropdown-menu (Radix `DropdownMenu` → Base UI `Menu`)"
+Cohesion: 0.04
+Nodes (48): Arrow / Item / Group / Label / CheckboxItem / RadioGroup / RadioItem / ItemIndicator / Separator / Sub / SubTrigger / SubContent, Arrow → Menu.Arrow, Base UI only, data attributes, CSS variables, Base UI only props worth knowing (Menu), Base UI only props worth knowing (NavigationMenu), CheckboxItem → Menu.CheckboxItem, Content → ContextMenu.Portal > Positioner > Popup, Content → Menu.Portal > Menu.Positioner > Menu.Popup (+40 more)
+
 ### Community 56 - "Prisma Next — Contract Authoring"
 Cohesion: 0.09
 Nodes (22): Checklist, Common Pitfalls, Diagnostic codes you route on, Key Concepts, Prisma Next — Contract Authoring, Reference, What Prisma Next doesn't do yet, When Not to Use (+14 more)
 
 ### Community 57 - "Prisma Next — Quickstart (Adoption)"
-Cohesion: 0.14
-Nodes (14): Canonical on-disk layout, Checklist, Commands you'll use day-to-day, Common Pitfalls, Decision — PSL vs TypeScript authoring, Key Concepts, Prisma Next — Quickstart (Adoption), Reference Files (+6 more)
+Cohesion: 0.09
+Nodes (21): Anti-patterns on this path, Canonical on-disk layout, Checklist, Commands you'll use day-to-day, Common Pitfalls, Concept — what to communicate first, Decision — PSL vs TypeScript authoring, Key Concepts (+13 more)
 
 ### Community 58 - ".agents/skills/prisma-8/upgrading/app/upgrades/0.16-to-0.17/strip-sha256-hash-prefixes.ts"
 Cohesion: 0.15
@@ -675,9 +718,9 @@ Nodes (19): Anatomy of a service, Builds are yours, Databases, Deploy config, De
 Cohesion: 0.10
 Nodes (19): Base Color Presets, Best Practices, Color Customization, Color Format, Component Customization, CSS Variable System, Customize Styles, Customize Variants (+11 more)
 
-### Community 76 - "test_design_system_mode.py"
-Cohesion: 0.15
-Nodes (11): _filter_anti_patterns_for_mode(), _query_wants_dark(), True when a styles.csv row describes itself as dark-first., True when the query explicitly asks for a dark theme., Resolve the mode the rest of the output has to agree with., Drop "avoid dark mode" advice once dark mode is the resolved answer., _resolve_color_mode(), _style_is_dark_primary() (+3 more)
+### Community 76 - "_style_is_dark_primary"
+Cohesion: 0.21
+Nodes (7): _query_wants_dark(), True when a styles.csv row describes itself as dark-first., True when the query explicitly asks for a dark theme., Resolve the mode the rest of the output has to agree with., _resolve_color_mode(), _style_is_dark_primary(), TestModeResolution
 
 ### Community 77 - "api/.agents/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-domain-namespaced-contracts.ts"
 Cohesion: 0.16
@@ -768,7 +811,7 @@ Cohesion: 0.18
 Nodes (16): apply_color(), apply_viewbox_size(), extract_svgs(), generate_batch(), generate_icon(), generate_sizes(), load_env(), main() (+8 more)
 
 ### Community 99 - ".agents/skills/prisma-8/SKILL.md"
-Cohesion: 0.14
+Cohesion: 0.17
 Nodes (5): Checklist, Prisma Next (Prisma 8), Routing rules, Routing table, The canonical model (one paragraph)
 
 ### Community 100 - "Prisma Next — The Migration Graph and Refs (Mental Model)"
@@ -803,8 +846,8 @@ Nodes (13): dryRun, execFileAsync, ExtensionRoot, extensionRoots, findMigrationD
 Cohesion: 0.18
 Nodes (15): canonicalizeJson(), computeMigrationHash(), dryRun, findMigrationManifests(), isJsonObject(), processFile(), projectRoot, removeTopLevelKey() (+7 more)
 
-### Community 109 - "api/.agents/skills/prisma-8/SKILL.md"
-Cohesion: 0.11
+### Community 109 - "Prisma Next — Queries"
+Cohesion: 0.18
 Nodes (11): Checklist, Common Pitfalls (cross-target), Consuming the result: `await`, `.toArray()`, or `for await`, Namespace-aware accessors, Pick your target, Prisma Next — Queries, Reference Files, Running queries from a short script (+3 more)
 
 ### Community 110 - "api/.agents/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-closed-mongo-contracts.ts"
@@ -884,7 +927,7 @@ Cohesion: 0.13
 Nodes (14): AIDA (Attention-Interest-Desire-Action), Before-After-Bridge, Contrast Patterns, Copywriting Formulas, Core Formulas, Cost of Inaction, FAB (Features-Advantages-Benefits), Formula-to-Slide Mapping (+6 more)
 
 ### Community 129 - "Prisma Next — Supabase"
-Cohesion: 0.13
+Cohesion: 0.12
 Nodes (15): Checklist, Common Pitfalls, Key Concepts, Prisma Next — Supabase, Reference Files, What Prisma Next doesn't do yet, When Not to Use, When to Use (+7 more)
 
 ### Community 130 - "0.10 → 0.11 — Extension-author upgrade instructions"
@@ -899,9 +942,9 @@ Nodes (14): AIDA (Attention-Interest-Desire-Action), Before-After-Bridge, Contra
 Cohesion: 0.23
 Nodes (3): detect_domain(), Auto-detect the most relevant domain from query. Matches are weighted by…, TestDomainDetection
 
-### Community 133 - "_palette_is_dark"
-Cohesion: 0.18
-Nodes (7): _palette_is_dark(), WCAG relative luminance of a #RRGGBB string, or None if unparseable., True when a colors.csv row's Background is a dark surface., _relative_luminance(), The exact reproduction from issue #428., TestEndToEndCoherence, TestLuminance
+### Community 133 - "test_design_system_mode.py"
+Cohesion: 0.11
+Nodes (15): _contrast_ratio(), _derive_dark_palette(), _palette_is_dark(), WCAG relative luminance of a #RRGGBB string, or None if unparseable., True when a colors.csv row's Background is a dark surface., WCAG contrast ratio for two hex colors, or None if either is invalid., Keep product brand tokens while deriving accessible dark surfaces., Pick the highest-ranked palette matching the resolved mode. Only the dark case… (+7 more)
 
 ### Community 134 - "Prisma Next — Supabase"
 Cohesion: 0.12
@@ -944,7 +987,7 @@ Cohesion: 0.14
 Nodes (13): Asking for help when the envelope doesn't route, Checklist, Common Pitfalls, How to ask for the full envelope, Key Concepts, Prisma Next — Debug, Routing — script teardown and closed client, Routing — symptom and code → next move (+5 more)
 
 ### Community 144 - "Prisma Next — Migration Review (Deployment + Concurrency)"
-Cohesion: 0.10
+Cohesion: 0.09
 Nodes (21): Checklist, Common Pitfalls, Concept — concurrent migrations on the same branch point, Concept — ref-mismatch on CI / deploy, Destination, Diagnostic codes, Graph-tree output, Key Concepts — the navigation model (+13 more)
 
 ### Community 145 - "Prisma Next — Queries (Postgres)"
@@ -995,9 +1038,9 @@ Nodes (12): 0.13 → 0.14 — Extension-author upgrade instructions, `contract-m
 Cohesion: 0.12
 Nodes (16): AggregateTypes, CodecTypes, Contract, ContractBase, DefaultLiteralValue, ExecutionHash, FieldInputTypes, FieldOutputTypes (+8 more)
 
-### Community 157 - "parse_decision_rules"
-Cohesion: 0.19
-Nodes (9): Find matching reasoning rule for a category., Apply reasoning rules to search results., apply_decision_rules(), _object_without_duplicates(), parse_decision_rules(), Return deterministic mutations and an audit trail; never execute data., Closed, non-executable grammar for design-system decision rules., Parse the canonical condition -> action-array representation. (+1 more)
+### Community 157 - "content-api.ts"
+Cohesion: 0.18
+Nodes (14): AnswerFeedback, ApiError, PracticeQuestion, PracticeSetSummary, PracticeSubmission, SubmittedAnswer, findPracticeDraft(), LastResult (+6 more)
 
 ### Community 158 - "0.13 → 0.14 — Extension-author upgrade instructions"
 Cohesion: 0.15
@@ -1083,9 +1126,9 @@ Nodes (4): Canonical regression contracts for resilient UI text layouts., read_r
 Cohesion: 0.18
 Nodes (11): 10. Charts & Data (LOW), 1. Accessibility (CRITICAL), 2. Touch & Interaction (CRITICAL), 3. Performance (HIGH), 4. Style Selection (HIGH), 5. Layout & Responsive (HIGH), 6. Typography & Color (MEDIUM), 7. Animation (MEDIUM) (+3 more)
 
-### Community 179 - "Commands"
-Cohesion: 0.20
-Nodes (10): Commands, Core, DevTools, Keyboard, Mouse, Navigation, Network, Save as (+2 more)
+### Community 179 - ".generate"
+Cohesion: 0.16
+Nodes (8): _filter_anti_patterns_for_mode(), Drop "avoid dark mode" advice once dark mode is the resolved answer., Execute searches across multiple domains., Extract results list from search result dict., Generate complete design system recommendation. variance/motion/density are…, Bucket a 1-10 dial value into its tier config. Returns None if value is None., _resolve_dial(), TestAntiPatternGating
 
 ### Community 180 - "Brand"
 Cohesion: 0.20
@@ -1175,9 +1218,9 @@ Nodes (8): padding-x, input, $type, $value, focus-ring, padding-x, $type, $value
 Cohesion: 0.19
 Nodes (14): $type, $value, $type, $value, $type, $value, primitive, radius (+6 more)
 
-### Community 202 - "practice-set.tsx"
-Cohesion: 0.15
-Nodes (10): PracticeSet, PracticeSetSummary, Question, savePracticeSet(), PracticeSetForm(), Props, clientAction(), clientLoader() (+2 more)
+### Community 202 - "Commands"
+Cohesion: 0.20
+Nodes (10): Commands, Core, DevTools, Keyboard, Mouse, Navigation, Network, Save as (+2 more)
 
 ### Community 203 - "ui-ux-pro-max"
 Cohesion: 0.25
@@ -1460,12 +1503,12 @@ Cohesion: 0.17
 Nodes (17): app, auth, requireAdmin(), content, contentError(), fields(), id(), invalid() (+9 more)
 
 ### Community 324 - "api"
-Cohesion: 0.17
-Nodes (9): api(), clientAction(), clientLoader(), TokenStatus, clientAction(), clientAction(), clientLoader(), TokenStatus (+1 more)
+Cohesion: 0.11
+Nodes (12): api(), AuthUser, clientAction(), clientLoader(), TokenStatus, clientAction(), clientAction(), clientAction() (+4 more)
 
-### Community 325 - "dependencies"
-Cohesion: 0.14
-Nodes (14): dependencies, @base-ui/react, class-variance-authority, cn, @fontsource-variable/inter, isbot, lucide-react, react (+6 more)
+### Community 325 - "Cookies"
+Cohesion: 0.22
+Nodes (9): Advanced: Multiple Cookies or Custom Options, Clear All Cookies, Cookies, Delete a Cookie, Filter Cookies by Domain, Filter Cookies by Path, Get Specific Cookie, List All Cookies (+1 more)
 
 ### Community 326 - "6475ece15052fd17a6b80b4eb3607cf47b066c3062b40171669a6cf0e4823f98/contract.d.ts"
 Cohesion: 0.12
@@ -1475,9 +1518,9 @@ Nodes (16): AggregateTypes, CodecTypes, Contract, ContractBase, DefaultLiteralVa
 Cohesion: 0.29
 Nodes (7): devDependencies, prisma, @prisma/cli-engine, @types/cors, @types/express, @types/node, typescript
 
-### Community 328 - "devDependencies"
-Cohesion: 0.22
-Nodes (9): devDependencies, @react-router/dev, tailwindcss, @tailwindcss/vite, @types/node, @types/react, @types/react-dom, typescript (+1 more)
+### Community 328 - "3. Heal"
+Cohesion: 0.33
+Nodes (6): 3.1 Find failing tests, 3.2 Debug one failure, 3.3 Apply the fix, 3.4 Reconcile with the spec, 3.5 Iteration and giving up, 3. Heal
 
 ### Community 329 - "Browser Automation with playwright-cli"
 Cohesion: 0.14
@@ -1491,9 +1534,9 @@ Nodes (5): dependencies, cors, dotenv, express, @prisma/orm-postgres
 Cohesion: 0.29
 Nodes (7): scripts, bootstrap:admin, contract:emit, seed:demo, start, test, typecheck
 
-### Community 332 - "button.tsx"
-Cohesion: 0.40
-Nodes (4): Button(), buttonVariants, class-variance-authority, cn
+### Community 332 - "practice-run.tsx"
+Cohesion: 0.08
+Nodes (23): AlertDialogContent(), AlertDialogDescription(), AlertDialogTitle(), Badge(), badgeVariants, Progress(), Tabs(), TabsContent() (+15 more)
 
 ### Community 333 - "Content API"
 Cohesion: 0.40
@@ -1503,57 +1546,41 @@ Nodes (4): Authentication, Checks, Content API, Local demo data
 Cohesion: 0.25
 Nodes (9): hashPassword(), email, raw(), request(), db, demoPracticeSetTitle, demoQuestions, demoTopics (+1 more)
 
-### Community 336 - "topic.tsx"
-Cohesion: 0.14
-Nodes (9): Material, saveContent(), Topic, ContentError(), ContentForm(), Props, QuestionForm(), clientAction() (+1 more)
+### Community 336 - "react-router"
+Cohesion: 0.08
+Nodes (23): Material, PracticeSet, Question, requireAdmin(), saveContent(), savePracticeSet(), Topic, ContentError() (+15 more)
 
-### Community 337 - "scripts"
-Cohesion: 0.40
-Nodes (5): scripts, build, dev, start, typecheck
+### Community 338 - "Storage State"
+Cohesion: 0.50
+Nodes (4): Restore Storage State, Save Storage State, Storage State, Storage State File Format
 
-### Community 340 - "content-api.ts"
-Cohesion: 0.21
-Nodes (7): AnswerFeedback, ApiError, currentUser(), PracticeQuestion, SubmittedAnswer, clientAction(), clientLoader()
+### Community 340 - "dashboard.tsx"
+Cohesion: 0.15
+Nodes (14): Button(), buttonVariants, Card(), CardContent(), CardDescription(), CardFooter(), CardHeader(), CardTitle() (+6 more)
 
-### Community 341 - "requireAuth"
-Cohesion: 0.24
-Nodes (6): requireAuth(), clientLoader(), clientLoader(), clientLoader(), resources, Welcome()
+### Community 343 - "toolbar"
+Cohesion: 0.04
+Nodes (46): accordion, Accordion.Content → Accordion.Panel, Accordion.Header → Accordion.Header, Accordion.Item → Accordion.Item, Accordion.Root → Accordion.Root, Accordion.Trigger → Accordion.Trigger, Base UI only props worth knowing, Base UI only props worth knowing (+38 more)
 
-### Community 342 - "_select_palette_for_mode"
-Cohesion: 0.22
-Nodes (7): _contrast_ratio(), _derive_dark_palette(), WCAG contrast ratio for two hex colors, or None if either is invalid., Keep product brand tokens while deriving accessible dark surfaces., Pick the highest-ranked palette matching the resolved mode. Only the dark case…, _select_palette_for_mode(), TestPaletteSelection
-
-### Community 343 - "requireAdmin"
-Cohesion: 0.20
-Nodes (7): AuthUser, requireAdmin(), clientLoader(), clientLoader(), clientLoader(), clientLoader(), LinkResult
-
-### Community 344 - "Workflow — First-touch orientation"
-Cohesion: 0.29
-Nodes (7): Anti-patterns on this path, Concept — what to communicate first, Step 1 — Read the project, name the contract, Step 2 — Get the user's app connected and round-tripping, Step 3 — Round-trip a row, Step 4 — Hand off to the next move, Workflow — First-touch orientation
+### Community 344 - "select"
+Cohesion: 0.04
+Nodes (44): Base UI only props worth knowing (checkbox), Base UI only props worth knowing (radio-group), Base UI only props worth knowing (select), Base UI only props worth knowing (slider), Base UI only props worth knowing (switch), checkbox, Checkbox.Indicator → Checkbox.Indicator, Checkbox.Root → Checkbox.Root (+36 more)
 
 ### Community 345 - "Prisma Next — Queries"
 Cohesion: 0.18
 Nodes (11): Checklist, Common Pitfalls (cross-target), Consuming the result: `await`, `.toArray()`, or `for await`, Namespace-aware accessors, Pick your target, Prisma Next — Queries, Reference Files, Running queries from a short script (+3 more)
 
-### Community 346 - "3. Heal"
-Cohesion: 0.33
-Nodes (6): 3.1 Find failing tests, 3.2 Debug one failure, 3.3 Apply the fix, 3.4 Reconcile with the spec, 3.5 Iteration and giving up, 3. Heal
+### Community 347 - "sidebar.tsx"
+Cohesion: 0.05
+Nodes (42): AppHeader(), pageTitle(), activePath(), adminContentItems, AppSidebar(), NavigationItem(), primaryItems, Input() (+34 more)
 
-### Community 348 - "practice-run.tsx"
-Cohesion: 0.16
-Nodes (12): PracticeSetForPractice, PracticeSubmission, answerLabel(), Draft, draftFor(), key(), LastResult, PracticeRun() (+4 more)
-
-### Community 350 - "Cookies"
-Cohesion: 0.06
-Nodes (35): Advanced: Multiple Cookies or Custom Options, Advanced: Multiple Operations, Authentication State Reuse, Clear All Cookies, Clear All localStorage, Clear sessionStorage, Common Patterns, Cookies (+27 more)
-
-### Community 351 - ".generate"
-Cohesion: 0.18
-Nodes (6): Execute searches across multiple domains., Select best matching result based on priority keywords., Extract results list from search result dict., Generate complete design system recommendation. variance/motion/density are…, Bucket a 1-10 dial value into its tier config. Returns None if value is None., _resolve_dial()
+### Community 350 - "Local Storage"
+Cohesion: 0.09
+Nodes (22): Advanced: Multiple Operations, Authentication State Reuse, Clear All localStorage, Clear sessionStorage, Common Patterns, Delete Database, Delete Single Item, Delete Single Item (+14 more)
 
 ### Community 352 - "Browser Session Management"
-Cohesion: 0.13
-Nodes (15): 1. Name Browser Sessions Semantically, 2. Always Clean Up, 3. Delete Stale Browser Data, A/B Testing Sessions, Best Practices, Browser Session Commands, Browser Session Configuration, Browser Session Isolation Properties (+7 more)
+Cohesion: 0.10
+Nodes (20): 1. Name Browser Sessions Semantically, 2. Always Clean Up, 3. Delete Stale Browser Data, A/B Testing Sessions, Attach by channel name, Attach via browser extension, Attach via CDP endpoint, Attaching to a Running Browser (+12 more)
 
 ### Community 353 - "Test generation (plan → generate → heal)"
 Cohesion: 0.12
@@ -1579,37 +1606,177 @@ Nodes (8): 1. Use Descriptive Filenames, 2. Record entire hero scripts., Basic R
 Cohesion: 0.25
 Nodes (8): Advanced Mocking with run-code, CLI Route Commands, Conditional Response Based on Request, Delayed Response, Modify Real Response, Request Mocking, Simulate Network Failures, URL Patterns
 
-### Community 359 - "Attaching to a Running Browser"
-Cohesion: 0.40
-Nodes (5): Attach by channel name, Attach via browser extension, Attach via CDP endpoint, Attaching to a Running Browser, Detach
+### Community 361 - "test_data_contracts.py"
+Cohesion: 0.10
+Nodes (14): Find matching reasoning rule for a category., Apply reasoning rules to search results., apply_decision_rules(), _object_without_duplicates(), parse_decision_rules(), Return deterministic mutations and an audit trail; never execute data., Closed, non-executable grammar for design-system decision rules., Parse the canonical condition -> action-array representation. (+6 more)
 
-### Community 360 - "Prisma Next (Prisma 8)"
-Cohesion: 0.40
+### Community 362 - "Per-component notes"
+Cohesion: 0.08
+Nodes (24): accordion, asChild -> render, breadcrumb / marker (Slot users), Coverage matrix, CSS custom properties, Data attributes / class hooks, dialog / alert-dialog / sheet, Doc-validation TODOs (before specs are final) (+16 more)
+
+### Community 363 - "Commands"
+Cohesion: 0.12
+Nodes (17): `add` — Add components, `apply` — Apply a preset to an existing project, `build` — Build a custom registry, Commands, Contents, `diff` — Check for updates, `docs` — Get component documentation URLs, Dry-Run Mode (+9 more)
+
+### Community 364 - "Framework Mode"
+Cohesion: 0.14
+Nodes (13): Data and Mutations, Forms, Fetchers, and Pending UI, Framework Mode, Framework Shape, Layout and Root Route Rules, Metadata, Middleware, Sessions, and Auth, Read the Local Docs by Mode (+5 more)
+
+### Community 365 - "shadcn/SKILL.md"
+Cohesion: 0.21
+Nodes (4): Icons, Icons in Button use data-icon attribute, No sizing classes on icons inside components, Pass icons as component objects, not string keys
+
+### Community 366 - "Customization & Theming"
+Cohesion: 0.14
+Nodes (14): 1. Built-in variants, 2. Tailwind classes via `className`, 3. Add a new variant, 4. Wrapper components, Adding Custom Colors, Border Radius, Changing the Theme, Checking for Updates (+6 more)
+
+### Community 367 - "Component Composition"
+Cohesion: 0.15
+Nodes (13): Avatar always needs AvatarFallback, Button has no isPending or isLoading prop, Callouts use Alert, Card structure, Choosing between overlay components, Component Composition, Contents, Dialog, Sheet, and Drawer always need a Title (+5 more)
+
+### Community 368 - "Styling & Customization"
+Cohesion: 0.15
+Nodes (13): Built-in variants first, className for layout only, Contents, No manual dark: color overrides, No manual z-index on overlay components, No raw color values for status/state indicators, No space-x-* / space-y-*, Prefer size-* over w-* h-* when equal (+5 more)
+
+### Community 369 - "alert-dialog"
+Cohesion: 0.17
+Nodes (12): Action → (no primitive), alert-dialog, Base UI only props worth knowing (alert-dialog), Cancel → Close, Content → Popup, CSS variables (alert-dialog), Data attributes (alert-dialog), Overlay → Backdrop (+4 more)
+
+### Community 370 - "Tools"
+Cohesion: 0.17
+Nodes (11): Configuring Registries, Setup, `shadcn:get_add_command_for_items`, `shadcn:get_audit_checklist`, `shadcn:get_item_examples_from_registries`, `shadcn:get_project_registries`, `shadcn:list_items_in_registries`, shadcn MCP Server (+3 more)
+
+### Community 372 - "toast"
+Cohesion: 0.18
+Nodes (11): Base UI only props worth knowing, CSS variables, Data attributes, toast, Toast.Action → Toast.Action, Toast.Close → Toast.Close, Toast.Description → Toast.Description, Toast.Provider → Toast.Provider (+3 more)
+
+### Community 373 - "popover"
+Cohesion: 0.18
+Nodes (11): Anchor → Positioner `anchor` prop, Arrow → Arrow, Base UI only props worth knowing (popover), Close → Close, Content → Positioner + Popup, CSS variables (popover), Data attributes (popover), popover (+3 more)
+
+### Community 374 - "shadcn/ui"
+Cohesion: 0.18
+Nodes (11): Component Docs, Examples, and Usage, Component Selection, Current Project Context, Detailed References, Key Fields, Key Patterns, Principles, Quick Reference (+3 more)
+
+### Community 375 - "api/.agents/skills/prisma-8/SKILL.md"
+Cohesion: 0.16
 Nodes (5): Checklist, Prisma Next (Prisma 8), Routing rules, Routing table, The canonical model (one paragraph)
 
-### Community 361 - "test_data_contracts.py"
-Cohesion: 0.16
-Nodes (6): Cross-file semantic contracts for curated design data., split_values(), style_identities(), TestLandingAndStackContract, TestStyleIdentityContract, _check_reasoning_contract()
+### Community 376 - "tooltip"
+Cohesion: 0.20
+Nodes (10): Arrow → Arrow, Base UI only props worth knowing (tooltip), Content → Positioner + Popup, CSS variables (tooltip), Data attributes (tooltip), Portal → Portal, Provider → Provider, Root → Root (+2 more)
+
+### Community 377 - "dialog"
+Cohesion: 0.20
+Nodes (10): Base UI only props worth knowing (dialog), Content → Popup, CSS variables (dialog), Data attributes (dialog), dialog, Overlay → Backdrop, Portal → Portal, Root → Root (+2 more)
+
+### Community 378 - "Target wrapper shapes (golden-derived specifics)"
+Cohesion: 0.20
+Nodes (9): Accordion animation placement, Button, Conventions, DropdownMenu / ContextMenu SubContent, Select, SubTrigger open styling, Tabs, Target wrapper shapes (golden-derived specifics) (+1 more)
+
+### Community 379 - "Data Mode"
+Cohesion: 0.20
+Nodes (9): Data and Mutations, Data Mode, Data Router Shape, Forms, Fetchers, and Pending UI, Navigation and URL State, Read the Local Docs by Mode, Route Objects and Routing, RSC Data (+1 more)
+
+### Community 380 - "Identify the Mode"
+Cohesion: 0.20
+Nodes (9): Data Mode, Declarative Mode, Framework Mode, Identify the Mode, Mode Migration Doc Index, React Router, RSC Framework and RSC Data Modes, Skill References (+1 more)
+
+### Community 381 - "scroll-area"
+Cohesion: 0.22
+Nodes (9): Base UI only props worth knowing, CSS variables, Data attributes, scroll-area, ScrollArea.Corner → ScrollArea.Corner, ScrollArea.Root → ScrollArea.Root, ScrollArea.Viewport → ScrollArea.Viewport, ScrollAreaScrollbar → ScrollArea.Scrollbar (+1 more)
+
+### Community 382 - "hover-card → preview-card"
+Cohesion: 0.22
+Nodes (9): Arrow → Arrow, Base UI only props worth knowing (preview-card), Content → Positioner + Popup, CSS variables (preview-card), Data attributes (preview-card), hover-card → preview-card, Portal → Portal, Root → Root (+1 more)
+
+### Community 383 - "React Server Components (RSC)"
+Cohesion: 0.22
+Nodes (8): Client/Server Boundaries, Data Loading in RSC, Detect RSC Data Mode, Detect RSC Framework Mode, React Server Components (RSC), Read the Local RSC Docs, RSC Route Module Differences, Stability
+
+### Community 384 - "Registry Authoring and Addresses"
+Cohesion: 0.22
+Nodes (9): Address Schemes, Build and Verify, GitHub Registries, Include, Item Definitions, Mental Model, Registry Authoring and Addresses, Registry Dependencies (+1 more)
+
+### Community 385 - "Base vs Radix"
+Cohesion: 0.22
+Nodes (9): Accordion, Base vs Radix, Button / trigger as non-button element (base only), Composition: asChild (radix) vs render (base), Contents, Select, Select — multiple selection and object values (base only), Slider (+1 more)
+
+### Community 386 - "Chat & Messaging"
+Cohesion: 0.22
+Nodes (9): Attachments use Attachment, Chat & Messaging, Contents, Escape hatch: the scroller hooks, Message rows use Message, Message surfaces use Bubble, Scrollable threads use MessageScroller, Streaming, anchoring, and jump-to-latest are built in (+1 more)
+
+### Community 387 - "form"
+Cohesion: 0.25
+Nodes (8): form, Form.Control → Field.Control, Form.Field → Field.Root, Form.Label → Field.Label, Form.Message → Field.Error, Form.Root → Form, Form.Submit → (none), Form.ValidityState → Field.Validity
+
+### Community 388 - "Declarative Mode"
+Cohesion: 0.25
+Nodes (7): Declarative Mode, Declarative Router Shape, Mode Boundary, Navigation, Read the Local Docs by Mode, Routing, URL Values
+
+### Community 389 - "Forms & Inputs"
+Cohesion: 0.25
+Nodes (8): Buttons inside inputs use InputGroup + InputGroupAddon, Contents, Field validation and disabled states, FieldSet + FieldLegend for grouping related fields, Forms & Inputs, Forms use FieldGroup + Field, InputGroup requires InputGroupInput/InputGroupTextarea, Option sets (2–7 choices) use ToggleGroup
+
+### Community 390 - "Critical Rules"
+Cohesion: 0.25
+Nodes (8): Chat & Messaging → [chat.md](./rules/chat.md), CLI, Component Structure → [composition.md](./rules/composition.md), Critical Rules, Forms & Inputs → [forms.md](./rules/forms.md), Icons → [icons.md](./rules/icons.md), Styling & Tailwind → [styling.md](./rules/styling.md), Use Components, Not Custom Markup → [composition.md](./rules/composition.md)
+
+### Community 391 - "Class-string rewrites (layer 2)"
+Cohesion: 0.29
+Nodes (6): Animation idiom, Class-string rewrites (layer 2), CSS variables, Data-attribute selectors, Disabled-state hooks, Element changes kill pseudo-class variants
+
+### Community 392 - "display-misc.md"
+Cohesion: 0.29
+Nodes (6): AccessibleIcon (radix `AccessibleIcon.Root`: `label` required), AspectRatio (radix `AspectRatio.Root`: `asChild`, `ratio` default `1`), Label (radix `Label.Root`: `asChild`, `htmlFor`), No Base UI counterpart, Radix UI → Base UI props mapping: progress, scroll-area, separator, avatar, toast, form, VisuallyHidden (radix `VisuallyHidden.Root`: `asChild`)
+
+### Community 393 - "avatar"
+Cohesion: 0.29
+Nodes (7): avatar, Avatar.Fallback → Avatar.Fallback, Avatar.Image → Avatar.Image, Avatar.Root → Avatar.Root, Base UI only props worth knowing, CSS variables, Data attributes
+
+### Community 394 - "Radix UI -> Base UI migration"
+Cohesion: 0.29
+Nodes (6): Hard rules, Modes, Preflight (always), Radix UI -> Base UI migration, Strategy: golden pair first, transformation engine second, Verify and report
+
+### Community 395 - "Consumer-side prop changes (call sites, not wrappers)"
+Cohesion: 0.33
+Nodes (5): Callback signature rule, Consumer-side prop changes (call sites, not wrappers), Per component, Sweep procedure, Universal
+
+### Community 396 - "Progress.Indicator → Progress.Indicator"
+Cohesion: 0.33
+Nodes (6): Base UI only props worth knowing, CSS variables, Data attributes, progress, Progress.Indicator → Progress.Indicator, Progress.Root → Progress.Root
+
+### Community 397 - "Separator.Root → Separator"
+Cohesion: 0.40
+Nodes (5): Base UI only props worth knowing, CSS variables, Data attributes, separator, Separator.Root → Separator
+
+### Community 399 - "(new) Fieldset.Root and Fieldset.Legend"
+Cohesion: 0.50
+Nodes (4): Base UI only props worth knowing (form-wide), CSS variables, Data attributes, (new) Fieldset.Root and Fieldset.Legend
+
+### Community 400 - "React Router application template"
+Cohesion: 0.67
+Nodes (3): Docker deployment, Tailwind CSS, React Router application template
 
 ## Knowledge Gaps
-- **2444 isolated node(s):** `fs`, `path`, `fs`, `path`, `fs` (+2439 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 2987 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **46 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **2851 isolated node(s):** `fs`, `path`, `fs`, `path`, `fs` (+2846 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 3428 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **43 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `ShadcnInstaller` connect `ShadcnInstaller` to `.check_shadcn_config`, `.test_get_installed_components_empty`, `.__init__`, `patch`, `.test_add_components_no_config`, `.test_add_components_dry_run`, `.test_list_installed_no_config`, `.test_init_dry_run`, `.test_check_shadcn_config_not_exists`, `TestShadcnInstaller`, `.test_get_installed_components_with_files`, `.test_add_components_no_components`?**
   _High betweenness centrality (0.004) - this node is a cross-community bridge._
-- **Why does `DesignSystemGenerator` connect `DesignSystemGenerator` to `BM25`, `_palette_is_dark`, `test_data_contracts.py`, `test_design_system_mode.py`, `design_system.py`, `_select_palette_for_mode`, `parse_decision_rules`, `.generate`?**
-  _High betweenness centrality (0.003) - this node is a cross-community bridge._
-- **Why does `search()` connect `search` to `detect_domain`, `scripts/core.py`, `BM25`, `validate_data.py`, `test_style_taxonomy.py`, `design_system.py`, `test_text_layout_resilience.py`, `_row_identities`, `.generate`?**
-  _High betweenness centrality (0.003) - this node is a cross-community bridge._
+- **Why does `DesignSystemGenerator` connect `DesignSystemGenerator` to `BM25`, `test_design_system_mode.py`, `test_data_contracts.py`, `design_system.py`, `.generate`?**
+  _High betweenness centrality (0.002) - this node is a cross-community bridge._
+- **Why does `search()` connect `search` to `detect_domain`, `scripts/core.py`, `BM25`, `test_core_data_quality.py`, `_normalize`, `design_system.py`, `test_text_layout_resilience.py`, `.generate`, `_row_identities`?**
+  _High betweenness centrality (0.002) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `TailwindConfigGenerator` (e.g. with `TestGeneratedConfigIsValidJs` and `TestTailwindConfigGenerator`) actually correct?**
   _`TailwindConfigGenerator` has 2 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 3 inferred relationships involving `DesignSystemGenerator` (e.g. with `TestReasoningMatch` and `TestReasoningContract`) actually correct?**
   _`DesignSystemGenerator` has 3 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `fs`, `path`, `fs` to the rest of the system?**
-  _2444 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _2851 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `api/package.json` be split into smaller, more focused modules?**
   _Cohesion score 0.1111111111111111 - nodes in this community are weakly interconnected._

@@ -2,11 +2,20 @@ import { Link } from "react-router";
 import type { Route } from "./+types/practice";
 import { api, requireAuth, type PracticeSetSummary } from "../content-api";
 import { ContentError } from "../content-form";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
 
 export const meta = () => [{ title: "Practice · Genshu" }];
 export async function clientLoader() {
   await requireAuth();
-  return api<PracticeSetSummary[]>("/practice");
+  const practiceSets = await api<PracticeSetSummary[]>("/practice");
+  return { practiceSets };
 }
 export function HydrateFallback() {
   return (
@@ -17,24 +26,44 @@ export function HydrateFallback() {
 }
 
 export default function PracticeSets({ loaderData }: Route.ComponentProps) {
+  const { practiceSets } = loaderData;
   return (
     <main className="practice-page">
-      <nav>
-        <Link to="/">Genshu home</Link>
-      </nav>
-      <h1>Practice</h1>
-      <p>Choose a practice set to begin.</p>
-      {!loaderData.length && (
-        <p>No practice content exists yet. An Admin needs to create a Practice Set.</p>
+      <div className="practice-page__header">
+        <div>
+          <p className="page-eyebrow">Practice</p>
+          <h1>Choose a practice set</h1>
+          <p className="page-intro">Answers can be changed until you submit.</p>
+        </div>
+      </div>
+      {!practiceSets.length && (
+        <p className="practice-empty">
+          No practice content exists yet. An Admin needs to create a Practice
+          Set.
+        </p>
       )}
       <ul className="practice-set-list">
-        {loaderData.map((practiceSet) => (
+        {practiceSets.map((practiceSet) => (
           <li key={practiceSet.id}>
-            <h2>{practiceSet.title}</h2>
-            {practiceSet.description && <p>{practiceSet.description}</p>}
-            <Link className="practice-link" to={`/practice/${practiceSet.id}`}>
-              Start practice
-            </Link>
+            <Card className="practice-set-card">
+              <CardHeader>
+                <CardTitle>
+                  <h2>{practiceSet.title}</h2>
+                </CardTitle>
+                {practiceSet.description && (
+                  <CardDescription>{practiceSet.description}</CardDescription>
+                )}
+              </CardHeader>
+              <CardContent />
+              <CardFooter>
+                <Link
+                  className="practice-link"
+                  to={`/practice/${practiceSet.id}`}
+                >
+                  Open practice set
+                </Link>
+              </CardFooter>
+            </Card>
           </li>
         ))}
       </ul>

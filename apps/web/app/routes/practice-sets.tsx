@@ -33,10 +33,6 @@ export function HydrateFallback() {
 export default function PracticeSets({ loaderData }: Route.ComponentProps) {
   return (
     <main className="content-admin">
-      <nav>
-        <Link to="/">Genshu home</Link> ·{" "}
-        <Link to="/topics">Topics and questions</Link>
-      </nav>
       <h1>Practice sets</h1>
       <p>
         Create a set, select questions, and put them in the study order you
