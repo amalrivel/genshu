@@ -5,6 +5,10 @@ export type Question = {
   correctAnswer: boolean; japaneseExplanation: string; indonesianExplanation: string;
   topicId: number; createdAt: string; updatedAt: string;
 };
+export type PracticeSetSummary = {
+  id: number; title: string; description: string | null; createdAt: string; updatedAt: string;
+};
+export type PracticeSet = PracticeSetSummary & { questions: Array<Question & { position: number }> };
 
 const base = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
@@ -36,6 +40,25 @@ export async function saveContent(request: Request, resource: "topics" | "materi
       } : {
         title: form.get("title"),
         ...(resource === "materials" ? { content: form.get("content"), topicId: Number(topicId) } : {}),
+      }),
+    });
+    return { ok: true, error: "", intent: deleting ? "delete" : id ? "update" : "create" };
+  } catch (error) {
+    return { ok: false, error: error instanceof Error ? error.message : "Request failed.", intent: "" };
+  }
+}
+
+export async function savePracticeSet(request: Request) {
+  const form = await request.formData();
+  const id = form.get("id");
+  const deleting = form.get("intent") === "delete";
+  try {
+    await api(`/practice-sets${id ? `/${encodeURIComponent(String(id))}` : ""}`, {
+      method: deleting ? "DELETE" : id ? "PUT" : "POST",
+      headers: { "Content-Type": "application/json" },
+      body: deleting ? undefined : JSON.stringify({
+        title: form.get("title"), description: form.get("description"),
+        questionIds: form.getAll("questionId").map(Number),
       }),
     });
     return { ok: true, error: "", intent: deleting ? "delete" : id ? "update" : "create" };

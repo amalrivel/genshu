@@ -29,6 +29,11 @@ body {
 .content-form select { width: 100%; border: 1px solid #888; border-radius: .25rem; padding: .6rem; background: transparent; }
 .content-form textarea { font-family: monospace; resize: vertical; }
 .question-form { border-top: 1px solid #888; padding-top: 1rem; }
+.question-selector, .selected-questions { display: grid; gap: .5rem; margin: .75rem 0; }
+.question-selector li, .selected-questions li { border: 1px solid #888; border-radius: .25rem; padding: .6rem; }
+.question-selector label, .selected-questions span { display: grid; gap: .2rem; }
+.question-selector input { width: auto; }
+.selected-questions li { display: flex; justify-content: space-between; align-items: center; gap: .75rem; }
 .content-form .actions { display: flex; flex-wrap: wrap; gap: .75rem; }
 .content-form button { padding: .6rem 1rem; border: 1px solid currentColor; border-radius: .25rem; cursor: pointer; }
 .content-form button:hover { background: #8882; }

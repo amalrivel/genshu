@@ -20,7 +20,13 @@ Run `pnpm run dev` from the workspace root. The API uses `apps/api/.env` for
 | GET | /questions/:id | One question |
 | POST | /questions | `{ "japaneseText": "…", "indonesianTranslation": "…", "furigana": "…", "correctAnswer": true, "japaneseExplanation": "…", "indonesianExplanation": "…", "topicId": 1 }` |
 | PUT | /questions/:id | Required question fields; optional topicId to move the question |
-| DELETE | /questions/:id | Deletes only the specified question |
+| DELETE | /questions/:id | Deletes only the specified question; 409 while included in a practice set |
+| GET | /practice-sets | Practice sets sorted by title, then ID |
+| GET | /practice-sets/:id | One practice set with ordered questions |
+| POST | /practice-sets | `{ "title": "Road signs", "description": "Optional", "questionIds": [2, 1] }` |
+| PUT | /practice-sets/:id | Required title; optional description and `questionIds` replacement |
+| PUT | /practice-sets/:id/questions | `{ "questionIds": [2, 1] }` replaces the selected questions and their order |
+| DELETE | /practice-sets/:id | Deletes the set and its memberships |
 
 Creates return 201, reads/updates 200, and deletes 204. Errors return
 `{ "error": "message" }`: invalid input 400, missing record 404, foreign-key
@@ -39,5 +45,5 @@ environment until access control is implemented.
 - `pnpm --filter web typecheck`
 - `pnpm --filter web build`
 
-The Question migration must be applied to the development database before using
-the new endpoints.
+The Question and Practice Set migrations must be applied to the development
+database before using the new endpoints.

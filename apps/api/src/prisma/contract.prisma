@@ -36,3 +36,23 @@ model Question {
   createdAt             TimestamptzString @default(now())
   updatedAt             temporal.updatedAtString()
 }
+
+model PracticeSet {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  createdAt   TimestamptzString @default(now())
+  updatedAt   temporal.updatedAtString()
+}
+
+model PracticeSetQuestion {
+  id            Int @id @default(autoincrement())
+  practiceSetId Int
+  questionId    Int
+  position      Int
+  practiceSet   PracticeSet @relation(fields: [practiceSetId], references: [id], onDelete: Cascade)
+  question      Question    @relation(fields: [questionId], references: [id])
+
+  @@unique([practiceSetId, questionId])
+  @@unique([practiceSetId, position])
+}

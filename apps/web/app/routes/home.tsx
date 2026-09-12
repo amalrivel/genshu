@@ -10,5 +10,5 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <><nav className="content-admin"><Link to="/topics">Manage topics and materials →</Link></nav><Welcome /></>;
+  return <><nav className="content-admin"><Link to="/topics">Manage topics and materials</Link> · <Link to="/practice-sets">Manage practice sets</Link></nav><Welcome /></>;
 }

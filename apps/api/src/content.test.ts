@@ -122,3 +122,67 @@ test('Topic → Material CRUD, validation, filtering and safe deletion', async (
     for (const id of topics) await fetch(`${base}/topics/${id}`, { method: 'DELETE' });
   }
 });
+
+test('Practice set CRUD, ordered questions, validation and safe question deletion', async () => {
+  const topics: number[] = [];
+  const questions: number[] = [];
+  const practiceSets: number[] = [];
+  const title = `Practice set check ${Date.now()}`;
+  try {
+    const topic = await request('/topics', 'POST', { title }, 201);
+    topics.push(topic.id);
+    const questionData = {
+      japaneseText: '道路では左側を走る。',
+      indonesianTranslation: 'Di jalan, berkendara di sisi kiri.',
+      correctAnswer: true,
+      japaneseExplanation: '日本では左側通行です。',
+      indonesianExplanation: 'Di Jepang, kendaraan berjalan di sisi kiri.',
+      topicId: topic.id,
+    };
+    for (const suffix of ['A', 'B', 'C']) {
+      const question = await request('/questions', 'POST', { ...questionData, japaneseText: `${suffix} ${questionData.japaneseText}` }, 201);
+      questions.push(question.id);
+    }
+    const [firstQuestion, secondQuestion, thirdQuestion] = questions;
+    for (const bad of [
+      {}, { title: ' ' }, { title: 'bad\0title' }, { title, questionIds: 'bad' },
+      { title, questionIds: [firstQuestion, firstQuestion] }, { title, questionIds: [2147483647] },
+      { title, questionIds: [0] },
+    ]) await request('/practice-sets', 'POST', bad, 400);
+    const practiceSet = await request('/practice-sets', 'POST', {
+      title: `${title} Z`, description: '  First review  ', questionIds: [secondQuestion, firstQuestion],
+    }, 201);
+    practiceSets.push(practiceSet.id);
+    assert.equal(practiceSet.description, 'First review');
+    assert.deepEqual(practiceSet.questions.map((question: { id: number }) => question.id), [secondQuestion, firstQuestion]);
+    assert.deepEqual(practiceSet.questions.map((question: { position: number }) => question.position), [0, 1]);
+    const otherSet = await request('/practice-sets', 'POST', { title: `${title} A` }, 201);
+    practiceSets.push(otherSet.id);
+    assert.deepEqual((await request('/practice-sets')).filter((set: { id: number }) => practiceSets.includes(set.id)).map((set: { id: number }) => set.id), [otherSet.id, practiceSet.id]);
+    assert.deepEqual((await request(`/practice-sets/${practiceSet.id}`)).questions.map((question: { id: number }) => question.id), [secondQuestion, firstQuestion]);
+    const updated = await request(`/practice-sets/${practiceSet.id}`, 'PUT', {
+      title: `${title} Updated`, description: null, questionIds: [thirdQuestion, firstQuestion, secondQuestion],
+    });
+    assert.equal(updated.description, null);
+    assert.deepEqual(updated.questions.map((question: { id: number }) => question.id), [thirdQuestion, firstQuestion, secondQuestion]);
+    const reordered = await request(`/practice-sets/${practiceSet.id}/questions`, 'PUT', { questionIds: [firstQuestion, thirdQuestion] });
+    assert.deepEqual(reordered.questions.map((question: { id: number }) => question.id), [firstQuestion, thirdQuestion]);
+    for (const bad of [
+      { questionIds: [firstQuestion, firstQuestion] }, { questionIds: [2147483647] }, { questionIds: [firstQuestion, 'bad'] },
+    ]) await request(`/practice-sets/${practiceSet.id}/questions`, 'PUT', bad, 400);
+    await request('/practice-sets/2147483647', 'GET', undefined, 404);
+    await request('/practice-sets/2147483647', 'PUT', { title, questionIds: [] }, 404);
+    await request('/practice-sets/2147483647/questions', 'PUT', { questionIds: [] }, 404);
+    await request('/practice-sets/2147483647', 'DELETE', undefined, 404);
+    await request(`/questions/${firstQuestion}`, 'DELETE', undefined, 409);
+    await request(`/practice-sets/${practiceSet.id}`, 'DELETE', undefined, 204);
+    await request(`/practice-sets/${practiceSet.id}`, 'GET', undefined, 404);
+    practiceSets.splice(practiceSets.indexOf(practiceSet.id), 1);
+    await request(`/questions/${firstQuestion}`, 'DELETE', undefined, 204);
+    questions.splice(questions.indexOf(firstQuestion), 1);
+  } finally {
+    for (const id of practiceSets) await fetch(`${base}/practice-sets/${id}`, { method: 'DELETE' });
+    for (const id of questions) await fetch(`${base}/questions/${id}`, { method: 'DELETE' });
+    for (const id of topics) await fetch(`${base}/topics/${id}`, { method: 'DELETE' });
+  }
+});

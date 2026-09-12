@@ -1,0 +1,326 @@
+[
+  {
+    "id": "table.practiceSet",
+    "label": "Create table \"practiceSet\"",
+    "summary": "Creates table \"practiceSet\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "practiceSet"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"practiceSet\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"practiceSet\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"practiceSet\"",
+        "sql": "CREATE TABLE \"public\".\"practiceSet\" (\n  \"createdAt\" timestamptz DEFAULT (now()) NOT NULL,\n  \"description\" text,\n  \"id\" SERIAL NOT NULL,\n  \"title\" text NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"practiceSet\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"practiceSet\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.practiceSetQuestion",
+    "label": "Create table \"practiceSetQuestion\"",
+    "summary": "Creates table \"practiceSetQuestion\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "practiceSetQuestion"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"practiceSetQuestion\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"practiceSetQuestion\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"practiceSetQuestion\"",
+        "sql": "CREATE TABLE \"public\".\"practiceSetQuestion\" (\n  \"id\" SERIAL NOT NULL,\n  \"position\" int4 NOT NULL,\n  \"practiceSetId\" int4 NOT NULL,\n  \"questionId\" int4 NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"practiceSetQuestion\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"practiceSetQuestion\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "unique.practiceSetQuestion.practiceSetQuestion_practiceSetId_questionId_key",
+    "label": "Add unique constraint on \"practiceSetQuestion\" (practiceSetId, questionId)",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "unique",
+        "name": "practiceSetQuestion_practiceSetId_questionId_key",
+        "table": "practiceSetQuestion"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure constraint \"practiceSetQuestion_practiceSetId_questionId_key\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "practiceSetQuestion_practiceSetId_questionId_key",
+          "public",
+          "\"public\".\"practiceSetQuestion\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add unique constraint \"practiceSetQuestion_practiceSetId_questionId_key\"",
+        "sql": "ALTER TABLE \"public\".\"practiceSetQuestion\" ADD CONSTRAINT \"practiceSetQuestion_practiceSetId_questionId_key\" UNIQUE (\"practiceSetId\", \"questionId\")"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify constraint \"practiceSetQuestion_practiceSetId_questionId_key\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "practiceSetQuestion_practiceSetId_questionId_key",
+          "public",
+          "\"public\".\"practiceSetQuestion\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "unique.practiceSetQuestion.practiceSetQuestion_practiceSetId_position_key",
+    "label": "Add unique constraint on \"practiceSetQuestion\" (practiceSetId, position)",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "unique",
+        "name": "practiceSetQuestion_practiceSetId_position_key",
+        "table": "practiceSetQuestion"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure constraint \"practiceSetQuestion_practiceSetId_position_key\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "practiceSetQuestion_practiceSetId_position_key",
+          "public",
+          "\"public\".\"practiceSetQuestion\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add unique constraint \"practiceSetQuestion_practiceSetId_position_key\"",
+        "sql": "ALTER TABLE \"public\".\"practiceSetQuestion\" ADD CONSTRAINT \"practiceSetQuestion_practiceSetId_position_key\" UNIQUE (\"practiceSetId\", \"position\")"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify constraint \"practiceSetQuestion_practiceSetId_position_key\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "practiceSetQuestion_practiceSetId_position_key",
+          "public",
+          "\"public\".\"practiceSetQuestion\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.practiceSetQuestion.practiceSetQuestion_practiceSetId_idx_991c1578",
+    "label": "Create index \"practiceSetQuestion_practiceSetId_idx_991c1578\" on \"practiceSetQuestion\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "practiceSetQuestion_practiceSetId_idx_991c1578",
+        "table": "practiceSetQuestion"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"practiceSetQuestion_practiceSetId_idx_991c1578\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"practiceSetQuestion_practiceSetId_idx_991c1578\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"practiceSetQuestion_practiceSetId_idx_991c1578\"",
+        "sql": "CREATE INDEX \"practiceSetQuestion_practiceSetId_idx_991c1578\" ON \"public\".\"practiceSetQuestion\" (\"practiceSetId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"practiceSetQuestion_practiceSetId_idx_991c1578\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"practiceSetQuestion_practiceSetId_idx_991c1578\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.practiceSetQuestion.practiceSetQuestion_questionId_idx_fdb42076",
+    "label": "Create index \"practiceSetQuestion_questionId_idx_fdb42076\" on \"practiceSetQuestion\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "practiceSetQuestion_questionId_idx_fdb42076",
+        "table": "practiceSetQuestion"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"practiceSetQuestion_questionId_idx_fdb42076\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"practiceSetQuestion_questionId_idx_fdb42076\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"practiceSetQuestion_questionId_idx_fdb42076\"",
+        "sql": "CREATE INDEX \"practiceSetQuestion_questionId_idx_fdb42076\" ON \"public\".\"practiceSetQuestion\" (\"questionId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"practiceSetQuestion_questionId_idx_fdb42076\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"practiceSetQuestion_questionId_idx_fdb42076\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.practiceSetQuestion.practiceSetQuestion_practiceSetId_fkey",
+    "label": "Add foreign key \"practiceSetQuestion_practiceSetId_fkey\" on \"practiceSetQuestion\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "foreignKey",
+        "name": "practiceSetQuestion_practiceSetId_fkey",
+        "table": "practiceSetQuestion"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"practiceSetQuestion_practiceSetId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "practiceSetQuestion_practiceSetId_fkey",
+          "public",
+          "\"public\".\"practiceSetQuestion\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"practiceSetQuestion_practiceSetId_fkey\"",
+        "sql": "ALTER TABLE \"public\".\"practiceSetQuestion\"\nADD CONSTRAINT \"practiceSetQuestion_practiceSetId_fkey\"\nFOREIGN KEY (\"practiceSetId\")\nREFERENCES \"public\".\"practiceSet\" (\"id\")\nON DELETE CASCADE"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"practiceSetQuestion_practiceSetId_fkey\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "practiceSetQuestion_practiceSetId_fkey",
+          "public",
+          "\"public\".\"practiceSetQuestion\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.practiceSetQuestion.practiceSetQuestion_questionId_fkey",
+    "label": "Add foreign key \"practiceSetQuestion_questionId_fkey\" on \"practiceSetQuestion\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "foreignKey",
+        "name": "practiceSetQuestion_questionId_fkey",
+        "table": "practiceSetQuestion"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"practiceSetQuestion_questionId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "practiceSetQuestion_questionId_fkey",
+          "public",
+          "\"public\".\"practiceSetQuestion\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"practiceSetQuestion_questionId_fkey\"",
+        "sql": "ALTER TABLE \"public\".\"practiceSetQuestion\"\nADD CONSTRAINT \"practiceSetQuestion_questionId_fkey\"\nFOREIGN KEY (\"questionId\")\nREFERENCES \"public\".\"question\" (\"id\")"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"practiceSetQuestion_questionId_fkey\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "practiceSetQuestion_questionId_fkey",
+          "public",
+          "\"public\".\"practiceSetQuestion\""
+        ]
+      }
+    ]
+  }
+]

@@ -53,6 +53,48 @@ function questionFields(body: unknown) {
   };
 }
 
+function practiceSetFields(body: unknown) {
+  if (!body || typeof body !== 'object' || Array.isArray(body)) invalid('A JSON object is required.');
+  const data = body as Record<string, unknown>;
+  if (typeof data.title !== 'string' || !data.title.trim() || data.title.includes('\0')) {
+    invalid('Title is required and must be text without null characters.');
+  }
+  const description = data.description;
+  if (description !== undefined && description !== null &&
+    (typeof description !== 'string' || description.includes('\0'))) {
+    invalid('Description must be text without null characters.');
+  }
+  return {
+    title: data.title.trim(),
+    description: typeof description === 'string' && description.trim() ? description.trim() : null,
+    questionIds: questionIds(data.questionIds),
+  };
+}
+
+function questionIds(value: unknown, required = false) {
+  if (value === undefined && !required) return undefined;
+  if (!Array.isArray(value)) invalid('Question IDs must be an array of unique positive PostgreSQL integers.');
+  const ids = value.map(id);
+  if (new Set(ids).size !== ids.length) invalid('Question IDs must not contain duplicates.');
+  return ids;
+}
+
+async function validateQuestionIds(ids: number[]) {
+  if (!ids.length) return;
+  const questions = await db.orm.public.Question.where((q) => q.id.in(ids)).all();
+  if (questions.length !== ids.length) invalid('One or more selected questions do not exist.');
+}
+
+async function practiceSetDetail(practiceSet: { id: number }) {
+  const links = await db.orm.public.PracticeSetQuestion.where({ practiceSetId: practiceSet.id })
+    .orderBy([(link) => link.position.asc(), (link) => link.id.asc()]).all();
+  const questions = links.length
+    ? await db.orm.public.Question.where((q) => q.id.in(links.map((link) => link.questionId))).all()
+    : [];
+  const byId = new Map(questions.map((question) => [question.id, question]));
+  return { ...practiceSet, questions: links.map((link) => ({ ...byId.get(link.questionId)!, position: link.position })) };
+}
+
 content.get('/topics', async (_req, res) => {
   res.json(await db.orm.public.Topic.orderBy([(t) => t.title.asc(), (t) => t.id.asc()]).all());
 });
@@ -156,14 +198,79 @@ content.delete('/questions/:id', async (req, res) => {
   res.status(204).end();
 });
 
+content.get('/practice-sets', async (_req, res) => {
+  res.json(await db.orm.public.PracticeSet.orderBy([(set) => set.title.asc(), (set) => set.id.asc()]).all());
+});
+content.get('/practice-sets/:id', async (req, res) => {
+  const practiceSet = await db.orm.public.PracticeSet.where({ id: id(req.params.id) }).first();
+  if (!practiceSet) { res.status(404).json({ error: 'Practice set not found.' }); return; }
+  res.json(await practiceSetDetail(practiceSet));
+});
+content.post('/practice-sets', async (req, res) => {
+  const data = practiceSetFields(req.body);
+  const selected = data.questionIds ?? [];
+  await validateQuestionIds(selected);
+  const practiceSet = await db.transaction(async (tx) => {
+    const set = await tx.orm.public.PracticeSet.create({ title: data.title, description: data.description });
+    for (const [position, questionId] of selected.entries()) {
+      await tx.orm.public.PracticeSetQuestion.create({ practiceSetId: set.id, questionId, position });
+    }
+    return set;
+  });
+  res.location(`/practice-sets/${practiceSet.id}`).status(201).json(await practiceSetDetail(practiceSet));
+});
+content.put('/practice-sets/:id', async (req, res) => {
+  const practiceSetId = id(req.params.id);
+  const data = practiceSetFields(req.body);
+  if (data.questionIds) await validateQuestionIds(data.questionIds);
+  const practiceSet = await db.transaction(async (tx) => {
+    const set = await tx.orm.public.PracticeSet.where({ id: practiceSetId }).update({
+      title: data.title, description: data.description,
+    });
+    if (!set || !data.questionIds) return set;
+    await tx.execute(tx.sql.public.practiceSetQuestion.delete()
+      .where((link, fns) => fns.eq(link.practiceSetId, practiceSetId)).build());
+    for (const [position, questionId] of data.questionIds.entries()) {
+      await tx.orm.public.PracticeSetQuestion.create({ practiceSetId, questionId, position });
+    }
+    return set;
+  });
+  if (!practiceSet) { res.status(404).json({ error: 'Practice set not found.' }); return; }
+  res.json(await practiceSetDetail(practiceSet));
+});
+content.put('/practice-sets/:id/questions', async (req, res) => {
+  const practiceSetId = id(req.params.id);
+  const selected = questionIds((req.body as Record<string, unknown>)?.questionIds, true)!;
+  await validateQuestionIds(selected);
+  const practiceSet = await db.transaction(async (tx) => {
+    const set = await tx.orm.public.PracticeSet.where({ id: practiceSetId }).first();
+    if (!set) return null;
+    await tx.execute(tx.sql.public.practiceSetQuestion.delete()
+      .where((link, fns) => fns.eq(link.practiceSetId, practiceSetId)).build());
+    for (const [position, questionId] of selected.entries()) {
+      await tx.orm.public.PracticeSetQuestion.create({ practiceSetId, questionId, position });
+    }
+    return set;
+  });
+  if (!practiceSet) { res.status(404).json({ error: 'Practice set not found.' }); return; }
+  res.json(await practiceSetDetail(practiceSet));
+});
+content.delete('/practice-sets/:id', async (req, res) => {
+  const practiceSet = await db.orm.public.PracticeSet.where({ id: id(req.params.id) }).delete();
+  if (!practiceSet) { res.status(404).json({ error: 'Practice set not found.' }); return; }
+  res.status(204).end();
+});
+
 export const contentError: ErrorRequestHandler = (error, req, res, _next) => {
   // Prisma wraps driver errors; inspect the cause chain without exposing SQL or credentials.
   let cause = error;
   for (let depth = 0; cause && depth < 10; depth++, cause = cause.cause) {
     if (cause.sqlState === '23503' || cause.code === '23503') {
-      res.status(409).json({ error: req.method === 'DELETE'
-        ? 'Delete this topic’s materials and questions before deleting the topic.'
-        : 'The selected topic does not exist.' });
+      res.status(409).json({ error: req.method === 'DELETE' && req.path.startsWith('/questions/')
+        ? 'Remove this question from its practice sets before deleting it.'
+        : req.method === 'DELETE'
+          ? 'Delete this topic’s materials and questions before deleting the topic.'
+          : 'The selected topic does not exist.' });
       return;
     }
   }
