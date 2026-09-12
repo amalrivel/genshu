@@ -48,6 +48,17 @@ export type AnswerFeedback = {
   japaneseExplanation: string;
   indonesianExplanation: string;
 };
+export type SubmittedAnswer = AnswerFeedback & {
+  questionId: number;
+  answer: boolean | null;
+};
+export type PracticeSubmission = {
+  total: number;
+  correct: number;
+  incorrect: number;
+  unanswered: number;
+  answers: SubmittedAnswer[];
+};
 export type AuthUser = {
   id: number;
   email: string;

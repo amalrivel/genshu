@@ -213,6 +213,24 @@ body {
   background: #608ee0;
   color: white;
 }
+.question-palette,
+.practice-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+.question-palette button {
+  min-width: 2.5rem;
+}
+.question-palette .current {
+  outline: 3px solid #608ee0;
+  outline-offset: 1px;
+}
+.question-palette .answered {
+  background: #238636;
+  color: white;
+}
 .practice-page button:disabled {
   cursor: wait;
   opacity: 0.65;

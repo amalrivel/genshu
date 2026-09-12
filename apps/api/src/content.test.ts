@@ -452,7 +452,7 @@ test("Practice set CRUD, ordered questions, validation and safe question deletio
   }
 });
 
-test("Participant practice payload hides answers and checks selected questions", async () => {
+test("Participant practice payload hides answers and scores final submissions", async () => {
   const topics: number[] = [];
   const questions: number[] = [];
   const practiceSets: number[] = [];
@@ -487,17 +487,30 @@ test("Participant practice payload hides answers and checks selected questions",
       },
       201,
     );
-    questions.push(first.id, outside.id);
+    const second = await request(
+      "/questions",
+      "POST",
+      {
+        japaneseText: "赤信号では止まる。",
+        indonesianTranslation: "Berhenti saat lampu merah.",
+        correctAnswer: true,
+        japaneseExplanation: "赤信号では停止します。",
+        indonesianExplanation: "Lampu merah mengharuskan berhenti.",
+        topicId: topic.id,
+      },
+      201,
+    );
+    questions.push(first.id, outside.id, second.id);
     const practiceSet = await request(
       "/practice-sets",
       "POST",
-      { title, questionIds: [first.id] },
+      { title, questionIds: [first.id, second.id] },
       201,
     );
     practiceSets.push(practiceSet.id);
 
     const practice = await request(`/practice-sets/${practiceSet.id}/practice`);
-    assert.equal(practice.questions.length, 1);
+    assert.equal(practice.questions.length, 2);
     assert.deepEqual(practice.questions[0], {
       id: first.id,
       japaneseText: first.japaneseText,
@@ -515,48 +528,67 @@ test("Participant practice payload hides answers and checks selected questions",
       false,
     );
 
-    const correct = await request(
-      `/practice-sets/${practiceSet.id}/questions/${first.id}/check-answer`,
-      "POST",
-      { answer: true },
-    );
-    assert.deepEqual(correct, {
-      isCorrect: true,
-      correctAnswer: true,
-      japaneseExplanation: first.japaneseExplanation,
-      indonesianExplanation: first.indonesianExplanation,
+    const submitted = await request(`/practice-sets/${practiceSet.id}/submit`, "POST", {
+      answers: [{ questionId: first.id, answer: true }],
     });
-    const incorrect = await request(
-      `/practice-sets/${practiceSet.id}/questions/${first.id}/check-answer`,
-      "POST",
-      { answer: false },
-    );
-    assert.equal(incorrect.isCorrect, false);
-    assert.equal(incorrect.correctAnswer, true);
+    assert.deepEqual(submitted, {
+      total: 2,
+      correct: 1,
+      incorrect: 1,
+      unanswered: 1,
+      answers: [
+        {
+          questionId: first.id,
+          answer: true,
+          isCorrect: true,
+          correctAnswer: true,
+          japaneseExplanation: first.japaneseExplanation,
+          indonesianExplanation: first.indonesianExplanation,
+        },
+        {
+          questionId: second.id,
+          answer: null,
+          isCorrect: false,
+          correctAnswer: true,
+          japaneseExplanation: second.japaneseExplanation,
+          indonesianExplanation: second.indonesianExplanation,
+        },
+      ],
+    });
+    const incorrect = await request(`/practice-sets/${practiceSet.id}/submit`, "POST", {
+      answers: [
+        { questionId: first.id, answer: true },
+        { questionId: second.id, answer: false },
+      ],
+    });
+    assert.equal(incorrect.correct, 1);
+    assert.equal(incorrect.incorrect, 1);
+    assert.equal(incorrect.unanswered, 0);
+    await request(`/practice-sets/${practiceSet.id}/submit`, "POST", {}, 400);
     await request(
-      `/practice-sets/${practiceSet.id}/questions/${first.id}/check-answer`,
+      `/practice-sets/${practiceSet.id}/submit`,
       "POST",
-      { answer: "true" },
+      { answers: [{ questionId: first.id, answer: true }, { questionId: first.id, answer: false }] },
+      400,
+    );
+    await request(
+      `/practice-sets/${practiceSet.id}/submit`,
+      "POST",
+      { answers: [{ questionId: outside.id, answer: false }] },
       400,
     );
     await request("/practice-sets/abc/practice", "GET", undefined, 400);
     await request(
-      `/practice-sets/${practiceSet.id}/questions/abc/check-answer`,
+      `/practice-sets/${practiceSet.id}/submit`,
       "POST",
-      { answer: true },
+      { answers: [{ questionId: "abc", answer: true }] },
       400,
     );
     await request("/practice-sets/2147483647/practice", "GET", undefined, 404);
     await request(
-      `/practice-sets/${practiceSet.id}/questions/2147483647/check-answer`,
+      `/practice-sets/2147483647/submit`,
       "POST",
-      { answer: true },
-      404,
-    );
-    await request(
-      `/practice-sets/${practiceSet.id}/questions/${outside.id}/check-answer`,
-      "POST",
-      { answer: false },
+      { answers: [] },
       404,
     );
   } finally {

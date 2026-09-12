@@ -4,229 +4,242 @@ import type { Route } from "./+types/practice-run";
 import {
   api,
   requireAuth,
-  type AnswerFeedback,
   type PracticeSetForPractice,
+  type PracticeSubmission,
 } from "../content-api";
 import { ContentError } from "../content-form";
 
-type Answer = { questionId: number; isCorrect: boolean };
+type Draft = {
+  practiceSetId: number;
+  questionIds: number[];
+  currentIndex: number;
+  answers: Record<string, boolean>;
+};
+type LastResult = Pick<
+  PracticeSubmission,
+  "total" | "correct" | "incorrect" | "unanswered"
+> & { submittedAt: string };
+
+function key(userId: number, practiceSetId: number, name: "practice" | "last-result") {
+  return `genshu:${name}:${userId}:${practiceSetId}`;
+}
+function read<T>(storageKey: string): T | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const value = window.localStorage.getItem(storageKey);
+    return value ? (JSON.parse(value) as T) : null;
+  } catch {
+    window.localStorage.removeItem(storageKey);
+    return null;
+  }
+}
+function draftFor(userId: number, practiceSet: PracticeSetForPractice): Draft | null {
+  if (typeof window === "undefined") return null;
+  const storageKey = key(userId, practiceSet.id, "practice");
+  const draft = read<Draft>(storageKey);
+  const questionIds = practiceSet.questions.map((question) => question.id);
+  if (
+    !draft ||
+    draft.practiceSetId !== practiceSet.id ||
+    !Array.isArray(draft.questionIds) ||
+    draft.questionIds.join(",") !== questionIds.join(",") ||
+    !Number.isInteger(draft.currentIndex) ||
+    draft.currentIndex < 0 ||
+    draft.currentIndex >= questionIds.length ||
+    !draft.answers ||
+    typeof draft.answers !== "object" ||
+    Object.entries(draft.answers).some(
+      ([questionId, answer]) =>
+        !questionIds.includes(Number(questionId)) || typeof answer !== "boolean",
+    )
+  ) {
+    window.localStorage.removeItem(storageKey);
+    return null;
+  }
+  return draft;
+}
+function answerLabel(answer: boolean | null) {
+  return answer === null ? "Unanswered" : answer ? "○ Maru" : "× Batsu";
+}
 
 export const meta = () => [{ title: "Practice runner · Genshu" }];
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
-  await requireAuth();
-  return api<PracticeSetForPractice>(
+  const user = await requireAuth();
+  const practiceSet = await api<PracticeSetForPractice>(
     `/practice-sets/${encodeURIComponent(params.practiceSetId)}/practice`,
   );
+  return { user, practiceSet };
 }
 export function HydrateFallback() {
-  return (
-    <main className="practice-page">
-      <p role="status">Loading practice…</p>
-    </main>
-  );
+  return <main className="practice-page"><p role="status">Loading practice…</p></main>;
 }
 
 export default function PracticeRun({ loaderData }: Route.ComponentProps) {
-  const [index, setIndex] = useState(0);
-  const [answer, setAnswer] = useState<boolean | null>(null);
-  const [feedback, setFeedback] = useState<AnswerFeedback | null>(null);
-  const [answers, setAnswers] = useState<Answer[]>([]);
-  const [checking, setChecking] = useState(false);
+  const { practiceSet, user } = loaderData;
+  const storageKey = key(user.id, practiceSet.id, "practice");
+  const lastResultKey = key(user.id, practiceSet.id, "last-result");
+  const [savedDraft] = useState(() => draftFor(user.id, practiceSet));
+  const [started, setStarted] = useState(!savedDraft);
+  const [index, setIndex] = useState(savedDraft?.currentIndex ?? 0);
+  const [answers, setAnswers] = useState<Record<string, boolean>>(savedDraft?.answers ?? {});
+  const [result, setResult] = useState<PracticeSubmission | null>(null);
+  const [reviewAll, setReviewAll] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [showFurigana, setShowFurigana] = useState(
     () =>
       typeof window !== "undefined" &&
       window.localStorage.getItem("genshu-show-furigana") === "true",
   );
-  const question = loaderData.questions[index];
-  const correct = answers.filter((item) => item.isCorrect).length;
+  const lastResult = read<LastResult>(lastResultKey);
+  const question = practiceSet.questions[index];
 
+  function save(nextAnswers: Record<string, boolean>, nextIndex = index) {
+    window.localStorage.setItem(
+      storageKey,
+      JSON.stringify({
+        practiceSetId: practiceSet.id,
+        questionIds: practiceSet.questions.map((item) => item.id),
+        currentIndex: nextIndex,
+        answers: nextAnswers,
+      }),
+    );
+  }
+  function move(nextIndex: number) {
+    setIndex(nextIndex);
+    save(answers, nextIndex);
+  }
+  function choose(answer: boolean) {
+    const nextAnswers = { ...answers, [question.id]: answer };
+    setAnswers(nextAnswers);
+    save(nextAnswers);
+  }
   function toggleFurigana() {
     setShowFurigana((value) => {
       window.localStorage.setItem("genshu-show-furigana", String(!value));
       return !value;
     });
   }
-
-  async function confirmAnswer() {
-    if (answer === null || !question) return;
-    setChecking(true);
+  async function submit() {
+    const unanswered = practiceSet.questions.length - Object.keys(answers).length;
+    const message = unanswered
+      ? `${unanswered} question${unanswered === 1 ? " is" : "s are"} still unanswered. Submit anyway?`
+      : "Submit your answers?";
+    if (!window.confirm(message)) return;
+    setSubmitting(true);
     setError("");
     try {
-      const result = await api<AnswerFeedback>(
-        `/practice-sets/${loaderData.id}/questions/${question.id}/check-answer`,
+      const submitted = await api<PracticeSubmission>(
+        `/practice-sets/${practiceSet.id}/submit`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ answer }),
+          body: JSON.stringify({
+            answers: Object.entries(answers).map(([questionId, answer]) => ({
+              questionId: Number(questionId),
+              answer,
+            })),
+          }),
         },
       );
-      setFeedback(result);
-      setAnswers((items) => [
-        ...items,
-        { questionId: question.id, isCorrect: result.isCorrect },
-      ]);
-    } catch (caught) {
-      setError(
-        caught instanceof Error
-          ? caught.message
-          : "Unable to check the answer.",
+      window.localStorage.removeItem(storageKey);
+      window.localStorage.setItem(
+        lastResultKey,
+        JSON.stringify({
+          total: submitted.total,
+          correct: submitted.correct,
+          incorrect: submitted.incorrect,
+          unanswered: submitted.unanswered,
+          submittedAt: new Date().toISOString(),
+        }),
       );
+      setResult(submitted);
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "Unable to submit answers.");
     } finally {
-      setChecking(false);
+      setSubmitting(false);
     }
   }
-
-  function next() {
-    setIndex((value) => value + 1);
-    setAnswer(null);
-    setFeedback(null);
-    setError("");
-  }
-
-  function restart() {
+  function startOver() {
+    window.localStorage.removeItem(storageKey);
+    setAnswers({});
     setIndex(0);
-    setAnswer(null);
-    setFeedback(null);
-    setAnswers([]);
-    setError("");
+    setStarted(true);
   }
 
-  if (!loaderData.questions.length)
+  if (!practiceSet.questions.length)
+    return <main className="practice-page"><nav><Link to="/practice">← Practice sets</Link></nav><h1>{practiceSet.title}</h1><p>This practice set has no questions yet.</p></main>;
+
+  if (!started)
     return (
       <main className="practice-page">
-        <nav>
-          <Link to="/practice">← Practice sets</Link>
-        </nav>
-        <h1>{loaderData.title}</h1>
-        <p>This practice set has no questions yet.</p>
+        <nav><Link to="/practice">← Practice sets</Link></nav>
+        <h1>{practiceSet.title}</h1>
+        <p>You have an unfinished practice draft.</p>
+        <div className="practice-actions">
+          <button type="button" onClick={() => setStarted(true)}>Continue</button>
+          <button type="button" onClick={startOver}>Start over</button>
+        </div>
+        {lastResult && <p>Last result: {lastResult.correct} / {lastResult.total} correct ({new Date(lastResult.submittedAt).toLocaleString()}).</p>}
       </main>
     );
-  if (index >= loaderData.questions.length) {
-    const incorrect = answers
-      .filter((item) => !item.isCorrect)
-      .map((item) =>
-        loaderData.questions.find(
-          (question) => question.id === item.questionId,
-        )!,
-      );
-    const percentage = Math.round(
-      (correct / loaderData.questions.length) * 100,
-    );
+
+  if (result) {
+    const feedback = new Map(result.answers.map((answer) => [answer.questionId, answer]));
+    const reviewed = reviewAll ? practiceSet.questions : practiceSet.questions.filter((item) => !feedback.get(item.id)?.isCorrect);
     return (
       <main className="practice-page">
-        <nav>
-          <Link to="/practice">← Practice sets</Link>
-        </nav>
+        <nav><Link to="/practice">← Practice sets</Link></nav>
         <h1>Practice complete</h1>
-        <h2>{loaderData.title}</h2>
-        <p className="score">
-          {correct} / {loaderData.questions.length} correct ({percentage}%)
-        </p>
-        {incorrect.length ? (
-          <>
-            <h3>Review incorrect answers</h3>
-            <ol className="incorrect-questions">
-              {incorrect.map((item) => (
-                <li key={item.id}>
-                  <span lang="ja">{item.japaneseText}</span>
-                  <span lang="id">{item.indonesianTranslation}</span>
-                </li>
-              ))}
-            </ol>
-          </>
-        ) : (
-          <p>Perfect score.</p>
-        )}
-        <button type="button" className="practice-link" onClick={restart}>
-          Practice again
-        </button>
+        <h2>{practiceSet.title}</h2>
+        <p className="score">{result.correct} / {result.total} correct ({Math.round((result.correct / result.total) * 100) || 0}%)</p>
+        <p>Incorrect: {result.incorrect} · Unanswered: {result.unanswered}</p>
+        <button type="button" className="furigana-toggle" aria-pressed={showFurigana} onClick={toggleFurigana}>Furigana: {showFurigana ? "shown" : "hidden"}</button>
+        <div className="practice-actions">
+          <button type="button" aria-pressed={!reviewAll} onClick={() => setReviewAll(false)}>Incorrect + unanswered</button>
+          <button type="button" aria-pressed={reviewAll} onClick={() => setReviewAll(true)}>All questions</button>
+        </div>
+        {reviewed.map((item) => {
+          const answer = feedback.get(item.id)!;
+          return <section className="practice-question" key={item.id}>
+            <p className="japanese-question" lang="ja">{item.japaneseText}</p>
+            {showFurigana && item.furigana && <p className="furigana" lang="ja">Furigana: {item.furigana}</p>}
+            <p lang="id">{item.indonesianTranslation}</p>
+            <p>Your answer: {answerLabel(answer.answer)}</p>
+            <p>Correct answer: {answerLabel(answer.correctAnswer)}</p>
+            <h3>Japanese explanation</h3><p lang="ja">{answer.japaneseExplanation}</p>
+            <h3>Penjelasan Bahasa Indonesia</h3><p lang="id">{answer.indonesianExplanation}</p>
+          </section>;
+        })}
+        {!reviewed.length && <p>Perfect score.</p>}
+        <button type="button" className="practice-link" onClick={startOver}>Practice again</button>
       </main>
     );
   }
 
   return (
     <main className="practice-page">
-      <nav>
-        <Link to="/practice">← Practice sets</Link>
-      </nav>
-      <p className="progress">
-        Question {index + 1} of {loaderData.questions.length}
-      </p>
-      <h1>{loaderData.title}</h1>
-      <button
-        type="button"
-        className="furigana-toggle"
-        aria-pressed={showFurigana}
-        onClick={toggleFurigana}
-      >
-        Furigana: {showFurigana ? "shown" : "hidden"}
-      </button>
-      <section
-        className="practice-question"
-        aria-label={`Question ${index + 1}`}
-      >
-        <p className="japanese-question" lang="ja">
-          {question.japaneseText}
-        </p>
-        {showFurigana && question.furigana && (
-          <p className="furigana" lang="ja">
-            Furigana: {question.furigana}
-          </p>
-        )}
+      <nav><Link to="/practice">← Practice sets</Link></nav>
+      <p className="progress">Question {index + 1} / {practiceSet.questions.length}</p>
+      <h1>{practiceSet.title}</h1>
+      <button type="button" className="furigana-toggle" aria-pressed={showFurigana} onClick={toggleFurigana}>Furigana: {showFurigana ? "shown" : "hidden"}</button>
+      <div className="question-palette" aria-label="Question navigation">
+        {practiceSet.questions.map((item, itemIndex) => <button key={item.id} type="button" className={itemIndex === index ? "current" : answers[item.id] !== undefined ? "answered" : ""} aria-current={itemIndex === index ? "step" : undefined} onClick={() => move(itemIndex)}>{itemIndex + 1}</button>)}
+      </div>
+      <section className="practice-question" aria-label={`Question ${index + 1}`}>
+        <p className="japanese-question" lang="ja">{question.japaneseText}</p>
+        {showFurigana && question.furigana && <p className="furigana" lang="ja">Furigana: {question.furigana}</p>}
         <p lang="id">{question.indonesianTranslation}</p>
         <div className="answer-options" aria-label="Choose an answer">
-          <button
-            type="button"
-            aria-pressed={answer === true}
-            className={answer === true ? "selected" : ""}
-            disabled={Boolean(feedback) || checking}
-            onClick={() => setAnswer(true)}
-          >
-            ○ Maru
-          </button>
-          <button
-            type="button"
-            aria-pressed={answer === false}
-            className={answer === false ? "selected" : ""}
-            disabled={Boolean(feedback) || checking}
-            onClick={() => setAnswer(false)}
-          >
-            × Batsu
-          </button>
+          <button type="button" aria-pressed={answers[question.id] === true} className={answers[question.id] === true ? "selected" : ""} onClick={() => choose(true)}>○ Maru</button>
+          <button type="button" aria-pressed={answers[question.id] === false} className={answers[question.id] === false ? "selected" : ""} onClick={() => choose(false)}>× Batsu</button>
         </div>
-        {!feedback && (
-          <button
-            type="button"
-            className="practice-link"
-            disabled={answer === null || checking}
-            onClick={confirmAnswer}
-          >
-            {checking ? "Checking…" : "Confirm answer"}
-          </button>
-        )}
+        <div className="practice-actions">
+          <button type="button" disabled={index === 0} onClick={() => move(index - 1)}>Previous</button>
+          <button type="button" disabled={index === practiceSet.questions.length - 1} onClick={() => move(index + 1)}>Next</button>
+          <button type="button" className="practice-link" disabled={submitting} onClick={submit}>{submitting ? "Submitting…" : "Submit answers"}</button>
+        </div>
         {error && <p role="alert">{error}</p>}
-        {feedback && (
-          <section
-            className={`feedback ${feedback.isCorrect ? "correct" : "incorrect"}`}
-            role="status"
-          >
-            <h2>{feedback.isCorrect ? "Correct" : "Incorrect"}</h2>
-            <p>
-              The correct answer is{" "}
-              {feedback.correctAnswer ? "○ Maru" : "× Batsu"}.
-            </p>
-            <h3>Japanese explanation</h3>
-            <p lang="ja">{feedback.japaneseExplanation}</p>
-            <h3>Penjelasan Bahasa Indonesia</h3>
-            <p lang="id">{feedback.indonesianExplanation}</p>
-            <button type="button" className="practice-link" onClick={next}>
-              {index + 1 === loaderData.questions.length
-                ? "See results"
-                : "Next question"}
-            </button>
-          </section>
-        )}
       </section>
     </main>
   );
