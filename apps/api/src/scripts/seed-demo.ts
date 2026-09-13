@@ -1,4 +1,4 @@
-import { db } from "./prisma/db.ts";
+import { db } from "../prisma/db.ts";
 
 export const demoTopics = ["[DEMO] Basic Japanese", "[DEMO] Road Words"];
 export const demoPracticeSetTitle = "[DEMO] Gentsuki Basic Practice";
@@ -33,15 +33,7 @@ export async function seedDemo() {
     const existing = (await db.orm.public.Question.where({ topicId }).all()).find(
       (question) => question.japaneseText === japaneseText,
     );
-    const data = {
-      japaneseText,
-      indonesianTranslation,
-      furigana,
-      correctAnswer,
-      japaneseExplanation,
-      indonesianExplanation,
-      topicId,
-    };
+    const data = { japaneseText, indonesianTranslation, furigana, correctAnswer, japaneseExplanation, indonesianExplanation, topicId };
     const question = existing
       ? (await db.orm.public.Question.where({ id: existing.id }).update(data))!
       : await db.orm.public.Question.create(data);
@@ -49,40 +41,24 @@ export async function seedDemo() {
   }
 
   const practiceSet = await db.transaction(async (tx) => {
-    const description =
-      "[DEMO] Synthetic development content only. Not authoritative driving instruction.";
+    const description = "[DEMO] Synthetic development content only. Not authoritative driving instruction.";
     const set =
       (await tx.orm.public.PracticeSet.where({ title: demoPracticeSetTitle }).first()) ??
-      (await tx.orm.public.PracticeSet.create({
-        title: demoPracticeSetTitle,
-        description,
-      }));
-    if (set.description !== description) {
+      (await tx.orm.public.PracticeSet.create({ title: demoPracticeSetTitle, description }));
+    if (set.description !== description)
       await tx.orm.public.PracticeSet.where({ id: set.id }).update({ description });
-    }
     await tx.execute(
-      tx.sql.public.practiceSetQuestion
-        .delete()
-        .where((link, fns) => fns.eq(link.practiceSetId, set.id))
-        .build(),
+      tx.sql.public.practiceSetQuestion.delete().where((link, fns) => fns.eq(link.practiceSetId, set.id)).build(),
     );
-    for (const [position, question] of questions.entries()) {
-      await tx.orm.public.PracticeSetQuestion.create({
-        practiceSetId: set.id,
-        questionId: question.id,
-        position,
-      });
-    }
+    for (const [position, question] of questions.entries())
+      await tx.orm.public.PracticeSetQuestion.create({ practiceSetId: set.id, questionId: question.id, position });
     return set;
   });
-
   return { topics, questions, practiceSet };
 }
 
 if (import.meta.main) {
   const result = await seedDemo();
-  console.log(
-    `Demo seeded: ${result.topics.length} topics, ${result.questions.length} questions, Practice Set #${result.practiceSet.id}.`,
-  );
+  console.log(`Demo seeded: ${result.topics.length} topics, ${result.questions.length} questions, Practice Set #${result.practiceSet.id}.`);
   await db.close();
 }

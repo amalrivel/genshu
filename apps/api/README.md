@@ -1,5 +1,16 @@
 # Content API
 
+## API architecture
+
+The API is a small modular monolith. `src/app.ts` builds the Express app and
+`src/server.ts` starts the listener. Domain routers live under
+`src/modules/` (`auth`, `users`, `topics`, `materials`, `questions`,
+`practice-sets`, and participant `practice`). Shared validation/errors and
+authentication middleware are under `src/shared/` and `src/middleware/`.
+Operational commands live under `src/scripts/`, tests under `src/tests/` (with
+the legacy integration entry point retained), and Prisma contract/runtime
+files remain owned by `src/prisma/`.
+
 Run `pnpm run dev` from the workspace root. The API uses `apps/api/.env` for
 `DATABASE_URL` and listens on port 3000. The web UI is at
 `http://localhost:5173/topics` or `http://127.0.0.1:5173/topics`. In local

@@ -1,74 +1,34 @@
 // Run against the local development API: node --test src/content.test.ts
 import assert from "node:assert/strict";
 import { after, before, test } from "node:test";
-import { hashPassword } from "./auth.ts";
 import { db } from "./prisma/db.ts";
-import { demoPracticeSetTitle, demoQuestions, demoTopics, seedDemo } from "./seed-demo.ts";
+import { demoPracticeSetTitle, demoQuestions, demoTopics, seedDemo } from "./scripts/seed-demo.ts";
+import {
+  closeTestContext,
+  createRequesters,
+  createTestContext,
+  type TestContext,
+} from "./tests/test-helpers.ts";
 
 const base = "http://localhost:3000";
 let adminCookie = "";
 let adminId = 0;
-async function raw(path: string, init: RequestInit = {}) {
-  return fetch(base + path, {
-    ...init,
-    headers: {
-      "Content-Type": "application/json",
-      Cookie: adminCookie,
-      ...init.headers,
-    },
-  });
-}
-async function publicRequest(
-  path: string,
-  method = "GET",
-  body?: unknown,
-  status = 200,
-) {
-  const response = await fetch(base + path, {
-    method,
-    headers: { "Content-Type": "application/json" },
-    body: body === undefined ? undefined : JSON.stringify(body),
-  });
-  const data = response.status === 204 ? null : await response.json();
-  assert.equal(response.status, status, JSON.stringify(data));
-  return { data, response };
-}
+let context!: TestContext;
+let requesters!: ReturnType<typeof createRequesters>;
 before(async () => {
-  const user = await db.orm.public.User.create({
-    email: `admin-${Date.now()}@example.com`,
-    name: "Test Admin",
-    role: "Admin",
-    isActive: true,
-    passwordHash: await hashPassword("Test password 123!"),
-  });
-  adminId = user.id;
-  const response = await fetch(base + "/auth/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email: user.email, password: "Test password 123!" }),
-  });
-  assert.equal(response.status, 200);
-  adminCookie = response.headers.getSetCookie()[0]!.split(";")[0]!;
+  context = await createTestContext();
+  adminId = context.adminId;
+  adminCookie = context.adminCookie;
+  requesters = createRequesters(context);
 });
 after(async () => {
-  await db.orm.public.User.where({ id: adminId }).delete();
-  await db.close();
+  await closeTestContext({ adminId, adminCookie });
 });
-async function request(
-  path: string,
-  method = "GET",
-  body?: unknown,
-  status = 200,
-) {
-  const response = await raw(path, {
-    method,
-    headers: { "Content-Type": "application/json" },
-    body: body === undefined ? undefined : JSON.stringify(body),
-  });
-  const data = response.status === 204 ? null : await response.json();
-  assert.equal(response.status, status, JSON.stringify(data));
-  return data;
-}
+const raw = (path: string, init?: RequestInit) => requesters.raw(path, init);
+const request = (path: string, method?: string, body?: unknown, status?: number) =>
+  requesters.request(path, method, body, status);
+const publicRequest = (path: string, method?: string, body?: unknown, status?: number) =>
+  requesters.publicRequest(path, method, body, status);
 
 test("Local Vite development ports can read API responses", async () => {
   const response = await raw("/topics", {

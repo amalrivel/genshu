@@ -1,5 +1,5 @@
-import { hashPassword } from "./auth.ts";
-import { db } from "./prisma/db.ts";
+import { hashPassword } from "../modules/auth/auth.service.ts";
+import { db } from "../prisma/db.ts";
 
 const email = process.env.ADMIN_EMAIL?.trim().toLowerCase();
 const password = process.env.ADMIN_PASSWORD;
@@ -16,9 +16,7 @@ if (
 }
 const existing = await db.orm.public.User.where({ email }).first();
 if (existing) {
-  console.log(
-    `Admin bootstrap skipped: ${email} already exists. No password was changed.`,
-  );
+  console.log(`Admin bootstrap skipped: ${email} already exists. No password was changed.`);
 } else {
   await db.orm.public.User.create({
     email,

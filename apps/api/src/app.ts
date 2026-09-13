@@ -1,32 +1,37 @@
-import express, { type Express, type Request, type Response } from "express";
+import express, { type Express } from "express";
 import cors from "cors";
-import { auth, requireAdmin, requireAuth } from "./auth.ts";
-import { content, contentError, participantPractice } from "./content.ts";
+import { authRoutes } from "./modules/auth/auth.routes.ts";
+import { usersRoutes } from "./modules/users/users.routes.ts";
+import { materialsRoutes } from "./modules/materials/materials.routes.ts";
+import { questionsRoutes } from "./modules/questions/questions.routes.ts";
+import { topicsRoutes } from "./modules/topics/topics.routes.ts";
+import { practiceSetsRoutes } from "./modules/practice-sets/practice-sets.routes.ts";
+import { practiceRoutes } from "./modules/practice/practice.routes.ts";
+import { requireAdmin, requireAuth } from "./middleware/auth.middleware.ts";
+import { errorHandler } from "./middleware/error.middleware.ts";
 
-const app: Express = express();
+export function createApp(): Express {
+  const app = express();
+  const corsOptions = {
+    origin: [/^http:\/\/localhost:\d+$/, /^http:\/\/127\.0\.0\.1:\d+$/],
+    credentials: true,
+    optionsSuccessStatus: 200,
+  };
 
-var corsOptions = {
-  origin: [/^http:\/\/localhost:\d+$/, /^http:\/\/127\.0\.0\.1:\d+$/],
-  credentials: true,
-  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-};
+  app.use(cors(corsOptions));
+  app.get("/", (_req, res) => res.send("Hello World!"));
+  app.get("/health", (_req, res) => res.send("Hello World!"));
+  app.use(express.json({ limit: "1mb" }));
 
-app.use(cors(corsOptions));
+  app.use(authRoutes);
+  app.use(requireAuth, practiceRoutes);
+  app.use(requireAuth, requireAdmin, topicsRoutes);
+  app.use(requireAuth, requireAdmin, materialsRoutes);
+  app.use(requireAuth, requireAdmin, questionsRoutes);
+  app.use(requireAuth, requireAdmin, practiceSetsRoutes);
+  app.use(usersRoutes);
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World!");
-});
-app.get("/health", (req: Request, res: Response) => {
-  res.send("Hello World!");
-});
-
-app.use(express.json({ limit: "1mb" }));
-app.use(auth);
-app.use(requireAuth, participantPractice);
-app.use(requireAuth, requireAdmin, content);
-app.use((_req, res) => {
-  res.status(404).json({ error: "Route not found." });
-});
-app.use(contentError);
-
-app.listen(3000);
+  app.use((_req, res) => res.status(404).json({ error: "Route not found." }));
+  app.use(errorHandler);
+  return app;
+}
