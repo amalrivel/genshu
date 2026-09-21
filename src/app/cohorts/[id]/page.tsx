@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { useParams, useRouter } from "next/navigation"
+import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation"
 import {
   ArrowLeft,
   Calendar,
@@ -10,24 +10,18 @@ import {
   Users,
   Plus,
   Trash2,
-  UserPlus,
-  Search,
-  Mail,
   Edit,
   Save,
-  ShieldCheck,
   AlertCircle,
   BookOpen,
   ArrowRight,
   ExternalLink,
-  FileText,
   FileCheck2,
   Clock,
   Award,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Table } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import {
@@ -44,14 +38,32 @@ import { cn } from "@/lib/utils"
 import { useTranslations } from "next-intl"
 import { Breadcrumbs } from "@/components/layout/breadcrumbs"
 import { StudentProfileDrawer } from "@/components/student-profile-drawer"
+import { PageHeader } from "@/components/layout/page-frame"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { DestructiveConfirmDialog } from "@/components/ui/destructive-confirm-dialog"
+import { CohortStatusBadge } from "@/components/cohorts/cohort-status-badge"
+import { CohortRosterPanels } from "@/components/cohorts/cohort-roster-panels"
 
-export default function CohortDetailPage() {
+type CohortTab = "students" | "teachers" | "attendance" | "practice" | "assignments" | "exams"
+type DestructiveAction =
+  | { type: "delete-cohort" }
+  | { type: "remove-member"; userId: string }
+
+const cohortTabs: CohortTab[] = ["students", "teachers", "attendance", "practice", "assignments", "exams"]
+
+function isCohortTab(value: string | null): value is CohortTab {
+  return value !== null && cohortTabs.includes(value as CohortTab)
+}
+
+function CohortDetailContent() {
   const t = useTranslations("cohortDetail")
   const tCohorts = useTranslations("cohorts")
   const tCommon = useTranslations("common")
 
   const params = useParams()
   const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
   const cohortId = params.id as string
 
   const {
@@ -79,11 +91,14 @@ export default function CohortDetailPage() {
   const cohortAssignments = getCohortAssignments(cohortId)
   const cohortExams = getCohortExams(cohortId)
 
-  const [activeTab, setActiveTab] = React.useState<"students" | "teachers" | "attendance" | "practice" | "assignments" | "exams">("students")
+  const activeTab: CohortTab = isCohortTab(searchParams.get("tab"))
+    ? searchParams.get("tab") as CohortTab
+    : "students"
   const [selectedStudent, setSelectedStudent] = React.useState<User | null>(null)
   const [studentSearch, setStudentSearch] = React.useState("")
   const [enrollStudentModalOpen, setEnrollStudentModalOpen] = React.useState("")
   const [assignTeacherModalOpen, setAssignTeacherModalOpen] = React.useState(false)
+  const [pendingDestructiveAction, setPendingDestructiveAction] = React.useState<DestructiveAction | null>(null)
 
   // Edit settings form
   const [isEditing, setIsEditing] = React.useState(false)
@@ -163,15 +178,27 @@ export default function CohortDetailPage() {
   }
 
   const handleDeleteCohort = () => {
-    if (
-      confirm(
-        `コホート「${cohort.name}」を完全に削除しますか？\nこの操作は取り消せません。`
-      )
-    ) {
+    setPendingDestructiveAction({ type: "delete-cohort" })
+  }
+
+  const handleTabChange = (value: string | null) => {
+    if (!isCohortTab(value)) return
+    router.push(`${pathname}?tab=${value}`, { scroll: false })
+  }
+
+  const handleConfirmDestructiveAction = () => {
+    if (!pendingDestructiveAction) return
+    if (pendingDestructiveAction.type === "delete-cohort") {
       deleteCohort(cohortId)
       router.push("/cohorts")
+    } else {
+      removeUserFromCohort(pendingDestructiveAction.userId, cohortId)
     }
   }
+
+  const pendingMember = pendingDestructiveAction?.type === "remove-member"
+    ? users.find((user) => user.id === pendingDestructiveAction.userId)
+    : undefined
 
   return (
     <div className="page-shell">
@@ -184,73 +211,48 @@ export default function CohortDetailPage() {
         ]}
       />
 
-      {/* Cohort Header Banner */}
-      <div className="rounded-xl border border-border/80 bg-card p-6 shadow-xs">
-        <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
-          <div className="space-y-2">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="font-mono text-xs font-bold text-primary bg-primary/10 px-2.5 py-0.5 rounded border border-primary/20">
-                {cohort.code}
-              </span>
-              <Badge
-                variant={
-                  cohort.status === "active"
-                    ? "success"
-                    : cohort.status === "upcoming"
-                    ? "info"
-                    : "secondary"
-                }
-                className="text-xs"
-              >
-                {cohort.status === "active" && tCohorts("statusActive")}
-                {cohort.status === "upcoming" && tCohorts("statusUpcoming")}
-                {cohort.status === "completed" && tCohorts("statusCompleted")}
-                {cohort.status === "archived" && tCohorts("statusArchived")}
-              </Badge>
-              <Badge variant="outline" className="text-xs">
-                {cohort.targetLevel}
-              </Badge>
-            </div>
-
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
-              {cohort.name}
-            </h1>
-
-            <p className="text-sm text-muted-foreground max-w-3xl">
-              {cohort.description}
-            </p>
-
-            <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground pt-1">
-              <span className="flex items-center gap-1.5">
-                <Calendar className="h-3.5 w-3.5" />
-                {t("period")} {cohort.startDate} 〜 {cohort.endDate}
-              </span>
-              <span className="flex items-center gap-1.5">
-                <GraduationCap className="h-3.5 w-3.5 text-indigo-500" />
-                {tCommon("roleGakusei")}: <strong className="text-foreground">{members.students.length}</strong>
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Users className="h-3.5 w-3.5 text-emerald-500" />
-                {tCommon("roleSensei")}: <strong className="text-foreground">{members.teachers.length}</strong>
-              </span>
-            </div>
-          </div>
-
-          {canManage && (
-            <div className="flex items-center gap-2 shrink-0">
-              <Button
-                variant={isEditing ? "default" : "outline"}
-                size="sm"
-                className="gap-1.5 text-xs"
-                onClick={handleStartEditing}
-              >
-                <Edit className="h-3.5 w-3.5" />
-                {isEditing ? tCommon("close") : tCommon("edit")}
-              </Button>
-            </div>
-          )}
-        </div>
-      </div>
+      <PageHeader
+        eyebrow={
+          <span className="flex flex-wrap items-center gap-2">
+            <span className="rounded border border-primary/20 bg-primary/10 px-2.5 py-0.5 font-mono text-xs font-bold text-primary">
+              {cohort.code}
+            </span>
+            <CohortStatusBadge status={cohort.status} className="gap-1 text-xs" />
+            <Badge variant="outline" className="text-xs">
+              {cohort.targetLevel}
+            </Badge>
+          </span>
+        }
+        title={cohort.name}
+        description={cohort.description}
+        metadata={
+          <>
+            <span className="flex items-center gap-1.5">
+              <Calendar aria-hidden="true" className="size-3.5" />
+              {t("period")} {cohort.startDate} 〜 {cohort.endDate}
+            </span>
+            <span>
+              {tCommon("roleGakusei")}: <strong className="text-foreground">{members.students.length}</strong>
+            </span>
+            <span>
+              {tCommon("roleSensei")}: <strong className="text-foreground">{members.teachers.length}</strong>
+            </span>
+          </>
+        }
+        action={
+          canManage ? (
+            <Button
+              variant={isEditing ? "default" : "outline"}
+              size="sm"
+              className="gap-1.5 text-xs"
+              onClick={handleStartEditing}
+            >
+              <Edit aria-hidden="true" className="size-3.5" />
+              {isEditing ? tCommon("close") : tCommon("edit")}
+            </Button>
+          ) : undefined
+        }
+      />
 
       {/* Edit Form Drawer if active */}
       {isEditing && (
@@ -265,16 +267,20 @@ export default function CohortDetailPage() {
             <form onSubmit={handleSaveSettings} className="space-y-4 text-sm">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium mb-1">{tCohorts("modalName")}</label>
+                  <label htmlFor="cohort-name" className="block text-xs font-medium mb-1">{tCohorts("modalName")}</label>
                   <Input
+                    id="cohort-name"
+                    name="name"
                     value={editName}
                     onChange={(e) => setEditName(e.target.value)}
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium mb-1">{tCohorts("modalCode")}</label>
+                  <label htmlFor="cohort-code" className="block text-xs font-medium mb-1">{tCohorts("modalCode")}</label>
                   <Input
+                    id="cohort-code"
+                    name="code"
                     value={editCode}
                     onChange={(e) => setEditCode(e.target.value)}
                     required
@@ -284,23 +290,29 @@ export default function CohortDetailPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-xs font-medium mb-1">{tCohorts("modalTargetLevel")}</label>
+                  <label htmlFor="cohort-level" className="block text-xs font-medium mb-1">{tCohorts("modalTargetLevel")}</label>
                   <Input
+                    id="cohort-level"
+                    name="targetLevel"
                     value={editTargetLevel}
                     onChange={(e) => setEditTargetLevel(e.target.value)}
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium mb-1">{tCohorts("modalStartDate")}</label>
+                  <label htmlFor="cohort-start-date" className="block text-xs font-medium mb-1">{tCohorts("modalStartDate")}</label>
                   <Input
+                    id="cohort-start-date"
+                    name="startDate"
                     type="date"
                     value={editStartDate}
                     onChange={(e) => setEditStartDate(e.target.value)}
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium mb-1">{tCohorts("modalEndDate")}</label>
+                  <label htmlFor="cohort-end-date" className="block text-xs font-medium mb-1">{tCohorts("modalEndDate")}</label>
                   <Input
+                    id="cohort-end-date"
+                    name="endDate"
                     type="date"
                     value={editEndDate}
                     onChange={(e) => setEditEndDate(e.target.value)}
@@ -310,8 +322,10 @@ export default function CohortDetailPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium mb-1">{tCohorts("filterStatus")}</label>
+                  <label htmlFor="cohort-status" className="block text-xs font-medium mb-1">{tCohorts("filterStatus")}</label>
                   <select
+                    id="cohort-status"
+                    name="status"
                     className="w-full h-9 rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     value={editStatus}
                     onChange={(e) => setEditStatus(e.target.value as CohortStatus)}
@@ -323,8 +337,10 @@ export default function CohortDetailPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-medium mb-1">{tCohorts("modalDescLabel")}</label>
+                  <label htmlFor="cohort-description" className="block text-xs font-medium mb-1">{tCohorts("modalDescLabel")}</label>
                   <Input
+                    id="cohort-description"
+                    name="description"
                     value={editDescription}
                     onChange={(e) => setEditDescription(e.target.value)}
                   />
@@ -362,357 +378,51 @@ export default function CohortDetailPage() {
         </Card>
       )}
 
-      {/* Roster Navigation Tabs */}
-      <div className="flex items-center gap-2 border-b border-border/70 pb-2 overflow-x-auto">
-        <button
-          onClick={() => setActiveTab("students")}
-          className={cn(
-            "flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-colors whitespace-nowrap",
-            activeTab === "students"
-              ? "bg-secondary text-foreground font-semibold shadow-xs"
-              : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
-          )}
-        >
-          <GraduationCap className="h-4 w-4 text-indigo-500" />
-          <span>{t("tabStudents", { count: members.students.length })}</span>
-        </button>
+      <Tabs value={activeTab} onValueChange={handleTabChange}>
+        <TabsList aria-label={t("tabsLabel")}>
+          <TabsTrigger value="students">
+            <GraduationCap aria-hidden="true" className="size-4" />
+            <span>{t("tabStudents", { count: members.students.length })}</span>
+          </TabsTrigger>
+          <TabsTrigger value="teachers">
+            <Users aria-hidden="true" className="size-4" />
+            <span>{t("tabStaff", { count: members.teachers.length + members.coordinators.length })}</span>
+          </TabsTrigger>
+          <TabsTrigger value="attendance">
+            <Calendar aria-hidden="true" className="size-4" />
+            <span>{t("tabAttendance", { count: cohortSessions.length })}</span>
+          </TabsTrigger>
+          <TabsTrigger value="practice">
+            <BookOpen aria-hidden="true" className="size-4" />
+            <span>{t("tabPractice", { count: cohortPracticeSets.length })}</span>
+          </TabsTrigger>
+          <TabsTrigger value="assignments">
+            <FileCheck2 aria-hidden="true" className="size-4" />
+            <span>{t("tabAssignments", { count: cohortAssignments.length })}</span>
+          </TabsTrigger>
+          <TabsTrigger value="exams">
+            <Award aria-hidden="true" className="size-4" />
+            <span>{t("tabExams", { count: cohortExams.length })}</span>
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value={activeTab}>
 
-        <button
-          onClick={() => setActiveTab("teachers")}
-          className={cn(
-            "flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-colors whitespace-nowrap",
-            activeTab === "teachers"
-              ? "bg-secondary text-foreground font-semibold shadow-xs"
-              : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
-          )}
-        >
-          <Users className="h-4 w-4 text-emerald-500" />
-          <span>{t("tabStaff", { count: members.teachers.length + members.coordinators.length })}</span>
-        </button>
-
-        <button
-          onClick={() => setActiveTab("attendance")}
-          className={cn(
-            "flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-colors whitespace-nowrap",
-            activeTab === "attendance"
-              ? "bg-secondary text-foreground font-semibold shadow-xs"
-              : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
-          )}
-        >
-          <Calendar className="h-4 w-4 text-amber-500" />
-          <span>{t("tabAttendance", { count: cohortSessions.length })}</span>
-        </button>
-
-        <button
-          onClick={() => setActiveTab("practice")}
-          className={cn(
-            "flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-colors whitespace-nowrap",
-            activeTab === "practice"
-              ? "bg-secondary text-foreground font-semibold shadow-xs"
-              : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
-          )}
-        >
-          <BookOpen className="h-4 w-4 text-blue-500" />
-          <span>{t("tabPractice", { count: cohortPracticeSets.length })}</span>
-        </button>
-
-        <button
-          onClick={() => setActiveTab("assignments")}
-          className={cn(
-            "flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-colors whitespace-nowrap",
-            activeTab === "assignments"
-              ? "bg-secondary text-foreground font-semibold shadow-xs"
-              : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
-          )}
-        >
-          <FileCheck2 className="h-4 w-4 text-purple-500" />
-          <span>{t("tabAssignments", { count: cohortAssignments.length })}</span>
-        </button>
-
-        <button
-          onClick={() => setActiveTab("exams")}
-          className={cn(
-            "flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-colors whitespace-nowrap",
-            activeTab === "exams"
-              ? "bg-secondary text-foreground font-semibold shadow-xs"
-              : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
-          )}
-        >
-          <Award className="h-4 w-4 text-amber-500" />
-          <span>{t("tabExams", { count: cohortExams.length })}</span>
-        </button>
-      </div>
-
-      {/* Tab Content 1: Students Roster */}
-      {activeTab === "students" && (
-        <div className="space-y-4">
-          {/* Action & Search Bar */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="relative flex-1 max-w-sm">
-              <Search className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-              <Input
-                placeholder={tCohorts("searchPlaceholder")}
-                value={studentSearch}
-                onChange={(e) => setStudentSearch(e.target.value)}
-                className="pl-8 text-xs h-9 bg-card"
-              />
-            </div>
-
-            {canManage && (
-              <Button
-                size="sm"
-                onClick={() => setEnrollStudentModalOpen("open")}
-                className="gap-1.5 text-xs shadow-xs"
-              >
-                <UserPlus className="h-4 w-4" />
-                {t("enrollStudent")}
-              </Button>
-            )}
-          </div>
-
-          {/* Students List */}
-          {filteredStudents.length === 0 ? (
-            <div className="rounded-xl border border-dashed border-border/80 p-8 text-center bg-card/40">
-              <GraduationCap className="mx-auto h-10 w-10 text-muted-foreground/60" />
-              <p className="mt-2 text-sm font-medium">{t("noStudentsEnrolled")}</p>
-            </div>
-          ) : (
-            <div className="rounded-xl border border-border/80 bg-card overflow-hidden shadow-xs">
-              <div className="overflow-x-auto">
-                <Table>
-                  <thead className="border-b border-border/60 bg-muted/40 text-xs font-semibold text-muted-foreground">
-                    <tr>
-                      <th className="py-3 px-4">{tCommon("name")}</th>
-                      <th className="py-3 px-4 hidden sm:table-cell">{tCommon("email")}</th>
-                      <th className="py-3 px-4 hidden md:table-cell">{tCommon("details")}</th>
-                      <th className="py-3 px-4 hidden lg:table-cell">{tCommon("status")}</th>
-                      <th className="py-3 px-4 text-right">{tCommon("actions")}</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-border/60">
-                    {filteredStudents.map((student) => {
-                      const initials = student.name
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")
-                        .substring(0, 2)
-                        .toUpperCase()
-
-                      return (
-                        <tr
-                          key={student.id}
-                          className="hover:bg-muted/30 transition-colors"
-                        >
-                          <td className="py-3 px-4">
-                            <div className="flex items-center gap-3">
-                              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-xs font-bold shrink-0">
-                                {initials}
-                              </div>
-                              <div>
-                                <div className="font-medium text-foreground">
-                                  {student.name}
-                                </div>
-                                {student.japaneseName && (
-                                  <div className="text-xs text-muted-foreground">
-                                    {student.japaneseName}
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                          </td>
-
-                          <td className="py-3 px-4 hidden sm:table-cell text-xs text-muted-foreground">
-                            <span className="flex items-center gap-1">
-                              <Mail className="h-3 w-3" />
-                              {student.email}
-                            </span>
-                          </td>
-
-                          <td className="py-3 px-4 hidden md:table-cell text-xs text-muted-foreground">
-                            {student.notes || "—"}
-                          </td>
-
-                          <td className="py-3 px-4 hidden lg:table-cell text-xs text-muted-foreground">
-                            {student.joinedDate}
-                          </td>
-
-                          <td className="py-3 px-4 text-right">
-                            <div className="flex items-center justify-end gap-1">
-                              <Button
-                                variant="ghost"
-                                size="xs"
-                                onClick={() => setSelectedStudent(student)}
-                                className="text-xs gap-1 hover:bg-muted font-medium text-foreground/80 hover:text-foreground"
-                              >
-                                <FileText className="h-3 w-3 text-indigo-500" />
-                                {t("viewProgress")}
-                              </Button>
-
-                              {canManage && (
-                                <Button
-                                  variant="ghost"
-                                  size="xs"
-                                  onClick={() => {
-                                    if (confirm(t("removeConfirm"))) {
-                                      removeUserFromCohort(student.id, cohortId)
-                                    }
-                                  }}
-                                  className="text-destructive hover:bg-destructive/10 text-xs gap-1"
-                                >
-                                  <Trash2 className="h-3 w-3" />
-                                  {t("removeFromCohort")}
-                                </Button>
-                              )}
-                            </div>
-                          </td>
-                        </tr>
-                      )
-                    })}
-                  </tbody>
-                </Table>
-              </div>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Tab Content 2: Staff & Teachers */}
-      {activeTab === "teachers" && (
-        <div className="space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <p className="text-xs text-muted-foreground">
-              {cohort.name} ({cohort.code})
-            </p>
-
-            {canManage && (
-              <Button
-                size="sm"
-                onClick={() => setAssignTeacherModalOpen(true)}
-                className="gap-1.5 text-xs shadow-xs"
-              >
-                <UserPlus className="h-4 w-4" />
-                {t("enrollStaff")}
-              </Button>
-            )}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Sensei */}
-            <Card className="border-border/80">
-              <CardHeader className="pb-3">
-                <CardTitle className="text-sm flex items-center gap-2">
-                  <Users className="h-4 w-4 text-emerald-500" />
-                  {tCommon("roleSensei")} ({members.teachers.length})
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                {members.teachers.length === 0 ? (
-                  <p className="text-xs text-muted-foreground py-2">{t("noStaffAssigned")}</p>
-                ) : (
-                  members.teachers.map((teacher) => (
-                    <div
-                      key={teacher.id}
-                      className="flex items-center justify-between rounded-lg border border-border/50 p-2.5 bg-muted/20"
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold">
-                          先
-                        </div>
-                        <div>
-                          <div className="text-sm font-medium">
-                            {teacher.name}
-                            {teacher.japaneseName && (
-                              <span className="ml-1 text-xs text-muted-foreground">
-                                ({teacher.japaneseName})
-                              </span>
-                            )}
-                          </div>
-                          <div className="text-xs text-muted-foreground flex items-center gap-1">
-                            <Mail className="h-3 w-3" />
-                            {teacher.email}
-                          </div>
-                        </div>
-                      </div>
-
-                      {canManage && (
-                        <Button
-                          variant="ghost"
-                          size="xs"
-                          onClick={() => {
-                            if (confirm(t("removeConfirm"))) {
-                              removeUserFromCohort(teacher.id, cohortId)
-                            }
-                          }}
-                          className="text-muted-foreground hover:text-destructive text-xs"
-                        >
-                          {t("removeFromCohort")}
-                        </Button>
-                      )}
-                    </div>
-                  ))
-                )}
-              </CardContent>
-            </Card>
-
-            {/* Coordinators */}
-            <Card className="border-border/80">
-              <CardHeader className="pb-3">
-                <CardTitle className="text-sm flex items-center gap-2">
-                  <ShieldCheck className="h-4 w-4 text-purple-500" />
-                  {tCommon("roleTantosha")} ({members.coordinators.length})
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                {members.coordinators.length === 0 ? (
-                  <p className="text-xs text-muted-foreground py-2">{t("noStaffAssigned")}</p>
-                ) : (
-                  members.coordinators.map((coordinator) => (
-                    <div
-                      key={coordinator.id}
-                      className="flex items-center justify-between rounded-lg border border-border/50 p-2.5 bg-muted/20"
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 text-xs font-bold">
-                          担
-                        </div>
-                        <div>
-                          <div className="text-sm font-medium">
-                            {coordinator.name}
-                            {coordinator.japaneseName && (
-                              <span className="ml-1 text-xs text-muted-foreground">
-                                ({coordinator.japaneseName})
-                              </span>
-                            )}
-                          </div>
-                          <div className="text-xs text-muted-foreground flex items-center gap-1">
-                            <Mail className="h-3 w-3" />
-                            {coordinator.email}
-                          </div>
-                        </div>
-                      </div>
-
-                      {canManage && (
-                        <Button
-                          variant="ghost"
-                          size="xs"
-                          onClick={() => {
-                            if (confirm(t("removeConfirm"))) {
-                              removeUserFromCohort(coordinator.id, cohortId)
-                            }
-                          }}
-                          className="text-muted-foreground hover:text-destructive text-xs"
-                        >
-                          {t("removeFromCohort")}
-                        </Button>
-                      )}
-                    </div>
-                  ))
-                )}
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      )}
+      <CohortRosterPanels
+        activeTab={activeTab === "teachers" ? "teachers" : "students"}
+        cohort={cohort}
+        members={members}
+        filteredStudents={filteredStudents}
+        canManage={canManage}
+        studentSearch={studentSearch}
+        onStudentSearchChange={setStudentSearch}
+        onEnrollStudent={() => setEnrollStudentModalOpen("open")}
+        onAssignStaff={() => setAssignTeacherModalOpen(true)}
+        onSelectStudent={setSelectedStudent}
+        onRequestRemove={(userId) => setPendingDestructiveAction({ type: "remove-member", userId })}
+        t={t}
+        tCohorts={tCohorts}
+        tCommon={tCommon}
+      />
 
       {/* Tab Content 3: Attendance Sessions */}
       {activeTab === "attendance" && (
@@ -834,7 +544,7 @@ export default function CohortDetailPage() {
                           {set.title}
                         </CardTitle>
                         <CardDescription className="text-xs mt-1 line-clamp-1">
-                          {set.description || "—"}
+                          {set.description || t("emptyValue")}
                         </CardDescription>
                       </div>
                       <Badge variant="outline" className="text-xs shrink-0 font-medium">
@@ -845,7 +555,7 @@ export default function CohortDetailPage() {
                   <CardContent className="space-y-3 pt-0">
                     <div className="flex items-center justify-between text-xs text-muted-foreground">
                       <span className="capitalize">{set.topic}</span>
-                      <span>{set.questions.length} Qs • Pass {set.passScore}%</span>
+                      <span>{t("questionsSummary", { count: set.questions.length })} · {t("passScore", { score: set.passScore })}</span>
                     </div>
 
                     <div className="flex items-center justify-end pt-2 border-t border-border/50">
@@ -905,7 +615,7 @@ export default function CohortDetailPage() {
                             {assignment.title}
                           </CardTitle>
                           <CardDescription className="text-xs mt-1 line-clamp-1">
-                            {assignment.description || "—"}
+                          {assignment.description || t("emptyValue")}
                           </CardDescription>
                         </div>
                         <Badge variant="outline" className="text-xs shrink-0 font-medium">
@@ -919,12 +629,12 @@ export default function CohortDetailPage() {
                           <Clock className="h-3 w-3" />
                           {assignment.dueDate}
                         </span>
-                        <span>Pass: {assignment.passScore} pts</span>
+                        <span>{t("passPoints", { score: assignment.passScore })}</span>
                       </div>
 
                       <div className="flex items-center justify-between pt-2 border-t border-border/50 text-xs">
                         <span className="text-muted-foreground">
-                          {subs.length}/{members.students.length} dikumpulkan ({gradedCount} dinilai)
+                          {t("submittedSummary", { submitted: subs.length, total: members.students.length, graded: gradedCount })}
                         </span>
                         <Link href={`/assignments/${assignment.id}`}>
                           <Button size="xs" variant="ghost" className="gap-1 text-xs text-primary font-medium hover:bg-primary/10">
@@ -989,7 +699,7 @@ export default function CohortDetailPage() {
                             {exam.title}
                           </CardTitle>
                           <CardDescription className="text-xs mt-1 line-clamp-1">
-                            {exam.description || "—"}
+                          {exam.description || t("emptyValue")}
                           </CardDescription>
                         </div>
                         <Badge variant="outline" className="text-xs shrink-0 font-medium">
@@ -1001,18 +711,18 @@ export default function CohortDetailPage() {
                       <div className="flex items-center justify-between text-xs text-muted-foreground">
                         <span className="flex items-center gap-1">
                           <Clock className="h-3 w-3" />
-                          {exam.durationMinutes} min
+                          {t("durationMinutes", { count: exam.durationMinutes })}
                         </span>
-                        <span>Pass: {exam.passScore}%</span>
+                        <span>{t("passScore", { score: exam.passScore })}</span>
                       </div>
 
                       <div className="flex items-center justify-between pt-2 border-t border-border/50 text-xs">
                         <span className="text-muted-foreground">
-                          {attempts.length} peserta · {passRate}% lulus
+                          {t("examAttemptsSummary", { count: attempts.length, rate: passRate })}
                         </span>
                         <Link href={`/exams/${exam.id}`}>
                           <Button size="xs" variant="ghost" className="gap-1 text-xs text-primary font-medium hover:bg-primary/10">
-                            {t("openAssignment")}
+                            {t("openExam")}
                             <ArrowRight className="h-3 w-3" />
                           </Button>
                         </Link>
@@ -1025,13 +735,15 @@ export default function CohortDetailPage() {
           )}
         </div>
       )}
+        </TabsContent>
+      </Tabs>
 
       {/* Modal: Enroll Existing Student */}
       <Dialog
         open={enrollStudentModalOpen === "open"}
         onOpenChange={(open) => !open && setEnrollStudentModalOpen("")}
       >
-        <DialogContent className="max-w-md">
+        <DialogContent className="max-w-md" closeLabel={tCommon("close")}>
           <DialogHeader>
             <DialogTitle>{t("enrollModalTitle")}</DialogTitle>
             <DialogDescription>
@@ -1087,7 +799,7 @@ export default function CohortDetailPage() {
         open={assignTeacherModalOpen}
         onOpenChange={setAssignTeacherModalOpen}
       >
-        <DialogContent className="max-w-md">
+        <DialogContent className="max-w-md" closeLabel={tCommon("close")}>
           <DialogHeader>
             <DialogTitle>{t("enrollModalTitle")}</DialogTitle>
             <DialogDescription>
@@ -1148,6 +860,28 @@ export default function CohortDetailPage() {
         </DialogContent>
       </Dialog>
 
+      <DestructiveConfirmDialog
+        open={pendingDestructiveAction !== null}
+        onOpenChange={(open) => !open && setPendingDestructiveAction(null)}
+        title={
+          pendingDestructiveAction?.type === "delete-cohort"
+            ? t("deleteCohortTitle")
+            : t("removeMemberTitle")
+        }
+        description={
+          pendingDestructiveAction?.type === "delete-cohort"
+            ? t("deleteCohortDesc", { name: cohort.name })
+            : t("removeMemberDesc", { name: pendingMember?.name ?? "" })
+        }
+        confirmLabel={
+          pendingDestructiveAction?.type === "delete-cohort"
+            ? tCommon("delete")
+            : t("removeFromCohort")
+        }
+        cancelLabel={tCommon("cancel")}
+        onConfirm={handleConfirmDestructiveAction}
+      />
+
       {/* Student Profile Quick Overview Drawer */}
       <StudentProfileDrawer
         student={selectedStudent}
@@ -1156,5 +890,13 @@ export default function CohortDetailPage() {
         onOpenChange={(open) => !open && setSelectedStudent(null)}
       />
     </div>
+  )
+}
+
+export default function CohortDetailPage() {
+  return (
+    <React.Suspense fallback={<div className="page-shell" aria-busy="true" />}>
+      <CohortDetailContent />
+    </React.Suspense>
   )
 }

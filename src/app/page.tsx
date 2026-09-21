@@ -96,7 +96,7 @@ export default function Home() {
               <div className="metric-item"><p className="metric-label">{t("studentProgress")}</p><p className="metric-value">{studentAttendance.rate}%</p><p className="metric-note">{tCommon("roleGakusei")}</p></div>
               <div className="metric-item"><p className="metric-label">{t("statAssignments")}</p><p className="metric-value">{studentPendingAssignments.length}</p><p className="metric-note">{t("pendingAssignments", { count: studentPendingAssignments.length })}</p></div>
               <div className="metric-item"><p className="metric-label">{t("statExams")}</p><p className="metric-value">{studentCompletedExams}/{exams.length}</p><p className="metric-note">{t("activeExamsSummary", { count: exams.length - studentCompletedExams })}</p></div>
-              <div className="metric-item"><p className="metric-label">{t("statAssignments")}</p><p className="metric-value">{studentCompletedPractice}/{practiceSets.length}</p><p className="metric-note">{t("practiceSetsSummary", { count: practiceSets.length })}</p></div>
+              <div className="metric-item"><p className="metric-label">{t("statPractice")}</p><p className="metric-value">{studentCompletedPractice}/{practiceSets.length}</p><p className="metric-note">{t("practiceSetsSummary", { count: practiceSets.length })}</p></div>
             </>
           ) : (
             <>

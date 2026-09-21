@@ -85,6 +85,7 @@
     "statCohortsActive": "進行中: {count} バッチ",
     "statAssignments": "総課題数",
     "statAssignmentsDesc": "作文・評価課題",
+    "statPractice": "練習問題数",
     "statStudents": "登録学生 (Gakusei)",
     "statStudentsDesc": "奨学金受講生",
     "statTeachers": "指導講師 (Sensei)",
@@ -334,6 +335,7 @@
     "notFound": "コホートが見つかりません",
     "level": "目標レベル:",
     "period": "研修期間:",
+    "tabsLabel": "コホート詳細ナビゲーション",
     "tabStudents": "受講生名簿 ({count})",
     "tabStaff": "講師・担当者名簿 ({count})",
     "tabAttendance": "出席管理 ({count})",
@@ -343,6 +345,10 @@
     "enrollStaff": "指導講師・担当者を配置",
     "removeFromCohort": "コホートから解除",
     "removeConfirm": "このメンバーをコホートから解除しますか？",
+    "deleteCohortTitle": "このコホートを削除しますか？",
+    "deleteCohortDesc": "コホート「{name}」と関連データを削除します。この操作は取り消せません。",
+    "removeMemberTitle": "メンバーをコホートから解除しますか？",
+    "removeMemberDesc": "{name} をこのコホートから解除します。",
     "noStudentsEnrolled": "現在このコホートに登録されている学生はいません。",
     "noStaffAssigned": "現在このコホートに配置されている指導講師・担当者はいません。",
     "noAttendanceSessions": "このコホートの出席セッションはまだありません。",
@@ -365,6 +371,14 @@
     "goToExamsModule": "試験モジュールを開く",
     "takeExam": "試験を受ける",
     "viewExamResults": "結果を確認"
+    ,"emptyValue": "—"
+    ,"questionsSummary": "{count} 問"
+    ,"passScore": "合格 {score}%"
+    ,"passPoints": "合格: {score} 点"
+    ,"submittedSummary": "{submitted}/{total} 提出済み ({graded} 件採点済み)"
+    ,"durationMinutes": "{count} 分"
+    ,"examAttemptsSummary": "{count} 名受験 · {rate}% 合格"
+    ,"openExam": "試験を開く"
   },
   "users": {
     "badge": "ユーザー台帳",

@@ -312,6 +312,10 @@
     @apply max-w-3xl text-sm leading-6 text-muted-foreground;
   }
 
+  .page-header-metadata {
+    @apply flex flex-wrap items-center gap-x-4 gap-y-1 pt-1 text-xs text-muted-foreground;
+  }
+
   .section-header {
     @apply flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between;
   }

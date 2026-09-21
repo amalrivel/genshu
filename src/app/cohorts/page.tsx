@@ -12,9 +12,6 @@ import {
   ArrowRight,
   Sparkles,
   Filter,
-  CheckCircle2,
-  Clock,
-  Archive,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -33,6 +30,7 @@ import { useData } from "@/lib/data-context"
 import { type CohortStatus } from "@/lib/mock-data"
 import { cn } from "@/lib/utils"
 import { useTranslations } from "next-intl"
+import { CohortStatusBadge } from "@/components/cohorts/cohort-status-badge"
 
 export default function CohortsPage() {
   const t = useTranslations("cohorts")
@@ -105,39 +103,6 @@ export default function CohortsPage() {
     setEndDate("")
     setFormError("")
     setCreateDialogOpen(false)
-  }
-
-  const getStatusBadge = (s: CohortStatus) => {
-    switch (s) {
-      case "active":
-        return (
-          <Badge variant="success" className="gap-1 text-xs">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            {t("statusActive")}
-          </Badge>
-        )
-      case "upcoming":
-        return (
-          <Badge variant="info" className="gap-1 text-xs">
-            <Clock className="h-3 w-3" />
-            {t("statusUpcoming")}
-          </Badge>
-        )
-      case "completed":
-        return (
-          <Badge variant="secondary" className="gap-1 text-xs">
-            <CheckCircle2 className="h-3 w-3" />
-            {t("statusCompleted")}
-          </Badge>
-        )
-      case "archived":
-        return (
-          <Badge variant="outline" className="gap-1 text-xs">
-            <Archive className="h-3 w-3" />
-            {t("statusArchived")}
-          </Badge>
-        )
-    }
   }
 
   return (
@@ -288,7 +253,7 @@ export default function CohortsPage() {
                       <span className="font-mono text-xs font-semibold text-muted-foreground bg-muted/60 px-2 py-0.5 rounded border border-border/50">
                         {cohort.code}
                       </span>
-                      {getStatusBadge(cohort.status)}
+                      <CohortStatusBadge status={cohort.status} className="gap-1 text-xs" />
                     </div>
                     <CardTitle className="text-base sm:text-lg group-hover:text-primary transition-colors">
                       {cohort.name}

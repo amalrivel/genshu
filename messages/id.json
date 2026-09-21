@@ -85,6 +85,7 @@
     "statCohortsActive": "Aktif: {count} batch",
     "statAssignments": "Total Tugas",
     "statAssignmentsDesc": "Komposisi & evaluasi",
+    "statPractice": "Total Latihan",
     "statStudents": "Siswa Terdaftar (Gakusei)",
     "statStudentsDesc": "Penerima beasiswa",
     "statTeachers": "Instruktur Pengajar (Sensei)",
@@ -337,6 +338,7 @@
     "notFound": "Kohort Tidak Ditemukan",
     "level": "Target Level:",
     "period": "Periode Pelatihan:",
+    "tabsLabel": "Navigasi detail kohort",
     "tabStudents": "Daftar Siswa ({count})",
     "tabStaff": "Pengajar & Staf ({count})",
     "tabAttendance": "Presensi ({count})",
@@ -346,6 +348,10 @@
     "enrollStaff": "Tugaskan Staf / Pengajar",
     "removeFromCohort": "Keluarkan dari Kohort",
     "removeConfirm": "Apakah Anda yakin ingin mengeluarkan pengguna ini dari kohort?",
+    "deleteCohortTitle": "Hapus kohort ini?",
+    "deleteCohortDesc": "Kohort {name} dan data terkait akan dihapus. Tindakan ini tidak dapat dibatalkan.",
+    "removeMemberTitle": "Keluarkan anggota dari kohort?",
+    "removeMemberDesc": "{name} akan dikeluarkan dari kohort ini.",
     "noStudentsEnrolled": "Belum ada siswa yang terdaftar dalam kohort ini.",
     "noStaffAssigned": "Belum ada staf pengajar yang ditugaskan dalam kohort ini.",
     "noAttendanceSessions": "Belum ada sesi presensi yang tercatat untuk kohort ini.",
@@ -368,6 +374,14 @@
     "goToExamsModule": "Buka Modul Ujian",
     "takeExam": "Mulai Ujian",
     "viewExamResults": "Lihat Hasil"
+    ,"emptyValue": "—"
+    ,"questionsSummary": "{count} soal"
+    ,"passScore": "Lulus {score}%"
+    ,"passPoints": "Lulus: {score} poin"
+    ,"submittedSummary": "{submitted}/{total} dikumpulkan ({graded} dinilai)"
+    ,"durationMinutes": "{count} menit"
+    ,"examAttemptsSummary": "{count} peserta · {rate}% lulus"
+    ,"openExam": "Buka Ujian"
   },
   "users": {
     "badge": "Direktori Pengguna",

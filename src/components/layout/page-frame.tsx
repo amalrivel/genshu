@@ -17,17 +17,19 @@ interface PageHeaderProps {
   title: React.ReactNode
   description?: React.ReactNode
   eyebrow?: React.ReactNode
+  metadata?: React.ReactNode
   action?: React.ReactNode
   className?: string
 }
 
-export function PageHeader({ title, description, eyebrow, action, className }: PageHeaderProps) {
+export function PageHeader({ title, description, eyebrow, metadata, action, className }: PageHeaderProps) {
   return (
     <header className={cn("page-header", className)}>
       <div className="min-w-0 space-y-1">
         {eyebrow && <p className="page-eyebrow">{eyebrow}</p>}
         <h1 className="page-title">{title}</h1>
         {description && <p className="page-description">{description}</p>}
+        {metadata && <div className="page-header-metadata">{metadata}</div>}
       </div>
       {action && <div className="page-header-action">{action}</div>}
     </header>
@@ -52,4 +54,3 @@ export function SectionHeader({ title, description, action, className }: Section
     </div>
   )
 }
-
