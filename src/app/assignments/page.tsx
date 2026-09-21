@@ -161,6 +161,28 @@ export default function AssignmentsPage() {
     }, 0)
   }, [assignments, getAssignmentSubmissions])
 
+  // Staff assignment-level tab counters (matching card filter predicates)
+  const staffPendingAssignmentsCount = React.useMemo(() => {
+    return assignments.filter((a) => {
+      const subs = getAssignmentSubmissions(a.id)
+      return subs.some((s) => s.status === "SUBMITTED")
+    }).length
+  }, [assignments, getAssignmentSubmissions])
+
+  const staffSubmittedAssignmentsCount = React.useMemo(() => {
+    return assignments.filter((a) => {
+      const subs = getAssignmentSubmissions(a.id)
+      return subs.length > 0
+    }).length
+  }, [assignments, getAssignmentSubmissions])
+
+  const staffGradedAssignmentsCount = React.useMemo(() => {
+    return assignments.filter((a) => {
+      const subs = getAssignmentSubmissions(a.id)
+      return subs.some((s) => s.status === "GRADED")
+    }).length
+  }, [assignments, getAssignmentSubmissions])
+
   const activeCohortsCount = React.useMemo(() => {
     const cohortIds = new Set(assignments.map((a) => a.cohortId))
     return cohortIds.size
@@ -369,7 +391,7 @@ export default function AssignmentsPage() {
                     : "text-muted-foreground hover:text-foreground"
                 )}
               >
-                {t("tabPending", { count: currentRole === "GAKUSEI" ? studentPendingCount : staffPendingGradingCount })}
+                {t("tabPending", { count: currentRole === "GAKUSEI" ? studentPendingCount : staffPendingAssignmentsCount })}
               </button>
               <button
                 type="button"
@@ -382,7 +404,7 @@ export default function AssignmentsPage() {
                     : "text-muted-foreground hover:text-foreground"
                 )}
               >
-                {t("tabSubmitted", { count: currentRole === "GAKUSEI" ? studentSubmittedCount : assignments.length })}
+                {t("tabSubmitted", { count: currentRole === "GAKUSEI" ? studentSubmittedCount : staffSubmittedAssignmentsCount })}
               </button>
               <button
                 type="button"
@@ -395,7 +417,7 @@ export default function AssignmentsPage() {
                     : "text-muted-foreground hover:text-foreground"
                 )}
               >
-                {t("tabGraded", { count: currentRole === "GAKUSEI" ? studentGradedCount : staffGradedCount })}
+                {t("tabGraded", { count: currentRole === "GAKUSEI" ? studentGradedCount : staffGradedAssignmentsCount })}
               </button>
             </div>
 
@@ -558,7 +580,7 @@ export default function AssignmentsPage() {
 
       {/* Create Assignment Modal */}
       <Dialog open={createModalOpen} onOpenChange={setCreateModalOpen}>
-        <DialogContent className="max-w-lg">
+        <DialogContent closeLabel={tCommon("close")} className="max-w-lg">
           <DialogHeader>
             <DialogTitle className="text-lg font-bold">{t("modalTitle")}</DialogTitle>
             <DialogDescription className="text-xs text-muted-foreground">

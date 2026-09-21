@@ -798,27 +798,27 @@
     "semantic_hash": "cb56bf002d36bb860c3d320a23bd871a"
   },
   "messages/id.json": {
-    "mtime": 1789975240.800522,
-    "seen": 1789975343.6791165,
-    "ast_hash": "7b06dc0f295fe69958a7e063fc0538a3",
+    "mtime": 1789985517.79972,
+    "seen": 1789986922.8794441,
+    "ast_hash": "8d6af47257841139864a2137055d1387",
     "semantic_hash": ""
   },
   "messages/ja.json": {
-    "mtime": 1789975262.162564,
-    "seen": 1789975343.6791189,
-    "ast_hash": "e84ca56050b22bcabcea196af72d842b",
+    "mtime": 1789985530.7853248,
+    "seen": 1789986922.8794463,
+    "ast_hash": "68a061de431639d999c4c42cbd3ca068",
     "semantic_hash": ""
   },
   "src/app/assignments/[id]/page.tsx": {
-    "mtime": 1789878412.0050008,
-    "seen": 1789878865.31107,
-    "ast_hash": "66dd785d32ccab36f41abb029096f235",
+    "mtime": 1789985633.2749026,
+    "seen": 1789986922.8795135,
+    "ast_hash": "c604a8dcd1e6c69826b1044fb84825ee",
     "semantic_hash": ""
   },
   "src/app/assignments/page.tsx": {
-    "mtime": 1789878512.211747,
-    "seen": 1789878865.311071,
-    "ast_hash": "7b5180ba51e83286be6b599f6bde34b2",
+    "mtime": 1789985576.0671535,
+    "seen": 1789986922.8795147,
+    "ast_hash": "d3f4a081839d9d250026ebc23d2a68fc",
     "semantic_hash": ""
   },
   "src/app/attendance/[id]/page.tsx": {
@@ -846,15 +846,15 @@
     "semantic_hash": ""
   },
   "src/app/practice/[id]/page.tsx": {
-    "mtime": 1789878411.6759589,
-    "seen": 1789878865.3110805,
-    "ast_hash": "594b7282ebc86e2538f7a898463570f0",
+    "mtime": 1789985453.2799847,
+    "seen": 1789986922.8797247,
+    "ast_hash": "f47069063ee3691b2540a835832065f8",
     "semantic_hash": ""
   },
   "src/app/practice/page.tsx": {
-    "mtime": 1789878512.117188,
-    "seen": 1789878865.311081,
-    "ast_hash": "67df51eb90da5f09f5c2e27a2b60d3c5",
+    "mtime": 1789977257.947806,
+    "seen": 1789977555.8074064,
+    "ast_hash": "df7ede4d459899e4faf6490988f7d14e",
     "semantic_hash": ""
   },
   "src/components/language-toggle.tsx": {

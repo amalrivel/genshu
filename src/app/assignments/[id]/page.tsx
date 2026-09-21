@@ -549,7 +549,7 @@ export default function AssignmentDetailPage() {
 
       {/* Confirmation Modal for Student Submission */}
       <Dialog open={confirmSubmitModal} onOpenChange={setConfirmSubmitModal}>
-        <DialogContent className="max-w-md">
+        <DialogContent closeLabel={tCommon("close")} className="max-w-md">
           <DialogHeader>
             <DialogTitle className="text-base font-bold">{t("submitAssignment")}</DialogTitle>
             <DialogDescription className="text-xs text-muted-foreground">
@@ -584,7 +584,7 @@ export default function AssignmentDetailPage() {
         open={!!selectedSubForGrading}
         onOpenChange={(open) => !open && setSelectedSubForGrading(null)}
       >
-        <DialogContent className="max-w-xl">
+        <DialogContent closeLabel={tCommon("close")} className="max-w-xl">
           <DialogHeader>
             <DialogTitle className="text-base font-bold">{t("gradingModalTitle")}</DialogTitle>
             <DialogDescription className="text-xs text-muted-foreground">
