@@ -1,16 +1,16 @@
 # Graph Report - genshu  (2026-09-21)
 
 ## Corpus Check
-- 355 files · ~528,615 words
+- 355 files · ~528,613 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 4732 nodes · 7247 edges · 392 communities (283 shown, 109 thin omitted)
+- 4732 nodes · 7253 edges · 386 communities (279 shown, 107 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 116 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5063ed9a`
+- Built from commit: `e26f6276`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -135,7 +135,7 @@
 - Animation Recipes
 - Form & Input Components
 - Tailwind CSS Responsive Design
-- test_data_contracts.py
+- test_core_data_quality.py
 - search_stack
 - Typography Specifications
 - High-Agency Frontend Skill
@@ -216,8 +216,7 @@
 - Copywriting Formulas
 - Design System: Taste Standard
 - detect_domain
-- parse_decision_rules
-- _palette_is_dark
+- _select_palette_for_mode
 - Banner Design - Multi-Format Creative Banner System
 - Messaging Framework
 - Brand Voice Framework
@@ -238,7 +237,6 @@
 - Token Architecture
 - design-tokens-starter.json
 - document.md
-- _select_palette_for_mode
 - Primitive Tokens
 - validate-tokens.cjs
 - card
@@ -276,9 +274,9 @@
 - Protocol: Premium Utilitarian Minimalism UI Architect
 - Slide Strategies
 - ._base_config
-- test_core.py
+- generate_design_system
 - devDependencies
-- .generate
+- parse_decision_rules
 - sync-brand-to-tokens.cjs
 - _run
 - Design Engineering
@@ -357,7 +355,6 @@
 - 15. DEFAULT SITE PACKS
 - 20. EXAMPLE INTERPRETATIONS
 - Heuristics Scoring Guide
-- test_style_taxonomy.py
 - next.config.ts
 - test_sync_brand_to_tokens.py
 - 16
@@ -401,12 +398,9 @@
 - .test_default_content_paths_nextjs
 - workflows/graphify.md
 - syncEditBadgeHitProxies
-- _normalize
 - Diagnostic Scan
 - Diagnostic Scan
-- TestGeneratedCatalogContract
 - Command guidance
-- scripts/search.py
 
 ## God Nodes (most connected - your core abstractions)
 1. `TailwindConfigGenerator` - 58 edges
@@ -441,11 +435,11 @@
 - **Derived Dependency Minimization** — agents_skills_vercel_react_best_practices_rules_rerender_dependencies_narrow_effect_dependencies, agents_skills_vercel_react_best_practices_rules_rerender_derived_state_no_effect_calculate_derived_state, agents_skills_vercel_react_best_practices_rules_rerender_derived_state_subscribe_to_derived_state, agents_skills_vercel_react_best_practices_rules_rerender_split_combined_hooks_split_hook_computations [INFERRED 0.85]
 - **React Concurrent Rendering Responsiveness** — agents_skills_vercel_react_best_practices_rules_rendering_usetransition_loading_use_transition_loading, agents_skills_vercel_react_best_practices_rules_rerender_transitions_transitions_for_non_urgent_updates, agents_skills_vercel_react_best_practices_rules_rerender_use_deferred_value_use_deferred_value [INFERRED 0.85]
 
-## Communities (392 total, 109 thin omitted)
+## Communities (386 total, 107 thin omitted)
 
 ### Community 0 - "assignments/[id]/page.tsx"
-Cohesion: 0.22
-Nodes (23): react, StudentProfileDrawer(), Badge(), BadgeProps, badgeVariants, Card(), CardContent(), CardDescription() (+15 more)
+Cohesion: 0.23
+Nodes (23): class-variance-authority, next-intl, react, StudentProfileDrawer(), Badge(), BadgeProps, badgeVariants, Card() (+15 more)
 
 ### Community 1 - "package.json"
 Cohesion: 0.10
@@ -460,8 +454,8 @@ Cohesion: 0.11
 Nodes (18): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+10 more)
 
 ### Community 4 - "app-header.tsx"
-Cohesion: 0.15
-Nodes (12): managementItems, NavItem, primaryItems, DropdownMenu(), DropdownMenuContent(), DropdownMenuGroup(), DropdownMenuItem(), DropdownMenuLabel() (+4 more)
+Cohesion: 0.11
+Nodes (16): next-themes, metadata, AppHeader(), managementItems, NavItem, primaryItems, ThemeProvider(), DropdownMenu() (+8 more)
 
 ### Community 5 - "data-context.tsx"
 Cohesion: 0.11
@@ -520,8 +514,8 @@ Cohesion: 0.50
 Nodes (3): defaultLocale, Locale, locales
 
 ### Community 94 - "lucide-react"
-Cohesion: 0.14
-Nodes (17): class-variance-authority, cn, lucide-react, next-intl, LanguageToggle(), BreadcrumbItem, Breadcrumbs(), BreadcrumbsProps (+9 more)
+Cohesion: 0.19
+Nodes (11): lucide-react, LanguageToggle(), PageHeader(), PageHeaderProps, PageShell(), PageShellProps, SectionHeader(), SectionHeaderProps (+3 more)
 
 ### Community 95 - "resumeSession"
 Cohesion: 0.06
@@ -532,8 +526,8 @@ Cohesion: 0.10
 Nodes (58): applyEditing(), beginNewLiveConfiguration(), buildInsertPlaceholderSnapshotFromDom(), buildLocatorForLeaf(), buildPickedAnchorSnapshot(), cancelEditing(), cancelEditingToPicking(), cancelInsertConfigure() (+50 more)
 
 ### Community 97 - "validate_data.py"
-Cohesion: 0.07
-Nodes (48): Semantic quality contracts for the core UI/UX datasets., read_rows(), TestAccessibilityGuidance, TestChartsTypographyAndIcons, TestCurrentReactGuidance, TestSemanticColors, _catalog_date(), _check_app_interface_contract() (+40 more)
+Cohesion: 0.12
+Nodes (34): _catalog_date(), _check_app_interface_contract(), _check_catalog_contract(), _check_catalog_summary(), _check_color_contract(), _check_core_data_contract(), _check_file(), _check_font_catalog() (+26 more)
 
 ### Community 98 - "initPageChat"
 Cohesion: 0.08
@@ -580,8 +574,8 @@ Cohesion: 0.05
 Nodes (37): 1. Color Palette, 2. Typography, 3. Logo Usage, 4. Voice & Tone, 5. Imagery Guidelines, 6. Design Components, Accessibility, AI Image Generation (+29 more)
 
 ### Community 109 - "scripts/core.py"
-Cohesion: 0.11
-Nodes (28): _contains_phrase(), _domain_keywords(), _exact_stack_identifier(), _file_signature(), _get_bm25(), _load_csv(), _load_csv_snapshot(), _load_product_keywords() (+20 more)
+Cohesion: 0.10
+Nodes (33): _contains_phrase(), _domain_keywords(), _exact_match_diagnostic(), _file_signature(), _get_bm25(), _legacy_successor_guidance(), _load_csv(), _load_csv_snapshot() (+25 more)
 
 ### Community 110 - "Genshu AI Development Playbook"
 Cohesion: 0.05
@@ -623,13 +617,13 @@ Nodes (32): Accordion, Alert, Alert Dialog, Avatar, Badge, Button, Card, Checkbo
 Cohesion: 0.06
 Nodes (32): 1. Mobile-First Design, 2. Consistent Breakpoint Usage, 3. Test at Breakpoint Boundaries, 4. Use Container for Content Width, 5. Progressive Enhancement, 6. Avoid Too Many Breakpoints, Best Practices, Breakpoint System (+24 more)
 
-### Community 120 - "test_data_contracts.py"
-Cohesion: 0.19
-Nodes (5): Cross-file semantic contracts for curated design data., split_values(), style_identities(), TestLandingAndStackContract, TestStyleIdentityContract
+### Community 120 - "test_core_data_quality.py"
+Cohesion: 0.14
+Nodes (13): Semantic quality contracts for the core UI/UX datasets., read_rows(), TestAccessibilityGuidance, TestChartsTypographyAndIcons, TestCurrentReactGuidance, TestSemanticColors, _check_chart_contract(), _check_icon_contract() (+5 more)
 
 ### Community 121 - "search_stack"
-Cohesion: 0.10
-Nodes (8): Search stack-specific guidelines, search_stack(), Freshness and migration contracts for native, desktop, and 3D stacks., _rows(), TestNativeDesktopStackFreshness, Freshness and generation-isolation contracts for web stack guidance., _rows(), TestWebStackFreshness
+Cohesion: 0.09
+Nodes (11): _exact_stack_identifier(), Resolve a standalone API identifier even when its BM25 IDF is low., Search stack-specific guidelines, search_stack(), _valid_max_results(), Freshness and migration contracts for native, desktop, and 3D stacks., _rows(), TestNativeDesktopStackFreshness (+3 more)
 
 ### Community 122 - "Typography Specifications"
 Cohesion: 0.06
@@ -680,8 +674,8 @@ Cohesion: 0.10
 Nodes (21): BM25, detect_domain(), _load_csv(), Load CSV and return list of dicts, Core search function using BM25, Auto-detect the most relevant domain from query, Main search function with auto-domain detection, Search across all domains and combine results (+13 more)
 
 ### Community 134 - "design_system.py"
-Cohesion: 0.11
-Nodes (24): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_master_md(), format_page_override_md(), _generate_intelligent_overrides(), hex_to_ansi(), persist_design_system() (+16 more)
+Cohesion: 0.10
+Nodes (26): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), _generate_intelligent_overrides(), hex_to_ansi() (+18 more)
 
 ### Community 135 - "Asset Approval Checklist"
 Cohesion: 0.08
@@ -696,8 +690,8 @@ Cohesion: 0.08
 Nodes (25): Assess Adaptation Challenge, Breakpoints: Content-Driven, Content Adaptation, Desktop Adaptation (Mobile → Desktop), Detect Input Method, Not Just Screen Size, Email Adaptation (Web → Email), Implement Adaptations, Layout Adaptation Patterns (+17 more)
 
 ### Community 138 - "BM25"
-Cohesion: 0.12
-Nodes (8): BM25, BM25 ranking algorithm for text search, Lowercase, normalize synonyms, split, remove punctuation, filter stopwords, Build BM25 index from documents, Score all documents against query, All indexed terms, for suggestion/typo-recovery purposes., TestBm25CoreBehavior, TestTokenizer
+Cohesion: 0.10
+Nodes (10): BM25, BM25 ranking algorithm for text search, Lowercase, normalize synonyms, split, remove punctuation, filter stopwords, Build BM25 index from documents, Score all documents against query, All indexed terms, for suggestion/typo-recovery purposes., Stdlib-only regression tests for core.py / design_system.py (unittest, not…, TestBm25CoreBehavior (+2 more)
 
 ### Community 139 - "Color Palette Management"
 Cohesion: 0.08
@@ -720,8 +714,8 @@ Cohesion: 0.08
 Nodes (24): Accessibility Patterns, Alternative: Tailwind-Only Setup, Best Practices, Common Patterns, Component Layer: shadcn/ui, Component Library Guide, Component + Styling Setup, Core Stack (+16 more)
 
 ### Community 144 - "search"
-Cohesion: 0.13
-Nodes (6): Resolve a deprecated in-domain alias, or expose a cross-domain redirect., Main search function with auto-domain detection, search(), _style_search_destination(), TestSearchDomains, TestStyleTaxonomy
+Cohesion: 0.11
+Nodes (9): _project_row(), Resolve a deprecated in-domain alias, or expose a cross-domain redirect., Main search function with auto-domain detection, search(), _style_search_destination(), TestSearchDomains, Regression tests for the public style taxonomy and search contract., read_rows() (+1 more)
 
 ### Community 145 - "Workflow"
 Cohesion: 0.08
@@ -752,8 +746,8 @@ Cohesion: 0.09
 Nodes (22): 10. ARC and object lifetime, 11. Testing — Swift Testing by default, 12. Macros, 13. Logging and debugging, 14. Unsafe code and interop, 15. Modern syntax you should be using, 16. Migrating an existing codebase to Swift 6, 1. Model data with value types (+14 more)
 
 ### Community 152 - "useData"
-Cohesion: 0.11
-Nodes (16): next-themes, AssignmentDetailPage(), AssignmentsPage(), SessionRollCallPage(), AttendancePage(), CohortsPage(), ExamDetailPage(), ExamsPage() (+8 more)
+Cohesion: 0.12
+Nodes (18): cn, AssignmentDetailPage(), AssignmentsPage(), SessionRollCallPage(), AttendancePage(), CohortsPage(), ExamDetailPage(), ExamsPage() (+10 more)
 
 ### Community 153 - "Apple Design"
 Cohesion: 0.09
@@ -772,8 +766,8 @@ Cohesion: 0.09
 Nodes (12): Add custom font families. Args: fonts: Dict of font_type: [font_names] e.g.,…, Add custom spacing values. Args: spacing: Dict of name: value e.g., {'18':…, Add custom breakpoints. Args: breakpoints: Dict of name: width e.g., {'3xl':…, Add plugin requirements. Args: plugins: List of plugin names e.g.,…, Get plugin recommendations based on configuration. Returns: List of recommended…, Generate Tailwind CSS configuration files., Validate configuration. Returns: Tuple of (valid, message), Add custom colors to theme. Args: colors: Dict of color_name: color_value Value… (+4 more)
 
 ### Community 157 - "DesignSystemGenerator"
-Cohesion: 0.16
-Nodes (6): DesignSystemGenerator, Generates design system recommendations from aggregated searches., Load reasoning rules from CSV., TestReasoningMatch, read_rows(), TestReasoningContract
+Cohesion: 0.08
+Nodes (13): DesignSystemGenerator, Generates design system recommendations from aggregated searches., Load reasoning rules from CSV., TestReasoningMatch, Cross-file semantic contracts for curated design data., read_rows(), split_values(), style_identities() (+5 more)
 
 ### Community 158 - "generate-slide.py"
 Cohesion: 0.14
@@ -943,13 +937,9 @@ Nodes (14): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typograph
 Cohesion: 0.23
 Nodes (3): detect_domain(), Auto-detect the most relevant domain from query. Matches are weighted by…, TestDomainDetection
 
-### Community 201 - "parse_decision_rules"
-Cohesion: 0.24
-Nodes (7): apply_decision_rules(), _object_without_duplicates(), parse_decision_rules(), Return deterministic mutations and an audit trail; never execute data., Closed, non-executable grammar for design-system decision rules., Parse the canonical condition -> action-array representation., _validate_action()
-
-### Community 202 - "_palette_is_dark"
-Cohesion: 0.18
-Nodes (7): _palette_is_dark(), WCAG relative luminance of a #RRGGBB string, or None if unparseable., True when a colors.csv row's Background is a dark surface., _relative_luminance(), The exact reproduction from issue #428., TestEndToEndCoherence, TestLuminance
+### Community 202 - "_select_palette_for_mode"
+Cohesion: 0.11
+Nodes (14): _contrast_ratio(), _derive_dark_palette(), _palette_is_dark(), WCAG relative luminance of a #RRGGBB string, or None if unparseable., True when a colors.csv row's Background is a dark surface., WCAG contrast ratio for two hex colors, or None if either is invalid., Keep product brand tokens while deriving accessible dark surfaces., Pick the highest-ranked palette matching the resolved mode. Only the dark case… (+6 more)
 
 ### Community 203 - "Banner Design - Multi-Format Creative Banner System"
 Cohesion: 0.14
@@ -1030,10 +1020,6 @@ Nodes (12): component, $type, $value, dark, semantic, $schema, $type, $value (+4
 ### Community 222 - "document.md"
 Cohesion: 0.08
 Nodes (23): Component translation rules, Narrative mapping, Pitfalls, Scan mode (approach C: auto-extract, then confirm descriptive language), Schema, Seed mode, Step 1: Find the design assets, Step 1: Route through new-work's workshop (+15 more)
-
-### Community 223 - "_select_palette_for_mode"
-Cohesion: 0.22
-Nodes (7): _contrast_ratio(), _derive_dark_palette(), WCAG contrast ratio for two hex colors, or None if either is invalid., Keep product brand tokens while deriving accessible dark surfaces., Pick the highest-ranked palette matching the resolved mode. Only the dark case…, _select_palette_for_mode(), TestPaletteSelection
 
 ### Community 224 - "Primitive Tokens"
 Cohesion: 0.17
@@ -1183,17 +1169,17 @@ Nodes (9): Common Structures, Duarte Sparkline Pattern, Matching Strategy to Con
 Cohesion: 0.22
 Nodes (6): Path, Initialize generator. Args: typescript: If True, generate .ts config, else .js…, Determine default output path., Create base configuration structure., Get default content paths for framework., Any
 
-### Community 261 - "test_core.py"
-Cohesion: 0.18
-Nodes (7): format_markdown(), generate_design_system(), Format design system as markdown., Main entry point for design system generation. Args: query: Search query (e.g.,…, Stdlib-only regression tests for core.py / design_system.py (unittest, not…, TestDiagnosticsContracts, TestPersistence
+### Community 261 - "generate_design_system"
+Cohesion: 0.22
+Nodes (6): generate_design_system(), Main entry point for design system generation. Args: query: Search query (e.g.,…, format_output(), UI/UX Pro Max Search - BM25 search engine for UI/UX style guides Usage: python…, Format results for Claude consumption (token-optimized), TestPersistence
 
 ### Community 262 - "devDependencies"
 Cohesion: 0.20
 Nodes (10): devDependencies, babel-plugin-react-compiler, eslint, eslint-config-next, tailwindcss, @tailwindcss/postcss, @types/node, @types/react (+2 more)
 
-### Community 263 - ".generate"
-Cohesion: 0.14
-Nodes (8): Execute searches across multiple domains., Find matching reasoning rule for a category., Apply reasoning rules to search results., Select best matching result based on priority keywords., Extract results list from search result dict., Generate complete design system recommendation. variance/motion/density are…, Bucket a 1-10 dial value into its tier config. Returns None if value is None., _resolve_dial()
+### Community 263 - "parse_decision_rules"
+Cohesion: 0.10
+Nodes (15): Execute searches across multiple domains., Find matching reasoning rule for a category., Apply reasoning rules to search results., Select best matching result based on priority keywords., Extract results list from search result dict., Generate complete design system recommendation. variance/motion/density are…, Bucket a 1-10 dial value into its tier config. Returns None if value is None., _resolve_dial() (+7 more)
 
 ### Community 264 - "sync-brand-to-tokens.cjs"
 Cohesion: 0.33
@@ -1555,10 +1541,6 @@ Nodes (3): secondary-foreground, $type, $value
 Cohesion: 0.27
 Nodes (10): bindEditBadgeProxy(), editBadgeProxyTargets(), initEditBadge(), initEditBadgeHitProxies(), positionEditBadge(), proxyMouseEvent(), setImportantStyle(), styleEditBadgeProxy() (+2 more)
 
-### Community 386 - "_normalize"
-Cohesion: 0.25
-Nodes (9): _exact_match_diagnostic(), _legacy_successor_guidance(), _normalize(), Apply longest-first synonym substitution at token boundaries., Whether a stack query explicitly targets an older framework generation., Choose one coherent applicability generation for stack retrieval., Prefer the explicit successor row for a brand-new app on legacy-only stacks., _stack_query_requests_legacy() (+1 more)
-
 ### Community 387 - "Diagnostic Scan"
 Cohesion: 0.33
 Nodes (6): 1. Accessibility (A11y), 2. Performance, 3. Theming, 4. Responsive Design, 5. Implementation Integrity (CRITICAL), Diagnostic Scan
@@ -1571,23 +1553,19 @@ Nodes (6): 1. Accessibility (VoiceOver / TalkBack), 2. Performance, 3. Appearanc
 Cohesion: 0.50
 Nodes (3): Command guidance, No-argument routing: the context-aware menu, Workflow questions
 
-### Community 391 - "scripts/search.py"
-Cohesion: 0.50
-Nodes (3): format_output(), UI/UX Pro Max Search - BM25 search engine for UI/UX style guides Usage: python…, Format results for Claude consumption (token-optimized)
-
 ## Knowledge Gaps
 - **2287 isolated node(s):** `fs`, `path`, `fs`, `path`, `fs` (+2282 more)
   These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 2730 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **109 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **107 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `search()` connect `search` to `validate_data.py`, `_normalize`, `test_core.py`, `design_system.py`, `.generate`, `detect_domain`, `scripts/search.py`, `scripts/core.py`, `test_style_taxonomy.py`, `test_text_layout_resilience.py`, `_row_identities`?**
+- **Why does `search()` connect `search` to `generate_design_system`, `design_system.py`, `parse_decision_rules`, `detect_domain`, `BM25`, `scripts/core.py`, `test_text_layout_resilience.py`, `test_core_data_quality.py`, `search_stack`, `_row_identities`?**
   _High betweenness centrality (0.004) - this node is a cross-community bridge._
-- **Why does `search_stack()` connect `search_stack` to `_normalize`, `test_core.py`, `scripts/search.py`, `scripts/core.py`, `search`, `test_text_layout_resilience.py`?**
+- **Why does `search_stack()` connect `search_stack` to `generate_design_system`, `BM25`, `scripts/core.py`, `search`, `test_text_layout_resilience.py`?**
   _High betweenness centrality (0.004) - this node is a cross-community bridge._
-- **Why does `DesignSystemGenerator` connect `DesignSystemGenerator` to `test_design_system_mode.py`, `test_core.py`, `design_system.py`, `.generate`, `_palette_is_dark`, `test_data_contracts.py`, `_select_palette_for_mode`?**
+- **Why does `DesignSystemGenerator` connect `DesignSystemGenerator` to `test_design_system_mode.py`, `generate_design_system`, `design_system.py`, `parse_decision_rules`, `BM25`, `_select_palette_for_mode`?**
   _High betweenness centrality (0.002) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `TailwindConfigGenerator` (e.g. with `TestGeneratedConfigIsValidJs` and `TestTailwindConfigGenerator`) actually correct?**
   _`TailwindConfigGenerator` has 2 INFERRED edges - model-reasoned connections that need verification._
