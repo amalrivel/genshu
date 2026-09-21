@@ -8,12 +8,12 @@ import {
   Plus,
   Search,
   Clock,
-  CheckCircle2,
   AlertCircle,
   Clock3,
   ArrowRight,
+  Filter,
 } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
@@ -26,7 +26,10 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog"
+import { PageHeader, PageShell, SectionHeader } from "@/components/layout/page-frame"
+import { EmptyState } from "@/components/ui/empty-state"
 import { useData } from "@/lib/data-context"
+import { type ExamStatus } from "@/lib/mock-data"
 import { cn } from "@/lib/utils"
 
 export default function ExamsPage() {
@@ -45,7 +48,10 @@ export default function ExamsPage() {
 
   const [selectedCohort, setSelectedCohort] = React.useState<string>("all")
   const [searchQuery, setSearchQuery] = React.useState("")
-  const [activeTab, setActiveTab] = React.useState<"all" | "active" | "completed">("all")
+  // For students: "all" | "available" | "completed"
+  // For staff: "all" | "ACTIVE" | "UPCOMING" | "CLOSED"
+  const [studentTab, setStudentTab] = React.useState<"all" | "available" | "completed">("all")
+  const [staffTab, setStaffTab] = React.useState<"all" | ExamStatus>("all")
   const [createModalOpen, setCreateModalOpen] = React.useState(false)
 
   // Form states for creating a new exam
@@ -64,6 +70,9 @@ export default function ExamsPage() {
 
   const canManage = currentRole === "TANTOSHA" || currentRole === "SENSEI"
 
+  // Normalized search query
+  const normalizedQuery = searchQuery.trim().toLowerCase()
+
   // Filter exams
   const filteredExams = React.useMemo(() => {
     return exams.filter((exam) => {
@@ -72,27 +81,56 @@ export default function ExamsPage() {
         return false
       }
       // Search query
-      if (searchQuery.trim()) {
-        const q = searchQuery.toLowerCase()
-        const matchTitle = exam.title.toLowerCase().includes(q)
-        const matchDesc = exam.description?.toLowerCase().includes(q)
-        if (!matchTitle && !matchDesc) return false
+      if (normalizedQuery) {
+        const matchTitle = exam.title.toLowerCase().includes(normalizedQuery)
+        const matchDesc = exam.description?.toLowerCase().includes(normalizedQuery)
+        const matchLevel = exam.targetLevel.toLowerCase().includes(normalizedQuery)
+        if (!matchTitle && !matchDesc && !matchLevel) return false
       }
-      // Status/Attempt filter
-      if (activeTab === "completed") {
-        if (currentRole === "GAKUSEI" && currentStudent) {
-          const attempt = getStudentExamAttempt(exam.id, currentStudent.id)
+      // Role-specific Status/Lifecycle filter
+      if (currentRole === "GAKUSEI") {
+        if (!currentStudent) return true
+        const attempt = getStudentExamAttempt(exam.id, currentStudent.id)
+        if (studentTab === "available") {
+          // Available: exam is active and student has not yet completed it
+          if (exam.status !== "ACTIVE" || Boolean(attempt)) return false
+        } else if (studentTab === "completed") {
+          // Completed: student has completed an attempt
           if (!attempt) return false
         }
-      } else if (activeTab === "active") {
-        if (currentRole === "GAKUSEI" && currentStudent) {
-          const attempt = getStudentExamAttempt(exam.id, currentStudent.id)
-          if (attempt) return false
+      } else {
+        // Staff lifecycle filter
+        if (staffTab !== "all" && exam.status !== staffTab) {
+          return false
         }
       }
       return true
     })
-  }, [exams, selectedCohort, searchQuery, activeTab, currentRole, currentStudent, getStudentExamAttempt])
+  }, [
+    exams,
+    selectedCohort,
+    normalizedQuery,
+    studentTab,
+    staffTab,
+    currentRole,
+    currentStudent,
+    getStudentExamAttempt,
+  ])
+
+  const hasActiveFilters =
+    Boolean(normalizedQuery) ||
+    selectedCohort !== "all" ||
+    (currentRole === "GAKUSEI" ? studentTab !== "all" : staffTab !== "all")
+
+  const resetFilters = () => {
+    setSearchQuery("")
+    setSelectedCohort("all")
+    if (currentRole === "GAKUSEI") {
+      setStudentTab("all")
+    } else {
+      setStaffTab("all")
+    }
+  }
 
   // Aggregate stats
   const stats = React.useMemo(() => {
@@ -191,8 +229,8 @@ export default function ExamsPage() {
       title: title.trim(),
       description: description.trim(),
       targetLevel,
-      durationMinutes: Number(durationMinutes),
-      passScore: Number(passScore),
+      durationMinutes: Number(durationMinutes) || 30,
+      passScore: Number(passScore) || 70,
       allowFurigana,
       status: "ACTIVE",
       instructorId: "user-s1",
@@ -210,357 +248,517 @@ export default function ExamsPage() {
   }
 
   return (
-    <div className="page-shell pb-12">
-      {/* Header Banner */}
-      <div className="page-header">
-        <div className="space-y-1">
-          <div className="flex items-center gap-2">
-            <span className="rounded-md bg-amber-500/10 px-2 py-0.5 text-xs font-semibold text-amber-600 dark:text-amber-400">
-              アセスメント・試験
-            </span>
+    <PageShell>
+      {/* Page Header */}
+      <PageHeader
+        eyebrow={
+          <span className="flex items-center gap-2">
+            <Badge variant="outline" className="text-[0.7rem] uppercase tracking-wider text-primary border-primary/30">
+              {t("badgeAssessment")}
+            </Badge>
             <span className="text-xs text-muted-foreground">
               {currentRole === "GAKUSEI" ? tCommon("roleGakusei") : tCommon("roleSensei")}
             </span>
+          </span>
+        }
+        title={t("title")}
+        description={currentRole === "GAKUSEI" ? t("descStudent") : t("descStaff")}
+        action={
+          canManage ? (
+            <Button
+              onClick={() => {
+                setFormError("")
+                setCreateModalOpen(true)
+              }}
+              className="gap-2 shadow-xs"
+            >
+              <Plus className="size-4" />
+              <span>{t("createExam")}</span>
+            </Button>
+          ) : undefined
+        }
+      />
+
+      {/* Role-Aware Metric Strip */}
+      <section aria-labelledby="exams-metrics-title">
+        <h2 id="exams-metrics-title" className="sr-only">
+          {t("metricsLabel")}
+        </h2>
+        {currentRole === "GAKUSEI" ? (
+          <div className="metric-strip">
+            <div className="metric-item">
+              <p className="metric-label">{t("statTotalExams")}</p>
+              <p className="metric-value">{stats.total}</p>
+              <p className="metric-note">{t("statTotalExamsNote")}</p>
+            </div>
+            <div className="metric-item">
+              <p className="metric-label">{t("statAttempted")}</p>
+              <p className="metric-value text-primary">{stats.primary}</p>
+              <p className="metric-note">{t("statAttemptedStudentNote")}</p>
+            </div>
+            <div className="metric-item">
+              <p className="metric-label">{t("statPassed")}</p>
+              <p className="metric-value text-emerald-700 dark:text-emerald-300">{stats.passed}</p>
+              <p className="metric-note">{t("statPassedStudentNote")}</p>
+            </div>
+            <div className="metric-item">
+              <p className="metric-label">{t("statAverageScore")}</p>
+              <p className="metric-value text-amber-700 dark:text-amber-300">
+                {stats.primary > 0 ? `${stats.avg}%` : "—"}
+              </p>
+              <p className="metric-note">{t("statAverageScoreStudentNote")}</p>
+            </div>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-            {t("title")}
-          </h1>
-          <p className="text-sm text-muted-foreground max-w-2xl">
-            {currentRole === "GAKUSEI" ? t("descStudent") : t("descStaff")}
-          </p>
-        </div>
-
-        {canManage && (
-          <Button
-            onClick={() => setCreateModalOpen(true)}
-            className="self-start md:self-auto gap-2 shadow-xs bg-amber-600 hover:bg-amber-700 text-white"
-          >
-            <Plus className="h-4 w-4" />
-            <span>{t("createExam")}</span>
-          </Button>
+        ) : (
+          <div className="metric-strip">
+            <div className="metric-item">
+              <p className="metric-label">{t("statTotalExams")}</p>
+              <p className="metric-value">{stats.total}</p>
+              <p className="metric-note">{t("statTotalExamsNote")}</p>
+            </div>
+            <div className="metric-item">
+              <p className="metric-label">{t("statAttempted")}</p>
+              <p className="metric-value text-primary">{stats.primary}</p>
+              <p className="metric-note">{t("statAttemptedStaffNote")}</p>
+            </div>
+            <div className="metric-item">
+              <p className="metric-label">{t("statPassed")}</p>
+              <p className="metric-value text-emerald-700 dark:text-emerald-300">{stats.passed}</p>
+              <p className="metric-note">{t("statPassedStaffNote")}</p>
+            </div>
+            <div className="metric-item">
+              <p className="metric-label">{t("statAverageScore")}</p>
+              <p className="metric-value text-amber-700 dark:text-amber-300">
+                {stats.primary > 0 ? `${stats.avg}%` : "—"}
+              </p>
+              <p className="metric-note">{t("statAverageScoreStaffNote")}</p>
+            </div>
+          </div>
         )}
-      </div>
+      </section>
 
-      {/* Overview Stat Cards */}
-      <div className="grid grid-cols-2 gap-3 sm:gap-4 sm:grid-cols-4">
-        <Card className="border-border/80 shadow-xs">
-          <CardContent className="p-4 sm:p-5">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-muted-foreground">
-                {t("statTotalExams")}
-              </span>
-              <Award className="h-4 w-4 text-primary" />
-            </div>
-            <p className="mt-2 text-2xl font-bold tracking-tight">{stats.total}</p>
-            <p className="text-[0.7rem] text-muted-foreground mt-0.5">
-              {t("allCohorts")}
-            </p>
-          </CardContent>
-        </Card>
+      {/* Main Section */}
+      <section aria-labelledby="exams-list-title" className="space-y-4">
+        <SectionHeader
+          title={<span id="exams-list-title">{t("listTitle")}</span>}
+          description={
+            <span aria-live="polite">
+              {t("resultsSummary", { shown: filteredExams.length, total: exams.length })}
+            </span>
+          }
+          action={
+            hasActiveFilters ? (
+              <Button type="button" variant="ghost" size="xs" onClick={resetFilters} className="text-xs">
+                {t("resetFilters")}
+              </Button>
+            ) : undefined
+          }
+        />
 
-        <Card className="border-border/80 shadow-xs">
-          <CardContent className="p-4 sm:p-5">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-muted-foreground">
-                {t("statAttempted")}
-              </span>
-              <CheckCircle2 className="h-4 w-4 text-blue-500" />
-            </div>
-            <p className="mt-2 text-2xl font-bold tracking-tight text-blue-600 dark:text-blue-400">
-              {stats.primary}
-            </p>
-            <p className="text-[0.7rem] text-muted-foreground mt-0.5">
-              {currentRole === "GAKUSEI" ? "Ujian selesai" : "Total sesi ujian"}
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="border-border/80 shadow-xs">
-          <CardContent className="p-4 sm:p-5">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-muted-foreground">
-                {t("statPassed")}
-              </span>
-              <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-            </div>
-            <p className="mt-2 text-2xl font-bold tracking-tight text-emerald-600 dark:text-emerald-400">
-              {stats.passed}
-            </p>
-            <p className="text-[0.7rem] text-muted-foreground mt-0.5">
-              {t("statusPassed")}
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="border-border/80 shadow-xs">
-          <CardContent className="p-4 sm:p-5">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-muted-foreground">
-                {t("statAverageScore")}
-              </span>
-              <Award className="h-4 w-4 text-amber-500" />
-            </div>
-            <p className="mt-2 text-2xl font-bold tracking-tight text-amber-600 dark:text-amber-400">
-              {stats.avg}%
-            </p>
-            <p className="text-[0.7rem] text-muted-foreground mt-0.5">
-              {t("passThreshold", { score: "70" })}
-            </p>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Filter Tabs & Search Bar */}
-      <div className="filter-toolbar">
-        <div className="flex items-center gap-1.5 p-1 rounded-lg border border-border/80 bg-muted/40 self-start">
-          <button
-            onClick={() => setActiveTab("all")}
-            className={cn(
-              "px-3 py-1 text-xs font-medium rounded-md transition-colors",
-              activeTab === "all"
-                ? "bg-background text-foreground shadow-xs font-semibold"
-                : "text-muted-foreground hover:text-foreground"
+        {/* Filter Toolbar */}
+        <div className="filter-toolbar">
+          <div className="flex flex-wrap items-center gap-2">
+            {/* Role-Specific Filter Tabs */}
+            {currentRole === "GAKUSEI" ? (
+              <div
+                role="group"
+                aria-label={t("filterStatus")}
+                className="flex items-center gap-1 p-1 bg-muted/60 rounded-lg border border-border/60 overflow-x-auto"
+              >
+                <button
+                  type="button"
+                  aria-pressed={studentTab === "all"}
+                  onClick={() => setStudentTab("all")}
+                  className={cn(
+                    "min-h-8 shrink-0 rounded-md px-3 py-1 text-xs font-medium whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60",
+                    studentTab === "all"
+                      ? "bg-background text-foreground shadow-xs font-semibold"
+                      : "text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  {t("tabAll")}
+                </button>
+                <button
+                  type="button"
+                  aria-pressed={studentTab === "available"}
+                  onClick={() => setStudentTab("available")}
+                  className={cn(
+                    "min-h-8 shrink-0 rounded-md px-3 py-1 text-xs font-medium whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60",
+                    studentTab === "available"
+                      ? "bg-primary/10 text-primary shadow-xs font-semibold"
+                      : "text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  {t("tabAvailable")}
+                </button>
+                <button
+                  type="button"
+                  aria-pressed={studentTab === "completed"}
+                  onClick={() => setStudentTab("completed")}
+                  className={cn(
+                    "min-h-8 shrink-0 rounded-md px-3 py-1 text-xs font-medium whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60",
+                    studentTab === "completed"
+                      ? "bg-background text-foreground shadow-xs font-semibold"
+                      : "text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  {t("tabCompleted")}
+                </button>
+              </div>
+            ) : (
+              <div
+                role="group"
+                aria-label={t("filterStatus")}
+                className="flex items-center gap-1 p-1 bg-muted/60 rounded-lg border border-border/60 overflow-x-auto"
+              >
+                <button
+                  type="button"
+                  aria-pressed={staffTab === "all"}
+                  onClick={() => setStaffTab("all")}
+                  className={cn(
+                    "min-h-8 shrink-0 rounded-md px-3 py-1 text-xs font-medium whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60",
+                    staffTab === "all"
+                      ? "bg-background text-foreground shadow-xs font-semibold"
+                      : "text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  {t("tabAll")}
+                </button>
+                <button
+                  type="button"
+                  aria-pressed={staffTab === "ACTIVE"}
+                  onClick={() => setStaffTab("ACTIVE")}
+                  className={cn(
+                    "min-h-8 shrink-0 rounded-md px-3 py-1 text-xs font-medium whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60",
+                    staffTab === "ACTIVE"
+                      ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 shadow-xs font-semibold"
+                      : "text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  {t("tabLifecycleActive")}
+                </button>
+                <button
+                  type="button"
+                  aria-pressed={staffTab === "UPCOMING"}
+                  onClick={() => setStaffTab("UPCOMING")}
+                  className={cn(
+                    "min-h-8 shrink-0 rounded-md px-3 py-1 text-xs font-medium whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60",
+                    staffTab === "UPCOMING"
+                      ? "bg-amber-500/15 text-amber-700 dark:text-amber-300 shadow-xs font-semibold"
+                      : "text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  {t("tabLifecycleUpcoming")}
+                </button>
+                <button
+                  type="button"
+                  aria-pressed={staffTab === "CLOSED"}
+                  onClick={() => setStaffTab("CLOSED")}
+                  className={cn(
+                    "min-h-8 shrink-0 rounded-md px-3 py-1 text-xs font-medium whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60",
+                    staffTab === "CLOSED"
+                      ? "bg-muted-foreground/15 text-foreground shadow-xs font-semibold"
+                      : "text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  {t("tabLifecycleClosed")}
+                </button>
+              </div>
             )}
-          >
-            {t("tabAll")}
-          </button>
-          <button
-            onClick={() => setActiveTab("active")}
-            className={cn(
-              "px-3 py-1 text-xs font-medium rounded-md transition-colors",
-              activeTab === "active"
-                ? "bg-background text-foreground shadow-xs font-semibold"
-                : "text-muted-foreground hover:text-foreground"
-            )}
-          >
-            {t("tabActive")}
-          </button>
-          <button
-            onClick={() => setActiveTab("completed")}
-            className={cn(
-              "px-3 py-1 text-xs font-medium rounded-md transition-colors",
-              activeTab === "completed"
-                ? "bg-background text-foreground shadow-xs font-semibold"
-                : "text-muted-foreground hover:text-foreground"
-            )}
-          >
-            {t("tabCompleted")}
-          </button>
-        </div>
 
-        <div className="flex items-center gap-2">
-          {/* Cohort Select */}
-          <select
-            value={selectedCohort}
-            onChange={(e) => setSelectedCohort(e.target.value)}
-            className="h-9 rounded-md border border-input bg-background px-3 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-ring"
-          >
-            <option value="all">{t("allCohorts")}</option>
-            {cohorts.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.code} — {c.name}
-              </option>
-            ))}
-          </select>
+            {/* Cohort Select Filter */}
+            <div className="flex items-center gap-1.5">
+              <Filter aria-hidden="true" className="size-3.5 text-muted-foreground ml-1" />
+              <select
+                aria-label={t("filterCohort")}
+                value={selectedCohort}
+                onChange={(e) => setSelectedCohort(e.target.value)}
+                className="h-9 rounded-lg border border-input bg-background px-2.5 text-xs focus:outline-none focus:ring-1 focus:ring-ring"
+              >
+                <option value="all">{t("allCohorts")}</option>
+                {cohorts.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.code} — {c.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
 
           {/* Search Bar */}
-          <div className="relative w-full sm:w-64">
-            <Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-muted-foreground" />
-              <Input
-                aria-label={t("searchPlaceholder")}
-                value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+          <div className="relative flex-1 min-w-[200px] max-w-sm">
+            <Search aria-hidden="true" className="absolute left-3 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              type="search"
+              aria-label={t("searchPlaceholder")}
               placeholder={t("searchPlaceholder")}
-                className="pl-8 text-sm h-10"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-8 text-xs h-9 bg-card"
             />
           </div>
         </div>
-      </div>
 
-      {/* Exam Grid */}
-      {filteredExams.length === 0 ? (
-      <div className="empty-state space-y-3">
-          <Award className="h-10 w-10 text-muted-foreground mx-auto" />
-          <p className="text-sm font-medium text-muted-foreground">{t("noExamsFound")}</p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-          {filteredExams.map((exam) => {
-            const cohort = cohorts.find((c) => c.id === exam.cohortId)
-            const studentAttempt =
-              currentRole === "GAKUSEI" && currentStudent
-                ? getStudentExamAttempt(exam.id, currentStudent.id)
-                : null
-            const allAttempts = getExamAttempts(exam.id)
-            const isCompleted = Boolean(studentAttempt)
+        {/* Exam Cards Grid or Empty State */}
+        {filteredExams.length === 0 ? (
+          hasActiveFilters ? (
+            <EmptyState
+              icon={<Award className="size-5" />}
+              title={t("emptyFilteredTitle")}
+              description={t("emptyFilteredDesc")}
+              action={
+                <Button type="button" variant="outline" size="sm" onClick={resetFilters}>
+                  {t("resetFilters")}
+                </Button>
+              }
+            />
+          ) : (
+            <EmptyState
+              icon={<Award className="size-5" />}
+              title={t("noExamsFound")}
+              description={t("subtitle")}
+            />
+          )
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {filteredExams.map((exam) => {
+              const cohort = cohorts.find((c) => c.id === exam.cohortId)
+              const studentAttempt =
+                currentRole === "GAKUSEI" && currentStudent
+                  ? getStudentExamAttempt(exam.id, currentStudent.id)
+                  : null
+              const allAttempts = getExamAttempts(exam.id)
+              const isCompleted = Boolean(studentAttempt)
+              const isAvailable = exam.status === "ACTIVE" && !isCompleted
 
-            return (
-              <Card
-                key={exam.id}
-                className={cn(
-                  "border-border/80 transition-all hover:shadow-md flex flex-col justify-between",
-                  isCompleted && "border-blue-500/30 bg-blue-50/5 dark:bg-blue-950/5"
-                )}
-              >
-                <CardHeader className="space-y-3 pb-3">
-                  <div className="flex items-center justify-between gap-2 flex-wrap">
-                    <div className="flex items-center gap-1.5 flex-wrap">
-                      <Badge variant="outline" className="font-mono text-xs font-bold">
-                        {exam.targetLevel}
-                      </Badge>
-                      {cohort && (
-                        <Badge variant="secondary" className="font-mono text-xs">
-                          {cohort.code}
+              return (
+                <Card
+                  key={exam.id}
+                  className={cn(
+                    "border-border/80 transition-all hover:shadow-sm flex flex-col justify-between",
+                    isCompleted && "border-blue-500/30 bg-blue-50/5 dark:bg-blue-950/5"
+                  )}
+                >
+                  <CardHeader className="space-y-3 pb-3">
+                    <div className="flex items-center justify-between gap-2 flex-wrap">
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <Badge variant="outline" className="font-mono text-xs font-bold">
+                          {exam.targetLevel}
                         </Badge>
-                      )}
-                      <span className="flex items-center gap-1 text-[0.72rem] text-muted-foreground font-medium">
-                        <Clock className="h-3 w-3" />
-                        {t("durationBadge", { minutes: exam.durationMinutes })}
+                        {cohort && (
+                          <Badge variant="secondary" className="font-mono text-xs">
+                            {cohort.code}
+                          </Badge>
+                        )}
+                        <span className="flex items-center gap-1 text-[0.72rem] text-muted-foreground font-medium">
+                          <Clock className="size-3" />
+                          {t("durationBadge", { minutes: exam.durationMinutes })}
+                        </span>
+                        {canManage && (
+                          <Badge
+                            variant={
+                              exam.status === "ACTIVE"
+                                ? "success"
+                                : exam.status === "UPCOMING"
+                                ? "warning"
+                                : "outline"
+                            }
+                            className="text-[0.68rem]"
+                          >
+                            {exam.status === "ACTIVE"
+                              ? t("statusActive")
+                              : exam.status === "UPCOMING"
+                              ? t("statusUpcoming")
+                              : t("statusClosed")}
+                          </Badge>
+                        )}
+                      </div>
+
+                      {/* Furigana badge */}
+                      <span
+                        className={cn(
+                          "text-[0.68rem] px-2 py-0.5 rounded font-medium",
+                          exam.allowFurigana
+                            ? "bg-muted text-muted-foreground"
+                            : "bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/20"
+                        )}
+                      >
+                        {exam.allowFurigana ? t("furiganaEnabled") : t("furiganaDisabled")}
                       </span>
                     </div>
 
-                    {/* Furigana badge */}
-                    <span
-                      className={cn(
-                        "text-[0.68rem] px-2 py-0.5 rounded font-medium",
-                        exam.allowFurigana
-                          ? "bg-muted text-muted-foreground"
-                          : "bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/20"
+                    <div>
+                      <CardTitle className="text-base font-bold hover:text-primary transition-colors leading-snug">
+                        <Link href={`/exams/${exam.id}`}>{exam.title}</Link>
+                      </CardTitle>
+                      {exam.description && (
+                        <CardDescription className="text-xs line-clamp-2 mt-1.5 leading-relaxed">
+                          {exam.description}
+                        </CardDescription>
                       )}
-                    >
-                      {exam.allowFurigana ? t("furiganaEnabled") : t("furiganaDisabled")}
-                    </span>
-                  </div>
+                    </div>
+                  </CardHeader>
 
-                  <div>
-                    <CardTitle className="text-base sm:text-lg font-bold hover:text-primary transition-colors leading-snug">
-                      <Link href={`/exams/${exam.id}`}>{exam.title}</Link>
-                    </CardTitle>
-                    {exam.description && (
-                      <CardDescription className="text-xs line-clamp-2 mt-1.5 leading-relaxed">
-                        {exam.description}
-                      </CardDescription>
-                    )}
-                  </div>
-                </CardHeader>
+                  <CardContent className="pt-0 space-y-4">
+                    {/* Metadata summary */}
+                    <div className="flex items-center justify-between text-xs text-muted-foreground pt-2 border-t border-border/50">
+                      <span>{t("questionsCount", { count: exam.questions.length })}</span>
+                      <span>{t("passThreshold", { score: exam.passScore })}</span>
+                    </div>
 
-                <CardContent className="pt-0 space-y-4">
-                  {/* Exam metadata pills */}
-                  <div className="flex items-center justify-between text-xs text-muted-foreground pt-2 border-t border-border/50">
-                    <span>{t("questionsCount", { count: exam.questions.length })}</span>
-                    <span>{t("passThreshold", { score: exam.passScore })}</span>
-                  </div>
-
-                  {/* Student Attempt Status Banner */}
-                  {currentRole === "GAKUSEI" && (
-                    <div className="rounded-lg p-2.5 text-xs flex items-center justify-between bg-muted/40 border border-border/50">
-                      {studentAttempt ? (
-                        <>
-                          <div className="flex items-center gap-2">
-                            <Badge
-                              variant={studentAttempt.passed ? "success" : "destructive"}
-                              className="text-[0.68rem] font-bold"
-                            >
-                              {studentAttempt.passed ? t("statusPassed") : t("statusFailed")}
-                            </Badge>
-                            <span className="font-semibold text-foreground">
-                              {studentAttempt.percentage}% ({studentAttempt.score}/{studentAttempt.maxScore})
+                    {/* Student Attempt Status Banner */}
+                    {currentRole === "GAKUSEI" && (
+                      <div className="rounded-lg p-2.5 text-xs flex items-center justify-between bg-muted/40 border border-border/50">
+                        {studentAttempt ? (
+                          <>
+                            <div className="flex items-center gap-2">
+                              <Badge
+                                variant={studentAttempt.passed ? "success" : "destructive"}
+                                className="text-[0.68rem] font-bold"
+                              >
+                                {studentAttempt.passed ? t("statusPassed") : t("statusFailed")}
+                              </Badge>
+                              <span className="font-semibold text-foreground font-mono">
+                                {studentAttempt.percentage}% ({studentAttempt.score}/{studentAttempt.maxScore})
+                              </span>
+                            </div>
+                            <span className="text-[0.7rem] text-muted-foreground">
+                              {studentAttempt.submittedAt}
                             </span>
-                          </div>
-                          <span className="text-[0.7rem] text-muted-foreground">
-                            {studentAttempt.submittedAt}
-                          </span>
-                        </>
-                      ) : (
-                        <>
-                          <div className="flex items-center gap-1.5 text-muted-foreground">
-                            <Clock3 className="h-3.5 w-3.5 text-amber-500" />
-                            <span>{t("statusNotAttempted")}</span>
-                          </div>
-                          <span className="text-[0.7rem] text-amber-600 dark:text-amber-400 font-medium">
-                            {t("tabActive")}
-                          </span>
-                        </>
-                      )}
-                    </div>
-                  )}
-
-                  {/* Teacher/Tantōsha Cohort Summary Banner */}
-                  {canManage && (
-                    <div className="rounded-lg p-2.5 text-xs flex items-center justify-between bg-muted/40 border border-border/50">
-                      <div className="flex items-center gap-2">
-                        <span className="text-muted-foreground">Peserta:</span>
-                        <span className="font-semibold text-foreground font-mono">
-                          {allAttempts.length} siswa
-                        </span>
+                          </>
+                        ) : (
+                          <>
+                            <div className="flex items-center gap-1.5 text-muted-foreground">
+                              <Clock3 className="size-3.5 text-amber-500" />
+                              <span>{t("statusNotAttempted")}</span>
+                            </div>
+                            <span
+                              className={cn(
+                                "text-[0.7rem] font-medium",
+                                exam.status === "ACTIVE"
+                                  ? "text-emerald-600 dark:text-emerald-400"
+                                  : "text-muted-foreground"
+                              )}
+                            >
+                              {exam.status === "ACTIVE"
+                                ? t("tabAvailable")
+                                : exam.status === "UPCOMING"
+                                ? t("statusUpcoming")
+                                : t("statusClosed")}
+                            </span>
+                          </>
+                        )}
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-muted-foreground">Kelulusan:</span>
-                        <span className="font-semibold text-emerald-600 dark:text-emerald-400 font-mono">
-                          {allAttempts.length > 0
-                            ? `${Math.round((allAttempts.filter((a) => a.passed).length / allAttempts.length) * 100)}%`
-                            : "—"}
-                        </span>
-                      </div>
-                    </div>
-                  )}
+                    )}
 
-                  {/* Action CTA Button */}
-                  <div className="pt-1">
-                    <Link href={`/exams/${exam.id}`} className="block">
-                      {isCompleted ? (
-                        <Button variant="outline" size="sm" className="w-full gap-2 text-xs">
-                          <span>{t("viewResults")}</span>
-                          <ArrowRight className="h-3.5 w-3.5" />
-                        </Button>
+                    {/* Teacher/Tantōsha Cohort Summary Banner */}
+                    {canManage && (
+                      <div className="rounded-lg p-2.5 text-xs flex items-center justify-between bg-muted/40 border border-border/50">
+                        <div className="flex items-center gap-2">
+                          <span className="text-muted-foreground">
+                            {t("cohortParticipants", { count: allAttempts.length })}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-muted-foreground">
+                            {t("cohortPassRate", {
+                              rate:
+                                allAttempts.length > 0
+                                  ? `${Math.round((allAttempts.filter((a) => a.passed).length / allAttempts.length) * 100)}%`
+                                  : "—",
+                            })}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Action CTA Button */}
+                    <div className="pt-1">
+                      {currentRole === "GAKUSEI" ? (
+                        isCompleted ? (
+                          <Link
+                            href={`/exams/${exam.id}`}
+                            className={cn(buttonVariants({ variant: "outline", size: "sm" }), "w-full gap-2 text-xs")}
+                          >
+                            <span>{t("viewResults")}</span>
+                            <ArrowRight className="size-3.5" />
+                          </Link>
+                        ) : isAvailable ? (
+                          <Link
+                            href={`/exams/${exam.id}`}
+                            className={cn(buttonVariants({ size: "sm" }), "w-full gap-2 text-xs shadow-xs")}
+                          >
+                            <Award className="size-3.5" />
+                            <span>{t("startExam")}</span>
+                          </Link>
+                        ) : (
+                          <Link
+                            href={`/exams/${exam.id}`}
+                            className={cn(buttonVariants({ variant: "outline", size: "sm" }), "w-full gap-2 text-xs")}
+                          >
+                            <span>{t("viewResults")}</span>
+                            <ArrowRight className="size-3.5" />
+                          </Link>
+                        )
                       ) : (
-                        <Button
-                          size="sm"
-                          className="w-full gap-2 text-xs shadow-xs bg-amber-600 hover:bg-amber-700 text-white"
+                        <Link
+                          href={`/exams/${exam.id}`}
+                          className={cn(buttonVariants({ variant: "outline", size: "sm" }), "w-full gap-2 text-xs")}
                         >
-                          <Award className="h-3.5 w-3.5" />
-                          <span>{t("startExam")}</span>
-                        </Button>
+                          <span>{t("viewResults")}</span>
+                          <ArrowRight className="size-3.5" />
+                        </Link>
                       )}
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
-            )
-          })}
-        </div>
-      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              )
+            })}
+          </div>
+        )}
+      </section>
 
       {/* Create Exam Modal */}
       <Dialog open={createModalOpen} onOpenChange={setCreateModalOpen}>
-        <DialogContent className="sm:max-w-lg">
+        <DialogContent className="sm:max-w-lg" closeLabel={tCommon("close")}>
           <DialogHeader>
-            <DialogTitle className="text-lg font-bold">{t("createModalTitle")}</DialogTitle>
+            <DialogTitle className="text-base font-bold">{t("createModalTitle")}</DialogTitle>
             <DialogDescription className="text-xs">{t("createModalDesc")}</DialogDescription>
           </DialogHeader>
 
           <form onSubmit={handleCreateExam} className="space-y-4 pt-2 text-xs">
             {formError && (
-              <div role="alert" aria-live="polite" className="rounded-md bg-destructive/10 p-3 text-sm text-destructive flex items-center gap-2">
-                <AlertCircle className="h-4 w-4 shrink-0" />
+              <div
+                role="alert"
+                aria-live="polite"
+                className="rounded-md bg-destructive/10 p-3 text-xs text-destructive flex items-center gap-2"
+              >
+                <AlertCircle className="size-4 shrink-0" />
                 <span>{formError}</span>
               </div>
             )}
 
             <div className="space-y-1.5">
-              <label className="font-semibold text-foreground">{t("fieldTitle")}</label>
+              <label htmlFor="create-exam-title" className="font-semibold text-foreground">
+                {t("fieldTitle")}
+              </label>
               <Input
+                id="create-exam-title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Contoh: JLPT N5 第2回 語彙・読解模擬試験"
+                placeholder={t("placeholderTitle")}
                 className="text-xs"
+                required
               />
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5">
-                <label className="font-semibold text-foreground">{t("fieldCohort")}</label>
+                <label htmlFor="create-exam-cohort" className="font-semibold text-foreground">
+                  {t("fieldCohort")}
+                </label>
                 <select
+                  id="create-exam-cohort"
                   value={cohortId}
                   onChange={(e) => setCohortId(e.target.value)}
                   className="w-full h-9 rounded-md border border-input bg-background px-3 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-ring"
@@ -574,8 +772,11 @@ export default function ExamsPage() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="font-semibold text-foreground">{t("fieldLevel")}</label>
+                <label htmlFor="create-exam-level" className="font-semibold text-foreground">
+                  {t("fieldLevel")}
+                </label>
                 <select
+                  id="create-exam-level"
                   value={targetLevel}
                   onChange={(e) => setTargetLevel(e.target.value as "N5")}
                   className="w-full h-9 rounded-md border border-input bg-background px-3 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-ring"
@@ -591,26 +792,34 @@ export default function ExamsPage() {
 
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5">
-                <label className="font-semibold text-foreground">{t("fieldDuration")}</label>
+                <label htmlFor="create-exam-duration" className="font-semibold text-foreground">
+                  {t("fieldDuration")}
+                </label>
                 <Input
+                  id="create-exam-duration"
                   type="number"
                   min={5}
                   max={180}
                   value={durationMinutes}
                   onChange={(e) => setDurationMinutes(Number(e.target.value))}
                   className="text-xs font-mono"
+                  required
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="font-semibold text-foreground">{t("fieldPassScore")}</label>
+                <label htmlFor="create-exam-pass-score" className="font-semibold text-foreground">
+                  {t("fieldPassScore")}
+                </label>
                 <Input
+                  id="create-exam-pass-score"
                   type="number"
                   min={10}
                   max={100}
                   value={passScore}
                   onChange={(e) => setPassScore(Number(e.target.value))}
                   className="text-xs font-mono"
+                  required
                 />
               </div>
             </div>
@@ -618,23 +827,26 @@ export default function ExamsPage() {
             <div className="flex items-center gap-2 pt-1">
               <input
                 type="checkbox"
-                id="allowFurigana"
+                id="create-exam-furigana"
                 checked={allowFurigana}
                 onChange={(e) => setAllowFurigana(e.target.checked)}
-                className="rounded border-input text-primary focus:ring-primary h-4 w-4"
+                className="rounded border-input text-primary focus:ring-primary size-4"
               />
-              <label htmlFor="allowFurigana" className="font-medium text-foreground cursor-pointer">
+              <label htmlFor="create-exam-furigana" className="font-medium text-foreground cursor-pointer text-xs">
                 {t("fieldAllowFurigana")}
               </label>
             </div>
 
             <div className="space-y-1.5">
-              <label className="font-semibold text-foreground">{t("fieldDescription")}</label>
+              <label htmlFor="create-exam-description" className="font-semibold text-foreground">
+                {t("fieldDescription")}
+              </label>
               <Textarea
+                id="create-exam-description"
                 rows={3}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Catatan aturan khusus ujian, materi yang diujikan..."
+                placeholder={t("placeholderDescription")}
                 className="w-full rounded-md border border-input bg-background p-2.5 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-ring font-sans"
               />
             </div>
@@ -648,13 +860,13 @@ export default function ExamsPage() {
               >
                 {tCommon("cancel")}
               </Button>
-              <Button type="submit" size="sm" className="bg-amber-600 hover:bg-amber-700 text-white">
+              <Button type="submit" size="sm">
                 {t("saveExam")}
               </Button>
             </DialogFooter>
           </form>
         </DialogContent>
       </Dialog>
-    </div>
+    </PageShell>
   )
 }
