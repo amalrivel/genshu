@@ -167,6 +167,15 @@ Follow the relevant dependency policy when present.
 
 Do not treat AI confidence as verification.
 
+Before reporting a code task as complete, run:
+
+```text
+bun run verify
+```
+
+Do not report completion unless this command passes. It performs the repository's
+canonical typecheck, lint, locale, build, diff, and Graphify checks.
+
 Use deterministic checks where appropriate, such as:
 
 ```text
