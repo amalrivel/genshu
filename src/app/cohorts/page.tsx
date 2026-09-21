@@ -30,6 +30,8 @@ import { useData } from "@/lib/data-context"
 import { type CohortStatus } from "@/lib/mock-data"
 import { cn } from "@/lib/utils"
 import { useTranslations } from "next-intl"
+import { EmptyState } from "@/components/ui/empty-state"
+import { PageHeader, PageShell, SectionHeader } from "@/components/layout/page-frame"
 import { CohortStatusBadge } from "@/components/cohorts/cohort-status-badge"
 
 export default function CohortsPage() {
@@ -53,13 +55,25 @@ export default function CohortsPage() {
   const [formError, setFormError] = React.useState("")
 
   const canManage = currentRole === "TANTOSHA" || currentRole === "SENSEI"
+  const normalizedSearchQuery = searchQuery.trim().toLowerCase()
+  const hasActiveFilters = normalizedSearchQuery.length > 0 || statusFilter !== "all"
+
+  const openCreateDialog = () => {
+    setFormError("")
+    setCreateDialogOpen(true)
+  }
+
+  const resetFilters = () => {
+    setSearchQuery("")
+    setStatusFilter("all")
+  }
 
   // Filtered cohorts
   const filteredCohorts = cohorts.filter((c) => {
     const matchesSearch =
-      c.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      c.code.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      c.description.toLowerCase().includes(searchQuery.toLowerCase())
+      c.name.toLowerCase().includes(normalizedSearchQuery) ||
+      c.code.toLowerCase().includes(normalizedSearchQuery) ||
+      c.description.toLowerCase().includes(normalizedSearchQuery)
     const matchesStatus = statusFilter === "all" || c.status === statusFilter
     return matchesSearch && matchesStatus
   })
@@ -106,221 +120,199 @@ export default function CohortsPage() {
   }
 
   return (
-    <div className="page-shell">
-      {/* Page Header */}
-      <div className="page-header">
-        <div>
-          <div className="flex items-center gap-2 mb-1">
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
-              {t("title")}
-            </h1>
-            <Badge variant="outline" className="text-xs font-normal">
-              {t("badge")}
-            </Badge>
-          </div>
-          <p className="text-sm text-muted-foreground">
-            {t("desc")}
-          </p>
-        </div>
+    <PageShell>
+      <PageHeader
+        eyebrow={t("badge")}
+        title={t("title")}
+        description={t("desc")}
+        action={
+          canManage ? (
+            <Button onClick={openCreateDialog} className="gap-2">
+              <Plus aria-hidden="true" className="size-4" />
+              {t("createCohort")}
+            </Button>
+          ) : (
+            <Badge variant="roleGakusei">{tCommon("roleGakusei")}</Badge>
+          )
+        }
+      />
 
-        {/* Action Button */}
-        {canManage ? (
-          <Button
-            onClick={() => {
-              setFormError("")
-              setCreateDialogOpen(true)
-            }}
-            className="gap-2 shadow-xs sm:self-start"
+      <section aria-label={t("statActiveCohorts")}>
+        <div className="metric-strip grid-cols-1 divide-x-0 divide-y sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+          <div className="metric-item">
+            <p className="metric-label">{t("statActiveCohorts")}</p>
+            <p className="metric-value text-primary">
+              {activeCohortsCount} <span className="text-sm font-normal text-muted-foreground">/ {cohorts.length}</span>
+            </p>
+            <p className="metric-note">{t("statusActive")}</p>
+          </div>
+          <div className="metric-item">
+            <p className="metric-label">{t("statTotalStudents")}</p>
+            <p className="metric-value">{totalStudentsCount}</p>
+            <p className="metric-note">{tCommon("roleGakusei")}</p>
+          </div>
+          <div className="metric-item">
+            <p className="metric-label">{t("statTotalTeachers")}</p>
+            <p className="metric-value">{totalSenseiCount}</p>
+            <p className="metric-note">{tCommon("roleSensei")}</p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="cohort-list-title" className="space-y-4">
+        <SectionHeader
+          title={<span id="cohort-list-title">{t("listTitle")}</span>}
+          description={
+            <span aria-live="polite">
+              {t("resultsSummary", { shown: filteredCohorts.length, total: cohorts.length })}
+            </span>
+          }
+        />
+
+        <div className="filter-toolbar">
+          <div className="relative min-w-0 flex-1 sm:max-w-md">
+            <Search aria-hidden="true" className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              type="search"
+              aria-label={t("searchPlaceholder")}
+              placeholder={t("searchPlaceholder")}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="bg-card pl-9"
+            />
+          </div>
+
+          <div
+            role="group"
+            aria-label={t("filterStatus")}
+            className="flex min-w-0 items-center gap-1 overflow-x-auto rounded-lg border border-border/60 bg-muted/50 p-1"
           >
-            <Plus className="h-4 w-4" />
-            {t("createCohort")}
-          </Button>
-        ) : (
-          <div className="text-xs bg-muted/60 text-muted-foreground px-3 py-1.5 rounded-md border border-border/60">
-            {tCommon("roleGakusei")}
+            <Filter aria-hidden="true" className="ml-2 mr-1 size-3.5 shrink-0 text-muted-foreground" />
+            {(
+              [
+                { id: "all", label: t("filterAll") },
+                { id: "active", label: t("statusActive") },
+                { id: "upcoming", label: t("statusUpcoming") },
+                { id: "completed", label: t("statusCompleted") },
+                { id: "archived", label: t("statusArchived") },
+              ] as const
+            ).map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                aria-pressed={statusFilter === tab.id}
+                onClick={() => setStatusFilter(tab.id)}
+                className={cn(
+                  "min-h-9 shrink-0 rounded-md px-3 py-1 text-xs font-medium whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60",
+                  statusFilter === tab.id
+                    ? "bg-background text-foreground shadow-xs"
+                    : "text-muted-foreground hover:text-foreground"
+                )}
+              >
+                {tab.label}
+              </button>
+            ))}
           </div>
-        )}
-      </div>
-
-      {/* Metrics Banner */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <Card className="border-border/60">
-          <CardContent className="flex items-center justify-between p-5">
-            <div>
-              <p className="text-xs font-medium text-muted-foreground">{t("statActiveCohorts")}</p>
-              <p className="mt-1 text-2xl sm:text-3xl font-bold tracking-tight text-primary">
-                {activeCohortsCount}{" "}
-                <span className="text-xs font-normal text-muted-foreground">/ {cohorts.length}</span>
-              </p>
-            </div>
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-              <Layers className="h-6 w-6" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-border/60">
-          <CardContent className="flex items-center justify-between p-5">
-            <div>
-              <p className="text-xs font-medium text-muted-foreground">{t("statTotalStudents")}</p>
-              <p className="mt-1 text-2xl sm:text-3xl font-bold tracking-tight">
-                {totalStudentsCount}
-              </p>
-            </div>
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
-              <GraduationCap className="h-6 w-6" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-border/60">
-          <CardContent className="flex items-center justify-between p-5">
-            <div>
-              <p className="text-xs font-medium text-muted-foreground">{t("statTotalTeachers")}</p>
-              <p className="mt-1 text-2xl sm:text-3xl font-bold tracking-tight">
-                {totalSenseiCount}
-              </p>
-            </div>
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-              <Users className="h-6 w-6" />
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Filter and Search Bar */}
-      <div className="filter-toolbar">
-        {/* Search */}
-        <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-          <Input
-            aria-label={t("searchPlaceholder")}
-            placeholder={t("searchPlaceholder")}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-9 bg-card"
-          />
         </div>
 
-        {/* Status filter tabs */}
-        <div className="flex items-center gap-1 overflow-x-auto p-1 bg-muted/50 rounded-lg border border-border/60">
-          <Filter className="h-3.5 w-3.5 text-muted-foreground ml-2 mr-1 shrink-0" />
-          {(
-            [
-              { id: "all", label: t("filterAll") },
-              { id: "active", label: t("statusActive") },
-              { id: "upcoming", label: t("statusUpcoming") },
-              { id: "completed", label: t("statusCompleted") },
-            ] as const
-          ).map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setStatusFilter(tab.id)}
-              className={cn(
-                "min-h-9 px-3 py-1 text-xs font-medium rounded-md whitespace-nowrap transition-colors",
-                statusFilter === tab.id
-                  ? "bg-background text-foreground shadow-xs"
-                  : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Cohorts Grid */}
       {filteredCohorts.length === 0 ? (
-        <div className="empty-state">
-          <Layers className="mx-auto h-12 w-12 text-muted-foreground/60" />
-          <h3 className="mt-4 text-base font-semibold">{t("noCohortsFound")}</h3>
-          <p className="mt-1 text-xs text-muted-foreground">
-            {t("noCohortsDesc")}
-          </p>
-        </div>
+        <EmptyState
+          icon={<Layers className="size-5" />}
+          title={t("noCohortsFound")}
+          description={t("noCohortsDesc")}
+          action={
+            hasActiveFilters ? (
+              <Button type="button" variant="outline" onClick={resetFilters}>
+                {t("resetFilters")}
+              </Button>
+            ) : canManage ? (
+              <Button type="button" onClick={openCreateDialog} className="gap-2">
+                <Plus aria-hidden="true" className="size-4" />
+                {t("createCohort")}
+              </Button>
+            ) : undefined
+          }
+        />
       ) : (
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {filteredCohorts.map((cohort) => {
             const members = getCohortMembers(cohort.id)
             return (
-              <Card
-                key={cohort.id}
-                className="group flex flex-col justify-between overflow-hidden border-border/80 transition-all hover:border-primary/40 hover:shadow-md"
-              >
-                <div>
-                  <CardHeader className="p-5 pb-3">
-                    <div className="flex items-center justify-between gap-2 mb-2">
-                      <span className="font-mono text-xs font-semibold text-muted-foreground bg-muted/60 px-2 py-0.5 rounded border border-border/50">
-                        {cohort.code}
+              <li key={cohort.id} className="min-w-0">
+                <Link
+                  href={`/cohorts/${cohort.id}`}
+                  aria-label={`${t("viewRoster")}: ${cohort.name}`}
+                  className="group block h-full rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2"
+                >
+                  <Card className="flex h-full flex-col overflow-hidden border-border/80 transition-colors hover:border-primary/40 hover:bg-muted/10">
+                    <div className="flex-1">
+                      <CardHeader className="p-5 pb-3">
+                        <div className="mb-2 flex items-center justify-between gap-2">
+                          <span className="rounded border border-border/50 bg-muted/60 px-2 py-0.5 font-mono text-xs font-semibold text-muted-foreground">
+                            {cohort.code}
+                          </span>
+                          <CohortStatusBadge status={cohort.status} className="gap-1 text-xs" />
+                        </div>
+                        <CardTitle className="text-base transition-colors group-hover:text-primary sm:text-lg">
+                          {cohort.name}
+                        </CardTitle>
+                        <div className="flex items-center gap-2 pt-1">
+                          <Badge variant="outline" className="px-1.5 py-0 text-[0.7rem] font-normal">
+                            {cohort.targetLevel}
+                          </Badge>
+                        </div>
+                        <CardDescription className="mt-2 line-clamp-2 text-xs text-muted-foreground">
+                          {cohort.description}
+                        </CardDescription>
+                      </CardHeader>
+
+                      <CardContent className="space-y-3 p-5 pt-0 text-xs">
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                          <Calendar aria-hidden="true" className="size-3.5 shrink-0" />
+                          <span>{cohort.startDate} 〜 {cohort.endDate}</span>
+                        </div>
+
+                        <div className="flex items-center justify-between rounded-lg border border-border/40 bg-muted/40 p-2.5">
+                          <div className="flex items-center gap-1.5">
+                            <GraduationCap aria-hidden="true" className="size-4 text-indigo-500" />
+                            <span className="font-medium tabular-nums">{members.students.length}</span>
+                            <span className="text-[0.7rem] text-muted-foreground">{tCommon("roleGakusei")}</span>
+                          </div>
+                          <div aria-hidden="true" className="h-3 w-px bg-border" />
+                          <div className="flex items-center gap-1.5">
+                            <Users aria-hidden="true" className="size-4 text-emerald-500" />
+                            <span className="font-medium tabular-nums">{members.teachers.length}</span>
+                            <span className="text-[0.7rem] text-muted-foreground">{tCommon("roleSensei")}</span>
+                          </div>
+                          <div aria-hidden="true" className="h-3 w-px bg-border" />
+                          <div className="flex items-center gap-1.5">
+                            <Sparkles aria-hidden="true" className="size-4 text-purple-500" />
+                            <span className="font-medium tabular-nums">{members.coordinators.length}</span>
+                            <span className="text-[0.7rem] text-muted-foreground">{tCommon("roleTantosha")}</span>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </div>
+
+                    <div className="flex items-center justify-between border-t border-border/60 bg-muted/10 px-5 py-3">
+                      <span className="text-xs text-muted-foreground">{cohort.createdAt}</span>
+                      <span className="inline-flex items-center gap-1.5 text-xs font-medium text-primary">
+                        {t("viewRoster")}
+                        <ArrowRight aria-hidden="true" className="size-3.5 transition-transform group-hover:translate-x-0.5" />
                       </span>
-                      <CohortStatusBadge status={cohort.status} className="gap-1 text-xs" />
                     </div>
-                    <CardTitle className="text-base sm:text-lg group-hover:text-primary transition-colors">
-                      {cohort.name}
-                    </CardTitle>
-                    <div className="flex items-center gap-2 pt-1">
-                      <Badge variant="outline" className="text-[0.7rem] py-0 px-1.5 font-normal">
-                        {cohort.targetLevel}
-                      </Badge>
-                    </div>
-                    <CardDescription className="line-clamp-2 mt-2 text-xs text-muted-foreground">
-                      {cohort.description}
-                    </CardDescription>
-                  </CardHeader>
-
-                  <CardContent className="p-5 pt-0 space-y-3 text-xs">
-                    {/* Date info */}
-                    <div className="flex items-center gap-2 text-muted-foreground">
-                      <Calendar className="h-3.5 w-3.5 shrink-0" />
-                      <span>
-                        {cohort.startDate} 〜 {cohort.endDate}
-                      </span>
-                    </div>
-
-                    {/* Roster counts */}
-                    <div className="rounded-lg bg-muted/40 p-2.5 flex items-center justify-between border border-border/40">
-                      <div className="flex items-center gap-1.5">
-                        <GraduationCap className="h-4 w-4 text-indigo-500" />
-                        <span className="font-medium">{members.students.length}</span>
-                        <span className="text-muted-foreground text-[0.7rem]">{tCommon("roleGakusei")}</span>
-                      </div>
-                      <div className="h-3 w-px bg-border" />
-                      <div className="flex items-center gap-1.5">
-                        <Users className="h-4 w-4 text-emerald-500" />
-                        <span className="font-medium">{members.teachers.length}</span>
-                        <span className="text-muted-foreground text-[0.7rem]">{tCommon("roleSensei")}</span>
-                      </div>
-                      <div className="h-3 w-px bg-border" />
-                      <div className="flex items-center gap-1.5">
-                        <Sparkles className="h-4 w-4 text-purple-500" />
-                        <span className="font-medium">{members.coordinators.length}</span>
-                        <span className="text-muted-foreground text-[0.7rem]">{tCommon("roleTantosha")}</span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </div>
-
-                {/* Card Action Link */}
-                <div className="border-t border-border/60 bg-muted/10 p-3 px-5 flex items-center justify-between">
-                  <span className="text-xs text-muted-foreground">
-                    {cohort.createdAt}
-                  </span>
-                  <Link href={`/cohorts/${cohort.id}`}>
-                    <Button variant="ghost" size="sm" className="gap-1.5 text-xs h-8 group-hover:bg-primary group-hover:text-primary-foreground">
-                      {t("viewRoster")}
-                      <ArrowRight className="h-3.5 w-3.5" />
-                    </Button>
-                  </Link>
-                </div>
-              </Card>
+                  </Card>
+                </Link>
+              </li>
             )
           })}
-        </div>
+        </ul>
       )}
+      </section>
 
       {/* Create Cohort Modal */}
       <Dialog open={createDialogOpen} onOpenChange={setCreateDialogOpen}>
-        <DialogContent className="max-w-md">
+        <DialogContent className="max-w-md" closeLabel={tCommon("close")}>
           <DialogHeader>
             <DialogTitle>{t("modalTitle")}</DialogTitle>
             <DialogDescription>
@@ -336,10 +328,12 @@ export default function CohortsPage() {
             )}
 
             <div>
-              <label className="block text-xs font-medium mb-1">
+              <label htmlFor="cohort-create-name" className="block text-xs font-medium mb-1">
                 {t("modalName")}
               </label>
               <Input
+                id="cohort-create-name"
+                name="name"
                 placeholder={t("modalNamePlaceholder")}
                 value={name}
                 onChange={(e) => {
@@ -356,12 +350,14 @@ export default function CohortsPage() {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <div>
-                <label className="block text-xs font-medium mb-1">
+                <label htmlFor="cohort-create-code" className="block text-xs font-medium mb-1">
                   {t("modalCode")}
                 </label>
                 <Input
+                  id="cohort-create-code"
+                  name="code"
                   placeholder={t("modalCodePlaceholder")}
                   value={code}
                   onChange={(e) => setCode(e.target.value)}
@@ -370,10 +366,12 @@ export default function CohortsPage() {
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium mb-1">
+                <label htmlFor="cohort-create-level" className="block text-xs font-medium mb-1">
                   {t("modalTargetLevel")}
                 </label>
                 <select
+                  id="cohort-create-level"
+                  name="targetLevel"
                   className="w-full h-9 rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   value={targetLevel}
                   onChange={(e) => setTargetLevel(e.target.value)}
@@ -386,22 +384,26 @@ export default function CohortsPage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <div>
-                <label className="block text-xs font-medium mb-1">
+                <label htmlFor="cohort-create-start-date" className="block text-xs font-medium mb-1">
                   {t("modalStartDate")}
                 </label>
                 <Input
+                  id="cohort-create-start-date"
+                  name="startDate"
                   type="date"
                   value={startDate}
                   onChange={(e) => setStartDate(e.target.value)}
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium mb-1">
+                <label htmlFor="cohort-create-end-date" className="block text-xs font-medium mb-1">
                   {t("modalEndDate")}
                 </label>
                 <Input
+                  id="cohort-create-end-date"
+                  name="endDate"
                   type="date"
                   value={endDate}
                   onChange={(e) => setEndDate(e.target.value)}
@@ -410,10 +412,12 @@ export default function CohortsPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-medium mb-1">
+              <label htmlFor="cohort-create-status" className="block text-xs font-medium mb-1">
                 {t("filterStatus")}
               </label>
               <select
+                id="cohort-create-status"
+                name="status"
                 className="w-full h-9 rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 value={status}
                 onChange={(e) => setStatus(e.target.value as CohortStatus)}
@@ -425,10 +429,12 @@ export default function CohortsPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-medium mb-1">
+              <label htmlFor="cohort-create-description" className="block text-xs font-medium mb-1">
                 {t("modalDescLabel")}
               </label>
               <Textarea
+                id="cohort-create-description"
+                name="description"
                 className="w-full min-h-[70px] rounded-md border border-input bg-transparent p-2 text-sm shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 placeholder="研修の目的や対象奨学生の概要を入力..."
                 value={description}
@@ -449,6 +455,6 @@ export default function CohortsPage() {
           </form>
         </DialogContent>
       </Dialog>
-    </div>
+    </PageShell>
   )
 }

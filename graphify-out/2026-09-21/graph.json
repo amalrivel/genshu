@@ -12641,7 +12641,7 @@
       "file_type": "code",
       "norm_label": "cohortdetailpage()",
       "source_file": "src/app/cohorts/[id]/page.tsx",
-      "source_location": "L896"
+      "source_location": "L915"
     },
     {
       "id": "src_app_cohorts_id_page_iscohorttab",
@@ -17714,7 +17714,7 @@
       "node_kind": "heading",
       "norm_label": "11. authentication",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L495"
+      "source_location": "L464"
     },
     {
       "id": "ai_project_12_file_storage",
@@ -17726,7 +17726,7 @@
       "node_kind": "heading",
       "norm_label": "12. file storage",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L515"
+      "source_location": "L480"
     },
     {
       "id": "ai_project_13_deployment_direction",
@@ -17738,7 +17738,7 @@
       "node_kind": "heading",
       "norm_label": "13. deployment direction",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L534"
+      "source_location": "L495"
     },
     {
       "id": "ai_project_14_architecture_principle",
@@ -17750,7 +17750,7 @@
       "node_kind": "heading",
       "norm_label": "14. architecture principle",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L579"
+      "source_location": "L530"
     },
     {
       "id": "ai_project_15_anti_overengineering_rules",
@@ -17762,7 +17762,7 @@
       "node_kind": "heading",
       "norm_label": "15. anti-overengineering rules",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L600"
+      "source_location": "L551"
     },
     {
       "id": "ai_project_16_ux_principles",
@@ -17774,7 +17774,7 @@
       "node_kind": "heading",
       "norm_label": "16. ux principles",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L634"
+      "source_location": "L585"
     },
     {
       "id": "ai_project_17_mobile_and_desktop",
@@ -17786,7 +17786,7 @@
       "node_kind": "heading",
       "norm_label": "17. mobile and desktop",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L661"
+      "source_location": "L612"
     },
     {
       "id": "ai_project_18_data_ownership",
@@ -17798,7 +17798,7 @@
       "node_kind": "heading",
       "norm_label": "18. data ownership",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L676"
+      "source_location": "L627"
     },
     {
       "id": "ai_project_19_security_and_permissions",
@@ -17810,7 +17810,7 @@
       "node_kind": "heading",
       "norm_label": "19. security and permissions",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L705"
+      "source_location": "L656"
     },
     {
       "id": "ai_project_1_purpose",
@@ -17834,7 +17834,7 @@
       "node_kind": "heading",
       "norm_label": "20. definition of done",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L732"
+      "source_location": "L683"
     },
     {
       "id": "ai_project_21_architectural_changes",
@@ -17846,7 +17846,7 @@
       "node_kind": "heading",
       "norm_label": "21. architectural changes",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L760"
+      "source_location": "L711"
     },
     {
       "id": "ai_project_22_documentation_rules",
@@ -17858,7 +17858,7 @@
       "node_kind": "heading",
       "norm_label": "22. documentation rules",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L790"
+      "source_location": "L741"
     },
     {
       "id": "ai_project_23_project_knowledge_hierarchy",
@@ -17870,7 +17870,7 @@
       "node_kind": "heading",
       "norm_label": "23. project knowledge hierarchy",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L822"
+      "source_location": "L773"
     },
     {
       "id": "ai_project_24_current_mvp_priorities",
@@ -17882,7 +17882,7 @@
       "node_kind": "heading",
       "norm_label": "24. current mvp priorities",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L849"
+      "source_location": "L800"
     },
     {
       "id": "ai_project_25_explicit_mvp_non_goals",
@@ -17894,7 +17894,7 @@
       "node_kind": "heading",
       "norm_label": "25. explicit mvp non-goals",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L879"
+      "source_location": "L830"
     },
     {
       "id": "ai_project_26_open_decisions",
@@ -17906,7 +17906,7 @@
       "node_kind": "heading",
       "norm_label": "26. open decisions",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L909"
+      "source_location": "L860"
     },
     {
       "id": "ai_project_27_product_philosophy",
@@ -17918,7 +17918,7 @@
       "node_kind": "heading",
       "norm_label": "27. product philosophy",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L931"
+      "source_location": "L882"
     },
     {
       "id": "ai_project_28_core_principle",
@@ -17930,7 +17930,7 @@
       "node_kind": "heading",
       "norm_label": "28. core principle",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L965"
+      "source_location": "L916"
     },
     {
       "id": "ai_project_2_product_identity",
@@ -18158,7 +18158,7 @@
       "node_kind": "heading",
       "norm_label": "database access layer",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L469"
+      "source_location": "L455"
     },
     {
       "id": "ai_project_furigana",
@@ -18206,7 +18206,7 @@
       "node_kind": "heading",
       "norm_label": "local development",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L449"
+      "source_location": "L436"
     },
     {
       "id": "ai_project_runtime_and_package_manager",
@@ -127365,7 +127365,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L449",
+      "source_location": "L436",
       "weight": 1.0
     },
     {
@@ -127376,7 +127376,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L469",
+      "source_location": "L455",
       "weight": 1.0
     },
     {
@@ -127629,7 +127629,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L495",
+      "source_location": "L464",
       "weight": 1.0
     },
     {
@@ -127640,7 +127640,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L515",
+      "source_location": "L480",
       "weight": 1.0
     },
     {
@@ -127651,7 +127651,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L534",
+      "source_location": "L495",
       "weight": 1.0
     },
     {
@@ -127662,7 +127662,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L579",
+      "source_location": "L530",
       "weight": 1.0
     },
     {
@@ -127673,7 +127673,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L600",
+      "source_location": "L551",
       "weight": 1.0
     },
     {
@@ -127684,7 +127684,29 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L634",
+      "source_location": "L585",
+      "weight": 1.0
+    },
+    {
+      "source": "ai_project_genshu_project_source_of_truth",
+      "target": "ai_project_17_mobile_and_desktop",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L612",
+      "weight": 1.0
+    },
+    {
+      "source": "ai_project_genshu_project_source_of_truth",
+      "target": "ai_project_18_data_ownership",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L627",
       "weight": 1.0
     },
     {
@@ -127700,35 +127722,13 @@
     },
     {
       "source": "ai_project_genshu_project_source_of_truth",
-      "target": "ai_project_17_mobile_and_desktop",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L661",
-      "weight": 1.0
-    },
-    {
-      "source": "ai_project_genshu_project_source_of_truth",
-      "target": "ai_project_18_data_ownership",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L676",
-      "weight": 1.0
-    },
-    {
-      "source": "ai_project_genshu_project_source_of_truth",
       "target": "ai_project_19_security_and_permissions",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L705",
+      "source_location": "L656",
       "weight": 1.0
     },
     {
@@ -127739,7 +127739,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L732",
+      "source_location": "L683",
       "weight": 1.0
     },
     {
@@ -127750,7 +127750,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L760",
+      "source_location": "L711",
       "weight": 1.0
     },
     {
@@ -127761,7 +127761,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L790",
+      "source_location": "L741",
       "weight": 1.0
     },
     {
@@ -127772,7 +127772,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L822",
+      "source_location": "L773",
       "weight": 1.0
     },
     {
@@ -127783,7 +127783,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L849",
+      "source_location": "L800",
       "weight": 1.0
     },
     {
@@ -127794,7 +127794,29 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L879",
+      "source_location": "L830",
+      "weight": 1.0
+    },
+    {
+      "source": "ai_project_genshu_project_source_of_truth",
+      "target": "ai_project_26_open_decisions",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L860",
+      "weight": 1.0
+    },
+    {
+      "source": "ai_project_genshu_project_source_of_truth",
+      "target": "ai_project_27_product_philosophy",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L882",
       "weight": 1.0
     },
     {
@@ -127810,35 +127832,13 @@
     },
     {
       "source": "ai_project_genshu_project_source_of_truth",
-      "target": "ai_project_26_open_decisions",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L909",
-      "weight": 1.0
-    },
-    {
-      "source": "ai_project_genshu_project_source_of_truth",
-      "target": "ai_project_27_product_philosophy",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L931",
-      "weight": 1.0
-    },
-    {
-      "source": "ai_project_genshu_project_source_of_truth",
       "target": "ai_project_28_core_principle",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L965",
+      "source_location": "L916",
       "weight": 1.0
     },
     {
@@ -129015,7 +129015,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/cohorts/[id]/page.tsx",
-      "source_location": "L896",
+      "source_location": "L915",
       "weight": 1.0
     },
     {
@@ -139245,5 +139245,5 @@
       "source_file": ".agents/skills/vercel-react-best-practices/rules/rendering-usetransition-loading.md"
     }
   ],
-  "built_at_commit": "95f8e464f1dc6db3734b1b94d7284cca9746a9e4"
+  "built_at_commit": "5063ed9a48629a498b86b2ae7f19b1593384906e"
 }
