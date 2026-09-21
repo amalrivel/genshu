@@ -17,8 +17,10 @@ import {
   Send,
   FileText,
   UserCheck,
+  ArrowLeft,
+  Clock,
 } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Table } from "@/components/ui/table"
 import { Textarea } from "@/components/ui/textarea"
@@ -35,8 +37,12 @@ import {
 import { Breadcrumbs } from "@/components/layout/breadcrumbs"
 import { FuriganaText } from "@/components/ui/furigana-text"
 import { StudentProfileDrawer } from "@/components/student-profile-drawer"
+import { PageHeader, PageShell, SectionHeader } from "@/components/layout/page-frame"
+import { EmptyState } from "@/components/ui/empty-state"
+import { DestructiveConfirmDialog } from "@/components/ui/destructive-confirm-dialog"
 import { useData } from "@/lib/data-context"
 import { type AssignmentSubmission, type User } from "@/lib/mock-data"
+import { cn } from "@/lib/utils"
 
 export default function AssignmentDetailPage() {
   const params = useParams()
@@ -86,6 +92,9 @@ export default function AssignmentDetailPage() {
   const [submitSuccess, setSubmitSuccess] = React.useState(false)
   const [confirmSubmitModal, setConfirmSubmitModal] = React.useState(false)
 
+  // Destructive delete dialog state
+  const [deleteConfirmModal, setDeleteConfirmModal] = React.useState(false)
+
   // Teacher grading modal state
   const [selectedSubForGrading, setSelectedSubForGrading] = React.useState<{
     student: User
@@ -102,16 +111,22 @@ export default function AssignmentDetailPage() {
 
   if (!assignment) {
     return (
-      <div className="mx-auto w-full max-w-4xl px-4 py-16 text-center space-y-4">
-        <AlertCircle className="h-12 w-12 text-destructive mx-auto" />
-        <h2 className="text-xl font-bold">{t("notFoundTitle")}</h2>
-        <p className="text-sm text-muted-foreground">{t("notFoundDesc")}</p>
-        <Link href="/assignments">
-          <Button variant="outline" className="gap-2">
-            {t("backToList")}
-          </Button>
-        </Link>
-      </div>
+      <PageShell>
+        <EmptyState
+          icon={<AlertCircle className="size-5 text-destructive" />}
+          title={t("notFoundTitle")}
+          description={t("notFoundDesc")}
+          action={
+            <Link
+              href="/assignments"
+              className={cn(buttonVariants({ variant: "outline" }), "gap-2")}
+            >
+              <ArrowLeft className="size-4" />
+              {t("backToList")}
+            </Link>
+          }
+        />
+      </PageShell>
     )
   }
 
@@ -143,11 +158,11 @@ export default function AssignmentDetailPage() {
     e.preventDefault()
     if (!selectedSubForGrading) return
     if (gradeScore < 0 || gradeScore > assignment.maxScore) {
-      setGradingError(`Nilai harus antara 0 dan ${assignment.maxScore}`)
+      setGradingError(t("errorScoreRange", { max: assignment.maxScore }))
       return
     }
     if (!gradeFeedback.trim()) {
-      setGradingError("Harap masukkan komentar umpan balik pembelajaran.")
+      setGradingError(t("errorFeedbackRequired"))
       return
     }
 
@@ -161,100 +176,98 @@ export default function AssignmentDetailPage() {
     setSelectedSubForGrading(null)
   }
 
-  const handleDeleteAssignment = () => {
-    if (confirm(t("deleteConfirm"))) {
-      deleteAssignment(assignment.id)
-      router.push("/assignments")
-    }
+  const handleConfirmDelete = () => {
+    deleteAssignment(assignment.id)
+    setDeleteConfirmModal(false)
+    router.push("/assignments")
   }
 
   return (
-    <div className="page-shell pb-24">
-      {/* Top Bar with Breadcrumbs & Actions */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <Breadcrumbs
-          items={[
-            { label: tNav("assignments"), href: "/assignments" },
-            { label: assignment.title },
-          ]}
-        />
+    <PageShell className="max-w-4xl pb-24">
+      {/* Breadcrumb Navigation */}
+      <Breadcrumbs
+        items={[
+          { label: tNav("assignments"), href: "/assignments" },
+          { label: assignment.title },
+        ]}
+      />
 
-        {canManage && (
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handleDeleteAssignment}
-            className="text-destructive hover:bg-destructive/10 text-xs self-start sm:self-auto gap-1.5"
-          >
-            <Trash2 className="h-3.5 w-3.5" />
-            <span>{t("deleteAssignment")}</span>
-          </Button>
-        )}
-      </div>
-
-      {/* Assignment Metadata Banner */}
-      <div className="rounded-2xl border border-border/80 bg-card p-6 sm:p-7 shadow-xs space-y-4">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="space-y-1.5">
-            <div className="flex items-center gap-2 flex-wrap">
-              <Badge variant="outline" className="font-mono text-xs">
-                {assignment.targetLevel}
-              </Badge>
-              {cohort && (
-                <Link href={`/cohorts/${cohort.id}`}>
-                  <Badge variant="secondary" className="font-mono text-xs hover:bg-secondary/80">
-                    {cohort.code} — {cohort.name}
-                  </Badge>
-                </Link>
-              )}
-            </div>
-            <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight">
-              {assignment.title}
-            </h1>
-            <p className="text-xs text-muted-foreground">
-              {assignment.description}
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 text-xs shrink-0">
-            <div className="rounded-lg bg-muted/60 p-3 text-center min-w-[110px]">
-              <span className="block text-[0.68rem] text-muted-foreground">{t("dueCountdown", { date: "" })}</span>
-              <span className="font-bold text-foreground">{assignment.dueDate}</span>
-            </div>
-            <div className="rounded-lg bg-muted/60 p-3 text-center min-w-[110px]">
-              <span className="block text-[0.68rem] text-muted-foreground">{t("maxScoreLabel", { score: "" })}</span>
-              <span className="font-bold text-foreground">{assignment.maxScore} pts (Pass {assignment.passScore})</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Page Header */}
+      <PageHeader
+        eyebrow={
+          <span className="flex flex-wrap items-center gap-2">
+            <Badge variant="outline" className="font-mono text-xs">
+              {assignment.targetLevel}
+            </Badge>
+            {cohort && (
+              <Link href={`/cohorts/${cohort.id}`}>
+                <Badge variant="secondary" className="font-mono text-xs hover:bg-secondary/80 cursor-pointer">
+                  {cohort.code} — {cohort.name}
+                </Badge>
+              </Link>
+            )}
+          </span>
+        }
+        title={assignment.title}
+        description={assignment.description}
+        metadata={
+          <>
+            <span className="flex items-center gap-1">
+              <Clock className="size-3.5" />
+              {t("dueCountdown", { date: assignment.dueDate })}
+            </span>
+            <span>{t("maxScoreLabel", { score: assignment.maxScore })}</span>
+            <span>{t("passScoreLabel", { score: assignment.passScore })}</span>
+          </>
+        }
+        action={
+          canManage ? (
+            <Button
+              type="button"
+              variant="destructive"
+              size="sm"
+              onClick={() => setDeleteConfirmModal(true)}
+              className="gap-1.5 text-xs shadow-xs"
+            >
+              <Trash2 className="size-3.5" />
+              <span>{t("deleteAssignment")}</span>
+            </Button>
+          ) : undefined
+        }
+      />
 
       {/* Japanese Prompt Card (With Furigana & Translation Toggles) */}
       <Card className="border-border/80 shadow-xs">
         <CardHeader className="pb-3 border-b border-border/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <CardTitle className="text-sm font-semibold flex items-center gap-2">
-            <BookOpen className="h-4 w-4 text-primary" />
+            <BookOpen className="size-4 text-primary" />
             <span>{t("promptTitle")}</span>
           </CardTitle>
 
           <div className="flex items-center gap-2">
             <Button
+              type="button"
               variant={showFurigana ? "secondary" : "outline"}
               size="xs"
+              aria-pressed={showFurigana}
               onClick={() => setShowFurigana(!showFurigana)}
               className="text-xs gap-1.5 h-7"
+              title={t("furiganaTooltip")}
             >
-              {showFurigana ? <Eye className="h-3 w-3" /> : <EyeOff className="h-3 w-3" />}
+              {showFurigana ? <Eye className="size-3.5" /> : <EyeOff className="size-3.5" />}
               <span>{t("furiganaToggle", { status: showFurigana ? t("on") : t("off") })}</span>
             </Button>
 
             <Button
+              type="button"
               variant={showTranslation ? "secondary" : "outline"}
               size="xs"
+              aria-pressed={showTranslation}
               onClick={() => setShowTranslation(!showTranslation)}
               className="text-xs gap-1.5 h-7"
+              title={t("translationTooltip")}
             >
-              <Languages className="h-3 w-3" />
+              <Languages className="size-3.5" />
               <span>{t("translationToggle", { status: showTranslation ? t("shown") : t("hidden") })}</span>
             </Button>
           </div>
@@ -267,9 +280,9 @@ export default function AssignmentDetailPage() {
 
           {showTranslation && assignment.description && (
             <div className="rounded-lg bg-blue-50/50 dark:bg-blue-950/20 p-3 text-xs text-blue-800 dark:text-blue-300 border border-blue-500/20 flex items-start gap-2">
-              <Languages className="h-4 w-4 shrink-0 mt-0.5" />
+              <Languages className="size-4 shrink-0 mt-0.5" />
               <div>
-                <span className="font-semibold block mb-0.5">Terjemahan & Panduan Instruksi:</span>
+                <span className="font-semibold block mb-0.5">{t("translationTitle")}</span>
                 <span>{assignment.description}</span>
               </div>
             </div>
@@ -281,8 +294,8 @@ export default function AssignmentDetailPage() {
       {currentRole === "GAKUSEI" && (
         <div className="space-y-6">
           {submitSuccess && (
-            <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/20 p-4 text-xs text-emerald-700 dark:text-emerald-300 flex items-center gap-2 font-medium">
-              <CheckCircle2 className="h-4 w-4 shrink-0" />
+            <div role="status" aria-live="polite" className="rounded-xl bg-emerald-500/10 border border-emerald-500/20 p-4 text-xs text-emerald-700 dark:text-emerald-300 flex items-center gap-2 font-medium">
+              <CheckCircle2 className="size-4 shrink-0" />
               <span>{t("submitSuccess")}</span>
             </div>
           )}
@@ -293,16 +306,16 @@ export default function AssignmentDetailPage() {
               <CardHeader className="pb-3 border-b border-emerald-500/20">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Award className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+                    <Award className="size-5 text-emerald-600 dark:text-emerald-400" />
                     <CardTitle className="text-base font-bold text-emerald-800 dark:text-emerald-300">
                       {t("evaluationTitle")}
                     </CardTitle>
                   </div>
                   <Badge
                     variant={studentSub.score! >= assignment.passScore ? "success" : "warning"}
-                    className="text-xs px-2.5 py-0.5 font-bold"
+                    className="text-xs px-2.5 py-0.5 font-bold font-mono"
                   >
-                    {studentSub.score} / {assignment.maxScore} pts
+                    {t("scoreInline", { score: studentSub.score || 0, max: assignment.maxScore })}
                   </Badge>
                 </div>
               </CardHeader>
@@ -330,7 +343,7 @@ export default function AssignmentDetailPage() {
               <CardHeader className="pb-3 border-b border-border/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                    <CheckCircle2 className="size-4 text-emerald-600 dark:text-emerald-400" />
                     <CardTitle className="text-sm font-semibold">{t("statusSubmitted")}</CardTitle>
                   </div>
                   <CardDescription className="text-xs mt-0.5">
@@ -340,12 +353,13 @@ export default function AssignmentDetailPage() {
 
                 {studentSub.status !== "GRADED" && (
                   <Button
+                    type="button"
                     variant="outline"
                     size="xs"
                     onClick={() => setIsEditing(true)}
                     className="gap-1.5 text-xs self-start sm:self-auto"
                   >
-                    <Edit3 className="h-3 w-3" />
+                    <Edit3 className="size-3" />
                     <span>{t("editSubmission")}</span>
                   </Button>
                 )}
@@ -381,6 +395,8 @@ export default function AssignmentDetailPage() {
 
               <CardContent className="pt-4 space-y-4">
                 <Textarea
+                  id="student-composition-textarea"
+                  aria-label={t("submissionWorkspace")}
                   rows={9}
                   value={compositionText}
                   onChange={(e) => setCompositionText(e.target.value)}
@@ -391,6 +407,7 @@ export default function AssignmentDetailPage() {
                 <div className="flex items-center justify-between pt-2">
                   {isEditing && (
                     <Button
+                      type="button"
                       variant="ghost"
                       size="sm"
                       onClick={() => {
@@ -404,13 +421,14 @@ export default function AssignmentDetailPage() {
                   )}
                   <div className="ml-auto flex items-center gap-2">
                     <Button
+                      type="button"
                       variant="default"
                       size="sm"
                       disabled={compositionText.trim().length === 0}
                       onClick={() => setConfirmSubmitModal(true)}
                       className="gap-2 shadow-xs"
                     >
-                      <Send className="h-3.5 w-3.5" />
+                      <Send className="size-3.5" />
                       <span>{t("submitAssignment")}</span>
                     </Button>
                   </div>
@@ -424,23 +442,19 @@ export default function AssignmentDetailPage() {
       {/* TEACHER / COORDINATOR VIEW: SUBMISSION ROSTER & GRADING */}
       {canManage && (
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-base font-bold tracking-tight">
-                {t("rosterTitle", { submitted: allSubmissions.length, total: cohortStudents.length })}
-              </h2>
-              <p className="text-xs text-muted-foreground">{t("rosterHint")}</p>
-            </div>
-          </div>
+          <SectionHeader
+            title={t("rosterTitle", { submitted: allSubmissions.length, total: cohortStudents.length })}
+            description={t("rosterHint")}
+          />
 
           <div className="rounded-xl border border-border/80 bg-card overflow-hidden shadow-xs">
             <div className="overflow-x-auto">
               <Table className="text-xs">
                 <thead className="border-b border-border/60 bg-muted/40 font-semibold text-muted-foreground">
                   <tr>
-                    <th className="py-3 px-4">{t("colStudent")}</th>
-                    <th className="py-3 px-4">{t("colStatus")}</th>
-                    <th className="py-3 px-4 hidden sm:table-cell">{t("colSubmittedAt")}</th>
+                    <th className="py-3 px-4 text-left">{t("colStudent")}</th>
+                    <th className="py-3 px-4 text-left">{t("colStatus")}</th>
+                    <th className="py-3 px-4 text-left hidden sm:table-cell">{t("colSubmittedAt")}</th>
                     <th className="py-3 px-4 text-center">{t("colScore")}</th>
                     <th className="py-3 px-4 text-right">{t("colAction")}</th>
                   </tr>
@@ -454,7 +468,7 @@ export default function AssignmentDetailPage() {
                       <tr key={student.id} className="hover:bg-muted/30 transition-colors">
                         <td className="py-3 px-4">
                           <div className="flex items-center gap-2.5">
-                            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-bold text-[0.7rem] shrink-0">
+                            <div className="flex size-7 items-center justify-center rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-bold text-[0.7rem] shrink-0">
                               {student.name.substring(0, 2).toUpperCase()}
                             </div>
                             <div>
@@ -497,23 +511,27 @@ export default function AssignmentDetailPage() {
                         <td className="py-3 px-4 text-right">
                           <div className="flex items-center justify-end gap-1.5">
                             <Button
+                              type="button"
                               variant="ghost"
                               size="xs"
+                              aria-label={`${tCommon("viewProgress")}: ${student.name}`}
                               onClick={() => setDrilldownStudent(student)}
                               className="text-xs text-muted-foreground hover:text-foreground h-7 px-2 gap-1"
                             >
-                              <FileText className="h-3 w-3 text-indigo-500" />
+                              <FileText className="size-3 text-indigo-500" />
                               <span>{tCommon("viewProgress")}</span>
                             </Button>
 
                             {isSubmitted ? (
                               <Button
+                                type="button"
                                 size="xs"
                                 variant={sub.status === "GRADED" ? "outline" : "default"}
+                                aria-label={sub.status === "GRADED" ? t("reviewActionForStudent", { name: student.name }) : t("gradeActionForStudent", { name: student.name })}
                                 onClick={() => handleOpenGrading(student, sub)}
                                 className="text-xs h-7 px-2.5 gap-1 shadow-xs"
                               >
-                                <UserCheck className="h-3 w-3" />
+                                <UserCheck className="size-3" />
                                 <span>{sub.status === "GRADED" ? t("actionReview") : t("actionGrade")}</span>
                               </Button>
                             ) : null}
@@ -543,6 +561,7 @@ export default function AssignmentDetailPage() {
           </div>
           <DialogFooter className="pt-2">
             <Button
+              type="button"
               variant="outline"
               size="sm"
               onClick={() => setConfirmSubmitModal(false)}
@@ -550,6 +569,7 @@ export default function AssignmentDetailPage() {
               {tCommon("cancel")}
             </Button>
             <Button
+              type="button"
               size="sm"
               onClick={handleStudentSubmit}
             >
@@ -575,15 +595,15 @@ export default function AssignmentDetailPage() {
           {selectedSubForGrading && (
             <form onSubmit={handleSaveGrade} className="space-y-4 text-xs">
               {gradingError && (
-                <div className="rounded-lg bg-destructive/10 p-2.5 text-xs text-destructive border border-destructive/20">
+                <div role="alert" aria-live="polite" className="rounded-lg bg-destructive/10 p-2.5 text-xs text-destructive border border-destructive/20">
                   {gradingError}
                 </div>
               )}
 
               <div>
-                <label className="block font-semibold mb-1 text-muted-foreground">
+                <span className="block font-semibold mb-1 text-muted-foreground">
                   {t("studentComposition", { name: selectedSubForGrading.student.name })}
-                </label>
+                </span>
                 <div className="rounded-xl bg-muted/30 p-3.5 border border-border/60 max-h-48 overflow-y-auto text-xs leading-relaxed whitespace-pre-line font-sans">
                   {selectedSubForGrading.submission.content}
                 </div>
@@ -594,10 +614,12 @@ export default function AssignmentDetailPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-medium mb-1">
+                  <label htmlFor="grading-score-input" className="block font-medium mb-1">
                     {t("inputScore", { max: assignment.maxScore })}
                   </label>
                   <Input
+                    id="grading-score-input"
+                    name="score"
                     type="number"
                     min={0}
                     max={assignment.maxScore}
@@ -607,13 +629,17 @@ export default function AssignmentDetailPage() {
                   />
                 </div>
                 <div className="flex items-end pb-1 text-[0.72rem] text-muted-foreground">
-                  <span>Standar lulus: {assignment.passScore} poin</span>
+                  <span>{t("passScoreInline", { score: assignment.passScore })}</span>
                 </div>
               </div>
 
               <div>
-                <label className="block font-medium mb-1">{t("inputFeedback")}</label>
+                <label htmlFor="grading-feedback-input" className="block font-medium mb-1">
+                  {t("inputFeedback")}
+                </label>
                 <Textarea
+                  id="grading-feedback-input"
+                  name="feedback"
                   rows={4}
                   value={gradeFeedback}
                   onChange={(e) => setGradeFeedback(e.target.value)}
@@ -640,6 +666,18 @@ export default function AssignmentDetailPage() {
         </DialogContent>
       </Dialog>
 
+      {/* Destructive Assignment Deletion Dialog */}
+      <DestructiveConfirmDialog
+        open={deleteConfirmModal}
+        onOpenChange={setDeleteConfirmModal}
+        title={t("deleteDialogTitle")}
+        description={t("deleteDialogDesc", { title: assignment.title })}
+        confirmLabel={t("deleteConfirmAction")}
+        cancelLabel={tCommon("cancel")}
+        closeLabel={tCommon("close")}
+        onConfirm={handleConfirmDelete}
+      />
+
       {/* Student Profile Overview Drawer */}
       <StudentProfileDrawer
         student={drilldownStudent}
@@ -647,6 +685,6 @@ export default function AssignmentDetailPage() {
         open={!!drilldownStudent}
         onOpenChange={(open) => !open && setDrilldownStudent(null)}
       />
-    </div>
+    </PageShell>
   )
 }

@@ -15,7 +15,7 @@ import {
   Eye,
   EyeOff,
 } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { FuriganaText } from "@/components/ui/furigana-text"
@@ -26,8 +26,16 @@ import { cn } from "@/lib/utils"
 import { useTranslations } from "next-intl"
 import { Breadcrumbs } from "@/components/layout/breadcrumbs"
 
+const TOPIC_TRANSLATION_KEYS: Record<string, "topicVocab" | "topicGrammar" | "topicCulture" | "topicKanji"> = {
+  "語彙": "topicVocab",
+  "文法": "topicGrammar",
+  "文化・マナー": "topicCulture",
+  "漢字": "topicKanji",
+}
+
 export default function PracticePlayerPage() {
   const t = useTranslations("practicePlayer")
+  const tPractice = useTranslations("practice")
   const tNav = useTranslations("nav")
   const params = useParams()
   const practiceId = params.id as string
@@ -163,11 +171,12 @@ export default function PracticePlayerPage() {
           title={t("notFoundTitle")}
           description={t("notFoundDesc")}
           action={
-            <Link href="/practice">
-              <Button variant="outline" className="gap-2">
-                <ArrowLeft className="size-4" />
-                {t("backToList")}
-              </Button>
+            <Link
+              href="/practice"
+              className={cn(buttonVariants({ variant: "outline" }), "gap-2")}
+            >
+              <ArrowLeft className="size-4" />
+              {t("backToList")}
             </Link>
           }
         />
@@ -178,6 +187,9 @@ export default function PracticePlayerPage() {
   const currentQuestion = practiceSet.questions[currentIndex]
   const totalQuestions = practiceSet.questions.length
   const progressPercent = Math.round(((currentIndex + 1) / totalQuestions) * 100)
+  const localizedTopic = practiceSet.topic in TOPIC_TRANSLATION_KEYS
+    ? tPractice(TOPIC_TRANSLATION_KEYS[practiceSet.topic])
+    : practiceSet.topic
 
   // Check correctness of confirmed answer
   const isCurrentCorrect =
@@ -230,7 +242,7 @@ export default function PracticePlayerPage() {
         description={practiceSet.description || undefined}
         metadata={
           <>
-            <span>{t("topicLabel", { topic: practiceSet.topic })}</span>
+            <span>{t("topicLabel", { topic: localizedTopic })}</span>
             {!isFinished && (
               <span className="font-semibold text-primary">
                 {t("questionProgress", { current: currentIndex + 1, total: totalQuestions })}
@@ -273,7 +285,14 @@ export default function PracticePlayerPage() {
       {!isFinished ? (
         <div className="space-y-6">
           {/* Progress Bar */}
-          <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
+          <div
+            role="progressbar"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={progressPercent}
+            aria-label={t("questionProgress", { current: currentIndex + 1, total: totalQuestions })}
+            className="h-2 w-full rounded-full bg-muted overflow-hidden"
+          >
             <div
               className="h-full bg-primary transition-all duration-300 ease-out"
               style={{ width: `${progressPercent}%` }}
@@ -288,7 +307,7 @@ export default function PracticePlayerPage() {
                   {currentQuestion.type === "TRUE_FALSE" ? t("typeTrueFalse") : t("typeMultipleChoice")}
                 </Badge>
                 <span className="text-xs text-muted-foreground">
-                  {t("topicLabel", { topic: practiceSet.topic })}
+                  {t("topicLabel", { topic: localizedTopic })}
                 </span>
               </div>
 
@@ -333,6 +352,8 @@ export default function PracticePlayerPage() {
                   return (
                     <button
                       key={idx}
+                      type="button"
+                      aria-pressed={isSelected}
                       disabled={isAnswerConfirmed}
                       onClick={() => setSelectedOption(idx)}
                       className={cn(
@@ -463,10 +484,11 @@ export default function PracticePlayerPage() {
                   <RotateCcw className="h-4 w-4" />
                   {t("retryQuiz")}
                 </Button>
-                <Link href="/practice" className="w-full sm:w-auto">
-                  <Button variant="outline" className="w-full gap-2">
-                    {t("backToList")}
-                  </Button>
+                <Link
+                  href="/practice"
+                  className={cn(buttonVariants({ variant: "outline" }), "w-full sm:w-auto gap-2")}
+                >
+                  {t("backToList")}
                 </Link>
               </div>
             </div>
