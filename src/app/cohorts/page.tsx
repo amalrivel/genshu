@@ -86,23 +86,23 @@ export default function CohortsPage() {
   const handleCreateCohort = (e: React.FormEvent) => {
     e.preventDefault()
     if (!name.trim()) {
-      setFormError("コホート名を入力してください (Please enter cohort name)")
+      setFormError(t("errorNameRequired"))
       return
     }
     if (!code.trim()) {
-      setFormError("コホート識別コードを入力してください (Please enter cohort code)")
+      setFormError(t("errorCodeRequired"))
       return
     }
     // Check code uniqueness
     if (cohorts.some((c) => c.code.toLowerCase() === code.trim().toLowerCase())) {
-      setFormError("このコードは既に使用されています (This code is already in use)")
+      setFormError(t("errorCodeExists"))
       return
     }
 
     addCohort({
       name: name.trim(),
       code: code.trim().toUpperCase(),
-      description: description.trim() || "日本奨学金プログラム研修生コホート",
+      description: description.trim() || t("defaultDescription"),
       targetLevel,
       startDate: startDate || new Date().toISOString().split("T")[0],
       endDate: endDate || "2026-12-31",
@@ -137,7 +137,8 @@ export default function CohortsPage() {
         }
       />
 
-      <section aria-label={t("statActiveCohorts")}>
+      <section aria-labelledby="cohort-metrics-title">
+        <h2 id="cohort-metrics-title" className="sr-only">{t("metricsLabel")}</h2>
         <div className="metric-strip grid-cols-1 divide-x-0 divide-y sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           <div className="metric-item">
             <p className="metric-label">{t("statActiveCohorts")}</p>
@@ -436,7 +437,7 @@ export default function CohortsPage() {
                 id="cohort-create-description"
                 name="description"
                 className="w-full min-h-[70px] rounded-md border border-input bg-transparent p-2 text-sm shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                placeholder="研修の目的や対象奨学生の概要を入力..."
+                placeholder={t("modalDescPlaceholder")}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />

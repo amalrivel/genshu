@@ -302,6 +302,7 @@
     "statActiveCohorts": "進行中のコホート",
     "statTotalStudents": "受講生総数",
     "statTotalTeachers": "指導講師総数",
+    "metricsLabel": "コホート概要",
     "filterAll": "すべてのステータス",
     "filterStatus": "ステータス絞り込み",
     "statusActive": "進行中 (Active)",
@@ -327,11 +328,16 @@
     "modalCodePlaceholder": "例: KNS-2027-01",
     "modalDescField": "説明・概要",
     "modalDescLabel": "プログラム概要",
+    "modalDescPlaceholder": "研修の目的や対象奨学生の概要を入力...",
     "modalLevel": "目標JLPTレベル",
     "modalTargetLevel": "目標JLPTレベル",
     "modalStartDate": "開始日 *",
     "modalEndDate": "終了予定日",
-    "modalSubmit": "コホートを作成"
+    "modalSubmit": "コホートを作成",
+    "errorNameRequired": "コホート名を入力してください",
+    "errorCodeRequired": "コホートコードを入力してください",
+    "errorCodeExists": "このコードは既に使用されています",
+    "defaultDescription": "日本奨学金プログラム研修生コホート"
   },
   "cohortDetail": {
     "backToList": "コホート一覧に戻る",

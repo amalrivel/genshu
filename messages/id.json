@@ -302,6 +302,7 @@
     "statActiveCohorts": "Kohort Aktif",
     "statTotalStudents": "Total Siswa Terdaftar",
     "statTotalTeachers": "Total Pengajar",
+    "metricsLabel": "Ringkasan kohort",
     "filterAll": "Semua Status",
     "filterStatus": "Status Kohort",
     "statusActive": "Sedang Berjalan (Active)",
@@ -327,6 +328,7 @@
     "modalCodePlaceholder": "Contoh: KNS-2027-01",
     "modalDescField": "Deskripsi Program",
     "modalDescLabel": "Deskripsi Program",
+    "modalDescPlaceholder": "Masukkan tujuan pelatihan atau ringkasan peserta beasiswa...",
     "modalLevel": "Target Level JLPT",
     "modalTargetLevel": "Target Level JLPT",
     "modalStartDate": "Tanggal Mulai *",
@@ -334,7 +336,8 @@
     "modalSubmit": "Simpan Kohort",
     "errorNameRequired": "Nama kohort harus diisi",
     "errorCodeRequired": "Kode kohort harus diisi",
-    "errorCodeExists": "Kode ini sudah digunakan"
+    "errorCodeExists": "Kode ini sudah digunakan",
+    "defaultDescription": "Kohort peserta program beasiswa Jepang"
   },
   "cohortDetail": {
     "backToList": "Kembali ke Daftar Kohort",
