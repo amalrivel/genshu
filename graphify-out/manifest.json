@@ -798,15 +798,15 @@
     "semantic_hash": "cb56bf002d36bb860c3d320a23bd871a"
   },
   "messages/id.json": {
-    "mtime": 1789975240.800522,
-    "seen": 1789975343.6791165,
-    "ast_hash": "7b06dc0f295fe69958a7e063fc0538a3",
+    "mtime": 1789977678.558997,
+    "seen": 1789977764.6380394,
+    "ast_hash": "af55d57ba4cb7a56958b6ba7f7f2dadb",
     "semantic_hash": ""
   },
   "messages/ja.json": {
-    "mtime": 1789975262.162564,
-    "seen": 1789975343.6791189,
-    "ast_hash": "e84ca56050b22bcabcea196af72d842b",
+    "mtime": 1789977678.6272075,
+    "seen": 1789977764.6380405,
+    "ast_hash": "a3be6e0c4cee8bf2a6fdcfec1f60a2bb",
     "semantic_hash": ""
   },
   "src/app/assignments/[id]/page.tsx": {
@@ -852,9 +852,9 @@
     "semantic_hash": ""
   },
   "src/app/practice/page.tsx": {
-    "mtime": 1789878512.117188,
-    "seen": 1789878865.311081,
-    "ast_hash": "67df51eb90da5f09f5c2e27a2b60d3c5",
+    "mtime": 1789977257.947806,
+    "seen": 1789977555.8074064,
+    "ast_hash": "df7ede4d459899e4faf6490988f7d14e",
     "semantic_hash": ""
   },
   "src/components/language-toggle.tsx": {

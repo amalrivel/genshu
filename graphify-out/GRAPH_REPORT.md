@@ -1,21 +1,21 @@
 # Graph Report - genshu  (2026-09-21)
 
 ## Corpus Check
-- 355 files · ~527,644 words
+- 355 files · ~528,147 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 4735 nodes · 7281 edges · 386 communities (279 shown, 107 thin omitted)
+- 4741 nodes · 7293 edges · 386 communities (278 shown, 108 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 116 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `62a42d7d`
+- Built from commit: `b9d8199e`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- assignments/[id]/page.tsx
+- cohorts/[id]/page.tsx
 - package.json
 - components.json
 - compilerOptions
@@ -107,11 +107,11 @@
 - Vercel Logo
 - Window Icon
 - Genshu README
-- cohorts/[id]/page.tsx
+- cohort-status-badge.tsx
 - request.ts
 - generate_design_system
-- connectSSE
-- initGlobalBar
+- resumeSession
+- setLiveState
 - validate_data.py
 - initPageChat
 - modern-screenshot.umd.js
@@ -122,7 +122,7 @@
 - brandkit/SKILL.md
 - slide_search_core.py
 - Tailwind CSS Utility Reference
-- applyEditing
+- initGlobalBar
 - Brand Guidelines v1.0
 - scripts/core.py
 - Genshu AI Development Playbook
@@ -139,14 +139,14 @@
 - search_stack
 - Typography Specifications
 - High-Agency Frontend Skill
-- mountSvelteComponentVariant
+- connectSSE
 - Logo Usage Rules
 - Component Specifications
 - html-token-validator.py
 - live.md
 - shadcn/ui Accessibility Patterns
 - TestTailwindConfigGenerator
-- impeccable/SKILL.md
+- new-work.md
 - Animation Standards Reference
 - logo/core.py
 - design_system.py
@@ -172,9 +172,9 @@
 - spacing
 - The Fixes
 - TailwindConfigGenerator
-- test_data_contracts.py
+- split_values
 - generate-slide.py
-- Operate mode depth (and Read notes)
+- impeccable/SKILL.md
 - The Toolkit
 - Prototyping Variants
 - Routing by Task Type
@@ -216,8 +216,8 @@
 - Copywriting Formulas
 - Design System: Taste Standard
 - detect_domain
-- attendance/[id]/page.tsx
-- _palette_is_dark
+- exams/[id]/page.tsx
+- _select_palette_for_mode
 - Banner Design - Multi-Format Creative Banner System
 - Messaging Framework
 - Brand Voice Framework
@@ -229,7 +229,7 @@
 - 2. THE COMBINATORIAL VARIATION ENGINE
 - New visual work
 - optimize.md
-- claimAndActOnAgentTarget
+- actOnAgentTarget
 - Layout Patterns
 - test_tailwind_config_gen.py
 - Working With Sonner
@@ -238,7 +238,7 @@
 - Token Architecture
 - design-tokens-starter.json
 - document.md
-- parse_decision_rules
+- read_rows
 - Primitive Tokens
 - validate-tokens.cjs
 - card
@@ -256,7 +256,7 @@
 - clarify.md
 - Nielsen's 10 Heuristics
 - Generate Combined Critique Report
-- users/page.tsx
+- practice/page.tsx
 - polish.md
 - quieter.md
 - The list
@@ -278,7 +278,7 @@
 - ._base_config
 - .generate
 - devDependencies
-- generate.md
+- scheduleAcceptCleanup
 - sync-brand-to-tokens.cjs
 - _run
 - Design Engineering
@@ -286,18 +286,18 @@
 - 18. EXTRA CREATIVITY & IMPLEMENTATION EDGE
 - Common Cognitive Load Violations
 - iOS platform
-- _select_palette_for_mode
+- syncEditBadgeHitProxies
 - Shape
 - input
 - 9. AI TELLS (Forbidden Patterns)
 - Component Building Principles
 - 12. THE COMBINATORIAL VARIATION ENGINE
 - 8. ANTI-AI-SLOP RULES
-- Adaptation Strategies
+- adapt.native.md
 - Android platform
-- Diagnostic Scan
+- Operate mode depth (and Read notes)
 - Persona-Based Design Testing
-- doctor.md
+- colorize.md
 - Extract Flow
 - _row_identities
 - Slides Reference
@@ -358,7 +358,7 @@
 - 20. EXAMPLE INTERPRETATIONS
 - Heuristics Scoring Guide
 - Diagnostic Scan
-- Command guidance
+- TestLandingAndStackContract
 - test_sync_brand_to_tokens.py
 - 16
 - 1
@@ -421,10 +421,10 @@
   .agents/skills/ui-ux-pro-max/scripts/tests/test_core.py → .agents/skills/design/scripts/cip/core.py
 - `enableInlineEdit()` --indirect_call--> `own()`  [INFERRED]
   .agents/skills/impeccable/scripts/live-browser.js → .agents/skills/impeccable/scripts/live-browser-dom.js
-- `layoutFlowChildren()` --indirect_call--> `pickable()`  [INFERRED]
-  .agents/skills/impeccable/scripts/live-browser.js → .agents/skills/impeccable/scripts/live-browser-dom.js
 - `TestShadcnInstaller` --uses--> `ShadcnInstaller`  [INFERRED]
   .agents/skills/ui-styling/scripts/tests/test_shadcn_add.py → .agents/skills/ui-styling/scripts/shadcn_add.py
+- `TestGeneratedConfigIsValidJs` --uses--> `TailwindConfigGenerator`  [INFERRED]
+  .agents/skills/ui-styling/scripts/tests/test_tailwind_config_gen.py → .agents/skills/ui-styling/scripts/tailwind_config_gen.py
 
 ## Import Cycles
 - None detected.
@@ -435,11 +435,11 @@
 - **Derived Dependency Minimization** — agents_skills_vercel_react_best_practices_rules_rerender_dependencies_narrow_effect_dependencies, agents_skills_vercel_react_best_practices_rules_rerender_derived_state_no_effect_calculate_derived_state, agents_skills_vercel_react_best_practices_rules_rerender_derived_state_subscribe_to_derived_state, agents_skills_vercel_react_best_practices_rules_rerender_split_combined_hooks_split_hook_computations [INFERRED 0.85]
 - **React Concurrent Rendering Responsiveness** — agents_skills_vercel_react_best_practices_rules_rendering_usetransition_loading_use_transition_loading, agents_skills_vercel_react_best_practices_rules_rerender_transitions_transitions_for_non_urgent_updates, agents_skills_vercel_react_best_practices_rules_rerender_use_deferred_value_use_deferred_value [INFERRED 0.85]
 
-## Communities (386 total, 107 thin omitted)
+## Communities (386 total, 108 thin omitted)
 
-### Community 0 - "assignments/[id]/page.tsx"
-Cohesion: 0.23
-Nodes (20): react, PERIOD_VALUES, Card(), CardContent(), CardDescription(), CardHeader(), CardTitle(), DestructiveConfirmDialogProps (+12 more)
+### Community 0 - "cohorts/[id]/page.tsx"
+Cohesion: 0.16
+Nodes (25): PERIOD_VALUES, CohortTab, cohortTabs, DestructiveAction, Card(), CardContent(), CardDescription(), CardHeader() (+17 more)
 
 ### Community 1 - "package.json"
 Cohesion: 0.10
@@ -454,12 +454,12 @@ Cohesion: 0.11
 Nodes (18): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+10 more)
 
 ### Community 4 - "app-header.tsx"
-Cohesion: 0.09
-Nodes (19): cn, next-themes, metadata, LanguageToggle(), AppHeader(), managementItems, NavItem, primaryItems (+11 more)
+Cohesion: 0.08
+Nodes (25): class-variance-authority, cn, lucide-react, next-intl, next-themes, metadata, LanguageToggle(), AppHeader() (+17 more)
 
 ### Community 5 - "data-context.tsx"
-Cohesion: 0.12
-Nodes (32): DataContext, DataContextType, DataProvider(), getRoleServerSnapshot(), getRoleSnapshot(), notifyRoleListeners(), roleListeners, subscribeRole() (+24 more)
+Cohesion: 0.10
+Nodes (38): CohortMembers, CohortRosterPanels(), CohortRosterPanelsProps, Translation, StudentProfileDrawerProps, DataContext, DataContextType, DataProvider() (+30 more)
 
 ### Community 6 - "dependencies"
 Cohesion: 0.17
@@ -467,7 +467,7 @@ Nodes (12): dependencies, @base-ui/react, class-variance-authority, cn, lucide-r
 
 ### Community 7 - "live-browser.js"
 Cohesion: 0.03
-Nodes (126): applyGlobalBarLabelState(), applyLiveBarPreference(), applyParamDefaults(), applyParamValue(), applyPlaceholderSizingStyles(), averageRgb01(), bindEditBadgeProxy(), bufferToBase64() (+118 more)
+Nodes (136): addManualContextText(), applyPlaceholderSizingStyles(), averageRgb01(), bufferToBase64(), buildCollapsible(), buildColorModels(), buildListHtml(), buildRadiiModels() (+128 more)
 
 ### Community 8 - "Narrow Effect Dependencies"
 Cohesion: 0.33
@@ -505,41 +505,41 @@ Nodes (3): Early Return from Functions, Early Length Check for Array Comparisons
 Cohesion: 0.67
 Nodes (3): Use React DOM Resource Hints, React DOM Resource Preloading APIs, Use defer or async on Script Tags
 
-### Community 92 - "cohorts/[id]/page.tsx"
-Cohesion: 0.14
-Nodes (17): class-variance-authority, CohortDetailContent(), CohortTab, cohortTabs, DestructiveAction, isCohortTab(), CohortStatusBadge(), CohortStatusBadgeProps (+9 more)
+### Community 92 - "cohort-status-badge.tsx"
+Cohesion: 0.67
+Nodes (3): CohortStatusBadge(), CohortStatusBadgeProps, CohortStatus
 
 ### Community 93 - "request.ts"
 Cohesion: 0.50
 Nodes (3): defaultLocale, Locale, locales
 
 ### Community 94 - "generate_design_system"
-Cohesion: 0.22
-Nodes (6): generate_design_system(), Main entry point for design system generation. Args: query: Search query (e.g.,…, format_output(), UI/UX Pro Max Search - BM25 search engine for UI/UX style guides Usage: python…, Format results for Claude consumption (token-optimized), TestPersistence
+Cohesion: 0.18
+Nodes (8): format_markdown(), generate_design_system(), Format design system as markdown., Main entry point for design system generation. Args: query: Search query (e.g.,…, format_output(), UI/UX Pro Max Search - BM25 search engine for UI/UX style guides Usage: python…, Format results for Claude consumption (token-optimized), TestPersistence
 
-### Community 95 - "connectSSE"
+### Community 95 - "resumeSession"
 Cohesion: 0.06
-Nodes (103): abandonForeignSession(), abandonSupersededGo(), abortSvelteComponentInjection(), applySavedSessionMeta(), buildInsertPlaceholderSnapshotFromDom(), buildPickedAnchorSnapshot(), captureAndEmit(), checkpointPayload() (+95 more)
+Nodes (77): applyParamDefaults(), applyParamValue(), applySavedSessionMeta(), buildCyclingRow(), buildParamsPanel(), clampVariantIndex(), clearHandled(), closedClipPath() (+69 more)
 
-### Community 96 - "initGlobalBar"
-Cohesion: 0.06
-Nodes (75): actOnAgentTarget(), agentStatusText(), barPaletteForTheme(), beginNewLiveConfiguration(), brandMarkSvg(), buildParamsPanel(), cancelEditing(), cancelEditingToPicking() (+67 more)
+### Community 96 - "setLiveState"
+Cohesion: 0.10
+Nodes (58): applyEditing(), beginNewLiveConfiguration(), buildInsertPlaceholderSnapshotFromDom(), buildLocatorForLeaf(), buildPickedAnchorSnapshot(), cancelEditing(), cancelEditingToPicking(), cancelInsertConfigure() (+50 more)
 
 ### Community 97 - "validate_data.py"
-Cohesion: 0.07
-Nodes (48): Semantic quality contracts for the core UI/UX datasets., read_rows(), TestAccessibilityGuidance, TestChartsTypographyAndIcons, TestCurrentReactGuidance, TestSemanticColors, _catalog_date(), _check_app_interface_contract() (+40 more)
+Cohesion: 0.10
+Nodes (42): Semantic quality contracts for the core UI/UX datasets., _catalog_date(), _check_app_interface_contract(), _check_catalog_contract(), _check_catalog_summary(), _check_chart_contract(), _check_color_contract(), _check_core_data_contract() (+34 more)
 
 ### Community 98 - "initPageChat"
-Cohesion: 0.07
-Nodes (57): agentHasWorkInFlight(), armPageChatForTyping(), attachSteerFocusDebug(), attachSteerFocusGuard(), buildSteerProcessingDots(), buildSteerQueueHint(), clearSteerAwaitTimer(), clearSteerFocusRecoverTimer() (+49 more)
+Cohesion: 0.08
+Nodes (50): armPageChatForTyping(), attachSteerFocusDebug(), attachSteerFocusGuard(), buildSteerProcessingDots(), buildSteerQueueHint(), clearSteerAwaitTimer(), clearSteerFocusRecoverTimer(), collapsePageChat() (+42 more)
 
 ### Community 99 - "modern-screenshot.umd.js"
 Cohesion: 0.09
 Nodes (55): ae(), be(), bt(), Ce(), s(), Ct(), de(), dt() (+47 more)
 
 ### Community 100 - "el"
-Cohesion: 0.07
-Nodes (56): actionLabel(), applyConfigureBarChrome(), bindConfigureCountPillTooltip(), bindConfigureInlineControlHover(), bindConfigureModifierPillHover(), buildConfigureActionControl(), buildConfigureCountControl(), buildConfigureRow() (+48 more)
+Cohesion: 0.08
+Nodes (50): actionLabel(), applyConfigureBarChrome(), bindConfigureCountPillTooltip(), bindConfigureInlineControlHover(), bindConfigureModifierPillHover(), buildConfigureActionControl(), buildConfigureCountControl(), buildConfigureRow() (+42 more)
 
 ### Community 101 - "search"
 Cohesion: 0.06
@@ -565,17 +565,17 @@ Nodes (38): format_context(), format_result(), main(), Format a single search re
 Cohesion: 0.05
 Nodes (43): Arbitrary Values, Aspect Ratio, Background Colors, Border Color, Border Radius, Border Style, Border Width, Borders (+35 more)
 
-### Community 107 - "applyEditing"
-Cohesion: 0.06
-Nodes (42): addManualContextText(), applyEditing(), buildLocatorForLeaf(), canRestoreManualEditElement(), collectEditableTextRows(), visit(), collectManualContextPieces(), walk() (+34 more)
+### Community 107 - "initGlobalBar"
+Cohesion: 0.10
+Nodes (32): agentHasWorkInFlight(), agentStatusText(), applyGlobalBarLabelState(), applyLiveBarPreference(), barPaletteForTheme(), brandMarkSvg(), buildDesignHeader(), designPanelCss() (+24 more)
 
 ### Community 108 - "Brand Guidelines v1.0"
 Cohesion: 0.05
 Nodes (37): 1. Color Palette, 2. Typography, 3. Logo Usage, 4. Voice & Tone, 5. Imagery Guidelines, 6. Design Components, Accessibility, AI Image Generation (+29 more)
 
 ### Community 109 - "scripts/core.py"
-Cohesion: 0.09
-Nodes (35): _contains_phrase(), _domain_keywords(), _exact_match_diagnostic(), _file_signature(), _get_bm25(), _legacy_successor_guidance(), _load_csv(), _load_csv_snapshot() (+27 more)
+Cohesion: 0.10
+Nodes (33): _contains_phrase(), _domain_keywords(), _exact_match_diagnostic(), _file_signature(), _get_bm25(), _legacy_successor_guidance(), _load_csv(), _load_csv_snapshot() (+25 more)
 
 ### Community 110 - "Genshu AI Development Playbook"
 Cohesion: 0.05
@@ -618,12 +618,12 @@ Cohesion: 0.06
 Nodes (32): 1. Mobile-First Design, 2. Consistent Breakpoint Usage, 3. Test at Breakpoint Boundaries, 4. Use Container for Content Width, 5. Progressive Enhancement, 6. Avoid Too Many Breakpoints, Best Practices, Breakpoint System (+24 more)
 
 ### Community 120 - "DesignSystemGenerator"
-Cohesion: 0.14
-Nodes (6): DesignSystemGenerator, Generates design system recommendations from aggregated searches., Load reasoning rules from CSV., Select best matching result based on priority keywords., TestReasoningMatch, TestReasoningContract
+Cohesion: 0.12
+Nodes (7): DesignSystemGenerator, Generates design system recommendations from aggregated searches., Load reasoning rules from CSV., TestReasoningMatch, read_rows(), TestGeneratedCatalogContract, TestReasoningContract
 
 ### Community 121 - "search_stack"
-Cohesion: 0.10
-Nodes (10): _exact_stack_identifier(), Resolve a standalone API identifier even when its BM25 IDF is low., Search stack-specific guidelines, search_stack(), Freshness and migration contracts for native, desktop, and 3D stacks., _rows(), TestNativeDesktopStackFreshness, Freshness and generation-isolation contracts for web stack guidance. (+2 more)
+Cohesion: 0.09
+Nodes (11): _exact_stack_identifier(), Resolve a standalone API identifier even when its BM25 IDF is low., Search stack-specific guidelines, search_stack(), _valid_max_results(), Freshness and migration contracts for native, desktop, and 3D stacks., _rows(), TestNativeDesktopStackFreshness (+3 more)
 
 ### Community 122 - "Typography Specifications"
 Cohesion: 0.06
@@ -633,9 +633,9 @@ Nodes (30): Accessibility, Base System, Best Practices, Clean & Modern, Common F
 Cohesion: 0.06
 Nodes (30): 10. FINAL PRE-FLIGHT CHECK, 1. ACTIVE BASELINE CONFIGURATION, 2. DEFAULT ARCHITECTURE & CONVENTIONS, 3. DESIGN ENGINEERING DIRECTIVES (Bias Correction), 4. CREATIVE PROACTIVITY (Anti-Slop Implementation), 5. PERFORMANCE GUARDRAILS, 6. TECHNICAL REFERENCE (Dial Definitions), 7. AI TELLS (Forbidden Patterns) (+22 more)
 
-### Community 124 - "mountSvelteComponentVariant"
-Cohesion: 0.10
-Nodes (31): acceptedDomAlreadyClean(), applyOriginalAttrsToSvelteAnchor(), clearHandledWrapperReloadStamp(), commitAcceptedSvelteComponentToDom(), componentModuleCandidates(), deferredRecoverySuperseded(), describeMountFailure(), detectDevServerBase() (+23 more)
+### Community 124 - "connectSSE"
+Cohesion: 0.07
+Nodes (59): abandonForeignSession(), abandonSupersededGo(), abortSvelteComponentInjection(), applyOriginalAttrsToSvelteAnchor(), cleanup(), clearMountErrorCard(), clearScrollY(), clearSession() (+51 more)
 
 ### Community 125 - "Logo Usage Rules"
 Cohesion: 0.07
@@ -650,8 +650,8 @@ Cohesion: 0.12
 Nodes (25): get_context(), is_allowed_exception(), is_allowed_rgba(), is_inside_block(), load_css_variables(), main(), print_result(), print_summary() (+17 more)
 
 ### Community 128 - "live.md"
-Cohesion: 0.08
-Nodes (22): Apply at system scale, Audit before choosing, Choose a strategy, Contrast and perception, Live-mode signature params, Verify, Visitor mode, Cleanup (+14 more)
+Cohesion: 0.07
+Nodes (26): Step 1: Parse the request, Step 2: Reuse the page, then start, Step 3: Generate, Step 4: Accept and close, Cleanup, Exit, First-time setup, Handle `accept` (+18 more)
 
 ### Community 129 - "shadcn/ui Accessibility Patterns"
 Cohesion: 0.07
@@ -661,9 +661,9 @@ Nodes (28): Accordion, Alert, ARIA Labels, Checkbox and Radio, Color Contrast, C
 Cohesion: 0.07
 Nodes (15): Test adding custom fonts., Test adding custom breakpoints., Test TailwindConfigGenerator class., Test plugin recommendations., Test generating TypeScript configuration., Test generating JavaScript configuration., Test validating valid configuration., Test validating config with no content paths. (+7 more)
 
-### Community 131 - "impeccable/SKILL.md"
+### Community 131 - "new-work.md"
 Cohesion: 0.09
-Nodes (21): Assess Adaptation Challenge, Implement & Verify, Recommended Actions, Recommended Actions, Craft (deprecated alias), Apply, Live-mode signature params, Set the spatial thesis (+13 more)
+Nodes (21): Recommended Actions, Craft (deprecated alias), Monorepo notes, Opting out of the boot check, Step 1: Run the pass, Step 2: Act by severity, Step 3: Deprecated fields are binding, Step 4: Do not overclaim on truth drift (+13 more)
 
 ### Community 132 - "Animation Standards Reference"
 Cohesion: 0.07
@@ -674,8 +674,8 @@ Cohesion: 0.10
 Nodes (21): BM25, detect_domain(), _load_csv(), Load CSV and return list of dicts, Core search function using BM25, Auto-detect the most relevant domain from query, Main search function with auto-domain detection, Search across all domains and combine results (+13 more)
 
 ### Community 134 - "design_system.py"
-Cohesion: 0.10
-Nodes (26): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), _generate_intelligent_overrides(), hex_to_ansi() (+18 more)
+Cohesion: 0.07
+Nodes (35): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_master_md(), format_page_override_md(), _generate_intelligent_overrides(), hex_to_ansi(), persist_design_system() (+27 more)
 
 ### Community 135 - "Asset Approval Checklist"
 Cohesion: 0.08
@@ -714,16 +714,16 @@ Cohesion: 0.08
 Nodes (24): Accessibility Patterns, Alternative: Tailwind-Only Setup, Best Practices, Common Patterns, Component Layer: shadcn/ui, Component Library Guide, Component + Styling Setup, Core Stack (+16 more)
 
 ### Community 144 - "search"
-Cohesion: 0.13
-Nodes (6): Resolve a deprecated in-domain alias, or expose a cross-domain redirect., Main search function with auto-domain detection, search(), _style_search_destination(), TestSearchDomains, TestStyleTaxonomy
+Cohesion: 0.11
+Nodes (8): _project_row(), Resolve a deprecated in-domain alias, or expose a cross-domain redirect., Main search function with auto-domain detection, search(), _style_search_destination(), TestSearchDomains, read_rows(), TestStyleTaxonomy
 
 ### Community 145 - "Workflow"
 Cohesion: 0.08
 Nodes (23): Art Direction Styles (Reuse from Banner), Color & Contrast, Design Best Practices, HTML Design Rules, HTML Template Structure, Option A: Chrome Headless CLI (Recommended — zero dependencies), Option B: chrome-devtools skill, Option C: Playwright script (+15 more)
 
 ### Community 146 - "handleManualEditActivity"
-Cohesion: 0.19
-Nodes (24): clearStoredManualApplyState(), fetchPendingCount(), handleManualEditActivity(), hidePendingApplyDock(), manualApplyLoadingText(), manualApplyStateKey(), manualEditEventForCurrentPage(), numberOrNull() (+16 more)
+Cohesion: 0.15
+Nodes (28): clearStoredManualApplyState(), fetchPendingCount(), handleManualEditActivity(), hasTextRows(), hidePendingApplyDock(), manualApplyLoadingText(), manualApplyStateKey(), manualEditEventForCurrentPage() (+20 more)
 
 ### Community 147 - "Design System"
 Cohesion: 0.09
@@ -734,8 +734,8 @@ Cohesion: 0.09
 Nodes (22): Assess Onboarding Needs, Context Over Ceremony, Contextual Help, Design Onboarding Experiences, Documentation & Help, Empty State Design, Feature Discovery & Adoption, Guided Tours & Walkthroughs (+14 more)
 
 ### Community 149 - "onAnnotDown"
-Cohesion: 0.13
-Nodes (23): applyPlaceholderDimensions(), beginEditPin(), buildAnnotationsForCapture(), buildPinElement(), buildPlaceholderResizeHandles(), cancelEditingPin(), cursorForPlaceholderEdge(), finalizeEditingPin() (+15 more)
+Cohesion: 0.15
+Nodes (21): applyPlaceholderDimensions(), beginEditPin(), buildAnnotationsForCapture(), buildPinElement(), cancelEditingPin(), clampPlaceholderSize(), finalizeEditingPin(), initAnnotOverlay() (+13 more)
 
 ### Community 150 - "Tailwind CSS Customization"
 Cohesion: 0.09
@@ -746,8 +746,8 @@ Cohesion: 0.09
 Nodes (22): 10. ARC and object lifetime, 11. Testing — Swift Testing by default, 12. Macros, 13. Logging and debugging, 14. Unsafe code and interop, 15. Modern syntax you should be using, 16. Migrating an existing codebase to Swift 6, 1. Model data with value types (+14 more)
 
 ### Community 152 - "useData"
-Cohesion: 0.14
-Nodes (14): AssignmentDetailPage(), AssignmentsPage(), SessionRollCallPage(), AttendancePage(), CohortsPage(), ExamDetailPage(), ExamsPage(), Home() (+6 more)
+Cohesion: 0.15
+Nodes (13): AssignmentDetailPage(), AssignmentsPage(), SessionRollCallPage(), AttendancePage(), CohortDetailContent(), isCohortTab(), CohortsPage(), ExamDetailPage() (+5 more)
 
 ### Community 153 - "Apple Design"
 Cohesion: 0.09
@@ -765,17 +765,17 @@ Nodes (21): 10. Status bar color doesn't match, 11. Right in Chrome, wrong on ph
 Cohesion: 0.09
 Nodes (12): Add custom font families. Args: fonts: Dict of font_type: [font_names] e.g.,…, Add custom spacing values. Args: spacing: Dict of name: value e.g., {'18':…, Add custom breakpoints. Args: breakpoints: Dict of name: width e.g., {'3xl':…, Add plugin requirements. Args: plugins: List of plugin names e.g.,…, Get plugin recommendations based on configuration. Returns: List of recommended…, Generate Tailwind CSS configuration files., Validate configuration. Returns: Tuple of (valid, message), Add custom colors to theme. Args: colors: Dict of color_name: color_value Value… (+4 more)
 
-### Community 157 - "test_data_contracts.py"
-Cohesion: 0.14
-Nodes (7): Cross-file semantic contracts for curated design data., read_rows(), split_values(), style_identities(), TestGeneratedCatalogContract, TestLandingAndStackContract, TestStyleIdentityContract
+### Community 157 - "split_values"
+Cohesion: 0.47
+Nodes (3): split_values(), style_identities(), TestStyleIdentityContract
 
 ### Community 158 - "generate-slide.py"
 Cohesion: 0.14
 Nodes (20): _e(), generate_chart_slide(), generate_cta_slide(), generate_deck(), generate_metrics_slide(), generate_problem_slide(), generate_solution_slide(), generate_testimonial_slide() (+12 more)
 
-### Community 159 - "Operate mode depth (and Read notes)"
+### Community 159 - "impeccable/SKILL.md"
 Cohesion: 0.10
-Nodes (18): Craft floor, Refuse, Verify, Constraints, Failure modes, Flow, $impeccable hooks, Routing (+10 more)
+Nodes (16): Craft floor, Refuse, Verify, Constraints, Failure modes, Flow, $impeccable hooks, Routing (+8 more)
 
 ### Community 160 - "The Toolkit"
 Cohesion: 0.10
@@ -798,8 +798,8 @@ Cohesion: 0.10
 Nodes (19): Base Color Presets, Best Practices, Color Customization, Color Format, Component Customization, CSS Variable System, Customize Styles, Customize Variants (+11 more)
 
 ### Community 165 - "test_design_system_mode.py"
-Cohesion: 0.15
-Nodes (10): _query_wants_dark(), True when a styles.csv row describes itself as dark-first., True when the query explicitly asks for a dark theme., Resolve the mode the rest of the output has to agree with., _resolve_color_mode(), _style_is_dark_primary(), Regression tests for color-mode coherence in design_system.py (issue #428).…, TestModeResolution (+2 more)
+Cohesion: 0.13
+Nodes (12): _filter_anti_patterns_for_mode(), _query_wants_dark(), True when a styles.csv row describes itself as dark-first., True when the query explicitly asks for a dark theme., Resolve the mode the rest of the output has to agree with., Drop "avoid dark mode" advice once dark mode is the resolved answer., _resolve_color_mode(), _style_is_dark_primary() (+4 more)
 
 ### Community 166 - "Glossary"
 Cohesion: 0.11
@@ -894,8 +894,8 @@ Cohesion: 0.12
 Nodes (16): 1. Read the screenshot (if present), 2. Wrap the element, 3. Load the action's reference, 4. Plan three variants: identity first, then mode, then axes, 5. Apply the freeform prompt (if present), 6. Deliver variants, 7. Parameters (composition-sized, 0-4 per variant), 8. Signal done (+8 more)
 
 ### Community 190 - "createLiveBrowserDomHelpers"
-Cohesion: 0.17
-Nodes (10): createLiveBrowserDomHelpers(), cssId(), liveUiRoot(), makeFrozenAnchor(), own(), pickable(), rectIsUsableAnchor(), uiAppend() (+2 more)
+Cohesion: 0.16
+Nodes (11): createLiveBrowserDomHelpers(), cssId(), liveUiRoot(), makeFrozenAnchor(), own(), pickable(), rectIsUsableAnchor(), uiAppend() (+3 more)
 
 ### Community 191 - "TestShadcnInstaller"
 Cohesion: 0.12
@@ -922,8 +922,8 @@ Cohesion: 0.13
 Nodes (15): Appendix B - Canonical Sources (read these before reinventing), Apple Liquid Glass (Apple platforms only), Atlassian, Bootstrap, Carbon, Fluent UI, GOV.UK, Material Web (+7 more)
 
 ### Community 197 - "Generate Report"
-Cohesion: 0.29
-Nodes (7): Audit Health Score, Detailed Findings by Severity, Executive Summary, Generate Report, Implementation Integrity Verdict, Patterns & Systemic Issues, Positive Findings
+Cohesion: 0.13
+Nodes (14): 1. Accessibility (A11y), 2. Performance, 3. Theming, 4. Responsive Design, 5. Implementation Integrity (CRITICAL), Audit Health Score, Detailed Findings by Severity, Diagnostic Scan (+6 more)
 
 ### Community 198 - "Copywriting Formulas"
 Cohesion: 0.13
@@ -937,13 +937,13 @@ Nodes (14): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typograph
 Cohesion: 0.23
 Nodes (3): detect_domain(), Auto-detect the most relevant domain from query. Matches are weighted by…, TestDomainDetection
 
-### Community 201 - "attendance/[id]/page.tsx"
-Cohesion: 0.18
-Nodes (14): lucide-react, next-intl, STATUS_OPTIONS, BreadcrumbItem, Breadcrumbs(), BreadcrumbsProps, PageHeader(), PageHeaderProps (+6 more)
+### Community 201 - "exams/[id]/page.tsx"
+Cohesion: 0.26
+Nodes (11): react, STATUS_OPTIONS, BreadcrumbItem, Breadcrumbs(), BreadcrumbsProps, StudentProfileDrawer(), Badge(), BadgeProps (+3 more)
 
-### Community 202 - "_palette_is_dark"
-Cohesion: 0.18
-Nodes (7): _palette_is_dark(), WCAG relative luminance of a #RRGGBB string, or None if unparseable., True when a colors.csv row's Background is a dark surface., _relative_luminance(), The exact reproduction from issue #428., TestEndToEndCoherence, TestLuminance
+### Community 202 - "_select_palette_for_mode"
+Cohesion: 0.11
+Nodes (14): _contrast_ratio(), _derive_dark_palette(), _palette_is_dark(), WCAG relative luminance of a #RRGGBB string, or None if unparseable., True when a colors.csv row's Background is a dark surface., WCAG contrast ratio for two hex colors, or None if either is invalid., Keep product brand tokens while deriving accessible dark surfaces., Pick the highest-ranked palette matching the resolved mode. Only the dark case… (+6 more)
 
 ### Community 203 - "Banner Design - Multi-Format Creative Banner System"
 Cohesion: 0.14
@@ -989,9 +989,9 @@ Nodes (14): 1. Decide what is already true, 2. Ask what will change the work, 3.
 Cohesion: 0.14
 Nodes (13): Animation Performance, Assess Performance Issues, Core Web Vitals Optimization, Cumulative Layout Shift (CLS < 0.1), Interaction to Next Paint (INP < 200ms), Largest Contentful Paint (LCP < 2.5s), Loading Performance, Network Optimization (+5 more)
 
-### Community 214 - "claimAndActOnAgentTarget"
-Cohesion: 0.31
-Nodes (14): agentTargetBusyReason(), agentTargetOverlayGone(), agentTargetTaken(), claimAgentTarget(), claimAndActOnAgentTarget(), declineAgentTargetBusy(), declineAgentTargetUnresolvable(), describeAgentTargetCandidate() (+6 more)
+### Community 214 - "actOnAgentTarget"
+Cohesion: 0.26
+Nodes (18): actOnAgentTarget(), agentTargetBusyReason(), agentTargetOverlayGone(), agentTargetTaken(), claimAgentTarget(), claimAndActOnAgentTarget(), declineAgentTargetBusy(), declineAgentTargetUnresolvable() (+10 more)
 
 ### Community 215 - "Layout Patterns"
 Cohesion: 0.14
@@ -1025,9 +1025,9 @@ Nodes (12): component, $type, $value, dark, semantic, $schema, $type, $value (+4
 Cohesion: 0.08
 Nodes (23): Component translation rules, Narrative mapping, Pitfalls, Scan mode (approach C: auto-extract, then confirm descriptive language), Schema, Seed mode, Step 1: Find the design assets, Step 1: Route through new-work's workshop (+15 more)
 
-### Community 223 - "parse_decision_rules"
-Cohesion: 0.17
-Nodes (9): Find matching reasoning rule for a category., Apply reasoning rules to search results., apply_decision_rules(), _object_without_duplicates(), parse_decision_rules(), Return deterministic mutations and an audit trail; never execute data., Closed, non-executable grammar for design-system decision rules., Parse the canonical condition -> action-array representation. (+1 more)
+### Community 223 - "read_rows"
+Cohesion: 0.19
+Nodes (5): read_rows(), TestAccessibilityGuidance, TestChartsTypographyAndIcons, TestCurrentReactGuidance, TestSemanticColors
 
 ### Community 224 - "Primitive Tokens"
 Cohesion: 0.17
@@ -1097,9 +1097,9 @@ Nodes (11): 10. Help and Documentation, 1. Visibility of System Status, 2. Match
 Cohesion: 0.18
 Nodes (11): Design Health Score, Design Specificity Verdict, Generate Combined Critique Report, Minor Observations, Overall Impression, Persona Red Flags, Priority Issues, Questions to Consider (+3 more)
 
-### Community 241 - "users/page.tsx"
-Cohesion: 0.17
-Nodes (15): RoleFilter, CohortMembers, CohortRosterPanels(), CohortRosterPanelsProps, Translation, EmptyState(), EmptyStateProps, Table() (+7 more)
+### Community 241 - "practice/page.tsx"
+Cohesion: 0.11
+Nodes (22): DraftQuestion, INITIAL_QUESTIONS, LEVELS, PracticePage(), PracticeTopic, TOPIC_TRANSLATION_KEYS, TOPICS, RoleFilter (+14 more)
 
 ### Community 242 - "polish.md"
 Cohesion: 0.18
@@ -1178,16 +1178,16 @@ Cohesion: 0.22
 Nodes (6): Path, Initialize generator. Args: typescript: If True, generate .ts config, else .js…, Determine default output path., Create base configuration structure., Get default content paths for framework., Any
 
 ### Community 261 - ".generate"
-Cohesion: 0.16
-Nodes (8): _filter_anti_patterns_for_mode(), Drop "avoid dark mode" advice once dark mode is the resolved answer., Execute searches across multiple domains., Extract results list from search result dict., Generate complete design system recommendation. variance/motion/density are…, Bucket a 1-10 dial value into its tier config. Returns None if value is None., _resolve_dial(), TestAntiPatternGating
+Cohesion: 0.18
+Nodes (6): Execute searches across multiple domains., Select best matching result based on priority keywords., Extract results list from search result dict., Generate complete design system recommendation. variance/motion/density are…, Bucket a 1-10 dial value into its tier config. Returns None if value is None., _resolve_dial()
 
 ### Community 262 - "devDependencies"
 Cohesion: 0.20
 Nodes (10): devDependencies, babel-plugin-react-compiler, eslint, eslint-config-next, tailwindcss, @tailwindcss/postcss, @types/node, @types/react (+2 more)
 
-### Community 263 - "generate.md"
-Cohesion: 0.15
-Nodes (11): Step 1: Parse the request, Step 2: Reuse the page, then start, Step 3: Generate, Step 4: Accept and close, append-arrays, append-string, Config drift, Consent prompt (use this phrasing) (+3 more)
+### Community 263 - "scheduleAcceptCleanup"
+Cohesion: 0.31
+Nodes (11): acceptedDomAlreadyClean(), clearHandledWrapperReloadStamp(), deferredRecoverySuperseded(), ensureAcceptedDomClean(), findAcceptedRuntimeWrappers(), handledWrapperReloadKey(), reloadAfterMissingAcceptedDom(), restoreAcceptedDomFromSnapshot() (+3 more)
 
 ### Community 264 - "sync-brand-to-tokens.cjs"
 Cohesion: 0.33
@@ -1217,12 +1217,12 @@ Nodes (9): 1. The Wall of Options, 2. The Memory Bridge, 3. The Hidden Navigatio
 Cohesion: 0.22
 Nodes (9): Color & materials, Components & controls, iOS platform, Layout & structure, Motion, The iOS slop test, Touch targets, Typography (+1 more)
 
-### Community 271 - "_select_palette_for_mode"
-Cohesion: 0.22
-Nodes (7): _contrast_ratio(), _derive_dark_palette(), WCAG contrast ratio for two hex colors, or None if either is invalid., Keep product brand tokens while deriving accessible dark surfaces., Pick the highest-ranked palette matching the resolved mode. Only the dark case…, _select_palette_for_mode(), TestPaletteSelection
+### Community 271 - "syncEditBadgeHitProxies"
+Cohesion: 0.27
+Nodes (10): bindEditBadgeProxy(), editBadgeProxyTargets(), initEditBadge(), initEditBadgeHitProxies(), positionEditBadge(), proxyMouseEvent(), setImportantStyle(), styleEditBadgeProxy() (+2 more)
 
 ### Community 272 - "Shape"
-Cohesion: 0.25
+Cohesion: 0.22
 Nodes (8): Cadence, Confirm and stop, Phase 1: Discovery interview, Phase 2: Resolve the design direction, Phase 3: Write the brief, Round 1: purpose, people, and outcome, Round 2: material, behavior, and boundaries, Shape
 
 ### Community 273 - "input"
@@ -1245,25 +1245,25 @@ Nodes (8): 12. THE COMBINATORIAL VARIATION ENGINE, Background Character, Hero Ar
 Cohesion: 0.25
 Nodes (8): 8. ANTI-AI-SLOP RULES, Carousel / marquee slop (layout), Content slop, Data / KPI slop, Density slop, Layout slop, Typography slop, Visual slop
 
-### Community 278 - "Adaptation Strategies"
-Cohesion: 0.40
-Nodes (5): Adaptation Strategies, Orientation & foldables, Phone → Tablet (iPad / large screens), Platform → platform (iOS ↔ Android), Web → native (porting a website or web app)
+### Community 278 - "adapt.native.md"
+Cohesion: 0.25
+Nodes (7): Adaptation Strategies, Assess Adaptation Challenge, Implement & Verify, Orientation & foldables, Phone → Tablet (iPad / large screens), Platform → platform (iOS ↔ Android), Web → native (porting a website or web app)
 
 ### Community 279 - "Android platform"
 Cohesion: 0.25
 Nodes (8): Android platform, Color & theming, Components & motion, Layout & structure, The Android slop test, Touch targets, Typography, Verifying the build
 
-### Community 280 - "Diagnostic Scan"
-Cohesion: 0.33
-Nodes (6): 1. Accessibility (A11y), 2. Performance, 3. Theming, 4. Responsive Design, 5. Implementation Integrity (CRITICAL), Diagnostic Scan
+### Community 280 - "Operate mode depth (and Read notes)"
+Cohesion: 0.22
+Nodes (9): Color, Components, Layout, Motion, Operate mode depth (and Read notes), Product constraints, Product permissions, The product slop test (+1 more)
 
 ### Community 281 - "Persona-Based Design Testing"
 Cohesion: 0.25
 Nodes (8): 1. Impatient Power User: "Alex", 2. Confused First-Timer: "Jordan", 3. Accessibility-Dependent User: "Sam", 4. Deliberate Stress Tester: "Riley", 5. Distracted Mobile User: "Casey", Persona-Based Design Testing, Project-Specific Personas, Selecting Personas
 
-### Community 282 - "doctor.md"
+### Community 282 - "colorize.md"
 Cohesion: 0.25
-Nodes (7): Monorepo notes, Opting out of the boot check, Step 1: Run the pass, Step 2: Act by severity, Step 3: Deprecated fields are binding, Step 4: Do not overclaim on truth drift, What this owns, and what it does not
+Nodes (7): Apply at system scale, Audit before choosing, Choose a strategy, Contrast and perception, Live-mode signature params, Verify, Visitor mode
 
 ### Community 283 - "Extract Flow"
 Cohesion: 0.25
@@ -1505,10 +1505,6 @@ Nodes (4): Heuristics Scoring Guide, Issue Severity (P0–P3), Reference Materia
 Cohesion: 0.33
 Nodes (6): 1. Accessibility (VoiceOver / TalkBack), 2. Performance, 3. Appearance & Theming, 4. Platform Conformance (CRITICAL), 5. Adaptivity, Diagnostic Scan
 
-### Community 343 - "Command guidance"
-Cohesion: 0.50
-Nodes (3): Command guidance, No-argument routing: the context-aware menu, Workflow questions
-
 ### Community 345 - "16"
 Cohesion: 0.67
 Nodes (3): $type, $value, 16
@@ -1554,23 +1550,23 @@ Cohesion: 0.50
 Nodes (3): nextConfig, withNextIntl, next
 
 ## Knowledge Gaps
-- **2290 isolated node(s):** `fs`, `path`, `fs`, `path`, `fs` (+2285 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 2728 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **107 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **2296 isolated node(s):** `fs`, `path`, `fs`, `path`, `fs` (+2291 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 2734 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **108 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `search()` connect `search` to `validate_data.py`, `.generate`, `design_system.py`, `test_design_system_mode.py`, `detect_domain`, `BM25`, `scripts/core.py`, `test_text_layout_resilience.py`, `_row_identities`, `generate_design_system`?**
+- **Why does `search()` connect `search` to `validate_data.py`, `.generate`, `design_system.py`, `test_design_system_mode.py`, `detect_domain`, `BM25`, `scripts/core.py`, `test_text_layout_resilience.py`, `search_stack`, `_row_identities`, `generate_design_system`, `read_rows`?**
   _High betweenness centrality (0.004) - this node is a cross-community bridge._
 - **Why does `search_stack()` connect `search_stack` to `BM25`, `scripts/core.py`, `search`, `test_text_layout_resilience.py`, `generate_design_system`?**
   _High betweenness centrality (0.004) - this node is a cross-community bridge._
-- **Why does `DesignSystemGenerator` connect `DesignSystemGenerator` to `.generate`, `design_system.py`, `test_design_system_mode.py`, `BM25`, `_palette_is_dark`, `_select_palette_for_mode`, `test_data_contracts.py`, `generate_design_system`, `parse_decision_rules`?**
+- **Why does `DesignSystemGenerator` connect `DesignSystemGenerator` to `.generate`, `design_system.py`, `test_design_system_mode.py`, `BM25`, `_select_palette_for_mode`, `generate_design_system`?**
   _High betweenness centrality (0.002) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `TailwindConfigGenerator` (e.g. with `TestGeneratedConfigIsValidJs` and `TestTailwindConfigGenerator`) actually correct?**
   _`TailwindConfigGenerator` has 2 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `fs`, `path`, `fs` to the rest of the system?**
-  _2290 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _2296 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `package.json` be split into smaller, more focused modules?**
   _Cohesion score 0.1 - nodes in this community are weakly interconnected._
 - **Should `components.json` be split into smaller, more focused modules?**

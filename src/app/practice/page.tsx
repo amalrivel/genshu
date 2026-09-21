@@ -2,88 +2,124 @@
 
 import * as React from "react"
 import Link from "next/link"
-import {
-  CheckSquare,
-  Plus,
-  Search,
-  ArrowRight,
-  CheckCircle2,
-} from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { ArrowRight, CheckCircle2, CheckSquare, Plus, Search } from "lucide-react"
+import { PageHeader, PageShell, SectionHeader } from "@/components/layout/page-frame"
 import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
   DialogDescription,
   DialogFooter,
+  DialogHeader,
+  DialogTitle,
 } from "@/components/ui/dialog"
+import { EmptyState } from "@/components/ui/empty-state"
+import { Input } from "@/components/ui/input"
 import { useData } from "@/lib/data-context"
 import { type PracticeQuestion } from "@/lib/mock-data"
 import { cn } from "@/lib/utils"
 import { useTranslations } from "next-intl"
 
+const TOPICS = ["語彙", "文法", "文化・マナー", "漢字"] as const
+const LEVELS = ["N5", "N4", "N3"] as const
+
+type PracticeTopic = (typeof TOPICS)[number]
+
+const TOPIC_TRANSLATION_KEYS: Record<PracticeTopic, "topicVocab" | "topicGrammar" | "topicCulture" | "topicKanji"> = {
+  "語彙": "topicVocab",
+  "文法": "topicGrammar",
+  "文化・マナー": "topicCulture",
+  "漢字": "topicKanji",
+}
+
+type DraftQuestion = {
+  prompt: string
+  translationId: string
+  options: string[]
+  correctAnswerIndex: number
+  explanationJa: string
+  explanationId: string
+}
+
+const INITIAL_QUESTIONS: DraftQuestion[] = [
+  {
+    prompt: "<ruby>日本<rt>にほん</rt></ruby>へ（　　）行きます。",
+    translationId: "Pergi ke Jepang pada bulan (...).",
+    options: ["４月", "４日", "４時", "４年"],
+    correctAnswerIndex: 0,
+    explanationJa: "「４月（しがつ）」が自然です。月を表す表現です。",
+    explanationId: "Pilihan '４月' (bulan April) paling tepat dalam konteks kalender.",
+  },
+]
+
 export default function PracticePage() {
   const t = useTranslations("practice")
   const tCommon = useTranslations("common")
-
   const { practiceSets, cohorts, currentRole, addPracticeSet, getBestAttempt } = useData()
 
   const [searchQuery, setSearchQuery] = React.useState("")
-  const [levelFilter, setLevelFilter] = React.useState<"ALL" | "N5" | "N4" | "N3">("ALL")
-  const [topicFilter, setTopicFilter] = React.useState<string>("ALL")
-  const [cohortFilter, setCohortFilter] = React.useState<string>("ALL")
+  const [levelFilter, setLevelFilter] = React.useState<(typeof LEVELS)[number] | "ALL">("ALL")
+  const [topicFilter, setTopicFilter] = React.useState<PracticeTopic | "ALL">("ALL")
+  const [cohortFilter, setCohortFilter] = React.useState("ALL")
   const [createDialogOpen, setCreateDialogOpen] = React.useState(false)
+  const [formError, setFormError] = React.useState("")
 
-  // Form state
   const [newTitle, setNewTitle] = React.useState("")
   const [newCohortId, setNewCohortId] = React.useState("cohort-1")
-  const [newTargetLevel, setNewTargetLevel] = React.useState<"N5" | "N4" | "N3">("N5")
-  const [newTopic, setNewTopic] = React.useState<"語彙" | "文法" | "文化・マナー" | "漢字">("語彙")
+  const [newTargetLevel, setNewTargetLevel] = React.useState<(typeof LEVELS)[number]>("N5")
+  const [newTopic, setNewTopic] = React.useState<PracticeTopic>("語彙")
   const [newDescription, setNewDescription] = React.useState("")
   const [newPassScore, setNewPassScore] = React.useState(70)
-
-  // Question builder for new set (start with 2 template questions)
-  const [questions, setQuestions] = React.useState<
-    Array<{
-      prompt: string
-      translationId: string
-      options: string[]
-      correctAnswerIndex: number
-      explanationJa: string
-      explanationId: string
-    }>
-  >([
-    {
-      prompt: "<ruby>日本<rt>にほん</rt></ruby>へ（　　）行きます。",
-      translationId: "Pergi ke Jepang pada bulan (...).",
-      options: ["４月", "４日", "４時", "４年"],
-      correctAnswerIndex: 0,
-      explanationJa: "「４月（しがつ）」が自然です。月を表す表現です。",
-      explanationId: "Pilihan '４月' (bulan April) paling tepat dalam konteks kalender.",
-    },
-  ])
+  const [questions, setQuestions] = React.useState<DraftQuestion[]>(INITIAL_QUESTIONS)
 
   const canManage = currentRole === "TANTOSHA" || currentRole === "SENSEI"
-
-  // Filtered sets
-  const filteredSets = practiceSets.filter((set) => {
+  const normalizedSearch = searchQuery.trim().toLowerCase()
+  const practiceSummaries = practiceSets.map((set) => ({ set, bestAttempt: getBestAttempt(set.id) }))
+  const filteredSets = practiceSummaries.filter(({ set }) => {
     const matchesSearch =
-      set.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      set.description.toLowerCase().includes(searchQuery.toLowerCase())
+      !normalizedSearch ||
+      set.title.toLowerCase().includes(normalizedSearch) ||
+      set.description.toLowerCase().includes(normalizedSearch)
     const matchesLevel = levelFilter === "ALL" || set.targetLevel === levelFilter
     const matchesTopic = topicFilter === "ALL" || set.topic === topicFilter
-    const matchesCohort =
-      cohortFilter === "ALL" || set.cohortId === "all" || set.cohortId === cohortFilter
+    const matchesCohort = cohortFilter === "ALL" || set.cohortId === "all" || set.cohortId === cohortFilter
     return matchesSearch && matchesLevel && matchesTopic && matchesCohort
   })
+  const hasActiveFilters = Boolean(normalizedSearch) || levelFilter !== "ALL" || topicFilter !== "ALL" || cohortFilter !== "ALL"
+
+  const attemptedSets = practiceSummaries.filter(({ bestAttempt }) => bestAttempt)
+  const passedSets = attemptedSets.filter(({ set, bestAttempt }) =>
+    bestAttempt ? (bestAttempt.score / bestAttempt.totalQuestions) * 100 >= set.passScore : false
+  )
+  const averageBestScore = attemptedSets.length
+    ? Math.round(
+        attemptedSets.reduce((total, { bestAttempt }) => total + (bestAttempt!.score / bestAttempt!.totalQuestions) * 100, 0) /
+          attemptedSets.length
+      )
+    : null
+  const totalQuestions = practiceSets.reduce((total, set) => total + set.questions.length, 0)
+  const topicCount = new Set(practiceSets.map((set) => set.topic)).size
+  const averagePassScore = practiceSets.length
+    ? Math.round(practiceSets.reduce((total, set) => total + set.passScore, 0) / practiceSets.length)
+    : null
+
+  const resetFilters = () => {
+    setSearchQuery("")
+    setLevelFilter("ALL")
+    setTopicFilter("ALL")
+    setCohortFilter("ALL")
+  }
+
+  const openCreateDialog = () => {
+    setFormError("")
+    setCreateDialogOpen(true)
+  }
 
   const handleAddQuestionField = () => {
-    setQuestions((prev) => [
-      ...prev,
+    setQuestions((previous) => [
+      ...previous,
       {
         prompt: "",
         translationId: "",
@@ -95,20 +131,38 @@ export default function PracticePage() {
     ])
   }
 
-  const handleCreateSet = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!newTitle.trim()) return
+  const updateQuestion = (questionIndex: number, updates: Partial<DraftQuestion>) => {
+    setQuestions((previous) => previous.map((question, index) => (index === questionIndex ? { ...question, ...updates } : question)))
+  }
 
-    const formattedQuestions: PracticeQuestion[] = questions.map((q, idx) => ({
-      id: `custom-q-${Date.now()}-${idx}`,
+  const updateOption = (questionIndex: number, optionIndex: number, value: string) => {
+    setQuestions((previous) =>
+      previous.map((question, index) => {
+        if (index !== questionIndex) return question
+        const options = [...question.options]
+        options[optionIndex] = value
+        return { ...question, options }
+      })
+    )
+  }
+
+  const handleCreateSet = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (!newTitle.trim()) {
+      setFormError(t("titleRequired"))
+      return
+    }
+
+    const formattedQuestions: PracticeQuestion[] = questions.map((question, index) => ({
+      id: `custom-q-${Date.now()}-${index}`,
       type: "MULTIPLE_CHOICE",
-      prompt: q.prompt.trim() || `問題 ${idx + 1}`,
-      promptPlain: q.prompt.replace(/<[^>]*>/g, ""),
-      translationId: q.translationId.trim() || "Terjemahan latihan",
-      options: q.options.filter((o) => o.trim().length > 0),
-      correctAnswerIndex: q.correctAnswerIndex,
-      explanationJa: q.explanationJa.trim() || "解説が登録されていません。",
-      explanationId: q.explanationId.trim() || "Belum ada penjelasan.",
+      prompt: question.prompt.trim() || `問題 ${index + 1}`,
+      promptPlain: question.prompt.replace(/<[^>]*>/g, ""),
+      translationId: question.translationId.trim() || "Terjemahan latihan",
+      options: question.options.filter((option) => option.trim().length > 0),
+      correctAnswerIndex: question.correctAnswerIndex,
+      explanationJa: question.explanationJa.trim() || "解説が登録されていません。",
+      explanationId: question.explanationId.trim() || "Belum ada penjelasan.",
     }))
 
     addPracticeSet({
@@ -124,443 +178,151 @@ export default function PracticePage() {
     setCreateDialogOpen(false)
     setNewTitle("")
     setNewDescription("")
+    setFormError("")
   }
 
   return (
-    <div className="page-shell">
-      {/* Header */}
-      <div className="page-header">
-        <div>
-          <div className="flex items-center gap-2 mb-1">
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
-              {t("title")}
-            </h1>
-            <Badge variant="outline" className="text-xs font-normal">
-              {t("badge")}
-            </Badge>
-          </div>
-          <p className="text-sm text-muted-foreground">
-            {t("desc")}
-          </p>
+    <PageShell>
+      <PageHeader
+        eyebrow={<Badge variant="outline">{t("badge")}</Badge>}
+        title={t("title")}
+        description={t("desc")}
+        action={
+          canManage ? (
+            <Button type="button" onClick={openCreateDialog} className="gap-2">
+              <Plus aria-hidden="true" className="size-4" />
+              {t("createSet")}
+            </Button>
+          ) : (
+            <Badge variant="roleGakusei">{tCommon("roleGakusei")}</Badge>
+          )
+        }
+      />
+
+      <section aria-labelledby="practice-metrics-title">
+        <h2 id="practice-metrics-title" className="sr-only">{t("metricsLabel")}</h2>
+        <div className="metric-strip">
+          {canManage ? (
+            <>
+              <div className="metric-item"><p className="metric-label">{t("metricSets")}</p><p className="metric-value">{practiceSets.length}</p><p className="metric-note">{t("metricSetsNote")}</p></div>
+              <div className="metric-item"><p className="metric-label">{t("metricQuestions")}</p><p className="metric-value">{totalQuestions}</p><p className="metric-note">{t("metricQuestionsNote")}</p></div>
+              <div className="metric-item"><p className="metric-label">{t("metricTopics")}</p><p className="metric-value">{topicCount}/{TOPICS.length}</p><p className="metric-note">{t("metricTopicsNote")}</p></div>
+              <div className="metric-item"><p className="metric-label">{t("metricPassScore")}</p><p className="metric-value">{averagePassScore === null ? "—" : `${averagePassScore}%`}</p><p className="metric-note">{t("metricPassScoreNote")}</p></div>
+            </>
+          ) : (
+            <>
+              <div className="metric-item"><p className="metric-label">{t("metricAvailable")}</p><p className="metric-value">{practiceSets.length}</p><p className="metric-note">{t("metricAvailableNote")}</p></div>
+              <div className="metric-item"><p className="metric-label">{t("metricAttempted")}</p><p className="metric-value">{attemptedSets.length}/{practiceSets.length}</p><p className="metric-note">{t("metricAttemptedNote")}</p></div>
+              <div className="metric-item"><p className="metric-label">{t("metricPassed")}</p><p className="metric-value">{passedSets.length}</p><p className="metric-note">{t("metricPassedNote")}</p></div>
+              <div className="metric-item"><p className="metric-label">{t("metricBestScore")}</p><p className="metric-value">{averageBestScore === null ? "—" : `${averageBestScore}%`}</p><p className="metric-note">{t("metricBestScoreNote")}</p></div>
+            </>
+          )}
         </div>
+      </section>
 
-        {canManage ? (
-          <Button
-            onClick={() => setCreateDialogOpen(true)}
-            className="gap-2 shadow-xs sm:self-start"
-          >
-            <Plus className="h-4 w-4" />
-            {t("createSet")}
-          </Button>
-        ) : (
-          <div className="text-xs bg-muted/60 text-muted-foreground px-3 py-1.5 rounded-md border border-border/60">
-            {tCommon("roleGakusei")}
-          </div>
-        )}
-      </div>
+      <section aria-labelledby="practice-list-title" className="space-y-4">
+        <SectionHeader
+          title={<span id="practice-list-title">{t("listTitle")}</span>}
+          description={<span aria-live="polite">{t("resultsSummary", { shown: filteredSets.length, total: practiceSets.length })}</span>}
+        />
 
-      {/* Filter and Search Bar */}
-      <div className="flex flex-col gap-4">
         <div className="filter-toolbar">
-          {/* Search Input */}
-          <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input
-              aria-label={t("searchPlaceholder")}
-              placeholder={t("searchPlaceholder")}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9 bg-card"
-            />
+          <div className="relative min-w-0 flex-1 sm:max-w-md">
+            <Search aria-hidden="true" className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+            <Input type="search" aria-label={t("searchPlaceholder")} placeholder={t("searchPlaceholder")} value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} className="bg-card pl-9" />
           </div>
-
-          {/* Cohort Selector */}
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-muted-foreground shrink-0 font-medium">{t("filterCohort")}</span>
-            <select
-              className="h-10 rounded-lg border border-input bg-card px-3 py-1 text-sm shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              value={cohortFilter}
-              onChange={(e) => setCohortFilter(e.target.value)}
-            >
+          <div className="flex min-w-0 items-center gap-2">
+            <label htmlFor="practice-cohort-filter" className="shrink-0 text-xs font-medium text-muted-foreground">{t("filterCohort")}</label>
+            <select id="practice-cohort-filter" value={cohortFilter} onChange={(event) => setCohortFilter(event.target.value)} className="h-10 min-w-0 rounded-lg border border-input bg-card px-3 py-1 text-sm shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
               <option value="ALL">{t("allCohorts")}</option>
-              {cohorts.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.code} - {c.name.substring(0, 16)}...
-                </option>
-              ))}
+              {cohorts.map((cohort) => <option key={cohort.id} value={cohort.id}>{cohort.code} — {cohort.name}</option>)}
             </select>
           </div>
         </div>
 
-        {/* Level and Topic Filter Badges */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-1 border-t border-border/40">
-          <div className="flex items-center gap-1.5 overflow-x-auto">
-            <span className="text-xs text-muted-foreground mr-1">{t("filterLevel")}</span>
-            {(["ALL", "N5", "N4", "N3"] as const).map((lvl) => (
-              <button
-                key={lvl}
-                onClick={() => setLevelFilter(lvl)}
-                className={cn(
-                  "min-h-9 px-2.5 py-1 text-xs font-medium rounded-md transition-colors",
-                  levelFilter === lvl
-                    ? "bg-primary text-primary-foreground shadow-xs"
-                    : "bg-muted/60 text-muted-foreground hover:text-foreground"
-                )}
-              >
-                {lvl === "ALL" ? t("allLevels") : lvl}
-              </button>
-            ))}
+        <div className="flex flex-col gap-3 border-t border-border/40 pt-3">
+          <div role="group" aria-label={t("filterLevel")} className="flex min-w-0 items-center gap-1 overflow-x-auto rounded-lg border border-border/60 bg-muted/50 p-1">
+            <span className="ml-2 mr-1 shrink-0 text-xs font-medium text-muted-foreground">{t("filterLevel")}</span>
+            <button type="button" aria-pressed={levelFilter === "ALL"} onClick={() => setLevelFilter("ALL")} className={cn("min-h-9 shrink-0 rounded-md px-3 py-1 text-xs font-medium whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60", levelFilter === "ALL" ? "bg-background text-foreground shadow-xs" : "text-muted-foreground hover:text-foreground")}>{t("allLevels")}</button>
+            {LEVELS.map((level) => <button key={level} type="button" aria-pressed={levelFilter === level} onClick={() => setLevelFilter(level)} className={cn("min-h-9 shrink-0 rounded-md px-3 py-1 text-xs font-medium whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60", levelFilter === level ? "bg-background text-foreground shadow-xs" : "text-muted-foreground hover:text-foreground")}>{level}</button>)}
           </div>
+          <div role="group" aria-label={t("filterTopic")} className="flex min-w-0 items-center gap-1 overflow-x-auto rounded-lg border border-border/60 bg-muted/50 p-1">
+            <span className="ml-2 mr-1 shrink-0 text-xs font-medium text-muted-foreground">{t("filterTopic")}</span>
+            <button type="button" aria-pressed={topicFilter === "ALL"} onClick={() => setTopicFilter("ALL")} className={cn("min-h-9 shrink-0 rounded-md px-3 py-1 text-xs font-medium whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60", topicFilter === "ALL" ? "bg-background text-foreground shadow-xs" : "text-muted-foreground hover:text-foreground")}>{t("allTopics")}</button>
+            {TOPICS.map((topic) => <button key={topic} type="button" aria-pressed={topicFilter === topic} onClick={() => setTopicFilter(topic)} className={cn("min-h-9 shrink-0 rounded-md px-3 py-1 text-xs font-medium whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60", topicFilter === topic ? "bg-background text-foreground shadow-xs" : "text-muted-foreground hover:text-foreground")}>{t(TOPIC_TRANSLATION_KEYS[topic])}</button>)}
+          </div>
+        </div>
 
-          <div className="flex items-center gap-1.5 overflow-x-auto">
-            <span className="text-xs text-muted-foreground mr-1">{t("filterTopic")}</span>
-            {(["ALL", "語彙", "文法", "文化・マナー", "漢字"] as const).map((top) => {
-              const label =
-                top === "ALL"
-                  ? t("allTopics")
-                  : top === "語彙"
-                  ? t("topicVocab")
-                  : top === "文法"
-                  ? t("topicGrammar")
-                  : top === "文化・マナー"
-                  ? t("topicCulture")
-                  : t("topicKanji")
+        {filteredSets.length === 0 ? (
+          <EmptyState
+            icon={<CheckSquare className="size-5" />}
+            title={hasActiveFilters ? t("noSetsFound") : t("noSetsEmpty")}
+            description={hasActiveFilters ? t("noSetsDesc") : t("noSetsEmptyDesc")}
+            action={hasActiveFilters ? <Button type="button" variant="outline" onClick={resetFilters}>{t("resetFilters")}</Button> : canManage ? <Button type="button" onClick={openCreateDialog} className="gap-2"><Plus aria-hidden="true" className="size-4" />{t("createSet")}</Button> : undefined}
+          />
+        ) : (
+          <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {filteredSets.map(({ set, bestAttempt }) => {
+              const targetCohort = cohorts.find((cohort) => cohort.id === set.cohortId)
+              const bestScore = bestAttempt ? Math.round((bestAttempt.score / bestAttempt.totalQuestions) * 100) : null
               return (
-                <button
-                  key={top}
-                  onClick={() => setTopicFilter(top)}
-                  className={cn(
-                    "min-h-9 px-2.5 py-1 text-xs font-medium rounded-md transition-colors",
-                    topicFilter === top
-                      ? "bg-secondary text-secondary-foreground font-semibold shadow-xs"
-                      : "bg-muted/40 text-muted-foreground hover:text-foreground"
-                  )}
-                >
-                  {label}
-                </button>
+                <li key={set.id} className="min-w-0">
+                  <Link href={`/practice/${set.id}`} aria-label={t("openPracticeFor", { title: set.title })} className="group block h-full rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2">
+                    <Card className="flex h-full flex-col border-border/80 transition-colors group-hover:border-primary/40 group-hover:shadow-md">
+                      <CardHeader className="space-y-3 p-5 pb-3">
+                        <div className="flex flex-wrap items-start justify-between gap-2">
+                          <div className="flex flex-wrap items-center gap-1.5"><Badge variant="outline" className="font-mono text-xs">{set.targetLevel}</Badge><Badge variant="secondary" className="text-xs">{t(TOPIC_TRANSLATION_KEYS[set.topic])}</Badge></div>
+                          {bestScore === null ? <Badge variant="outline" className="text-xs">{t("notAttempted")}</Badge> : <Badge variant={bestScore >= set.passScore ? "success" : "warning"} className="gap-1 text-xs"><CheckCircle2 aria-hidden="true" className="size-3" />{t("bestScore")} {bestScore}%</Badge>}
+                        </div>
+                        <div><CardTitle className="text-base transition-colors group-hover:text-primary sm:text-lg">{set.title}</CardTitle><CardDescription className="mt-2 line-clamp-2 text-xs">{set.description}</CardDescription></div>
+                      </CardHeader>
+                      <CardContent className="flex flex-1 flex-col gap-4 p-5 pt-0">
+                        <div className="grid grid-cols-3 gap-2 rounded-lg border border-border/40 bg-muted/40 p-3 text-xs text-muted-foreground">
+                          <span><span className="block text-[0.7rem]">{t("questionCount")}</span><strong className="mt-0.5 block text-sm text-foreground">{set.questions.length}</strong></span>
+                          <span><span className="block text-[0.7rem]">{t("passCriteria")}</span><strong className="mt-0.5 block text-sm text-foreground">{set.passScore}%</strong></span>
+                          <span><span className="block text-[0.7rem]">{t("filterCohort")}</span><strong className="mt-0.5 block truncate font-mono text-sm text-foreground">{set.cohortId === "all" ? tCommon("all") : targetCohort?.code ?? t("unknownCohort")}</strong></span>
+                        </div>
+                        <div className="mt-auto flex items-center justify-between gap-3 border-t border-border/60 pt-3"><time dateTime={set.createdAt} className="text-xs text-muted-foreground">{set.createdAt}</time><span className="inline-flex min-h-9 items-center gap-1.5 text-sm font-medium text-primary">{bestAttempt ? t("retakePractice") : t("startPractice")}<ArrowRight aria-hidden="true" className="size-3.5 transition-transform group-hover:translate-x-0.5" /></span></div>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </li>
               )
             })}
-          </div>
-        </div>
-      </div>
+          </ul>
+        )}
+      </section>
 
-      {/* Practice Sets Grid */}
-      {filteredSets.length === 0 ? (
-        <div className="empty-state">
-          <CheckSquare className="mx-auto h-12 w-12 text-muted-foreground/60" />
-          <h3 className="mt-4 text-base font-semibold">{t("noSetsFound")}</h3>
-          <p className="mt-1 text-xs text-muted-foreground">
-            {t("noSetsDesc")}
-          </p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {filteredSets.map((set) => {
-            const bestAttempt = getBestAttempt(set.id)
-            const targetCohort = cohorts.find((c) => c.id === set.cohortId)
-
-            return (
-              <Card
-                key={set.id}
-                className="group flex flex-col justify-between overflow-hidden border-border/80 transition-all hover:border-primary/40 hover:shadow-md"
-              >
-                <div>
-                  <CardHeader className="p-5 pb-3">
-                    <div className="flex items-center justify-between gap-2 mb-2">
-                      <div className="flex items-center gap-1.5">
-                        <Badge variant="outline" className="font-mono text-xs">
-                          {set.targetLevel}
-                        </Badge>
-                        <Badge variant="secondary" className="text-xs">
-                          {set.topic}
-                        </Badge>
-                      </div>
-
-                      {bestAttempt ? (
-                        <Badge
-                          variant={
-                            (bestAttempt.score / bestAttempt.totalQuestions) * 100 >=
-                            set.passScore
-                              ? "success"
-                              : "warning"
-                          }
-                          className="text-xs gap-1"
-                        >
-                          <CheckCircle2 className="h-3 w-3" />
-                          {t("bestScore")}{" "}
-                          {Math.round(
-                            (bestAttempt.score / bestAttempt.totalQuestions) * 100
-                          )}
-                          %
-                        </Badge>
-                      ) : (
-                        <span className="text-[0.7rem] text-muted-foreground">
-                          {t("notAttempted")}
-                        </span>
-                      )}
-                    </div>
-
-                    <CardTitle className="text-base sm:text-lg group-hover:text-primary transition-colors">
-                      {set.title}
-                    </CardTitle>
-
-                    <CardDescription className="line-clamp-2 mt-2 text-xs text-muted-foreground">
-                      {set.description}
-                    </CardDescription>
-                  </CardHeader>
-
-                  <CardContent className="p-5 pt-0 space-y-3 text-xs">
-                    <div className="rounded-lg bg-muted/40 p-2.5 flex items-center justify-between border border-border/40 text-muted-foreground">
-                      <span>{t("questionCount")} <strong className="text-foreground">{set.questions.length}</strong></span>
-                      <span>{t("passCriteria")} <strong className="text-foreground">{set.passScore}%</strong></span>
-                      <span>
-                        {set.cohortId === "all" ? (
-                          tCommon("all")
-                        ) : (
-                          <span className="font-mono">{targetCohort?.code || "Cohort"}</span>
-                        )}
-                      </span>
-                    </div>
-                  </CardContent>
-                </div>
-
-                {/* Card Action */}
-                <div className="border-t border-border/60 bg-muted/10 p-3 px-5 flex items-center justify-between">
-                  <span className="text-[0.7rem] text-muted-foreground">
-                    {set.createdAt}
-                  </span>
-                  <Link href={`/practice/${set.id}`}>
-                    <Button
-                      size="sm"
-                      className="gap-1.5 text-xs h-8 shadow-xs"
-                    >
-                      {bestAttempt ? t("retakePractice") : t("startPractice")}
-                      <ArrowRight className="h-3.5 w-3.5" />
-                    </Button>
-                  </Link>
-                </div>
-              </Card>
-            )
-          })}
-        </div>
-      )}
-
-      {/* Create Practice Set Modal */}
-      <Dialog open={createDialogOpen} onOpenChange={setCreateDialogOpen}>
-        <DialogContent className="max-w-xl max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle>{t("modalTitle")}</DialogTitle>
-            <DialogDescription>
-              {t("modalDesc")}
-            </DialogDescription>
-          </DialogHeader>
-
+      <Dialog open={createDialogOpen} onOpenChange={(open) => { setCreateDialogOpen(open); if (!open) setFormError("") }}>
+        <DialogContent className="max-h-[90vh] max-w-xl overflow-y-auto" closeLabel={tCommon("close")}>
+          <DialogHeader><DialogTitle>{t("modalTitle")}</DialogTitle><DialogDescription>{t("modalDesc")}</DialogDescription></DialogHeader>
           <form onSubmit={handleCreateSet} className="space-y-4 text-sm">
-            <div>
-              <label className="block text-xs font-medium mb-1">
-                {t("modalFieldTitle")}
-              </label>
-              <Input
-                placeholder="例: N5 基礎語彙・動詞活用ドリル"
-                value={newTitle}
-                onChange={(e) => setNewTitle(e.target.value)}
-                required
-              />
+            {formError && <p role="alert" aria-live="polite" className="rounded-md border border-destructive/20 bg-destructive/10 p-3 text-sm text-destructive">{formError}</p>}
+            <div><label htmlFor="practice-create-title" className="mb-1 block text-xs font-medium">{t("modalFieldTitle")}</label><Input id="practice-create-title" name="title" placeholder={t("titlePlaceholder")} value={newTitle} onChange={(event) => { setNewTitle(event.target.value); if (formError) setFormError("") }} required /></div>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+              <div><label htmlFor="practice-create-level" className="mb-1 block text-xs font-medium">{t("modalFieldLevel")}</label><select id="practice-create-level" name="level" value={newTargetLevel} onChange={(event) => setNewTargetLevel(event.target.value as (typeof LEVELS)[number])} className="h-10 w-full rounded-md border border-input bg-transparent px-3 py-1 text-xs shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{LEVELS.map((level) => <option key={level} value={level}>{level}</option>)}</select></div>
+              <div><label htmlFor="practice-create-topic" className="mb-1 block text-xs font-medium">{t("modalFieldTopic")}</label><select id="practice-create-topic" name="topic" value={newTopic} onChange={(event) => setNewTopic(event.target.value as PracticeTopic)} className="h-10 w-full rounded-md border border-input bg-transparent px-3 py-1 text-xs shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{TOPICS.map((topic) => <option key={topic} value={topic}>{t(TOPIC_TRANSLATION_KEYS[topic])}</option>)}</select></div>
+              <div><label htmlFor="practice-create-cohort" className="mb-1 block text-xs font-medium">{t("modalFieldCohort")}</label><select id="practice-create-cohort" name="cohort" value={newCohortId} onChange={(event) => setNewCohortId(event.target.value)} className="h-10 w-full rounded-md border border-input bg-transparent px-3 py-1 text-xs shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><option value="all">{t("allCohorts")}</option>{cohorts.map((cohort) => <option key={cohort.id} value={cohort.id}>{cohort.code} — {cohort.name}</option>)}</select></div>
             </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div>
-                <label className="block text-xs font-medium mb-1">{t("modalFieldLevel")}</label>
-                <select
-                  className="w-full h-9 rounded-md border border-input bg-transparent px-3 py-1 text-xs shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  value={newTargetLevel}
-                  onChange={(e) => setNewTargetLevel(e.target.value as "N5" | "N4" | "N3")}
-                >
-                  <option value="N5">N5</option>
-                  <option value="N4">N4</option>
-                  <option value="N3">N3</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium mb-1">{t("modalFieldTopic")}</label>
-                <select
-                  className="w-full h-9 rounded-md border border-input bg-transparent px-3 py-1 text-xs shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  value={newTopic}
-                  onChange={(e) =>
-                    setNewTopic(e.target.value as "語彙" | "文法" | "文化・マナー" | "漢字")
-                  }
-                >
-                  <option value="語彙">{t("topicVocab")}</option>
-                  <option value="文法">{t("topicGrammar")}</option>
-                  <option value="文化・マナー">{t("topicCulture")}</option>
-                  <option value="漢字">{t("topicKanji")}</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium mb-1">{t("modalFieldCohort")}</label>
-                <select
-                  className="w-full h-9 rounded-md border border-input bg-transparent px-3 py-1 text-xs shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  value={newCohortId}
-                  onChange={(e) => setNewCohortId(e.target.value)}
-                >
-                  <option value="all">{t("allCohorts")}</option>
-                  {cohorts.map((c) => (
-                    <option key={c.id} value={c.id}>
-                      {c.code} - {c.name.substring(0, 14)}...
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div className="sm:col-span-2">
-                <label className="block text-xs font-medium mb-1">{t("modalFieldDesc")}</label>
-                <Input
-                  placeholder="学習者がこのドリルで達成すべき内容を入力..."
-                  value={newDescription}
-                  onChange={(e) => setNewDescription(e.target.value)}
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-medium mb-1">{t("modalFieldPassScore")}</label>
-                <Input
-                  type="number"
-                  min={50}
-                  max={100}
-                  value={newPassScore}
-                  onChange={(e) => setNewPassScore(Number(e.target.value))}
-                />
-              </div>
-            </div>
-
-            {/* Questions Builder */}
-            <div className="space-y-3 pt-2 border-t border-border">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold">登録する問題 ({questions.length}問)</span>
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="xs"
-                  onClick={handleAddQuestionField}
-                  className="gap-1 text-xs"
-                >
-                  <Plus className="h-3 w-3" />
-                  問題を追加
-                </Button>
-              </div>
-
-              {questions.map((q, idx) => (
-                <div
-                  key={idx}
-                  className="rounded-lg border border-border p-3.5 space-y-2.5 bg-muted/20"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold text-xs text-primary">第 {idx + 1} 問</span>
-                  </div>
-
-                  <div>
-                    <label className="block text-[0.7rem] text-muted-foreground mb-0.5">
-                      問題文（ふりがなタグ &lt;ruby&gt;漢字&lt;rt&gt;かんじ&lt;/rt&gt;&lt;/ruby&gt; を使えます）
-                    </label>
-                    <Input
-                      placeholder="例: <ruby>朝<rt>あさ</rt></ruby>起きて、顔を（　　）。"
-                      value={q.prompt}
-                      onChange={(e) => {
-                        const updated = [...questions]
-                        updated[idx].prompt = e.target.value
-                        setQuestions(updated)
-                      }}
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-[0.7rem] text-muted-foreground mb-0.5">
-                      インドネシア語訳 (Terjemahan Bantuan)
-                    </label>
-                    <Input
-                      placeholder="例: Bangun di pagi hari, (...) muka."
-                      value={q.translationId}
-                      onChange={(e) => {
-                        const updated = [...questions]
-                        updated[idx].translationId = e.target.value
-                        setQuestions(updated)
-                      }}
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-2">
-                    {q.options.map((opt, oIdx) => (
-                      <div key={oIdx}>
-                        <label className="block text-[0.68rem] text-muted-foreground mb-0.5">
-                          選択肢 {oIdx + 1} {q.correctAnswerIndex === oIdx && "(★ 正解)"}
-                        </label>
-                        <Input
-                          value={opt}
-                          onChange={(e) => {
-                            const updated = [...questions]
-                            updated[idx].options[oIdx] = e.target.value
-                            setQuestions(updated)
-                          }}
-                          className={q.correctAnswerIndex === oIdx ? "border-emerald-500/60" : ""}
-                        />
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs text-muted-foreground">正解の番号:</span>
-                    <select
-                      className="h-8 rounded border border-input bg-card px-2 text-xs"
-                      value={q.correctAnswerIndex}
-                      onChange={(e) => {
-                        const updated = [...questions]
-                        updated[idx].correctAnswerIndex = Number(e.target.value)
-                        setQuestions(updated)
-                      }}
-                    >
-                      {q.options.map((_, oIdx) => (
-                        <option key={oIdx} value={oIdx}>
-                          選択肢 {oIdx + 1}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-[0.7rem] text-muted-foreground mb-0.5">
-                      解説（日本語）
-                    </label>
-                    <Input
-                      placeholder="例: 「顔を洗う」が自然な組み合わせです。"
-                      value={q.explanationJa}
-                      onChange={(e) => {
-                        const updated = [...questions]
-                        updated[idx].explanationJa = e.target.value
-                        setQuestions(updated)
-                      }}
-                    />
-                  </div>
-                </div>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3"><div className="sm:col-span-2"><label htmlFor="practice-create-description" className="mb-1 block text-xs font-medium">{t("modalFieldDesc")}</label><Input id="practice-create-description" name="description" placeholder={t("descriptionPlaceholder")} value={newDescription} onChange={(event) => setNewDescription(event.target.value)} /></div><div><label htmlFor="practice-create-pass-score" className="mb-1 block text-xs font-medium">{t("modalFieldPassScore")}</label><Input id="practice-create-pass-score" name="passScore" type="number" min={50} max={100} value={newPassScore} onChange={(event) => setNewPassScore(Number(event.target.value))} /></div></div>
+            <fieldset className="space-y-3 border-t border-border pt-4">
+              <legend className="sr-only">{t("questionsLegend")}</legend>
+              <div className="flex items-center justify-between gap-3"><p className="text-xs font-semibold">{t("questionsCount", { count: questions.length })}</p><Button type="button" variant="outline" size="xs" onClick={handleAddQuestionField} className="gap-1 text-xs"><Plus aria-hidden="true" className="size-3" />{t("addQuestion")}</Button></div>
+              {questions.map((question, questionIndex) => (
+                <fieldset key={questionIndex} className="space-y-3 rounded-lg border border-border bg-muted/20 p-3.5">
+                  <legend className="px-1 text-xs font-semibold text-primary">{t("questionNumber", { number: questionIndex + 1 })}</legend>
+                  <div><label htmlFor={`practice-question-${questionIndex}-prompt`} className="mb-1 block text-xs text-muted-foreground">{t("questionPrompt")}</label><Input id={`practice-question-${questionIndex}-prompt`} name={`question-${questionIndex}-prompt`} placeholder={t("questionPromptPlaceholder")} value={question.prompt} onChange={(event) => updateQuestion(questionIndex, { prompt: event.target.value })} required /></div>
+                  <div><label htmlFor={`practice-question-${questionIndex}-translation`} className="mb-1 block text-xs text-muted-foreground">{t("questionTranslation")}</label><Input id={`practice-question-${questionIndex}-translation`} name={`question-${questionIndex}-translation`} placeholder={t("questionTranslationPlaceholder")} value={question.translationId} onChange={(event) => updateQuestion(questionIndex, { translationId: event.target.value })} /></div>
+                  <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">{question.options.map((option, optionIndex) => <div key={optionIndex}><label htmlFor={`practice-question-${questionIndex}-option-${optionIndex}`} className="mb-1 block text-xs text-muted-foreground">{t("optionLabel", { number: optionIndex + 1 })}{question.correctAnswerIndex === optionIndex ? ` ${t("correctOption")}` : ""}</label><Input id={`practice-question-${questionIndex}-option-${optionIndex}`} name={`question-${questionIndex}-option-${optionIndex}`} value={option} onChange={(event) => updateOption(questionIndex, optionIndex, event.target.value)} className={question.correctAnswerIndex === optionIndex ? "border-emerald-500/60" : undefined} /></div>)}</div>
+                  <div className="flex flex-wrap items-center gap-2"><label htmlFor={`practice-question-${questionIndex}-correct-answer`} className="text-xs text-muted-foreground">{t("correctAnswer")}</label><select id={`practice-question-${questionIndex}-correct-answer`} name={`question-${questionIndex}-correct-answer`} value={question.correctAnswerIndex} onChange={(event) => updateQuestion(questionIndex, { correctAnswerIndex: Number(event.target.value) })} className="h-9 rounded border border-input bg-card px-2 text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{question.options.map((_, optionIndex) => <option key={optionIndex} value={optionIndex}>{t("optionLabel", { number: optionIndex + 1 })}</option>)}</select></div>
+                  <div><label htmlFor={`practice-question-${questionIndex}-explanation`} className="mb-1 block text-xs text-muted-foreground">{t("questionExplanation")}</label><Input id={`practice-question-${questionIndex}-explanation`} name={`question-${questionIndex}-explanation`} placeholder={t("questionExplanationPlaceholder")} value={question.explanationJa} onChange={(event) => updateQuestion(questionIndex, { explanationJa: event.target.value })} /></div>
+                </fieldset>
               ))}
-            </div>
-
-            <DialogFooter>
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setCreateDialogOpen(false)}
-              >
-                {tCommon("cancel")}
-              </Button>
-              <Button type="submit">{t("modalSubmit")}</Button>
-            </DialogFooter>
+            </fieldset>
+            <DialogFooter><Button type="button" variant="outline" onClick={() => setCreateDialogOpen(false)}>{tCommon("cancel")}</Button><Button type="submit">{t("modalSubmit")}</Button></DialogFooter>
           </form>
         </DialogContent>
       </Dialog>
-    </div>
+    </PageShell>
   )
 }
