@@ -19,6 +19,8 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { FuriganaText } from "@/components/ui/furigana-text"
+import { EmptyState } from "@/components/ui/empty-state"
+import { PageHeader, PageShell, SectionHeader } from "@/components/layout/page-frame"
 import { useData } from "@/lib/data-context"
 import { cn } from "@/lib/utils"
 import { useTranslations } from "next-intl"
@@ -155,19 +157,21 @@ export default function PracticePlayerPage() {
 
   if (!practiceSet) {
     return (
-      <div className="page-shell text-center">
-        <AlertCircle className="mx-auto h-12 w-12 text-destructive" />
-        <h2 className="mt-4 text-xl font-bold">{t("notFoundTitle")}</h2>
-        <p className="mt-1 text-sm text-muted-foreground">
-          {t("notFoundDesc")}
-        </p>
-        <Link href="/practice" className="mt-6 inline-block">
-          <Button variant="outline" className="gap-2">
-            <ArrowLeft className="h-4 w-4" />
-            {t("backToList")}
-          </Button>
-        </Link>
-      </div>
+      <PageShell>
+        <EmptyState
+          icon={<AlertCircle className="size-5" />}
+          title={t("notFoundTitle")}
+          description={t("notFoundDesc")}
+          action={
+            <Link href="/practice">
+              <Button variant="outline" className="gap-2">
+                <ArrowLeft className="size-4" />
+                {t("backToList")}
+              </Button>
+            </Link>
+          }
+        />
+      </PageShell>
     )
   }
 
@@ -196,75 +200,84 @@ export default function PracticePlayerPage() {
   })
 
   return (
-    <div className="mx-auto w-full max-w-4xl space-y-6 px-4 py-8 sm:px-6 pb-28 sm:pb-32">
-      {/* Top Bar Navigation */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border/70 pb-4">
-        <Breadcrumbs
-          items={[
-            { label: tNav("practice"), href: "/practice" },
-            { label: practiceSet.title },
-          ]}
-        />
+    <PageShell className={cn("max-w-4xl", !isFinished && "pb-28 sm:pb-32")}>
+      <Breadcrumbs
+        items={[
+          { label: tNav("practice"), href: "/practice" },
+          { label: practiceSet.title },
+        ]}
+      />
 
-        {/* Global Controls: Furigana & Translation Toggles */}
-        <div className="flex items-center gap-2">
-          {/* Furigana Toggle */}
-          <Button
-            variant={showFurigana ? "secondary" : "outline"}
-            size="xs"
-            onClick={() => setShowFurigana(!showFurigana)}
-            className="text-xs gap-1.5 h-8"
-            title="ふりがな（ルビ）の表示・非表示を切り替えます"
-          >
-            {showFurigana ? <Eye className="h-3.5 w-3.5" /> : <EyeOff className="h-3.5 w-3.5" />}
-            <span>{t("furiganaToggle", { status: showFurigana ? t("on") : t("off") })}</span>
-          </Button>
+      <PageHeader
+        eyebrow={
+          <span className="flex flex-wrap items-center gap-2">
+            <Badge variant="outline" className="font-mono text-[0.7rem]">
+              {practiceSet.targetLevel}
+            </Badge>
+            {practiceSet.cohortId && practiceSet.cohortId !== "all" && cohort && (
+              <Link href={`/cohorts/${cohort.id}`}>
+                <Badge
+                  variant="secondary"
+                  className="font-mono text-[0.7rem] hover:bg-secondary/80 cursor-pointer"
+                >
+                  {cohort.code}
+                </Badge>
+              </Link>
+            )}
+          </span>
+        }
+        title={practiceSet.title}
+        description={practiceSet.description || undefined}
+        metadata={
+          <>
+            <span>{t("topicLabel", { topic: practiceSet.topic })}</span>
+            {!isFinished && (
+              <span className="font-semibold text-primary">
+                {t("questionProgress", { current: currentIndex + 1, total: totalQuestions })}
+              </span>
+            )}
+          </>
+        }
+        action={
+          <div className="flex items-center gap-2">
+            {/* Furigana Toggle */}
+            <Button
+              variant={showFurigana ? "secondary" : "outline"}
+              size="xs"
+              aria-pressed={showFurigana}
+              onClick={() => setShowFurigana(!showFurigana)}
+              className="text-xs gap-1.5 h-8"
+              title={t("furiganaTooltip")}
+            >
+              {showFurigana ? <Eye className="h-3.5 w-3.5" /> : <EyeOff className="h-3.5 w-3.5" />}
+              <span>{t("furiganaToggle", { status: showFurigana ? t("on") : t("off") })}</span>
+            </Button>
 
-          {/* Translation Toggle */}
-          <Button
-            variant={showTranslation ? "secondary" : "outline"}
-            size="xs"
-            onClick={() => setShowTranslation(!showTranslation)}
-            className="text-xs gap-1.5 h-8"
-            title="問題文のインドネシア語訳を表示します"
-          >
-            <Languages className="h-3.5 w-3.5" />
-            <span>{t("translationToggle", { status: showTranslation ? t("shown") : t("hidden") })}</span>
-          </Button>
-        </div>
-      </div>
+            {/* Translation Toggle */}
+            <Button
+              variant={showTranslation ? "secondary" : "outline"}
+              size="xs"
+              aria-pressed={showTranslation}
+              onClick={() => setShowTranslation(!showTranslation)}
+              className="text-xs gap-1.5 h-8"
+              title={t("translationTooltip")}
+            >
+              <Languages className="h-3.5 w-3.5" />
+              <span>{t("translationToggle", { status: showTranslation ? t("shown") : t("hidden") })}</span>
+            </Button>
+          </div>
+        }
+      />
 
       {/* QUIZ VIEW (When not finished) */}
       {!isFinished ? (
         <div className="space-y-6">
-          {/* Quiz Header & Progress Track */}
-          <div className="space-y-2">
-            <div className="flex items-center justify-between text-xs">
-              <div className="flex items-center gap-2 flex-wrap">
-                <Badge variant="outline" className="font-mono text-[0.7rem]">
-                  {practiceSet.targetLevel}
-                </Badge>
-                {practiceSet.cohortId && practiceSet.cohortId !== "all" && cohort && (
-                  <Link href={`/cohorts/${cohort.id}`}>
-                    <Badge variant="secondary" className="font-mono text-[0.7rem] hover:bg-secondary/80 cursor-pointer">
-                      {cohort.code}
-                    </Badge>
-                  </Link>
-                )}
-                <span className="font-medium text-foreground">{practiceSet.title}</span>
-              </div>
-              <span className="font-semibold text-primary">
-                {t("questionProgress", { current: currentIndex + 1, total: totalQuestions })}
-              </span>
-            </div>
-
-            {/* Progress Bar */}
-            <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
-              <div
-                className="h-full bg-primary transition-all duration-300 ease-out"
-                style={{ width: `${progressPercent}%` }}
-              />
-            </div>
+          {/* Progress Bar */}
+          <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
+            <div
+              className="h-full bg-primary transition-all duration-300 ease-out"
+              style={{ width: `${progressPercent}%` }}
+            />
           </div>
 
           {/* Main Question Card */}
@@ -290,7 +303,7 @@ export default function PracticePlayerPage() {
               {/* Optional Indonesian Translation */}
               {showTranslation && currentQuestion.translationId && (
                 <div className="rounded-md bg-muted/40 p-2.5 text-xs text-muted-foreground border border-border/50 animate-in fade-in-50 mt-2">
-                  <span className="font-semibold text-foreground/80">Arti: </span>
+                  <span className="font-semibold text-foreground/80">{t("translationPrefix")} </span>
                   {currentQuestion.translationId}
                 </div>
               )}
@@ -461,51 +474,53 @@ export default function PracticePlayerPage() {
 
           {/* Remediation & Review Section */}
           <div className="space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border/70 pb-3">
-              <div>
-                <h3 className="text-lg font-bold tracking-tight">
-                  {t("reviewTitle")}
-                </h3>
-                <p className="text-xs text-muted-foreground">
-                  {t("reviewDesc")}
-                </p>
-              </div>
-
-              {/* Filter Tabs: All vs Incorrect Only */}
-              <div className="flex items-center gap-1 p-1 bg-muted/50 rounded-lg border border-border/60">
-                <button
-                  onClick={() => setReviewFilter("all")}
-                  className={cn(
-                    "px-3 py-1 text-xs font-medium rounded-md transition-colors",
-                    reviewFilter === "all"
-                      ? "bg-background text-foreground shadow-xs"
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
+            <SectionHeader
+              title={t("reviewTitle")}
+              description={t("reviewDesc")}
+              action={
+                <div
+                  role="group"
+                  aria-label={t("reviewTitle")}
+                  className="flex items-center gap-1 p-1 bg-muted/50 rounded-lg border border-border/60"
                 >
-                  {t("tabAllQuestions", { count: practiceSet.questions.length })}
-                </button>
-                <button
-                  onClick={() => setReviewFilter("incorrect")}
-                  className={cn(
-                    "px-3 py-1 text-xs font-medium rounded-md transition-colors flex items-center gap-1",
-                    reviewFilter === "incorrect"
-                      ? "bg-destructive/15 text-destructive font-semibold shadow-xs"
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
-                >
-                  <XCircle className="h-3.5 w-3.5" />
-                  {t("tabIncorrectOnly", { count: totalQuestions - correctCount })}
-                </button>
-              </div>
-            </div>
+                  <button
+                    type="button"
+                    aria-pressed={reviewFilter === "all"}
+                    onClick={() => setReviewFilter("all")}
+                    className={cn(
+                      "px-3 py-1 text-xs font-medium rounded-md transition-colors whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60",
+                      reviewFilter === "all"
+                        ? "bg-background text-foreground shadow-xs"
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    {t("tabAllQuestions", { count: practiceSet.questions.length })}
+                  </button>
+                  <button
+                    type="button"
+                    aria-pressed={reviewFilter === "incorrect"}
+                    onClick={() => setReviewFilter("incorrect")}
+                    className={cn(
+                      "px-3 py-1 text-xs font-medium rounded-md transition-colors flex items-center gap-1 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60",
+                      reviewFilter === "incorrect"
+                        ? "bg-destructive/15 text-destructive font-semibold shadow-xs"
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    <XCircle className="h-3.5 w-3.5" />
+                    {t("tabIncorrectOnly", { count: totalQuestions - correctCount })}
+                  </button>
+                </div>
+              }
+            />
 
             {/* Questions Review List */}
             {reviewQuestions.length === 0 ? (
-              <div className="rounded-xl border border-dashed border-border/80 p-8 text-center bg-card/40">
-                <CheckCircle2 className="mx-auto h-10 w-10 text-emerald-500" />
-                <p className="mt-2 text-sm font-semibold">{t("allCorrectPraise")}</p>
-                <p className="text-xs text-muted-foreground mt-0.5">{t("allCorrectPraiseSub")}</p>
-              </div>
+              <EmptyState
+                icon={<CheckCircle2 className="size-5 text-emerald-500" />}
+                title={t("allCorrectPraise")}
+                description={t("allCorrectPraiseSub")}
+              />
             ) : (
               <div className="space-y-4">
                 {reviewQuestions.map((q) => {
@@ -600,7 +615,11 @@ export default function PracticePlayerPage() {
 
       {/* Sticky Bottom Navigation & Action Dock (Prevents layout jump and scroll fatigue) */}
       {!isFinished && (
-        <div className="fixed bottom-0 left-0 right-0 z-30 border-t border-border/80 bg-background/95 backdrop-blur-md px-4 py-3 sm:py-4 shadow-xl transition-all">
+        <div
+          role="toolbar"
+          aria-label={t("confirmAnswer")}
+          className="fixed bottom-0 left-0 right-0 z-30 border-t border-border/80 bg-background/95 backdrop-blur-md px-4 py-3 sm:py-4 shadow-xl transition-all"
+        >
           <div className="mx-auto max-w-4xl flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
             {/* Left: Feedback / Status Indicator */}
             <div className="flex items-center gap-2 text-xs sm:text-sm">
@@ -710,6 +729,6 @@ export default function PracticePlayerPage() {
           </div>
         </div>
       )}
-    </div>
+    </PageShell>
   )
 }

@@ -368,7 +368,10 @@
     "correctBadge": "Benar",
     "incorrectBadge": "Salah",
     "correctAnswerTag": "Kunci Jawaban",
-    "yourChoiceTag": "Jawaban Anda"
+    "yourChoiceTag": "Jawaban Anda",
+    "furiganaTooltip": "Tampilkan/sembunyikan furigana (ruby) pada teks Jepang",
+    "translationTooltip": "Tampilkan terjemahan bahasa Indonesia untuk teks soal",
+    "translationPrefix": "Arti:"
   },
   "cohorts": {
     "badge": "Kohort & Kelas",
