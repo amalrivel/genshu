@@ -18,6 +18,7 @@ interface DestructiveConfirmDialogProps {
   description: React.ReactNode
   confirmLabel: React.ReactNode
   cancelLabel: React.ReactNode
+  closeLabel?: string
   onConfirm: () => void
 }
 
@@ -28,6 +29,7 @@ export function DestructiveConfirmDialog({
   description,
   confirmLabel,
   cancelLabel,
+  closeLabel,
   onConfirm,
 }: DestructiveConfirmDialogProps) {
   const handleConfirm = () => {
@@ -37,7 +39,7 @@ export function DestructiveConfirmDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent closeLabel={closeLabel}>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
