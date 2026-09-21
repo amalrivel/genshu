@@ -423,26 +423,13 @@ The goal is to build a coherent Genshu interface.
 
 ## 10. Data Platform
 
-Genshu uses PostgreSQL as its database.
+Genshu's planned persistent database is PostgreSQL.
 
-The preferred MVP data platform is:
+The current frontend prototype intentionally uses mock data and browser
+`localStorage`. No persistent backend is implemented yet.
 
-```text
-Supabase
-```
-
-Supabase may provide:
-
-- PostgreSQL,
-- authentication,
-- file storage,
-- generated TypeScript database types,
-- migrations and database tooling,
-- and related backend infrastructure.
-
-The architecture should still treat PostgreSQL as the fundamental database rather than unnecessarily designing Genshu around proprietary platform behavior.
-
-This should preserve reasonable portability if infrastructure requirements change later.
+When backend work begins, development should start with a local PostgreSQL
+workflow. Supabase is not part of the current architecture.
 
 ---
 
@@ -453,12 +440,11 @@ Development should remain local-first.
 Preferred development environment:
 
 ```text
-Supabase local development stack
+Local PostgreSQL
 ```
 
-Where practical, developers should be able to run the relevant database and supporting Supabase services locally.
-
-Development should not depend on manually editing the hosted production environment.
+Development should not depend on manually editing a hosted production
+environment.
 
 Database schema changes must be reproducible from repository-controlled migrations.
 
@@ -468,37 +454,16 @@ Do not treat manually configured remote database state as the source of truth.
 
 ### Database Access Layer
 
-Do not introduce an ORM by default.
+The access layer is undecided until persistent backend work begins.
 
-Prefer the simplest Supabase/PostgreSQL access approach that fits the current application.
-
-Generated TypeScript database types should be used where appropriate.
-
-Current preferred architecture:
-
-```text
-Next.js
-    ↓
-Supabase server/client APIs
-    ↓
-PostgreSQL
-```
-
-Prisma or another ORM may be introduced later only when a concrete technical requirement justifies the additional abstraction.
-
-Introducing, replacing, or removing the database access layer is an architectural decision.
-
-Do not introduce Prisma merely because it is a common Next.js choice.
+Do not introduce an ORM or backend framework without a concrete requirement.
+Choosing the database access layer is an architectural decision.
 
 ---
 
 ## 11. Authentication
 
-The preferred authentication direction is:
-
-```text
-Supabase Auth
-```
+Authentication is not implemented and its provider is undecided.
 
 Authentication implementation must support the role model required by Genshu.
 
@@ -514,11 +479,7 @@ The exact invitation and account-recovery workflows may evolve during MVP implem
 
 ## 12. File Storage
 
-When Genshu requires persistent uploaded files, the preferred MVP storage direction is:
-
-```text
-Supabase Storage
-```
+Persistent file storage is not implemented and its provider is undecided.
 
 Examples may include:
 
@@ -533,19 +494,9 @@ Do not introduce separate object-storage infrastructure unless actual requiremen
 
 ## 13. Deployment Direction
 
-Preferred MVP deployment:
-
-```text
-Next.js application
-    → Vercel
-
-Database / Auth / Storage
-    → Supabase
-```
-
-This is the current preferred direction.
-
-It is not a permanent infrastructure commitment.
+Production deployment is undecided. Do not select a hosting platform for the
+backend before the local PostgreSQL workflow and application requirements are
+defined.
 
 The exact production pricing tier remains an operational decision rather than a project architecture rule.
 
@@ -853,9 +804,11 @@ Current development priority follows this rough order:
 ```text
 foundation
     ↓
-authentication & roles
+frontend UI/UX consistency
     ↓
 basic user / cohort management
+    ↓
+authentication & roles
     ↓
 attendance
     ↓
@@ -865,9 +818,7 @@ assignments
     ↓
 exams
     ↓
-UX refinement
-    ↓
-additional LMS capabilities
+backend persistence and infrastructure
 ```
 
 This ordering may change when implementation dependencies justify it.

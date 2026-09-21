@@ -39,7 +39,7 @@ For any meaningful development task:
 
 1. Read `.ai/PROJECT.md`.
 2. Read `.ai/README.md`.
-3. Identify and read any relevant policy under `.ai/policies/`.
+3. If `.ai/policies/` exists, identify and read only policies relevant to the task.
 4. Identify and load any relevant Agent Skill under `.agents/skills/`.
 5. Read only the feature documentation, source files, and tests relevant to the task.
 6. Inspect the existing implementation before proposing structural changes.
@@ -64,7 +64,7 @@ AI development conventions and playbook structure live in:
 .ai/README.md
 ```
 
-Persistent AI operating rules live in:
+Persistent AI operating rules, when present, live in:
 
 ```text
 .ai/policies/
@@ -76,7 +76,7 @@ Reusable task procedures live in:
 .agents/skills/
 ```
 
-Detailed product and technical documentation lives in:
+Detailed product and technical documentation, when present, lives in:
 
 ```text
 docs/

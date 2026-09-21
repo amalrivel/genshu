@@ -4,7 +4,7 @@ Genshu is a learning-management workspace for Indonesian students in Japanese sc
 
 ## Current MVP
 
-The current application is a frontend-first prototype. Its realistic mock data and role preview are persisted in browser `localStorage`, so changes are local to the current browser and are not yet suitable for shared or official learning history. The planned persistence direction is PostgreSQL/Supabase, but that backend is not implemented yet.
+The current application is a frontend-first prototype. Its realistic mock data and role preview are persisted in browser `localStorage`, so changes are local to the current browser and are not yet suitable for shared or official learning history. The planned persistence direction is local PostgreSQL, but that backend is not implemented yet.
 
 The interface supports Indonesian and Japanese, dark mode, responsive navigation, and mobile-oriented student workflows.
 

@@ -732,9 +732,9 @@
     "semantic_hash": "a2760511c65806022ad20adf74370ff3"
   },
   "src/app/cohorts/[id]/page.tsx": {
-    "mtime": 1789953578.9942505,
-    "seen": 1789953745.0899603,
-    "ast_hash": "09981c80f1f7db72e244c489ba0d1bb9",
+    "mtime": 1789954157.8612177,
+    "seen": 1789954194.3485217,
+    "ast_hash": "cf7a66b15a9f87295f8d882469a84ef8",
     "semantic_hash": ""
   },
   "src/app/cohorts/page.tsx": {
@@ -1326,9 +1326,9 @@
     "semantic_hash": ""
   },
   "src/components/cohorts/cohort-status-badge.tsx": {
-    "mtime": 1789953283.3541408,
-    "seen": 1789953745.0902128,
-    "ast_hash": "976f5be309f3418c913669dea86145ac",
+    "mtime": 1789953773.6045065,
+    "seen": 1789954194.3488607,
+    "ast_hash": "5b04d1f81718a1617b045f066a7c56cb",
     "semantic_hash": ""
   },
   "src/components/ui/destructive-confirm-dialog.tsx": {
@@ -2187,6 +2187,12 @@
     "mtime": 1789859980.0113435,
     "seen": 1789953745.0949292,
     "ast_hash": "feaa2e98ed6b3889fce3edc538318add",
+    "semantic_hash": ""
+  },
+  "src/components/cohorts/cohort-roster-panels.tsx": {
+    "mtime": 1789954162.5399797,
+    "seen": 1789954194.3488584,
+    "ast_hash": "3a06b51c114552a4a66471cc5a6fcf78",
     "semantic_hash": ""
   }
 }

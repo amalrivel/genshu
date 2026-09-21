@@ -405,10 +405,10 @@ function CohortDetailContent() {
             <span>{t("tabExams", { count: cohortExams.length })}</span>
           </TabsTrigger>
         </TabsList>
-        <TabsContent value={activeTab}>
+        <TabsContent value="students">
 
       <CohortRosterPanels
-        activeTab={activeTab === "teachers" ? "teachers" : "students"}
+        activeTab="students"
         cohort={cohort}
         members={members}
         filteredStudents={filteredStudents}
@@ -423,9 +423,29 @@ function CohortDetailContent() {
         tCohorts={tCohorts}
         tCommon={tCommon}
       />
+        </TabsContent>
+
+        <TabsContent value="teachers">
+          <CohortRosterPanels
+            activeTab="teachers"
+            cohort={cohort}
+            members={members}
+            filteredStudents={filteredStudents}
+            canManage={canManage}
+            studentSearch={studentSearch}
+            onStudentSearchChange={setStudentSearch}
+            onEnrollStudent={() => setEnrollStudentModalOpen("open")}
+            onAssignStaff={() => setAssignTeacherModalOpen(true)}
+            onSelectStudent={setSelectedStudent}
+            onRequestRemove={(userId) => setPendingDestructiveAction({ type: "remove-member", userId })}
+            t={t}
+            tCohorts={tCohorts}
+            tCommon={tCommon}
+          />
+        </TabsContent>
 
       {/* Tab Content 3: Attendance Sessions */}
-      {activeTab === "attendance" && (
+      <TabsContent value="attendance">
         <div className="space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
@@ -505,10 +525,10 @@ function CohortDetailContent() {
             </div>
           )}
         </div>
-      )}
+      </TabsContent>
 
       {/* Tab Content 4: Practice Sets */}
-      {activeTab === "practice" && (
+      <TabsContent value="practice">
         <div className="space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
@@ -572,10 +592,10 @@ function CohortDetailContent() {
             </div>
           )}
         </div>
-      )}
+      </TabsContent>
 
       {/* Tab Content 5: Assignments */}
-      {activeTab === "assignments" && (
+      <TabsContent value="assignments">
         <div className="space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
@@ -650,10 +670,10 @@ function CohortDetailContent() {
             </div>
           )}
         </div>
-      )}
+      </TabsContent>
 
       {/* Tab Content 6: Exams */}
-      {activeTab === "exams" && (
+      <TabsContent value="exams">
         <div className="space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
@@ -734,8 +754,7 @@ function CohortDetailContent() {
             </div>
           )}
         </div>
-      )}
-        </TabsContent>
+      </TabsContent>
       </Tabs>
 
       {/* Modal: Enroll Existing Student */}

@@ -678,9 +678,9 @@
     "semantic_hash": "98087aedd18375666dbb093c859b2949"
   },
   "AGENTS.md": {
-    "mtime": 1789870566.4629836,
-    "seen": 1789876502.2614958,
-    "ast_hash": "940f3ec2fa22ee0296a3665a2dbc434c",
+    "mtime": 1789955822.0372639,
+    "seen": 1789956000.1669075,
+    "ast_hash": "ff573951511f19c9c34ddf1d6bab6bb3",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
@@ -690,9 +690,9 @@
     "semantic_hash": "5c27369b226fcf2be8a6cfe52224e767"
   },
   "README.md": {
-    "mtime": 1789953251.4172287,
-    "seen": 1789953745.0949945,
-    "ast_hash": "ef2fdef6e9ac2c405b086082faddff78",
+    "mtime": 1789955821.9041362,
+    "seen": 1789956000.1669412,
+    "ast_hash": "2482aede2e786d030f7f267f0c6cf47a",
     "semantic_hash": ""
   },
   ".agents/skills/shadcn/assets/shadcn-small.png": {
@@ -732,9 +732,9 @@
     "semantic_hash": "a2760511c65806022ad20adf74370ff3"
   },
   "src/app/cohorts/[id]/page.tsx": {
-    "mtime": 1789954157.8612177,
-    "seen": 1789954194.3485217,
-    "ast_hash": "cf7a66b15a9f87295f8d882469a84ef8",
+    "mtime": 1789955795.1289513,
+    "seen": 1789956000.1532388,
+    "ast_hash": "b721d465968fc0642b06b0a7470893ed",
     "semantic_hash": ""
   },
   "src/app/cohorts/page.tsx": {
@@ -2178,9 +2178,9 @@
     "semantic_hash": ""
   },
   ".ai/PROJECT.md": {
-    "mtime": 1789859993.5683684,
-    "seen": 1789953745.0949278,
-    "ast_hash": "66a8ad03413593963728acf46302606b",
+    "mtime": 1789955852.2157714,
+    "seen": 1789956000.1668727,
+    "ast_hash": "dd03973cf87dae9cb8f9780eb0aa7009",
     "semantic_hash": ""
   },
   ".ai/README.md": {
