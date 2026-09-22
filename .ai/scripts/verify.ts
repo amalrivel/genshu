@@ -95,12 +95,12 @@ async function verify() {
   await run("[1/6] TypeScript typecheck", ["bun", "run", "typecheck"])
   await run("[2/6] ESLint", ["bun", "run", "lint"])
   await validateLocales()
-  await run("[4/6] Production build", ["bun", "run", "build"], BUILD_TIMEOUT_MS)
 
   const graphifyBefore = await output(["git", "diff", "HEAD", "--binary", "--", "graphify-out"])
-  await run("[5/6] Graphify update", ["graphify", "update", "."])
+  await run("[4/6] Graphify update", ["graphify", "update", "."])
   const graphifyAfter = await output(["git", "diff", "HEAD", "--binary", "--", "graphify-out"])
-  await run("[6/6] Git diff check", ["git", "diff", "--check"])
+  await run("[5/6] Git diff check", ["git", "diff", "--check"])
+  await run("[6/6] Production build", ["bun", "run", "build"], BUILD_TIMEOUT_MS)
 
   console.log("\nVerification passed.")
   console.log(`Graphify: ${graphifyBefore === graphifyAfter ? "already current (no tracked changes)." : "produced tracked changes."}`)

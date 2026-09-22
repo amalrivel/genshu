@@ -9357,7 +9357,7 @@
       "file_type": "code",
       "norm_label": "isobject()",
       "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L8"
+      "source_location": "L10"
     },
     {
       "id": "ai_scripts_verify_keytypes",
@@ -9369,7 +9369,7 @@
       "file_type": "code",
       "norm_label": "keytypes()",
       "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L42"
+      "source_location": "L62"
     },
     {
       "id": "ai_scripts_verify_output",
@@ -9381,7 +9381,7 @@
       "file_type": "code",
       "norm_label": "output()",
       "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L24"
+      "source_location": "L44"
     },
     {
       "id": "ai_scripts_verify_readlocale",
@@ -9393,7 +9393,7 @@
       "file_type": "code",
       "norm_label": "readlocale()",
       "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L32"
+      "source_location": "L52"
     },
     {
       "id": "ai_scripts_verify_run",
@@ -9405,7 +9405,7 @@
       "file_type": "code",
       "norm_label": "run()",
       "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L12"
+      "source_location": "L14"
     },
     {
       "id": "ai_scripts_verify_validatelocales",
@@ -9417,7 +9417,7 @@
       "file_type": "code",
       "norm_label": "validatelocales()",
       "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L52"
+      "source_location": "L72"
     },
     {
       "id": "ai_scripts_verify_verify",
@@ -9429,7 +9429,7 @@
       "file_type": "code",
       "norm_label": "verify()",
       "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L74"
+      "source_location": "L94"
     },
     {
       "id": "agents_skills_brand_scripts_sync_brand_to_tokens_adjustbrightness",
@@ -47985,7 +47985,7 @@
       "file_type": "code",
       "norm_label": "locales",
       "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L3"
+      "source_location": "L5"
     },
     {
       "id": "agents_skills_brand_scripts_sync_brand_to_tokens",
@@ -81316,7 +81316,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L47",
+      "source_location": "L67",
       "weight": 1.0
     },
     {
@@ -81328,7 +81328,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L35",
+      "source_location": "L55",
       "weight": 1.0
     },
     {
@@ -81340,7 +81340,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L55",
+      "source_location": "L75",
       "weight": 1.0
     },
     {
@@ -81352,31 +81352,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L56",
-      "weight": 1.0
-    },
-    {
-      "source": "ai_scripts_verify_verify",
-      "target": "ai_scripts_verify_run",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L75",
-      "weight": 1.0
-    },
-    {
-      "source": "ai_scripts_verify_verify",
-      "target": "ai_scripts_verify_validatelocales",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L77",
+      "source_location": "L76",
       "weight": 1.0
     },
     {
@@ -81388,7 +81364,31 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L81",
+      "source_location": "L100",
+      "weight": 1.0
+    },
+    {
+      "source": "ai_scripts_verify_verify",
+      "target": "ai_scripts_verify_run",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": ".ai/scripts/verify.ts",
+      "source_location": "L95",
+      "weight": 1.0
+    },
+    {
+      "source": "ai_scripts_verify_verify",
+      "target": "ai_scripts_verify_validatelocales",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": ".ai/scripts/verify.ts",
+      "source_location": "L97",
       "weight": 1.0
     },
     {
@@ -129575,13 +129575,24 @@
     },
     {
       "source": "ai_scripts_verify",
+      "target": "ai_scripts_verify_isobject",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".ai/scripts/verify.ts",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "ai_scripts_verify",
       "target": "ai_scripts_verify_run",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L12",
+      "source_location": "L14",
       "weight": 1.0
     },
     {
@@ -129592,7 +129603,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L24",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -129603,7 +129614,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L3",
+      "source_location": "L5",
       "weight": 1.0
     },
     {
@@ -129614,7 +129625,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L32",
+      "source_location": "L52",
       "weight": 1.0
     },
     {
@@ -129625,7 +129636,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L42",
+      "source_location": "L62",
       "weight": 1.0
     },
     {
@@ -129636,7 +129647,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L52",
+      "source_location": "L72",
       "weight": 1.0
     },
     {
@@ -129647,18 +129658,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L74",
-      "weight": 1.0
-    },
-    {
-      "source": "ai_scripts_verify",
-      "target": "ai_scripts_verify_isobject",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L8",
+      "source_location": "L94",
       "weight": 1.0
     },
     {
@@ -140779,5 +140779,5 @@
       "source_file": ".agents/skills/vercel-react-best-practices/rules/rendering-usetransition-loading.md"
     }
   ],
-  "built_at_commit": "4c9a4269e19a8e4336d9402391ab3edd18f9f8a6"
+  "built_at_commit": "d792a525e5a702299075025a91a8cf359e44cff7"
 }

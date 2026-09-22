@@ -81357,18 +81357,6 @@
     },
     {
       "source": "ai_scripts_verify_verify",
-      "target": "ai_scripts_verify_output",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": ".ai/scripts/verify.ts",
-      "source_location": "L100",
-      "weight": 1.0
-    },
-    {
-      "source": "ai_scripts_verify_verify",
       "target": "ai_scripts_verify_run",
       "relation": "calls",
       "_origin": "ast",
@@ -81389,6 +81377,18 @@
       "context": "call",
       "source_file": ".ai/scripts/verify.ts",
       "source_location": "L97",
+      "weight": 1.0
+    },
+    {
+      "source": "ai_scripts_verify_verify",
+      "target": "ai_scripts_verify_output",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": ".ai/scripts/verify.ts",
+      "source_location": "L99",
       "weight": 1.0
     },
     {
@@ -140779,5 +140779,5 @@
       "source_file": ".agents/skills/vercel-react-best-practices/rules/rendering-usetransition-loading.md"
     }
   ],
-  "built_at_commit": "d792a525e5a702299075025a91a8cf359e44cff7"
+  "built_at_commit": "fa66ee8075c99eea3b5586e86e04b90fb6cbc57d"
 }

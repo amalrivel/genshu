@@ -1,7 +1,7 @@
 # Graph Report - genshu  (2026-09-22)
 
 ## Corpus Check
-- 356 files · ~530,508 words
+- 356 files · ~530,584 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `4c9a4269`
+- Built from commit: `d792a525`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 

@@ -2196,9 +2196,9 @@
     "semantic_hash": ""
   },
   ".ai/scripts/verify.ts": {
-    "mtime": 1790034824.4632614,
-    "seen": 1790035200.3317177,
-    "ast_hash": "8d721a629fa7f7c9e22f425ada132c75",
+    "mtime": 1790035594.3346174,
+    "seen": 1790035617.2764323,
+    "ast_hash": "29ced3e9de7af322423b1ae9c399a25b",
     "semantic_hash": ""
   }
 }
