@@ -1,4 +1,6 @@
 type JsonObject = Record<string, unknown>
+const BUILD_TIMEOUT_MS = 5 * 60 * 1000
+const TERMINATION_GRACE_PERIOD_MS = 5 * 1000
 
 const locales = [
   ["Indonesian", "messages/id.json"],
@@ -9,15 +11,33 @@ function isObject(value: unknown): value is JsonObject {
   return typeof value === "object" && value !== null && !Array.isArray(value)
 }
 
-async function run(label: string, command: string[]) {
+async function run(label: string, command: string[], timeoutMs?: number) {
   console.log(`\n${label}`)
-  const process = Bun.spawn(command, {
+  const child = Bun.spawn(command, {
     stdin: "ignore",
     stdout: "inherit",
     stderr: "inherit",
+    ...(timeoutMs
+      ? {
+          env: { ...process.env, BUN_FEATURE_FLAG_NO_ORPHANS: "1" },
+        }
+      : {}),
   })
 
-  const exitCode = await process.exited
+  let timedOut = false
+  let forceKillTimer: ReturnType<typeof setTimeout> | undefined
+  const timeout = timeoutMs
+    ? setTimeout(() => {
+        timedOut = true
+        child.kill("SIGTERM")
+        forceKillTimer = setTimeout(() => child.kill("SIGKILL"), TERMINATION_GRACE_PERIOD_MS)
+      }, timeoutMs)
+    : undefined
+
+  const exitCode = await child.exited
+  if (timeout) clearTimeout(timeout)
+  if (forceKillTimer) clearTimeout(forceKillTimer)
+  if (timedOut) throw new Error(`${label} timed out after ${timeoutMs}ms`)
   if (exitCode !== 0) throw new Error(`${label} failed with exit code ${exitCode}`)
 }
 
@@ -75,12 +95,12 @@ async function verify() {
   await run("[1/6] TypeScript typecheck", ["bun", "run", "typecheck"])
   await run("[2/6] ESLint", ["bun", "run", "lint"])
   await validateLocales()
-  await run("[4/6] Production build", ["bun", "run", "build"])
-  await run("[5/6] Git diff check", ["git", "diff", "--check"])
+  await run("[4/6] Production build", ["bun", "run", "build"], BUILD_TIMEOUT_MS)
 
   const graphifyBefore = await output(["git", "diff", "HEAD", "--binary", "--", "graphify-out"])
-  await run("[6/6] Graphify update", ["graphify", "update", "."])
+  await run("[5/6] Graphify update", ["graphify", "update", "."])
   const graphifyAfter = await output(["git", "diff", "HEAD", "--binary", "--", "graphify-out"])
+  await run("[6/6] Git diff check", ["git", "diff", "--check"])
 
   console.log("\nVerification passed.")
   console.log(`Graphify: ${graphifyBefore === graphifyAfter ? "already current (no tracked changes)." : "produced tracked changes."}`)

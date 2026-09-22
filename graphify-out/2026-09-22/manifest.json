@@ -24,9 +24,9 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1789953237.345199,
-    "seen": 1789953745.0897706,
-    "ast_hash": "b1604504ae1201d25b76ce4900521752",
+    "mtime": 1790032044.6011775,
+    "seen": 1790032950.6445715,
+    "ast_hash": "697c31e54c9f986a2ec9898a57df8fae",
     "semantic_hash": ""
   },
   "postcss.config.mjs": {
@@ -678,9 +678,9 @@
     "semantic_hash": "98087aedd18375666dbb093c859b2949"
   },
   "AGENTS.md": {
-    "mtime": 1789955822.0372639,
-    "seen": 1789956000.1669075,
-    "ast_hash": "ff573951511f19c9c34ddf1d6bab6bb3",
+    "mtime": 1790032044.6781774,
+    "seen": 1790032950.650738,
+    "ast_hash": "185e63f37b963d5ee70c14f68e613ed9",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
@@ -798,15 +798,15 @@
     "semantic_hash": "cb56bf002d36bb860c3d320a23bd871a"
   },
   "messages/id.json": {
-    "mtime": 1789985517.79972,
-    "seen": 1789986922.8794441,
-    "ast_hash": "8d6af47257841139864a2137055d1387",
+    "mtime": 1790020078.2939532,
+    "seen": 1790032950.6445503,
+    "ast_hash": "ffc14c61997a5d5cde15be058c5be353",
     "semantic_hash": ""
   },
   "messages/ja.json": {
-    "mtime": 1789985530.7853248,
-    "seen": 1789986922.8794463,
-    "ast_hash": "68a061de431639d999c4c42cbd3ca068",
+    "mtime": 1790020070.7002864,
+    "seen": 1790032950.6445515,
+    "ast_hash": "5601be6164d219658e8bf99c612c980c",
     "semantic_hash": ""
   },
   "src/app/assignments/[id]/page.tsx": {
@@ -834,15 +834,15 @@
     "semantic_hash": ""
   },
   "src/app/exams/[id]/page.tsx": {
-    "mtime": 1789878412.2016697,
-    "seen": 1789878865.3110769,
-    "ast_hash": "8b7f10500f4893951cdfea6903399e87",
+    "mtime": 1790020173.765611,
+    "seen": 1790032950.6447392,
+    "ast_hash": "0e20973b78b07e7fff6acd700ff756ee",
     "semantic_hash": ""
   },
   "src/app/exams/page.tsx": {
-    "mtime": 1789878512.2987413,
-    "seen": 1789878865.3110776,
-    "ast_hash": "28c4d09027868102f4a005ca1df7ed55",
+    "mtime": 1790020170.6892776,
+    "seen": 1790032950.64474,
+    "ast_hash": "df4c5211fdb4208e4c701cbcc29dd2c2",
     "semantic_hash": ""
   },
   "src/app/practice/[id]/page.tsx": {
@@ -2193,6 +2193,12 @@
     "mtime": 1789954162.5399797,
     "seen": 1789954194.3488584,
     "ast_hash": "3a06b51c114552a4a66471cc5a6fcf78",
+    "semantic_hash": ""
+  },
+  ".ai/scripts/verify.ts": {
+    "mtime": 1790032489.2605112,
+    "seen": 1790032950.6445107,
+    "ast_hash": "b610e38494732474c40a3ef00de5115e",
     "semantic_hash": ""
   }
 }
