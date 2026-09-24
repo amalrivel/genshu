@@ -38,6 +38,24 @@
     "notFoundTitle": "ページが見つかりません",
     "notFoundDesc": "指定されたページは存在しないか、移動された可能性があります。"
   },
+  "materials": {
+    "badge": "公開済み教材",
+    "title": "学習教材",
+    "description": "公開された日本語教材を読めます。ログインは必要ありません。",
+    "listTitle": "教材一覧",
+    "publishedNote": "公開教材はすべての端末で共通です。",
+    "emptyTitle": "公開教材はまだありません",
+    "emptyDescription": "教材が公開されると、ここに表示されます。",
+    "readMaterial": "教材を読む",
+    "updated": "更新日 {date}",
+    "backToMaterials": "教材一覧へ戻る",
+    "showFurigana": "ふりがなを表示",
+    "hideFurigana": "ふりがなを隠す",
+    "showTranslation": "インドネシア語訳を表示",
+    "hideTranslation": "インドネシア語訳を隠す",
+    "translation": "インドネシア語の説明",
+    "japaneseOriginal": "日本語の本文"
+  },
   "nav": {
     "dashboard": "概要",
     "dashboardFull": "概要 / Dashboard",
@@ -45,6 +63,7 @@
     "attendanceFull": "出席管理 / Attendance",
     "cohorts": "コホート",
     "cohortsFull": "コホート / Cohorts",
+    "materials": "教材",
     "practice": "練習問題",
     "practiceFull": "練習問題 / Practice",
     "assignments": "課題",
@@ -70,7 +89,8 @@
     "preferences": "表示設定",
     "openUtilities": "表示設定を開く",
     "openNavigation": "ナビゲーションを開く",
-    "closeNavigation": "ナビゲーションを閉じる"
+    "closeNavigation": "ナビゲーションを閉じる",
+    "staff": "スタッフ"
   },
   "dashboard": {
     "heroTag": "研修 LMS",
@@ -128,10 +148,10 @@
     "practiceSetsSummary": "利用可能な練習問題 {count} 件",
     "openWorkspace": "ワークスペースを開く",
     "studentProgress": "学習進捗",
-    "programSnapshot": "プログラム概要"
-    ,"statAttendance": "出席セッション"
-    ,"statusActive": "進行中"
-    ,"studentsCount": "学生 {count} 名"
+    "programSnapshot": "プログラム概要",
+    "statAttendance": "出席セッション",
+    "statusActive": "進行中",
+    "studentsCount": "学生 {count} 名"
   },
   "attendance": {
     "badge": "出席・受講管理",
@@ -252,6 +272,8 @@
     "noNote": "備考なし"
   },
   "practice": {
+    "anonymousPracticeNote": "この練習は匿名の学習用です。回答と結果はこのセッション中だけ表示され、学生の成績や履歴として保存されません。",
+    "questionCountValue": "{count} 問",
     "badge": "自主学習・理解度確認",
     "subtitle": "日本語対話型ドリル",
     "title": "練習問題 (Practice Sets)",
@@ -327,6 +349,9 @@
     "questionExplanationPlaceholder": "例: 「顔を洗う」が自然な組み合わせです。"
   },
   "practicePlayer": {
+    "localResultTitle": "練習終了",
+    "localResultDescription": "回答と解説を確認しましょう。この結果は学習セッションのみの表示で、正式な成績や履歴にはなりません。",
+    "localOnlyResult": "このセッションのみ",
     "backToList": "練習問題一覧に戻る",
     "notFoundTitle": "練習問題が見つかりません",
     "notFoundDesc": "指定された問題セットは存在しないか、削除されました。",
@@ -459,15 +484,15 @@
     "noExams": "このコホートに割り当てられた試験はまだありません。",
     "goToExamsModule": "試験モジュールを開く",
     "takeExam": "試験を受ける",
-    "viewExamResults": "結果を確認"
-    ,"emptyValue": "—"
-    ,"questionsSummary": "{count} 問"
-    ,"passScore": "合格 {score}%"
-    ,"passPoints": "合格: {score} 点"
-    ,"submittedSummary": "{submitted}/{total} 提出済み ({graded} 件採点済み)"
-    ,"durationMinutes": "{count} 分"
-    ,"examAttemptsSummary": "{count} 名受験 · {rate}% 合格"
-    ,"openExam": "試験を開く"
+    "viewExamResults": "結果を確認",
+    "emptyValue": "—",
+    "questionsSummary": "{count} 問",
+    "passScore": "合格 {score}%",
+    "passPoints": "合格: {score} 点",
+    "submittedSummary": "{submitted}/{total} 提出済み ({graded} 件採点済み)",
+    "durationMinutes": "{count} 分",
+    "examAttemptsSummary": "{count} 名受験 · {rate}% 合格",
+    "openExam": "試験を開く"
   },
   "users": {
     "badge": "ユーザー台帳",
@@ -830,5 +855,73 @@
     "statCohortAvg": "コホート平均点",
     "statCohortAvgNote": "基準ライン: {score}%",
     "viewStudentProgress": "{name} の進捗を確認"
+  },
+  "staff": {
+    "navStaff": "スタッフ",
+    "loginTitle": "Genshu スタッフログイン",
+    "loginDescription": "招待された先生と担当者向けです。",
+    "forbidden": "このアカウントにはスタッフ権限がありません。",
+    "invalid": "メールアドレスまたはパスワードが正しくありません。",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "signIn": "ログイン",
+    "staffArea": "スタッフページ",
+    "signedInAs": "{name} · {role}",
+    "sensei": "先生",
+    "tantosha": "担当者",
+    "manageMaterials": "教材を管理",
+    "managePractice": "練習を管理",
+    "viewStudentMaterials": "学生向け教材を見る",
+    "signOut": "ログアウト",
+    "backStaff": "スタッフページ",
+    "draftNote": "下書きは学生には表示されません。",
+    "materialsTitle": "教材を管理",
+    "createMaterial": "教材を作成",
+    "editMaterial": "教材を編集",
+    "published": "公開中",
+    "draft": "下書き",
+    "edit": "編集",
+    "backMaterials": "教材を管理",
+    "materialDraftHint": "内容を確認してから公開してください。",
+    "slug": "URL スラッグ",
+    "titleJa": "日本語のタイトル",
+    "titleId": "インドネシア語のタイトル",
+    "summaryJa": "日本語の概要",
+    "summaryId": "インドネシア語の概要",
+    "level": "レベル",
+    "topic": "テーマ",
+    "section": "セクション {number}",
+    "headingJa": "日本語の見出し",
+    "headingId": "インドネシア語の見出し",
+    "bodyJa": "日本語の本文",
+    "bodyId": "インドネシア語の説明",
+    "removeSection": "セクションを削除",
+    "addSection": "セクションを追加",
+    "publishMaterial": "学生に公開する",
+    "saveMaterial": "教材を保存",
+    "practiceTitle": "練習を管理",
+    "createPractice": "練習を作成",
+    "editPractice": "練習を編集",
+    "backPractice": "練習を管理",
+    "setId": "URL ID",
+    "descriptionJa": "日本語の説明",
+    "descriptionId": "インドネシア語の説明",
+    "question": "問題 {number}",
+    "questionType": "問題の種類",
+    "multipleChoice": "選択問題",
+    "trueFalse": "正誤問題",
+    "prompt": "日本語の問題文",
+    "translationId": "インドネシア語訳",
+    "option": "選択肢 {letter}",
+    "correct": "正解",
+    "true": "正しい ○",
+    "false": "誤り ×",
+    "explanationJa": "日本語の解説",
+    "explanationId": "インドネシア語の解説",
+    "removeQuestion": "問題を削除",
+    "addQuestion": "問題を追加",
+    "publishPractice": "学生に公開する",
+    "savePractice": "練習を保存",
+    "saveError": "保存できませんでした。入力内容と未使用の ID を確認してください。"
   }
 }

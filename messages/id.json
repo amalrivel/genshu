@@ -38,6 +38,24 @@
     "notFoundTitle": "Halaman tidak ditemukan",
     "notFoundDesc": "Alamat yang Anda buka tidak tersedia atau sudah dipindahkan."
   },
+  "materials": {
+    "badge": "Materi terbit",
+    "title": "Materi belajar",
+    "description": "Baca materi bahasa Jepang yang telah diterbitkan. Halaman ini dapat dibuka tanpa login.",
+    "listTitle": "Semua materi",
+    "publishedNote": "Materi terbit tersedia bersama untuk semua perangkat.",
+    "emptyTitle": "Belum ada materi terbit",
+    "emptyDescription": "Materi akan muncul di sini setelah diterbitkan.",
+    "readMaterial": "Baca materi",
+    "updated": "Diperbarui {date}",
+    "backToMaterials": "Kembali ke materi",
+    "showFurigana": "Tampilkan furigana",
+    "hideFurigana": "Sembunyikan furigana",
+    "showTranslation": "Tampilkan arti Indonesia",
+    "hideTranslation": "Sembunyikan arti Indonesia",
+    "translation": "Penjelasan bahasa Indonesia",
+    "japaneseOriginal": "Teks bahasa Jepang"
+  },
   "nav": {
     "dashboard": "Dasbor",
     "dashboardFull": "Ringkasan / Dasbor",
@@ -45,6 +63,7 @@
     "attendanceFull": "Manajemen Presensi",
     "cohorts": "Kohort",
     "cohortsFull": "Manajemen Kohort",
+    "materials": "Materi",
     "practice": "Latihan",
     "practiceFull": "Latihan Soal",
     "assignments": "Tugas",
@@ -70,7 +89,8 @@
     "preferences": "Preferensi",
     "openUtilities": "Buka pengaturan tampilan",
     "openNavigation": "Buka navigasi",
-    "closeNavigation": "Tutup navigasi"
+    "closeNavigation": "Tutup navigasi",
+    "staff": "Staf"
   },
   "dashboard": {
     "heroTag": "LMS Pelatihan",
@@ -128,10 +148,10 @@
     "practiceSetsSummary": "{count} set latihan tersedia",
     "openWorkspace": "Buka ruang kerja",
     "studentProgress": "Progres belajar",
-    "programSnapshot": "Ringkasan program"
-    ,"statAttendance": "Sesi presensi"
-    ,"statusActive": "Aktif"
-    ,"studentsCount": "{count} siswa"
+    "programSnapshot": "Ringkasan program",
+    "statAttendance": "Sesi presensi",
+    "statusActive": "Aktif",
+    "studentsCount": "{count} siswa"
   },
   "attendance": {
     "badge": "Presensi & Pembelajaran",
@@ -252,6 +272,8 @@
     "noNote": "Tidak ada catatan"
   },
   "practice": {
+    "anonymousPracticeNote": "Latihan ini anonim dan hanya untuk belajar. Jawaban dan hasil hanya tampak selama sesi ini; tidak disimpan sebagai nilai atau riwayat siswa.",
+    "questionCountValue": "{count} soal",
     "badge": "Latihan Mandiri & Evaluasi",
     "subtitle": "Drill Latihan Pemahaman Bahasa Jepang",
     "title": "Latihan Soal (Practice Sets)",
@@ -327,6 +349,9 @@
     "questionExplanationPlaceholder": "Contoh: 「顔を洗う」が自然な組み合わせです。"
   },
   "practicePlayer": {
+    "localResultTitle": "Latihan selesai",
+    "localResultDescription": "Tinjau jawaban dan pembahasan. Hasil ini hanya untuk sesi belajar Anda dan tidak menjadi nilai resmi atau riwayat.",
+    "localOnlyResult": "Hasil sesi ini saja",
     "backToList": "Kembali ke Daftar Latihan",
     "notFoundTitle": "Set Latihan Tidak Ditemukan",
     "notFoundDesc": "Set latihan yang diminta tidak ada atau telah dihapus.",
@@ -459,15 +484,15 @@
     "noExams": "Belum ada ujian yang ditugaskan ke kohort ini.",
     "goToExamsModule": "Buka Modul Ujian",
     "takeExam": "Mulai Ujian",
-    "viewExamResults": "Lihat Hasil"
-    ,"emptyValue": "—"
-    ,"questionsSummary": "{count} soal"
-    ,"passScore": "Lulus {score}%"
-    ,"passPoints": "Lulus: {score} poin"
-    ,"submittedSummary": "{submitted}/{total} dikumpulkan ({graded} dinilai)"
-    ,"durationMinutes": "{count} menit"
-    ,"examAttemptsSummary": "{count} peserta · {rate}% lulus"
-    ,"openExam": "Buka Ujian"
+    "viewExamResults": "Lihat Hasil",
+    "emptyValue": "—",
+    "questionsSummary": "{count} soal",
+    "passScore": "Lulus {score}%",
+    "passPoints": "Lulus: {score} poin",
+    "submittedSummary": "{submitted}/{total} dikumpulkan ({graded} dinilai)",
+    "durationMinutes": "{count} menit",
+    "examAttemptsSummary": "{count} peserta · {rate}% lulus",
+    "openExam": "Buka Ujian"
   },
   "users": {
     "badge": "Direktori Pengguna",
@@ -830,5 +855,73 @@
     "statCohortAvg": "Rata-rata Kohort",
     "statCohortAvgNote": "Standar kelulusan: {score}%",
     "viewStudentProgress": "Lihat progres {name}"
+  },
+  "staff": {
+    "navStaff": "Staf",
+    "loginTitle": "Masuk staf Genshu",
+    "loginDescription": "Untuk Sensei dan Tantōsha yang sudah diundang.",
+    "forbidden": "Akun ini tidak memiliki akses staf.",
+    "invalid": "Email atau kata sandi tidak cocok.",
+    "email": "Email",
+    "password": "Kata sandi",
+    "signIn": "Masuk",
+    "staffArea": "Ruang staf",
+    "signedInAs": "{name} · {role}",
+    "sensei": "Sensei",
+    "tantosha": "Tantōsha",
+    "manageMaterials": "Kelola materi",
+    "managePractice": "Kelola latihan",
+    "viewStudentMaterials": "Lihat materi siswa",
+    "signOut": "Keluar",
+    "backStaff": "Ruang staf",
+    "draftNote": "Draf tidak terlihat oleh siswa.",
+    "materialsTitle": "Kelola materi",
+    "createMaterial": "Buat materi",
+    "editMaterial": "Edit materi",
+    "published": "Terbit",
+    "draft": "Draf",
+    "edit": "Edit",
+    "backMaterials": "Kelola materi",
+    "materialDraftHint": "Simpan sebagai draf sampai isinya siap.",
+    "slug": "Slug URL",
+    "titleJa": "Judul Jepang",
+    "titleId": "Judul Indonesia",
+    "summaryJa": "Ringkasan Jepang",
+    "summaryId": "Ringkasan Indonesia",
+    "level": "Level",
+    "topic": "Topik",
+    "section": "Bagian {number}",
+    "headingJa": "Subjudul Jepang",
+    "headingId": "Subjudul Indonesia",
+    "bodyJa": "Teks Jepang",
+    "bodyId": "Penjelasan Indonesia",
+    "removeSection": "Hapus bagian",
+    "addSection": "Tambah bagian",
+    "publishMaterial": "Terbitkan untuk siswa",
+    "saveMaterial": "Simpan materi",
+    "practiceTitle": "Kelola latihan",
+    "createPractice": "Buat latihan",
+    "editPractice": "Edit latihan",
+    "backPractice": "Kelola latihan",
+    "setId": "ID URL",
+    "descriptionJa": "Deskripsi Jepang",
+    "descriptionId": "Deskripsi Indonesia",
+    "question": "Soal {number}",
+    "questionType": "Jenis soal",
+    "multipleChoice": "Pilihan ganda",
+    "trueFalse": "Benar / salah",
+    "prompt": "Pertanyaan Jepang",
+    "translationId": "Terjemahan pertanyaan Indonesia",
+    "option": "Pilihan {letter}",
+    "correct": "Jawaban benar",
+    "true": "Benar ○",
+    "false": "Salah ×",
+    "explanationJa": "Pembahasan Jepang",
+    "explanationId": "Pembahasan Indonesia",
+    "removeQuestion": "Hapus soal",
+    "addQuestion": "Tambah soal",
+    "publishPractice": "Terbitkan untuk siswa",
+    "savePractice": "Simpan latihan",
+    "saveError": "Gagal menyimpan. Periksa isian dan pastikan ID belum digunakan."
   }
 }

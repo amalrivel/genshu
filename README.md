@@ -2,11 +2,20 @@
 
 Genshu is a learning-management workspace for Indonesian students in Japanese scholarship learning programs. It supports three simulated roles—Gakusei, Sensei, and Tantōsha—with workflows for attendance, practice, assignments, exams, cohorts, and users.
 
-## Current MVP
+## Current release work
 
-The current application is a frontend-first prototype. Its realistic mock data and role preview are persisted in browser `localStorage`, so changes are local to the current browser and are not yet suitable for shared or official learning history. The planned persistence direction is local PostgreSQL, but that backend is not implemented yet.
+Published materials and anonymous practice now read shared content from local
+PostgreSQL. Student answers are temporary and are not official records. Staff
+login and content authoring use Supabase Auth plus server-side role checks, but
+need a configured Supabase project and end-to-end browser verification before
+release. Attendance, assignments, exams, cohort management, and user management
+still use prototype data and are hidden in production until released separately.
 
-The interface supports Indonesian and Japanese, dark mode, responsive navigation, and mobile-oriented student workflows.
+Vercel and Supabase PostgreSQL are the initial deployment targets. Development
+remains local-first with versioned database migrations.
+
+The interface supports Indonesian and Japanese, dark mode, responsive navigation,
+and mobile-oriented student workflows.
 
 ## Development
 

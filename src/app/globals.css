@@ -284,6 +284,13 @@
     @apply border-t border-border bg-background px-4 py-4 md:hidden;
   }
 
+  @media (min-width: 48rem) {
+    .mobile-menu-trigger,
+    .mobile-navigation {
+      display: none !important;
+    }
+  }
+
   .mobile-nav-label {
     @apply px-3 pb-1 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground;
   }

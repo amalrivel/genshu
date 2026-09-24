@@ -164,24 +164,43 @@ AI agents must never interpret long-term vision as permission to implement futur
 
 ---
 
-## 5. Current MVP
+## 5. Release Scope
 
-The first usable MVP focuses on four primary learning functions:
+### First live release
 
-1. Attendance
-2. Practice
-3. Assignments
-4. Exams
+The first live release has two student workflows:
 
-Supporting functionality may be implemented when required for these workflows.
+1. Read published learning materials without signing in.
+2. Complete practice questions without signing in or creating official attempt history.
 
-The goal of the MVP is not maximum feature coverage.
+Sensei sign in to author and publish content. Tantōsha sign in for permitted
+coordination and oversight; content authoring is not granted by default. These
+permissions must be enforced server-side. Published materials and questions
+are shared data and must persist on the server. Anonymous practice answers may remain temporary browser state;
+they must not be presented as official student records.
 
-The goal is to provide a small set of genuinely usable workflows with good UX.
+The current attendance, assignment, and exam screens are prototype workflows.
+They are hidden on production routes and must not be described or exposed as
+operational features until each has server persistence, appropriate identity
+and authorization, and end-to-end verification. Release those features incrementally after the first live release.
+
+The broader MVP still aims to include attendance, practice, assignments, and
+exams. The first live release is deliberately smaller than that broader MVP.
+
+### Learning materials
+
+Students should be able to find and read published Japanese learning materials
+comfortably on phones and desktop browsers. Supporting Indonesian explanations
+and optional furigana may be used where appropriate. Staff need a simple way to
+publish and correct materials. Staff login and authoring UI now exist in code but await integration testing
+against a Supabase project. Sample content is managed through versioned local
+SQL seed data. The
+exact authoring model should follow real content needs, without a speculative
+course hierarchy.
 
 ---
 
-### 5.1 Attendance
+### Later release: Attendance
 
 The system should allow relevant users to record and review student attendance.
 
@@ -198,7 +217,7 @@ Do not build without a concrete requirement:
 
 ---
 
-### 5.2 Practice
+### First live release: Practice
 
 Sensei can create practice activities for students.
 
@@ -219,7 +238,7 @@ Students should be able to review answers and explanations after completing or s
 
 ---
 
-### 5.3 Assignments
+### Later release: Assignments
 
 Sensei can create assignments and assign them to students.
 
@@ -236,7 +255,7 @@ Avoid advanced assignment workflows until actual requirements exist.
 
 ---
 
-### 5.4 Exams
+### Later release: Exams
 
 The system should support exam-style assessments.
 
@@ -336,6 +355,11 @@ Exact class and cohort modeling remains an open decision.
 
 Genshu does not require public self-registration for the initial MVP.
 
+The first live release requires accounts only for Sensei and Tantōsha.
+Students may read published materials and complete anonymous practice without
+accounts. Student accounts and official per-student records belong to later
+releases.
+
 Accounts are managed by authorized program users.
 
 Both:
@@ -423,13 +447,17 @@ The goal is to build a coherent Genshu interface.
 
 ## 10. Data Platform
 
-Genshu's planned persistent database is PostgreSQL.
+Genshu's planned persistent database is PostgreSQL, hosted initially by
+Supabase for the first live release.
 
-The current frontend prototype intentionally uses mock data and browser
-`localStorage`. No persistent backend is implemented yet.
+Published materials and practice sets are stored in PostgreSQL and read by
+server-side Next.js code. Anonymous practice answers and scores remain in the
+current browser session only; they are not official records. Other workflows
+outside the first live release may still use prototype mock data and
+`localStorage`.
 
-When backend work begins, development should start with a local PostgreSQL
-workflow. Supabase is not part of the current architecture.
+Development uses local PostgreSQL and versioned repository migrations.
+Supabase is the selected initial production database host.
 
 ---
 
@@ -454,16 +482,30 @@ Do not treat manually configured remote database state as the source of truth.
 
 ### Database Access Layer
 
-The access layer is undecided until persistent backend work begins.
+Published learning content uses the `postgres` (Postgres.js) driver from
+server-only Next.js code with parameterized SQL. This keeps the small initial
+schema direct and avoids an ORM. The private `POSTGRES_URL` connection is never
+sent to browsers; student queries explicitly filter for published rows. RLS is
+enabled and public Supabase roles have no table grants or policies. Anonymous
+routes have no content mutation handlers.
 
-Do not introduce an ORM or backend framework without a concrete requirement.
-Choosing the database access layer is an architectural decision.
+Local schema changes are versioned SQL migrations under `db/migrations/` and
+are applied with the repository Bun scripts and `psql`. `db/seed.sql` contains
+repeatable sample material, practice, and unpublished rows. Supabase remains
+the initial hosting target; its runtime connection should use the connection
+pooler that matches the selected deployment runtime.
 
 ---
 
 ## 11. Authentication
 
-Authentication is not implemented and its provider is undecided.
+The staff login implementation uses Supabase Auth with cookie-based sessions.
+Sensei and Tantōsha access is determined by active rows in the server-side
+staff_members table, not user-editable profile metadata. Content mutations
+require the Sensei role inside each Server Action. No public registration is
+provided. This integration still requires a Supabase project, provisioned staff
+accounts, and browser verification before release. Anonymous student access
+must never grant content editing privileges.
 
 Authentication implementation must support the role model required by Genshu.
 
@@ -494,9 +536,15 @@ Do not introduce separate object-storage infrastructure unless actual requiremen
 
 ## 13. Deployment Direction
 
-Production deployment is undecided. Do not select a hosting platform for the
-backend before the local PostgreSQL workflow and application requirements are
-defined.
+The selected initial production target is Vercel for the single Next.js
+application and Supabase for PostgreSQL. The repository's main branch is the
+intended production branch; use preview deployments to review changes before
+merging. Production setup remains pending until the local database workflow,
+staff access, content persistence, and release verification are implemented.
+
+Keep deployment configuration and database migrations reproducible. Plan for
+backups, restoration, and application rollback before relying on production
+data. A code rollback does not reverse a database migration automatically.
 
 The exact production pricing tier remains an operational decision rather than a project architecture rule.
 
@@ -797,28 +845,26 @@ If sources disagree, identify the mismatch rather than silently normalizing it.
 
 ---
 
-## 24. Current MVP Priorities
+## 24. Current Release Priorities
 
 Current development priority follows this rough order:
 
 ```text
-foundation
+confirm first-release content and access needs
     ↓
-frontend UI/UX consistency
+local PostgreSQL workflow and versioned migrations
     ↓
-basic user / cohort management
+published material and practice persistence
     ↓
-authentication & roles
+staff authentication and server-side authorization
     ↓
-attendance
+student reading and anonymous practice on mobile and desktop
     ↓
-practice
+verification, backup and restore rehearsal, preview deployment
     ↓
-assignments
+first live release
     ↓
-exams
-    ↓
-backend persistence and infrastructure
+attendance, assignments, exams in separately verified releases
 ```
 
 This ordering may change when implementation dependencies justify it.
@@ -871,6 +917,8 @@ The following areas are intentionally not fully specified yet:
 - production deployment pricing tier,
 - detailed course-authoring workflow,
 - exact account invitation and recovery workflows,
+- staff authentication provider and database access layer,
+- first-release material format and publishing workflow,
 - and future organization structure.
 
 Do not invent elaborate solutions for these areas.

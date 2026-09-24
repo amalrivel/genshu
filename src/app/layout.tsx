@@ -3,7 +3,7 @@ import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
 import { ThemeProvider } from "@/components/theme-provider";
-import { DataProvider } from "@/lib/data-context";
+import { LegacyDataProvider } from "@/components/legacy-data-provider";
 import { AppHeader } from "@/components/layout/app-header";
 import { cn } from "@/lib/utils";
 
@@ -35,7 +35,7 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <DataProvider>
+            <LegacyDataProvider>
               <a
                 href="#main-content"
                 className="sr-only fixed left-4 top-4 z-[100] rounded-md bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground focus:not-sr-only"
@@ -50,7 +50,7 @@ export default async function RootLayout({
                   <span className="text-[0.7rem]">{tCommon("version")}</span>
                 </div>
               </footer>
-            </DataProvider>
+            </LegacyDataProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
