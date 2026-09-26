@@ -112,6 +112,19 @@
       "source_location": "L13"
     },
     {
+      "id": "src_components_cohorts_cohort_roster_panels_cohortrosterpanelsprops",
+      "label": "CohortRosterPanelsProps",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "cohorts/[id]/page.tsx",
+      "file_type": "code",
+      "norm_label": "cohortrosterpanelsprops",
+      "source_file": "src/components/cohorts/cohort-roster-panels.tsx",
+      "source_location": "L19"
+    },
+    {
       "id": "src_components_cohorts_cohort_roster_panels_translation",
       "label": "Translation",
       "_callable": true,
@@ -331,19 +344,6 @@
       "norm_label": "jsonobject",
       "source_file": ".ai/scripts/verify.ts",
       "source_location": "L1"
-    },
-    {
-      "id": "src_components_cohorts_cohort_roster_panels_cohortrosterpanelsprops",
-      "label": "CohortRosterPanelsProps",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "data-context.tsx",
-      "file_type": "code",
-      "norm_label": "cohortrosterpanelsprops",
-      "source_file": "src/components/cohorts/cohort-roster-panels.tsx",
-      "source_location": "L19"
     },
     {
       "id": "src_lib_data_context_datacontexttype",
@@ -697,45 +697,6 @@
       "source_location": "L44"
     },
     {
-      "id": "src_lib_database_types_database",
-      "label": "Database",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "createClient",
-      "file_type": "code",
-      "norm_label": "database",
-      "source_file": "src/lib/database.types.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "src_lib_database_types_json",
-      "label": "Json",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "createClient",
-      "file_type": "code",
-      "norm_label": "json",
-      "source_file": "src/lib/database.types.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_lib_database_types_table",
-      "label": "Table",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "createClient",
-      "file_type": "code",
-      "norm_label": "table",
-      "source_file": "src/lib/database.types.ts",
-      "source_location": "L3"
-    },
-    {
       "id": "src_lib_staff_staffmember",
       "label": "StaffMember",
       "_callable": true,
@@ -760,6 +721,45 @@
       "norm_label": "locale",
       "source_file": "src/i18n/request.ts",
       "source_location": "L5"
+    },
+    {
+      "id": "src_lib_database_types_database",
+      "label": "Database",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 95,
+      "community_name": "database.types.ts",
+      "file_type": "code",
+      "norm_label": "database",
+      "source_file": "src/lib/database.types.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "src_lib_database_types_json",
+      "label": "Json",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 95,
+      "community_name": "database.types.ts",
+      "file_type": "code",
+      "norm_label": "json",
+      "source_file": "src/lib/database.types.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_lib_database_types_table",
+      "label": "Table",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 95,
+      "community_name": "database.types.ts",
+      "file_type": "code",
+      "norm_label": "table",
+      "source_file": "src/lib/database.types.ts",
+      "source_location": "L3"
     },
     {
       "id": "src_app_assignments_id_page_assignmentdetailpage",
@@ -1444,6 +1444,90 @@
       "norm_label": "usedata()",
       "source_file": "src/lib/data-context.tsx",
       "source_location": "L977"
+    },
+    {
+      "id": "db_scripts_check_data_api_migration_asuser",
+      "label": "asUser()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 144,
+      "community_name": "check-data-api-migration.js",
+      "file_type": "code",
+      "norm_label": "asuser()",
+      "source_file": "db/scripts/check-data-api-migration.js",
+      "source_location": "L23"
+    },
+    {
+      "id": "db_scripts_check_data_api_migration_denied",
+      "label": "denied()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 144,
+      "community_name": "check-data-api-migration.js",
+      "file_type": "code",
+      "norm_label": "denied()",
+      "source_file": "db/scripts/check-data-api-migration.js",
+      "source_location": "L24"
+    },
+    {
+      "id": "db_scripts_check_data_api_migration_practice",
+      "label": "practice()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 144,
+      "community_name": "check-data-api-migration.js",
+      "file_type": "code",
+      "norm_label": "practice()",
+      "source_file": "db/scripts/check-data-api-migration.js",
+      "source_location": "L19"
+    },
+    {
+      "id": "db_scripts_check_data_api_migration_publicchecks",
+      "label": "publicChecks()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 144,
+      "community_name": "check-data-api-migration.js",
+      "file_type": "code",
+      "norm_label": "publicchecks()",
+      "source_file": "db/scripts/check-data-api-migration.js",
+      "source_location": "L85"
+    },
+    {
+      "id": "db_scripts_check_data_api_client",
+      "label": "client()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 145,
+      "community_name": "check-data-api.js",
+      "file_type": "code",
+      "norm_label": "client()",
+      "source_file": "db/scripts/check-data-api.js",
+      "source_location": "L7"
+    },
+    {
+      "id": "db_scripts_check_data_api_denied",
+      "label": "denied()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 145,
+      "community_name": "check-data-api.js",
+      "file_type": "code",
+      "norm_label": "denied()",
+      "source_file": "db/scripts/check-data-api.js",
+      "source_location": "L13"
+    },
+    {
+      "id": "db_scripts_check_data_api_ok",
+      "label": "ok()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 145,
+      "community_name": "check-data-api.js",
+      "file_type": "code",
+      "norm_label": "ok()",
+      "source_file": "db/scripts/check-data-api.js",
+      "source_location": "L8"
     },
     {
       "id": "src_app_page_home",
@@ -2226,18 +2310,6 @@
       "source_location": "L22"
     },
     {
-      "id": "src_lib_supabase_client_createclient",
-      "label": "createClient()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "createClient",
-      "file_type": "code",
-      "norm_label": "createclient()",
-      "source_file": "src/lib/supabase/client.ts",
-      "source_location": "L4"
-    },
-    {
       "id": "src_lib_supabase_server_createclient",
       "label": "createClient()",
       "_callable": true,
@@ -2250,12 +2322,24 @@
       "source_location": "L9"
     },
     {
+      "id": "src_lib_supabase_client_createclient",
+      "label": "createClient()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 95,
+      "community_name": "database.types.ts",
+      "file_type": "code",
+      "norm_label": "createclient()",
+      "source_file": "src/lib/supabase/client.ts",
+      "source_location": "L4"
+    },
+    {
       "id": "src_lib_supabase_proxy_updatesession",
       "label": "updateSession()",
       "_callable": true,
       "_origin": "ast",
       "community": 95,
-      "community_name": "src/proxy.ts",
+      "community_name": "database.types.ts",
       "file_type": "code",
       "norm_label": "updatesession()",
       "source_file": "src/lib/supabase/proxy.ts",
@@ -2267,7 +2351,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 95,
-      "community_name": "src/proxy.ts",
+      "community_name": "database.types.ts",
       "file_type": "code",
       "norm_label": "proxy()",
       "source_file": "src/proxy.ts",
@@ -2799,7 +2883,7 @@
       "file_type": "concept",
       "norm_label": "lucide-react",
       "source_file": "package.json",
-      "source_location": "L25"
+      "source_location": "L27"
     },
     {
       "id": "ref_next_intl",
@@ -2810,7 +2894,7 @@
       "file_type": "concept",
       "norm_label": "next-intl",
       "source_file": "package.json",
-      "source_location": "L27"
+      "source_location": "L29"
     },
     {
       "id": "ref_react",
@@ -2821,7 +2905,7 @@
       "file_type": "concept",
       "norm_label": "react",
       "source_file": "package.json",
-      "source_location": "L29"
+      "source_location": "L31"
     },
     {
       "id": "package",
@@ -2843,7 +2927,7 @@
       "file_type": "code",
       "norm_label": "ignorescripts",
       "source_file": "package.json",
-      "source_location": "L46"
+      "source_location": "L48"
     },
     {
       "id": "package_name",
@@ -2865,7 +2949,7 @@
       "file_type": "code",
       "norm_label": "packagemanager",
       "source_file": "package.json",
-      "source_location": "L45"
+      "source_location": "L47"
     },
     {
       "id": "package_private",
@@ -2887,7 +2971,7 @@
       "file_type": "code",
       "norm_label": "trusteddependencies",
       "source_file": "package.json",
-      "source_location": "L50"
+      "source_location": "L52"
     },
     {
       "id": "package_version",
@@ -2909,7 +2993,7 @@
       "file_type": "concept",
       "norm_label": "babel-plugin-react-compiler",
       "source_file": "package.json",
-      "source_location": "L39"
+      "source_location": "L41"
     },
     {
       "id": "ref_base_ui_react",
@@ -2920,7 +3004,7 @@
       "file_type": "concept",
       "norm_label": "@base-ui/react",
       "source_file": "package.json",
-      "source_location": "L20"
+      "source_location": "L22"
     },
     {
       "id": "ref_class_variance_authority",
@@ -2931,7 +3015,7 @@
       "file_type": "concept",
       "norm_label": "class-variance-authority",
       "source_file": "package.json",
-      "source_location": "L23"
+      "source_location": "L25"
     },
     {
       "id": "ref_eslint",
@@ -2942,7 +3026,7 @@
       "file_type": "concept",
       "norm_label": "eslint",
       "source_file": "package.json",
-      "source_location": "L40"
+      "source_location": "L42"
     },
     {
       "id": "ref_eslint_config_next",
@@ -2953,7 +3037,7 @@
       "file_type": "concept",
       "norm_label": "eslint-config-next",
       "source_file": "package.json",
-      "source_location": "L41"
+      "source_location": "L43"
     },
     {
       "id": "ref_react_dom",
@@ -2964,7 +3048,7 @@
       "file_type": "concept",
       "norm_label": "react-dom",
       "source_file": "package.json",
-      "source_location": "L30"
+      "source_location": "L32"
     },
     {
       "id": "ref_shadcn",
@@ -2975,18 +3059,7 @@
       "file_type": "concept",
       "norm_label": "shadcn",
       "source_file": "package.json",
-      "source_location": "L31"
-    },
-    {
-      "id": "ref_supabase_supabase_js",
-      "label": "@supabase/supabase-js",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "package.json",
-      "file_type": "concept",
-      "norm_label": "@supabase/supabase-js",
-      "source_file": "package.json",
-      "source_location": "L22"
+      "source_location": "L33"
     },
     {
       "id": "ref_tailwindcss",
@@ -2997,7 +3070,7 @@
       "file_type": "concept",
       "norm_label": "tailwindcss",
       "source_file": "package.json",
-      "source_location": "L42"
+      "source_location": "L44"
     },
     {
       "id": "ref_tailwindcss_postcss",
@@ -3008,7 +3081,7 @@
       "file_type": "concept",
       "norm_label": "@tailwindcss/postcss",
       "source_file": "package.json",
-      "source_location": "L35"
+      "source_location": "L37"
     },
     {
       "id": "ref_tw_animate_css",
@@ -3019,7 +3092,7 @@
       "file_type": "concept",
       "norm_label": "tw-animate-css",
       "source_file": "package.json",
-      "source_location": "L32"
+      "source_location": "L34"
     },
     {
       "id": "ref_types_node",
@@ -3030,7 +3103,7 @@
       "file_type": "concept",
       "norm_label": "@types/node",
       "source_file": "package.json",
-      "source_location": "L36"
+      "source_location": "L38"
     },
     {
       "id": "ref_types_react",
@@ -3041,7 +3114,7 @@
       "file_type": "concept",
       "norm_label": "@types/react",
       "source_file": "package.json",
-      "source_location": "L37"
+      "source_location": "L39"
     },
     {
       "id": "ref_types_react_dom",
@@ -3052,7 +3125,7 @@
       "file_type": "concept",
       "norm_label": "@types/react-dom",
       "source_file": "package.json",
-      "source_location": "L38"
+      "source_location": "L40"
     },
     {
       "id": "ref_typescript",
@@ -3063,7 +3136,7 @@
       "file_type": "concept",
       "norm_label": "typescript",
       "source_file": "package.json",
-      "source_location": "L43"
+      "source_location": "L45"
     },
     {
       "id": "ai_project_9_technical_direction",
@@ -3189,7 +3262,7 @@
       "node_kind": "heading",
       "norm_label": "11. authentication",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L515"
+      "source_location": "L523"
     },
     {
       "id": "ai_project_12_file_storage",
@@ -3201,7 +3274,7 @@
       "node_kind": "heading",
       "norm_label": "12. file storage",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L539"
+      "source_location": "L547"
     },
     {
       "id": "ai_project_13_deployment_direction",
@@ -3213,7 +3286,7 @@
       "node_kind": "heading",
       "norm_label": "13. deployment direction",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L554"
+      "source_location": "L562"
     },
     {
       "id": "ai_project_14_architecture_principle",
@@ -3225,7 +3298,7 @@
       "node_kind": "heading",
       "norm_label": "14. architecture principle",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L602"
+      "source_location": "L610"
     },
     {
       "id": "ai_project_15_anti_overengineering_rules",
@@ -3237,7 +3310,7 @@
       "node_kind": "heading",
       "norm_label": "15. anti-overengineering rules",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L623"
+      "source_location": "L631"
     },
     {
       "id": "ai_project_16_ux_principles",
@@ -3249,7 +3322,7 @@
       "node_kind": "heading",
       "norm_label": "16. ux principles",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L657"
+      "source_location": "L665"
     },
     {
       "id": "ai_project_17_mobile_and_desktop",
@@ -3261,7 +3334,7 @@
       "node_kind": "heading",
       "norm_label": "17. mobile and desktop",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L684"
+      "source_location": "L692"
     },
     {
       "id": "ai_project_18_data_ownership",
@@ -3273,7 +3346,7 @@
       "node_kind": "heading",
       "norm_label": "18. data ownership",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L699"
+      "source_location": "L707"
     },
     {
       "id": "ai_project_19_security_and_permissions",
@@ -3285,7 +3358,7 @@
       "node_kind": "heading",
       "norm_label": "19. security and permissions",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L728"
+      "source_location": "L736"
     },
     {
       "id": "ai_project_1_purpose",
@@ -3309,7 +3382,7 @@
       "node_kind": "heading",
       "norm_label": "20. definition of done",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L755"
+      "source_location": "L763"
     },
     {
       "id": "ai_project_21_architectural_changes",
@@ -3321,7 +3394,7 @@
       "node_kind": "heading",
       "norm_label": "21. architectural changes",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L783"
+      "source_location": "L791"
     },
     {
       "id": "ai_project_22_documentation_rules",
@@ -3333,7 +3406,7 @@
       "node_kind": "heading",
       "norm_label": "22. documentation rules",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L813"
+      "source_location": "L821"
     },
     {
       "id": "ai_project_23_project_knowledge_hierarchy",
@@ -3345,7 +3418,7 @@
       "node_kind": "heading",
       "norm_label": "23. project knowledge hierarchy",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L845"
+      "source_location": "L853"
     },
     {
       "id": "ai_project_24_current_release_priorities",
@@ -3357,7 +3430,7 @@
       "node_kind": "heading",
       "norm_label": "24. current release priorities",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L872"
+      "source_location": "L880"
     },
     {
       "id": "ai_project_25_explicit_mvp_non_goals",
@@ -3369,7 +3442,7 @@
       "node_kind": "heading",
       "norm_label": "25. explicit mvp non-goals",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L900"
+      "source_location": "L908"
     },
     {
       "id": "ai_project_26_open_decisions",
@@ -3381,7 +3454,7 @@
       "node_kind": "heading",
       "norm_label": "26. open decisions",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L930"
+      "source_location": "L938"
     },
     {
       "id": "ai_project_27_product_philosophy",
@@ -3393,7 +3466,7 @@
       "node_kind": "heading",
       "norm_label": "27. product philosophy",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L952"
+      "source_location": "L960"
     },
     {
       "id": "ai_project_28_core_principle",
@@ -3405,7 +3478,7 @@
       "node_kind": "heading",
       "norm_label": "28. core principle",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L986"
+      "source_location": "L994"
     },
     {
       "id": "ai_project_2_product_identity",
@@ -3693,7 +3766,7 @@
       "node_kind": "heading",
       "norm_label": "local learning-content database",
       "source_file": ".ai/README.md",
-      "source_location": "L75"
+      "source_location": "L80"
     },
     {
       "id": "ai_readme_repository_knowledge",
@@ -3705,7 +3778,7 @@
       "node_kind": "heading",
       "norm_label": "repository knowledge",
       "source_file": ".ai/README.md",
-      "source_location": "L68"
+      "source_location": "L73"
     },
     {
       "id": "ai_readme_sources_and_scope",
@@ -3729,7 +3802,7 @@
       "node_kind": "heading",
       "norm_label": "staff access setup",
       "source_file": ".ai/README.md",
-      "source_location": "L93"
+      "source_location": "L98"
     },
     {
       "id": "ai_readme_verification",
@@ -3741,7 +3814,7 @@
       "node_kind": "heading",
       "norm_label": "verification",
       "source_file": ".ai/README.md",
-      "source_location": "L58"
+      "source_location": "L60"
     },
     {
       "id": "agents_skills_supabase_postgres_best_practices_references_data_n_plus_one",
@@ -5218,7 +5291,7 @@
       "label": "0. How generation works",
       "_origin": "ast",
       "community": 137,
-      "community_name": "Test generation (plan \u2192 generate \u2192 heal)",
+      "community_name": "3. Heal",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "0. how generation works",
@@ -5226,11 +5299,203 @@
       "source_location": "L14"
     },
     {
+      "id": "agents_skills_playwright_cli_references_test_generation_1_1_prerequisite_workspace",
+      "label": "1.1 Prerequisite: workspace",
+      "_origin": "ast",
+      "community": 137,
+      "community_name": "3. Heal",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1.1 prerequisite: workspace",
+      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
+      "source_location": "L146"
+    },
+    {
+      "id": "agents_skills_playwright_cli_references_test_generation_1_2_prerequisite_seed_test",
+      "label": "1.2 Prerequisite: seed test",
+      "_origin": "ast",
+      "community": 137,
+      "community_name": "3. Heal",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1.2 prerequisite: seed test",
+      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
+      "source_location": "L162"
+    },
+    {
+      "id": "agents_skills_playwright_cli_references_test_generation_1_3_explore_the_app",
+      "label": "1.3 Explore the app",
+      "_origin": "ast",
+      "community": 137,
+      "community_name": "3. Heal",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1.3 explore the app",
+      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
+      "source_location": "L203"
+    },
+    {
+      "id": "agents_skills_playwright_cli_references_test_generation_1_4_write_the_spec_file",
+      "label": "1.4 Write the spec file",
+      "_origin": "ast",
+      "community": 137,
+      "community_name": "3. Heal",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1.4 write the spec file",
+      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
+      "source_location": "L234"
+    },
+    {
+      "id": "agents_skills_playwright_cli_references_test_generation_1_planning",
+      "label": "1. Planning",
+      "_origin": "ast",
+      "community": 137,
+      "community_name": "3. Heal",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. planning",
+      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
+      "source_location": "L142"
+    },
+    {
+      "id": "agents_skills_playwright_cli_references_test_generation_2_1_inputs",
+      "label": "2.1 Inputs",
+      "_origin": "ast",
+      "community": 137,
+      "community_name": "3. Heal",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2.1 inputs",
+      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
+      "source_location": "L285"
+    },
+    {
+      "id": "agents_skills_playwright_cli_references_test_generation_2_2_generate_one_scenario",
+      "label": "2.2 Generate one scenario",
+      "_origin": "ast",
+      "community": 137,
+      "community_name": "3. Heal",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2.2 generate one scenario",
+      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
+      "source_location": "L291"
+    },
+    {
+      "id": "agents_skills_playwright_cli_references_test_generation_2_3_generate_multiple_scenarios",
+      "label": "2.3 Generate multiple scenarios",
+      "_origin": "ast",
+      "community": 137,
+      "community_name": "3. Heal",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2.3 generate multiple scenarios",
+      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
+      "source_location": "L350"
+    },
+    {
+      "id": "agents_skills_playwright_cli_references_test_generation_2_4_run_generated_tests",
+      "label": "2.4 Run generated tests",
+      "_origin": "ast",
+      "community": 137,
+      "community_name": "3. Heal",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2.4 run generated tests",
+      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
+      "source_location": "L354"
+    },
+    {
+      "id": "agents_skills_playwright_cli_references_test_generation_2_generate",
+      "label": "2. Generate",
+      "_origin": "ast",
+      "community": 137,
+      "community_name": "3. Heal",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. generate",
+      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
+      "source_location": "L281"
+    },
+    {
+      "id": "agents_skills_playwright_cli_references_test_generation_3_1_find_failing_tests",
+      "label": "3.1 Find failing tests",
+      "_origin": "ast",
+      "community": 137,
+      "community_name": "3. Heal",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3.1 find failing tests",
+      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
+      "source_location": "L370"
+    },
+    {
+      "id": "agents_skills_playwright_cli_references_test_generation_3_2_debug_one_failure",
+      "label": "3.2 Debug one failure",
+      "_origin": "ast",
+      "community": 137,
+      "community_name": "3. Heal",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3.2 debug one failure",
+      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
+      "source_location": "L378"
+    },
+    {
+      "id": "agents_skills_playwright_cli_references_test_generation_3_3_apply_the_fix",
+      "label": "3.3 Apply the fix",
+      "_origin": "ast",
+      "community": 137,
+      "community_name": "3. Heal",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3.3 apply the fix",
+      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
+      "source_location": "L401"
+    },
+    {
+      "id": "agents_skills_playwright_cli_references_test_generation_3_4_reconcile_with_the_spec",
+      "label": "3.4 Reconcile with the spec",
+      "_origin": "ast",
+      "community": 137,
+      "community_name": "3. Heal",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3.4 reconcile with the spec",
+      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
+      "source_location": "L407"
+    },
+    {
+      "id": "agents_skills_playwright_cli_references_test_generation_3_5_iteration_and_giving_up",
+      "label": "3.5 Iteration and giving up",
+      "_origin": "ast",
+      "community": 137,
+      "community_name": "3. Heal",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3.5 iteration and giving up",
+      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
+      "source_location": "L420"
+    },
+    {
+      "id": "agents_skills_playwright_cli_references_test_generation_3_heal",
+      "label": "3. Heal",
+      "_origin": "ast",
+      "community": 137,
+      "community_name": "3. Heal",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. heal",
+      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
+      "source_location": "L366"
+    },
+    {
       "id": "agents_skills_playwright_cli_references_test_generation_add_assertions_manually",
       "label": "Add assertions manually",
       "_origin": "ast",
       "community": 137,
-      "community_name": "Test generation (plan \u2192 generate \u2192 heal)",
+      "community_name": "3. Heal",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "add assertions manually",
@@ -5242,7 +5507,7 @@
       "label": "Building a test file",
       "_origin": "ast",
       "community": 137,
-      "community_name": "Test generation (plan \u2192 generate \u2192 heal)",
+      "community_name": "3. Heal",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "building a test file",
@@ -5254,7 +5519,7 @@
       "label": "Cross-references",
       "_origin": "ast",
       "community": 137,
-      "community_name": "Test generation (plan \u2192 generate \u2192 heal)",
+      "community_name": "3. Heal",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "cross-references",
@@ -5266,7 +5531,7 @@
       "label": "Explore before recording",
       "_origin": "ast",
       "community": 137,
-      "community_name": "Test generation (plan \u2192 generate \u2192 heal)",
+      "community_name": "3. Heal",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "explore before recording",
@@ -5278,7 +5543,7 @@
       "label": "Test generation (plan \u2192 generate \u2192 heal)",
       "_origin": "ast",
       "community": 137,
-      "community_name": "Test generation (plan \u2192 generate \u2192 heal)",
+      "community_name": "3. Heal",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "test generation (plan \u2192 generate \u2192 heal)",
@@ -5290,48 +5555,12 @@
       "label": "Use semantic locators",
       "_origin": "ast",
       "community": 137,
-      "community_name": "Test generation (plan \u2192 generate \u2192 heal)",
+      "community_name": "3. Heal",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "use semantic locators",
       "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
       "source_location": "L59"
-    },
-    {
-      "id": "agents_skills_playwright_cli_references_session_management_1_name_browser_sessions_semantically",
-      "label": "1. Name Browser Sessions Semantically",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "Browser Session Management",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. name browser sessions semantically",
-      "source_file": ".agents/skills/playwright-cli/references/session-management.md",
-      "source_location": "L195"
-    },
-    {
-      "id": "agents_skills_playwright_cli_references_session_management_2_always_clean_up",
-      "label": "2. Always Clean Up",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "Browser Session Management",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. always clean up",
-      "source_file": ".agents/skills/playwright-cli/references/session-management.md",
-      "source_location": "L206"
-    },
-    {
-      "id": "agents_skills_playwright_cli_references_session_management_3_delete_stale_browser_data",
-      "label": "3. Delete Stale Browser Data",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "Browser Session Management",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. delete stale browser data",
-      "source_file": ".agents/skills/playwright-cli/references/session-management.md",
-      "source_location": "L220"
     },
     {
       "id": "agents_skills_playwright_cli_references_session_management_a_b_testing_sessions",
@@ -5344,66 +5573,6 @@
       "norm_label": "a/b testing sessions",
       "source_file": ".agents/skills/playwright-cli/references/session-management.md",
       "source_location": "L84"
-    },
-    {
-      "id": "agents_skills_playwright_cli_references_session_management_attach_by_channel_name",
-      "label": "Attach by channel name",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "Browser Session Management",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "attach by channel name",
-      "source_file": ".agents/skills/playwright-cli/references/session-management.md",
-      "source_location": "L112"
-    },
-    {
-      "id": "agents_skills_playwright_cli_references_session_management_attach_via_browser_extension",
-      "label": "Attach via browser extension",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "Browser Session Management",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "attach via browser extension",
-      "source_file": ".agents/skills/playwright-cli/references/session-management.md",
-      "source_location": "L142"
-    },
-    {
-      "id": "agents_skills_playwright_cli_references_session_management_attach_via_cdp_endpoint",
-      "label": "Attach via CDP endpoint",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "Browser Session Management",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "attach via cdp endpoint",
-      "source_file": ".agents/skills/playwright-cli/references/session-management.md",
-      "source_location": "L134"
-    },
-    {
-      "id": "agents_skills_playwright_cli_references_session_management_attaching_to_a_running_browser",
-      "label": "Attaching to a Running Browser",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "Browser Session Management",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "attaching to a running browser",
-      "source_file": ".agents/skills/playwright-cli/references/session-management.md",
-      "source_location": "L108"
-    },
-    {
-      "id": "agents_skills_playwright_cli_references_session_management_best_practices",
-      "label": "Best Practices",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "Browser Session Management",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "best practices",
-      "source_file": ".agents/skills/playwright-cli/references/session-management.md",
-      "source_location": "L193"
     },
     {
       "id": "agents_skills_playwright_cli_references_session_management_browser_session_commands",
@@ -5488,18 +5657,6 @@
       "norm_label": "default browser session",
       "source_file": ".agents/skills/playwright-cli/references/session-management.md",
       "source_location": "L164"
-    },
-    {
-      "id": "agents_skills_playwright_cli_references_session_management_detach",
-      "label": "Detach",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "Browser Session Management",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "detach",
-      "source_file": ".agents/skills/playwright-cli/references/session-management.md",
-      "source_location": "L150"
     },
     {
       "id": "agents_skills_playwright_cli_references_session_management_environment_variable",
@@ -6239,196 +6396,288 @@
       "source_location": "L28"
     },
     {
-      "id": "agents_skills_playwright_cli_references_test_generation_3_1_find_failing_tests",
-      "label": "3.1 Find failing tests",
+      "id": "db_scripts_check_data_api_migration",
+      "label": "check-data-api-migration.js",
       "_origin": "ast",
       "community": 144,
-      "community_name": "3. Heal",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3.1 find failing tests",
-      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
-      "source_location": "L370"
+      "community_name": "check-data-api-migration.js",
+      "file_type": "code",
+      "norm_label": "check-data-api-migration.js",
+      "source_file": "db/scripts/check-data-api-migration.js",
+      "source_location": "L1"
     },
     {
-      "id": "agents_skills_playwright_cli_references_test_generation_3_2_debug_one_failure",
-      "label": "3.2 Debug one failure",
+      "id": "db_scripts_check_data_api_migration_migrations",
+      "label": "migrations",
       "_origin": "ast",
       "community": 144,
-      "community_name": "3. Heal",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3.2 debug one failure",
-      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
-      "source_location": "L378"
+      "community_name": "check-data-api-migration.js",
+      "file_type": "code",
+      "norm_label": "migrations",
+      "source_file": "db/scripts/check-data-api-migration.js",
+      "source_location": "L10"
     },
     {
-      "id": "agents_skills_playwright_cli_references_test_generation_3_3_apply_the_fix",
-      "label": "3.3 Apply the fix",
+      "id": "db_scripts_check_data_api_migration_questions",
+      "label": "questions",
       "_origin": "ast",
       "community": 144,
-      "community_name": "3. Heal",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3.3 apply the fix",
-      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
-      "source_location": "L401"
+      "community_name": "check-data-api-migration.js",
+      "file_type": "code",
+      "norm_label": "questions",
+      "source_file": "db/scripts/check-data-api-migration.js",
+      "source_location": "L15"
     },
     {
-      "id": "agents_skills_playwright_cli_references_test_generation_3_4_reconcile_with_the_spec",
-      "label": "3.4 Reconcile with the spec",
-      "_origin": "ast",
-      "community": 144,
-      "community_name": "3. Heal",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3.4 reconcile with the spec",
-      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
-      "source_location": "L407"
-    },
-    {
-      "id": "agents_skills_playwright_cli_references_test_generation_3_5_iteration_and_giving_up",
-      "label": "3.5 Iteration and giving up",
-      "_origin": "ast",
-      "community": 144,
-      "community_name": "3. Heal",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3.5 iteration and giving up",
-      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
-      "source_location": "L420"
-    },
-    {
-      "id": "agents_skills_playwright_cli_references_test_generation_3_heal",
-      "label": "3. Heal",
-      "_origin": "ast",
-      "community": 144,
-      "community_name": "3. Heal",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. heal",
-      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
-      "source_location": "L366"
-    },
-    {
-      "id": "agents_skills_playwright_cli_references_test_generation_1_1_prerequisite_workspace",
-      "label": "1.1 Prerequisite: workspace",
+      "id": "db_scripts_check_data_api",
+      "label": "check-data-api.js",
       "_origin": "ast",
       "community": 145,
-      "community_name": "1. Planning",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1.1 prerequisite: workspace",
-      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
-      "source_location": "L146"
+      "community_name": "check-data-api.js",
+      "file_type": "code",
+      "norm_label": "check-data-api.js",
+      "source_file": "db/scripts/check-data-api.js",
+      "source_location": "L1"
     },
     {
-      "id": "agents_skills_playwright_cli_references_test_generation_1_2_prerequisite_seed_test",
-      "label": "1.2 Prerequisite: seed test",
+      "id": "db_scripts_check_data_api_material",
+      "label": "material",
       "_origin": "ast",
       "community": 145,
-      "community_name": "1. Planning",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1.2 prerequisite: seed test",
-      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
-      "source_location": "L162"
+      "community_name": "check-data-api.js",
+      "file_type": "code",
+      "norm_label": "material",
+      "source_file": "db/scripts/check-data-api.js",
+      "source_location": "L36"
     },
     {
-      "id": "agents_skills_playwright_cli_references_test_generation_1_3_explore_the_app",
-      "label": "1.3 Explore the app",
+      "id": "db_scripts_check_data_api_missing",
+      "label": "missing",
       "_origin": "ast",
       "community": 145,
-      "community_name": "1. Planning",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1.3 explore the app",
-      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
-      "source_location": "L203"
+      "community_name": "check-data-api.js",
+      "file_type": "code",
+      "norm_label": "missing",
+      "source_file": "db/scripts/check-data-api.js",
+      "source_location": "L19"
     },
     {
-      "id": "agents_skills_playwright_cli_references_test_generation_1_4_write_the_spec_file",
-      "label": "1.4 Write the spec file",
+      "id": "db_scripts_check_data_api_question",
+      "label": "question",
       "_origin": "ast",
       "community": 145,
-      "community_name": "1. Planning",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1.4 write the spec file",
-      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
-      "source_location": "L234"
+      "community_name": "check-data-api.js",
+      "file_type": "code",
+      "norm_label": "question",
+      "source_file": "db/scripts/check-data-api.js",
+      "source_location": "L38"
     },
     {
-      "id": "agents_skills_playwright_cli_references_test_generation_1_planning",
-      "label": "1. Planning",
+      "id": "db_scripts_check_data_api_readers",
+      "label": "readers",
       "_origin": "ast",
       "community": 145,
-      "community_name": "1. Planning",
+      "community_name": "check-data-api.js",
+      "file_type": "code",
+      "norm_label": "readers",
+      "source_file": "db/scripts/check-data-api.js",
+      "source_location": "L18"
+    },
+    {
+      "id": "db_scripts_check_data_api_sections",
+      "label": "sections",
+      "_origin": "ast",
+      "community": 145,
+      "community_name": "check-data-api.js",
+      "file_type": "code",
+      "norm_label": "sections",
+      "source_file": "db/scripts/check-data-api.js",
+      "source_location": "L35"
+    },
+    {
+      "id": "db_scripts_check_data_api_sensei",
+      "label": "sensei",
+      "_origin": "ast",
+      "community": 145,
+      "community_name": "check-data-api.js",
+      "file_type": "code",
+      "norm_label": "sensei",
+      "source_file": "db/scripts/check-data-api.js",
+      "source_location": "L17"
+    },
+    {
+      "id": "db_scripts_check_data_api_set",
+      "label": "set",
+      "_origin": "ast",
+      "community": 145,
+      "community_name": "check-data-api.js",
+      "file_type": "code",
+      "norm_label": "set",
+      "source_file": "db/scripts/check-data-api.js",
+      "source_location": "L37"
+    },
+    {
+      "id": "ref_supabase_supabase_js",
+      "label": "@supabase/supabase-js",
+      "_origin": "ast",
+      "community": 145,
+      "community_name": "check-data-api.js",
+      "file_type": "concept",
+      "norm_label": "@supabase/supabase-js",
+      "source_file": "package.json",
+      "source_location": "L24"
+    },
+    {
+      "id": "agents_skills_playwright_cli_references_session_management_attach_by_channel_name",
+      "label": "Attach by channel name",
+      "_origin": "ast",
+      "community": 146,
+      "community_name": "Attaching to a Running Browser",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "1. planning",
-      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
+      "norm_label": "attach by channel name",
+      "source_file": ".agents/skills/playwright-cli/references/session-management.md",
+      "source_location": "L112"
+    },
+    {
+      "id": "agents_skills_playwright_cli_references_session_management_attach_via_browser_extension",
+      "label": "Attach via browser extension",
+      "_origin": "ast",
+      "community": 146,
+      "community_name": "Attaching to a Running Browser",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "attach via browser extension",
+      "source_file": ".agents/skills/playwright-cli/references/session-management.md",
       "source_location": "L142"
     },
     {
-      "id": "agents_skills_playwright_cli_references_test_generation_2_1_inputs",
-      "label": "2.1 Inputs",
+      "id": "agents_skills_playwright_cli_references_session_management_attach_via_cdp_endpoint",
+      "label": "Attach via CDP endpoint",
       "_origin": "ast",
       "community": 146,
-      "community_name": "2. Generate",
+      "community_name": "Attaching to a Running Browser",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "2.1 inputs",
-      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
-      "source_location": "L285"
+      "norm_label": "attach via cdp endpoint",
+      "source_file": ".agents/skills/playwright-cli/references/session-management.md",
+      "source_location": "L134"
     },
     {
-      "id": "agents_skills_playwright_cli_references_test_generation_2_2_generate_one_scenario",
-      "label": "2.2 Generate one scenario",
+      "id": "agents_skills_playwright_cli_references_session_management_attaching_to_a_running_browser",
+      "label": "Attaching to a Running Browser",
       "_origin": "ast",
       "community": 146,
-      "community_name": "2. Generate",
+      "community_name": "Attaching to a Running Browser",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "2.2 generate one scenario",
-      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
-      "source_location": "L291"
+      "norm_label": "attaching to a running browser",
+      "source_file": ".agents/skills/playwright-cli/references/session-management.md",
+      "source_location": "L108"
     },
     {
-      "id": "agents_skills_playwright_cli_references_test_generation_2_3_generate_multiple_scenarios",
-      "label": "2.3 Generate multiple scenarios",
+      "id": "agents_skills_playwright_cli_references_session_management_detach",
+      "label": "Detach",
       "_origin": "ast",
       "community": 146,
-      "community_name": "2. Generate",
+      "community_name": "Attaching to a Running Browser",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "2.3 generate multiple scenarios",
-      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
-      "source_location": "L350"
+      "norm_label": "detach",
+      "source_file": ".agents/skills/playwright-cli/references/session-management.md",
+      "source_location": "L150"
     },
     {
-      "id": "agents_skills_playwright_cli_references_test_generation_2_4_run_generated_tests",
-      "label": "2.4 Run generated tests",
+      "id": "agents_skills_playwright_cli_references_session_management_1_name_browser_sessions_semantically",
+      "label": "1. Name Browser Sessions Semantically",
       "_origin": "ast",
-      "community": 146,
-      "community_name": "2. Generate",
+      "community": 147,
+      "community_name": "Best Practices",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "2.4 run generated tests",
-      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
-      "source_location": "L354"
+      "norm_label": "1. name browser sessions semantically",
+      "source_file": ".agents/skills/playwright-cli/references/session-management.md",
+      "source_location": "L195"
     },
     {
-      "id": "agents_skills_playwright_cli_references_test_generation_2_generate",
-      "label": "2. Generate",
+      "id": "agents_skills_playwright_cli_references_session_management_2_always_clean_up",
+      "label": "2. Always Clean Up",
       "_origin": "ast",
-      "community": 146,
-      "community_name": "2. Generate",
+      "community": 147,
+      "community_name": "Best Practices",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "2. generate",
-      "source_file": ".agents/skills/playwright-cli/references/test-generation.md",
-      "source_location": "L281"
+      "norm_label": "2. always clean up",
+      "source_file": ".agents/skills/playwright-cli/references/session-management.md",
+      "source_location": "L206"
+    },
+    {
+      "id": "agents_skills_playwright_cli_references_session_management_3_delete_stale_browser_data",
+      "label": "3. Delete Stale Browser Data",
+      "_origin": "ast",
+      "community": 147,
+      "community_name": "Best Practices",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. delete stale browser data",
+      "source_file": ".agents/skills/playwright-cli/references/session-management.md",
+      "source_location": "L220"
+    },
+    {
+      "id": "agents_skills_playwright_cli_references_session_management_best_practices",
+      "label": "Best Practices",
+      "_origin": "ast",
+      "community": 147,
+      "community_name": "Best Practices",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "best practices",
+      "source_file": ".agents/skills/playwright-cli/references/session-management.md",
+      "source_location": "L193"
+    },
+    {
+      "id": "next_config",
+      "label": "next.config.ts",
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "next.config.ts",
+      "file_type": "code",
+      "norm_label": "next.config.ts",
+      "source_file": "next.config.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "next_config_nextconfig",
+      "label": "nextConfig",
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "next.config.ts",
+      "file_type": "code",
+      "norm_label": "nextconfig",
+      "source_file": "next.config.ts",
+      "source_location": "L6"
+    },
+    {
+      "id": "next_config_withnextintl",
+      "label": "withNextIntl",
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "next.config.ts",
+      "file_type": "code",
+      "norm_label": "withnextintl",
+      "source_file": "next.config.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "ref_next",
+      "label": "next",
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "next.config.ts",
+      "file_type": "concept",
+      "norm_label": "next",
+      "source_file": "package.json",
+      "source_location": "L28"
     },
     {
       "id": "src_app_page",
@@ -7238,39 +7487,6 @@
       "source_location": "L25"
     },
     {
-      "id": "next_config",
-      "label": "next.config.ts",
-      "_origin": "ast",
-      "community": 385,
-      "community_name": "layout.tsx",
-      "file_type": "code",
-      "norm_label": "next.config.ts",
-      "source_file": "next.config.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "next_config_nextconfig",
-      "label": "nextConfig",
-      "_origin": "ast",
-      "community": 385,
-      "community_name": "layout.tsx",
-      "file_type": "code",
-      "norm_label": "nextconfig",
-      "source_file": "next.config.ts",
-      "source_location": "L6"
-    },
-    {
-      "id": "next_config_withnextintl",
-      "label": "withNextIntl",
-      "_origin": "ast",
-      "community": 385,
-      "community_name": "layout.tsx",
-      "file_type": "code",
-      "norm_label": "withnextintl",
-      "source_file": "next.config.ts",
-      "source_location": "L4"
-    },
-    {
       "id": "src_app_layout",
       "label": "layout.tsx",
       "_origin": "ast",
@@ -7315,17 +7531,6 @@
       "source_location": "L1"
     },
     {
-      "id": "ref_next",
-      "label": "next",
-      "_origin": "ast",
-      "community": 385,
-      "community_name": "layout.tsx",
-      "file_type": "concept",
-      "norm_label": "next",
-      "source_file": "package.json",
-      "source_location": "L26"
-    },
-    {
       "id": "ref_next_themes",
       "label": "next-themes",
       "_origin": "ast",
@@ -7334,7 +7539,7 @@
       "file_type": "concept",
       "norm_label": "next-themes",
       "source_file": "package.json",
-      "source_location": "L28"
+      "source_location": "L30"
     },
     {
       "id": "src_components_ui_dropdown_menu",
@@ -7356,7 +7561,7 @@
       "file_type": "concept",
       "norm_label": "cn",
       "source_file": "package.json",
-      "source_location": "L24"
+      "source_location": "L26"
     },
     {
       "id": "src_lib_data_context",
@@ -7499,7 +7704,7 @@
       "file_type": "code",
       "norm_label": "dependencies",
       "source_file": "package.json",
-      "source_location": "L19"
+      "source_location": "L21"
     },
     {
       "id": "package_dependencies_base_ui_react",
@@ -7510,7 +7715,7 @@
       "file_type": "code",
       "norm_label": "@base-ui/react",
       "source_file": "package.json",
-      "source_location": "L20"
+      "source_location": "L22"
     },
     {
       "id": "package_dependencies_class_variance_authority",
@@ -7521,7 +7726,7 @@
       "file_type": "code",
       "norm_label": "class-variance-authority",
       "source_file": "package.json",
-      "source_location": "L23"
+      "source_location": "L25"
     },
     {
       "id": "package_dependencies_cn",
@@ -7532,7 +7737,7 @@
       "file_type": "code",
       "norm_label": "cn",
       "source_file": "package.json",
-      "source_location": "L24"
+      "source_location": "L26"
     },
     {
       "id": "package_dependencies_lucide_react",
@@ -7543,7 +7748,7 @@
       "file_type": "code",
       "norm_label": "lucide-react",
       "source_file": "package.json",
-      "source_location": "L25"
+      "source_location": "L27"
     },
     {
       "id": "package_dependencies_next",
@@ -7554,7 +7759,7 @@
       "file_type": "code",
       "norm_label": "next",
       "source_file": "package.json",
-      "source_location": "L26"
+      "source_location": "L28"
     },
     {
       "id": "package_dependencies_next_intl",
@@ -7565,7 +7770,7 @@
       "file_type": "code",
       "norm_label": "next-intl",
       "source_file": "package.json",
-      "source_location": "L27"
+      "source_location": "L29"
     },
     {
       "id": "package_dependencies_next_themes",
@@ -7576,7 +7781,7 @@
       "file_type": "code",
       "norm_label": "next-themes",
       "source_file": "package.json",
-      "source_location": "L28"
+      "source_location": "L30"
     },
     {
       "id": "package_dependencies_react",
@@ -7587,7 +7792,7 @@
       "file_type": "code",
       "norm_label": "react",
       "source_file": "package.json",
-      "source_location": "L29"
+      "source_location": "L31"
     },
     {
       "id": "package_dependencies_react_dom",
@@ -7598,7 +7803,7 @@
       "file_type": "code",
       "norm_label": "react-dom",
       "source_file": "package.json",
-      "source_location": "L30"
+      "source_location": "L32"
     },
     {
       "id": "package_dependencies_shadcn",
@@ -7609,7 +7814,7 @@
       "file_type": "code",
       "norm_label": "shadcn",
       "source_file": "package.json",
-      "source_location": "L31"
+      "source_location": "L33"
     },
     {
       "id": "package_dependencies_supabase_ssr",
@@ -7620,7 +7825,7 @@
       "file_type": "code",
       "norm_label": "@supabase/ssr",
       "source_file": "package.json",
-      "source_location": "L21"
+      "source_location": "L23"
     },
     {
       "id": "package_dependencies_supabase_supabase_js",
@@ -7631,7 +7836,7 @@
       "file_type": "code",
       "norm_label": "@supabase/supabase-js",
       "source_file": "package.json",
-      "source_location": "L22"
+      "source_location": "L24"
     },
     {
       "id": "package_dependencies_tw_animate_css",
@@ -7642,7 +7847,7 @@
       "file_type": "code",
       "norm_label": "tw-animate-css",
       "source_file": "package.json",
-      "source_location": "L32"
+      "source_location": "L34"
     },
     {
       "id": "db_scripts_migrate",
@@ -7851,6 +8056,28 @@
       "source_location": "L12"
     },
     {
+      "id": "package_scripts_db_check_data_api",
+      "label": "db:check-data-api",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "db:check-data-api",
+      "source_file": "package.json",
+      "source_location": "L17"
+    },
+    {
+      "id": "package_scripts_db_check_data_api_live",
+      "label": "db:check-data-api-live",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "db:check-data-api-live",
+      "source_file": "package.json",
+      "source_location": "L18"
+    },
+    {
       "id": "package_scripts_db_migrate",
       "label": "db:migrate",
       "_origin": "ast",
@@ -7914,7 +8141,7 @@
       "file_type": "code",
       "norm_label": "learning:smoke",
       "source_file": "package.json",
-      "source_location": "L17"
+      "source_location": "L19"
     },
     {
       "id": "package_scripts_lint",
@@ -7969,7 +8196,7 @@
       "file_type": "code",
       "norm_label": "devdependencies",
       "source_file": "package.json",
-      "source_location": "L34"
+      "source_location": "L36"
     },
     {
       "id": "package_devdependencies_babel_plugin_react_compiler",
@@ -7980,7 +8207,7 @@
       "file_type": "code",
       "norm_label": "babel-plugin-react-compiler",
       "source_file": "package.json",
-      "source_location": "L39"
+      "source_location": "L41"
     },
     {
       "id": "package_devdependencies_eslint",
@@ -7991,7 +8218,7 @@
       "file_type": "code",
       "norm_label": "eslint",
       "source_file": "package.json",
-      "source_location": "L40"
+      "source_location": "L42"
     },
     {
       "id": "package_devdependencies_eslint_config_next",
@@ -8002,7 +8229,7 @@
       "file_type": "code",
       "norm_label": "eslint-config-next",
       "source_file": "package.json",
-      "source_location": "L41"
+      "source_location": "L43"
     },
     {
       "id": "package_devdependencies_tailwindcss",
@@ -8013,7 +8240,7 @@
       "file_type": "code",
       "norm_label": "tailwindcss",
       "source_file": "package.json",
-      "source_location": "L42"
+      "source_location": "L44"
     },
     {
       "id": "package_devdependencies_tailwindcss_postcss",
@@ -8024,7 +8251,7 @@
       "file_type": "code",
       "norm_label": "@tailwindcss/postcss",
       "source_file": "package.json",
-      "source_location": "L35"
+      "source_location": "L37"
     },
     {
       "id": "package_devdependencies_types_node",
@@ -8035,7 +8262,7 @@
       "file_type": "code",
       "norm_label": "@types/node",
       "source_file": "package.json",
-      "source_location": "L36"
+      "source_location": "L38"
     },
     {
       "id": "package_devdependencies_types_react",
@@ -8046,7 +8273,7 @@
       "file_type": "code",
       "norm_label": "@types/react",
       "source_file": "package.json",
-      "source_location": "L37"
+      "source_location": "L39"
     },
     {
       "id": "package_devdependencies_types_react_dom",
@@ -8057,7 +8284,7 @@
       "file_type": "code",
       "norm_label": "@types/react-dom",
       "source_file": "package.json",
-      "source_location": "L38"
+      "source_location": "L40"
     },
     {
       "id": "package_devdependencies_typescript",
@@ -8068,7 +8295,7 @@
       "file_type": "code",
       "norm_label": "typescript",
       "source_file": "package.json",
-      "source_location": "L43"
+      "source_location": "L45"
     },
     {
       "id": "agents_skills_supabase_skill",
@@ -8785,17 +9012,6 @@
       "source_location": "L1"
     },
     {
-      "id": "src_lib_database_types",
-      "label": "database.types.ts",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "createClient",
-      "file_type": "code",
-      "norm_label": "database.types.ts",
-      "source_file": "src/lib/database.types.ts",
-      "source_location": "L1"
-    },
-    {
       "id": "src_lib_staff",
       "label": "staff.ts",
       "_origin": "ast",
@@ -8804,17 +9020,6 @@
       "file_type": "code",
       "norm_label": "staff.ts",
       "source_file": "src/lib/staff.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_lib_supabase_client",
-      "label": "client.ts",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "createClient",
-      "file_type": "code",
-      "norm_label": "client.ts",
-      "source_file": "src/lib/supabase/client.ts",
       "source_location": "L1"
     },
     {
@@ -8827,17 +9032,6 @@
       "norm_label": "server.ts",
       "source_file": "src/lib/supabase/server.ts",
       "source_location": "L1"
-    },
-    {
-      "id": "ref_supabase_ssr",
-      "label": "@supabase/ssr",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "createClient",
-      "file_type": "concept",
-      "norm_label": "@supabase/ssr",
-      "source_file": "package.json",
-      "source_location": "L21"
     },
     {
       "id": "agents_skills_supabase_changelog",
@@ -9461,11 +9655,33 @@
       "source_location": "L190"
     },
     {
+      "id": "src_lib_database_types",
+      "label": "database.types.ts",
+      "_origin": "ast",
+      "community": 95,
+      "community_name": "database.types.ts",
+      "file_type": "code",
+      "norm_label": "database.types.ts",
+      "source_file": "src/lib/database.types.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_lib_supabase_client",
+      "label": "client.ts",
+      "_origin": "ast",
+      "community": 95,
+      "community_name": "database.types.ts",
+      "file_type": "code",
+      "norm_label": "client.ts",
+      "source_file": "src/lib/supabase/client.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "src_lib_supabase_proxy",
       "label": "supabase/proxy.ts",
       "_origin": "ast",
       "community": 95,
-      "community_name": "src/proxy.ts",
+      "community_name": "database.types.ts",
       "file_type": "code",
       "norm_label": "supabase/proxy.ts",
       "source_file": "src/lib/supabase/proxy.ts",
@@ -9476,7 +9692,7 @@
       "label": "src/proxy.ts",
       "_origin": "ast",
       "community": 95,
-      "community_name": "src/proxy.ts",
+      "community_name": "database.types.ts",
       "file_type": "code",
       "norm_label": "src/proxy.ts",
       "source_file": "src/proxy.ts",
@@ -9487,7 +9703,7 @@
       "label": "config",
       "_origin": "ast",
       "community": 95,
-      "community_name": "src/proxy.ts",
+      "community_name": "database.types.ts",
       "file_type": "code",
       "norm_label": "config",
       "source_file": "src/proxy.ts",
@@ -9498,11 +9714,22 @@
       "label": "prototypePaths",
       "_origin": "ast",
       "community": 95,
-      "community_name": "src/proxy.ts",
+      "community_name": "database.types.ts",
       "file_type": "code",
       "norm_label": "prototypepaths",
       "source_file": "src/proxy.ts",
       "source_location": "L4"
+    },
+    {
+      "id": "ref_supabase_ssr",
+      "label": "@supabase/ssr",
+      "_origin": "ast",
+      "community": 95,
+      "community_name": "database.types.ts",
+      "file_type": "concept",
+      "norm_label": "@supabase/ssr",
+      "source_file": "package.json",
+      "source_location": "L23"
     },
     {
       "id": "ai_project",
@@ -11406,6 +11633,30 @@
       "weight": 1.0
     },
     {
+      "source": "db_scripts_check_data_api_migration_publicchecks",
+      "target": "db_scripts_check_data_api_migration_practice",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "db/scripts/check-data-api-migration.js",
+      "source_location": "L101",
+      "weight": 1.0
+    },
+    {
+      "source": "db_scripts_check_data_api_migration_publicchecks",
+      "target": "db_scripts_check_data_api_migration_denied",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "db/scripts/check-data-api-migration.js",
+      "source_location": "L98",
+      "weight": 1.0
+    },
+    {
       "source": "src_app_assignments_id_page_assignmentdetailpage",
       "target": "src_components_ui_button_buttonvariants",
       "relation": "calls",
@@ -12290,7 +12541,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L20",
+      "source_location": "L22",
       "weight": 1.0
     },
     {
@@ -12302,7 +12553,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L21",
+      "source_location": "L23",
       "weight": 1.0
     },
     {
@@ -12314,7 +12565,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L22",
+      "source_location": "L24",
       "weight": 1.0
     },
     {
@@ -12326,7 +12577,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L23",
+      "source_location": "L25",
       "weight": 1.0
     },
     {
@@ -12338,7 +12589,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L24",
+      "source_location": "L26",
       "weight": 1.0
     },
     {
@@ -12350,7 +12601,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L25",
+      "source_location": "L27",
       "weight": 1.0
     },
     {
@@ -12362,7 +12613,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L26",
+      "source_location": "L28",
       "weight": 1.0
     },
     {
@@ -12374,7 +12625,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L27",
+      "source_location": "L29",
       "weight": 1.0
     },
     {
@@ -12386,7 +12637,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L28",
+      "source_location": "L30",
       "weight": 1.0
     },
     {
@@ -12398,7 +12649,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L29",
+      "source_location": "L31",
       "weight": 1.0
     },
     {
@@ -12410,7 +12661,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L30",
+      "source_location": "L32",
       "weight": 1.0
     },
     {
@@ -12422,7 +12673,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L31",
+      "source_location": "L33",
       "weight": 1.0
     },
     {
@@ -12434,7 +12685,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L32",
+      "source_location": "L34",
       "weight": 1.0
     },
     {
@@ -12446,7 +12697,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L35",
+      "source_location": "L37",
       "weight": 1.0
     },
     {
@@ -12458,7 +12709,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L36",
+      "source_location": "L38",
       "weight": 1.0
     },
     {
@@ -12470,7 +12721,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L37",
+      "source_location": "L39",
       "weight": 1.0
     },
     {
@@ -12482,7 +12733,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L38",
+      "source_location": "L40",
       "weight": 1.0
     },
     {
@@ -12494,7 +12745,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L39",
+      "source_location": "L41",
       "weight": 1.0
     },
     {
@@ -12506,7 +12757,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L40",
+      "source_location": "L42",
       "weight": 1.0
     },
     {
@@ -12518,7 +12769,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L41",
+      "source_location": "L43",
       "weight": 1.0
     },
     {
@@ -12530,7 +12781,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L42",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -12542,7 +12793,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L43",
+      "source_location": "L45",
       "weight": 1.0
     },
     {
@@ -16706,6 +16957,18 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/proxy.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "db_scripts_check_data_api",
+      "target": "ref_supabase_supabase_js",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "db/scripts/check-data-api.js",
       "source_location": "L2",
       "weight": 1.0
     },
@@ -23821,7 +24084,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L515",
+      "source_location": "L523",
       "weight": 1.0
     },
     {
@@ -23832,7 +24095,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L539",
+      "source_location": "L547",
       "weight": 1.0
     },
     {
@@ -23843,7 +24106,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L554",
+      "source_location": "L562",
       "weight": 1.0
     },
     {
@@ -23854,7 +24117,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L602",
+      "source_location": "L610",
       "weight": 1.0
     },
     {
@@ -23865,7 +24128,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L623",
+      "source_location": "L631",
       "weight": 1.0
     },
     {
@@ -23887,7 +24150,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L657",
+      "source_location": "L665",
       "weight": 1.0
     },
     {
@@ -23898,7 +24161,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L684",
+      "source_location": "L692",
       "weight": 1.0
     },
     {
@@ -23909,7 +24172,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L699",
+      "source_location": "L707",
       "weight": 1.0
     },
     {
@@ -23920,7 +24183,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L728",
+      "source_location": "L736",
       "weight": 1.0
     },
     {
@@ -23931,7 +24194,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L755",
+      "source_location": "L763",
       "weight": 1.0
     },
     {
@@ -23942,7 +24205,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L783",
+      "source_location": "L791",
       "weight": 1.0
     },
     {
@@ -23953,7 +24216,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L813",
+      "source_location": "L821",
       "weight": 1.0
     },
     {
@@ -23964,7 +24227,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L845",
+      "source_location": "L853",
       "weight": 1.0
     },
     {
@@ -23975,7 +24238,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L872",
+      "source_location": "L880",
       "weight": 1.0
     },
     {
@@ -23997,7 +24260,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L900",
+      "source_location": "L908",
       "weight": 1.0
     },
     {
@@ -24008,7 +24271,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L930",
+      "source_location": "L938",
       "weight": 1.0
     },
     {
@@ -24019,7 +24282,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L952",
+      "source_location": "L960",
       "weight": 1.0
     },
     {
@@ -24030,7 +24293,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L986",
+      "source_location": "L994",
       "weight": 1.0
     },
     {
@@ -24068,17 +24331,6 @@
     },
     {
       "source": "ai_readme_genshu_ai_development_workflow",
-      "target": "ai_readme_verification",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".ai/README.md",
-      "source_location": "L58",
-      "weight": 1.0
-    },
-    {
-      "source": "ai_readme_genshu_ai_development_workflow",
       "target": "ai_readme_sources_and_scope",
       "relation": "contains",
       "_origin": "ast",
@@ -24090,13 +24342,24 @@
     },
     {
       "source": "ai_readme_genshu_ai_development_workflow",
+      "target": "ai_readme_verification",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".ai/README.md",
+      "source_location": "L60",
+      "weight": 1.0
+    },
+    {
+      "source": "ai_readme_genshu_ai_development_workflow",
       "target": "ai_readme_repository_knowledge",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/README.md",
-      "source_location": "L68",
+      "source_location": "L73",
       "weight": 1.0
     },
     {
@@ -24107,7 +24370,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/README.md",
-      "source_location": "L75",
+      "source_location": "L80",
       "weight": 1.0
     },
     {
@@ -24118,7 +24381,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/README.md",
-      "source_location": "L93",
+      "source_location": "L98",
       "weight": 1.0
     },
     {
@@ -24463,6 +24726,182 @@
       "weight": 1.0
     },
     {
+      "source": "db_scripts_check_data_api",
+      "target": "db_scripts_check_data_api_denied",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "db/scripts/check-data-api.js",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "db_scripts_check_data_api",
+      "target": "db_scripts_check_data_api_sensei",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "db/scripts/check-data-api.js",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "db_scripts_check_data_api",
+      "target": "db_scripts_check_data_api_readers",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "db/scripts/check-data-api.js",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "db_scripts_check_data_api",
+      "target": "db_scripts_check_data_api_missing",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "db/scripts/check-data-api.js",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "db_scripts_check_data_api",
+      "target": "db_scripts_check_data_api_sections",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "db/scripts/check-data-api.js",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "db_scripts_check_data_api",
+      "target": "db_scripts_check_data_api_material",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "db/scripts/check-data-api.js",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "db_scripts_check_data_api",
+      "target": "db_scripts_check_data_api_set",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "db/scripts/check-data-api.js",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "db_scripts_check_data_api",
+      "target": "db_scripts_check_data_api_question",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "db/scripts/check-data-api.js",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "db_scripts_check_data_api",
+      "target": "db_scripts_check_data_api_client",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "db/scripts/check-data-api.js",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "db_scripts_check_data_api",
+      "target": "db_scripts_check_data_api_ok",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "db/scripts/check-data-api.js",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "db_scripts_check_data_api_migration",
+      "target": "db_scripts_check_data_api_migration_migrations",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "db/scripts/check-data-api-migration.js",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "db_scripts_check_data_api_migration",
+      "target": "db_scripts_check_data_api_migration_questions",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "db/scripts/check-data-api-migration.js",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "db_scripts_check_data_api_migration",
+      "target": "db_scripts_check_data_api_migration_practice",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "db/scripts/check-data-api-migration.js",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "db_scripts_check_data_api_migration",
+      "target": "db_scripts_check_data_api_migration_asuser",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "db/scripts/check-data-api-migration.js",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "db_scripts_check_data_api_migration",
+      "target": "db_scripts_check_data_api_migration_denied",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "db/scripts/check-data-api-migration.js",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "db_scripts_check_data_api_migration",
+      "target": "db_scripts_check_data_api_migration_publicchecks",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "db/scripts/check-data-api-migration.js",
+      "source_location": "L85",
+      "weight": 1.0
+    },
+    {
       "source": "db_scripts_migrate",
       "target": "db_scripts_migrate_psql",
       "relation": "contains",
@@ -24629,17 +25068,6 @@
     },
     {
       "source": "package",
-      "target": "package_dependencies",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "package.json",
-      "source_location": "L19",
-      "weight": 1.0
-    },
-    {
-      "source": "package",
       "target": "package_name",
       "relation": "contains",
       "_origin": "ast",
@@ -24647,6 +25075,17 @@
       "confidence_score": 1.0,
       "source_file": "package.json",
       "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "package",
+      "target": "package_dependencies",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "package.json",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -24668,7 +25107,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L34",
+      "source_location": "L36",
       "weight": 1.0
     },
     {
@@ -24690,7 +25129,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L45",
+      "source_location": "L47",
       "weight": 1.0
     },
     {
@@ -24701,7 +25140,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L46",
+      "source_location": "L48",
       "weight": 1.0
     },
     {
@@ -24723,7 +25162,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L50",
+      "source_location": "L52",
       "weight": 1.0
     },
     {
@@ -24734,7 +25173,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L20",
+      "source_location": "L22",
       "weight": 1.0
     },
     {
@@ -24745,7 +25184,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L21",
+      "source_location": "L23",
       "weight": 1.0
     },
     {
@@ -24756,7 +25195,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L22",
+      "source_location": "L24",
       "weight": 1.0
     },
     {
@@ -24767,7 +25206,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L23",
+      "source_location": "L25",
       "weight": 1.0
     },
     {
@@ -24778,7 +25217,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L24",
+      "source_location": "L26",
       "weight": 1.0
     },
     {
@@ -24789,7 +25228,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L25",
+      "source_location": "L27",
       "weight": 1.0
     },
     {
@@ -24800,7 +25239,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L26",
+      "source_location": "L28",
       "weight": 1.0
     },
     {
@@ -24811,7 +25250,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L27",
+      "source_location": "L29",
       "weight": 1.0
     },
     {
@@ -24822,7 +25261,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L28",
+      "source_location": "L30",
       "weight": 1.0
     },
     {
@@ -24833,7 +25272,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L29",
+      "source_location": "L31",
       "weight": 1.0
     },
     {
@@ -24844,7 +25283,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L30",
+      "source_location": "L32",
       "weight": 1.0
     },
     {
@@ -24855,7 +25294,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L31",
+      "source_location": "L33",
       "weight": 1.0
     },
     {
@@ -24866,7 +25305,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L32",
+      "source_location": "L34",
       "weight": 1.0
     },
     {
@@ -24877,7 +25316,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L35",
+      "source_location": "L37",
       "weight": 1.0
     },
     {
@@ -24888,7 +25327,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L36",
+      "source_location": "L38",
       "weight": 1.0
     },
     {
@@ -24899,7 +25338,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L37",
+      "source_location": "L39",
       "weight": 1.0
     },
     {
@@ -24910,7 +25349,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L38",
+      "source_location": "L40",
       "weight": 1.0
     },
     {
@@ -24921,7 +25360,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L39",
+      "source_location": "L41",
       "weight": 1.0
     },
     {
@@ -24932,7 +25371,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L40",
+      "source_location": "L42",
       "weight": 1.0
     },
     {
@@ -24943,7 +25382,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L41",
+      "source_location": "L43",
       "weight": 1.0
     },
     {
@@ -24954,7 +25393,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L42",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -24965,7 +25404,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L43",
+      "source_location": "L45",
       "weight": 1.0
     },
     {
@@ -25047,13 +25486,35 @@
     },
     {
       "source": "package_scripts",
-      "target": "package_scripts_learning_smoke",
+      "target": "package_scripts_db_check_data_api",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
       "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "package_scripts",
+      "target": "package_scripts_db_check_data_api_live",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "package.json",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "package_scripts",
+      "target": "package_scripts_learning_smoke",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "package.json",
+      "source_location": "L19",
       "weight": 1.0
     },
     {
@@ -28206,5 +28667,5 @@
       "source_file": ".agents/skills/vercel-react-best-practices/rules/rendering-usetransition-loading.md"
     }
   ],
-  "built_at_commit": "a3fdaef0948c6c1e0bf8c917c435358519d4d8af"
+  "built_at_commit": "3125d001e33954017602c24917fce862024e3ff1"
 }

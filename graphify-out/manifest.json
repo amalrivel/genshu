@@ -24,9 +24,9 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1790404605.6682997,
-    "seen": 1790404953.0854077,
-    "ast_hash": "86a2ec861a1c25c9c25518399719d169",
+    "mtime": 1790408134.6432173,
+    "seen": 1790408265.3355823,
+    "ast_hash": "5f730fb4c8fb678787a8fe943f811d7a",
     "semantic_hash": ""
   },
   "postcss.config.mjs": {
@@ -630,9 +630,9 @@
     "semantic_hash": "5c27369b226fcf2be8a6cfe52224e767"
   },
   "README.md": {
-    "mtime": 1790405332.099908,
-    "seen": 1790405564.3001516,
-    "ast_hash": "925b5d1c6e5b8caace403ec4b56b51ba",
+    "mtime": 1790409900.9227517,
+    "seen": 1790409960.5305314,
+    "ast_hash": "5843886bc82d1936b471d8a625dc1943",
     "semantic_hash": ""
   },
   ".agents/skills/shadcn/assets/shadcn-small.png": {
@@ -888,15 +888,15 @@
     "semantic_hash": ""
   },
   ".ai/PROJECT.md": {
-    "mtime": 1790405326.9959183,
-    "seen": 1790405564.3000977,
-    "ast_hash": "9d4f6a2760f1dc91b629030a936f3cac",
+    "mtime": 1790409900.7987518,
+    "seen": 1790409960.5304809,
+    "ast_hash": "34fbb5abf88133dd30f7a994827a1d72",
     "semantic_hash": ""
   },
   ".ai/README.md": {
-    "mtime": 1790405326.9479184,
-    "seen": 1790405564.3001006,
-    "ast_hash": "a603c228ff0a7850ef60f4031221a2d9",
+    "mtime": 1790409900.8627517,
+    "seen": 1790409960.5304832,
+    "ast_hash": "abfe1952af760c13699ae16bf2a20177",
     "semantic_hash": ""
   },
   "src/components/cohorts/cohort-roster-panels.tsx": {
@@ -906,9 +906,9 @@
     "semantic_hash": ""
   },
   ".ai/scripts/verify.ts": {
-    "mtime": 1790035594.3346174,
-    "seen": 1790035617.2764323,
-    "ast_hash": "29ced3e9de7af322423b1ae9c399a25b",
+    "mtime": 1790408134.5672174,
+    "seen": 1790408265.3353038,
+    "ast_hash": "99ecabd466265ae755804116304229cf",
     "semantic_hash": ""
   },
   "db/scripts/migrate.js": {
@@ -1401,6 +1401,18 @@
     "mtime": 1790404261.2922132,
     "seen": 1790404953.0880628,
     "ast_hash": "9ea8b5b4d7db28e60d3cf65bd76bb19a",
+    "semantic_hash": ""
+  },
+  "db/scripts/check-data-api-migration.js": {
+    "mtime": 1790407549.7153635,
+    "seen": 1790407611.2486155,
+    "ast_hash": "c38dc3e44f1ca902723abc7feb1ca694",
+    "semantic_hash": ""
+  },
+  "db/scripts/check-data-api.js": {
+    "mtime": 1790408287.787189,
+    "seen": 1790408356.6647148,
+    "ast_hash": "45795ccf0f01fe96f106b4d95e62ed22",
     "semantic_hash": ""
   }
 }

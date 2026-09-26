@@ -14,6 +14,8 @@
     "db:seed": "bun db/scripts/seed.js",
     "db:verify": "bun db/scripts/verify.js",
     "db:verify-permissions": "bun db/scripts/verify.js --permissions",
+    "db:check-data-api": "bun db/scripts/check-data-api-migration.js",
+    "db:check-data-api-live": "bun db/scripts/check-data-api.js",
     "learning:smoke": "bash db/scripts/smoke-learning.sh"
   },
   "dependencies": {

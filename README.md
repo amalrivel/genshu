@@ -9,8 +9,11 @@ PostgreSQL. The Supabase schema is provisioned with one published material and
 one published practice set. Student answers are temporary and are not official
 records. Staff login and content authoring use Supabase Auth plus server-side
 role checks; Sensei and Tantōsha identities are mapped. Production-browser
-verification passed on 2026-09-26 for Sensei authoring/publishing, Tantōsha
-authoring denial, anonymous student reading/practice, and hidden drafts.
+checks passed on 2026-09-26 for Sensei authoring/publishing, Tantōsha
+authoring denial, anonymous student reading/practice, and hidden drafts. Those
+local production checks have now been repeated through Data API, including
+expired-session refresh and desktop/mobile practice. They do not verify the
+current Vercel deployment.
 Attendance, assignments, exams, cohort
 management, and user management still use prototype data and are hidden in
 production until released separately.
@@ -39,6 +42,27 @@ bun run verify
 The project uses Next.js 16, React 19, TypeScript, Tailwind CSS 4, shadcn/Base UI primitives, `next-intl`, and `next-themes`.
 
 ## Vercel production status and setup
+
+Run `bun run db:check-data-api` to check migrations, RLS with all five role
+cases, JSON round trips, and RPC rollback in a temporary local PostgreSQL
+database. This needs PostgreSQL binaries (`POSTGRES_BIN` can override their
+directory) and permission to create a local Unix socket. It does not connect
+to Supabase or replace direct Data API and browser verification.
+
+`bun run db:check-data-api-live` uses the publishable key and QA Auth sessions
+to check direct API permissions, JSON, and atomic replacement. Provide
+`SENSEI_EMAIL`/`SENSEI_PASSWORD`, `TANTOSHA_EMAIL`/`TANTOSHA_PASSWORD`,
+`NONSTAFF_EMAIL`/`NONSTAFF_PASSWORD`, and
+`INACTIVE_STAFF_EMAIL`/`INACTIVE_STAFF_PASSWORD` in local env only. The script
+creates uniquely named QA content and deletes it afterward; missing roles
+cause an incomplete-coverage exit. It never creates identities or modifies
+staff membership.
+
+Verification on 2026-09-26: local SQL checks pass for all five roles; live Data
+API checks pass for all five roles. QA content has been removed and
+original row hashes remain unchanged. Local production browser checks and
+build/start with `POSTGRES_URL` absent pass. `bun run verify --webpack` passes;
+the default Turbopack build cannot bind its worker port in this sandbox.
 
 1. In the existing `genshu` project, verify the `amalrivel/genshu` Git
    connection, Next.js preset, repository root, and `main` production branch.
@@ -155,8 +179,10 @@ before relying on real content.
 ### Current deployment status
 
 The existing `genshu` Vercel project has a READY production deployment from
-`main` at `genshu.vercel.app`. Earlier runtime logs showed `/materials` failing
-because `POSTGRES_URL` was missing; applying migration 005 and deploying the
-Data API code will remove that runtime dependency. Verify the deployed
-Supabase URL and publishable key, then repeat the deployed-domain checks before
-calling beta usable. Builds must not run migrations or seed data.
+`main` at `genshu.vercel.app`, running commit `3125d00`. Its `/materials` route
+returns HTTP 500; runtime errors show that `NEXT_PUBLIC_SUPABASE_URL` and
+`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` are missing. The live migration ledger
+now includes migration 005, whose Data API grants and policies pass the live
+permission verifier. Original content and staff row hashes are unchanged.
+Configure the required Production values and retest the deployed flows.
+Builds must not run migrations or seed data.

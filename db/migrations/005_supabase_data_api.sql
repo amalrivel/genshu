@@ -82,8 +82,11 @@ begin
   if not (select private.is_sensei()) then
     raise exception 'Sensei permission required' using errcode = '42501';
   end if;
-  if practice_id is null or jsonb_typeof(p_questions) <> 'array' then
+  if practice_id is null or jsonb_typeof(p_questions) is distinct from 'array' then
     raise exception 'Invalid practice set payload' using errcode = '22023';
+  end if;
+  if jsonb_array_length(p_questions) not between 1 and 30 then
+    raise exception 'Practice set must contain 1 to 30 questions' using errcode = '22023';
   end if;
 
   if p_update then
@@ -108,10 +111,10 @@ begin
   select practice_id || '-q' || (q.ordinality)::text, practice_id, (q.ordinality - 1)::integer,
     q.question_type, q.prompt, q.prompt_plain, q.translation_id, q.options, q.correct_answer_index,
     q.explanation_ja, q.explanation_id
-  from jsonb_to_recordset(p_questions) with ordinality as q(
+  from rows from (jsonb_to_recordset(p_questions) as (
     question_type text, prompt text, prompt_plain text, translation_id text,
-    options jsonb, correct_answer_index integer, explanation_ja text, explanation_id text, ordinality bigint
-  );
+    options jsonb, correct_answer_index integer, explanation_ja text, explanation_id text
+  )) with ordinality as q;
 end;
 $$;
 

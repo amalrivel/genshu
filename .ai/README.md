@@ -44,11 +44,13 @@ for migration and database-check scripts using `psql`. Staff login and
 server-side `staff_members` authorization remain unchanged. Migration 005
 defines public reads of published content, Sensei reads of drafts, and
 Sensei-only authoring. Tantōsha cannot author. Practice-set and question
-replacement is atomic through a restricted database RPC. The migration has
-not yet been applied to the configured Supabase project; automatic review
-blocked the live permission change. Earlier browser checks predate this Data
-API migration, so repeat the required API, browser, and runtime checks after
-it is applied.
+replacement is atomic through a restricted database RPC. Migration 005 is
+applied to the configured Supabase project and passes the live permission
+verifier. Local SQL checks cover all five caller roles, JSON round trips, and
+RPC rollback. Live Data API checks pass for all five roles. Local production
+browser checks pass, including expired-session refresh. Production build/start
+pass with `POSTGRES_URL` absent. Repeat deployed-domain checks before claiming
+Vercel release readiness.
 
 User-facing learning data used officially must persist on the server.
 Anonymous practice in the first release has no official student attempt
@@ -61,6 +63,9 @@ their own release requirements are verified.
 Graphify update, diff checks, and a production build. Add focused behavior
 tests when they protect an important user or permission flow. Browser checks
 should cover the changed workflow on a phone-sized and desktop viewport.
+If a sandbox prohibits Turbopack's worker port binding, use
+`bun run verify --webpack` to run the same checks with Next.js's supported
+Webpack build option.
 
 Report what actually passed. If a required check cannot run or fails, state
 the blocker and do not call the implementation complete.

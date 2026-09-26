@@ -47,9 +47,9 @@ begin
   end if;
 
   if exists (
-    select 1 from information_schema.role_table_grants
-    where table_schema = 'public' and table_name = 'genshu_schema_migrations'
-      and grantee in ('anon', 'authenticated')
+    select 1 from information_schema.role_table_grants as grants
+    where grants.table_schema = 'public' and grants.table_name = 'genshu_schema_migrations'
+      and grants.grantee in ('anon', 'authenticated')
   ) then
     raise exception 'Public roles must not access the migration ledger';
   end if;

@@ -497,9 +497,17 @@ cookie-aware `@supabase/ssr` server client per request; the browser client is
 available for client-side needs. PostgreSQL connections are limited to the
 repository's administration scripts for applying versioned SQL migrations and
 running database checks. `POSTGRES_URL` is not a Vercel runtime requirement.
-Migration 005 defines the Data API grants and policies, but is not yet applied
-to the configured live Supabase project; automatic review rejected the initial
-application attempt.
+Migration 005 is applied to the configured Supabase project. Its live grants
+and policies pass the read-only permission verifier, and the original content
+and staff row hashes are unchanged after application.
+Local SQL checks pass for anon, authenticated non-staff, active Sensei,
+active Tantōsha, and inactive staff. Live Data API checks also pass for all
+five roles; read-only administrator checks confirm the non-staff and inactive
+QA identities have the intended membership state.
+Local production browser checks pass for authoring, anonymous reading and
+practice, login/logout, and expired-session refresh. Production build/start
+also pass with `POSTGRES_URL` absent. The full verifier passes with `--webpack`;
+default Turbopack is blocked by this sandbox's worker-port restriction.
 Published content is filtered in queries and protected by RLS; staff-only
 content and writes are also restricted by policies. Practice-set replacement
 uses a Sensei-authorized transaction RPC so the set and child questions commit

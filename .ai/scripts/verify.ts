@@ -100,7 +100,7 @@ async function verify() {
   await run("[4/6] Graphify update", ["graphify", "update", "."])
   const graphifyAfter = await output(["git", "diff", "HEAD", "--binary", "--", "graphify-out"])
   await run("[5/6] Git diff check", ["git", "diff", "--check"])
-  await run("[6/6] Production build", ["bun", "run", "build"], BUILD_TIMEOUT_MS)
+  await run("[6/6] Production build", ["bun", "run", "build", ...(process.argv.includes("--webpack") ? ["--webpack"] : [])], BUILD_TIMEOUT_MS)
 
   console.log("\nVerification passed.")
   console.log(`Graphify: ${graphifyBefore === graphifyAfter ? "already current (no tracked changes)." : "produced tracked changes."}`)
