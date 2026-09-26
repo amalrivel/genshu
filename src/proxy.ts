@@ -8,12 +8,12 @@ export async function proxy(request: NextRequest) {
   if (process.env.NODE_ENV === "production" && prototypePaths.some((path) => pathname === path || pathname.startsWith(path + "/"))) {
     return NextResponse.redirect(new URL("/materials", request.url))
   }
-  if (pathname === "/login" || pathname === "/staff" || pathname.startsWith("/staff/")) {
+  if (["/login", "/materials", "/practice", "/staff"].some((path) => pathname === path || pathname.startsWith(path + "/"))) {
     return updateSession(request)
   }
   return NextResponse.next({ request })
 }
 
 export const config = {
-  matcher: ["/login", "/staff/:path*", "/attendance/:path*", "/assignments/:path*", "/exams/:path*", "/cohorts/:path*", "/users/:path*"],
+  matcher: ["/login", "/materials/:path*", "/practice/:path*", "/staff/:path*", "/attendance/:path*", "/assignments/:path*", "/exams/:path*", "/cohorts/:path*", "/users/:path*"],
 }

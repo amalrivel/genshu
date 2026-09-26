@@ -2,7 +2,7 @@
 import { revalidatePath } from "next/cache"
 import { getTranslations } from "next-intl/server"
 import { redirect } from "next/navigation"
-import { database } from "@/lib/content-repository"
+import { createClient } from "@/lib/supabase/server"
 import { requireSensei } from "@/lib/staff"
 import type { StaffFormState } from "@/components/staff-action-form"
 
@@ -35,25 +35,30 @@ export async function saveMaterial(_state: StaffFormState, form: FormData): Prom
     }))
     const published = form.get("published") === "on"
     const original = String(form.get("original") ?? "")
-    const db = database()
+    const client = await createClient()
+    const values = {
+      title_ja: titleJa, title_id: titleId, summary_ja: summaryJa, summary_id: summaryId,
+      level, topic, sections, is_published: published,
+    }
     if (original) {
       if (original !== slug) throw new Error("Slug materi tidak dapat diubah.")
-      const rows = await db`
-        update learning_materials set
-          title_ja = ${titleJa}, title_id = ${titleId}, summary_ja = ${summaryJa}, summary_id = ${summaryId},
-          level = ${level}, topic = ${topic}, sections = ${db.json(sections)}::jsonb,
-          is_published = ${published}, published_at = case when ${published} then coalesce(published_at, now()) else null end,
-          updated_at = now()
-        where slug = ${slug} returning slug
-      `
-      if (rows.length !== 1) throw new Error("Materi tidak ditemukan.")
+      const { data: current, error: lookupError } = await client.from("learning_materials")
+        .select("published_at").eq("slug", slug).maybeSingle()
+      if (lookupError) throw lookupError
+      if (!current) throw new Error("Materi tidak ditemukan.")
+      const now = new Date().toISOString()
+      const { data, error } = await client.from("learning_materials").update({
+        ...values,
+        published_at: published ? current.published_at ?? now : null,
+        updated_at: now,
+      }).eq("slug", slug).select("slug").maybeSingle()
+      if (error) throw error
+      if (!data) throw new Error("Materi tidak ditemukan.")
     } else {
-      await db`
-        insert into learning_materials
-          (slug, title_ja, title_id, summary_ja, summary_id, level, topic, sections, is_published, published_at)
-        values (${slug}, ${titleJa}, ${titleId}, ${summaryJa}, ${summaryId}, ${level}, ${topic},
-          ${db.json(sections)}::jsonb, ${published}, case when ${published} then now() else null end)
-      `
+      const { error } = await client.from("learning_materials").insert({
+        slug, ...values, published_at: published ? new Date().toISOString() : null,
+      })
+      if (error) throw error
     }
   } catch {
     const t = await getTranslations("staff")

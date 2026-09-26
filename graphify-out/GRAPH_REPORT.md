@@ -1,16 +1,16 @@
-# Graph Report - genshu  (2026-09-24)
+# Graph Report - genshu  (2026-09-26)
 
 ## Corpus Check
-- 218 files · ~100,552 words
+- 234 files · ~111,144 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 740 nodes · 1289 edges · 139 communities (39 shown, 99 thin omitted)
+- 906 nodes · 1459 edges · 151 communities (51 shown, 99 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 27 edges (avg confidence: 0.81)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `8c8d3ddb`
+- Built from commit: `a3fdaef0`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -22,7 +22,7 @@
 - dropdown-menu.tsx
 - data-context.tsx
 - dependencies
-- content-repository.ts
+- createClient
 - Narrow Effect Dependencies
 - Extract to Memoized Components
 - Cache Repeated Function Calls
@@ -150,25 +150,35 @@
 - security-rls-basics.md
 - security-rls-performance.md
 - _template.md
+- Cookies
+- Browser Automation with playwright-cli
+- Test generation (plan → generate → heal)
+- Browser Session Management
+- Running Custom Playwright Code
+- Tracing
+- playwright-cli/SKILL.md
+- Video Recording
+- Advanced Mocking with run-code
+- 3. Heal
+- 1. Planning
+- 2. Generate
 - The Fixes
 - verify.ts
-- app-header.tsx
+- layout.tsx
 
 ## God Nodes (most connected - your core abstractions)
 1. `react` - 36 edges
 2. `Genshu — Project Source of Truth` - 29 edges
 3. `lucide-react` - 26 edges
-4. `next-intl` - 22 edges
-5. `Button()` - 21 edges
-6. `database()` - 21 edges
+4. `createClient()` - 23 edges
+5. `next-intl` - 22 edges
+6. `Button()` - 21 edges
 7. `useData()` - 21 edges
 8. `Badge()` - 17 edges
 9. `compilerOptions` - 16 edges
 10. `PageShell()` - 15 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `CohortMembers` --references--> `User`  [EXTRACTED]
-  src/components/cohorts/cohort-roster-panels.tsx → src/lib/mock-data.ts
 - `Version and Minimize localStorage Data` --semantically_similar_to--> `Cache Storage API Calls`  [INFERRED] [semantically similar]
   .agents/skills/vercel-react-best-practices/rules/client-localstorage-schema.md → .agents/skills/vercel-react-best-practices/rules/js-cache-storage.md
 - `Cache Repeated Function Calls` --semantically_similar_to--> `Cache Property Access in Loops`  [INFERRED] [semantically similar]
@@ -177,6 +187,8 @@
   .agents/skills/vercel-react-best-practices/rules/js-cache-function-results.md → .agents/skills/vercel-react-best-practices/rules/js-cache-storage.md
 - `CSS content-visibility for Long Lists` --semantically_similar_to--> `Use useDeferredValue for Expensive Derived Renders`  [INFERRED] [semantically similar]
   .agents/skills/vercel-react-best-practices/rules/rendering-content-visibility.md → .agents/skills/vercel-react-best-practices/rules/rerender-use-deferred-value.md
+- `Use useTransition Over Manual Loading States` --semantically_similar_to--> `Use Transitions for Non-Urgent Updates`  [INFERRED] [semantically similar]
+  .agents/skills/vercel-react-best-practices/rules/rendering-usetransition-loading.md → .agents/skills/vercel-react-best-practices/rules/rerender-transitions.md
 
 ## Import Cycles
 - None detected.
@@ -187,11 +199,11 @@
 - **Derived Dependency Minimization** — agents_skills_vercel_react_best_practices_rules_rerender_dependencies_narrow_effect_dependencies, agents_skills_vercel_react_best_practices_rules_rerender_derived_state_no_effect_calculate_derived_state, agents_skills_vercel_react_best_practices_rules_rerender_derived_state_subscribe_to_derived_state, agents_skills_vercel_react_best_practices_rules_rerender_split_combined_hooks_split_hook_computations [INFERRED 0.85]
 - **React Concurrent Rendering Responsiveness** — agents_skills_vercel_react_best_practices_rules_rendering_usetransition_loading_use_transition_loading, agents_skills_vercel_react_best_practices_rules_rerender_transitions_transitions_for_non_urgent_updates, agents_skills_vercel_react_best_practices_rules_rerender_use_deferred_value_use_deferred_value [INFERRED 0.85]
 
-## Communities (139 total, 99 thin omitted)
+## Communities (151 total, 99 thin omitted)
 
 ### Community 0 - "cohorts/[id]/page.tsx"
-Cohesion: 0.08
-Nodes (78): lucide-react, next-intl, react, AssignmentDetailPage(), AssignmentsPage(), SessionRollCallPage(), STATUS_OPTIONS, AttendancePage() (+70 more)
+Cohesion: 0.07
+Nodes (81): lucide-react, next-intl, react, AssignmentDetailPage(), AssignmentsPage(), SessionRollCallPage(), STATUS_OPTIONS, AttendancePage() (+73 more)
 
 ### Community 1 - "package.json"
 Cohesion: 0.09
@@ -199,7 +211,7 @@ Nodes (21): ignoreScripts, name, packageManager, private, trustedDependencies, v
 
 ### Community 2 - "components.json"
 Cohesion: 0.09
-Nodes (21): aliases, components, hooks, lib, ui, utils, iconLibrary, menuAccent (+13 more)
+Nodes (22): aliases, components, hooks, lib, ui, utils, iconLibrary, menuAccent (+14 more)
 
 ### Community 3 - "compilerOptions"
 Cohesion: 0.11
@@ -207,15 +219,15 @@ Nodes (18): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModu
 
 ### Community 5 - "data-context.tsx"
 Cohesion: 0.11
-Nodes (36): CohortRosterPanelsProps, StudentProfileDrawerProps, DataContext, DataContextType, DataProvider(), getRoleServerSnapshot(), getRoleSnapshot(), notifyRoleListeners() (+28 more)
+Nodes (34): CohortRosterPanelsProps, DataContext, DataContextType, DataProvider(), getRoleServerSnapshot(), getRoleSnapshot(), notifyRoleListeners(), roleListeners (+26 more)
 
 ### Community 6 - "dependencies"
-Cohesion: 0.13
-Nodes (15): dependencies, @base-ui/react, class-variance-authority, cn, lucide-react, next, next-intl, next-themes (+7 more)
+Cohesion: 0.14
+Nodes (14): dependencies, @base-ui/react, class-variance-authority, cn, lucide-react, next, next-intl, next-themes (+6 more)
 
-### Community 7 - "content-repository.ts"
+### Community 7 - "createClient"
 Cohesion: 0.06
-Nodes (52): postgres, signIn(), signOut(), dynamic, LoginPage(), MaterialsPage(), MaterialPage(), dynamic (+44 more)
+Nodes (56): @supabase/ssr, signIn(), signOut(), dynamic, LoginPage(), MaterialsPage(), dynamic, MaterialPage() (+48 more)
 
 ### Community 8 - "Narrow Effect Dependencies"
 Cohesion: 0.33
@@ -263,11 +275,11 @@ Nodes (3): child, connectionString, parsedUrl
 
 ### Community 64 - "verify.js"
 Cohesion: 0.50
-Nodes (3): child, connectionString, parsedUrl
+Nodes (3): connectionString, parsedUrl, permissionsOnly
 
 ### Community 66 - "scripts"
-Cohesion: 0.17
-Nodes (12): scripts, build, check, db:migrate, db:seed, db:verify, dev, learning:smoke (+4 more)
+Cohesion: 0.15
+Nodes (13): scripts, build, check, db:migrate, db:seed, db:verify, db:verify-permissions, dev (+5 more)
 
 ### Community 67 - "devDependencies"
 Cohesion: 0.20
@@ -302,8 +314,8 @@ Cohesion: 0.29
 Nodes (7): 5. Release Scope, First live release, First live release: Practice, Later release: Assignments, Later release: Attendance, Later release: Exams, Learning materials
 
 ### Community 95 - "src/proxy.ts"
-Cohesion: 0.38
-Nodes (5): @supabase/ssr, updateSession(), config, prototypePaths, proxy()
+Cohesion: 0.47
+Nodes (4): updateSession(), config, prototypePaths, proxy()
 
 ### Community 96 - "Genshu Agent Instructions"
 Cohesion: 0.33
@@ -333,6 +345,54 @@ Nodes (3): 10. Data Platform, Database Access Layer, Local Development
 Cohesion: 0.08
 Nodes (24): 11. Authentication, 12. File Storage, 13. Deployment Direction, 14. Architecture Principle, 15. Anti-Overengineering Rules, 16. UX Principles, 17. Mobile and Desktop, 18. Data Ownership (+16 more)
 
+### Community 135 - "Cookies"
+Cohesion: 0.06
+Nodes (35): Advanced: Multiple Cookies or Custom Options, Advanced: Multiple Operations, Authentication State Reuse, Clear All Cookies, Clear All localStorage, Clear sessionStorage, Common Patterns, Cookies (+27 more)
+
+### Community 136 - "Browser Automation with playwright-cli"
+Cohesion: 0.08
+Nodes (24): Browser Automation with playwright-cli, Browser Sessions, Commands, Core, DevTools, Example: Debugging with DevTools, Example: Form submission, Example: Interactive session (+16 more)
+
+### Community 137 - "Test generation (plan → generate → heal)"
+Cohesion: 0.29
+Nodes (7): 0. How generation works, Add assertions manually, Building a test file, Cross-references, Explore before recording, Test generation (plan → generate → heal), Use semantic locators
+
+### Community 138 - "Browser Session Management"
+Cohesion: 0.10
+Nodes (20): 1. Name Browser Sessions Semantically, 2. Always Clean Up, 3. Delete Stale Browser Data, A/B Testing Sessions, Attach by channel name, Attach via browser extension, Attach via CDP endpoint, Attaching to a Running Browser (+12 more)
+
+### Community 139 - "Running Custom Playwright Code"
+Cohesion: 0.15
+Nodes (13): Clipboard, Complex Workflows, Error Handling, File Downloads, Frames and Iframes, Geolocation, JavaScript Execution, Media Emulation (+5 more)
+
+### Community 140 - "Tracing"
+Cohesion: 0.12
+Nodes (16): 1. Start Tracing Before the Problem, 2. Clean Up Old Traces, Analyzing Performance, Basic Usage, Best Practices, Capturing Evidence, Debugging Failed Actions, Limitations (+8 more)
+
+### Community 141 - "playwright-cli/SKILL.md"
+Cohesion: 0.24
+Nodes (4): Examples, Inspecting Element Attributes, Debugging Playwright Tests, Running Playwright Tests
+
+### Community 142 - "Video Recording"
+Cohesion: 0.22
+Nodes (8): 1. Use Descriptive Filenames, 2. Record entire hero scripts., Basic Recording, Best Practices, Limitations, Overlay API Summary, Tracing vs Video, Video Recording
+
+### Community 143 - "Advanced Mocking with run-code"
+Cohesion: 0.25
+Nodes (8): Advanced Mocking with run-code, CLI Route Commands, Conditional Response Based on Request, Delayed Response, Modify Real Response, Request Mocking, Simulate Network Failures, URL Patterns
+
+### Community 144 - "3. Heal"
+Cohesion: 0.33
+Nodes (6): 3.1 Find failing tests, 3.2 Debug one failure, 3.3 Apply the fix, 3.4 Reconcile with the spec, 3.5 Iteration and giving up, 3. Heal
+
+### Community 145 - "1. Planning"
+Cohesion: 0.40
+Nodes (5): 1.1 Prerequisite: workspace, 1.2 Prerequisite: seed test, 1.3 Explore the app, 1.4 Write the spec file, 1. Planning
+
+### Community 146 - "2. Generate"
+Cohesion: 0.40
+Nodes (5): 2.1 Inputs, 2.2 Generate one scenario, 2.3 Generate multiple scenarios, 2.4 Run generated tests, 2. Generate
+
 ### Community 155 - "The Fixes"
 Cohesion: 0.09
 Nodes (21): 10. Status bar color doesn't match, 11. Right in Chrome, wrong on phone, 1. Hover state stuck after tap, 2. Gray/blue flash on tap, 3. Layout has the wrong height, 4. Page zooms into the input, 5. Tap feels laggy, 6. Pull-to-refresh hijacks scroll (+13 more)
@@ -341,29 +401,29 @@ Nodes (21): 10. Status bar color doesn't match, 11. Right in Chrome, wrong on ph
 Cohesion: 0.36
 Nodes (9): isObject(), JsonObject, keyTypes(), locales, output(), readLocale(), run(), validateLocales() (+1 more)
 
-### Community 385 - "app-header.tsx"
-Cohesion: 0.14
-Nodes (11): nextConfig, withNextIntl, next, next-themes, metadata, LanguageToggle(), AppHeader(), links (+3 more)
+### Community 385 - "layout.tsx"
+Cohesion: 0.18
+Nodes (8): nextConfig, withNextIntl, next, next-themes, metadata, AppHeader(), LegacyDataProvider(), ThemeProvider()
 
 ## Knowledge Gaps
-- **399 isolated node(s):** `JsonObject`, `locales`, `$schema`, `style`, `rsc` (+394 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 471 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **523 isolated node(s):** `JsonObject`, `locales`, `$schema`, `style`, `rsc` (+518 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 596 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **99 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `react` connect `cohorts/[id]/page.tsx` to `package.json`, `app-header.tsx`, `dropdown-menu.tsx`, `data-context.tsx`, `content-repository.ts`?**
-  _High betweenness centrality (0.057) - this node is a cross-community bridge._
-- **Why does `lucide-react` connect `cohorts/[id]/page.tsx` to `package.json`, `app-header.tsx`, `dropdown-menu.tsx`?**
-  _High betweenness centrality (0.026) - this node is a cross-community bridge._
-- **Why does `next-intl` connect `cohorts/[id]/page.tsx` to `package.json`, `app-header.tsx`, `content-repository.ts`?**
+- **Why does `react` connect `cohorts/[id]/page.tsx` to `package.json`, `layout.tsx`, `dropdown-menu.tsx`, `data-context.tsx`, `createClient`?**
+  _High betweenness centrality (0.042) - this node is a cross-community bridge._
+- **Why does `lucide-react` connect `cohorts/[id]/page.tsx` to `package.json`, `dropdown-menu.tsx`, `createClient`?**
   _High betweenness centrality (0.017) - this node is a cross-community bridge._
+- **Why does `next-intl` connect `cohorts/[id]/page.tsx` to `package.json`, `layout.tsx`, `createClient`?**
+  _High betweenness centrality (0.012) - this node is a cross-community bridge._
 - **What connects `JsonObject`, `locales`, `$schema` to the rest of the system?**
-  _399 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _523 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `cohorts/[id]/page.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.07570305211248834 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07311586051743532 - nodes in this community are weakly interconnected._
 - **Should `package.json` be split into smaller, more focused modules?**
   _Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected._
 - **Should `components.json` be split into smaller, more focused modules?**
-  _Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08695652173913043 - nodes in this community are weakly interconnected._

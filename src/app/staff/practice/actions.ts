@@ -2,7 +2,7 @@
 import { revalidatePath } from "next/cache"
 import { getTranslations } from "next-intl/server"
 import { redirect } from "next/navigation"
-import { database } from "@/lib/content-repository"
+import { createClient } from "@/lib/supabase/server"
 import { requireSensei } from "@/lib/staff"
 import type { StaffFormState } from "@/components/staff-action-form"
 
@@ -43,34 +43,25 @@ export async function savePracticeSet(_state: StaffFormState, form: FormData): P
       }
     })
     const published = form.get("published") === "on"
-    const db = database()
-    await db.begin(async (sql) => {
-      if (original) {
-        const updated = await sql`
-          update practice_sets set title = ${titleJa}, title_id = ${titleId}, description = ${descriptionJa},
-            description_id = ${descriptionId}, target_level = ${level}, topic = ${topic},
-            is_published = ${published}, published_at = case when ${published} then coalesce(published_at, now()) else null end,
-            updated_at = now() where id = ${id} returning id
-        `
-        if (!updated.length) throw new Error("Latihan tidak ditemukan.")
-        await sql`delete from practice_questions where practice_set_id = ${id}`
-      } else {
-        await sql`
-          insert into practice_sets (id, title, title_id, description, description_id, target_level, topic, is_published, published_at)
-          values (${id}, ${titleJa}, ${titleId}, ${descriptionJa}, ${descriptionId}, ${level}, ${topic}, ${published}, case when ${published} then now() else null end)
-        `
-      }
-      for (const [position, question] of questions.entries()) {
-        const questionId = id + "-q" + (position + 1)
-        await sql`
-          insert into practice_questions
-            (id, practice_set_id, position, question_type, prompt, prompt_plain, translation_id, options, correct_answer_index, explanation_ja, explanation_id)
-          values (${questionId}, ${id}, ${position}, ${question.type}, ${question.prompt},
-            ${question.prompt.replace(/\{([^|{}]+)\|[^{}]+\}/g, "$1")}, ${question.translationId},
-            ${sql.json(question.options)}::jsonb, ${question.correct}, ${question.explanationJa}, ${question.explanationId})
-        `
-      }
+    const client = await createClient()
+    const { error } = await client.rpc("save_practice_set", {
+      p_set: {
+        id, title: titleJa, title_id: titleId, description: descriptionJa,
+        description_id: descriptionId, target_level: level, topic, is_published: published,
+      },
+      p_questions: questions.map((question) => ({
+        question_type: question.type,
+        prompt: question.prompt,
+        prompt_plain: question.prompt.replace(/\{([^|{}]+)\|[^{}]+\}/g, "$1"),
+        translation_id: question.translationId,
+        options: question.options,
+        correct_answer_index: question.correct,
+        explanation_ja: question.explanationJa,
+        explanation_id: question.explanationId,
+      })),
+      p_update: Boolean(original),
     })
+    if (error) throw error
   } catch {
     const t = await getTranslations("staff")
     return { error: t("saveError") }

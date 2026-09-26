@@ -2,7 +2,7 @@ import Link from "next/link"
 import { getTranslations } from "next-intl/server"
 import { notFound } from "next/navigation"
 import { requireSensei } from "@/lib/staff"
-import { database } from "@/lib/content-repository"
+import { createClient } from "@/lib/supabase/server"
 import { saveMaterial } from "../actions"
 import { StaffActionForm } from "@/components/staff-action-form"
 import { MaterialSectionsEditor } from "@/components/material-sections-editor"
@@ -18,11 +18,16 @@ export default async function MaterialEditor({ params }: { params: Promise<{ slu
   const { slug } = await params
   let material: MaterialRow | undefined
   if (slug !== "new") {
-    const rows = await database()`
-      select slug, title_ja as "titleJa", title_id as "titleId", summary_ja as "summaryJa", summary_id as "summaryId",
-        level, topic, sections, is_published as "published" from learning_materials where slug = ${slug} limit 1
-    `
-    material = rows[0] as unknown as MaterialRow | undefined
+    const client = await createClient()
+    const { data, error } = await client.from("learning_materials")
+      .select("slug,title_ja,title_id,summary_ja,summary_id,level,topic,sections,is_published")
+      .eq("slug", slug).maybeSingle()
+    if (error) throw new Error(`Supabase material lookup failed: ${error.message}`)
+    material = data ? {
+      slug: data.slug, titleJa: data.title_ja, titleId: data.title_id,
+      summaryJa: data.summary_ja, summaryId: data.summary_id, level: data.level,
+      topic: data.topic, sections: data.sections as unknown as MaterialSection[], published: data.is_published,
+    } : undefined
     if (!material) notFound()
   }
   const inputClass = "mt-1 w-full rounded-md border bg-background px-3 py-2"

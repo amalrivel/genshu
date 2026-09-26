@@ -193,10 +193,10 @@ Students should be able to find and read published Japanese learning materials
 comfortably on phones and desktop browsers. Supporting Indonesian explanations
 and optional furigana may be used where appropriate. Staff need a simple way to
 publish and correct materials. Staff login and authoring UI now exist in code.
-The Supabase schema and Sensei/Tantōsha mappings are provisioned. On 2026-09-26,
-production-browser checks verified staff login, Sensei material and practice
-create/edit/publish, anonymous published reading and practice, hidden drafts,
-and server-side Tantōsha authoring denial. Temporary QA content was removed.
+The Supabase schema and Sensei/Tantōsha mappings are provisioned. Production
+browser checks on 2026-09-26 verified these workflows against the prior direct
+PostgreSQL integration. Re-run them against the Supabase Data API before
+claiming the migrated release is verified. Temporary QA content was removed.
 Sample content is managed through versioned local SQL seed data. The exact authoring model should follow real
 content needs, without a speculative course hierarchy.
 
@@ -467,7 +467,14 @@ Supabase is the selected initial production database host.
 
 Development should remain local-first.
 
-Preferred development environment:
+Application runtime needs a Supabase Data API endpoint, so local development
+must point `NEXT_PUBLIC_SUPABASE_URL` and the publishable key to a local
+Supabase stack or an isolated development Supabase project. A plain PostgreSQL
+server is only a migration/check target; it cannot serve the app's runtime
+queries. `POSTGRES_URL` is configured separately for administration scripts.
+Do not point a local authoring session at production content.
+
+Preferred database environment:
 
 ```text
 Local PostgreSQL
@@ -484,31 +491,38 @@ Do not treat manually configured remote database state as the source of truth.
 
 ### Database Access Layer
 
-Published learning content uses the `postgres` (Postgres.js) driver from
-server-only Next.js code with parameterized SQL. This keeps the small initial
-schema direct and avoids an ORM. The private `POSTGRES_URL` connection is never
-sent to browsers; student queries explicitly filter for published rows. RLS is
-enabled and public Supabase roles have no table grants or policies. Anonymous
-routes have no content mutation handlers.
+All application database reads and writes use `@supabase/supabase-js` through
+Supabase Data API. Next.js Server Components and Server Actions use a new
+cookie-aware `@supabase/ssr` server client per request; the browser client is
+available for client-side needs. PostgreSQL connections are limited to the
+repository's administration scripts for applying versioned SQL migrations and
+running database checks. `POSTGRES_URL` is not a Vercel runtime requirement.
+Migration 005 defines the Data API grants and policies, but is not yet applied
+to the configured live Supabase project; automatic review rejected the initial
+application attempt.
+Published content is filtered in queries and protected by RLS; staff-only
+content and writes are also restricted by policies. Practice-set replacement
+uses a Sensei-authorized transaction RPC so the set and child questions commit
+atomically.
 
-Local schema changes are versioned SQL migrations under `db/migrations/` and
-are applied with the repository Bun scripts and `psql`. `db/seed.sql` contains
-repeatable sample material, practice, and unpublished rows. Supabase remains
-the initial hosting target; its runtime connection should use the connection
-pooler that matches the selected deployment runtime.
+Migrations under `db/migrations/` use the repository Bun scripts and `psql`.
+`db/seed.sql` remains local-development sample data and must not be run against
+Supabase. Runtime configuration consists of `NEXT_PUBLIC_SUPABASE_URL` and
+`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` only.
 
 ---
 
 ## 11. Authentication
 
 The staff login implementation uses Supabase Auth with cookie-based sessions.
-Sensei and Tantōsha access is determined by active rows in the server-side
-staff_members table, not user-editable profile metadata. Content mutations
-require the Sensei role inside each Server Action. No public registration is
-provided. The initial Supabase project has the Genshu migrations and mapped
-Sensei/Tantōsha identities. Browser login and content publishing passed
-end-to-end verification on 2026-09-26. Anonymous student access must never
-grant content editing privileges.
+Sensei and Tantōsha access is determined by active rows in `staff_members`,
+not user-editable profile metadata. Content mutations require the Sensei role
+inside each Server Action and RLS policy. Public students may read published
+materials and practice only. No public registration is provided. The Supabase
+project retains its existing content and staff identities. Browser and
+permission verification for the Data API migration must be recorded before
+claiming release readiness. Anonymous student access must never grant content
+editing privileges.
 
 Authentication implementation must support the role model required by Genshu.
 
@@ -540,14 +554,21 @@ Do not introduce separate object-storage infrastructure unless actual requiremen
 ## 13. Deployment Direction
 
 The selected initial production target is Vercel for the single Next.js
-application and Supabase for PostgreSQL. The repository's main branch is the
-intended production branch; use preview deployments to review changes before
-merging. Production setup remains pending until the local database workflow,
-staff access, content persistence, and release verification are implemented.
+application and Supabase for PostgreSQL and its Data API. Use the repository
+root, Next.js preset, `main` as the production branch,
+`bun install --frozen-lockfile`, and `bun run build`. Vercel runtime requires
+only `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` for
+database access and Auth. `POSTGRES_URL` is reserved for administration
+scripts and must not be configured as an application runtime dependency. The
+existing `genshu` Vercel project has a READY deployment at `genshu.vercel.app`;
+production environment variables and post-migration deployed flows must be
+verified before treating beta as usable.
 
-Keep deployment configuration and database migrations reproducible. Plan for
-backups, restoration, and application rollback before relying on production
-data. A code rollback does not reverse a database migration automatically.
+The configured Supabase project is on the Free plan. Supabase does not provide
+downloadable automatic backups for Free projects. Arrange and rehearse an
+off-site export and restore to an isolated database before relying on real
+production content. A code rollback does not reverse database migrations or
+content edits.
 
 The exact production pricing tier remains an operational decision rather than a project architecture rule.
 
@@ -920,8 +941,6 @@ The following areas are intentionally not fully specified yet:
 - production deployment pricing tier,
 - detailed course-authoring workflow,
 - exact account invitation and recovery workflows,
-- staff authentication provider and database access layer,
-- first-release material format and publishing workflow,
 - and future organization structure.
 
 Do not invent elaborate solutions for these areas.

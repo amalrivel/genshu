@@ -1,7 +1,6 @@
 "use server"
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
-import { database } from "@/lib/content-repository"
 
 export async function signIn(formData: FormData) {
   const email = String(formData.get("email") ?? "").trim()
@@ -10,12 +9,15 @@ export async function signIn(formData: FormData) {
   const client = await createClient()
   const { data, error } = await client.auth.signInWithPassword({ email, password })
   if (error || !data.user?.id) redirect("/login?error=invalid")
-  const rows = await database()`
-    select user_id from staff_members where user_id = ${data.user.id}::uuid and is_active = true limit 1
-  `
-  if (!rows.length) {
+  const { data: staff, error: staffError } = await client
+    .from("staff_members")
+    .select("user_id")
+    .eq("user_id", data.user.id)
+    .eq("is_active", true)
+    .maybeSingle()
+  if (staffError || !staff) {
     await client.auth.signOut({ scope: "local" })
-    redirect("/login?error=forbidden")
+    redirect(staffError ? "/login?error=unavailable" : "/login?error=forbidden")
   }
   redirect("/staff")
 }

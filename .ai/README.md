@@ -35,16 +35,20 @@ acceptance criteria, verification, or review.
 Do not silently change the database platform, authentication approach, role
 model, hosting architecture, or major dependencies. Propose the specific
 tradeoff and update `.ai/PROJECT.md` when the decision is accepted. The
-initial release targets Vercel and Supabase PostgreSQL, with local development
-and versioned migrations. Published student content uses server-only Postgres.js
-queries with a private `POSTGRES_URL`; student routes filter to published rows.
-Staff login uses Supabase Auth and server-side staff_members roles. Sensei may
-edit materials and practice; Tantōsha currently has read-only staff access.
-The Supabase schema and Sensei/Tantōsha mappings are provisioned. On
-2026-09-26, production-browser checks verified Sensei authoring and publishing,
-Tantōsha authoring denial, anonymous published reading and practice, and draft
-privacy. Temporary QA content was removed. Re-run `bun run verify` and the
-Supabase checks before deployment.
+initial release targets Vercel and Supabase, with local development and
+versioned SQL migrations. Application data access uses Supabase Data API
+through `@supabase/supabase-js`; Next.js server code uses the cookie-aware
+`@supabase/ssr` client. Runtime requires only `NEXT_PUBLIC_SUPABASE_URL` and
+`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. `POSTGRES_URL` is administration-only
+for migration and database-check scripts using `psql`. Staff login and
+server-side `staff_members` authorization remain unchanged. Migration 005
+defines public reads of published content, Sensei reads of drafts, and
+Sensei-only authoring. Tantōsha cannot author. Practice-set and question
+replacement is atomic through a restricted database RPC. The migration has
+not yet been applied to the configured Supabase project; automatic review
+blocked the live permission change. Earlier browser checks predate this Data
+API migration, so repeat the required API, browser, and runtime checks after
+it is applied.
 
 User-facing learning data used officially must persist on the server.
 Anonymous practice in the first release has no official student attempt
@@ -70,24 +74,26 @@ project truth. Do not duplicate active instructions across these files.
 
 ## Local learning-content database
 
-1. Install/start local PostgreSQL and create a database plus an application login.
-2. Copy `.env.example` to `.env.local` and set the server-only `POSTGRES_URL`.
-3. Run `bun run db:migrate` and `bun run db:seed`. Both commands are safe to rerun.
+1. Start a local Supabase stack or use an isolated development Supabase project
+   for runtime Data API and Auth. A plain PostgreSQL service supports migrations
+   and checks but not app runtime queries.
+2. Set the two Supabase runtime values in `.env.local`. Set `POSTGRES_URL` only
+   when running administration scripts with `psql`.
+3. Run `bun run db:migrate` to apply versioned migrations. Run `bun run db:seed`
+   only against local PostgreSQL; never seed the configured Supabase project.
 4. Run `bun run db:verify` to validate local sample publication state, or
    `bun run db:verify-permissions` to check RLS and public-role grants without
    requiring or changing sample content. The permissions check is read-only and
    can also be run against the configured Supabase project.
 5. Start the app with `bun run dev`; `/` opens the published materials catalog.
 
-The app role needs read access for its server queries. Do not grant database
-credentials to browser code or create anonymous write grants. Supabase runtime
-connections should use an appropriate pooler URL and keep prepared statements
-disabled for transaction-pooler compatibility.
+The app uses the Data API with the caller's cookie session and RLS. Never put a
+PostgreSQL URL or secret/service-role key in the runtime or browser.
 
 ## Staff access setup
 
 Configure NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY from
-the Supabase project. Keep POSTGRES_URL server-only. Apply migrations before
+the Supabase project. Keep POSTGRES_URL out of app runtime. Apply migrations before
 using the staff area. Create staff identities through Supabase Auth using an
 invitation or administrator workflow; public self-registration is not exposed
 in Genshu. Insert the identity UUID in staff_members with role SENSEI or

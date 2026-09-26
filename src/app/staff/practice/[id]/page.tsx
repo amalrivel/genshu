@@ -2,7 +2,7 @@ import Link from "next/link"
 import { getTranslations } from "next-intl/server"
 import { notFound } from "next/navigation"
 import { requireSensei } from "@/lib/staff"
-import { database } from "@/lib/content-repository"
+import { createClient } from "@/lib/supabase/server"
 import { PracticeQuestionsEditor } from "@/components/practice-questions-editor"
 import { savePracticeSet } from "../actions"
 import { StaffActionForm } from "@/components/staff-action-form"
@@ -19,18 +19,27 @@ export default async function PracticeEditor({ params }: { params: Promise<{ id:
   let set: SetRow | undefined
   let questions: PracticeQuestion[] = []
   if (id !== "new") {
-    const rows = await database()`
-      select id, title as "titleJa", title_id as "titleId", description as "descriptionJa", description_id as "descriptionId",
-        target_level as level, topic, is_published as published from practice_sets where id = ${id} limit 1
-    `
-    set = rows[0] as SetRow | undefined
+    const client = await createClient()
+    const { data, error } = await client.from("practice_sets")
+      .select("id,title,title_id,description,description_id,target_level,topic,is_published")
+      .eq("id", id).maybeSingle()
+    if (error) throw new Error(`Supabase practice lookup failed: ${error.message}`)
+    set = data ? {
+      id: data.id, titleJa: data.title, titleId: data.title_id,
+      descriptionJa: data.description, descriptionId: data.description_id,
+      level: data.target_level, topic: data.topic, published: data.is_published,
+    } : undefined
     if (!set) notFound()
-    const questionRows = await database()`
-      select id, question_type as type, prompt, prompt_plain as "promptPlain", translation_id as "translationId", options,
-        correct_answer_index as "correctAnswerIndex", explanation_ja as "explanationJa", explanation_id as "explanationId"
-      from practice_questions where practice_set_id = ${id} order by position
-    `
-    questions = questionRows as unknown as PracticeQuestion[]
+    const { data: questionRows, error: questionError } = await client.from("practice_questions")
+      .select("id,question_type,prompt,prompt_plain,translation_id,options,correct_answer_index,explanation_ja,explanation_id")
+      .eq("practice_set_id", id).order("position")
+    if (questionError) throw new Error(`Supabase practice question lookup failed: ${questionError.message}`)
+    questions = (questionRows ?? []).map((question) => ({
+      id: question.id, type: question.question_type as PracticeQuestion["type"], prompt: question.prompt,
+      promptPlain: question.prompt_plain, translationId: question.translation_id,
+      options: question.options as unknown as string[], correctAnswerIndex: question.correct_answer_index,
+      explanationJa: question.explanation_ja, explanationId: question.explanation_id,
+    }))
   }
   const inputClass = "mt-1 w-full rounded-md border bg-background px-3 py-2"
   return <main className="mx-auto w-full max-w-3xl px-5 py-12">

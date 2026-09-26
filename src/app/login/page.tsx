@@ -12,7 +12,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
   return <main className="mx-auto w-full max-w-md px-5 py-14">
     <h1 className="text-2xl font-semibold">{t("loginTitle")}</h1>
     <p className="mt-2 text-sm text-muted-foreground">{t("loginDescription")}</p>
-    {error && <p role="alert" className="mt-5 rounded-md border border-destructive px-4 py-3 text-sm text-destructive">{error === "forbidden" ? t("forbidden") : t("invalid")}</p>}
+    {error && <p role="alert" className="mt-5 rounded-md border border-destructive px-4 py-3 text-sm text-destructive">{error === "forbidden" ? t("forbidden") : error === "unavailable" ? t("unavailable") : t("invalid")}</p>}
     <form action={signIn} className="mt-7 space-y-4">
       <label className="block text-sm font-medium">{t("email")}<input name="email" type="email" required autoComplete="email" className="mt-1 w-full rounded-md border bg-background px-3 py-2" /></label>
       <label className="block text-sm font-medium">{t("password")}<input name="password" type="password" required autoComplete="current-password" className="mt-1 w-full rounded-md border bg-background px-3 py-2" /></label>

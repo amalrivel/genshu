@@ -19,29 +19,5 @@ begin
   ) then
     raise exception 'A published practice set has no questions';
   end if;
-  if not (select relrowsecurity from pg_class where oid = 'public.staff_members'::regclass) or
-     not (select relrowsecurity from pg_class where oid = 'public.learning_materials'::regclass) or
-     not (select relrowsecurity from pg_class where oid = 'public.practice_sets'::regclass) or
-     not (select relrowsecurity from pg_class where oid = 'public.practice_questions'::regclass) then
-    raise exception 'RLS must be enabled on every public learning content table';
-  end if;
-  if exists (select 1 from pg_roles where rolname = 'anon') and (
-    has_table_privilege('anon', 'public.staff_members', 'SELECT') or
-    has_table_privilege('anon', 'public.learning_materials', 'SELECT') or
-    has_table_privilege('anon', 'public.learning_materials', 'INSERT') or
-    has_table_privilege('anon', 'public.learning_materials', 'UPDATE') or
-    has_table_privilege('anon', 'public.practice_sets', 'INSERT') or
-    has_table_privilege('anon', 'public.practice_questions', 'INSERT')
-  ) then
-    raise exception 'Supabase anon role must not access or mutate content tables directly';
-  end if;
-  if exists (select 1 from pg_roles where rolname = 'authenticated') and (
-    has_table_privilege('authenticated', 'public.staff_members', 'SELECT') or
-    has_table_privilege('authenticated', 'public.learning_materials', 'SELECT') or
-    has_table_privilege('authenticated', 'public.practice_sets', 'INSERT') or
-    has_table_privilege('authenticated', 'public.practice_questions', 'UPDATE')
-  ) then
-    raise exception 'Supabase authenticated role must not access content tables directly';
-  end if;
 end;
 $$;

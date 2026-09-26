@@ -1,89 +1,136 @@
 import "server-only"
-import postgres from "postgres"
+import { createClient } from "@/lib/supabase/server"
 import type { PublishedMaterial, PublishedPracticeSet, PublishedPracticeSummary } from "@/lib/content-types"
 
-const globalForPostgres = globalThis as typeof globalThis & {
-  genshuSql?: ReturnType<typeof postgres>
-}
-
-export function database() {
-  const connectionString = process.env.POSTGRES_URL
-  if (!connectionString) {
-    throw new Error("POSTGRES_URL belum diatur. Salin contoh konfigurasi .env.example ke .env.local.")
-  }
-
-  const parsedUrl = new URL(connectionString)
-  parsedUrl.searchParams.delete("schema")
-  globalForPostgres.genshuSql ??= postgres(parsedUrl.toString(), {
-    max: 2,
-    idle_timeout: 20,
-    connect_timeout: 5,
-    prepare: false,
-  })
-  return globalForPostgres.genshuSql
+function checkError(context: string, error: { message: string } | null) {
+  if (error) throw new Error(`Supabase ${context} failed: ${error.message}`)
 }
 
 export async function listPublishedMaterials(): Promise<PublishedMaterial[]> {
-  const rows = await database()`
-    select slug, title_ja as "titleJa", title_id as "titleId",
-      summary_ja as "summaryJa", summary_id as "summaryId", level, topic,
-      updated_at::date::text as "updatedAt", sections
-    from learning_materials
-    where is_published = true and published_at is not null
-    order by sort_order asc, published_at desc, slug asc
-  `
-  return rows as unknown as PublishedMaterial[]
+  const client = await createClient()
+  const { data, error } = await client
+    .from("learning_materials")
+    .select("slug,title_ja,title_id,summary_ja,summary_id,level,topic,updated_at,sections")
+    .eq("is_published", true)
+    .not("published_at", "is", null)
+    .order("sort_order")
+    .order("published_at", { ascending: false })
+    .order("slug")
+  checkError("material list", error)
+  return (data ?? []).map((row) => ({
+    slug: row.slug,
+    titleJa: row.title_ja,
+    titleId: row.title_id,
+    summaryJa: row.summary_ja,
+    summaryId: row.summary_id,
+    level: row.level,
+    topic: row.topic,
+    updatedAt: row.updated_at.slice(0, 10),
+    sections: row.sections as unknown as PublishedMaterial["sections"],
+  }))
 }
 
 export async function getPublishedMaterial(slug: string): Promise<PublishedMaterial | null> {
-  const rows = await database()`
-    select slug, title_ja as "titleJa", title_id as "titleId",
-      summary_ja as "summaryJa", summary_id as "summaryId", level, topic,
-      updated_at::date::text as "updatedAt", sections
-    from learning_materials
-    where slug = ${slug} and is_published = true and published_at is not null
-    limit 1
-  `
-  return (rows[0] as unknown as PublishedMaterial | undefined) ?? null
+  const client = await createClient()
+  const { data, error } = await client
+    .from("learning_materials")
+    .select("slug,title_ja,title_id,summary_ja,summary_id,level,topic,updated_at,sections")
+    .eq("slug", slug)
+    .eq("is_published", true)
+    .not("published_at", "is", null)
+    .maybeSingle()
+  checkError("material lookup", error)
+  if (!data) return null
+  return {
+    slug: data.slug,
+    titleJa: data.title_ja,
+    titleId: data.title_id,
+    summaryJa: data.summary_ja,
+    summaryId: data.summary_id,
+    level: data.level,
+    topic: data.topic,
+    updatedAt: data.updated_at.slice(0, 10),
+    sections: data.sections as unknown as PublishedMaterial["sections"],
+  }
 }
 
 export async function listPublishedPracticeSets(): Promise<PublishedPracticeSummary[]> {
-  const rows = await database()`
-    select p.id, p.title as "titleJa", p.title_id as "titleId",
-      p.description as "descriptionJa", p.description_id as "descriptionId", p.target_level as "targetLevel",
-      p.topic, p.published_at::date::text as "publishedAt",
-      count(q.id)::integer as "questionCount"
-    from practice_sets p
-    join practice_questions q on q.practice_set_id = p.id
-    where p.is_published = true and p.published_at is not null
-    group by p.id
-    order by p.published_at desc, p.id asc
-  `
-  return rows as unknown as PublishedPracticeSummary[]
+  const client = await createClient()
+  const { data, error } = await client
+    .from("practice_sets")
+    .select("id,title,title_id,description,description_id,target_level,topic,published_at")
+    .eq("is_published", true)
+    .not("published_at", "is", null)
+    .order("published_at", { ascending: false })
+    .order("id")
+  checkError("practice list", error)
+  if (!data?.length) return []
+
+  const { data: questions, error: questionError } = await client
+    .from("practice_questions")
+    .select("practice_set_id")
+    .in("practice_set_id", data.map(({ id }) => id))
+  checkError("practice question counts", questionError)
+  const counts = new Map<string, number>()
+  for (const question of questions ?? []) {
+    counts.set(question.practice_set_id, (counts.get(question.practice_set_id) ?? 0) + 1)
+  }
+
+  return data.flatMap((row) => {
+    const questionCount = counts.get(row.id) ?? 0
+    return questionCount === 0 ? [] : [{
+      id: row.id,
+      titleJa: row.title,
+      titleId: row.title_id,
+      descriptionJa: row.description,
+      descriptionId: row.description_id,
+      targetLevel: row.target_level as PublishedPracticeSummary["targetLevel"],
+      topic: row.topic as PublishedPracticeSummary["topic"],
+      publishedAt: row.published_at!.slice(0, 10),
+      questionCount,
+    }]
+  })
 }
 
 export async function getPublishedPracticeSet(id: string): Promise<PublishedPracticeSet | null> {
-  const rows = await database()`
-    select p.id, p.title as "titleJa", p.title_id as "titleId",
-      p.description as "descriptionJa", p.description_id as "descriptionId", p.target_level as "targetLevel",
-      p.topic, p.published_at::date::text as "publishedAt",
-      coalesce(jsonb_agg(jsonb_build_object(
-        'id', q.id,
-        'type', q.question_type,
-        'prompt', q.prompt,
-        'promptPlain', q.prompt_plain,
-        'translationId', q.translation_id,
-        'options', q.options,
-        'correctAnswerIndex', q.correct_answer_index,
-        'explanationJa', q.explanation_ja,
-        'explanationId', q.explanation_id
-      ) order by q.position) filter (where q.id is not null), '[]'::jsonb) as questions
-    from practice_sets p
-    left join practice_questions q on q.practice_set_id = p.id
-    where p.id = ${id} and p.is_published = true and p.published_at is not null
-    group by p.id
-    having count(q.id) > 0
-    limit 1
-  `
-  return (rows[0] as unknown as PublishedPracticeSet | undefined) ?? null
+  const client = await createClient()
+  const { data: row, error } = await client
+    .from("practice_sets")
+    .select("id,title,title_id,description,description_id,target_level,topic,published_at")
+    .eq("id", id)
+    .eq("is_published", true)
+    .not("published_at", "is", null)
+    .maybeSingle()
+  checkError("practice lookup", error)
+  if (!row) return null
+
+  const { data: rows, error: questionError } = await client
+    .from("practice_questions")
+    .select("id,question_type,prompt,prompt_plain,translation_id,options,correct_answer_index,explanation_ja,explanation_id")
+    .eq("practice_set_id", id)
+    .order("position")
+  checkError("practice questions", questionError)
+  if (!rows?.length) return null
+
+  return {
+    id: row.id,
+    titleJa: row.title,
+    titleId: row.title_id,
+    descriptionJa: row.description,
+    descriptionId: row.description_id,
+    targetLevel: row.target_level as PublishedPracticeSet["targetLevel"],
+    topic: row.topic as PublishedPracticeSet["topic"],
+    publishedAt: row.published_at!.slice(0, 10),
+    questions: rows.map((question) => ({
+      id: question.id,
+      type: question.question_type as PublishedPracticeSet["questions"][number]["type"],
+      prompt: question.prompt,
+      promptPlain: question.prompt_plain,
+      translationId: question.translation_id,
+      options: question.options as unknown as string[],
+      correctAnswerIndex: question.correct_answer_index,
+      explanationJa: question.explanation_ja,
+      explanationId: question.explanation_id,
+    })),
+  }
 }

@@ -1,7 +1,6 @@
 import "server-only"
 import { notFound, redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
-import { database } from "@/lib/content-repository"
 
 export type StaffMember = { userId: string; role: "SENSEI" | "TANTOSHA"; displayName: string }
 
@@ -10,11 +9,14 @@ export async function currentStaff(): Promise<StaffMember | null> {
   const client = await createClient()
   const { data, error } = await client.auth.getClaims()
   if (error || !data?.claims?.sub) return null
-  const rows = await database()`
-    select user_id::text as "userId", role, display_name as "displayName"
-    from staff_members where user_id = ${data.claims.sub}::uuid and is_active = true limit 1
-  `
-  return (rows[0] as StaffMember | undefined) ?? null
+  const { data: staff, error: staffError } = await client
+    .from("staff_members")
+    .select("user_id,role,display_name")
+    .eq("user_id", data.claims.sub)
+    .eq("is_active", true)
+    .maybeSingle()
+  if (staffError) throw new Error(`Supabase staff check failed: ${staffError.message}`)
+  return staff ? { userId: staff.user_id, role: staff.role as StaffMember["role"], displayName: staff.display_name } : null
 }
 
 export async function requireStaff() {

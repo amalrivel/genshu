@@ -861,6 +861,7 @@
     "loginTitle": "Masuk staf Genshu",
     "loginDescription": "Untuk Sensei dan Tantōsha yang sudah diundang.",
     "forbidden": "Akun ini tidak memiliki akses staf.",
+    "unavailable": "Login tidak dapat diverifikasi saat ini. Silakan coba lagi.",
     "invalid": "Email atau kata sandi tidak cocok.",
     "email": "Email",
     "password": "Kata sandi",
