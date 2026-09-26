@@ -508,6 +508,13 @@ Local production browser checks pass for authoring, anonymous reading and
 practice, login/logout, and expired-session refresh. Production build/start
 also pass with `POSTGRES_URL` absent. The full verifier passes with `--webpack`;
 default Turbopack is blocked by this sandbox's worker-port restriction.
+The 2026-09-26 Production HTTP 500 was resolved by replacing the two public
+Supabase variables' Production Secret targets with validated Config values
+and rebuilding. CLI deployment `dpl_7Vraq7P3RP8gxZifswCkvubJoyNF` from commit
+`4216e53` serves `genshu.vercel.app`. Live HTTP/browser checks pass for published
+content, anonymous practice, staff authoring and session refresh; draft URLs
+remain anonymous 404. The original content hashes are preserved. Vercel's
+remote Turbopack build passes; no database or RLS changes were required.
 Published content is filtered in queries and protected by RLS; staff-only
 content and writes are also restricted by policies. Practice-set replacement
 uses a Sensei-authorized transaction RPC so the set and child questions commit

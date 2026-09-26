@@ -178,23 +178,26 @@ before relying on real content.
 
 ### Current deployment status
 
-The existing `genshu` Vercel project has a READY production deployment from
-`main` at `genshu.vercel.app`, running commit `39a83c6` in deployment
-`dpl_EerZiC3j8cFWWgP5uGNYrVZZFLAd`. The 2026-09-26 18:05 JST incident and
-a cookie-free reproduction return HTTP 500. Runtime logs contain Supabase's
-"Your project's URL and Key are required" exception, digest `2431554270`,
-in the server client creation path. At least one required Supabase value is
-absent/empty in that deployment; the specific Production scope and values
-still need inspection through an authenticated Vercel CLI. The live migration ledger
-now includes migration 005, whose Data API grants and policies pass the live
-permission verifier. Original content and staff row hashes are unchanged.
-Configure the required Production values and retest the deployed flows.
-Builds must not run migrations or seed data.
+The existing `genshu` Vercel project serves `genshu.vercel.app` from READY
+deployment `dpl_7Vraq7P3RP8gxZifswCkvubJoyNF`, deployed through the CLI from
+commit `4216e53`. The 2026-09-26 18:05 JST incident on the previous deployment
+failed during Supabase client creation with "Your project's URL and Key are
+required", digest `2431554270`. The two required public variables were stored
+as Secret; their Production targets were replaced with validated Config
+values and the app was rebuilt. Preview targets were preserved.
+Cookie-free live HTTP checks now return 200 with actual Supabase content on
+both catalogs and published detail routes. Live browser checks pass for
+anonymous reading/practice, Sensei authoring, login/logout, expired-session
+refresh, and Tantōsha authoring denial. Draft URLs remain anonymous 404.
+New runtime logs show 200 on the fix deployment with no 5xx in the checked
+post-deployment interval. QA content is removed and original row hashes remain
+unchanged. Migration 005 remains applied; no seed/reset or RLS changes were
+needed. Builds must not run migrations or seed data.
 
 Incident recovery: open the existing project's
 [Environment Variables settings](https://vercel.com/amalrivels-projects/genshu/settings/environment-variables),
-set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` from
-the existing Supabase project with **Production** selected, then create a new
+set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` as
+**Config** from the existing Supabase project with **Production** selected, then create a new
 Production deployment from `main`. Changing variables does not update an
 existing deployment. The runtime needs no `POSTGRES_URL`. Check the four
 published catalog/detail routes anonymously and inspect new runtime logs.
