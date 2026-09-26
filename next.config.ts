@@ -6,6 +6,7 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
+  experimental: { useTypeScriptCli: false },
 };
 
 export default withNextIntl(nextConfig);

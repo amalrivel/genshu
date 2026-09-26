@@ -286,6 +286,10 @@
     "topicGrammar": "Tata Bahasa (文法)",
     "topicCulture": "Budaya & Etiket (文化)",
     "topicKanji": "Kanji (漢字)",
+    "topicBook": "Buku soal (book)",
+    "topicGenchare": "Genchare",
+    "topicMenkyoBlog": "Menkyo Blog",
+    "levelNonJlpt": "Di luar JLPT",
     "allLevels": "Semua Level",
     "allTopics": "Semua Topik",
     "allCohorts": "Semua Kohort",
@@ -922,6 +926,7 @@
     "removeQuestion": "Hapus soal",
     "addQuestion": "Tambah soal",
     "publishPractice": "Terbitkan untuk siswa",
+    "publishQuestion": "Terbitkan soal ini",
     "savePractice": "Simpan latihan",
     "saveError": "Gagal menyimpan. Periksa isian dan pastikan ID belum digunakan."
   }

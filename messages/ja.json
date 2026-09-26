@@ -286,6 +286,10 @@
     "topicGrammar": "文法 (Grammar)",
     "topicCulture": "文化・マナー (Culture)",
     "topicKanji": "漢字 (Kanji)",
+    "topicBook": "書籍問題 (book)",
+    "topicGenchare": "原付問題 (Genchare)",
+    "topicMenkyoBlog": "免許ブログ問題 (Menkyo Blog)",
+    "levelNonJlpt": "JLPT対象外",
     "allLevels": "すべてのレベル",
     "allTopics": "すべてのトピック",
     "allCohorts": "すべてのコホート",
@@ -922,6 +926,7 @@
     "removeQuestion": "問題を削除",
     "addQuestion": "問題を追加",
     "publishPractice": "学生に公開する",
+    "publishQuestion": "この問題を公開する",
     "savePractice": "練習を保存",
     "saveError": "保存できませんでした。入力内容と未使用の ID を確認してください。"
   }

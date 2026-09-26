@@ -10,11 +10,14 @@ import { Input } from "@/components/ui/input"
 import { PageHeader, PageShell, SectionHeader } from "@/components/layout/page-frame"
 import type { PublishedPracticeSummary } from "@/lib/content-types"
 
-const TOPIC_KEYS: Record<PublishedPracticeSummary["topic"], "topicVocab" | "topicGrammar" | "topicCulture" | "topicKanji"> = {
+const TOPIC_KEYS: Partial<Record<PublishedPracticeSummary["topic"], "topicVocab" | "topicGrammar" | "topicCulture" | "topicKanji" | "topicBook" | "topicGenchare" | "topicMenkyoBlog">> = {
   語彙: "topicVocab",
   文法: "topicGrammar",
   "文化・マナー": "topicCulture",
   漢字: "topicKanji",
+  book: "topicBook",
+  genchare: "topicGenchare",
+  menkyo_blog: "topicMenkyoBlog",
 }
 
 export function PracticeCatalog({ sets }: { sets: PublishedPracticeSummary[] }) {
@@ -57,8 +60,8 @@ export function PracticeCatalog({ sets }: { sets: PublishedPracticeSummary[] }) 
                   <Card className="flex h-full flex-col border-border/80 transition-colors group-hover:border-primary/40 group-hover:shadow-md">
                     <CardHeader className="space-y-3 p-5 pb-3">
                       <div className="flex flex-wrap items-center gap-1.5">
-                        <Badge variant="outline" className="font-mono text-xs">{set.targetLevel}</Badge>
-                        <Badge variant="secondary" className="text-xs">{t(TOPIC_KEYS[set.topic])}</Badge>
+                        <Badge variant="outline" className="font-mono text-xs">{set.targetLevel === "NON_JLPT" ? t("levelNonJlpt") : set.targetLevel}</Badge>
+                        <Badge variant="secondary" className="text-xs">{TOPIC_KEYS[set.topic] ? t(TOPIC_KEYS[set.topic]!) : set.topic}</Badge>
                       </div>
                       <div><CardTitle className="text-base transition-colors group-hover:text-primary sm:text-lg">{japanese ? set.titleJa : set.titleId}</CardTitle><CardDescription className="mt-2 line-clamp-3 text-sm">{japanese ? set.descriptionJa : set.descriptionId}</CardDescription></div>
                     </CardHeader>

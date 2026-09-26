@@ -69,6 +69,7 @@ export async function listPublishedPracticeSets(): Promise<PublishedPracticeSumm
   const { data: questions, error: questionError } = await client
     .from("practice_questions")
     .select("practice_set_id")
+    .eq("is_published", true)
     .in("practice_set_id", data.map(({ id }) => id))
   checkError("practice question counts", questionError)
   const counts = new Map<string, number>()
@@ -106,8 +107,9 @@ export async function getPublishedPracticeSet(id: string): Promise<PublishedPrac
 
   const { data: rows, error: questionError } = await client
     .from("practice_questions")
-    .select("id,question_type,prompt,prompt_plain,translation_id,options,correct_answer_index,explanation_ja,explanation_id")
+    .select("id,question_type,prompt,prompt_plain,translation_id,options,correct_answer_index,explanation_ja,explanation_id,explanation_markup,question_context,question_context_markup,image_url,image_width,image_height,is_published,source_ref,source_digest")
     .eq("practice_set_id", id)
+    .eq("is_published", true)
     .order("position")
   checkError("practice questions", questionError)
   if (!rows?.length) return null
@@ -131,6 +133,15 @@ export async function getPublishedPracticeSet(id: string): Promise<PublishedPrac
       correctAnswerIndex: question.correct_answer_index,
       explanationJa: question.explanation_ja,
       explanationId: question.explanation_id,
+      explanationMarkup: question.explanation_markup,
+      context: question.question_context,
+      contextMarkup: question.question_context_markup,
+      imageUrl: question.image_url,
+      imageWidth: question.image_width,
+      imageHeight: question.image_height,
+      isPublished: question.is_published,
+      sourceRef: question.source_ref ?? "",
+      sourceDigest: question.source_digest ?? "",
     })),
   }
 }

@@ -458,6 +458,13 @@ current browser session only; they are not official records. Other workflows
 outside the first live release may still use prototype mock data and
 `localStorage`.
 
+Migration 006 adds source provenance, per-question publication, illustration
+context, and local image metadata for imported Japanese true/false banks. The
+source categories `book`, `genchare`, and `menkyo_blog` and level `NON_JLPT`
+remain distinct from Genshu's authored JLPT and topic categories. The import
+and its editorial draft exceptions are documented in
+`docs/gentsuki-bank-import.md`.
+
 Development uses local PostgreSQL and versioned repository migrations.
 Supabase is the selected initial production database host.
 

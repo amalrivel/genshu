@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
+import Image from "next/image"
 import {
   CheckCircle2,
   XCircle,
@@ -23,11 +24,14 @@ import { useLocale, useTranslations } from "next-intl"
 import { Breadcrumbs } from "@/components/layout/breadcrumbs"
 import type { PublishedPracticeSet } from "@/lib/content-types"
 
-const TOPIC_TRANSLATION_KEYS: Record<string, "topicVocab" | "topicGrammar" | "topicCulture" | "topicKanji"> = {
+const TOPIC_TRANSLATION_KEYS: Record<string, "topicVocab" | "topicGrammar" | "topicCulture" | "topicKanji" | "topicBook" | "topicGenchare" | "topicMenkyoBlog"> = {
   "語彙": "topicVocab",
   "文法": "topicGrammar",
   "文化・マナー": "topicCulture",
   "漢字": "topicKanji",
+  book: "topicBook",
+  genchare: "topicGenchare",
+  menkyo_blog: "topicMenkyoBlog",
 }
 
 export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPracticeSet }) {
@@ -187,7 +191,7 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
         eyebrow={
           <span className="flex flex-wrap items-center gap-2">
             <Badge variant="outline" className="font-mono text-[0.7rem]">
-              {practiceSet.targetLevel}
+              {practiceSet.targetLevel === "NON_JLPT" ? tPractice("levelNonJlpt") : practiceSet.targetLevel}
             </Badge>
           </span>
         }
@@ -266,7 +270,9 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
 
               {/* Japanese Prompt with Furigana */}
               <div className="text-lg sm:text-xl font-medium leading-loose text-foreground">
-                <FuriganaTokenText text={currentQuestion.prompt} showFurigana={showFurigana} />
+                {currentQuestion.context && <div className="mb-4 space-y-1 text-base font-normal">{showFurigana ? <FuriganaTokenText text={currentQuestion.contextMarkup} /> : currentQuestion.context}</div>}
+                {currentQuestion.imageUrl && currentQuestion.imageWidth && currentQuestion.imageHeight && <Image className="mb-4 h-auto max-w-full rounded-md" src={currentQuestion.imageUrl} width={currentQuestion.imageWidth} height={currentQuestion.imageHeight} alt={japanese ? "問題の図" : "Ilustrasi soal"} />}
+                {showFurigana ? <FuriganaTokenText text={currentQuestion.prompt} /> : currentQuestion.promptPlain}
               </div>
 
               {/* Optional Indonesian Translation */}
@@ -322,7 +328,7 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
                         >
                           {currentQuestion.type === "TRUE_FALSE" ? (idx === 0 ? "○" : "×") : String.fromCharCode(65 + idx)}
                         </span>
-                        <span>{optionText}</span>
+                        <span>{currentQuestion.type === "TRUE_FALSE" && optionText === (idx === 0 ? "○" : "×") ? "" : optionText}</span>
                       </div>
 
                       {/* Right indicator: Keyboard shortcut hint or Revealed Status Icon */}
@@ -375,7 +381,7 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
                   {/* Japanese & Indonesian Explanation */}
                   <div className="text-xs sm:text-sm leading-relaxed text-foreground space-y-1">
                     <p className="font-semibold text-muted-foreground text-xs">{t("explanationLabel")}</p>
-                    <p>{currentQuestion.explanationJa}</p>
+                    {showFurigana ? <FuriganaTokenText text={currentQuestion.explanationMarkup || currentQuestion.explanationJa} /> : <p>{currentQuestion.explanationJa}</p>}
                     {currentQuestion.explanationId && (
                       <p className="text-xs text-muted-foreground pt-1 border-t border-border/50">
                         {currentQuestion.explanationId}
@@ -516,7 +522,9 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
 
                         {/* Prompt */}
                         <div className="text-base font-medium leading-relaxed">
-                          <FuriganaTokenText text={q.prompt} showFurigana={showFurigana} />
+                          {q.context && <div className="space-y-1 text-sm font-normal">{showFurigana ? <FuriganaTokenText text={q.contextMarkup} /> : q.context}</div>}
+                          {q.imageUrl && q.imageWidth && q.imageHeight && <Image className="my-3 h-auto max-w-full rounded-md" src={q.imageUrl} width={q.imageWidth} height={q.imageHeight} alt={japanese ? "問題の図" : "Ilustrasi soal"} />}
+                          {showFurigana ? <FuriganaTokenText text={q.prompt} /> : q.promptPlain}
                         </div>
 
                         {showTranslation && q.translationId && (
@@ -546,8 +554,9 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
                                 )}
                               >
                                 <span>
-                                  {q.type === "TRUE_FALSE" ? (optIdx === 0 ? "○ " : "× ") : `${String.fromCharCode(65 + optIdx)}. `}
-                                  {opt}
+                                  {q.type === "TRUE_FALSE"
+                                    ? opt === (optIdx === 0 ? "○" : "×") ? opt : `${optIdx === 0 ? "○" : "×"} ${opt}`
+                                    : `${String.fromCharCode(65 + optIdx)}. ${opt}`}
                                 </span>
                                 {isAnswer && <span className="text-[0.68rem] bg-emerald-600 text-white px-1.5 py-0.2 rounded font-normal">{t("correctAnswerTag")}</span>}
                                 {!isAnswer && isUserPick && <span className="text-[0.68rem] bg-destructive text-white px-1.5 py-0.2 rounded font-normal">{t("yourChoiceTag")}</span>}
@@ -559,7 +568,7 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
                         {/* Explanation */}
                         <div className="rounded-lg bg-muted/40 p-3 border border-border/50 space-y-1">
                           <p className="font-semibold text-foreground">{t("explanationLabel")}</p>
-                          <p className="text-muted-foreground">{q.explanationJa}</p>
+                          {showFurigana ? <FuriganaTokenText text={q.explanationMarkup || q.explanationJa} className="text-muted-foreground" /> : <p className="text-muted-foreground">{q.explanationJa}</p>}
                           {q.explanationId && (
                             <p className="text-muted-foreground pt-1 border-t border-border/40 text-[0.72rem]">
                               {q.explanationId}

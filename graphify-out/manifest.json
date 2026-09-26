@@ -18,9 +18,9 @@
     "semantic_hash": "3230c83a577149ead58e78dd3a20f797"
   },
   "next.config.ts": {
-    "mtime": 1789865871.8865652,
-    "seen": 1789876502.261414,
-    "ast_hash": "3fa9b801990a81ac988896ff23885189",
+    "mtime": 1790419168.5922465,
+    "seen": 1790419478.1446538,
+    "ast_hash": "ebb15ccf84ec50f7e190260bd5299b88",
     "semantic_hash": ""
   },
   "package.json": {
@@ -738,15 +738,15 @@
     "semantic_hash": "cb56bf002d36bb860c3d320a23bd871a"
   },
   "messages/id.json": {
-    "mtime": 1790405531.3798656,
-    "seen": 1790405564.292356,
-    "ast_hash": "8f957940cf8478a9226fd7f995c52e45",
+    "mtime": 1790418433.4685872,
+    "seen": 1790418879.3243918,
+    "ast_hash": "0758db7f2986432a48f5f4119838cc79",
     "semantic_hash": ""
   },
   "messages/ja.json": {
-    "mtime": 1790405531.4398658,
-    "seen": 1790405564.2923586,
-    "ast_hash": "74f582f50f8307e15e576a8ee0660cbc",
+    "mtime": 1790418433.5045874,
+    "seen": 1790418879.3243928,
+    "ast_hash": "73ea8e45cb1777a7fe9bd80a29bb6d86",
     "semantic_hash": ""
   },
   "src/app/assignments/[id]/page.tsx": {
@@ -888,9 +888,9 @@
     "semantic_hash": ""
   },
   ".ai/PROJECT.md": {
-    "mtime": 1790415633.8732328,
-    "seen": 1790415682.2777245,
-    "ast_hash": "ee5cb2f3f21a303b158f8d5f50279d3b",
+    "mtime": 1790419458.0242436,
+    "seen": 1790419478.150099,
+    "ast_hash": "06f5b5a5142e9eda67982857d8ab62eb",
     "semantic_hash": ""
   },
   ".ai/README.md": {
@@ -960,15 +960,15 @@
     "semantic_hash": ""
   },
   "src/components/practice-catalog.tsx": {
-    "mtime": 1790247870.6265876,
-    "seen": 1790248325.9999702,
-    "ast_hash": "54fb0731dd71b0822ccede9325fd3bfe",
+    "mtime": 1790418312.472598,
+    "seen": 1790418879.3252366,
+    "ast_hash": "b3f749515934889682dba1b1e6c03c67",
     "semantic_hash": ""
   },
   "src/components/practice-player.tsx": {
-    "mtime": 1790247870.6276135,
-    "seen": 1790248325.999972,
-    "ast_hash": "4c73e779047bc24df013ee987e657818",
+    "mtime": 1790420012.6001372,
+    "seen": 1790420031.0596256,
+    "ast_hash": "23b6ffc1fc3000d0254f13bf2508d590",
     "semantic_hash": ""
   },
   "src/components/ui/furigana-token-text.tsx": {
@@ -978,15 +978,15 @@
     "semantic_hash": ""
   },
   "src/lib/content-repository.ts": {
-    "mtime": 1790404396.8041835,
-    "seen": 1790404953.0879633,
-    "ast_hash": "e910540b2ec4449e1e3e16fded5eb092",
+    "mtime": 1790418312.4405982,
+    "seen": 1790418879.3256226,
+    "ast_hash": "88559bddf75c62a2f5913e34def3308a",
     "semantic_hash": ""
   },
   "src/lib/content-types.ts": {
-    "mtime": 1790247870.625437,
-    "seen": 1790248326.000437,
-    "ast_hash": "3c15f3263d4a26d404bdd23eaee8fb74",
+    "mtime": 1790418312.4085982,
+    "seen": 1790418879.3256233,
+    "ast_hash": "9407bc5053a0938691f9b0f6508923da",
     "semantic_hash": ""
   },
   "src/app/login/actions.ts": {
@@ -1026,15 +1026,15 @@
     "semantic_hash": ""
   },
   "src/app/staff/practice/[id]/page.tsx": {
-    "mtime": 1790404560.5321314,
-    "seen": 1790404953.0862765,
-    "ast_hash": "e46c065c87f88876bd28f8248ffc0228",
+    "mtime": 1790418388.004531,
+    "seen": 1790418879.3249474,
+    "ast_hash": "ae1f49ba0dfd26fd792490c01da2ebea",
     "semantic_hash": ""
   },
   "src/app/staff/practice/actions.ts": {
-    "mtime": 1790404475.624169,
-    "seen": 1790404953.0862799,
-    "ast_hash": "91878fb929c43f310538df79dc33cb7f",
+    "mtime": 1790418761.1404822,
+    "seen": 1790418879.3249483,
+    "ast_hash": "b7b045c7be8db25838dd5e72e029ba76",
     "semantic_hash": ""
   },
   "src/app/staff/practice/page.tsx": {
@@ -1050,9 +1050,9 @@
     "semantic_hash": ""
   },
   "src/components/practice-questions-editor.tsx": {
-    "mtime": 1790248550.4030252,
-    "seen": 1790248655.8477404,
-    "ast_hash": "d5e8b1b4a31c5bebaad7ac039d38c980",
+    "mtime": 1790418388.0285308,
+    "seen": 1790418879.3252378,
+    "ast_hash": "7fd94202f11064f7f8c6f752821a9ef6",
     "semantic_hash": ""
   },
   "src/lib/staff.ts": {
@@ -1398,9 +1398,9 @@
     "semantic_hash": ""
   },
   "src/lib/database.types.ts": {
-    "mtime": 1790404261.2922132,
-    "seen": 1790404953.0880628,
-    "ast_hash": "9ea8b5b4d7db28e60d3cf65bd76bb19a",
+    "mtime": 1790418761.204482,
+    "seen": 1790418879.3256452,
+    "ast_hash": "61ff137879553bd25ddb90cbf751dd21",
     "semantic_hash": ""
   },
   "db/scripts/check-data-api-migration.js": {
@@ -1419,6 +1419,612 @@
     "mtime": 1790414053.3016894,
     "seen": 1790414106.9890459,
     "ast_hash": "26ee5881c4194dcd0d9bdc4b79b750cf",
+    "semantic_hash": ""
+  },
+  "db/imports/gentsuki-ready-web/dataset.json": {
+    "mtime": 1790418830.2564533,
+    "seen": 1790418879.3242304,
+    "ast_hash": "1b9a5a8d9f963ba937a62c5d94f3c8f6",
+    "semantic_hash": ""
+  },
+  "db/imports/gentsuki-ready-web/manifest.json": {
+    "mtime": 1790418104.08063,
+    "seen": 1790418879.3242314,
+    "ast_hash": "b71dcda63b5fc0ccbfb7a8fcef69fb9d",
+    "semantic_hash": ""
+  },
+  "db/imports/gentsuki-ready-web/source/book_1.json": {
+    "mtime": 1790418528.9480057,
+    "seen": 1790418879.3242319,
+    "ast_hash": "3cb448e7bf8b122c1181857e53283dc5",
+    "semantic_hash": ""
+  },
+  "db/imports/gentsuki-ready-web/source/book_2.json": {
+    "mtime": 1790418528.949216,
+    "seen": 1790418879.3242328,
+    "ast_hash": "0a471e15fda7615fa7ff583289cb9ef6",
+    "semantic_hash": ""
+  },
+  "db/imports/gentsuki-ready-web/source/book_3.json": {
+    "mtime": 1790418528.950561,
+    "seen": 1790418879.3242335,
+    "ast_hash": "e78fd432e7b1426ab08a7050bb83586b",
+    "semantic_hash": ""
+  },
+  "db/imports/gentsuki-ready-web/source/genchare_1.json": {
+    "mtime": 1790418528.951642,
+    "seen": 1790418879.3242342,
+    "ast_hash": "dd0787fb4fbca080c516c23e6fbb7689",
+    "semantic_hash": ""
+  },
+  "db/imports/gentsuki-ready-web/source/genchare_2.json": {
+    "mtime": 1790418528.952797,
+    "seen": 1790418879.324235,
+    "ast_hash": "f963a74ff7fc0d8baaf180c3c371793b",
+    "semantic_hash": ""
+  },
+  "db/imports/gentsuki-ready-web/source/genchare_3.json": {
+    "mtime": 1790418528.9539,
+    "seen": 1790418879.3242354,
+    "ast_hash": "2e473a6e323ffc3b5811a0b53862132a",
+    "semantic_hash": ""
+  },
+  "db/imports/gentsuki-ready-web/source/genchare_4.json": {
+    "mtime": 1790418528.9550366,
+    "seen": 1790418879.324236,
+    "ast_hash": "4d836c6477d72f0560d34bdcfa5070af",
+    "semantic_hash": ""
+  },
+  "db/imports/gentsuki-ready-web/source/menkyo_blog_1.json": {
+    "mtime": 1790418528.9560778,
+    "seen": 1790418879.3242369,
+    "ast_hash": "78ea51bf32cb3f93f7e6beb4a91debdd",
+    "semantic_hash": ""
+  },
+  "db/imports/gentsuki-ready-web/source/menkyo_blog_2.json": {
+    "mtime": 1790418528.9572556,
+    "seen": 1790418879.3242376,
+    "ast_hash": "f9003335218edab6895a8abaacee0154",
+    "semantic_hash": ""
+  },
+  "db/imports/gentsuki-ready-web/source/menkyo_blog_3.json": {
+    "mtime": 1790418528.9585204,
+    "seen": 1790418879.3242383,
+    "ast_hash": "bc197c3f80ddd5b02cb5d326084db237",
+    "semantic_hash": ""
+  },
+  "db/imports/gentsuki-ready-web/source/menkyo_blog_4.json": {
+    "mtime": 1790418528.9596374,
+    "seen": 1790418879.3242388,
+    "ast_hash": "84bf4a8d13bc4ce25f832166b979d5f4",
+    "semantic_hash": ""
+  },
+  "db/imports/gentsuki-ready-web/source/menkyo_blog_5.json": {
+    "mtime": 1790418528.9606848,
+    "seen": 1790418879.3242397,
+    "ast_hash": "b2b2a735a076f559da20d9a3c3b6e948",
+    "semantic_hash": ""
+  },
+  "db/scripts/import-gentsuki-ready-web.ts": {
+    "mtime": 1790419412.4882255,
+    "seen": 1790419478.144503,
+    "ast_hash": "44044bd6592a3f997f82f776e401fbe3",
+    "semantic_hash": ""
+  },
+  ".agents/rules/antigravity-rtk-rules.md": {
+    "mtime": 1790416315.8170784,
+    "seen": 1790418879.3258028,
+    "ast_hash": "837fb66e350c86b910a3b4b8d0172580",
+    "semantic_hash": ""
+  },
+  "docs/gentsuki-bank-import.md": {
+    "mtime": 1790418850.860472,
+    "seen": 1790418879.3292246,
+    "ast_hash": "097f4d3757986ed32d33351a4b1e61b2",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/02788e0b7a8e60e50c5f16d1edfa42b6f96377e7.jpg": {
+    "mtime": 1790417978.4837425,
+    "seen": 1790418879.3292968,
+    "ast_hash": "45a253578a9233f78c65d261996e0c8c",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/02cbfef242620fe7860bf5e364f83a3b8c143164.jpg": {
+    "mtime": 1790417978.130485,
+    "seen": 1790418879.3292978,
+    "ast_hash": "187e997aea52a37a2c1809098f35abef",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/099054a3c92bdc6e8ee465ea9e44b9db503fc457.jpg": {
+    "mtime": 1790417979.005123,
+    "seen": 1790418879.3292987,
+    "ast_hash": "75a92a9d1fde10e115cb1368abbdad5c",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/0ae5326411bcd33153be7f427df0a9e6e0211815.jpg": {
+    "mtime": 1790417978.6599658,
+    "seen": 1790418879.3292994,
+    "ast_hash": "2e40431fcdba5996638920fb660ff413",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/0e466a0828caf4c953ad4eae8596d045b9e687cc.jpg": {
+    "mtime": 1790417978.5326211,
+    "seen": 1790418879.3293002,
+    "ast_hash": "4411d70e3710c4e2b1080ac7d7a7fe6b",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/1367c725f17e74b4492caa937d832d28b4d3041b.jpg": {
+    "mtime": 1790417978.9006803,
+    "seen": 1790418879.3293006,
+    "ast_hash": "42c90d5978796dc5ab62ec2ad3feb756",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/14e1332efc27d33fc51af4163cce1b17632c0f6f.jpg": {
+    "mtime": 1790417978.0597079,
+    "seen": 1790418879.3293016,
+    "ast_hash": "e540630ec7268f8a60fb253a14ec596b",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/186f466b6b65fa7066578ec328fa8a6cd952ee1e.jpg": {
+    "mtime": 1790417978.0820546,
+    "seen": 1790418879.3293025,
+    "ast_hash": "b38fa351041632e9eb0edf347d4b785b",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/191ae63eb3c89bcb6c57f60cb5c48b28e78b4dc1.jpg": {
+    "mtime": 1790417978.7681904,
+    "seen": 1790418879.3293035,
+    "ast_hash": "6e3fd4537aae16cab4d9c8d9b1e4331c",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/1cbbe8342ddca92d25d6d494df550f1bbe455575.jpg": {
+    "mtime": 1790417978.9503775,
+    "seen": 1790418879.329304,
+    "ast_hash": "31e30668291c324749b51f52b57908f4",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/204579daed6df3f4147c360cce458549421b56d5.jpg": {
+    "mtime": 1790417978.6841314,
+    "seen": 1790418879.329305,
+    "ast_hash": "fd12c9a203fe35092c1907b7e86f8360",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/2bb829f62de440735031eae8c866240daeb2ef3f.jpg": {
+    "mtime": 1790417979.0292957,
+    "seen": 1790418879.3293054,
+    "ast_hash": "dbf097311618a99ec1e36386d5eb16c2",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/2ed4ad419369c3a06e262deeb1cd811ad5fa1708.jpg": {
+    "mtime": 1790417978.6926806,
+    "seen": 1790418879.3293061,
+    "ast_hash": "05060e6d67e9debaad627772c1d5425c",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/2fda5accdc73ffdb65983db6c6d2a8deabe38f5f.jpg": {
+    "mtime": 1790417978.2716434,
+    "seen": 1790418879.3293068,
+    "ast_hash": "46637a6de6dc6d47558e2ed7927e31c1",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/30303b61e1193fcdbf8722ea62f677c20e34659e.jpg": {
+    "mtime": 1790417978.7915385,
+    "seen": 1790418879.3293076,
+    "ast_hash": "9cbb918a45776f06844c6eece3bcb77e",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/329d310a5fcff412bc19e59c4b8932dc878256a6.jpg": {
+    "mtime": 1790417978.9366803,
+    "seen": 1790418879.3293083,
+    "ast_hash": "a42dfab5fb59df786fdf3bdbdd016cd4",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/363de4e14142c42d719f835753c0258b309735da.jpg": {
+    "mtime": 1790417978.3623617,
+    "seen": 1790418879.3293087,
+    "ast_hash": "ec676bc8ea2d55d5ada42ec39eb2aa5b",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/38a341abf328e2134c266cef59203e3bc9788f2c.jpg": {
+    "mtime": 1790417978.3135157,
+    "seen": 1790418879.3293095,
+    "ast_hash": "52601b51808924e1743c4aceb005ca4e",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/432a254c0fc1ffc6bfe927dd5a74ee55221cdb9f.jpg": {
+    "mtime": 1790417978.8783965,
+    "seen": 1790418879.32931,
+    "ast_hash": "9ecd2d7c16a55d370aa28fa0f871dfed",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/449eff08ba3058e821ab6951a25f41e33a34580f.jpg": {
+    "mtime": 1790417978.734314,
+    "seen": 1790418879.3293104,
+    "ast_hash": "0d8cd48967efaae08dd2a180b52e73e4",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/44f3cfa12394ca3e4c3907f3325e67e839e086cc.jpg": {
+    "mtime": 1790417979.04146,
+    "seen": 1790418879.329311,
+    "ast_hash": "fe2becdc5e8bb04e6f3851e0ba54570d",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/46acf974df9ef79fb75744af108a45cf0f301386.jpg": {
+    "mtime": 1790417978.5866199,
+    "seen": 1790418879.3293118,
+    "ast_hash": "f06509a58909f31d21e8eb1388397abd",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/46d8406e3d0cf7bdd08f0f6d1808dedcdb08df43.jpg": {
+    "mtime": 1790417978.6206806,
+    "seen": 1790418879.3293123,
+    "ast_hash": "fc0829dbdffa6f5d88b0936ba9f23ae5",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/4ad1ae3902f3fe2e79436297ea71a71b8e251ec9.jpg": {
+    "mtime": 1790417978.9259098,
+    "seen": 1790418879.329313,
+    "ast_hash": "450c0cd7a112f92f6a253077c8d3f3cc",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/4ce0745b815ee7ba35737bd8363428b460f26ad8.jpg": {
+    "mtime": 1790417978.8303545,
+    "seen": 1790418879.3293138,
+    "ast_hash": "15777857d204cbfeedf9f0f38c2c26a3",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/4d1d82c7f34fd95f6e88664b46b410489ac9c89a.jpg": {
+    "mtime": 1790417978.7805068,
+    "seen": 1790418879.3293142,
+    "ast_hash": "f5ee066b0eca7133991112bc7b4f3b5e",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/5b92c921806e1c30eadc0f4b6bb85faf40089923.jpg": {
+    "mtime": 1790417978.2280726,
+    "seen": 1790418879.3293152,
+    "ast_hash": "bebaa30524b758887542eda7b8a4070e",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/5bd85e0adc07f4b166f1ca2d47d53854ae2bc13d.jpg": {
+    "mtime": 1790417978.6367793,
+    "seen": 1790418879.3293157,
+    "ast_hash": "2217c0ff403e0b9d10bf80f972879265",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/617c62a93d012deb5df72fa1a62306340883f6a7.jpg": {
+    "mtime": 1790417978.1177063,
+    "seen": 1790418879.3293164,
+    "ast_hash": "40a1edbc4f78f42d0d2bdda1e2f12c7c",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/61ae222a93488eca9c8528c03c3f0e60dd1b0edd.jpg": {
+    "mtime": 1790417978.9631746,
+    "seen": 1790418879.3293169,
+    "ast_hash": "37c2960362857518d33dcc1bea7bdb30",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/651f78b56ed32300ac194b3dbebaddc90f8d7551.jpg": {
+    "mtime": 1790417978.0686815,
+    "seen": 1790418879.3293176,
+    "ast_hash": "f22546cea26dfd914dd871ab25360643",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/661f460c8f561cab51f730072638c63fcaa97c26.jpg": {
+    "mtime": 1790417978.5491242,
+    "seen": 1790418879.3293183,
+    "ast_hash": "d3cd74ccc2f150925deeab189d32610c",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/69b3c37f7ccdab3e19a46315b257534c08c86560.jpg": {
+    "mtime": 1790417978.6485405,
+    "seen": 1790418879.329319,
+    "ast_hash": "f71bc4606eb68e46291278a1e57fe860",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/6afb028b01c9b154941cbb64a29cda151b9dba71.jpg": {
+    "mtime": 1790417978.5730546,
+    "seen": 1790418879.3293197,
+    "ast_hash": "d54e6f505415afe5f99ba46b813ef889",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/6ec1deb8982f21bd168d8d9c8e81e5d3cf5a9d9a.jpg": {
+    "mtime": 1790417978.8162909,
+    "seen": 1790418879.3293202,
+    "ast_hash": "bf18683b7d9203ae0436cd0790adeed2",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/725db7af9a51e5ee861b708cb691f965cdfd9154.jpg": {
+    "mtime": 1790417979.05268,
+    "seen": 1790418879.3293207,
+    "ast_hash": "ec4967e7bde1e980ce891f6398672def",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/7da1ee0fb75fc25ce8c85f54cca397101aae7c64.jpg": {
+    "mtime": 1790417978.2162702,
+    "seen": 1790418879.3293211,
+    "ast_hash": "83b4fe67103c8f7727d7c61131470bd2",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/7f001809fb3f67f96e4158611967401dd3e8526e.jpg": {
+    "mtime": 1790417978.5080006,
+    "seen": 1790418879.3293216,
+    "ast_hash": "237a8cd996d59cead915955a80471f65",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/80bed20e146ed494ff67d8aafa647352e367de55.jpg": {
+    "mtime": 1790417978.3979652,
+    "seen": 1790418879.3293223,
+    "ast_hash": "9d44069ad5bb9b123ba40b5d9eca4a2f",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/80fb66b8aa434ba29278f51fd1a74b048c1d3c35.jpg": {
+    "mtime": 1790417978.348681,
+    "seen": 1790418879.3293228,
+    "ast_hash": "57f4972e8c4cf93d153afae3295fdf5c",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/82fb726d9efc0407d0e4f09e9b7a6ffcb959b96e.jpg": {
+    "mtime": 1790417978.6102982,
+    "seen": 1790418879.3293235,
+    "ast_hash": "a79abfedf5417f31f31f68faa6267b1a",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/8586e1107a890d40a557ec8247bef86d87e7498c.jpg": {
+    "mtime": 1790417979.0758111,
+    "seen": 1790418879.3293242,
+    "ast_hash": "eb2d8b4d169382cc73430f4dc21dce37",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/876d22eba713b00d211412d5334531d2b9645889.jpg": {
+    "mtime": 1790417978.3041697,
+    "seen": 1790418879.329325,
+    "ast_hash": "1ba17becedfc910c0d4420d0797b8198",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/93f43d799d52e90a43ccbfa27ff7f0c7703a881d.jpg": {
+    "mtime": 1790417978.3366811,
+    "seen": 1790418879.329326,
+    "ast_hash": "9ecc37627899890d6c1f3856118abb22",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/97a3890ed246115d324129da50a8a788dbb0b919.jpg": {
+    "mtime": 1790417978.5643635,
+    "seen": 1790418879.3293266,
+    "ast_hash": "e9b959569fa4ce5684078e237d2df7ba",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/9816f5b91fa6b0cf47bd05016edb28da8421300d.jpg": {
+    "mtime": 1790417978.372681,
+    "seen": 1790418879.3293273,
+    "ast_hash": "86df01821892e33ff6452c608f7668bb",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/9b172cb9c1cd1bf0acd8e126f9c330e82be399ac.jpg": {
+    "mtime": 1790417978.3851912,
+    "seen": 1790418879.329328,
+    "ast_hash": "916fb95d301bf7f76a9b6dcce068b314",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/9b43458ee9c4b038dad608fd57409da43619da59.jpg": {
+    "mtime": 1790417978.80465,
+    "seen": 1790418879.3293285,
+    "ast_hash": "a7b095975ae1ba5b0315b9c221b0c83f",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/9d4f05983db10e943b26ee6ac872b3372a443d83.jpg": {
+    "mtime": 1790417978.8886802,
+    "seen": 1790418879.3293293,
+    "ast_hash": "2daf62da0f7dcfe4d62a6503e3bfc3f1",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/a2b3c05777adf5c7d621ea40963aa72c2bd17a58.jpg": {
+    "mtime": 1790417978.1578627,
+    "seen": 1790418879.32933,
+    "ast_hash": "62d2e8499358fa175286a3343bf90330",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/a3bf482221c178b10e11085980c6c10ead669c3e.jpg": {
+    "mtime": 1790417978.4484563,
+    "seen": 1790418879.3293304,
+    "ast_hash": "9480b26fb661f39d346e719b396309bc",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/a571bfb95ba4caee09358b958567b125bb4a306d.jpg": {
+    "mtime": 1790417978.7455845,
+    "seen": 1790418879.329331,
+    "ast_hash": "28eae45dc20e8b14dd0e27e80587ed2d",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/a665a0a7ace64dd6d0c254333acb570cb19a2883.jpg": {
+    "mtime": 1790417978.9981763,
+    "seen": 1790418879.3293314,
+    "ast_hash": "66c7c359a18eb2ddfdb017bb9637586e",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/a9df3e0aba1ef1d30bfa9714d6459c80b636e6d8.jpg": {
+    "mtime": 1790417978.3265855,
+    "seen": 1790418879.3293319,
+    "ast_hash": "d341db64effe47ac0cecb509dad399ff",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/aa957a5176657b305132e75f8ec8ebc56e412431.jpg": {
+    "mtime": 1790417978.7195566,
+    "seen": 1790418879.3293328,
+    "ast_hash": "2208c67f348279e372249ed5de02692f",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/afe84888b7314f789809b4d965ba1b92d69348bb.jpg": {
+    "mtime": 1790417979.0161269,
+    "seen": 1790418879.3293335,
+    "ast_hash": "9491d0d25eb02f473199e6655c705cc7",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/b15bce637a259ee520d6970e8ae3a0c46acfd1af.jpg": {
+    "mtime": 1790417978.2408948,
+    "seen": 1790418879.329334,
+    "ast_hash": "3dd558290ad790e9344ac020efd89dbe",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/b16df538b96a324ce08e3baf8c3df90a1752175f.jpg": {
+    "mtime": 1790417978.4268408,
+    "seen": 1790418879.3293345,
+    "ast_hash": "16e5340000047ca4b45301785137837d",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/b8c9ead2e095781f49c20fa159e3d338e199c128.jpg": {
+    "mtime": 1790417978.7565105,
+    "seen": 1790418879.329335,
+    "ast_hash": "8f6133978dc51befedb959fb504268f0",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/b935bb212dff7c6de5250e1828b972bbebe1058a.jpg": {
+    "mtime": 1790417978.7096696,
+    "seen": 1790418879.3293355,
+    "ast_hash": "64f8cfa11ee6a9e73f62dde67dd07038",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/bfeff2598dd3c44d220535b381b2b50d62c6aabd.jpg": {
+    "mtime": 1790417978.5976336,
+    "seen": 1790418879.3293364,
+    "ast_hash": "cf78e013302a599a62b9124f6eba33e4",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/c181d807f1618ccd1df8154983be2c51722fdeb7.jpg": {
+    "mtime": 1790417978.8534691,
+    "seen": 1790418879.329337,
+    "ast_hash": "73b64a5e1ecf20f139fbaf261ec07765",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/c45c5c98db2faa4e8f93d0432387e544720ab6d9.jpg": {
+    "mtime": 1790417978.4731386,
+    "seen": 1790418879.3293374,
+    "ast_hash": "c016a5372694425c0afd22123a5aed47",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/c49e73ade4d0b961d13847faa1c56d8127ac16af.jpg": {
+    "mtime": 1790417978.8655162,
+    "seen": 1790418879.3293378,
+    "ast_hash": "20a26b9b7d418bbd3c1abcd8d00f6fad",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/c638a7b95f5653ff5bad6c035f6220d55fc0d60a.jpg": {
+    "mtime": 1790417978.169592,
+    "seen": 1790418879.3293386,
+    "ast_hash": "6d69aa3b9a46d545557ed56eb6fd8bbd",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/c654884c2b955d3efb7959e0bf7637af1d979469.jpg": {
+    "mtime": 1790417978.4128923,
+    "seen": 1790418879.329339,
+    "ast_hash": "78101fa410e49a3cd2217ee06a0722a1",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/c66123ae5bb86a445503ccddb69192c1c460a3bb.jpg": {
+    "mtime": 1790417978.2543604,
+    "seen": 1790418879.3293397,
+    "ast_hash": "57aae15914d1e1d2d58cc2203dab17f6",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/c7faee8b0889533938af90177772d6076d20bd17.jpg": {
+    "mtime": 1790417998.1806278,
+    "seen": 1790418879.3293405,
+    "ast_hash": "f7309cef000a64f6b284fa56d7e6cbff",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/cd37b4fe0360a4829cae7facaeb8a159bf223d86.jpg": {
+    "mtime": 1790417978.9771967,
+    "seen": 1790418879.329341,
+    "ast_hash": "ad94ea7343ad081ce214a18e32415785",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/d3920f84d93d3a445a722838d8815cfb1def810d.jpg": {
+    "mtime": 1790417978.1411893,
+    "seen": 1790418879.3293414,
+    "ast_hash": "20f34562143faa036b01b22ff77055be",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/d413428010434504ed971fb5c4783de700a11863.jpg": {
+    "mtime": 1790417978.520196,
+    "seen": 1790418879.3293421,
+    "ast_hash": "4e7529b1597d0ea9f8527284e854d348",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/d68446de56d680cfbc08330d840281fe99e57ca8.jpg": {
+    "mtime": 1790417978.497465,
+    "seen": 1790418879.329343,
+    "ast_hash": "3d5f41fa7bb7d8c4a8c654c95aefa058",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/d69da10e001260287cef97735864b369cc01accb.jpg": {
+    "mtime": 1790417978.1060283,
+    "seen": 1790418879.3293436,
+    "ast_hash": "3ebb825956a87d6ac4358f11c1558241",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/d6e77008f7284347d8d7eba714d2e17fafdee808.jpg": {
+    "mtime": 1790417978.4601543,
+    "seen": 1790418879.329344,
+    "ast_hash": "2b61d27dfa8f017dd046b3b0762ee3c9",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/da26d477475b9cdc095bdd5b82325d4970622d67.jpg": {
+    "mtime": 1790417978.671477,
+    "seen": 1790418879.3293447,
+    "ast_hash": "3d2d1133a6cd1a849c89be2f9928b9dc",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/dcb4ef6ab9e6e4a6903c2e21e21aab52abaae81e.jpg": {
+    "mtime": 1790417978.2779148,
+    "seen": 1790418879.3293452,
+    "ast_hash": "ed15cb977a68a4bcd43fc3b94556b8c9",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/e47bdd7353b32b13facc51a196ee52363814eda5.jpg": {
+    "mtime": 1790417978.204235,
+    "seen": 1790418879.3293457,
+    "ast_hash": "d1adf48559894ec7f2dc574c62e4d10c",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/ebda689d3f45e6d06b901bf46102d872e9662326.jpg": {
+    "mtime": 1790417978.4352763,
+    "seen": 1790418879.3293467,
+    "ast_hash": "50bdf9004693b577ffb9b21da20b026e",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/ed727725de4a6d017909b5b872217f0be79bc5a1.jpg": {
+    "mtime": 1790417978.0941708,
+    "seen": 1790418879.3293471,
+    "ast_hash": "2a78c9952effdf6046c3bfb912d100c4",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/eea7d2d7fb15813926353aecee70cd0e0f2299f0.jpg": {
+    "mtime": 1790417978.2876318,
+    "seen": 1790418879.3293476,
+    "ast_hash": "8da080187be21aa8cf5d11ecab9aa58e",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/f0d3da7fc7f9445a3d3c4c0381147b01a6a8091a.jpg": {
+    "mtime": 1790417978.1916537,
+    "seen": 1790418879.329348,
+    "ast_hash": "205bd0824819aa570f494e05b75ac331",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/f4c3cef3bb160e38142e2c47d84725b42b303e03.jpg": {
+    "mtime": 1790417978.9126801,
+    "seen": 1790418879.3293486,
+    "ast_hash": "eeac7ac8c7b58fa109cfcb49bd8d971e",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/fa28321471a20eb0a03fcef33c0c0da66787d095.jpg": {
+    "mtime": 1790417978.8421745,
+    "seen": 1790418879.329349,
+    "ast_hash": "3605930d7373b16d94023204fd55e587",
+    "semantic_hash": ""
+  },
+  "public/gentsuki-quiz-assets/fa52d493b04ef2d33941dc868790a9f1f25baff5.jpg": {
+    "mtime": 1790417978.1802287,
+    "seen": 1790418879.3293495,
+    "ast_hash": "48aa4b1cf9843be835e78aace4380fd3",
     "semantic_hash": ""
   }
 }
