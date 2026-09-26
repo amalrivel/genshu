@@ -14,6 +14,7 @@ The work is recorded in commits `24670b1` (import/data/schema), `3f4f017`
 | Import `--check` | Passed | 12 sets, 614 questions, 602 published, 12 drafts, 84 assets; validates group image Git blob hashes |
 | Connected import `--dry-run` | Passed, read-only | 0 insert, 0 update, 12 skip, 0 errors; reports 14 source groups, 42 children, and 15 focus-point labels omitted from corrected import |
 | Supabase group integrity query | Passed | 14 groups, 42 children, zero incomplete groups; no missing group images, leaked draft children, or legacy child contexts |
+| Data API source-to-live group comparison | Passed | Publishable client under RLS matched all 14 group rows and 42 child rows across shared context/image, order, Japanese prompt/ruby, answer, explanation, publication, IDs, and provenance; zero mismatches |
 | Local Data API migration/RLS harness | Passed | Five roles, group visibility, prohibited writes, incomplete/publication/cross-set rejection, Sensei save/repair, rollback |
 | Live Data API role/RPC checks | Passed | Anon, non-staff, active Sensei, active Tantōsha, inactive staff; group publish/repair guards; QA rows cleaned and follow-up count was zero |
 | Browser samples for illustration banks | Passed | Book 1–3 and Genchare 1–4 each rendered 3 children with 1 shared image and no focus-points label |
@@ -25,7 +26,7 @@ The work is recorded in commits `24670b1` (import/data/schema), `3f4f017`
 | Import `--verify-live` | Blocked | Local Sensei credentials were rejected by Supabase Auth; group role/RPC checks ran independently |
 | Vercel | Read-only status checked | Preview `dpl_89t64zrZLKkFgTGKaPwGgqaKmKXK` is READY at commit `317a63f`; production `dpl_7Vraq7P3RP8gxZifswCkvubJoyNF` is READY at `4216e530406f50a2df3bae5694de3f0d5c77c8a1` |
 | Preview for this worktree | Not created | Automatic approval review rejected the deploy tool call because it had no explicit preview-only target and could publish to a shared or production destination. No deployment was made. |
-| Isolated export/restore rehearsal | Not run | No separate Supabase target/local stack is available; production must not be used |
+| Isolated export/restore rehearsal | Not run | No separate Supabase target/local stack is available (`supabase`, Docker, and `POSTGRES_URL` are absent); branch listing shows only the default branch on the current project, so production must not be used |
 
 The source JSON contains `focus_points_plain` and `focus_points_ruby`; Git
 blame traces these fields to the source repository's original import commit
@@ -46,8 +47,8 @@ answer keys, explanations, ruby, and image references are preserved.
 - Complete the isolated backup/restore rehearsal described in `recovery.md`
   when a separate Supabase target or local Supabase stack is available.
 - Configure `POSTGRES_URL` and valid active Sensei importer credentials if the
-  SQL verifier and `--verify-live` are required in addition to successful live
-  Data API/RLS checks.
+  standalone SQL verifier and importer `--verify-live` command are required in
+  addition to the successful direct source-to-live Data API/RLS checks.
 
 Do not open later LMS features or redesign unrelated UI while these release
 criteria remain open.
