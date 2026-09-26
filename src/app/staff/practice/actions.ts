@@ -49,6 +49,7 @@ export async function savePracticeSet(_state: StaffFormState, form: FormData): P
     }
     const count = Number(form.get("questionCount"))
     if (!Number.isInteger(count) || count < 1 || count > maxQuestions) throw new Error("Jumlah soal tidak valid.")
+    const groupChildren = new Map<string, { position: number; isPublished: boolean }[]>()
     const questions = Array.from({ length: count }, (_, index) => {
       const type = field(form, "type" + index, 30)
       if (type !== "MULTIPLE_CHOICE" && type !== "TRUE_FALSE") throw new Error("Jenis soal tidak valid.")
@@ -57,10 +58,18 @@ export async function savePracticeSet(_state: StaffFormState, form: FormData): P
       if (!Number.isInteger(correct) || correct < 0 || correct >= options.length) throw new Error("Jawaban benar tidak valid.")
       const imageUrl = contentField(form, "imageUrl" + index, 128, true)
       if (imageUrl && !/^\/gentsuki-quiz-assets\/[a-f0-9]{40}\.jpg$/.test(imageUrl)) throw new Error("Aset soal tidak valid.")
+      const groupId = contentField(form, "groupId" + index, 120, true) || null
+      const groupPositionValue = form.get("groupPosition" + index)
+      const groupPosition = groupPositionValue === null || groupPositionValue === "" ? null : Number(groupPositionValue)
+      if (groupId ? !Number.isInteger(groupPosition) || groupPosition! < 0 || groupPosition! > 2 : groupPosition !== null) throw new Error("Urutan grup soal tidak valid.")
+      const isPublished = form.get("isPublished" + index) === "on"
+      if (groupId) groupChildren.set(groupId, [...(groupChildren.get(groupId) ?? []), { position: groupPosition!, isPublished }])
       return {
         id: contentField(form, "id" + index, 120, true),
         sourceRef: contentField(form, "sourceRef" + index, 120, true),
         sourceDigest: contentField(form, "sourceDigest" + index, 80, true),
+        groupId,
+        groupPosition,
         type, prompt: contentField(form, "prompt" + index, 2000),
         promptPlain: contentField(form, "promptPlain" + index, 2000, true),
         translationId: contentField(form, "translationId" + index, 2000, true),
@@ -70,11 +79,16 @@ export async function savePracticeSet(_state: StaffFormState, form: FormData): P
         contextMarkup: contentField(form, "contextMarkup" + index, 2000, true),
         imageUrl, imageWidth: optionalDimension(form.get("imageWidth" + index)),
         imageHeight: optionalDimension(form.get("imageHeight" + index)),
-        isPublished: form.get("isPublished" + index) === "on",
+        isPublished,
         explanationId: contentField(form, "explanationId" + index, 2000, true),
       }
     })
     const published = form.get("published") === "on"
+    for (const children of groupChildren.values()) {
+      if (children.length !== 3 || children.map((child) => child.position).toSorted().join(",") !== "0,1,2" || published && children.some((child) => !child.isPublished)) {
+        throw new Error("Grup ilustrasi harus menyimpan tiga anak berurutan dan terbit bersama.")
+      }
+    }
     const { error } = await client.rpc("save_practice_set", {
       p_set: {
         id, title: titleJa, title_id: titleId, description: descriptionJa,
@@ -99,6 +113,8 @@ export async function savePracticeSet(_state: StaffFormState, form: FormData): P
         image_height: question.imageHeight,
         source_ref: question.sourceRef || null,
         source_digest: question.sourceDigest || null,
+        question_group_id: question.groupId,
+        group_position: question.groupPosition,
       })),
       p_update: Boolean(original),
     })

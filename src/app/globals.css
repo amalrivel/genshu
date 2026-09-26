@@ -380,6 +380,18 @@
   }
 
   @media (max-width: 639px) {
+    .practice-player-header .page-header-action {
+      @apply w-full min-w-0;
+    }
+
+    .practice-player-header .page-header-action > div {
+      @apply flex-wrap;
+    }
+
+    .practice-player-header .page-header-action > div > button {
+      @apply min-w-0;
+    }
+
     .page-header-action > button,
     .page-header-action > a > button {
       min-height: 2.75rem;

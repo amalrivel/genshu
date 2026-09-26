@@ -36,6 +36,17 @@ export type PracticeQuestion = {
   isPublished: boolean
   sourceRef: string
   sourceDigest: string
+  groupId: string | null
+  groupPosition: number | null
+}
+
+export type PracticeQuestionGroup = {
+  id: string
+  context: string
+  contextMarkup: string
+  imageUrl: string
+  imageWidth: number | null
+  imageHeight: number | null
 }
 
 export type PublishedPracticeSet = {
@@ -48,8 +59,9 @@ export type PublishedPracticeSet = {
   topic: string
   publishedAt: string
   questions: PracticeQuestion[]
+  questionGroups: PracticeQuestionGroup[]
 }
 
-export type PublishedPracticeSummary = Omit<PublishedPracticeSet, "questions"> & {
+export type PublishedPracticeSummary = Omit<PublishedPracticeSet, "questions" | "questionGroups"> & {
   questionCount: number
 }

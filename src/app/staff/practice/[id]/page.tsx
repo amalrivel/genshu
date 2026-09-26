@@ -6,7 +6,7 @@ import { createClient } from "@/lib/supabase/server"
 import { PracticeQuestionsEditor } from "@/components/practice-questions-editor"
 import { savePracticeSet } from "../actions"
 import { StaffActionForm } from "@/components/staff-action-form"
-import type { PracticeQuestion } from "@/lib/content-types"
+import type { PracticeQuestion, PracticeQuestionGroup } from "@/lib/content-types"
 
 export const dynamic = "force-dynamic"
 
@@ -18,6 +18,7 @@ export default async function PracticeEditor({ params }: { params: Promise<{ id:
   const { id } = await params
   let set: SetRow | undefined
   let questions: PracticeQuestion[] = []
+  let questionGroups: PracticeQuestionGroup[] = []
   if (id !== "new") {
     const client = await createClient()
     const { data, error } = await client.from("practice_sets")
@@ -31,7 +32,7 @@ export default async function PracticeEditor({ params }: { params: Promise<{ id:
     } : undefined
     if (!set) notFound()
     const { data: questionRows, error: questionError } = await client.from("practice_questions")
-      .select("id,question_type,prompt,prompt_plain,translation_id,options,correct_answer_index,explanation_ja,explanation_id,explanation_markup,question_context,question_context_markup,image_url,image_width,image_height,is_published,source_ref,source_digest")
+      .select("id,question_type,prompt,prompt_plain,translation_id,options,correct_answer_index,explanation_ja,explanation_id,explanation_markup,question_context,question_context_markup,image_url,image_width,image_height,is_published,source_ref,source_digest,question_group_id,group_position")
       .eq("practice_set_id", id).order("position")
     if (questionError) throw new Error(`Supabase practice question lookup failed: ${questionError.message}`)
     questions = (questionRows ?? []).map((question) => ({
@@ -43,6 +44,15 @@ export default async function PracticeEditor({ params }: { params: Promise<{ id:
       contextMarkup: question.question_context_markup, imageUrl: question.image_url,
       imageWidth: question.image_width, imageHeight: question.image_height,
       isPublished: question.is_published, sourceRef: question.source_ref ?? "", sourceDigest: question.source_digest ?? "",
+      groupId: question.question_group_id, groupPosition: question.group_position,
+    }))
+    const { data: groupRows, error: groupError } = await client.from("practice_question_groups")
+      .select("id,question_context,question_context_markup,image_url,image_width,image_height")
+      .eq("practice_set_id", id).order("position")
+    if (groupError) throw new Error(`Supabase practice group lookup failed: ${groupError.message}`)
+    questionGroups = (groupRows ?? []).map((group) => ({
+      id: group.id, context: group.question_context, contextMarkup: group.question_context_markup,
+      imageUrl: group.image_url, imageWidth: group.image_width, imageHeight: group.image_height,
     }))
   }
   const inputClass = "mt-1 w-full rounded-md border bg-background px-3 py-2"
@@ -55,7 +65,7 @@ export default async function PracticeEditor({ params }: { params: Promise<{ id:
       <div className="grid gap-4 sm:grid-cols-2"><label className="block text-sm font-medium">{t("titleJa")}<input className={inputClass} name="titleJa" required maxLength={200} defaultValue={set?.titleJa} /></label><label className="block text-sm font-medium">{t("titleId")}<input className={inputClass} name="titleId" required maxLength={200} defaultValue={set?.titleId} /></label></div>
       <div className="grid gap-4 sm:grid-cols-2"><label className="block text-sm font-medium">{t("descriptionJa")}<textarea className={inputClass} name="descriptionJa" maxLength={500} rows={3} defaultValue={set?.descriptionJa} /></label><label className="block text-sm font-medium">{t("descriptionId")}<textarea className={inputClass} name="descriptionId" maxLength={500} rows={3} defaultValue={set?.descriptionId} /></label></div>
       <div className="grid gap-4 sm:grid-cols-2"><label className="block text-sm font-medium">{t("level")}<select name="level" className={inputClass} defaultValue={set?.level ?? "N5"}><option>N5</option><option>N4</option><option>N3</option><option>NON_JLPT</option></select></label><label className="block text-sm font-medium">{t("topic")}<select name="topic" className={inputClass} defaultValue={set?.topic ?? "語彙"}><option>語彙</option><option>文法</option><option>文化・マナー</option><option>漢字</option><option>book</option><option>genchare</option><option>menkyo_blog</option></select></label></div>
-      <PracticeQuestionsEditor initial={questions} maxQuestions={set?.sourceRepository === "amalrivel/gentsuki-ready-web" ? 60 : 30} />
+      <PracticeQuestionsEditor initial={questions} groups={questionGroups} maxQuestions={set?.sourceRepository === "amalrivel/gentsuki-ready-web" ? 60 : 30} />
       <label className="flex items-center gap-3 text-sm"><input type="checkbox" name="published" defaultChecked={set?.published} />{t("publishPractice")}</label>
     </StaffActionForm>
   </main>

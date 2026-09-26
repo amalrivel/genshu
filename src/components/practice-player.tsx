@@ -23,6 +23,7 @@ import { cn } from "@/lib/utils"
 import { useLocale, useTranslations } from "next-intl"
 import { Breadcrumbs } from "@/components/layout/breadcrumbs"
 import type { PublishedPracticeSet } from "@/lib/content-types"
+import { buildPracticeUnits, scorePracticeUnits } from "@/lib/practice-units"
 
 const TOPIC_TRANSLATION_KEYS: Record<string, "topicVocab" | "topicGrammar" | "topicCulture" | "topicKanji" | "topicBook" | "topicGenchare" | "topicMenkyoBlog"> = {
   "語彙": "topicVocab",
@@ -42,11 +43,13 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
   const t = useTranslations("practicePlayer")
   const tPractice = useTranslations("practice")
   const tNav = useTranslations("nav")
+  const practiceUnits = React.useMemo(() => buildPracticeUnits(practiceSet.questions, practiceSet.questionGroups), [practiceSet])
+  const playableQuestions = React.useMemo(() => practiceUnits.flatMap((unit) => unit.questions), [practiceUnits])
   // Quiz player state
   const [currentIndex, setCurrentIndex] = React.useState(0)
-  const [selectedOption, setSelectedOption] = React.useState<number | null>(null)
-  const [isAnswerConfirmed, setIsAnswerConfirmed] = React.useState(false)
+  const [selectedOptions, setSelectedOptions] = React.useState<Record<string, number>>({})
   const [answers, setAnswers] = React.useState<Record<string, number>>({})
+  const [activeQuestionId, setActiveQuestionId] = React.useState<string | null>(null)
   const [isFinished, setIsFinished] = React.useState(false)
 
   // Furigana & Translation controls
@@ -56,23 +59,22 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
   // Results review filter
   const [reviewFilter, setReviewFilter] = React.useState<"all" | "incorrect">("all")
 
-  const handleConfirmAnswer = React.useCallback(() => {
-    if (!practiceSet || selectedOption === null) return
-    const q = practiceSet.questions[currentIndex]
-    if (!q) return
-    setIsAnswerConfirmed(true)
-    setAnswers((prev) => ({
-      ...prev,
-      [q.id]: selectedOption,
-    }))
-  }, [practiceSet, currentIndex, selectedOption])
+  const selectAnswer = React.useCallback((questionId: string, option: number) => {
+    setSelectedOptions((prev) => ({ ...prev, [questionId]: option }))
+  }, [])
+
+  const handleConfirmAnswer = React.useCallback((question: PublishedPracticeSet["questions"][number]) => {
+    const selected = selectedOptions[question.id] ?? answers[question.id]
+    if (selected === undefined) return
+    setAnswers((prev) => ({ ...prev, [question.id]: selected }))
+  }, [answers, selectedOptions])
 
   const handleNextQuestion = React.useCallback(() => {
-    if (!practiceSet) return
-    if (currentIndex + 1 < practiceSet.questions.length) {
+    const unit = practiceUnits[currentIndex]
+    if (!unit || unit.questions.some((question) => answers[question.id] === undefined)) return
+    if (currentIndex + 1 < practiceUnits.length) {
       setCurrentIndex((prev) => prev + 1)
-      setSelectedOption(null)
-      setIsAnswerConfirmed(false)
+      setActiveQuestionId(practiceUnits[currentIndex + 1].questions.find((question) => answers[question.id] === undefined)?.id ?? practiceUnits[currentIndex + 1].questions[0].id)
       if (typeof window !== "undefined") {
         window.scrollTo({ top: 0, behavior: "smooth" })
       }
@@ -82,13 +84,26 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
         window.scrollTo({ top: 0, behavior: "smooth" })
       }
     }
-  }, [practiceSet, currentIndex])
+  }, [practiceUnits, currentIndex, answers])
+
+  const handlePreviousQuestion = React.useCallback(() => {
+    if (currentIndex === 0) return
+    setCurrentIndex((index) => index - 1)
+    const previous = practiceUnits[currentIndex - 1]
+    setActiveQuestionId(previous.questions.find((question) => answers[question.id] === undefined)?.id ?? previous.questions[0].id)
+  }, [practiceUnits, currentIndex, answers])
+
+  const handleEditAnswer = (questionId: string) => setAnswers((prev) => {
+    const next = { ...prev }
+    delete next[questionId]
+    return next
+  })
 
   const handleRestartQuiz = () => {
     setCurrentIndex(0)
-    setSelectedOption(null)
-    setIsAnswerConfirmed(false)
+    setSelectedOptions({})
     setAnswers({})
+    setActiveQuestionId(null)
     setIsFinished(false)
     setReviewFilter("all")
     if (typeof window !== "undefined") {
@@ -98,9 +113,12 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
 
   // Keyboard navigation shortcuts: 1-4 / A-D to select, Enter to Confirm / Next
   React.useEffect(() => {
-    if (isFinished || !practiceSet) return
-    const currentQ = practiceSet.questions[currentIndex]
-    if (!currentQ) return
+    if (isFinished) return
+    const unit = practiceUnits[currentIndex]
+    if (!unit) return
+    const currentQ = unit.questions.find((question) => question.id === activeQuestionId)
+      ?? unit.questions.find((question) => answers[question.id] === undefined)
+      ?? unit.questions[0]
 
     const handleKeyDown = (e: KeyboardEvent) => {
       // Ignore when focusing input elements
@@ -113,7 +131,7 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
         return
       }
 
-      if (!isAnswerConfirmed) {
+      if (answers[currentQ.id] === undefined) {
         // Keys 1-4 or A-D to select option
         const key = e.key.toUpperCase()
         let optionIndex = -1
@@ -126,16 +144,17 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
 
         if (optionIndex >= 0 && optionIndex < currentQ.options.length) {
           e.preventDefault()
-          setSelectedOption(optionIndex)
-        } else if (e.key === "Enter" && selectedOption !== null) {
+          selectAnswer(currentQ.id, optionIndex)
+        } else if (e.key === "Enter" && (selectedOptions[currentQ.id] ?? answers[currentQ.id]) !== undefined) {
           e.preventDefault()
-          handleConfirmAnswer()
+          handleConfirmAnswer(currentQ)
         }
       } else {
-        // When answer is confirmed, Enter advances to next question
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault()
-          handleNextQuestion()
+          const nextUnanswered = unit.questions.find((question) => answers[question.id] === undefined)
+          if (nextUnanswered) setActiveQuestionId(nextUnanswered.id)
+          else handleNextQuestion()
         }
       }
     }
@@ -144,34 +163,36 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [
     isFinished,
-    practiceSet,
+    practiceUnits,
     currentIndex,
-    isAnswerConfirmed,
-    selectedOption,
+    activeQuestionId,
+    answers,
+    selectedOptions,
+    selectAnswer,
     handleConfirmAnswer,
     handleNextQuestion,
   ])
 
-  const currentQuestion = practiceSet.questions[currentIndex]
-  const totalQuestions = practiceSet.questions.length
-  const progressPercent = Math.round(((currentIndex + 1) / totalQuestions) * 100)
+  const currentUnit = practiceUnits[currentIndex]
+  const currentQuestion = currentUnit.questions[0]
+  const totalQuestions = playableQuestions.length
+  const progressPercent = Math.round(((currentIndex + 1) / practiceUnits.length) * 100)
   const localizedTopic = practiceSet.topic in TOPIC_TRANSLATION_KEYS
     ? tPractice(TOPIC_TRANSLATION_KEYS[practiceSet.topic])
     : practiceSet.topic
 
   // Check correctness of confirmed answer
-  const isCurrentCorrect =
-    selectedOption !== null &&
-    selectedOption === currentQuestion.correctAnswerIndex
+  const selectedOption = selectedOptions[currentQuestion.id] ?? answers[currentQuestion.id] ?? null
+  const isAnswerConfirmed = answers[currentQuestion.id] !== undefined
+  const isCurrentCorrect = answers[currentQuestion.id] === currentQuestion.correctAnswerIndex
+  const answeredInCurrentUnit = currentUnit.questions.filter((question) => answers[question.id] !== undefined).length
+  const isCurrentUnitComplete = answeredInCurrentUnit === currentUnit.questions.length
 
-  // Calculate final score
-  const correctCount = practiceSet.questions.filter(
-    (q) => answers[q.id] === q.correctAnswerIndex
-  ).length
-  const scorePercent = Math.round((correctCount / totalQuestions) * 100)
+  const { correctCount, score, maximum: scoreMaximum } = scorePracticeUnits(practiceUnits, answers)
+  const currentGroup = currentUnit.group
 
   // Filtered review questions
-  const reviewQuestions = practiceSet.questions.filter((q) => {
+  const reviewQuestions = playableQuestions.filter((q) => {
     if (reviewFilter === "incorrect") {
       return answers[q.id] !== q.correctAnswerIndex
     }
@@ -188,6 +209,7 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
       />
 
       <PageHeader
+        className="practice-player-header"
         eyebrow={
           <span className="flex flex-wrap items-center gap-2">
             <Badge variant="outline" className="font-mono text-[0.7rem]">
@@ -202,7 +224,7 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
             <span>{t("topicLabel", { topic: localizedTopic })}</span>
             {!isFinished && (
               <span className="font-semibold text-primary">
-                {t("questionProgress", { current: currentIndex + 1, total: totalQuestions })}
+                {t("questionProgress", { current: currentIndex + 1, total: practiceUnits.length })}
               </span>
             )}
           </>
@@ -247,7 +269,7 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
             aria-valuemin={0}
             aria-valuemax={100}
             aria-valuenow={progressPercent}
-            aria-label={t("questionProgress", { current: currentIndex + 1, total: totalQuestions })}
+            aria-label={t("questionProgress", { current: currentIndex + 1, total: practiceUnits.length })}
             className="h-2 w-full rounded-full bg-muted overflow-hidden"
           >
             <div
@@ -257,6 +279,44 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
           </div>
 
           {/* Main Question Card */}
+          {currentGroup ? (
+            <Card className="border-border/80 shadow-md">
+              <CardHeader className="space-y-4 p-6 pb-4">
+                <Badge variant="secondary" className="w-fit text-xs">{t("typeTrueFalse")}</Badge>
+                <div className="space-y-3 text-base font-normal leading-loose">
+                  {showFurigana ? <FuriganaTokenText text={currentGroup.contextMarkup} /> : currentGroup.context}
+                  {currentGroup.imageUrl && currentGroup.imageWidth && currentGroup.imageHeight && <Image className="h-auto max-w-full rounded-md" src={currentGroup.imageUrl} width={currentGroup.imageWidth} height={currentGroup.imageHeight} alt={japanese ? "問題の図" : "Ilustrasi soal"} />}
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-6 p-6 pt-2">
+                {currentUnit.questions.map((question) => {
+                  const selected = selectedOptions[question.id] ?? answers[question.id] ?? null
+                  const confirmed = answers[question.id] !== undefined
+                  const correct = answers[question.id] === question.correctAnswerIndex
+                  return <section key={question.id} aria-labelledby={`group-child-${question.id}`} onFocusCapture={() => setActiveQuestionId(question.id)} className="space-y-3 border-t border-border/70 pt-5 first:border-0 first:pt-0">
+                    <h3 id={`group-child-${question.id}`} className="text-base font-semibold">{t("questionNumber", { number: practiceSet.questions.indexOf(question) + 1 })}</h3>
+                    <div className="text-base font-medium leading-loose">{showFurigana ? <FuriganaTokenText text={question.prompt} /> : question.promptPlain}</div>
+                    {showTranslation && question.translationId && <p className="text-xs text-muted-foreground">{question.translationId}</p>}
+                    <div className="grid grid-cols-2 gap-2">
+                      {question.options.map((option, optionIndex) => {
+                        const isSelected = selected === optionIndex
+                        const isCorrect = optionIndex === question.correctAnswerIndex
+                        return <button key={optionIndex} type="button" aria-pressed={isSelected} disabled={confirmed}
+                          onClick={() => selectAnswer(question.id, optionIndex)}
+                          className={cn("min-h-12 rounded-xl border p-3 text-base font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-default", isSelected ? "border-primary bg-primary/10 text-primary ring-2 ring-primary/30" : "border-border bg-card hover:bg-muted/40", confirmed && isCorrect && "border-emerald-500 bg-emerald-50 text-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-200", confirmed && isSelected && !isCorrect && "border-destructive bg-destructive/10 text-destructive")}
+                        >{option}</button>
+                      })}
+                    </div>
+                    {!confirmed ? <Button variant="outline" size="sm" disabled={selected === null} onClick={() => handleConfirmAnswer(question)}>{t("confirmAnswer")}</Button> : <div className="space-y-3 rounded-xl border border-border/80 bg-muted/30 p-4">
+                      <div className={cn("font-bold text-sm", correct ? "text-emerald-700 dark:text-emerald-300" : "text-destructive")}>{correct ? t("correctNotice") : t("incorrectNotice", { answer: question.correctAnswerIndex === 0 ? "○" : "×" })}</div>
+                      <div className="space-y-1 text-sm leading-relaxed"><p className="font-semibold text-muted-foreground text-xs">{t("explanationLabel")}</p>{showFurigana ? <FuriganaTokenText text={question.explanationMarkup || question.explanationJa} /> : <p>{question.explanationJa}</p>}{question.explanationId && <p className="border-t border-border/50 pt-1 text-xs text-muted-foreground">{question.explanationId}</p>}</div>
+                      <Button variant="outline" size="sm" onClick={() => handleEditAnswer(question.id)}>{t("editAnswer")}</Button>
+                    </div>}
+                  </section>
+                })}
+              </CardContent>
+            </Card>
+          ) : (
           <Card className="border-border/80 shadow-md">
             <CardHeader className="p-6 pb-4">
               <div className="flex items-center justify-between mb-3">
@@ -270,8 +330,7 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
 
               {/* Japanese Prompt with Furigana */}
               <div className="text-lg sm:text-xl font-medium leading-loose text-foreground">
-                {currentQuestion.context && <div className="mb-4 space-y-1 text-base font-normal">{showFurigana ? <FuriganaTokenText text={currentQuestion.contextMarkup} /> : currentQuestion.context}</div>}
-                {currentQuestion.imageUrl && currentQuestion.imageWidth && currentQuestion.imageHeight && <Image className="mb-4 h-auto max-w-full rounded-md" src={currentQuestion.imageUrl} width={currentQuestion.imageWidth} height={currentQuestion.imageHeight} alt={japanese ? "問題の図" : "Ilustrasi soal"} />}
+                <>{currentQuestion.context && <div className="mb-4 space-y-1 text-base font-normal">{showFurigana ? <FuriganaTokenText text={currentQuestion.contextMarkup} /> : currentQuestion.context}</div>}{currentQuestion.imageUrl && currentQuestion.imageWidth && currentQuestion.imageHeight && <Image className="mb-4 h-auto max-w-full rounded-md" src={currentQuestion.imageUrl} width={currentQuestion.imageWidth} height={currentQuestion.imageHeight} alt={japanese ? "問題の図" : "Ilustrasi soal"} />}</>
                 {showFurigana ? <FuriganaTokenText text={currentQuestion.prompt} /> : currentQuestion.promptPlain}
               </div>
 
@@ -311,7 +370,7 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
                       type="button"
                       aria-pressed={isSelected}
                       disabled={isAnswerConfirmed}
-                      onClick={() => setSelectedOption(idx)}
+                      onClick={() => selectAnswer(currentQuestion.id, idx)}
                       className={cn(
                         "w-full rounded-xl border p-4 text-left text-sm sm:text-base transition-all flex items-center justify-between cursor-pointer disabled:cursor-default",
                         optionStyle
@@ -390,8 +449,10 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
                   </div>
                 </div>
               )}
+              {isAnswerConfirmed && <Button variant="outline" size="sm" onClick={() => handleEditAnswer(currentQuestion.id)}>{t("editAnswer")}</Button>}
             </CardContent>
           </Card>
+          )}
         </div>
       ) : (
         /* RESULTS & REVIEW VIEW (When quiz is completed) */
@@ -405,7 +466,7 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
                   "bg-primary/10 text-primary border border-primary/20"
                 )}
               >
-                {scorePercent}%
+                  {Math.round((score / scoreMaximum) * 100)}%
               </div>
 
               <div>
@@ -419,6 +480,7 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
                 <div>
                   <span className="text-muted-foreground">{t("correctCountLabel")} </span>
                   <strong className="text-foreground text-sm font-bold">{correctCount}</strong> / {totalQuestions}
+                  <span className="ml-2">({score}/{scoreMaximum})</span>
                 </div>
                 <span className="text-muted-foreground">{t("localOnlyResult")}</span>
               </div>
@@ -492,13 +554,16 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
               />
             ) : (
               <div className="space-y-4">
-                {reviewQuestions.map((q) => {
-                  const userChoice = answers[q.id]
-                  const isCorrect = userChoice === q.correctAnswerIndex
+              {reviewQuestions.map((q) => {
+                const userChoice = answers[q.id]
+                const isCorrect = userChoice === q.correctAnswerIndex
+                const reviewGroup = q.groupId ? practiceSet.questionGroups.find((group) => group.id === q.groupId) : undefined
+                const isFirstShownGroupChild = !reviewGroup || reviewQuestions.find((item) => item.groupId === q.groupId)?.id === q.id
 
                   return (
                     <Card
                       key={q.id}
+                      data-question-group={q.groupId ?? undefined}
                       className={cn(
                         "border-border/80 overflow-hidden",
                         isCorrect ? "hover:border-emerald-500/30" : "hover:border-destructive/30"
@@ -507,7 +572,7 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
                       <CardHeader className="p-5 pb-3">
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-xs font-bold text-muted-foreground">
-                            {t("questionNumber", { number: practiceSet.questions.indexOf(q) + 1 })}
+                            {t("questionNumber", { number: playableQuestions.indexOf(q) + 1 })}
                           </span>
                           {isCorrect ? (
                             <Badge variant="success" className="text-xs gap-1">
@@ -522,8 +587,7 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
 
                         {/* Prompt */}
                         <div className="text-base font-medium leading-relaxed">
-                          {q.context && <div className="space-y-1 text-sm font-normal">{showFurigana ? <FuriganaTokenText text={q.contextMarkup} /> : q.context}</div>}
-                          {q.imageUrl && q.imageWidth && q.imageHeight && <Image className="my-3 h-auto max-w-full rounded-md" src={q.imageUrl} width={q.imageWidth} height={q.imageHeight} alt={japanese ? "問題の図" : "Ilustrasi soal"} />}
+                          {reviewGroup ? isFirstShownGroupChild && <div className="space-y-1 text-sm font-normal" data-question-group={reviewGroup.id}>{showFurigana ? <FuriganaTokenText text={reviewGroup.contextMarkup} /> : reviewGroup.context}{reviewGroup.imageUrl && reviewGroup.imageWidth && reviewGroup.imageHeight && <Image className="my-3 h-auto max-w-full rounded-md" src={reviewGroup.imageUrl} width={reviewGroup.imageWidth} height={reviewGroup.imageHeight} alt={japanese ? "問題の図" : "Ilustrasi soal"} />}</div> : <>{q.context && <div className="space-y-1 text-sm font-normal">{showFurigana ? <FuriganaTokenText text={q.contextMarkup} /> : q.context}</div>}{q.imageUrl && q.imageWidth && q.imageHeight && <Image className="my-3 h-auto max-w-full rounded-md" src={q.imageUrl} width={q.imageWidth} height={q.imageHeight} alt={japanese ? "問題の図" : "Ilustrasi soal"} />}</>}
                           {showFurigana ? <FuriganaTokenText text={q.prompt} /> : q.promptPlain}
                         </div>
 
@@ -595,7 +659,9 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
           <div className="mx-auto max-w-4xl flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
             {/* Left: Feedback / Status Indicator */}
             <div className="flex items-center gap-2 text-xs sm:text-sm">
-              {!isAnswerConfirmed ? (
+              {currentGroup ? (
+                <span className="text-xs text-muted-foreground">{t("groupAnswerProgress", { current: answeredInCurrentUnit, total: currentUnit.questions.length })}</span>
+              ) : !isAnswerConfirmed ? (
                 selectedOption === null ? (
                   <div className="flex items-center gap-2 text-muted-foreground">
                     <span className="inline-flex h-2 w-2 rounded-full bg-muted-foreground/50 animate-pulse shrink-0" />
@@ -655,11 +721,16 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
 
             {/* Right: Primary Action Button (Fixed position, never moves or hides) */}
             <div className="flex items-center gap-2 shrink-0">
-              {!isAnswerConfirmed ? (
+              <Button variant="outline" size="default" disabled={currentIndex === 0} onClick={handlePreviousQuestion}>{t("previousQuestion")}</Button>
+              {currentGroup ? (
+                <Button size="default" disabled={!isCurrentUnitComplete} onClick={handleNextQuestion} className="w-full sm:w-auto gap-2">
+                  {currentIndex + 1 < practiceUnits.length ? <>{t("nextQuestion")}<ArrowRight className="h-4 w-4" /></> : <>{t("viewResults")}<Sparkles className="h-4 w-4" /></>}
+                </Button>
+              ) : !isAnswerConfirmed ? (
                 <Button
                   size="default"
                   disabled={selectedOption === null}
-                  onClick={handleConfirmAnswer}
+                  onClick={() => handleConfirmAnswer(currentQuestion)}
                   className="w-full sm:w-auto gap-2 shadow-xs text-xs sm:text-sm font-semibold h-10 px-5"
                 >
                   {t("confirmAnswer")}
@@ -678,7 +749,7 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
                       : "bg-primary text-primary-foreground"
                   )}
                 >
-                  {currentIndex + 1 < totalQuestions ? (
+                  {currentIndex + 1 < practiceUnits.length ? (
                     <>
                       {t("nextQuestion")}
                       <ArrowRight className="h-4 w-4" />
