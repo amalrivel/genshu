@@ -41,7 +41,7 @@ export async function saveMaterial(_state: StaffFormState, form: FormData): Prom
       const rows = await db`
         update learning_materials set
           title_ja = ${titleJa}, title_id = ${titleId}, summary_ja = ${summaryJa}, summary_id = ${summaryId},
-          level = ${level}, topic = ${topic}, sections = ${JSON.stringify(sections)}::jsonb,
+          level = ${level}, topic = ${topic}, sections = ${db.json(sections)}::jsonb,
           is_published = ${published}, published_at = case when ${published} then coalesce(published_at, now()) else null end,
           updated_at = now()
         where slug = ${slug} returning slug
@@ -52,7 +52,7 @@ export async function saveMaterial(_state: StaffFormState, form: FormData): Prom
         insert into learning_materials
           (slug, title_ja, title_id, summary_ja, summary_id, level, topic, sections, is_published, published_at)
         values (${slug}, ${titleJa}, ${titleId}, ${summaryJa}, ${summaryId}, ${level}, ${topic},
-          ${JSON.stringify(sections)}::jsonb, ${published}, case when ${published} then now() else null end)
+          ${db.json(sections)}::jsonb, ${published}, case when ${published} then now() else null end)
       `
     }
   } catch {

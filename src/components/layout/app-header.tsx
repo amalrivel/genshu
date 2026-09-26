@@ -53,7 +53,7 @@ export function AppHeader() {
         <nav aria-label={t("primaryNavigation")} className="desktop-nav">{links.map((link) => navLink(link))}</nav>
         <div className="header-actions">
           <div className="flex items-center gap-2"><LanguageToggle /><ModeToggle /></div>
-          <Button variant="outline" size="icon" className="mobile-menu-trigger" onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? t("closeNavigation") : t("openNavigation")} aria-expanded={menuOpen} aria-controls="mobile-navigation">
+          <Button variant="outline" size="icon" className="mobile-menu-trigger md:hidden" onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? t("closeNavigation") : t("openNavigation")} aria-expanded={menuOpen} aria-controls="mobile-navigation">
             {menuOpen ? <X className="size-4" aria-hidden="true" /> : <Menu className="size-4" aria-hidden="true" />}
           </Button>
         </div>

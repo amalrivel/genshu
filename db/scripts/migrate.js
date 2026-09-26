@@ -17,6 +17,11 @@ async function psql(args) {
 }
 
 await psql(["-c", "create table if not exists genshu_schema_migrations (name text primary key, applied_at timestamptz not null default now())"])
+await psql(["-c", "alter table genshu_schema_migrations enable row level security; revoke all on genshu_schema_migrations from public"])
+await psql(["-c", `do $$ begin
+  if exists (select 1 from pg_roles where rolname = 'anon') then revoke all on genshu_schema_migrations from anon; end if;
+  if exists (select 1 from pg_roles where rolname = 'authenticated') then revoke all on genshu_schema_migrations from authenticated; end if;
+end $$`])
 const folder = resolve(import.meta.dir, "../migrations")
 const migrations = (await readdir(folder)).filter((name) => /^\d{3}_[\w.-]+\.sql$/.test(name)).sort()
 

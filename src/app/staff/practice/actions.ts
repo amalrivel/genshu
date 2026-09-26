@@ -67,7 +67,7 @@ export async function savePracticeSet(_state: StaffFormState, form: FormData): P
             (id, practice_set_id, position, question_type, prompt, prompt_plain, translation_id, options, correct_answer_index, explanation_ja, explanation_id)
           values (${questionId}, ${id}, ${position}, ${question.type}, ${question.prompt},
             ${question.prompt.replace(/\{([^|{}]+)\|[^{}]+\}/g, "$1")}, ${question.translationId},
-            ${JSON.stringify(question.options)}::jsonb, ${question.correct}, ${question.explanationJa}, ${question.explanationId})
+            ${sql.json(question.options)}::jsonb, ${question.correct}, ${question.explanationJa}, ${question.explanationId})
         `
       }
     })

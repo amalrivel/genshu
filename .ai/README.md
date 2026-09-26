@@ -40,7 +40,11 @@ and versioned migrations. Published student content uses server-only Postgres.js
 queries with a private `POSTGRES_URL`; student routes filter to published rows.
 Staff login uses Supabase Auth and server-side staff_members roles. Sensei may
 edit materials and practice; Tantōsha currently has read-only staff access.
-The integration needs real Supabase Auth and browser verification before release.
+The Supabase schema and Sensei/Tantōsha mappings are provisioned. On
+2026-09-26, production-browser checks verified Sensei authoring and publishing,
+Tantōsha authoring denial, anonymous published reading and practice, and draft
+privacy. Temporary QA content was removed. Re-run `bun run verify` and the
+Supabase checks before deployment.
 
 User-facing learning data used officially must persist on the server.
 Anonymous practice in the first release has no official student attempt
@@ -69,7 +73,11 @@ project truth. Do not duplicate active instructions across these files.
 1. Install/start local PostgreSQL and create a database plus an application login.
 2. Copy `.env.example` to `.env.local` and set the server-only `POSTGRES_URL`.
 3. Run `bun run db:migrate` and `bun run db:seed`. Both commands are safe to rerun.
-4. Start the app with `bun run dev`; `/` opens the published materials catalog.
+4. Run `bun run db:verify` to validate local sample publication state, or
+   `bun run db:verify-permissions` to check RLS and public-role grants without
+   requiring or changing sample content. The permissions check is read-only and
+   can also be run against the configured Supabase project.
+5. Start the app with `bun run dev`; `/` opens the published materials catalog.
 
 The app role needs read access for its server queries. Do not grant database
 credentials to browser code or create anonymous write grants. Supabase runtime

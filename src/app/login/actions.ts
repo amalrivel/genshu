@@ -1,13 +1,13 @@
 "use server"
 import { redirect } from "next/navigation"
-import { createAuthClient } from "@/lib/supabase/server"
+import { createClient } from "@/lib/supabase/server"
 import { database } from "@/lib/content-repository"
 
 export async function signIn(formData: FormData) {
   const email = String(formData.get("email") ?? "").trim()
   const password = String(formData.get("password") ?? "")
   if (!email || !password) redirect("/login?error=invalid")
-  const client = await createAuthClient()
+  const client = await createClient()
   const { data, error } = await client.auth.signInWithPassword({ email, password })
   if (error || !data.user?.id) redirect("/login?error=invalid")
   const rows = await database()`
@@ -21,7 +21,7 @@ export async function signIn(formData: FormData) {
 }
 
 export async function signOut() {
-  const client = await createAuthClient()
+  const client = await createClient()
   await client.auth.signOut({ scope: "local" })
   redirect("/login")
 }

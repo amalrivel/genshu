@@ -192,11 +192,13 @@ exams. The first live release is deliberately smaller than that broader MVP.
 Students should be able to find and read published Japanese learning materials
 comfortably on phones and desktop browsers. Supporting Indonesian explanations
 and optional furigana may be used where appropriate. Staff need a simple way to
-publish and correct materials. Staff login and authoring UI now exist in code but await integration testing
-against a Supabase project. Sample content is managed through versioned local
-SQL seed data. The
-exact authoring model should follow real content needs, without a speculative
-course hierarchy.
+publish and correct materials. Staff login and authoring UI now exist in code.
+The Supabase schema and Sensei/Tantōsha mappings are provisioned. On 2026-09-26,
+production-browser checks verified staff login, Sensei material and practice
+create/edit/publish, anonymous published reading and practice, hidden drafts,
+and server-side Tantōsha authoring denial. Temporary QA content was removed.
+Sample content is managed through versioned local SQL seed data. The exact authoring model should follow real
+content needs, without a speculative course hierarchy.
 
 ---
 
@@ -503,9 +505,10 @@ The staff login implementation uses Supabase Auth with cookie-based sessions.
 Sensei and Tantōsha access is determined by active rows in the server-side
 staff_members table, not user-editable profile metadata. Content mutations
 require the Sensei role inside each Server Action. No public registration is
-provided. This integration still requires a Supabase project, provisioned staff
-accounts, and browser verification before release. Anonymous student access
-must never grant content editing privileges.
+provided. The initial Supabase project has the Genshu migrations and mapped
+Sensei/Tantōsha identities. Browser login and content publishing passed
+end-to-end verification on 2026-09-26. Anonymous student access must never
+grant content editing privileges.
 
 Authentication implementation must support the role model required by Genshu.
 

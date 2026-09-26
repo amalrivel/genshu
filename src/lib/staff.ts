@@ -1,13 +1,13 @@
 import "server-only"
 import { notFound, redirect } from "next/navigation"
-import { createAuthClient } from "@/lib/supabase/server"
+import { createClient } from "@/lib/supabase/server"
 import { database } from "@/lib/content-repository"
 
 export type StaffMember = { userId: string; role: "SENSEI" | "TANTOSHA"; displayName: string }
 
 export async function currentStaff(): Promise<StaffMember | null> {
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) return null
-  const client = await createAuthClient()
+  const client = await createClient()
   const { data, error } = await client.auth.getClaims()
   if (error || !data?.claims?.sub) return null
   const rows = await database()`

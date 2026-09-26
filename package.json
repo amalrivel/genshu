@@ -13,6 +13,7 @@
     "db:migrate": "bun db/scripts/migrate.js",
     "db:seed": "bun db/scripts/seed.js",
     "db:verify": "bun db/scripts/verify.js",
+    "db:verify-permissions": "bun db/scripts/verify.js --permissions",
     "learning:smoke": "bash db/scripts/smoke-learning.sh"
   },
   "dependencies": {
