@@ -618,9 +618,9 @@
     "semantic_hash": "98087aedd18375666dbb093c859b2949"
   },
   "AGENTS.md": {
-    "mtime": 1790240164.2267735,
-    "seen": 1790240194.315768,
-    "ast_hash": "5ec38dbdf0d35018a47af1778a39ac2a",
+    "mtime": 1790428516.0871346,
+    "seen": 1790431170.4698284,
+    "ast_hash": "70b96a56d2ed1eefdc0b0d906374e262",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
@@ -630,9 +630,9 @@
     "semantic_hash": "5c27369b226fcf2be8a6cfe52224e767"
   },
   "README.md": {
-    "mtime": 1790415633.841233,
-    "seen": 1790415682.2777855,
-    "ast_hash": "23621435c7a8073a3627c1f918027e59",
+    "mtime": 1790428655.4697285,
+    "seen": 1790431170.4698553,
+    "ast_hash": "0ede03412bb22cdcea320619a3d98e88",
     "semantic_hash": ""
   },
   ".agents/skills/shadcn/assets/shadcn-small.png": {
@@ -738,15 +738,15 @@
     "semantic_hash": "cb56bf002d36bb860c3d320a23bd871a"
   },
   "messages/id.json": {
-    "mtime": 1790418433.4685872,
-    "seen": 1790418879.3243918,
-    "ast_hash": "0758db7f2986432a48f5f4119838cc79",
+    "mtime": 1790429902.4021044,
+    "seen": 1790431170.462609,
+    "ast_hash": "32ae796258064f3c9c8065007cd67dc3",
     "semantic_hash": ""
   },
   "messages/ja.json": {
-    "mtime": 1790418433.5045874,
-    "seen": 1790418879.3243928,
-    "ast_hash": "73ea8e45cb1777a7fe9bd80a29bb6d86",
+    "mtime": 1790429906.1441424,
+    "seen": 1790431170.4626105,
+    "ast_hash": "b54d64bda962c53ed121ba6cb53bbed4",
     "semantic_hash": ""
   },
   "src/app/assignments/[id]/page.tsx": {
@@ -888,15 +888,15 @@
     "semantic_hash": ""
   },
   ".ai/PROJECT.md": {
-    "mtime": 1790419458.0242436,
-    "seen": 1790419478.150099,
-    "ast_hash": "06f5b5a5142e9eda67982857d8ab62eb",
+    "mtime": 1790428718.5686715,
+    "seen": 1790431170.469825,
+    "ast_hash": "8d3efe1ca5e3988c4ad86d4cb003b3e1",
     "semantic_hash": ""
   },
   ".ai/README.md": {
-    "mtime": 1790409900.8627517,
-    "seen": 1790409960.5304832,
-    "ast_hash": "abfe1952af760c13699ae16bf2a20177",
+    "mtime": 1790428674.9443135,
+    "seen": 1790431170.4698267,
+    "ast_hash": "633198fbe48d41accd94846b22866879",
     "semantic_hash": ""
   },
   "src/components/cohorts/cohort-roster-panels.tsx": {
@@ -966,9 +966,9 @@
     "semantic_hash": ""
   },
   "src/components/practice-player.tsx": {
-    "mtime": 1790420012.6001372,
-    "seen": 1790420031.0596256,
-    "ast_hash": "23b6ffc1fc3000d0254f13bf2508d590",
+    "mtime": 1790429858.6467493,
+    "seen": 1790431170.463984,
+    "ast_hash": "52432d2e9b5eb90e3d71d9e3a5125727",
     "semantic_hash": ""
   },
   "src/components/ui/furigana-token-text.tsx": {
@@ -978,15 +978,15 @@
     "semantic_hash": ""
   },
   "src/lib/content-repository.ts": {
-    "mtime": 1790418312.4405982,
-    "seen": 1790418879.3256226,
-    "ast_hash": "88559bddf75c62a2f5913e34def3308a",
+    "mtime": 1790430629.4896014,
+    "seen": 1790431170.4645514,
+    "ast_hash": "a2b2d389e077203a162a658ddf41f91f",
     "semantic_hash": ""
   },
   "src/lib/content-types.ts": {
-    "mtime": 1790418312.4085982,
-    "seen": 1790418879.3256233,
-    "ast_hash": "9407bc5053a0938691f9b0f6508923da",
+    "mtime": 1790424018.9539373,
+    "seen": 1790424756.8789701,
+    "ast_hash": "de2178daaad4b310c6e9be3cdfd113da",
     "semantic_hash": ""
   },
   "src/app/login/actions.ts": {
@@ -1026,15 +1026,15 @@
     "semantic_hash": ""
   },
   "src/app/staff/practice/[id]/page.tsx": {
-    "mtime": 1790418388.004531,
-    "seen": 1790418879.3249474,
-    "ast_hash": "ae1f49ba0dfd26fd792490c01da2ebea",
+    "mtime": 1790429758.4850295,
+    "seen": 1790431170.4634714,
+    "ast_hash": "7d7da894bfa4c119c168bc2935db69b4",
     "semantic_hash": ""
   },
   "src/app/staff/practice/actions.ts": {
-    "mtime": 1790418761.1404822,
-    "seen": 1790418879.3249483,
-    "ast_hash": "b7b045c7be8db25838dd5e72e029ba76",
+    "mtime": 1790430729.1510663,
+    "seen": 1790431170.4634724,
+    "ast_hash": "f2fed773b576f0e01101f45657592a04",
     "semantic_hash": ""
   },
   "src/app/staff/practice/page.tsx": {
@@ -1050,9 +1050,9 @@
     "semantic_hash": ""
   },
   "src/components/practice-questions-editor.tsx": {
-    "mtime": 1790418388.0285308,
-    "seen": 1790418879.3252378,
-    "ast_hash": "7fd94202f11064f7f8c6f752821a9ef6",
+    "mtime": 1790429748.3953915,
+    "seen": 1790431170.4639852,
+    "ast_hash": "4414d3287608108feb83451e12a4605a",
     "semantic_hash": ""
   },
   "src/lib/staff.ts": {
@@ -1398,21 +1398,21 @@
     "semantic_hash": ""
   },
   "src/lib/database.types.ts": {
-    "mtime": 1790418761.204482,
-    "seen": 1790418879.3256452,
-    "ast_hash": "61ff137879553bd25ddb90cbf751dd21",
+    "mtime": 1790424079.2214427,
+    "seen": 1790424756.878993,
+    "ast_hash": "c990da31771c02ffa18f59a11c6be61c",
     "semantic_hash": ""
   },
   "db/scripts/check-data-api-migration.js": {
-    "mtime": 1790407549.7153635,
-    "seen": 1790407611.2486155,
-    "ast_hash": "c38dc3e44f1ca902723abc7feb1ca694",
+    "mtime": 1790430290.0546372,
+    "seen": 1790431170.4624612,
+    "ast_hash": "58abb8a4ba23b67e1f6539e2c39db4eb",
     "semantic_hash": ""
   },
   "db/scripts/check-data-api.js": {
-    "mtime": 1790408287.787189,
-    "seen": 1790408356.6647148,
-    "ast_hash": "45795ccf0f01fe96f106b4d95e62ed22",
+    "mtime": 1790430677.7566848,
+    "seen": 1790431170.4624631,
+    "ast_hash": "5f69ed28185cc9e50df4936f8303582d",
     "semantic_hash": ""
   },
   ".ai/scripts/check-supabase-config.ts": {
@@ -1422,9 +1422,9 @@
     "semantic_hash": ""
   },
   "db/imports/gentsuki-ready-web/dataset.json": {
-    "mtime": 1790418830.2564533,
-    "seen": 1790418879.3242304,
-    "ast_hash": "1b9a5a8d9f963ba937a62c5d94f3c8f6",
+    "mtime": 1790426136.7920194,
+    "seen": 1790426837.6261187,
+    "ast_hash": "4a91f40aad84f414bee77c6b69365a91",
     "semantic_hash": ""
   },
   "db/imports/gentsuki-ready-web/manifest.json": {
@@ -1506,21 +1506,21 @@
     "semantic_hash": ""
   },
   "db/scripts/import-gentsuki-ready-web.ts": {
-    "mtime": 1790419412.4882255,
-    "seen": 1790419478.144503,
-    "ast_hash": "44044bd6592a3f997f82f776e401fbe3",
+    "mtime": 1790429476.5043828,
+    "seen": 1790431170.4624643,
+    "ast_hash": "08a4fcc9e34d4246341660eae7d325d7",
     "semantic_hash": ""
   },
   ".agents/rules/antigravity-rtk-rules.md": {
-    "mtime": 1790416315.8170784,
-    "seen": 1790418879.3258028,
-    "ast_hash": "837fb66e350c86b910a3b4b8d0172580",
+    "mtime": 1790428696.0292888,
+    "seen": 1790431170.4648843,
+    "ast_hash": "7180814f19b792d8b60803c7b5a999d4",
     "semantic_hash": ""
   },
   "docs/gentsuki-bank-import.md": {
-    "mtime": 1790418850.860472,
-    "seen": 1790418879.3292246,
-    "ast_hash": "097f4d3757986ed32d33351a4b1e61b2",
+    "mtime": 1790428655.5044496,
+    "seen": 1790431170.4698575,
+    "ast_hash": "dc5cddaac4445c655af9598cfa975a85",
     "semantic_hash": ""
   },
   "public/gentsuki-quiz-assets/02788e0b7a8e60e50c5f16d1edfa42b6f96377e7.jpg": {
@@ -2025,6 +2025,42 @@
     "mtime": 1790417978.1802287,
     "seen": 1790418879.3293495,
     "ast_hash": "48aa4b1cf9843be835e78aace4380fd3",
+    "semantic_hash": ""
+  },
+  "db/imports/gentsuki-ready-web/legacy-illustration-questions.json": {
+    "mtime": 1790424510.9286213,
+    "seen": 1790424756.8771791,
+    "ast_hash": "7b5c21f0a48dfe244fdb3ba5f2d7138f",
+    "semantic_hash": ""
+  },
+  "src/lib/practice-units.check.ts": {
+    "mtime": 1790430624.8048344,
+    "seen": 1790431170.4646745,
+    "ast_hash": "88f0d908d5b4844864cc1b4f3927fa7e",
+    "semantic_hash": ""
+  },
+  "src/lib/practice-units.ts": {
+    "mtime": 1790430617.7179508,
+    "seen": 1790431170.4646773,
+    "ast_hash": "972e514703c1100bbc7e458eddcc0dd8",
+    "semantic_hash": ""
+  },
+  "docs/recovery.md": {
+    "mtime": 1790428655.4709828,
+    "seen": 1790431170.46986,
+    "ast_hash": "e5b4a1ccf776a0acfe7c4c0a10fd2531",
+    "semantic_hash": ""
+  },
+  "docs/release-readiness.md": {
+    "mtime": 1790428655.4720564,
+    "seen": 1790431170.4698677,
+    "ast_hash": "5e887e918ab6842386c905d6b11148a2",
+    "semantic_hash": ""
+  },
+  "docs/worker-next-goal.md": {
+    "mtime": 1790428655.4731941,
+    "seen": 1790431170.469869,
+    "ast_hash": "a974681547301f9f40f253f04d4919cd",
     "semantic_hash": ""
   }
 }

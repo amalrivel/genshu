@@ -1,16 +1,16 @@
 # Graph Report - genshu  (2026-09-26)
 
 ## Corpus Check
-- 255 files · ~297,614 words
+- 267 files · ~307,742 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1316 nodes · 1877 edges · 241 communities (141 shown, 99 thin omitted)
+- 1362 nodes · 1952 edges · 235 communities (135 shown, 99 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 27 edges (avg confidence: 0.81)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `de3e4eef`
+- Built from commit: `317a63f1`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -106,17 +106,15 @@
 - Next.js Logo
 - Vercel Logo
 - Window Icon
-- Genshu README
+- content-repository.ts
 - Section Definitions
 - request.ts
-- 5. Release Scope
+- staff/practice/[id]/page.tsx
 - database.types.ts
-- Genshu Agent Instructions
+- login/actions.ts
 - Supabase Postgres Best Practices
-- 6. Language Rules
-- 3. Primary Users
-- 9. Technical Direction
-- 10. Data Platform
+- 2-3
+- material-sections-editor.tsx
 - advanced-full-text-search.md
 - Genshu — Project Source of Truth
 - advanced-jsonb-indexing.md
@@ -152,7 +150,7 @@
 - _template.md
 - Cookies
 - Browser Automation with playwright-cli
-- Test generation (plan → generate → heal)
+- 3. Heal
 - Browser Session Management
 - Running Custom Playwright Code
 - Tracing
@@ -163,11 +161,9 @@
 - import-gentsuki-ready-web.ts
 - sourceFiles
 - assetMeta
-- 3. Heal
-- RTK - Rust Token Killer (Google Antigravity)
-- 1. Planning
-- 2. Generate
-- 1-10
+- Use Cases
+- antigravity-rtk-rules.md
+- next.config.ts
 - 1-1
 - The Fixes
 - 1-2
@@ -180,7 +176,7 @@
 - 1-9
 - 2-10
 - 2-1
-- 2-3
+- 2-2
 - 2-4
 - 2-5
 - 2-6
@@ -251,8 +247,6 @@
 - 車両横断禁止 標識
 - 車線減少 警戒標識
 - 転回禁止 標示
-- Gentsuki bank import
-- next.config.ts
 - verify.ts
 - layout.tsx
 
@@ -289,15 +283,15 @@
 - **Derived Dependency Minimization** — agents_skills_vercel_react_best_practices_rules_rerender_dependencies_narrow_effect_dependencies, agents_skills_vercel_react_best_practices_rules_rerender_derived_state_no_effect_calculate_derived_state, agents_skills_vercel_react_best_practices_rules_rerender_derived_state_subscribe_to_derived_state, agents_skills_vercel_react_best_practices_rules_rerender_split_combined_hooks_split_hook_computations [INFERRED 0.85]
 - **React Concurrent Rendering Responsiveness** — agents_skills_vercel_react_best_practices_rules_rendering_usetransition_loading_use_transition_loading, agents_skills_vercel_react_best_practices_rules_rerender_transitions_transitions_for_non_urgent_updates, agents_skills_vercel_react_best_practices_rules_rerender_use_deferred_value_use_deferred_value [INFERRED 0.85]
 
-## Communities (241 total, 99 thin omitted)
+## Communities (235 total, 99 thin omitted)
 
 ### Community 0 - "cohorts/[id]/page.tsx"
 Cohesion: 0.07
-Nodes (81): lucide-react, next-intl, react, AssignmentDetailPage(), AssignmentsPage(), SessionRollCallPage(), STATUS_OPTIONS, AttendancePage() (+73 more)
+Nodes (85): class-variance-authority, lucide-react, next-intl, react, AssignmentDetailPage(), AssignmentsPage(), SessionRollCallPage(), STATUS_OPTIONS (+77 more)
 
 ### Community 1 - "package.json"
 Cohesion: 0.10
-Nodes (20): ignoreScripts, name, packageManager, private, trustedDependencies, version, babel-plugin-react-compiler, @base-ui/react (+12 more)
+Nodes (19): ignoreScripts, name, packageManager, private, trustedDependencies, version, babel-plugin-react-compiler, @base-ui/react (+11 more)
 
 ### Community 2 - "components.json"
 Cohesion: 0.09
@@ -309,15 +303,15 @@ Nodes (18): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModu
 
 ### Community 5 - "data-context.tsx"
 Cohesion: 0.11
-Nodes (34): CohortRosterPanelsProps, DataContext, DataContextType, DataProvider(), getRoleServerSnapshot(), getRoleSnapshot(), notifyRoleListeners(), roleListeners (+26 more)
+Nodes (33): DataContext, DataContextType, DataProvider(), getRoleServerSnapshot(), getRoleSnapshot(), notifyRoleListeners(), roleListeners, subscribeRole() (+25 more)
 
 ### Community 6 - "dependencies"
 Cohesion: 0.14
 Nodes (14): dependencies, @base-ui/react, class-variance-authority, cn, lucide-react, next, next-intl, next-themes (+6 more)
 
 ### Community 7 - "createClient"
-Cohesion: 0.06
-Nodes (56): names, original, signIn(), signOut(), dynamic, LoginPage(), MaterialsPage(), dynamic (+48 more)
+Cohesion: 0.20
+Nodes (15): names, original, field(), saveMaterial(), dynamic, StaffMaterialsPage(), dynamic, MaterialEditor() (+7 more)
 
 ### Community 8 - "Narrow Effect Dependencies"
 Cohesion: 0.33
@@ -332,8 +326,8 @@ Cohesion: 0.50
 Nodes (4): Version and Minimize localStorage Data, Cache Repeated Function Calls, Cache Property Access in Loops, Cache Storage API Calls
 
 ### Community 11 - "Genshu AI development workflow"
-Cohesion: 0.25
-Nodes (8): Decision boundaries, Development loop, Genshu AI development workflow, Local learning-content database, Repository knowledge, Sources and scope, Staff access setup, Verification
+Cohesion: 0.06
+Nodes (34): Architectural Change Rules, Genshu Agent Instructions, Source of Truth Hierarchy, Worker and Reviewer Protocol, Decision boundaries, Development loop, Genshu AI development workflow, Local learning-content database (+26 more)
 
 ### Community 12 - "Use useTransition Over Manual Loading States"
 Cohesion: 0.50
@@ -391,6 +385,10 @@ Nodes (15): [0.1.3](https://github.com/supabase/agent-skills/compare/v0.1.2...v0
 Cohesion: 0.12
 Nodes (15): 1. Concrete Transformation Patterns, 2. Error-First Structure, 3. Quantified Impact, 4. Self-Contained Examples, 5. Semantic Naming, Code Example Standards, Comments, Impact Level Guidelines (+7 more)
 
+### Community 91 - "content-repository.ts"
+Cohesion: 0.10
+Nodes (29): MaterialsPage(), MaterialPage(), dynamic, PracticeSetPage(), dynamic, PracticePage(), PracticeCatalog(), PracticePlayer() (+21 more)
+
 ### Community 92 - "Section Definitions"
 Cohesion: 0.20
 Nodes (9): 1. Query Performance (query), 2. Connection Management (conn), 3. Security & RLS (security), 4. Schema Design (schema), 5. Concurrency & Locking (lock), 6. Data Access Patterns (data), 7. Monitoring & Diagnostics (monitor), 8. Advanced Features (advanced) (+1 more)
@@ -399,41 +397,33 @@ Nodes (9): 1. Query Performance (query), 2. Connection Management (conn), 3. Sec
 Cohesion: 0.50
 Nodes (3): defaultLocale, Locale, locales
 
-### Community 94 - "5. Release Scope"
-Cohesion: 0.29
-Nodes (7): 5. Release Scope, First live release, First live release: Practice, Later release: Assignments, Later release: Attendance, Later release: Exams, Learning materials
+### Community 94 - "staff/practice/[id]/page.tsx"
+Cohesion: 0.22
+Nodes (11): contentField(), field(), optionalDimension(), savePracticeSet(), dynamic, SetRow, blank(), EditableQuestion (+3 more)
 
 ### Community 95 - "database.types.ts"
 Cohesion: 0.19
 Nodes (8): @supabase/ssr, Database, Json, Table, updateSession(), config, prototypePaths, proxy()
 
-### Community 96 - "Genshu Agent Instructions"
-Cohesion: 0.33
-Nodes (4): Architectural Change Rules, Genshu Agent Instructions, Source of Truth Hierarchy, Worker and Reviewer Protocol
+### Community 96 - "login/actions.ts"
+Cohesion: 0.29
+Nodes (8): signIn(), signOut(), dynamic, LoginPage(), dynamic, StaffPage(), currentStaff(), requireStaff()
 
 ### Community 97 - "Supabase Postgres Best Practices"
 Cohesion: 0.33
 Nodes (5): How to Use, References, Rule Categories by Priority, Supabase Postgres Best Practices, When to Apply
 
-### Community 98 - "6. Language Rules"
-Cohesion: 0.40
-Nodes (5): 6. Language Rules, Application Interface, Assignments and Exams, Furigana, Learning Content
-
-### Community 99 - "3. Primary Users"
+### Community 98 - "2-3"
 Cohesion: 0.50
-Nodes (4): 3.1 Gakusei — 学生, 3.2 Sensei — 先生, 3.3 Tantōsha — 担当者, 3. Primary Users
+Nodes (4): height, sha, width, 2-3
 
-### Community 100 - "9. Technical Direction"
-Cohesion: 0.50
-Nodes (4): 9. Technical Direction, Application Framework, Runtime and Package Manager, UI
-
-### Community 101 - "10. Data Platform"
+### Community 99 - "material-sections-editor.tsx"
 Cohesion: 0.67
-Nodes (3): 10. Data Platform, Database Access Layer, Local Development
+Nodes (3): blank(), MaterialSectionsEditor(), MaterialSection
 
 ### Community 103 - "Genshu — Project Source of Truth"
-Cohesion: 0.08
-Nodes (24): 11. Authentication, 12. File Storage, 13. Deployment Direction, 14. Architecture Principle, 15. Anti-Overengineering Rules, 16. UX Principles, 17. Mobile and Desktop, 18. Data Ownership (+16 more)
+Cohesion: 0.04
+Nodes (47): 10. Data Platform, 11. Authentication, 12. File Storage, 13. Deployment Direction, 14. Architecture Principle, 15. Anti-Overengineering Rules, 16. UX Principles, 17. Mobile and Desktop (+39 more)
 
 ### Community 135 - "Cookies"
 Cohesion: 0.06
@@ -443,9 +433,9 @@ Nodes (35): Advanced: Multiple Cookies or Custom Options, Advanced: Multiple Ope
 Cohesion: 0.08
 Nodes (24): Browser Automation with playwright-cli, Browser Sessions, Commands, Core, DevTools, Example: Debugging with DevTools, Example: Form submission, Example: Interactive session (+16 more)
 
-### Community 137 - "Test generation (plan → generate → heal)"
-Cohesion: 0.29
-Nodes (7): 0. How generation works, Add assertions manually, Building a test file, Cross-references, Explore before recording, Test generation (plan → generate → heal), Use semantic locators
+### Community 137 - "3. Heal"
+Cohesion: 0.09
+Nodes (23): 0. How generation works, 1.1 Prerequisite: workspace, 1.2 Prerequisite: seed test, 1.3 Explore the app, 1.4 Write the spec file, 1. Planning, 2.1 Inputs, 2.2 Generate one scenario (+15 more)
 
 ### Community 138 - "Browser Session Management"
 Cohesion: 0.10
@@ -456,8 +446,8 @@ Cohesion: 0.15
 Nodes (13): Clipboard, Complex Workflows, Error Handling, File Downloads, Frames and Iframes, Geolocation, JavaScript Execution, Media Emulation (+5 more)
 
 ### Community 140 - "Tracing"
-Cohesion: 0.12
-Nodes (16): 1. Start Tracing Before the Problem, 2. Clean Up Old Traces, Analyzing Performance, Basic Usage, Best Practices, Capturing Evidence, Debugging Failed Actions, Limitations (+8 more)
+Cohesion: 0.15
+Nodes (12): 1. Start Tracing Before the Problem, 2. Clean Up Old Traces, Basic Usage, Best Practices, Limitations, `resources/`, Trace Output Files, `trace-{timestamp}.network` (+4 more)
 
 ### Community 141 - "playwright-cli/SKILL.md"
 Cohesion: 0.24
@@ -472,12 +462,12 @@ Cohesion: 0.25
 Nodes (8): Advanced Mocking with run-code, CLI Route Commands, Conditional Response Based on Request, Delayed Response, Modify Real Response, Request Mocking, Simulate Network Failures, URL Patterns
 
 ### Community 144 - "check-data-api-migration.js"
-Cohesion: 0.38
-Nodes (5): denied(), migrations, practice(), publicChecks(), questions
+Cohesion: 0.23
+Nodes (9): denied(), groupedPractice(), groups(), migrations, practice(), publicChecks(), questions, repairQuestions (+1 more)
 
 ### Community 145 - "import-gentsuki-ready-web.ts"
-Cohesion: 0.07
-Nodes (30): material, missing, question, readers, sections, sensei, set, Bank (+22 more)
+Cohesion: 0.05
+Nodes (39): group, groupQuestions, groupSet, material, missing, question, readers, repairQuestions (+31 more)
 
 ### Community 146 - "sourceFiles"
 Cohesion: 0.15
@@ -485,27 +475,15 @@ Nodes (13): sourceFiles, book_1.json, book_2.json, book_3.json, genchare_1.json,
 
 ### Community 147 - "assetMeta"
 Cohesion: 0.25
-Nodes (7): height, sha, width, assetMeta, 2-2, commit, repository
+Nodes (7): height, sha, width, assetMeta, 1-10, commit, repository
 
-### Community 148 - "3. Heal"
-Cohesion: 0.33
-Nodes (6): 3.1 Find failing tests, 3.2 Debug one failure, 3.3 Apply the fix, 3.4 Reconcile with the spec, 3.5 Iteration and giving up, 3. Heal
-
-### Community 149 - "RTK - Rust Token Killer (Google Antigravity)"
-Cohesion: 0.40
-Nodes (4): Meta Commands, RTK - Rust Token Killer (Google Antigravity), Rule, Why
-
-### Community 150 - "1. Planning"
-Cohesion: 0.40
-Nodes (5): 1.1 Prerequisite: workspace, 1.2 Prerequisite: seed test, 1.3 Explore the app, 1.4 Write the spec file, 1. Planning
-
-### Community 151 - "2. Generate"
-Cohesion: 0.40
-Nodes (5): 2.1 Inputs, 2.2 Generate one scenario, 2.3 Generate multiple scenarios, 2.4 Run generated tests, 2. Generate
-
-### Community 153 - "1-10"
+### Community 148 - "Use Cases"
 Cohesion: 0.50
-Nodes (4): height, sha, width, 1-10
+Nodes (4): Analyzing Performance, Capturing Evidence, Debugging Failed Actions, Use Cases
+
+### Community 150 - "next.config.ts"
+Cohesion: 0.50
+Nodes (3): nextConfig, withNextIntl, next
 
 ### Community 154 - "1-1"
 Cohesion: 0.50
@@ -555,9 +533,9 @@ Nodes (4): height, sha, width, 2-10
 Cohesion: 0.50
 Nodes (4): height, sha, width, 2-1
 
-### Community 166 - "2-3"
+### Community 166 - "2-2"
 Cohesion: 0.50
-Nodes (4): height, sha, width, 2-3
+Nodes (4): height, sha, width, 2-2
 
 ### Community 167 - "2-4"
 Cohesion: 0.50
@@ -839,14 +817,6 @@ Nodes (4): 車線減少 警戒標識 , height, sha, width
 Cohesion: 0.50
 Nodes (4): 転回禁止 標示 , height, sha, width
 
-### Community 237 - "Gentsuki bank import"
-Cohesion: 0.50
-Nodes (3): Gentsuki bank import, Mapping, Run
-
-### Community 238 - "next.config.ts"
-Cohesion: 0.50
-Nodes (3): nextConfig, withNextIntl, next
-
 ### Community 263 - "verify.ts"
 Cohesion: 0.36
 Nodes (9): isObject(), JsonObject, keyTypes(), locales, output(), readLocale(), run(), validateLocales() (+1 more)
@@ -856,24 +826,24 @@ Cohesion: 0.28
 Nodes (5): next-themes, metadata, AppHeader(), LegacyDataProvider(), ThemeProvider()
 
 ## Knowledge Gaps
-- **821 isolated node(s):** `names`, `original`, `JsonObject`, `locales`, `$schema` (+816 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 900 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **850 isolated node(s):** `names`, `original`, `JsonObject`, `locales`, `$schema` (+845 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 929 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **99 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `assetMeta` connect `assetMeta` to `1-10`, `1-1`, `1-2`, `1-3`, `1-4`, `1-5`, `1-6`, `1-7`, `1-8`, `1-9`, `2-10`, `2-1`, `2-3`, `2-4`, `2-5`, `2-6`, `2-7`, `2-8`, `2-9`, `3031`, `3091`, `3131`, `3211`, `3271`, `3311`, `3381`, `3461`, `3471`, `3481`, `3-10`, `3-11`, `3-1`, `3-2`, `3-3`, `3-4`, `3-5`, `3-6`, `3-7`, `3-8`, `3-9`, `4051`, `4121`, `4161`, `4191`, `4241`, `4271`, `4401`, `4421`, `4451`, `4471`, `4481`, `5011`, `5101`, `5141`, `5191`, `5241`, `5281`, `5331`, `5401`, `5451`, `5471`, `5481`, `6051`, `6101`, `6161`, `6201`, `6251`, `6301`, `6361`, `6401`, `6451`, `6471`, `6481`, `その他の危険 標識`, `二輪の自動車以外通行止め 標識`, `合流注意 警戒標識`, `専用通行帯 原付 通行`, `左折可 標識 日本`, `登坂車線 交通標識`, `自転車専用 標識 日本`, `車両横断禁止 標識`, `車線減少 警戒標識`, `転回禁止 標示`?**
-  _High betweenness centrality (0.071) - this node is a cross-community bridge._
-- **Why does `react` connect `cohorts/[id]/page.tsx` to `package.json`, `layout.tsx`, `dropdown-menu.tsx`, `data-context.tsx`, `createClient`?**
+- **Why does `assetMeta` connect `assetMeta` to `2-3`, `1-1`, `1-2`, `1-3`, `1-4`, `1-5`, `1-6`, `1-7`, `1-8`, `1-9`, `2-10`, `2-1`, `2-2`, `2-4`, `2-5`, `2-6`, `2-7`, `2-8`, `2-9`, `3031`, `3091`, `3131`, `3211`, `3271`, `3311`, `3381`, `3461`, `3471`, `3481`, `3-10`, `3-11`, `3-1`, `3-2`, `3-3`, `3-4`, `3-5`, `3-6`, `3-7`, `3-8`, `3-9`, `4051`, `4121`, `4161`, `4191`, `4241`, `4271`, `4401`, `4421`, `4451`, `4471`, `4481`, `5011`, `5101`, `5141`, `5191`, `5241`, `5281`, `5331`, `5401`, `5451`, `5471`, `5481`, `6051`, `6101`, `6161`, `6201`, `6251`, `6301`, `6361`, `6401`, `6451`, `6471`, `6481`, `その他の危険 標識`, `二輪の自動車以外通行止め 標識`, `合流注意 警戒標識`, `専用通行帯 原付 通行`, `左折可 標識 日本`, `登坂車線 交通標識`, `自転車専用 標識 日本`, `車両横断禁止 標識`, `車線減少 警戒標識`, `転回禁止 標示`?**
+  _High betweenness centrality (0.069) - this node is a cross-community bridge._
+- **Why does `react` connect `cohorts/[id]/page.tsx` to `package.json`, `layout.tsx`, `material-sections-editor.tsx`, `dropdown-menu.tsx`, `data-context.tsx`, `staff/practice/[id]/page.tsx`?**
   _High betweenness centrality (0.030) - this node is a cross-community bridge._
 - **Why does `@supabase/supabase-js` connect `import-gentsuki-ready-web.ts` to `package.json`?**
-  _High betweenness centrality (0.013) - this node is a cross-community bridge._
+  _High betweenness centrality (0.023) - this node is a cross-community bridge._
 - **What connects `names`, `original`, `JsonObject` to the rest of the system?**
-  _821 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _850 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `cohorts/[id]/page.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.07311586051743532 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06928059218135554 - nodes in this community are weakly interconnected._
 - **Should `package.json` be split into smaller, more focused modules?**
-  _Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.1 - nodes in this community are weakly interconnected._
 - **Should `components.json` be split into smaller, more focused modules?**
   _Cohesion score 0.08695652173913043 - nodes in this community are weakly interconnected._
