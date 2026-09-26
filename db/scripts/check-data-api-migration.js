@@ -16,10 +16,33 @@ const questions = JSON.stringify([{
   question_type: "TRUE_FALSE", prompt: "漢字", prompt_plain: "漢字", translation_id: "Kanji",
   options: ["○", "×"], correct_answer_index: 0, explanation_ja: "説明", explanation_id: "Penjelasan",
 }])
-const practice = (id, published, title = "練習") => JSON.stringify({
+const groupId = "qa-group-g"
+const groupRows = (setId, published = [true, true, true], positions = [0, 1, 2], ref = `${setId}/group`, questionGroupId = `${setId}-g`) => JSON.stringify(positions.map((position, index) => ({
+  id: `${setId}-q${index + 1}`, question_type: "TRUE_FALSE", prompt: `Group ${index + 1}`,
+  prompt_plain: `Group ${index + 1}`, translation_id: "", options: ["○", "×"], correct_answer_index: 0,
+  explanation_ja: "説明", explanation_id: "", is_published: published[index], source_ref: `${ref}-${index + 1}`,
+  question_group_id: questionGroupId, group_position: position,
+})))
+const groups = (id) => JSON.stringify([{ id: `${id}-g`, position: 0, source_ref: "qa/group", source_digest: "qa-digest", question_context: "共有状況", question_context_markup: "共有状況", image_url: "", image_width: null, image_height: null }])
+const groupedPractice = (id, published = true, includeGroups = true) => JSON.stringify({
+  ...JSON.parse(practice(id, published)),
+  ...(includeGroups ? { question_groups: JSON.parse(groups(id)) } : {}),
+})
+const repairSetId = "qa-repair"
+const repairSet = JSON.stringify({
+  ...JSON.parse(practice(repairSetId, true)), source_repository: "amalrivel/gentsuki-ready-web",
+  source_ref: "qa_repair", source_commit: "f085af618ff11e594868eeed653a945d6daaa682", source_digest: "legacy-set",
+})
+const repairQuestions = JSON.stringify([0, 1, 2].map((index) => ({
+  id: `${repairSetId}-q${index + 1}`, question_type: "TRUE_FALSE", prompt: `Repair ${index + 1}`,
+  prompt_plain: `Repair ${index + 1}`, translation_id: "", options: ["○", "×"], correct_answer_index: 0,
+  explanation_ja: "説明", explanation_id: "", question_context: "Old stem\n• old focus point",
+  question_context_markup: "Old stem", image_url: "", source_ref: `qa_repair/1-${index + 1}`, source_digest: "legacy-child",
+})))
+function practice(id, published, title = "練習") { return JSON.stringify({
   id, title, title_id: "Latihan", description: "説明", description_id: "Penjelasan",
   target_level: "N5", topic: "漢字", is_published: published,
-})
+}) }
 const asUser = (id) => `reset role; select set_config('request.jwt.claim.sub', '${id}', false); set role authenticated;`
 const denied = (sql) => `begin ${sql}; raise exception 'Unauthorized operation succeeded'; exception when insufficient_privilege then null; end;`
 const materialInsert = `insert into public.learning_materials(slug,title_ja,title_id,summary_id,level,topic) values ('qa-unauthorized','QA','QA','QA','N5','QA')`
@@ -44,6 +67,9 @@ const fixtures = `
   ${asUser(sensei)}
   select public.save_practice_set('${practice("qa-published", true)}','${questions}',false);
   select public.save_practice_set('${practice("qa-draft", false)}','${questions}',false);
+  select public.save_practice_set('${groupedPractice("qa-group", true)}','${groupRows("qa-group")}',false);
+  select public.save_practice_set('${groupedPractice("qa-partial-draft", false)}','${groupRows("qa-partial-draft", [true,false,true])}',false);
+  select public.save_practice_set('${repairSet}','${repairQuestions}',false);
   do $$
   declare original_timestamp timestamptz;
   begin
@@ -72,6 +98,32 @@ const fixtures = `
       raise exception 'Empty questions accepted';
     exception when invalid_parameter_value then null;
     end;
+    begin
+      perform public.save_practice_set('${groupedPractice("qa-group", true, false)}','${groupRows("qa-group", [true,true], [0,1])}',true);
+      raise exception 'Incomplete group replacement accepted';
+    exception when invalid_parameter_value then null;
+    end;
+    begin
+      perform public.save_practice_set('${groupedPractice("qa-group", true, false)}','${groupRows("qa-group", [true,false,true])}',true);
+      raise exception 'Partly unpublished public group accepted';
+    exception when invalid_parameter_value then null;
+    end;
+    begin
+      perform public.save_practice_set('${practice("qa-cross-set", true)}','${groupRows("qa-cross-set")}',false);
+      raise exception 'Cross-set group reference accepted';
+    exception when invalid_parameter_value then null;
+    end;
+    if (select count(*) from public.practice_questions where practice_set_id='qa-group' and question_group_id='${groupId}' and group_position in (0,1,2)) <> 3 then
+      raise exception 'Rejected group replacement changed existing children';
+    end if;
+    begin
+      insert into public.practice_question_groups(id,practice_set_id,position,source_ref,source_digest,question_context,question_context_markup,image_url)
+      values ('qa-invalid-group','qa-group',1,'qa/invalid','qa','bad','bad','');
+      set constraints practice_question_group_integrity immediate;
+      raise exception 'Invalid direct group insert passed DB integrity validation';
+    exception when check_violation then null;
+    end;
+    set constraints all deferred;
     if (select count(*) from public.practice_questions where practice_set_id='qa-published') <> 1 then
       raise exception 'Invalid payload removed questions';
     end if;
@@ -81,24 +133,47 @@ const fixtures = `
     ${denied(`update public.staff_members set role='SENSEI' where user_id='${sensei}'`)}
   end;
   $$;
+  select public.repair_gentsuki_illustration_groups('${repairSetId}',
+    (select jsonb_agg(jsonb_build_object('id',id,'position',position,'question_type',question_type,'prompt',prompt,'prompt_plain',prompt_plain,'translation_id',translation_id,'options',options,'correct_answer_index',correct_answer_index,'explanation_ja',explanation_ja,'explanation_id',explanation_id,'is_published',is_published,'explanation_markup',explanation_markup,'question_context',question_context,'question_context_markup',question_context_markup,'image_url',image_url,'image_width',image_width,'image_height',image_height,'source_ref',source_ref,'source_digest',source_digest) order by position)
+      from public.practice_questions where practice_set_id='${repairSetId}'),
+    '[{"id":"${repairSetId}-g","position":0,"source_ref":"qa_repair/1","source_digest":"group-digest","question_context":"Shared situation","question_context_markup":"Shared situation","image_url":"/gentsuki-quiz-assets/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.jpg","image_width":10,"image_height":20}]'::jsonb,
+    '[{"id":"${repairSetId}-q1","question_group_id":"${repairSetId}-g","group_position":0,"source_digest":"new-child-1"},{"id":"${repairSetId}-q2","question_group_id":"${repairSetId}-g","group_position":1,"source_digest":"new-child-2"},{"id":"${repairSetId}-q3","question_group_id":"${repairSetId}-g","group_position":2,"source_digest":"new-child-3"}]'::jsonb,
+    'new-set-digest');
+  do $$ begin
+    if (select count(*) from public.practice_question_groups where practice_set_id='${repairSetId}') <> 1 or
+       (select count(*) from public.practice_questions where practice_set_id='${repairSetId}' and question_group_id='${repairSetId}-g' and group_position in (0,1,2) and question_context='' and image_url='') <> 3 then
+      raise exception 'Sensei illustration repair failed to create the shared group';
+    end if;
+    if exists(select 1 from public.practice_questions where practice_set_id='${repairSetId}' and question_context like '%old focus point%') then
+      raise exception 'Repair left legacy focus metadata in a child prompt context';
+    end if;
+  end $$;
 `
 const publicChecks = (ownMembership) => `
   do $$ begin
     if not row_security_active('public.learning_materials') then raise exception 'RLS is not active for this role'; end if;
     if exists(select 1 from public.learning_materials where slug='qa-draft') or
        exists(select 1 from public.practice_sets where id='qa-draft') or
-       exists(select 1 from public.practice_questions where practice_set_id='qa-draft') then
+       exists(select 1 from public.practice_questions where practice_set_id='qa-draft') or
+       exists(select 1 from public.practice_question_groups where id='${groupId}' and practice_set_id='qa-partial-draft') or
+       exists(select 1 from public.practice_questions where practice_set_id='qa-partial-draft') then
       raise exception 'Draft or child row leaked';
     end if;
     if (select count(*) from public.learning_materials where slug='qa-published') <> 1 or
        (select count(*) from public.practice_questions where practice_set_id='qa-published') <> 1 then
       raise exception 'Published content inaccessible';
     end if;
+    if (select count(*) from public.practice_question_groups where id='${groupId}') <> 1 or
+       (select count(*) from public.practice_questions where practice_set_id='qa-group' and question_group_id='${groupId}') <> 3 then
+      raise exception 'Complete published group is inaccessible or incomplete';
+    end if;
     ${ownMembership === null ? "" : `if (select count(*) from public.staff_members) <> ${ownMembership} then raise exception 'Membership visibility incorrect'; end if;`}
     ${denied(materialInsert)}
     ${denied(`insert into public.staff_members(user_id,role,display_name) values ('${nonstaff}','SENSEI','Escalation')`)}
     ${denied(`update public.staff_members set is_active=true,role='SENSEI' where user_id='${inactive}'`)}
     ${denied(`perform public.save_practice_set('${practice("qa-denied", false)}','${questions}',false)`)}
+    ${denied(`insert into public.practice_question_groups(id,practice_set_id,position,source_ref,source_digest,question_context,question_context_markup,image_url) values ('qa-denied-group','qa-group',9,'qa/denied','qa','no','no','')`)}
+    ${denied(`perform public.repair_gentsuki_illustration_groups('qa-group','[]','[]','[]','qa')`)}
   end; $$;
 `
 const checks = `
