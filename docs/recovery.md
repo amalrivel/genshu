@@ -4,6 +4,8 @@
 
 No completed backup/restore rehearsal is recorded in the repository. Treat
 recovery as an outstanding operational gate, not a verified capability.
+The owner has deferred the isolated rehearsal to a later operational phase;
+this is not a completed recovery check.
 Earlier notes reported a Free Supabase plan; inspect the current project's
 backup facilities before choosing a method. Supabase recommends regular CLI
 exports and off-site copies for Free projects; see the official
@@ -63,3 +65,17 @@ schema before promoting a previous Vercel deployment. Verify routes and logs
 after rollback. Database/group repair and content rollback need a separate,
 reviewed recovery action; preserve Sensei edits and take an export first.
 Do not drop group tables, reset data, or run the sample seed to roll back a UI.
+
+## Environment inventory — 2026-09-27 JST
+
+The inspected source project is `invekuqrmwvrfxkcqfcp` (`ap-southeast-1`).
+The available branch listing contains only `main` on that same project and no
+isolated target. Local `supabase` CLI and Docker are absent, and
+`POSTGRES_URL` is not configured. No export, restore, reset, or seed was run.
+
+To perform the rehearsal, the owner must provide an isolated Supabase project
+or local Supabase stack, access appropriate for read-only source export and
+target restore, and the required CLI/container tooling. Confirm source and
+target project identities and capabilities without recording credentials.
+Until those resources exist, the rehearsal remains incomplete; production is
+not an acceptable substitute.

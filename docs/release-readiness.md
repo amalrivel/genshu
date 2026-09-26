@@ -41,11 +41,12 @@ answer keys, explanations, ruby, and image references are preserved.
 
 ## Outstanding acceptance criteria
 
-- Deploy and test a non-production preview using an action that explicitly
-  enforces preview-only scope. Do not retry through a different path to evade
-  the approval review.
-- Complete the isolated backup/restore rehearsal described in `recovery.md`
-  when a separate Supabase target or local Supabase stack is available.
+- **Deferred by owner:** deploy and test a non-production preview using an
+  action that explicitly enforces preview-only scope. Do not retry through a
+  different path to evade the approval review.
+- **Deferred by owner:** complete the isolated backup/restore rehearsal
+  described in `recovery.md` when a separate Supabase target or local Supabase
+  stack is available.
 - Configure `POSTGRES_URL` and valid active Sensei importer credentials if the
   standalone SQL verifier and importer `--verify-live` command are required in
   addition to the successful direct source-to-live Data API/RLS checks.
@@ -61,6 +62,22 @@ and digest `2431554270`. Recovery deployment
 `dpl_7Vraq7P3RP8gxZifswCkvubJoyNF` was built from `4216e53` after fixing
 Production Supabase variable configuration. It is READY at that commit, but
 historical checks do not assert current beta readiness.
+
+## Operational status — 2026-09-27 JST
+
+| Gate | Evidence and status |
+| --- | --- |
+| Local implementation and Data API | Verified at local HEAD `dc1e6b2f7e4cc8e5f7c835c95d3f4f327bb4633c`; the 2026-09-26 checks above remain the latest implementation evidence. Worktree contains only the pre-existing untracked `.agents/rules/` directory. |
+| GitHub availability | GitHub read-only branch/commit/PR checks and remote ref lookup show `codex/gentsuki-bank-import-20260926` still at `317a63f1d60aa5cade2635c4bcbf3f2ccc49d702`; local branch is six commits ahead. The six local commits are `24670b1`, `3f4f017`, `a264264`, `7e9e3b9`, `02e57a2`, and `dc1e6b2`. No PR was found for that head, and GitHub returned 422 when asked for local commit `dc1e6b2f7e4cc8e5f7c835c95d3f4f327bb4633c`. The remote tip `317a63f1d60aa5cade2635c4bcbf3f2ccc49d702` was fetched read-only from GitHub. A terminal `git ls-remote` retry on 2026-09-27 could not resolve `github.com`; no remote state was inferred from that failed retry. No push was performed. |
+| Vercel preview | **Deferred by owner; not completed.** Read-only deployment inventory contains the prior READY branch deployment `dpl_89t64zrZLKkFgTGKaPwGgqaKmKXK` (`https://genshu-2l1eqdpp1-amalrivels-projects.vercel.app`) at old commit `317a63f`; it does not contain the correction. No newer deployment was listed. The deployment detail reports `target: null` and the correction-free branch commit; it does not expose an explicit environment label. Its existing success check is for that old commit only. Browser/runtime checks were not run against it. The earlier automatic approval rejection was not bypassed; no deployment path was retried. |
+| Recovery rehearsal | **Deferred by owner; not completed.** Current Supabase source is `invekuqrmwvrfxkcqfcp` in `ap-southeast-1`. The project is `ACTIVE_HEALTHY`. Read-only branch inventory shows only default `main`, `project_ref` and `parent_project_ref` both equal to the source project, and `with_data: false`; there is no isolated target. The available Supabase tools do not provide a database export/dump operation. `supabase`, Docker, and `POSTGRES_URL` are unavailable locally. No export or restore was attempted. |
+
+Operational status is separate: local implementation/Data API is verified;
+the owner deferred Preview verification and the isolated recovery rehearsal to
+a later operational phase. Do not interpret the old deployment's READY state
+as verification of this work. Local correction commits are not in the observed
+GitHub branch, and there is no evidence that they are present in production;
+production readiness is not claimed.
 
 ## Evidence updates
 
