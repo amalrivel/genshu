@@ -3,9 +3,10 @@
 ## Evidence snapshot — 2026-09-26 JST
 
 Implementation began from HEAD `317a63f1d60aa5cade2635c4bcbf3f2ccc49d702`.
-The corrections and implementation below are in the current worktree and have
-not yet been committed. Source behavior was checked at the pinned repository
-commit `f085af618ff11e594868eeed653a945d6daaa682`.
+The work is recorded in commits `24670b1` (import/data/schema), `3f4f017`
+(player/editor), `a264264` (project/release documentation), and `7e9e3b9`
+(Graphify output). Source behavior was checked at pinned repository commit
+`f085af618ff11e594868eeed653a945d6daaa682`.
 
 | Check | Result | Scope |
 | --- | --- | --- |
@@ -19,7 +20,7 @@ commit `f085af618ff11e594868eeed653a945d6daaa682`.
 | Book 3 interactive player/review | Passed | Independent answers, answer edit, back-navigation state, source scoring, per-child explanations, keyboard, furigana toggle; 390px and 1365px viewports had no horizontal overflow |
 | `bun run typecheck`, `bun run lint`, score self-check | Passed | Current local worktree |
 | `bun run verify --webpack` | Passed | Full verifier, locale validation, Graphify update, and Next production build |
-| `bun run verify` | Interrupted | Reached Turbopack production build but stopped after it made no further progress; the explicit `--webpack` full verifier passed |
+| `bun run verify` | Interrupted | Reached Turbopack production build but made no further progress; it was stopped after waiting. The explicit `--webpack` full verifier passed |
 | `bun run db:verify`, `bun run db:verify-permissions` | Blocked | `POSTGRES_URL` is not configured; live Data API and migration harness were run instead |
 | Import `--verify-live` | Blocked | Local Sensei credentials were rejected by Supabase Auth; group role/RPC checks ran independently |
 | Vercel | Read-only status checked | Preview `dpl_89t64zrZLKkFgTGKaPwGgqaKmKXK` is READY at commit `317a63f`; production `dpl_7Vraq7P3RP8gxZifswCkvubJoyNF` is READY at `4216e530406f50a2df3bae5694de3f0d5c77c8a1` |
@@ -39,7 +40,6 @@ answer keys, explanations, ruby, and image references are preserved.
 
 ## Outstanding acceptance criteria
 
-- Commit the reviewed source/import, schema/player, and documentation changes.
 - Deploy and test a non-production preview using an action that explicitly
   enforces preview-only scope. Do not retry through a different path to evade
   the approval review.
