@@ -1,16 +1,16 @@
 # Graph Report - genshu  (2026-09-26)
 
 ## Corpus Check
-- 236 files · ~112,866 words
+- 237 files · ~113,040 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 926 nodes · 1480 edges · 153 communities (53 shown, 99 thin omitted)
+- 929 nodes · 1484 edges · 152 communities (52 shown, 99 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 27 edges (avg confidence: 0.81)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `3125d001`
+- Built from commit: `39a83c61`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -163,16 +163,15 @@
 - check-data-api.js
 - Attaching to a Running Browser
 - Best Practices
-- next.config.ts
 - The Fixes
 - verify.ts
-- layout.tsx
+- app-header.tsx
 
 ## God Nodes (most connected - your core abstractions)
 1. `react` - 36 edges
 2. `Genshu — Project Source of Truth` - 29 edges
 3. `lucide-react` - 26 edges
-4. `createClient()` - 23 edges
+4. `createClient()` - 24 edges
 5. `next-intl` - 22 edges
 6. `Button()` - 21 edges
 7. `useData()` - 21 edges
@@ -201,11 +200,11 @@
 - **Derived Dependency Minimization** — agents_skills_vercel_react_best_practices_rules_rerender_dependencies_narrow_effect_dependencies, agents_skills_vercel_react_best_practices_rules_rerender_derived_state_no_effect_calculate_derived_state, agents_skills_vercel_react_best_practices_rules_rerender_derived_state_subscribe_to_derived_state, agents_skills_vercel_react_best_practices_rules_rerender_split_combined_hooks_split_hook_computations [INFERRED 0.85]
 - **React Concurrent Rendering Responsiveness** — agents_skills_vercel_react_best_practices_rules_rendering_usetransition_loading_use_transition_loading, agents_skills_vercel_react_best_practices_rules_rerender_transitions_transitions_for_non_urgent_updates, agents_skills_vercel_react_best_practices_rules_rerender_use_deferred_value_use_deferred_value [INFERRED 0.85]
 
-## Communities (153 total, 99 thin omitted)
+## Communities (152 total, 99 thin omitted)
 
 ### Community 0 - "cohorts/[id]/page.tsx"
-Cohesion: 0.07
-Nodes (82): lucide-react, next-intl, react, AssignmentDetailPage(), AssignmentsPage(), SessionRollCallPage(), STATUS_OPTIONS, AttendancePage() (+74 more)
+Cohesion: 0.08
+Nodes (75): lucide-react, next-intl, react, AssignmentDetailPage(), AssignmentsPage(), SessionRollCallPage(), STATUS_OPTIONS, AttendancePage() (+67 more)
 
 ### Community 1 - "package.json"
 Cohesion: 0.10
@@ -220,8 +219,8 @@ Cohesion: 0.11
 Nodes (18): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+10 more)
 
 ### Community 5 - "data-context.tsx"
-Cohesion: 0.11
-Nodes (33): DataContext, DataContextType, DataProvider(), getRoleServerSnapshot(), getRoleSnapshot(), notifyRoleListeners(), roleListeners, subscribeRole() (+25 more)
+Cohesion: 0.10
+Nodes (37): CohortMembers, CohortRosterPanelsProps, StudentProfileDrawerProps, DataContext, DataContextType, DataProvider(), getRoleServerSnapshot(), getRoleSnapshot() (+29 more)
 
 ### Community 6 - "dependencies"
 Cohesion: 0.14
@@ -229,7 +228,7 @@ Nodes (14): dependencies, @base-ui/react, class-variance-authority, cn, lucide-r
 
 ### Community 7 - "createClient"
 Cohesion: 0.06
-Nodes (52): signIn(), signOut(), dynamic, LoginPage(), MaterialsPage(), dynamic, MaterialPage(), dynamic (+44 more)
+Nodes (54): names, original, signIn(), signOut(), dynamic, LoginPage(), MaterialsPage(), dynamic (+46 more)
 
 ### Community 8 - "Narrow Effect Dependencies"
 Cohesion: 0.33
@@ -399,10 +398,6 @@ Nodes (5): Attach by channel name, Attach via browser extension, Attach via CDP 
 Cohesion: 0.50
 Nodes (4): 1. Name Browser Sessions Semantically, 2. Always Clean Up, 3. Delete Stale Browser Data, Best Practices
 
-### Community 148 - "next.config.ts"
-Cohesion: 0.50
-Nodes (3): nextConfig, withNextIntl, next
-
 ### Community 155 - "The Fixes"
 Cohesion: 0.09
 Nodes (21): 10. Status bar color doesn't match, 11. Right in Chrome, wrong on phone, 1. Hover state stuck after tap, 2. Gray/blue flash on tap, 3. Layout has the wrong height, 4. Page zooms into the input, 5. Tap feels laggy, 6. Pull-to-refresh hijacks scroll (+13 more)
@@ -411,28 +406,28 @@ Nodes (21): 10. Status bar color doesn't match, 11. Right in Chrome, wrong on ph
 Cohesion: 0.36
 Nodes (9): isObject(), JsonObject, keyTypes(), locales, output(), readLocale(), run(), validateLocales() (+1 more)
 
-### Community 385 - "layout.tsx"
-Cohesion: 0.28
-Nodes (5): next-themes, metadata, AppHeader(), LegacyDataProvider(), ThemeProvider()
+### Community 385 - "app-header.tsx"
+Cohesion: 0.14
+Nodes (11): nextConfig, withNextIntl, next, next-themes, metadata, LanguageToggle(), AppHeader(), links (+3 more)
 
 ## Knowledge Gaps
-- **533 isolated node(s):** `JsonObject`, `locales`, `$schema`, `style`, `rsc` (+528 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 610 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **535 isolated node(s):** `names`, `original`, `JsonObject`, `locales`, `$schema` (+530 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 612 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **99 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `react` connect `cohorts/[id]/page.tsx` to `package.json`, `layout.tsx`, `dropdown-menu.tsx`, `data-context.tsx`, `createClient`?**
+- **Why does `react` connect `cohorts/[id]/page.tsx` to `package.json`, `app-header.tsx`, `dropdown-menu.tsx`, `data-context.tsx`, `createClient`?**
   _High betweenness centrality (0.043) - this node is a cross-community bridge._
-- **Why does `lucide-react` connect `cohorts/[id]/page.tsx` to `package.json`, `dropdown-menu.tsx`, `createClient`?**
+- **Why does `lucide-react` connect `cohorts/[id]/page.tsx` to `package.json`, `app-header.tsx`, `dropdown-menu.tsx`, `createClient`?**
   _High betweenness centrality (0.018) - this node is a cross-community bridge._
-- **Why does `next-intl` connect `cohorts/[id]/page.tsx` to `package.json`, `layout.tsx`, `createClient`?**
+- **Why does `@supabase/ssr` connect `database.types.ts` to `package.json`, `createClient`?**
   _High betweenness centrality (0.013) - this node is a cross-community bridge._
-- **What connects `JsonObject`, `locales`, `$schema` to the rest of the system?**
-  _533 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `names`, `original`, `JsonObject` to the rest of the system?**
+  _535 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `cohorts/[id]/page.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.07221948818897637 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07933342828656886 - nodes in this community are weakly interconnected._
 - **Should `package.json` be split into smaller, more focused modules?**
   _Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected._
 - **Should `components.json` be split into smaller, more focused modules?**

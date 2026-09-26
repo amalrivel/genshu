@@ -179,10 +179,24 @@ before relying on real content.
 ### Current deployment status
 
 The existing `genshu` Vercel project has a READY production deployment from
-`main` at `genshu.vercel.app`, running commit `3125d00`. Its `/materials` route
-returns HTTP 500; runtime errors show that `NEXT_PUBLIC_SUPABASE_URL` and
-`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` are missing. The live migration ledger
+`main` at `genshu.vercel.app`, running commit `39a83c6` in deployment
+`dpl_EerZiC3j8cFWWgP5uGNYrVZZFLAd`. The 2026-09-26 18:05 JST incident and
+a cookie-free reproduction return HTTP 500. Runtime logs contain Supabase's
+"Your project's URL and Key are required" exception, digest `2431554270`,
+in the server client creation path. At least one required Supabase value is
+absent/empty in that deployment; the specific Production scope and values
+still need inspection through an authenticated Vercel CLI. The live migration ledger
 now includes migration 005, whose Data API grants and policies pass the live
 permission verifier. Original content and staff row hashes are unchanged.
 Configure the required Production values and retest the deployed flows.
 Builds must not run migrations or seed data.
+
+Incident recovery: open the existing project's
+[Environment Variables settings](https://vercel.com/amalrivels-projects/genshu/settings/environment-variables),
+set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` from
+the existing Supabase project with **Production** selected, then create a new
+Production deployment from `main`. Changing variables does not update an
+existing deployment. The runtime needs no `POSTGRES_URL`. Check the four
+published catalog/detail routes anonymously and inspect new runtime logs.
+Run `bun .ai/scripts/check-supabase-config.ts` to check that missing-variable
+errors identify names without exposing their values.

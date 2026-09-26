@@ -7,12 +7,18 @@ import type { Database } from '@/lib/database.types'
  * function when using it.
  */
 export async function createClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+  if (!url || !key) {
+    const missing = [!url && 'NEXT_PUBLIC_SUPABASE_URL', !key && 'NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY'].filter(Boolean)
+    throw new Error(`Missing Supabase configuration: ${missing.join(', ')}. Configure the deployment environment and rebuild.`)
+  }
   const cookieStore = await cookies()
 
   return createServerClient<Database>(
     // Each call uses the current request's cookies; never reuse a server client.
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+    url,
+    key,
     {
       cookies: {
         getAll() {

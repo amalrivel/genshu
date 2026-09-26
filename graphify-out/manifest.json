@@ -630,9 +630,9 @@
     "semantic_hash": "5c27369b226fcf2be8a6cfe52224e767"
   },
   "README.md": {
-    "mtime": 1790409900.9227517,
-    "seen": 1790409960.5305314,
-    "ast_hash": "5843886bc82d1936b471d8a625dc1943",
+    "mtime": 1790414451.9195364,
+    "seen": 1790414468.057384,
+    "ast_hash": "2d3b2ba1abb20ae684c8d9834c8e593c",
     "semantic_hash": ""
   },
   ".agents/skills/shadcn/assets/shadcn-small.png": {
@@ -1068,9 +1068,9 @@
     "semantic_hash": ""
   },
   "src/lib/supabase/server.ts": {
-    "mtime": 1790404413.9081762,
-    "seen": 1790404953.0881212,
-    "ast_hash": "6e9c060160eeb30355033efff79e96e8",
+    "mtime": 1790414053.2136896,
+    "seen": 1790414106.9913397,
+    "ast_hash": "0c7b87561b0b336dffd74d06d36ae838",
     "semantic_hash": ""
   },
   "src/proxy.ts": {
@@ -1413,6 +1413,12 @@
     "mtime": 1790408287.787189,
     "seen": 1790408356.6647148,
     "ast_hash": "45795ccf0f01fe96f106b4d95e62ed22",
+    "semantic_hash": ""
+  },
+  ".ai/scripts/check-supabase-config.ts": {
+    "mtime": 1790414053.3016894,
+    "seen": 1790414106.9890459,
+    "ast_hash": "26ee5881c4194dcd0d9bdc4b79b750cf",
     "semantic_hash": ""
   }
 }
