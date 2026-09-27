@@ -46,10 +46,11 @@ for migration and database-check scripts using `psql`. Staff login and
 server-side `staff_members` authorization remain unchanged. Migration 005
 defines public reads of published content, Sensei reads of drafts, and
 Sensei-only authoring. Tantōsha cannot author. Practice-set and question
-replacement is atomic through a restricted database RPC. Review evidence and outstanding group-validation work are tracked in
-`docs/release-readiness.md`. Earlier five-role tests for materials and practice
-questions do not establish permission coverage for newly added group tables
-or RPCs. Verify the exact changed interfaces before claiming completion.
+replacement is atomic through a restricted database RPC. Group tables and RPCs now have permission checks and reported five-role Data
+API coverage. Imported-bank authoring and catalog regressions are covered by
+action, RPC, and catalog tests; release evidence is in
+`docs/release-readiness.md`. Repeat those checks against the target after
+applying the forward migration.
 
 User-facing learning data used officially must persist on the server.
 Anonymous practice in the first release has no official student attempt
@@ -117,9 +118,9 @@ project truth. Do not duplicate active instructions across these files.
 4. Run `bun run db:verify` to validate local sample publication state, or
    `bun run db:verify-permissions` to check RLS and public-role grants without
    requiring or changing sample content. The permissions check is read-only and
-   can also be run against the configured Supabase project. Its current coverage
-   omits illustration groups; consult `docs/release-readiness.md` before using
-   a passing result as a release gate for that feature.
+   can also be run against the configured Supabase project. Its coverage includes
+   illustration groups and RPC grants. This inspection does not establish that
+   the editor can save imported banks; consult `docs/release-readiness.md`.
 5. Start the app with `bun run dev`; `/` opens the published materials catalog.
 
 The app uses the Data API with the caller's cookie session and RLS. Never put a

@@ -97,7 +97,7 @@ for public variables embedded at build time. Do not upload QA passwords or
 administration `POSTGRES_URL` to Vercel. Builds must not run migrations or seeds.
 
 Apply required migrations separately after checking the target ledger. The
-current worktree includes migrations 001–011; presence here is not proof of
+current worktree includes migrations 001–013; presence here is not proof of
 application to a target or inclusion in a deployment.
 
 Set Supabase Auth Site URL to the final production HTTPS URL and configure

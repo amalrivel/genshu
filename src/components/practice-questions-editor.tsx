@@ -26,8 +26,6 @@ export function PracticeQuestionsEditor({ initial, groups = [], maxQuestions = 3
     {questions.map((question, index) => <fieldset key={question.key} data-question-group={question.groupId ?? undefined} className="space-y-4 rounded-lg border p-5"><legend className="px-2 font-semibold">{t("question", { number: index + 1 })}</legend>
       {question.groupId && question.groupPosition === 0 && groupsById.get(question.groupId) && <div className="space-y-2 rounded-md bg-muted/40 p-3 text-sm" data-shared-question-group={question.groupId}><p className="font-medium">{groupsById.get(question.groupId)!.context}</p>{groupsById.get(question.groupId)!.imageUrl && groupsById.get(question.groupId)!.imageWidth && groupsById.get(question.groupId)!.imageHeight && <Image src={groupsById.get(question.groupId)!.imageUrl} width={groupsById.get(question.groupId)!.imageWidth!} height={groupsById.get(question.groupId)!.imageHeight!} alt="" className="h-auto max-w-full rounded-md" />}</div>}
       <input type="hidden" name={"id" + index} value={question.id} />
-      <input type="hidden" name={"promptPlain" + index} value={question.promptPlain} />
-      <input type="hidden" name={"explanationMarkup" + index} value={question.explanationMarkup} />
       <input type="hidden" name={"context" + index} value={question.context} />
       <input type="hidden" name={"contextMarkup" + index} value={question.contextMarkup} />
       <input type="hidden" name={"imageUrl" + index} value={question.imageUrl} />

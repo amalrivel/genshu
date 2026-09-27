@@ -630,9 +630,9 @@
     "semantic_hash": "5c27369b226fcf2be8a6cfe52224e767"
   },
   "README.md": {
-    "mtime": 1790428655.4697285,
-    "seen": 1790431170.4698553,
-    "ast_hash": "0ede03412bb22cdcea320619a3d98e88",
+    "mtime": 1790467951.162545,
+    "seen": 1790467990.8011124,
+    "ast_hash": "d50f8bf2b995556e758b7c7549c9c677",
     "semantic_hash": ""
   },
   ".agents/skills/shadcn/assets/shadcn-small.png": {
@@ -888,15 +888,15 @@
     "semantic_hash": ""
   },
   ".ai/PROJECT.md": {
-    "mtime": 1790428718.5686715,
-    "seen": 1790431170.469825,
-    "ast_hash": "8d3efe1ca5e3988c4ad86d4cb003b3e1",
+    "mtime": 1790467951.1148078,
+    "seen": 1790467990.8010547,
+    "ast_hash": "952c0c2d10d73ca92828552be77c6303",
     "semantic_hash": ""
   },
   ".ai/README.md": {
-    "mtime": 1790428674.9443135,
-    "seen": 1790431170.4698267,
-    "ast_hash": "633198fbe48d41accd94846b22866879",
+    "mtime": 1790467951.2139542,
+    "seen": 1790467990.8010566,
+    "ast_hash": "92ced7d7b98ff788c23e03cf5ba77398",
     "semantic_hash": ""
   },
   "src/components/cohorts/cohort-roster-panels.tsx": {
@@ -978,9 +978,9 @@
     "semantic_hash": ""
   },
   "src/lib/content-repository.ts": {
-    "mtime": 1790430629.4896014,
-    "seen": 1790431170.4645514,
-    "ast_hash": "a2b2d389e077203a162a658ddf41f91f",
+    "mtime": 1790467449.9960623,
+    "seen": 1790467990.793545,
+    "ast_hash": "fae4db1d6294680b277748f2fb4dff1f",
     "semantic_hash": ""
   },
   "src/lib/content-types.ts": {
@@ -1032,9 +1032,9 @@
     "semantic_hash": ""
   },
   "src/app/staff/practice/actions.ts": {
-    "mtime": 1790430729.1510663,
-    "seen": 1790431170.4634724,
-    "ast_hash": "f2fed773b576f0e01101f45657592a04",
+    "mtime": 1790467450.0356622,
+    "seen": 1790467990.7923024,
+    "ast_hash": "2aad9deb103bb91c5f70073e4d590fc0",
     "semantic_hash": ""
   },
   "src/app/staff/practice/page.tsx": {
@@ -1050,9 +1050,9 @@
     "semantic_hash": ""
   },
   "src/components/practice-questions-editor.tsx": {
-    "mtime": 1790429748.3953915,
-    "seen": 1790431170.4639852,
-    "ast_hash": "4414d3287608108feb83451e12a4605a",
+    "mtime": 1790467450.0900607,
+    "seen": 1790467990.7928402,
+    "ast_hash": "d02ba943be3e7c279180d41570e02652",
     "semantic_hash": ""
   },
   "src/lib/staff.ts": {
@@ -1404,9 +1404,9 @@
     "semantic_hash": ""
   },
   "db/scripts/check-data-api-migration.js": {
-    "mtime": 1790430290.0546372,
-    "seen": 1790431170.4624612,
-    "ast_hash": "58abb8a4ba23b67e1f6539e2c39db4eb",
+    "mtime": 1790468388.4818616,
+    "seen": 1790468441.1844509,
+    "ast_hash": "de0eec00be5ff35883ee5b9430da1834",
     "semantic_hash": ""
   },
   "db/scripts/check-data-api.js": {
@@ -1518,9 +1518,9 @@
     "semantic_hash": ""
   },
   "docs/gentsuki-bank-import.md": {
-    "mtime": 1790428655.5044496,
-    "seen": 1790431170.4698575,
-    "ast_hash": "dc5cddaac4445c655af9598cfa975a85",
+    "mtime": 1790468334.9268973,
+    "seen": 1790468441.201842,
+    "ast_hash": "3d92f0221f45fdd0fbc589fc14fe4a7c",
     "semantic_hash": ""
   },
   "public/gentsuki-quiz-assets/02788e0b7a8e60e50c5f16d1edfa42b6f96377e7.jpg": {
@@ -2034,33 +2034,39 @@
     "semantic_hash": ""
   },
   "src/lib/practice-units.check.ts": {
-    "mtime": 1790430624.8048344,
-    "seen": 1790431170.4646745,
-    "ast_hash": "88f0d908d5b4844864cc1b4f3927fa7e",
+    "mtime": 1790467529.020222,
+    "seen": 1790467990.7937183,
+    "ast_hash": "aa39b6320cd3db652f999cafb3876afc",
     "semantic_hash": ""
   },
   "src/lib/practice-units.ts": {
-    "mtime": 1790430617.7179508,
-    "seen": 1790431170.4646773,
-    "ast_hash": "972e514703c1100bbc7e458eddcc0dd8",
+    "mtime": 1790467658.6401036,
+    "seen": 1790467990.7937195,
+    "ast_hash": "03c96344450d6277c396d776610b9ee2",
     "semantic_hash": ""
   },
   "docs/recovery.md": {
-    "mtime": 1790428655.4709828,
-    "seen": 1790431170.46986,
-    "ast_hash": "e5b4a1ccf776a0acfe7c4c0a10fd2531",
+    "mtime": 1790466470.788926,
+    "seen": 1790467990.8011181,
+    "ast_hash": "fc2e6d9f01efaf18e15d2cf7fd614259",
     "semantic_hash": ""
   },
   "docs/release-readiness.md": {
-    "mtime": 1790428655.4720564,
-    "seen": 1790431170.4698677,
-    "ast_hash": "5e887e918ab6842386c905d6b11148a2",
+    "mtime": 1790468388.5602107,
+    "seen": 1790468441.2019026,
+    "ast_hash": "88e3d05378b803fb220d794dcba3b28f",
     "semantic_hash": ""
   },
   "docs/worker-next-goal.md": {
-    "mtime": 1790428655.4731941,
-    "seen": 1790431170.469869,
-    "ast_hash": "a974681547301f9f40f253f04d4919cd",
+    "mtime": 1790466470.7899454,
+    "seen": 1790467990.8011215,
+    "ast_hash": "f01abb404165b364057be9677be73dc8",
+    "semantic_hash": ""
+  },
+  "db/scripts/practice-actions.test.js": {
+    "mtime": 1790467786.8882763,
+    "seen": 1790467990.7908895,
+    "ast_hash": "ca992da97a052ae81bbc1260a46e5c8a",
     "semantic_hash": ""
   }
 }

@@ -515,7 +515,7 @@ cookie-aware `@supabase/ssr` server client per request; the browser client is
 available for client-side needs. PostgreSQL connections are limited to the
 repository's administration scripts for applying versioned SQL migrations and
 running database checks. `POSTGRES_URL` is not a Vercel runtime requirement.
-Migration 005 introduced Data API grants and RLS. Migrations 006–011 in the
+Migration 005 introduced Data API grants and RLS. Migrations 006–013 in the
 current worktree add import provenance, illustration groups, and repair/policy
 changes. File presence does not prove a migration has been applied: inspect
 `genshu_schema_migrations` on the intended target before running the migrator.

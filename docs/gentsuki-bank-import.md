@@ -32,7 +32,7 @@ Draft refs and differing source fields: `book_2/8` (`explanation_plain`); `book_
 
 ## Run
 
-Apply migration 006 and migrations 007–012 in order through the normal migration process. Migration 006 adds per-question publication, source provenance, image metadata, source categories, and the non-JLPT level. Migrations 007–011 add group records and child links, repair support, and group RLS. Migration 012 enforces complete ordered groups and public eligibility. Runtime remains on the Supabase Data API; anonymous writes are not allowed.
+Apply migration 006 and migrations 007–013 in order through the normal migration process. Migration 006 adds per-question publication, source provenance, image metadata, source categories, and the non-JLPT level. Migrations 007–011 add group records and child links, repair support, and group RLS. Migration 012 enforces complete ordered groups and public eligibility. Migration 013 makes update limits depend on stored provenance, preserves imported provenance during atomic replacement, and reserves 60-question creation for the pinned Gentsuki bank identities. Runtime remains on the Supabase Data API; anonymous writes are not allowed.
 
 With the Genshu Supabase URL and publishable key plus `SENSEI_EMAIL` and `SENSEI_PASSWORD` set in a local, untracked environment file:
 

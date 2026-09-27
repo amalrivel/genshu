@@ -1,6 +1,6 @@
 import "server-only"
 import { createClient } from "@/lib/supabase/server"
-import { buildPracticeUnits, hasCompletePublishedGroup } from "@/lib/practice-units"
+import { buildPracticeUnits, countPublishedPracticeQuestions } from "@/lib/practice-units"
 import type { PublishedMaterial, PublishedPracticeSet, PublishedPracticeSummary } from "@/lib/content-types"
 
 function checkError(context: string, error: { message: string } | null) {
@@ -77,25 +77,10 @@ export async function listPublishedPracticeSets(): Promise<PublishedPracticeSumm
     .select("id,practice_set_id")
     .in("practice_set_id", data.map(({ id }) => id))
   checkError("practice group counts", groupError)
-  const groupIds = new Set((groups ?? []).map(({ id }) => id))
-  const childrenByGroup = new Map<string, typeof questions>()
-  for (const question of questions ?? []) {
-    if (!question.question_group_id) continue
-    const children = childrenByGroup.get(question.question_group_id)
-    if (children) children.push(question)
-    else childrenByGroup.set(question.question_group_id, [question])
-  }
-  const counts = new Map<string, number>()
-  for (const question of questions ?? []) {
-    if (!question.question_group_id) counts.set(question.practice_set_id, (counts.get(question.practice_set_id) ?? 0) + 1)
-  }
-  for (const [groupId, children] of childrenByGroup) {
-    if (!groupIds.has(groupId) || !children || !hasCompletePublishedGroup(children.map((child) => ({
-      groupPosition: child.group_position, isPublished: child.is_published,
-    })))) continue
-    const setId = children[0].practice_set_id
-    counts.set(setId, (counts.get(setId) ?? 0) + children.length)
-  }
+  const counts = countPublishedPracticeQuestions((questions ?? []).map((question) => ({
+    practiceSetId: question.practice_set_id, groupId: question.question_group_id,
+    groupPosition: question.group_position, isPublished: question.is_published,
+  })), (groups ?? []).map((group) => ({ id: group.id, practiceSetId: group.practice_set_id })))
 
   return data.flatMap((row) => {
     const questionCount = counts.get(row.id) ?? 0

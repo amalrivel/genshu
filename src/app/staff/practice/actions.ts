@@ -37,15 +37,20 @@ export async function savePracticeSet(_state: StaffFormState, form: FormData): P
     const titleId = field(form, "titleId", 200)
     const descriptionJa = contentField(form, "descriptionJa", 500, true)
     const descriptionId = contentField(form, "descriptionId", 500, true)
-    const level = field(form, "level", 2)
+    const level = field(form, "level", 12)
     const topic = field(form, "topic", 50)
     if (!["N5", "N4", "N3", "NON_JLPT"].includes(level) || !["語彙", "文法", "文化・マナー", "漢字", "book", "genchare", "menkyo_blog"].includes(topic)) throw new Error("Level atau topik tidak valid.")
     const client = await createClient()
     let maxQuestions = 30
+    const storedQuestions = new Map<string, { prompt: string; prompt_plain: string; explanation_ja: string; explanation_markup: string }>()
     if (original) {
       const { data: stored, error: storedError } = await client.from("practice_sets").select("source_repository").eq("id", id).maybeSingle()
       if (storedError) throw storedError
       if (stored?.source_repository === "amalrivel/gentsuki-ready-web") maxQuestions = 60
+      const { data: questions, error: questionsError } = await client.from("practice_questions")
+        .select("id,prompt,prompt_plain,explanation_ja,explanation_markup").eq("practice_set_id", id)
+      if (questionsError) throw questionsError
+      for (const question of questions ?? []) storedQuestions.set(question.id, question)
     }
     const count = Number(form.get("questionCount"))
     if (!Number.isInteger(count) || count < 1 || count > maxQuestions) throw new Error("Jumlah soal tidak valid.")
@@ -64,17 +69,21 @@ export async function savePracticeSet(_state: StaffFormState, form: FormData): P
       if (groupId ? !Number.isInteger(groupPosition) || groupPosition! < 0 || groupPosition! > 2 : groupPosition !== null) throw new Error("Urutan grup soal tidak valid.")
       const isPublished = form.get("isPublished" + index) === "on"
       if (groupId) groupChildren.set(groupId, [...(groupChildren.get(groupId) ?? []), { position: groupPosition!, isPublished }])
+      const questionId = contentField(form, "id" + index, 120, true)
+      const storedQuestion = storedQuestions.get(questionId)
+      const prompt = contentField(form, "prompt" + index, 2000)
+      const explanationJa = contentField(form, "explanationJa" + index, 2000)
       return {
-        id: contentField(form, "id" + index, 120, true),
+        id: questionId,
         sourceRef: contentField(form, "sourceRef" + index, 120, true),
         sourceDigest: contentField(form, "sourceDigest" + index, 80, true),
         groupId,
         groupPosition,
-        type, prompt: contentField(form, "prompt" + index, 2000),
-        promptPlain: contentField(form, "promptPlain" + index, 2000, true),
+        type, prompt,
+        promptPlain: storedQuestion?.prompt === prompt ? storedQuestion.prompt_plain : prompt.replace(/\{([^|{}]+)\|[^{}]+\}/g, "$1"),
         translationId: contentField(form, "translationId" + index, 2000, true),
-        options, correct, explanationJa: contentField(form, "explanationJa" + index, 2000),
-        explanationMarkup: contentField(form, "explanationMarkup" + index, 2000, true),
+        options, correct, explanationJa,
+        explanationMarkup: storedQuestion?.explanation_ja === explanationJa ? storedQuestion.explanation_markup : explanationJa,
         context: contentField(form, "context" + index, 2000, true),
         contextMarkup: contentField(form, "contextMarkup" + index, 2000, true),
         imageUrl, imageWidth: optionalDimension(form.get("imageWidth" + index)),

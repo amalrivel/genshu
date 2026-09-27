@@ -39,6 +39,20 @@ const repairQuestions = JSON.stringify([0, 1, 2].map((index) => ({
   explanation_ja: "説明", explanation_id: "", question_context: "Old stem\n• old focus point",
   question_context_markup: "Old stem", image_url: "", source_ref: `qa_repair/1-${index + 1}`, source_digest: "legacy-child",
 })))
+const limitQuestions = (setId, count) => JSON.stringify(Array.from({ length: count }, (_, index) => ({
+  id: `${setId}-q${index + 1}`, question_type: "TRUE_FALSE", prompt: `Question ${index + 1}`,
+  prompt_plain: `Question ${index + 1}`, translation_id: "", options: ["○", "×"], correct_answer_index: 0,
+  explanation_ja: "説明", explanation_id: "", is_published: true,
+})))
+const sqlJson = (value) => `'${JSON.stringify(value).replaceAll("'", "''")}'`
+const importedId = "gentsuki-book-1"
+const importedSet = {
+  ...JSON.parse(practice(importedId, true)), target_level: "NON_JLPT", source_repository: "amalrivel/gentsuki-ready-web",
+  source_ref: "book_1", source_commit: "f085af618ff11e594868eeed653a945d6daaa682", source_digest: "import-digest",
+}
+const importedQuestions = limitQuestions(importedId, 52)
+const ordinaryId = "qa-ordinary-limit"
+const ordinaryQuestions = limitQuestions(ordinaryId, 1)
 function practice(id, published, title = "練習") { return JSON.stringify({
   id, title, title_id: "Latihan", description: "説明", description_id: "Penjelasan",
   target_level: "N5", topic: "漢字", is_published: published,
@@ -70,6 +84,30 @@ const fixtures = `
   select public.save_practice_set('${groupedPractice("qa-group", true)}','${groupRows("qa-group")}',false);
   select public.save_practice_set('${groupedPractice("qa-partial-draft", false)}','${groupRows("qa-partial-draft", [true,false,true])}',false);
   select public.save_practice_set('${repairSet}','${repairQuestions}',false);
+  ${asUser(sensei)}
+  select public.save_practice_set(${sqlJson(importedSet)},${sqlJson(JSON.parse(importedQuestions))},false);
+  select public.save_practice_set(${sqlJson({ ...importedSet, source_repository: "spoofed/repository", source_ref: "spoofed", source_commit: "spoofed", title: "Import edit" })},${sqlJson(JSON.parse(importedQuestions))},true);
+  select public.save_practice_set(${sqlJson(JSON.parse(practice(ordinaryId, true)))},${sqlJson(JSON.parse(ordinaryQuestions))},false);
+  do $$ begin
+    if (select count(*) from public.practice_questions where practice_set_id='${importedId}') <> 52 or
+       (select source_repository from public.practice_sets where id='${importedId}') <> 'amalrivel/gentsuki-ready-web' then
+      raise exception 'Imported bank update lost question count or provenance';
+    end if;
+    begin
+      perform public.save_practice_set(${sqlJson({ ...JSON.parse(practice(ordinaryId, true)), source_repository: "amalrivel/gentsuki-ready-web", source_ref: "book_1", source_commit: "f085af618ff11e594868eeed653a945d6daaa682" })},${sqlJson(JSON.parse(limitQuestions(ordinaryId, 31)))},true);
+      raise exception 'Client provenance escalated an ordinary update above 30 questions';
+    exception when invalid_parameter_value then null;
+    end;
+    if (select count(*) from public.practice_questions where practice_set_id='${ordinaryId}') <> 1 or
+       (select title from public.practice_sets where id='${ordinaryId}') <> '練習' then
+      raise exception 'Rejected ordinary-bank update was not atomic';
+    end if;
+    begin
+      perform public.save_practice_set(${sqlJson({ ...JSON.parse(practice("qa-fake-import", true)), source_repository: "amalrivel/gentsuki-ready-web", source_ref: "spoofed", source_commit: "f085af618ff11e594868eeed653a945d6daaa682" })},${sqlJson(JSON.parse(limitQuestions("qa-fake-import", 31)))},false);
+      raise exception 'Unpinned importer metadata granted 60 questions';
+    exception when invalid_parameter_value then null;
+    end;
+  end $$;
   do $$
   declare original_timestamp timestamptz;
   begin
