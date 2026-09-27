@@ -3,6 +3,7 @@ import { afterEach, beforeEach, expect, mock, test } from "bun:test"
 let senseiAllowed = true
 let storedRepository = "amalrivel/gentsuki-ready-web"
 let storedQuestions = []
+let storedGroups = []
 let rpcCalls = []
 let catalogRows = {}
 const redirectSignal = new Error("redirect")
@@ -20,7 +21,7 @@ mock.module("@/lib/supabase/server", () => ({
       in() { return this },
       maybeSingle: async () => ({ data: { source_repository: storedRepository }, error: null }),
       then(resolve) {
-        const data = catalogRows[table] ?? (table === "practice_questions" ? storedQuestions : [])
+        const data = catalogRows[table] ?? (table === "practice_questions" ? storedQuestions : table === "practice_question_groups" ? storedGroups : [])
         return Promise.resolve({ data, error: null }).then(resolve)
       },
     }),
@@ -39,7 +40,7 @@ function formFor(id, count, stored = true) {
   const form = new FormData()
   for (const [key, value] of Object.entries({
     id, original: stored ? id : "", titleJa: "練習", titleId: "Latihan", descriptionJa: "", descriptionId: "",
-    level: storedRepository ? "NON_JLPT" : "N5", topic: "book", questionCount: String(count), published: "on",
+    level: storedRepository ? "NON_JLPT" : "N5", topic: "book", questionCount: String(count), groupCount: "0", published: "on",
   })) form.set(key, value)
   for (let index = 0; index < count; index++) {
     const qid = stored ? `${id}-q-${index + 1}` : ""
@@ -77,6 +78,7 @@ beforeEach(() => {
     id: `bank-q-${index + 1}`, prompt: `prompt ${index + 1}`, prompt_plain: `teks plain ${index + 1}`,
     explanation_ja: `explanation ${index + 1}`, explanation_markup: `{説明|せつめい}${index + 1}`,
   }))
+  storedGroups = []
 })
 afterEach(() => { mock.clearAllMocks() })
 
@@ -110,6 +112,32 @@ test("edited prompt and explanation send coherent furigana-on/off values instead
   expect(payload[0].explanation_markup).toBe("周囲を確認します。")
   expect(payload[1].prompt_plain).toBe("teks plain 2")
   expect(payload[1].explanation_markup).toBe("{説明|せつめい}2")
+})
+
+test("practice save can remove a whole group and preserves authoritative metadata for retained groups", async () => {
+  const group = {
+    id: "bank-group-1", position: 0, source_ref: "book_1/1", source_digest: "group-digest",
+    question_context: "共有状況", question_context_markup: "共有状況", image_url: "/group.jpg", image_width: 100, image_height: 80,
+  }
+  storedGroups = [group]
+  const deleteForm = formFor("bank", 1)
+  deleteForm.set("groupCount", "0")
+  await expect(savePracticeSet(undefined, deleteForm)).rejects.toBe(redirectSignal)
+  expect(rpcCalls[0].args.p_set.question_groups).toEqual([])
+
+  rpcCalls = []
+  const keepForm = formFor("bank", 1)
+  keepForm.set("groupCount", "1")
+  keepForm.set("groupIdForSave0", group.id)
+  await expect(savePracticeSet(undefined, keepForm)).rejects.toBe(redirectSignal)
+  expect(rpcCalls[0].args.p_set.question_groups).toEqual([group])
+
+  rpcCalls = []
+  const forgedForm = formFor("bank", 1)
+  forgedForm.set("groupCount", "1")
+  forgedForm.set("groupIdForSave0", "another-set-group")
+  expect(await savePracticeSet(undefined, forgedForm)).toHaveProperty("error")
+  expect(rpcCalls).toHaveLength(0)
 })
 
 test("ordinary-bank limit and action role gate still prevent RPC calls", async () => {

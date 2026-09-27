@@ -159,3 +159,112 @@ covered behavior, results, and limitations. For deployment checks, include the
 deployment ID/URL and served source commit. Mark an acceptance criterion
 resolved only when the evidence covers it. Keep credentials, sessions, and
 private QA artifacts out of this document.
+
+## Reviewer follow-up — 2026-09-27 UTC+09
+
+Current HEAD is `52402ad9439b25c4d35c00134257664c82c54f98`, following local
+implementation commit `329c278`. Focused diff inspection confirms the four
+previous findings have corresponding corrections. The reviewer reran
+`bun test db/scripts/practice-actions.test.js`: five tests passed with 28
+assertions; `bun src/lib/practice-units.check.ts` also passed. No browser or
+live SQL checks were rerun, and remote PR state was not refreshed in this
+follow-up. Local commits alone do not prove PR availability.
+
+Unlike the earlier untracked state, `.agents/rules/antigravity-rtk-rules.md`
+is now staged; it was preserved and was not included in these documentation
+changes. The Graphify query modifies its tracked query stamp. No core code,
+migration, dataset or script was edited by the reviewer. The next worker goal
+now targets local browser verification; Preview and recovery stay deferred.
+
+## Local browser follow-up — 2026-09-27 UTC+09
+
+Browser verification used Playwright CLI 0.1.19 against the local Genshu app at
+`http://localhost:3000`, with checkout HEAD
+`52402ad9439b25c4d35c00134257664c82c54f98`. The Next.js dev server was already
+running for this workspace; I used it without stopping or restarting it. The
+app's configured Supabase URL is the shared project `invekuqrmwvrfxkcqfcp`.
+Browser navigation and practice answers are client-side session state; no
+authoring action, database write, or migration was issued. Browser console
+errors, page errors, and failed requests were all empty. The local Next dev log
+had no matching error, exception, unhandled, or failed lines for this run.
+
+| Browser scenario | Result |
+| --- | --- |
+| Book 3 catalog and student practice | The anonymous catalog listed 13 published sets and included Book 3. Book 3 rendered 46 practice units containing 50 published questions, matching the local import dataset's 50 published questions out of 52 records. The two unpublished records were not included in the student session. |
+| Shared illustration content | Groups `gentsuki-book-3-group-47` and `gentsuki-book-3-group-48` each rendered three child sections and one loaded shared image. For group 48, the context matched the source text exactly once with furigana off; all three child prompts matched their source plain text. `駐車車両の先の状況` was absent before answering. |
+| Independent answers, editing, and navigation | Confirming a child left the other two selections empty. Editing the first child from correct to incorrect and back updated only that child. Returning from group 48 to group 47 retained all three answers and their explanations. |
+| Furigana, keyboard, reload, and layout | Furigana on/off changed ruby rendering; reloading returned the local session to question 1. Keyboard `1`/`2` and Enter selected, confirmed, and advanced a standard question. No horizontal overflow at 1365×900 or 390×844. |
+| Scoring and review | All standard questions and group 47 were answered correctly; one child in group 48 was answered incorrectly. The review displayed 49/50 correct and 46/48 points, confirming the group with one wrong child received zero points. Full review showed 50 child explanations and two shared group images; incorrect-only review retained the incorrect child's group image and explanation. Group child explanations matched the source dataset. |
+| Anonymous access | Direct navigation to `/staff/practice/gentsuki-book-3` redirected to `/login`; no editor fields were visible. This verifies the anonymous route gate, not staff login or the other staff-role permissions. |
+
+The browser run did **not** test saving an imported set. There is no local
+Supabase CLI/stack, Docker/Podman runtime, or isolated Supabase branch available;
+the local `.env` points only to the shared project, and the connected Supabase
+inventory lists only that project. I did not log in to Sensei, save 50/52
+questions, or apply migration 013. The prior action test and isolated local
+PostgreSQL migration/RLS harness remain supporting evidence, but they are not a
+browser save against a local Supabase Data API/Auth backend. The imported-bank
+browser save, saved-text reload, Sensei login, and browser permission paths for
+non-staff/Tantōsha/inactive staff therefore remain unverified until an isolated
+runtime backend and QA accounts are available. The current Supabase branch
+inventory contains only the default `main` branch on the shared project.
+
+Supporting checks rerun during this follow-up: `bun test db/scripts/practice-actions.test.js`
+passed 5 tests/28 assertions;
+`bun src/lib/practice-units.check.ts` passed; importer `--check` passed for 12
+sets, 614 records, 602 published questions, 12 drafts, 84 assets, and 21 known
+warnings; and `bun db/scripts/check-data-api-migration.js` passed on its
+temporary local PostgreSQL cluster, including five-role RLS and RPC rollback.
+These checks cover helper/action and SQL behavior, not a browser save through a
+local Supabase Data API/Auth runtime. The full verifier was not rerun because
+this follow-up made no application-code changes; documentation checks are
+`git diff --check` and local-link validation.
+
+No imported bank in the available dataset is group-only: illustration banks
+also contain standalone questions. Group-only catalog counts are covered by
+the existing focused regression test, but there was no browser-visible
+group-only fixture to exercise. Preview verification and recovery rehearsal
+remain deferred by the owner, not passed. No push, merge, deployment, or shared
+database mutation occurred during this follow-up.
+
+## Core-use follow-up — 2026-09-27 UTC+09
+
+Scope was narrowed by the owner to current learner and Sensei core use. I
+inspected the published-material list/reader, practice catalog/player and
+review, Sensei material/practice editors and actions, login, `requireStaff` /
+`requireSensei`, cookie-backed Supabase server client, and existing
+`save_practice_set` contract. The learner paths read only published rows;
+staff pages and every staff mutation retain server-side role checks. No
+Tantōsha permissions or shared database state were changed.
+
+One authoring blocker was corrected: illustration children could not be
+removed from a practice set because the editor hid child deletion for groups
+and offered no whole-group action. The editor now removes all three children
+as one operation. On save it submits only the retained group IDs; the server
+reloads their context/image/source metadata for the set and sends those rows
+through the existing atomic `save_practice_set` group replacement. A submitted
+group ID not present on that set is rejected. This retains the existing
+three-child/publish-together validation. No migration or database operation
+was made.
+
+| Check | Result |
+| --- | --- |
+| `bun run typecheck` | Passed. |
+| `bun run lint` | Passed. |
+| `bun test db/scripts/practice-actions.test.js` | Passed: 6 tests, including whole-group deletion, retained server-authoritative metadata, forged group-ID rejection, and existing Sensei/size/source handling. |
+| `bun run verify` | Started but made no progress during Turbopack build; manually interrupted. Not counted as a pass or build failure. |
+| `bun run verify --webpack` | Passed all six repository stages, including production build. Graphify reported the code graph current. |
+| Local browser inventory | `playwright-cli list` returned “no browsers.” Per the revised scope, I did not set up a local Supabase QA stack or browser authoring environment. |
+
+The earlier Book 3 browser evidence above covers student practice, answer
+state, scoring, review, furigana, keyboard and desktop/phone layout. This
+follow-up did not re-run browser checks. Material reading was reviewed in its
+source route and renderer but was not browser exercised in this run. Sensei
+login, material save/publish, practice save/publish/group deletion, and
+Tantōsha permission paths remain unverified through an authenticated runtime.
+Local Supabase QA and browser authoring verification are **deferred**, not
+passed. Preview and restore rehearsal remain **deferred by the owner**, not
+passed. This follow-up changed local application code, messages, one focused
+test, Graphify output, and this evidence note; it made no shared database
+change and no push, merge, deployment, or commit. Existing owner edits and
+staged files in the worktree were preserved.

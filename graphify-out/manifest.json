@@ -738,15 +738,15 @@
     "semantic_hash": "cb56bf002d36bb860c3d320a23bd871a"
   },
   "messages/id.json": {
-    "mtime": 1790429902.4021044,
-    "seen": 1790431170.462609,
-    "ast_hash": "32ae796258064f3c9c8065007cd67dc3",
+    "mtime": 1790478696.6158292,
+    "seen": 1790478749.1477895,
+    "ast_hash": "d790139d4927a20b25216938091f5750",
     "semantic_hash": ""
   },
   "messages/ja.json": {
-    "mtime": 1790429906.1441424,
-    "seen": 1790431170.4626105,
-    "ast_hash": "b54d64bda962c53ed121ba6cb53bbed4",
+    "mtime": 1790478696.6518295,
+    "seen": 1790478749.1477907,
+    "ast_hash": "237faae387bf13c43fea3f700025210b",
     "semantic_hash": ""
   },
   "src/app/assignments/[id]/page.tsx": {
@@ -1032,9 +1032,9 @@
     "semantic_hash": ""
   },
   "src/app/staff/practice/actions.ts": {
-    "mtime": 1790467450.0356622,
-    "seen": 1790467990.7923024,
-    "ast_hash": "2aad9deb103bb91c5f70073e4d590fc0",
+    "mtime": 1790478677.9894812,
+    "seen": 1790478749.1484656,
+    "ast_hash": "fd7951eec9d471e0aaa839a6f8f31996",
     "semantic_hash": ""
   },
   "src/app/staff/practice/page.tsx": {
@@ -1050,9 +1050,9 @@
     "semantic_hash": ""
   },
   "src/components/practice-questions-editor.tsx": {
-    "mtime": 1790467450.0900607,
-    "seen": 1790467990.7928402,
-    "ast_hash": "d02ba943be3e7c279180d41570e02652",
+    "mtime": 1790478654.309637,
+    "seen": 1790478749.148798,
+    "ast_hash": "c58f3bbf8e77bfcdb7a08c741f004394",
     "semantic_hash": ""
   },
   "src/lib/staff.ts": {
@@ -2052,21 +2052,21 @@
     "semantic_hash": ""
   },
   "docs/release-readiness.md": {
-    "mtime": 1790468388.5602107,
-    "seen": 1790468441.2019026,
-    "ast_hash": "88e3d05378b803fb220d794dcba3b28f",
+    "mtime": 1790478055.1499357,
+    "seen": 1790478749.1527693,
+    "ast_hash": "f1b0f406ea36159170d38ccc61138785",
     "semantic_hash": ""
   },
   "docs/worker-next-goal.md": {
-    "mtime": 1790466470.7899454,
-    "seen": 1790467990.8011215,
-    "ast_hash": "f01abb404165b364057be9677be73dc8",
+    "mtime": 1790476697.0147257,
+    "seen": 1790478749.15277,
+    "ast_hash": "bac7cb4377e4451d4c61fab382a102ac",
     "semantic_hash": ""
   },
   "db/scripts/practice-actions.test.js": {
-    "mtime": 1790467786.8882763,
-    "seen": 1790467990.7908895,
-    "ast_hash": "ca992da97a052ae81bbc1260a46e5c8a",
+    "mtime": 1790478696.6838295,
+    "seen": 1790478749.1476967,
+    "ast_hash": "c9a1d4bcf819dade5c8bf0557799d581",
     "semantic_hash": ""
   }
 }

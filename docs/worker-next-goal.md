@@ -1,67 +1,64 @@
-# Next worker goal: fix imported-bank authoring and catalog correctness
+# Next worker goal: verify the corrected authoring and learner flows locally
+
+## Starting evidence
+
+Implementation commit `329c278` and evidence commit `52402ad` are local.
+The reviewer reran the five actual-server-action regression tests and grouping/
+scoring checks successfully. See `release-readiness.md` for earlier build and
+local PostgreSQL evidence. Migration 013 is not applied to shared Supabase.
+The current staged `.agents/rules/antigravity-rtk-rules.md` is unrelated to this
+verification goal; preserve it and exclude it from any task commit.
 
 ## Goal
 
-Resolve the four reproduced defects in `docs/release-readiness.md`, preserving
-illustration groups, source wording, answer keys, provenance and existing role
-permissions. Produce a reviewable revision of draft PR #1. Do not add LMS
-features or redesign the application.
+Verify the corrected editor and learner flows through a real browser, using
+local or explicitly isolated test data for saves. Resolve any reproducible
+failure within this scope and report precise evidence. No later LMS features.
 
-## Preparation
+Read AGENTS.md, .ai/PROJECT.md, .ai/README.md and release-readiness.md. Inspect
+current worktree and installed browser tools. Use applicable browser skills and
+existing tooling; absence of playwright-cli alone does not establish that all
+browser automation is unavailable. Read Next.js guides before code changes.
 
-Read `AGENTS.md`, `.ai/PROJECT.md`, `.ai/README.md`,
-`docs/release-readiness.md` and `docs/gentsuki-bank-import.md`. Inspect branch,
-worktree and PR scope before editing; preserve reviewer documentation changes
-and untracked `.agents/rules/`. Read applicable Next.js guides and Supabase
-skills. Runtime stays on Supabase Data API; no ORM or direct database runtime.
+## Required scenarios
 
-## Fixes
+- Sensei opens and saves a NON_JLPT imported bank containing 50/52 questions.
+  A no-change save preserves source prompt/plain and explanation/markup variants.
+- Edit a prompt and explanation, save, reload and view the learner flow with
+  furigana on and off. Both modes must reflect the new content. Do not invent
+  readings or alter unrelated source content and answer keys.
+- A shared image/context appears once with three illustration children; answers
+  remain independent. Verify navigation, answer editing, review and two-point
+  all-correct scoring; one incorrect or unanswered child earns no group points.
+- Check standard questions and a group-only catalog. Existing regression tests
+  must retain shuffled-row, invalid-group and ordinary-bank-limit coverage.
+- Exercise desktop and phone-size layouts, keyboard interaction and reload.
+  Check browser console and failed requests. Use isolated QA roles for denied
+  authoring paths where available; do not create or modify real users for tests.
 
-1. Accept `NON_JLPT` through the real practice server action. The existing
-   two-character field limit makes every imported-bank save fail before RPC.
-2. Make RPC question limits agree with the action: existing imported banks may
-   contain up to 60 questions, ordinary banks up to 30. Determine imported
-   status from stored authoritative provenance on updates. Do not grant the
-   larger limit from client-controlled metadata. Preserve provenance and
-   atomic replacement. Inspect the target migration ledger; never edit an
-   applied migration. Add a forward migration if needed.
-3. Correct prompt/explanation editing so furigana on/off reflects the same
-   newly saved content. Hidden old plain/markup values must not override edits.
-   Preserve original variants on no-change saves; do not normalize unrelated
-   source data, invent readings, or change answer keys.
-4. Make catalog completeness independent of Data API row order. A published
-   group with positions 2,0,1 is complete. Duplicate, missing, unpublished or
-   cross-set children must remain invalid. Keep catalog/detail counts aligned.
+## Environment and limits
 
-## Verification
+Use a local or explicitly isolated backend for writes and migration 013.
+Never save fixture edits into the shared source/production database. If only
+shared Supabase is configured, public browser checks can proceed read-only;
+report isolated authoring verification as incomplete with the exact missing
+resource. Do not reset, seed or migrate shared Supabase under this goal.
 
-Add targeted regression tests that exercise the actual server action and RPC
-contract, not only the helper or a handcrafted alternate payload. Cover a
-no-change imported save at NON_JLPT with 50/52 questions, edited prompt and
-explanation with furigana on/off, unchanged source preservation, shuffled group
-rows and group-only catalogs. Verify ordinary-bank limits and rejection of
-client-supplied provenance escalation. Retain atomic rollback and role gates:
-Sensei can author; anon, non-staff, Tantōsha and inactive staff cannot.
+Preview deployment and export/restore rehearsal remain deferred by the owner.
+Do not merge, push, deploy, promote, reconnect Git integration or restore shared
+infrastructure. Do not bypass an automatic approval rejection with another path.
 
-Use a local or explicitly isolated database fixture for destructive tests.
-Do not mutate shared source/production data to prove saving works. If an
-isolated SQL target is unavailable, complete code and local tests and report
-that specific verification limit without reopening deferred operational work.
+## Evidence and handoff
 
-Run import --check, existing grouping/scoring checks, required Graphify update,
-and bun run verify. Report the default bundler result honestly; if a justified
-Webpack fallback is needed, record it separately. Test the editor and learner
-flow in a browser at desktop and phone sizes when tooling is available.
+Record tested revision, environment, viewport, scenarios, actual results and
+limitations in release-readiness.md. Keep credentials, sessions and private
+browser artifacts out of Git. Fixes require targeted regressions, Graphify
+update and bun run verify; document a Webpack fallback separately. For
+verification/documentation only, check links and git diff --check instead of
+rerunning the full verifier.
 
-## Scope and handoff
-
-Preview deployment and export/restore rehearsal remain deferred by the owner;
-they are not acceptance criteria for this bounded implementation goal. Do not
-merge, deploy, promote, reconnect Vercel Git integration, export or restore a
-shared database. Do not retry a denied deployment through another path.
-
-Update release evidence with changed behavior, migration status, actual checks,
-revision and limitations. Prepare focused commits without secrets or private QA
-artifacts. Push or update the PR only when the active session authorizes that
-action. Completion means these four code defects are fixed with regression
-evidence; it does not mean production is updated or the beta is release-ready.
+Completion requires browser evidence for the scenarios actually available and
+an honest list of unverified scenarios. An unavailable isolated backend is a
+verification limitation, not proof that authoring works. Do not claim deployment
+or production readiness. Prepare a handoff for owner review before any separate
+push/merge/release authorization.

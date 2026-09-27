@@ -43,6 +43,7 @@ export async function savePracticeSet(_state: StaffFormState, form: FormData): P
     const client = await createClient()
     let maxQuestions = 30
     const storedQuestions = new Map<string, { prompt: string; prompt_plain: string; explanation_ja: string; explanation_markup: string }>()
+    let storedGroups: { id: string; position: number; source_ref: string; source_digest: string; question_context: string; question_context_markup: string; image_url: string; image_width: number | null; image_height: number | null }[] = []
     if (original) {
       const { data: stored, error: storedError } = await client.from("practice_sets").select("source_repository").eq("id", id).maybeSingle()
       if (storedError) throw storedError
@@ -51,7 +52,19 @@ export async function savePracticeSet(_state: StaffFormState, form: FormData): P
         .select("id,prompt,prompt_plain,explanation_ja,explanation_markup").eq("practice_set_id", id)
       if (questionsError) throw questionsError
       for (const question of questions ?? []) storedQuestions.set(question.id, question)
+      const { data: groups, error: groupsError } = await client.from("practice_question_groups")
+        .select("id,position,source_ref,source_digest,question_context,question_context_markup,image_url,image_width,image_height")
+        .eq("practice_set_id", id)
+      if (groupsError) throw groupsError
+      storedGroups = groups ?? []
     }
+    const groupCount = Number(form.get("groupCount"))
+    if (!Number.isInteger(groupCount) || groupCount < 0 || groupCount > maxQuestions / 3) throw new Error("Jumlah grup ilustrasi tidak valid.")
+    const requestedGroupIds = Array.from({ length: groupCount }, (_, index) => contentField(form, "groupIdForSave" + index, 120))
+    if (new Set(requestedGroupIds).size !== requestedGroupIds.length || requestedGroupIds.some((groupId) => !storedGroups.some((group) => group.id === groupId))) {
+      throw new Error("Grup ilustrasi tidak valid.")
+    }
+    const requestedGroups = requestedGroupIds.map((groupId) => storedGroups.find((group) => group.id === groupId)!)
     const count = Number(form.get("questionCount"))
     if (!Number.isInteger(count) || count < 1 || count > maxQuestions) throw new Error("Jumlah soal tidak valid.")
     const groupChildren = new Map<string, { position: number; isPublished: boolean }[]>()
@@ -102,6 +115,7 @@ export async function savePracticeSet(_state: StaffFormState, form: FormData): P
       p_set: {
         id, title: titleJa, title_id: titleId, description: descriptionJa,
         description_id: descriptionId, target_level: level, topic, is_published: published,
+        question_groups: requestedGroups,
       },
       p_questions: questions.map((question) => ({
         question_type: question.type,

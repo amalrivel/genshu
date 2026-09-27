@@ -927,6 +927,7 @@
     "explanationJa": "日本語の解説",
     "explanationId": "インドネシア語の解説",
     "removeQuestion": "問題を削除",
+    "removeQuestionGroup": "イラストグループ全体を削除",
     "addQuestion": "問題を追加",
     "publishPractice": "学生に公開する",
     "publishQuestion": "この問題を公開する",

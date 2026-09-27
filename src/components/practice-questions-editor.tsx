@@ -21,8 +21,11 @@ export function PracticeQuestionsEditor({ initial, groups = [], maxQuestions = 3
   )
   const inputClass = "mt-1 w-full rounded-md border bg-background px-3 py-2"
   const groupsById = new Map(groups.map((group) => [group.id, group]))
+  const retainedGroups = groups.filter((group) => questions.some((question) => question.groupId === group.id))
   return <div className="space-y-5">
     <input type="hidden" name="questionCount" value={questions.length} />
+    <input type="hidden" name="groupCount" value={retainedGroups.length} />
+    {retainedGroups.map((group, index) => <input key={group.id} type="hidden" name={`groupIdForSave${index}`} value={group.id} />)}
     {questions.map((question, index) => <fieldset key={question.key} data-question-group={question.groupId ?? undefined} className="space-y-4 rounded-lg border p-5"><legend className="px-2 font-semibold">{t("question", { number: index + 1 })}</legend>
       {question.groupId && question.groupPosition === 0 && groupsById.get(question.groupId) && <div className="space-y-2 rounded-md bg-muted/40 p-3 text-sm" data-shared-question-group={question.groupId}><p className="font-medium">{groupsById.get(question.groupId)!.context}</p>{groupsById.get(question.groupId)!.imageUrl && groupsById.get(question.groupId)!.imageWidth && groupsById.get(question.groupId)!.imageHeight && <Image src={groupsById.get(question.groupId)!.imageUrl} width={groupsById.get(question.groupId)!.imageWidth!} height={groupsById.get(question.groupId)!.imageHeight!} alt="" className="h-auto max-w-full rounded-md" />}</div>}
       <input type="hidden" name={"id" + index} value={question.id} />
@@ -43,6 +46,7 @@ export function PracticeQuestionsEditor({ initial, groups = [], maxQuestions = 3
       <label className="block text-sm font-medium">{t("correct")}<select name={"correct" + index} className={inputClass} defaultValue={question.correctAnswerIndex}>{(question.type === "TRUE_FALSE" ? [t("true"), t("false")] : ["A", "B", "C", "D"]).map((label, option) => <option key={option} value={option}>{label}</option>)}</select></label>
       <label className="block text-sm font-medium">{t("explanationJa")}<textarea name={"explanationJa" + index} className={inputClass} required maxLength={2000} rows={2} defaultValue={question.explanationJa} /></label>
       <label className="block text-sm font-medium">{t("explanationId")}<textarea name={"explanationId" + index} className={inputClass} required maxLength={2000} rows={2} defaultValue={question.explanationId} /></label>
+      {question.groupId && question.groupPosition === 0 && <button type="button" onClick={() => setQuestions((items) => items.filter((item) => item.groupId !== question.groupId))} className="text-sm text-destructive">{t("removeQuestionGroup")}</button>}
       {questions.length > 1 && !question.groupId && <button type="button" onClick={() => setQuestions((items) => items.filter((item) => item.key !== question.key))} className="text-sm text-destructive">{t("removeQuestion")}</button>}
     </fieldset>)}
     <button type="button" disabled={questions.length >= maxQuestions} onClick={() => setQuestions((items) => [...items, { ...blank(), key: nextKey.current++ }])} className="rounded-md border px-4 py-2 text-sm">{t("addQuestion")}</button>
