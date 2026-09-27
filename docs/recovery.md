@@ -50,8 +50,9 @@ restored baseline before applying later forward migrations.
 Verify content digests, provenance, group relationships, child positions,
 publication state, and assets. Run read-only grants/RLS inspection against the
 restore, then test direct Data API access for anon, non-staff, Sensei, Tantōsha,
-and inactive staff, including group tables and RPCs. Existing group coverage
-is incomplete; do not treat a legacy verifier pass as sufficient.
+and inactive staff, including group tables and RPCs. Group permission checks and a local five-role Data API harness are available.
+Repeat the relevant checks on the restored target; a source/local pass does
+not establish that the restore preserves permissions and behavior.
 
 Point an isolated application at the restore and verify public reading/practice,
 draft privacy, staff authentication, and authoring. Record the source/target,

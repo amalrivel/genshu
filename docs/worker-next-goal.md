@@ -1,73 +1,67 @@
-# Next worker goal: complete illustration groups and verify the beta revision
+# Next worker goal: fix imported-bank authoring and catalog correctness
 
-Use this task with Codex or Agy. Documentation has been aligned by the reviewer;
-implement and verify the remaining product requirements rather than rewriting
-architecture or adding later LMS features.
+## Goal
 
-## Goal and preparation
+Resolve the four reproduced defects in `docs/release-readiness.md`, preserving
+illustration groups, source wording, answer keys, provenance and existing role
+permissions. Produce a reviewable revision of draft PR #1. Do not add LMS
+features or redesign the application.
 
-Finish illustration groups as one shared situation/image with three child
-questions, preserve source content, enforce group integrity, and produce a
-reviewable beta revision with evidence.
+## Preparation
 
 Read `AGENTS.md`, `.ai/PROJECT.md`, `.ai/README.md`,
-`docs/release-readiness.md`, and `docs/gentsuki-bank-import.md`. Inspect the
-current working tree and preserve existing corrections, datasets, migrations,
-and documentation edits. Check the target migration ledger before applying
-anything; do not edit applied migrations. Read relevant framework and Supabase
-skill documentation before changing Next.js or SQL.
+`docs/release-readiness.md` and `docs/gentsuki-bank-import.md`. Inspect branch,
+worktree and PR scope before editing; preserve reviewer documentation changes
+and untracked `.agents/rules/`. Read applicable Next.js guides and Supabase
+skills. Runtime stays on Supabase Data API; no ORM or direct database runtime.
 
-## Implementation
+## Fixes
 
-- Render one answering unit per standard question or illustration group.
-  Display the shared situation/image once and all three children in order.
-  Keep independent answers, back navigation, answer editing, keyboard access,
-  furigana, and review behavior. Avoid unrelated UI redesign.
-- Preserve source wording and answer keys. Metadata such as `focus_points`
-  must not become hints, prompts, or explanations. Trace discrepancies to the
-  pinned source data and legacy renderer before correcting them.
-- Enforce exactly three same-set children at positions 0,1,2. Editor, server,
-  and database must reject invalid group saves. Do not partially publish a
-  group: all three children must be eligible before it becomes playable.
-- Score one point per standard question and two per complete group only if
-  every child is correct. Derive score maximum from valid playable units.
-  Never award group points for a missing, unpublished, or unanswered child.
-- Preserve content/provenance and Sensei edits. Keep runtime on Supabase Data
-  API and existing role model. No seed, reset, RLS bypass, or service-role
-  shortcut. Add a forward migration only if necessary.
+1. Accept `NON_JLPT` through the real practice server action. The existing
+   two-character field limit makes every imported-bank save fail before RPC.
+2. Make RPC question limits agree with the action: existing imported banks may
+   contain up to 60 questions, ordinary banks up to 30. Determine imported
+   status from stored authoritative provenance on updates. Do not grant the
+   larger limit from client-controlled metadata. Preserve provenance and
+   atomic replacement. Inspect the target migration ledger; never edit an
+   applied migration. Add a forward migration if needed.
+3. Correct prompt/explanation editing so furigana on/off reflects the same
+   newly saved content. Hidden old plain/markup values must not override edits.
+   Preserve original variants on no-change saves; do not normalize unrelated
+   source data, invent readings, or change answer keys.
+4. Make catalog completeness independent of Data API row order. A published
+   group with positions 2,0,1 is complete. Duplicate, missing, unpublished or
+   cross-set children must remain invalid. Keep catalog/detail counts aligned.
 
 ## Verification
 
-Extend grants/RLS checks and local/live fixtures for group tables and save/repair
-RPCs. Cover anon, non-staff, Sensei, Tantōsha, and inactive staff. Test drafts,
-forbidden writes, missing/duplicate/cross-set children, a partly unpublished
-group, successful authoring, and rollback on invalid replacement.
+Add targeted regression tests that exercise the actual server action and RPC
+contract, not only the helper or a handcrafted alternate payload. Cover a
+no-change imported save at NON_JLPT with 50/52 questions, edited prompt and
+explanation with furigana on/off, unchanged source preservation, shuffled group
+rows and group-only catalogs. Verify ordinary-bank limits and rejection of
+client-supplied provenance escalation. Retain atomic rollback and role gates:
+Sensei can author; anon, non-staff, Tantōsha and inactive staff cannot.
 
-Add meaningful scoring checks for all-correct, one-wrong, and unanswered cases.
-Validate group image files as well as standalone question assets. Run import
-`--check`, `--dry-run`, and `--verify-live`; use `--apply` only for validated
-necessary corrections. Run `bun run verify` and document any justified
-`--webpack` fallback. Test desktop and phone-sized browser flows, including
-standard-question regressions. Do not call an HTTP 200 a browser test.
+Use a local or explicitly isolated database fixture for destructive tests.
+Do not mutate shared source/production data to prove saving works. If an
+isolated SQL target is unavailable, complete code and local tests and report
+that specific verification limit without reopening deferred operational work.
 
-## Handoff and operations
+Run import --check, existing grouping/scoring checks, required Graphify update,
+and bun run verify. Report the default bundler result honestly; if a justified
+Webpack fallback is needed, record it separately. Test the editor and learner
+flow in a browser at desktop and phone sizes when tooling is available.
 
-Review the actual diff and produce focused commits with no secrets or private
-browser output. Prepare a preview only when the existing project's access and
-authorization permit it; identify its source commit and test that deployment.
-Do not infer permission to publish production from this document alone.
+## Scope and handoff
 
-Follow `docs/recovery.md` to rehearse export/restore on an isolated Supabase
-target when resources are available. Never restore to production. Report the
-precise missing resource if this step cannot run, while completing independent
-implementation work. Update release evidence with actual checks, commits,
-environments, and remaining limitations.
+Preview deployment and export/restore rehearsal remain deferred by the owner;
+they are not acceptance criteria for this bounded implementation goal. Do not
+merge, deploy, promote, reconnect Vercel Git integration, export or restore a
+shared database. Do not retry a denied deployment through another path.
 
-## Done
-
-The player and review preserve grouped content; editor/server/database preserve
-complete groups; scoring and role tests cover failure cases; source/data/assets
-remain correct; mandatory checks pass; the handoff identifies verified revision
-and deployment scope. Recovery or deployment steps without evidence remain
-explicitly incomplete. Report changed behavior, migrations, test outcomes,
-commit/preview URL, and blockers; do not equate a green build with a shipped beta.
+Update release evidence with changed behavior, migration status, actual checks,
+revision and limitations. Prepare focused commits without secrets or private QA
+artifacts. Push or update the PR only when the active session authorizes that
+action. Completion means these four code defects are fixed with regression
+evidence; it does not mean production is updated or the beta is release-ready.
