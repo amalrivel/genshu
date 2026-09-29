@@ -423,6 +423,7 @@ export function PracticePlayer({
                             <button
                               key={optionIndex}
                               type="button"
+                              aria-label={question.type === "TRUE_FALSE" ? t(optionIndex === 0 ? "trueChoice" : "falseChoice") : undefined}
                               aria-pressed={isSelected}
                               disabled={confirmed}
                               onClick={() =>
@@ -430,6 +431,7 @@ export function PracticePlayer({
                               }
                               className={cn(
                                 "min-h-12 rounded-xl border p-3 text-base font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-default",
+                                question.type === "TRUE_FALSE" && "min-h-24 sm:min-h-28 flex items-center gap-4 text-left text-lg sm:text-xl",
                                 isSelected
                                   ? "border-primary bg-primary/10 text-primary ring-2 ring-primary/30"
                                   : "border-border bg-card hover:bg-muted/40",
@@ -442,7 +444,14 @@ export function PracticePlayer({
                                   "border-destructive bg-destructive/10 text-destructive",
                               )}
                             >
-                              {option}
+                              {question.type === "TRUE_FALSE" ? (
+                                <>
+                                  <span aria-hidden="true" className="flex size-12 shrink-0 items-center justify-center rounded-full border text-2xl sm:size-14 sm:text-3xl">
+                                    {optionIndex === 0 ? "○" : "×"}
+                                  </span>
+                                  {t(optionIndex === 0 ? "trueChoice" : "falseChoice")}
+                                </>
+                              ) : option}
                             </button>
                           );
                         })}
