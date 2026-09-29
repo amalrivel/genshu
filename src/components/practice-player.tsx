@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Link from "next/link"
-import Image from "next/image"
+import * as React from "react";
+import Link from "next/link";
+import Image from "next/image";
 import {
   CheckCircle2,
   XCircle,
@@ -12,113 +12,165 @@ import {
   Sparkles,
   Eye,
   EyeOff,
-} from "lucide-react"
-import { Button, buttonVariants } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { FuriganaTokenText } from "@/components/ui/furigana-token-text"
-import { EmptyState } from "@/components/ui/empty-state"
-import { PageHeader, PageShell, SectionHeader } from "@/components/layout/page-frame"
-import { cn } from "@/lib/utils"
-import { useLocale, useTranslations } from "next-intl"
-import { Breadcrumbs } from "@/components/layout/breadcrumbs"
-import type { PublishedPracticeSet } from "@/lib/content-types"
-import { buildPracticeUnits, scorePracticeUnits } from "@/lib/practice-units"
+} from "lucide-react";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { FuriganaTokenText } from "@/components/ui/furigana-token-text";
+import { EmptyState } from "@/components/ui/empty-state";
+import {
+  PageHeader,
+  PageShell,
+  SectionHeader,
+} from "@/components/layout/page-frame";
+import { cn } from "@/lib/utils";
+import { useLocale, useTranslations } from "next-intl";
+import { Breadcrumbs } from "@/components/layout/breadcrumbs";
+import type { PublishedPracticeSet } from "@/lib/content-types";
+import { buildPracticeUnits, scorePracticeUnits } from "@/lib/practice-units";
 
-const TOPIC_TRANSLATION_KEYS: Record<string, "topicVocab" | "topicGrammar" | "topicCulture" | "topicKanji" | "topicBook" | "topicGenchare" | "topicMenkyoBlog"> = {
-  "語彙": "topicVocab",
-  "文法": "topicGrammar",
+const TOPIC_TRANSLATION_KEYS: Record<
+  string,
+  | "topicVocab"
+  | "topicGrammar"
+  | "topicCulture"
+  | "topicKanji"
+  | "topicBook"
+  | "topicGenchare"
+  | "topicMenkyoBlog"
+> = {
+  語彙: "topicVocab",
+  文法: "topicGrammar",
   "文化・マナー": "topicCulture",
-  "漢字": "topicKanji",
+  漢字: "topicKanji",
   book: "topicBook",
   genchare: "topicGenchare",
   menkyo_blog: "topicMenkyoBlog",
-}
+};
 
-export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPracticeSet }) {
-  const locale = useLocale()
-  const japanese = locale === "ja"
-  const localizedTitle = japanese ? practiceSet.titleJa : practiceSet.titleId
-  const localizedDescription = japanese ? practiceSet.descriptionJa : practiceSet.descriptionId
-  const t = useTranslations("practicePlayer")
-  const tPractice = useTranslations("practice")
-  const tNav = useTranslations("nav")
-  const practiceUnits = React.useMemo(() => buildPracticeUnits(practiceSet.questions, practiceSet.questionGroups), [practiceSet])
-  const playableQuestions = React.useMemo(() => practiceUnits.flatMap((unit) => unit.questions), [practiceUnits])
+export function PracticePlayer({
+  practiceSet,
+}: {
+  practiceSet: PublishedPracticeSet;
+}) {
+  const locale = useLocale();
+  const japanese = locale === "ja";
+  const localizedTitle = japanese ? practiceSet.titleJa : practiceSet.titleId;
+  const localizedDescription = japanese
+    ? practiceSet.descriptionJa
+    : practiceSet.descriptionId;
+  const t = useTranslations("practicePlayer");
+  const tPractice = useTranslations("practice");
+  const tNav = useTranslations("nav");
+  const practiceUnits = React.useMemo(
+    () => buildPracticeUnits(practiceSet.questions, practiceSet.questionGroups),
+    [practiceSet],
+  );
+  const playableQuestions = React.useMemo(
+    () => practiceUnits.flatMap((unit) => unit.questions),
+    [practiceUnits],
+  );
   // Quiz player state
-  const [currentIndex, setCurrentIndex] = React.useState(0)
-  const [selectedOptions, setSelectedOptions] = React.useState<Record<string, number>>({})
-  const [answers, setAnswers] = React.useState<Record<string, number>>({})
-  const [activeQuestionId, setActiveQuestionId] = React.useState<string | null>(null)
-  const [isFinished, setIsFinished] = React.useState(false)
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [selectedOptions, setSelectedOptions] = React.useState<
+    Record<string, number>
+  >({});
+  const [answers, setAnswers] = React.useState<Record<string, number>>({});
+  const [activeQuestionId, setActiveQuestionId] = React.useState<string | null>(
+    null,
+  );
+  const [isFinished, setIsFinished] = React.useState(false);
 
   // Furigana & Translation controls
-  const [showFurigana, setShowFurigana] = React.useState(true)
-  const [showTranslation, setShowTranslation] = React.useState(false)
+  const [showFurigana, setShowFurigana] = React.useState(true);
+  const [showTranslation, setShowTranslation] = React.useState(false);
 
   // Results review filter
-  const [reviewFilter, setReviewFilter] = React.useState<"all" | "incorrect">("all")
+  const [reviewFilter, setReviewFilter] = React.useState<"all" | "incorrect">(
+    "all",
+  );
 
-  const selectAnswer = React.useCallback((questionId: string, option: number) => {
-    setSelectedOptions((prev) => ({ ...prev, [questionId]: option }))
-  }, [])
+  const selectAnswer = React.useCallback(
+    (questionId: string, option: number) => {
+      setSelectedOptions((prev) => ({ ...prev, [questionId]: option }));
+    },
+    [],
+  );
 
-  const handleConfirmAnswer = React.useCallback((question: PublishedPracticeSet["questions"][number]) => {
-    const selected = selectedOptions[question.id] ?? answers[question.id]
-    if (selected === undefined) return
-    setAnswers((prev) => ({ ...prev, [question.id]: selected }))
-  }, [answers, selectedOptions])
+  const handleConfirmAnswer = React.useCallback(
+    (question: PublishedPracticeSet["questions"][number]) => {
+      const selected = selectedOptions[question.id] ?? answers[question.id];
+      if (selected === undefined) return;
+      setAnswers((prev) => ({ ...prev, [question.id]: selected }));
+    },
+    [answers, selectedOptions],
+  );
 
   const handleNextQuestion = React.useCallback(() => {
-    const unit = practiceUnits[currentIndex]
-    if (!unit || unit.questions.some((question) => answers[question.id] === undefined)) return
+    const unit = practiceUnits[currentIndex];
+    if (
+      !unit ||
+      unit.questions.some((question) => answers[question.id] === undefined)
+    )
+      return;
     if (currentIndex + 1 < practiceUnits.length) {
-      setCurrentIndex((prev) => prev + 1)
-      setActiveQuestionId(practiceUnits[currentIndex + 1].questions.find((question) => answers[question.id] === undefined)?.id ?? practiceUnits[currentIndex + 1].questions[0].id)
+      setCurrentIndex((prev) => prev + 1);
+      setActiveQuestionId(
+        practiceUnits[currentIndex + 1].questions.find(
+          (question) => answers[question.id] === undefined,
+        )?.id ?? practiceUnits[currentIndex + 1].questions[0].id,
+      );
       if (typeof window !== "undefined") {
-        window.scrollTo({ top: 0, behavior: "smooth" })
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
     } else {
-      setIsFinished(true)
+      setIsFinished(true);
       if (typeof window !== "undefined") {
-        window.scrollTo({ top: 0, behavior: "smooth" })
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
     }
-  }, [practiceUnits, currentIndex, answers])
+  }, [practiceUnits, currentIndex, answers]);
 
+  // TODO: balik kesoal selanjutnya juga ga dibutuhkan saat ini. saya juga inginnya ini hanya 1 arah dulu, tidak bisa balik. nanti baru perbaikan.
   const handlePreviousQuestion = React.useCallback(() => {
-    if (currentIndex === 0) return
-    setCurrentIndex((index) => index - 1)
-    const previous = practiceUnits[currentIndex - 1]
-    setActiveQuestionId(previous.questions.find((question) => answers[question.id] === undefined)?.id ?? previous.questions[0].id)
-  }, [practiceUnits, currentIndex, answers])
+    if (currentIndex === 0) return;
+    setCurrentIndex((index) => index - 1);
+    const previous = practiceUnits[currentIndex - 1];
+    setActiveQuestionId(
+      previous.questions.find((question) => answers[question.id] === undefined)
+        ?.id ?? previous.questions[0].id,
+    );
+  }, [practiceUnits, currentIndex, answers]);
 
-  const handleEditAnswer = (questionId: string) => setAnswers((prev) => {
-    const next = { ...prev }
-    delete next[questionId]
-    return next
-  })
+  // TODO: jangan buat gakkusei bisa merubah jawabannya. sudah cukup dengan konfirmasi jawaban setelah gakkusei menjawab pertanyaan nya. kalau sudah di kunci, tidak bisa berubah lagi, itu khusus untuk practice. kalau mock exam itu beda lagi yaa...
+  const handleEditAnswer = (questionId: string) =>
+    setAnswers((prev) => {
+      const next = { ...prev };
+      delete next[questionId];
+      return next;
+    });
 
   const handleRestartQuiz = () => {
-    setCurrentIndex(0)
-    setSelectedOptions({})
-    setAnswers({})
-    setActiveQuestionId(null)
-    setIsFinished(false)
-    setReviewFilter("all")
+    setCurrentIndex(0);
+    setSelectedOptions({});
+    setAnswers({});
+    setActiveQuestionId(null);
+    setIsFinished(false);
+    setReviewFilter("all");
     if (typeof window !== "undefined") {
-      window.scrollTo({ top: 0, behavior: "smooth" })
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
-  }
+  };
 
   // Keyboard navigation shortcuts: 1-4 / A-D to select, Enter to Confirm / Next
   React.useEffect(() => {
-    if (isFinished) return
-    const unit = practiceUnits[currentIndex]
-    if (!unit) return
-    const currentQ = unit.questions.find((question) => question.id === activeQuestionId)
-      ?? unit.questions.find((question) => answers[question.id] === undefined)
-      ?? unit.questions[0]
+    if (isFinished) return;
+    const unit = practiceUnits[currentIndex];
+    if (!unit) return;
+    const currentQ =
+      unit.questions.find((question) => question.id === activeQuestionId) ??
+      unit.questions.find((question) => answers[question.id] === undefined) ??
+      unit.questions[0];
 
     const handleKeyDown = (e: KeyboardEvent) => {
       // Ignore when focusing input elements
@@ -126,41 +178,49 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
         e.target instanceof HTMLInputElement ||
         e.target instanceof HTMLTextAreaElement ||
         e.target instanceof HTMLSelectElement ||
-        e.target instanceof HTMLElement && e.target.closest("button, a, [role=button], [contenteditable=true]") !== null
+        (e.target instanceof HTMLElement &&
+          e.target.closest(
+            "button, a, [role=button], [contenteditable=true]",
+          ) !== null)
       ) {
-        return
+        return;
       }
 
       if (answers[currentQ.id] === undefined) {
         // Keys 1-4 or A-D to select option
-        const key = e.key.toUpperCase()
-        let optionIndex = -1
+        const key = e.key.toUpperCase();
+        let optionIndex = -1;
         if (key >= "1" && key <= "4") {
-          optionIndex = parseInt(key, 10) - 1
-        } else if (key === "A") optionIndex = 0
-        else if (key === "B") optionIndex = 1
-        else if (key === "C") optionIndex = 2
-        else if (key === "D") optionIndex = 3
+          optionIndex = parseInt(key, 10) - 1;
+        } else if (key === "A") optionIndex = 0;
+        else if (key === "B") optionIndex = 1;
+        else if (key === "C") optionIndex = 2;
+        else if (key === "D") optionIndex = 3;
 
         if (optionIndex >= 0 && optionIndex < currentQ.options.length) {
-          e.preventDefault()
-          selectAnswer(currentQ.id, optionIndex)
-        } else if (e.key === "Enter" && (selectedOptions[currentQ.id] ?? answers[currentQ.id]) !== undefined) {
-          e.preventDefault()
-          handleConfirmAnswer(currentQ)
+          e.preventDefault();
+          selectAnswer(currentQ.id, optionIndex);
+        } else if (
+          e.key === "Enter" &&
+          (selectedOptions[currentQ.id] ?? answers[currentQ.id]) !== undefined
+        ) {
+          e.preventDefault();
+          handleConfirmAnswer(currentQ);
         }
       } else {
         if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault()
-          const nextUnanswered = unit.questions.find((question) => answers[question.id] === undefined)
-          if (nextUnanswered) setActiveQuestionId(nextUnanswered.id)
-          else handleNextQuestion()
+          e.preventDefault();
+          const nextUnanswered = unit.questions.find(
+            (question) => answers[question.id] === undefined,
+          );
+          if (nextUnanswered) setActiveQuestionId(nextUnanswered.id);
+          else handleNextQuestion();
         }
       }
-    }
+    };
 
-    window.addEventListener("keydown", handleKeyDown)
-    return () => window.removeEventListener("keydown", handleKeyDown)
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [
     isFinished,
     practiceUnits,
@@ -171,49 +231,65 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
     selectAnswer,
     handleConfirmAnswer,
     handleNextQuestion,
-  ])
+  ]);
 
-  const currentUnit = practiceUnits[currentIndex]
-  const currentQuestion = currentUnit.questions[0]
-  const totalQuestions = playableQuestions.length
-  const progressPercent = Math.round(((currentIndex + 1) / practiceUnits.length) * 100)
-  const localizedTopic = practiceSet.topic in TOPIC_TRANSLATION_KEYS
-    ? tPractice(TOPIC_TRANSLATION_KEYS[practiceSet.topic])
-    : practiceSet.topic
+  const currentUnit = practiceUnits[currentIndex];
+  const currentQuestion = currentUnit.questions[0];
+  const totalQuestions = playableQuestions.length;
+  const progressPercent = Math.round(
+    ((currentIndex + 1) / practiceUnits.length) * 100,
+  );
+  const localizedTopic =
+    practiceSet.topic in TOPIC_TRANSLATION_KEYS
+      ? tPractice(TOPIC_TRANSLATION_KEYS[practiceSet.topic])
+      : practiceSet.topic;
 
   // Check correctness of confirmed answer
-  const selectedOption = selectedOptions[currentQuestion.id] ?? answers[currentQuestion.id] ?? null
-  const isAnswerConfirmed = answers[currentQuestion.id] !== undefined
-  const isCurrentCorrect = answers[currentQuestion.id] === currentQuestion.correctAnswerIndex
-  const answeredInCurrentUnit = currentUnit.questions.filter((question) => answers[question.id] !== undefined).length
-  const isCurrentUnitComplete = answeredInCurrentUnit === currentUnit.questions.length
+  const selectedOption =
+    selectedOptions[currentQuestion.id] ?? answers[currentQuestion.id] ?? null;
+  const isAnswerConfirmed = answers[currentQuestion.id] !== undefined;
+  const isCurrentCorrect =
+    answers[currentQuestion.id] === currentQuestion.correctAnswerIndex;
+  const answeredInCurrentUnit = currentUnit.questions.filter(
+    (question) => answers[question.id] !== undefined,
+  ).length;
+  const isCurrentUnitComplete =
+    answeredInCurrentUnit === currentUnit.questions.length;
 
-  const { correctCount, score, maximum: scoreMaximum } = scorePracticeUnits(practiceUnits, answers)
-  const currentGroup = currentUnit.group
+  const {
+    correctCount,
+    score,
+    maximum: scoreMaximum,
+  } = scorePracticeUnits(practiceUnits, answers);
+  const currentGroup = currentUnit.group;
 
   // Filtered review questions
   const reviewQuestions = playableQuestions.filter((q) => {
     if (reviewFilter === "incorrect") {
-      return answers[q.id] !== q.correctAnswerIndex
+      return answers[q.id] !== q.correctAnswerIndex;
     }
-    return true
-  })
+    return true;
+  });
 
   return (
     <PageShell className={cn("max-w-4xl", !isFinished && "pb-28 sm:pb-32")}>
+      // TODO: Breadcrumbs juga tidak dibutuhkan asat ini, karena nested route
+      nya tidak begitu dalam, cukup hanya dengan back button saya sudah cukup
+      untuk saat ini.
       <Breadcrumbs
         items={[
           { label: tNav("practice"), href: "/practice" },
           { label: localizedTitle },
         ]}
       />
-
       <PageHeader
         className="practice-player-header"
         eyebrow={
           <span className="flex flex-wrap items-center gap-2">
             <Badge variant="outline" className="font-mono text-[0.7rem]">
-              {practiceSet.targetLevel === "NON_JLPT" ? tPractice("levelNonJlpt") : practiceSet.targetLevel}
+              {practiceSet.targetLevel === "NON_JLPT"
+                ? tPractice("levelNonJlpt")
+                : practiceSet.targetLevel}
             </Badge>
           </span>
         }
@@ -224,7 +300,10 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
             <span>{t("topicLabel", { topic: localizedTopic })}</span>
             {!isFinished && (
               <span className="font-semibold text-primary">
-                {t("questionProgress", { current: currentIndex + 1, total: practiceUnits.length })}
+                {t("questionProgress", {
+                  current: currentIndex + 1,
+                  total: practiceUnits.length,
+                })}
               </span>
             )}
           </>
@@ -240,8 +319,16 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
               className="min-h-11 gap-1.5 text-xs"
               title={t("furiganaTooltip")}
             >
-              {showFurigana ? <Eye className="h-3.5 w-3.5" /> : <EyeOff className="h-3.5 w-3.5" />}
-              <span>{t("furiganaToggle", { status: showFurigana ? t("on") : t("off") })}</span>
+              {showFurigana ? (
+                <Eye className="h-3.5 w-3.5" />
+              ) : (
+                <EyeOff className="h-3.5 w-3.5" />
+              )}
+              <span>
+                {t("furiganaToggle", {
+                  status: showFurigana ? t("on") : t("off"),
+                })}
+              </span>
             </Button>
 
             {/* Translation Toggle */}
@@ -254,12 +341,15 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
               title={t("translationTooltip")}
             >
               <Languages className="h-3.5 w-3.5" />
-              <span>{t("translationToggle", { status: showTranslation ? t("shown") : t("hidden") })}</span>
+              <span>
+                {t("translationToggle", {
+                  status: showTranslation ? t("shown") : t("hidden"),
+                })}
+              </span>
             </Button>
           </div>
         }
       />
-
       {/* QUIZ VIEW (When not finished) */}
       {!isFinished ? (
         <div className="space-y-6">
@@ -269,7 +359,10 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
             aria-valuemin={0}
             aria-valuemax={100}
             aria-valuenow={progressPercent}
-            aria-label={t("questionProgress", { current: currentIndex + 1, total: practiceUnits.length })}
+            aria-label={t("questionProgress", {
+              current: currentIndex + 1,
+              total: practiceUnits.length,
+            })}
             className="h-2 w-full rounded-full bg-muted overflow-hidden"
           >
             <div
@@ -282,188 +375,378 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
           {currentGroup ? (
             <Card className="border-border/80 shadow-md">
               <CardHeader className="space-y-4 p-6 pb-4">
-                <Badge variant="secondary" className="w-fit text-xs">{t("typeTrueFalse")}</Badge>
+                <Badge variant="secondary" className="w-fit text-xs">
+                  {t("typeTrueFalse")}
+                </Badge>
                 <div className="space-y-3 text-base font-normal leading-loose">
-                  {showFurigana ? <FuriganaTokenText text={currentGroup.contextMarkup} /> : currentGroup.context}
-                  {currentGroup.imageUrl && currentGroup.imageWidth && currentGroup.imageHeight && <Image className="h-auto max-w-full rounded-md" src={currentGroup.imageUrl} width={currentGroup.imageWidth} height={currentGroup.imageHeight} alt={japanese ? "問題の図" : "Ilustrasi soal"} />}
+                  {showFurigana ? (
+                    <FuriganaTokenText text={currentGroup.contextMarkup} />
+                  ) : (
+                    currentGroup.context
+                  )}
+                  {currentGroup.imageUrl &&
+                    currentGroup.imageWidth &&
+                    currentGroup.imageHeight && (
+                      <Image
+                        className="h-auto max-w-full rounded-md"
+                        src={currentGroup.imageUrl}
+                        width={currentGroup.imageWidth}
+                        height={currentGroup.imageHeight}
+                        alt={japanese ? "問題の図" : "Ilustrasi soal"}
+                      />
+                    )}
                 </div>
               </CardHeader>
               <CardContent className="space-y-6 p-6 pt-2">
                 {currentUnit.questions.map((question) => {
-                  const selected = selectedOptions[question.id] ?? answers[question.id] ?? null
-                  const confirmed = answers[question.id] !== undefined
-                  const correct = answers[question.id] === question.correctAnswerIndex
-                  return <section key={question.id} aria-labelledby={`group-child-${question.id}`} onFocusCapture={() => setActiveQuestionId(question.id)} className="space-y-3 border-t border-border/70 pt-5 first:border-0 first:pt-0">
-                    <h3 id={`group-child-${question.id}`} className="text-base font-semibold">{t("questionNumber", { number: practiceSet.questions.indexOf(question) + 1 })}</h3>
-                    <div className="text-base font-medium leading-loose">{showFurigana ? <FuriganaTokenText text={question.prompt} /> : question.promptPlain}</div>
-                    {showTranslation && question.translationId && <p className="text-xs text-muted-foreground">{question.translationId}</p>}
-                    <div className="grid grid-cols-2 gap-2">
-                      {question.options.map((option, optionIndex) => {
-                        const isSelected = selected === optionIndex
-                        const isCorrect = optionIndex === question.correctAnswerIndex
-                        return <button key={optionIndex} type="button" aria-pressed={isSelected} disabled={confirmed}
-                          onClick={() => selectAnswer(question.id, optionIndex)}
-                          onKeyDown={(event) => {
-                            if (event.key === "Enter") {
-                              event.preventDefault()
-                              if (!event.repeat) handleConfirmAnswer(question)
-                            }
-                          }}
-                          className={cn("min-h-12 rounded-xl border p-3 text-base font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-default", isSelected ? "border-primary bg-primary/10 text-primary ring-2 ring-primary/30" : "border-border bg-card hover:bg-muted/40", confirmed && isCorrect && "border-emerald-500 bg-emerald-50 text-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-200", confirmed && isSelected && !isCorrect && "border-destructive bg-destructive/10 text-destructive")}
-                        >{option}</button>
-                      })}
-                    </div>
-                    {!confirmed ? <Button variant="outline" size="sm" disabled={selected === null} onClick={() => handleConfirmAnswer(question)}>{t("confirmAnswer")}</Button> : <div className="space-y-3 rounded-xl border border-border/80 bg-muted/30 p-4">
-                      <div className={cn("font-bold text-sm", correct ? "text-emerald-700 dark:text-emerald-300" : "text-destructive")}>{correct ? t("correctNotice") : t("incorrectNotice", { answer: question.correctAnswerIndex === 0 ? "○" : "×" })}</div>
-                      <div className="space-y-1 text-sm leading-relaxed"><p className="font-semibold text-muted-foreground text-xs">{t("explanationLabel")}</p>{showFurigana ? <FuriganaTokenText text={question.explanationMarkup || question.explanationJa} /> : <p>{question.explanationJa}</p>}{question.explanationId && <p className="border-t border-border/50 pt-1 text-xs text-muted-foreground">{question.explanationId}</p>}</div>
-                      <Button variant="outline" size="sm" onClick={() => handleEditAnswer(question.id)}>{t("editAnswer")}</Button>
-                    </div>}
-                  </section>
+                  const selected =
+                    selectedOptions[question.id] ??
+                    answers[question.id] ??
+                    null;
+                  const confirmed = answers[question.id] !== undefined;
+                  const correct =
+                    answers[question.id] === question.correctAnswerIndex;
+                  return (
+                    <section
+                      key={question.id}
+                      aria-labelledby={`group-child-${question.id}`}
+                      onFocusCapture={() => setActiveQuestionId(question.id)}
+                      className="space-y-3 border-t border-border/70 pt-5 first:border-0 first:pt-0"
+                    >
+                      <h3
+                        id={`group-child-${question.id}`}
+                        className="text-base font-semibold"
+                      >
+                        {t("questionNumber", {
+                          number: practiceSet.questions.indexOf(question) + 1,
+                        })}
+                      </h3>
+                      <div className="text-base font-medium leading-loose">
+                        {showFurigana ? (
+                          <FuriganaTokenText text={question.prompt} />
+                        ) : (
+                          question.promptPlain
+                        )}
+                      </div>
+                      {showTranslation && question.translationId && (
+                        <p className="text-xs text-muted-foreground">
+                          {question.translationId}
+                        </p>
+                      )}
+                      <div className="grid grid-cols-2 gap-2">
+                        {question.options.map((option, optionIndex) => {
+                          const isSelected = selected === optionIndex;
+                          const isCorrect =
+                            optionIndex === question.correctAnswerIndex;
+                          return (
+                            <button
+                              key={optionIndex}
+                              type="button"
+                              aria-pressed={isSelected}
+                              disabled={confirmed}
+                              onClick={() =>
+                                selectAnswer(question.id, optionIndex)
+                              }
+                              onKeyDown={(event) => {
+                                if (event.key === "Enter") {
+                                  event.preventDefault();
+                                  if (!event.repeat)
+                                    handleConfirmAnswer(question);
+                                }
+                              }}
+                              className={cn(
+                                "min-h-12 rounded-xl border p-3 text-base font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-default",
+                                isSelected
+                                  ? "border-primary bg-primary/10 text-primary ring-2 ring-primary/30"
+                                  : "border-border bg-card hover:bg-muted/40",
+                                confirmed &&
+                                  isCorrect &&
+                                  "border-emerald-500 bg-emerald-50 text-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-200",
+                                confirmed &&
+                                  isSelected &&
+                                  !isCorrect &&
+                                  "border-destructive bg-destructive/10 text-destructive",
+                              )}
+                            >
+                              {option}
+                            </button>
+                          );
+                        })}
+                      </div>
+                      {!confirmed ? (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          disabled={selected === null}
+                          onClick={() => handleConfirmAnswer(question)}
+                        >
+                          {t("confirmAnswer")}
+                        </Button>
+                      ) : (
+                        <div className="space-y-3 rounded-xl border border-border/80 bg-muted/30 p-4">
+                          <div
+                            className={cn(
+                              "font-bold text-sm",
+                              correct
+                                ? "text-emerald-700 dark:text-emerald-300"
+                                : "text-destructive",
+                            )}
+                          >
+                            {correct
+                              ? t("correctNotice")
+                              : t("incorrectNotice", {
+                                  answer:
+                                    question.correctAnswerIndex === 0
+                                      ? "○"
+                                      : "×",
+                                })}
+                          </div>
+                          <div className="space-y-1 text-sm leading-relaxed">
+                            <p className="font-semibold text-muted-foreground text-xs">
+                              {t("explanationLabel")}
+                            </p>
+                            {showFurigana ? (
+                              <FuriganaTokenText
+                                text={
+                                  question.explanationMarkup ||
+                                  question.explanationJa
+                                }
+                              />
+                            ) : (
+                              <p>{question.explanationJa}</p>
+                            )}
+                            {question.explanationId && (
+                              <p className="border-t border-border/50 pt-1 text-xs text-muted-foreground">
+                                {question.explanationId}
+                              </p>
+                            )}
+                          </div>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleEditAnswer(question.id)}
+                          >
+                            {t("editAnswer")}
+                          </Button>
+                        </div>
+                      )}
+                    </section>
+                  );
                 })}
               </CardContent>
             </Card>
           ) : (
-          <Card className="border-border/80 shadow-md">
-            <CardHeader className="p-6 pb-4">
-              <div className="flex items-center justify-between mb-3">
-                <Badge variant="secondary" className="text-xs">
-                  {currentQuestion.type === "TRUE_FALSE" ? t("typeTrueFalse") : t("typeMultipleChoice")}
-                </Badge>
-                <span className="text-xs text-muted-foreground">
-                  {t("topicLabel", { topic: localizedTopic })}
-                </span>
-              </div>
-
-              {/* Japanese Prompt with Furigana */}
-              <div className="text-lg sm:text-xl font-medium leading-loose text-foreground">
-                <>{currentQuestion.context && <div className="mb-4 space-y-1 text-base font-normal">{showFurigana ? <FuriganaTokenText text={currentQuestion.contextMarkup} /> : currentQuestion.context}</div>}{currentQuestion.imageUrl && currentQuestion.imageWidth && currentQuestion.imageHeight && <Image className="mb-4 h-auto max-w-full rounded-md" src={currentQuestion.imageUrl} width={currentQuestion.imageWidth} height={currentQuestion.imageHeight} alt={japanese ? "問題の図" : "Ilustrasi soal"} />}</>
-                {showFurigana ? <FuriganaTokenText text={currentQuestion.prompt} /> : currentQuestion.promptPlain}
-              </div>
-
-              {/* Optional Indonesian Translation */}
-              {showTranslation && currentQuestion.translationId && (
-                <div className="rounded-md bg-muted/40 p-2.5 text-xs text-muted-foreground border border-border/50 animate-in fade-in-50 mt-2">
-                  <span className="font-semibold text-foreground/80">{t("translationPrefix")} </span>
-                  {currentQuestion.translationId}
+            <Card className="border-border/80 shadow-md">
+              <CardHeader className="p-6 pb-4">
+                <div className="flex items-center justify-between mb-3">
+                  <Badge variant="secondary" className="text-xs">
+                    {currentQuestion.type === "TRUE_FALSE"
+                      ? t("typeTrueFalse")
+                      : t("typeMultipleChoice")}
+                  </Badge>
+                  <span className="text-xs text-muted-foreground">
+                    {t("topicLabel", { topic: localizedTopic })}
+                  </span>
                 </div>
-              )}
-            </CardHeader>
 
-            {/* Options List */}
-            <CardContent className="p-6 pt-2 space-y-3">
-              <div className="grid grid-cols-1 gap-2.5">
-                {currentQuestion.options.map((optionText, idx) => {
-                  const isSelected = selectedOption === idx
-                  const isCorrect = idx === currentQuestion.correctAnswerIndex
-
-                  let optionStyle = "border-border/80 bg-card hover:bg-muted/40 text-foreground"
-
-                  if (isAnswerConfirmed) {
-                    if (isCorrect) {
-                      optionStyle = "border-emerald-500 bg-emerald-50 text-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-200 ring-2 ring-emerald-500/30"
-                    } else if (isSelected) {
-                      optionStyle = "border-destructive bg-destructive/10 text-destructive dark:bg-destructive/20 ring-2 ring-destructive/30"
-                    } else {
-                      optionStyle = "border-border/40 opacity-60"
-                    }
-                  } else if (isSelected) {
-                    optionStyle = "border-primary bg-primary/10 text-primary ring-2 ring-primary/40 font-medium"
-                  }
-
-                  return (
-                    <button
-                      key={idx}
-                      type="button"
-                      aria-pressed={isSelected}
-                      disabled={isAnswerConfirmed}
-                      onClick={() => selectAnswer(currentQuestion.id, idx)}
-                      onKeyDown={(event) => {
-                        if (event.key === "Enter") {
-                          event.preventDefault()
-                          if (!event.repeat) handleConfirmAnswer(currentQuestion)
-                        }
-                      }}
-                      className={cn(
-                        "w-full rounded-xl border p-4 text-left text-sm sm:text-base transition-all flex items-center justify-between cursor-pointer disabled:cursor-default",
-                        optionStyle
+                {/* Japanese Prompt with Furigana */}
+                <div className="text-lg sm:text-xl font-medium leading-loose text-foreground">
+                  <>
+                    {currentQuestion.context && (
+                      <div className="mb-4 space-y-1 text-base font-normal">
+                        {showFurigana ? (
+                          <FuriganaTokenText
+                            text={currentQuestion.contextMarkup}
+                          />
+                        ) : (
+                          currentQuestion.context
+                        )}
+                      </div>
+                    )}
+                    {currentQuestion.imageUrl &&
+                      currentQuestion.imageWidth &&
+                      currentQuestion.imageHeight && (
+                        <Image
+                          className="mb-4 h-auto max-w-full rounded-md"
+                          src={currentQuestion.imageUrl}
+                          width={currentQuestion.imageWidth}
+                          height={currentQuestion.imageHeight}
+                          alt={japanese ? "問題の図" : "Ilustrasi soal"}
+                        />
                       )}
-                    >
-                      <div className="flex items-center gap-3">
-                        <span
-                          className={cn(
-                            "flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold shrink-0 border",
-                            isSelected
-                              ? "bg-primary text-primary-foreground border-primary"
-                              : "border-border text-muted-foreground bg-muted/30"
-                          )}
-                        >
-                          {currentQuestion.type === "TRUE_FALSE" ? (idx === 0 ? "○" : "×") : String.fromCharCode(65 + idx)}
-                        </span>
-                        <span>{currentQuestion.type === "TRUE_FALSE" && optionText === (idx === 0 ? "○" : "×") ? "" : optionText}</span>
-                      </div>
+                  </>
+                  {showFurigana ? (
+                    <FuriganaTokenText text={currentQuestion.prompt} />
+                  ) : (
+                    currentQuestion.promptPlain
+                  )}
+                </div>
 
-                      {/* Right indicator: Keyboard shortcut hint or Revealed Status Icon */}
-                      <div className="flex items-center gap-2">
-                        {!isAnswerConfirmed && (
-                          <span className="hidden sm:inline-block text-[0.68rem] text-muted-foreground/60 border border-border/60 rounded px-1.5 py-0.5 font-mono">
-                            {idx + 1}
-                          </span>
-                        )}
-                        {isAnswerConfirmed && (
-                          <div>
-                            {isCorrect && (
-                              <CheckCircle2 className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
-                            )}
-                            {!isCorrect && isSelected && (
-                              <XCircle className="h-5 w-5 text-destructive" />
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    </button>
-                  )
-                })}
-              </div>
+                {/* Optional Indonesian Translation */}
+                {showTranslation && currentQuestion.translationId && (
+                  <div className="rounded-md bg-muted/40 p-2.5 text-xs text-muted-foreground border border-border/50 animate-in fade-in-50 mt-2">
+                    <span className="font-semibold text-foreground/80">
+                      {t("translationPrefix")}{" "}
+                    </span>
+                    {currentQuestion.translationId}
+                  </div>
+                )}
+              </CardHeader>
 
-              {/* Revealed Explanation Panel */}
-              {isAnswerConfirmed && (
-                <div className="rounded-xl border border-border/80 bg-muted/30 p-4 sm:p-5 space-y-3 animate-in fade-in-50 mt-4">
-                  <div className="flex items-center gap-2">
-                    {isCurrentCorrect ? (
-                      <div className="flex items-center gap-1.5 text-emerald-700 dark:text-emerald-300 font-bold text-sm sm:text-base">
-                        <CheckCircle2 className="h-5 w-5" />
-                        {t("correctNotice")}
-                      </div>
-                    ) : (
-                      <div className="flex items-center gap-1.5 text-destructive font-bold text-sm sm:text-base">
-                        <XCircle className="h-5 w-5" />
-                        {t("incorrectNotice", {
-                          answer:
-                            currentQuestion.type === "TRUE_FALSE"
-                              ? currentQuestion.correctAnswerIndex === 0
+              {/* Options List */}
+              <CardContent className="p-6 pt-2 space-y-3">
+                <div className="grid grid-cols-1 gap-2.5">
+                  {/* TODO: Tolong revisi bagaimana bentuk pilihan atau options dalam soal maru/batsu. 
+                  karena ini hanya punya 2 nilai, lebih baik pilihannya dibuat lebih besar dan jelas, baik secara
+                  visual ataupun juga ukuran dan lainnya juga. */}
+                  {currentQuestion.options.map((optionText, idx) => {
+                    const isSelected = selectedOption === idx;
+                    const isCorrect =
+                      idx === currentQuestion.correctAnswerIndex;
+
+                    let optionStyle =
+                      "border-border/80 bg-card hover:bg-muted/40 text-foreground";
+
+                    if (isAnswerConfirmed) {
+                      if (isCorrect) {
+                        optionStyle =
+                          "border-emerald-500 bg-emerald-50 text-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-200 ring-2 ring-emerald-500/30";
+                      } else if (isSelected) {
+                        optionStyle =
+                          "border-destructive bg-destructive/10 text-destructive dark:bg-destructive/20 ring-2 ring-destructive/30";
+                      } else {
+                        optionStyle = "border-border/40 opacity-60";
+                      }
+                    } else if (isSelected) {
+                      optionStyle =
+                        "border-primary bg-primary/10 text-primary ring-2 ring-primary/40 font-medium";
+                    }
+
+                    return (
+                      <button
+                        key={idx}
+                        type="button"
+                        aria-pressed={isSelected}
+                        disabled={isAnswerConfirmed}
+                        onClick={() => selectAnswer(currentQuestion.id, idx)}
+                        onKeyDown={(event) => {
+                          if (event.key === "Enter") {
+                            event.preventDefault();
+                            if (!event.repeat)
+                              handleConfirmAnswer(currentQuestion);
+                          }
+                        }}
+                        className={cn(
+                          "w-full rounded-xl border p-4 text-left text-sm sm:text-base transition-all flex items-center justify-between cursor-pointer disabled:cursor-default",
+                          optionStyle,
+                        )}
+                      >
+                        <div className="flex items-center gap-3">
+                          <span
+                            className={cn(
+                              "flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold shrink-0 border",
+                              isSelected
+                                ? "bg-primary text-primary-foreground border-primary"
+                                : "border-border text-muted-foreground bg-muted/30",
+                            )}
+                          >
+                            {currentQuestion.type === "TRUE_FALSE"
+                              ? idx === 0
                                 ? "○"
                                 : "×"
-                              : String.fromCharCode(65 + currentQuestion.correctAnswerIndex),
-                        })}
-                      </div>
-                    )}
-                  </div>
+                              : String.fromCharCode(65 + idx)}
+                          </span>
+                          <span>
+                            {currentQuestion.type === "TRUE_FALSE" &&
+                            optionText === (idx === 0 ? "○" : "×")
+                              ? ""
+                              : optionText}
+                          </span>
+                        </div>
 
-                  {/* Japanese & Indonesian Explanation */}
-                  <div className="text-xs sm:text-sm leading-relaxed text-foreground space-y-1">
-                    <p className="font-semibold text-muted-foreground text-xs">{t("explanationLabel")}</p>
-                    {showFurigana ? <FuriganaTokenText text={currentQuestion.explanationMarkup || currentQuestion.explanationJa} /> : <p>{currentQuestion.explanationJa}</p>}
-                    {currentQuestion.explanationId && (
-                      <p className="text-xs text-muted-foreground pt-1 border-t border-border/50">
-                        {currentQuestion.explanationId}
-                      </p>
-                    )}
-                  </div>
+                        {/* Right indicator: Keyboard shortcut hint or Revealed Status Icon */}
+                        <div className="flex items-center gap-2">
+                          {!isAnswerConfirmed && (
+                            <span className="hidden sm:inline-block text-[0.68rem] text-muted-foreground/60 border border-border/60 rounded px-1.5 py-0.5 font-mono">
+                              {idx + 1}
+                            </span>
+                          )}
+                          {isAnswerConfirmed && (
+                            <div>
+                              {isCorrect && (
+                                <CheckCircle2 className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+                              )}
+                              {!isCorrect && isSelected && (
+                                <XCircle className="h-5 w-5 text-destructive" />
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      </button>
+                    );
+                  })}
                 </div>
-              )}
-              {isAnswerConfirmed && <Button variant="outline" size="sm" onClick={() => handleEditAnswer(currentQuestion.id)}>{t("editAnswer")}</Button>}
-            </CardContent>
-          </Card>
+
+                {/* Revealed Explanation Panel */}
+                {isAnswerConfirmed && (
+                  <div className="rounded-xl border border-border/80 bg-muted/30 p-4 sm:p-5 space-y-3 animate-in fade-in-50 mt-4">
+                    <div className="flex items-center gap-2">
+                      {isCurrentCorrect ? (
+                        <div className="flex items-center gap-1.5 text-emerald-700 dark:text-emerald-300 font-bold text-sm sm:text-base">
+                          <CheckCircle2 className="h-5 w-5" />
+                          {t("correctNotice")}
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-1.5 text-destructive font-bold text-sm sm:text-base">
+                          <XCircle className="h-5 w-5" />
+                          {t("incorrectNotice", {
+                            answer:
+                              currentQuestion.type === "TRUE_FALSE"
+                                ? currentQuestion.correctAnswerIndex === 0
+                                  ? "○"
+                                  : "×"
+                                : String.fromCharCode(
+                                    65 + currentQuestion.correctAnswerIndex,
+                                  ),
+                          })}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Japanese & Indonesian Explanation */}
+                    <div className="text-xs sm:text-sm leading-relaxed text-foreground space-y-1">
+                      <p className="font-semibold text-muted-foreground text-xs">
+                        {t("explanationLabel")}
+                      </p>
+                      {showFurigana ? (
+                        <FuriganaTokenText
+                          text={
+                            currentQuestion.explanationMarkup ||
+                            currentQuestion.explanationJa
+                          }
+                        />
+                      ) : (
+                        <p>{currentQuestion.explanationJa}</p>
+                      )}
+                      {currentQuestion.explanationId && (
+                        <p className="text-xs text-muted-foreground pt-1 border-t border-border/50">
+                          {currentQuestion.explanationId}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                )}
+                {isAnswerConfirmed && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleEditAnswer(currentQuestion.id)}
+                  >
+                    {t("editAnswer")}
+                  </Button>
+                )}
+              </CardContent>
+            </Card>
           )}
         </div>
       ) : (
@@ -475,26 +758,37 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
               <div
                 className={cn(
                   "mx-auto flex h-20 w-20 items-center justify-center rounded-full text-3xl font-extrabold shadow-xs",
-                  "bg-primary/10 text-primary border border-primary/20"
+                  "bg-primary/10 text-primary border border-primary/20",
                 )}
               >
-                  {Math.round((score / scoreMaximum) * 100)}%
+                {Math.round((score / scoreMaximum) * 100)}%
               </div>
 
               <div>
                 <h2 className="text-2xl font-bold tracking-tight">
                   {t("localResultTitle")}
                 </h2>
-                <p className="text-xs text-muted-foreground mt-1">{t("localResultDescription")}</p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  {t("localResultDescription")}
+                </p>
               </div>
 
               <div className="flex items-center justify-center gap-3 py-3 border-y flex-wrap border-border/60 text-xs">
                 <div>
-                  <span className="text-muted-foreground">{t("correctCountLabel")} </span>
-                  <strong className="text-foreground text-sm font-bold">{correctCount}</strong> / {totalQuestions}
-                  <span className="ml-2">({score}/{scoreMaximum})</span>
+                  <span className="text-muted-foreground">
+                    {t("correctCountLabel")}{" "}
+                  </span>
+                  <strong className="text-foreground text-sm font-bold">
+                    {correctCount}
+                  </strong>{" "}
+                  / {totalQuestions}
+                  <span className="ml-2">
+                    ({score}/{scoreMaximum})
+                  </span>
                 </div>
-                <span className="text-muted-foreground">{t("localOnlyResult")}</span>
+                <span className="text-muted-foreground">
+                  {t("localOnlyResult")}
+                </span>
               </div>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
@@ -507,7 +801,10 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
                 </Button>
                 <Link
                   href="/practice"
-                  className={cn(buttonVariants({ variant: "outline" }), "w-full sm:w-auto gap-2")}
+                  className={cn(
+                    buttonVariants({ variant: "outline" }),
+                    "w-full sm:w-auto gap-2",
+                  )}
                 >
                   {t("backToList")}
                 </Link>
@@ -534,10 +831,12 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
                       "px-3 py-1 text-xs font-medium rounded-md transition-colors whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60",
                       reviewFilter === "all"
                         ? "bg-background text-foreground shadow-xs"
-                        : "text-muted-foreground hover:text-foreground"
+                        : "text-muted-foreground hover:text-foreground",
                     )}
                   >
-                    {t("tabAllQuestions", { count: practiceSet.questions.length })}
+                    {t("tabAllQuestions", {
+                      count: practiceSet.questions.length,
+                    })}
                   </button>
                   <button
                     type="button"
@@ -547,11 +846,13 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
                       "px-3 py-1 text-xs font-medium rounded-md transition-colors flex items-center gap-1 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60",
                       reviewFilter === "incorrect"
                         ? "bg-destructive/15 text-destructive font-semibold shadow-xs"
-                        : "text-muted-foreground hover:text-foreground"
+                        : "text-muted-foreground hover:text-foreground",
                     )}
                   >
                     <XCircle className="h-3.5 w-3.5" />
-                    {t("tabIncorrectOnly", { count: totalQuestions - correctCount })}
+                    {t("tabIncorrectOnly", {
+                      count: totalQuestions - correctCount,
+                    })}
                   </button>
                 </div>
               }
@@ -566,11 +867,18 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
               />
             ) : (
               <div className="space-y-4">
-              {reviewQuestions.map((q) => {
-                const userChoice = answers[q.id]
-                const isCorrect = userChoice === q.correctAnswerIndex
-                const reviewGroup = q.groupId ? practiceSet.questionGroups.find((group) => group.id === q.groupId) : undefined
-                const isFirstShownGroupChild = !reviewGroup || reviewQuestions.find((item) => item.groupId === q.groupId)?.id === q.id
+                {reviewQuestions.map((q) => {
+                  const userChoice = answers[q.id];
+                  const isCorrect = userChoice === q.correctAnswerIndex;
+                  const reviewGroup = q.groupId
+                    ? practiceSet.questionGroups.find(
+                        (group) => group.id === q.groupId,
+                      )
+                    : undefined;
+                  const isFirstShownGroupChild =
+                    !reviewGroup ||
+                    reviewQuestions.find((item) => item.groupId === q.groupId)
+                      ?.id === q.id;
 
                   return (
                     <Card
@@ -578,29 +886,91 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
                       data-question-group={q.groupId ?? undefined}
                       className={cn(
                         "border-border/80 overflow-hidden",
-                        isCorrect ? "hover:border-emerald-500/30" : "hover:border-destructive/30"
+                        isCorrect
+                          ? "hover:border-emerald-500/30"
+                          : "hover:border-destructive/30",
                       )}
                     >
                       <CardHeader className="p-5 pb-3">
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-xs font-bold text-muted-foreground">
-                            {t("questionNumber", { number: playableQuestions.indexOf(q) + 1 })}
+                            {t("questionNumber", {
+                              number: playableQuestions.indexOf(q) + 1,
+                            })}
                           </span>
                           {isCorrect ? (
                             <Badge variant="success" className="text-xs gap-1">
-                              <CheckCircle2 className="h-3 w-3" /> {t("correctBadge")}
+                              <CheckCircle2 className="h-3 w-3" />{" "}
+                              {t("correctBadge")}
                             </Badge>
                           ) : (
-                            <Badge variant="destructive" className="text-xs gap-1">
-                              <XCircle className="h-3 w-3" /> {t("incorrectBadge")}
+                            <Badge
+                              variant="destructive"
+                              className="text-xs gap-1"
+                            >
+                              <XCircle className="h-3 w-3" />{" "}
+                              {t("incorrectBadge")}
                             </Badge>
                           )}
                         </div>
 
                         {/* Prompt */}
                         <div className="text-base font-medium leading-relaxed">
-                          {reviewGroup ? isFirstShownGroupChild && <div className="space-y-1 text-sm font-normal" data-question-group={reviewGroup.id}>{showFurigana ? <FuriganaTokenText text={reviewGroup.contextMarkup} /> : reviewGroup.context}{reviewGroup.imageUrl && reviewGroup.imageWidth && reviewGroup.imageHeight && <Image className="my-3 h-auto max-w-full rounded-md" src={reviewGroup.imageUrl} width={reviewGroup.imageWidth} height={reviewGroup.imageHeight} alt={japanese ? "問題の図" : "Ilustrasi soal"} />}</div> : <>{q.context && <div className="space-y-1 text-sm font-normal">{showFurigana ? <FuriganaTokenText text={q.contextMarkup} /> : q.context}</div>}{q.imageUrl && q.imageWidth && q.imageHeight && <Image className="my-3 h-auto max-w-full rounded-md" src={q.imageUrl} width={q.imageWidth} height={q.imageHeight} alt={japanese ? "問題の図" : "Ilustrasi soal"} />}</>}
-                          {showFurigana ? <FuriganaTokenText text={q.prompt} /> : q.promptPlain}
+                          {reviewGroup ? (
+                            isFirstShownGroupChild && (
+                              <div
+                                className="space-y-1 text-sm font-normal"
+                                data-question-group={reviewGroup.id}
+                              >
+                                {showFurigana ? (
+                                  <FuriganaTokenText
+                                    text={reviewGroup.contextMarkup}
+                                  />
+                                ) : (
+                                  reviewGroup.context
+                                )}
+                                {reviewGroup.imageUrl &&
+                                  reviewGroup.imageWidth &&
+                                  reviewGroup.imageHeight && (
+                                    <Image
+                                      className="my-3 h-auto max-w-full rounded-md"
+                                      src={reviewGroup.imageUrl}
+                                      width={reviewGroup.imageWidth}
+                                      height={reviewGroup.imageHeight}
+                                      alt={
+                                        japanese ? "問題の図" : "Ilustrasi soal"
+                                      }
+                                    />
+                                  )}
+                              </div>
+                            )
+                          ) : (
+                            <>
+                              {q.context && (
+                                <div className="space-y-1 text-sm font-normal">
+                                  {showFurigana ? (
+                                    <FuriganaTokenText text={q.contextMarkup} />
+                                  ) : (
+                                    q.context
+                                  )}
+                                </div>
+                              )}
+                              {q.imageUrl && q.imageWidth && q.imageHeight && (
+                                <Image
+                                  className="my-3 h-auto max-w-full rounded-md"
+                                  src={q.imageUrl}
+                                  width={q.imageWidth}
+                                  height={q.imageHeight}
+                                  alt={japanese ? "問題の図" : "Ilustrasi soal"}
+                                />
+                              )}
+                            </>
+                          )}
+                          {showFurigana ? (
+                            <FuriganaTokenText text={q.prompt} />
+                          ) : (
+                            q.promptPlain
+                          )}
                         </div>
 
                         {showTranslation && q.translationId && (
@@ -614,8 +984,8 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
                         {/* Options summary */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                           {q.options.map((opt, optIdx) => {
-                            const isUserPick = userChoice === optIdx
-                            const isAnswer = optIdx === q.correctAnswerIndex
+                            const isUserPick = userChoice === optIdx;
+                            const isAnswer = optIdx === q.correctAnswerIndex;
 
                             return (
                               <div
@@ -625,26 +995,47 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
                                   isAnswer
                                     ? "border-emerald-500 bg-emerald-50 text-emerald-900 dark:bg-emerald-950/30 dark:text-emerald-200 font-semibold"
                                     : isUserPick
-                                    ? "border-destructive bg-destructive/10 text-destructive"
-                                    : "border-border/50 text-muted-foreground bg-muted/10"
+                                      ? "border-destructive bg-destructive/10 text-destructive"
+                                      : "border-border/50 text-muted-foreground bg-muted/10",
                                 )}
                               >
                                 <span>
                                   {q.type === "TRUE_FALSE"
-                                    ? opt === (optIdx === 0 ? "○" : "×") ? opt : `${optIdx === 0 ? "○" : "×"} ${opt}`
+                                    ? opt === (optIdx === 0 ? "○" : "×")
+                                      ? opt
+                                      : `${optIdx === 0 ? "○" : "×"} ${opt}`
                                     : `${String.fromCharCode(65 + optIdx)}. ${opt}`}
                                 </span>
-                                {isAnswer && <span className="text-[0.68rem] bg-emerald-600 text-white px-1.5 py-0.2 rounded font-normal">{t("correctAnswerTag")}</span>}
-                                {!isAnswer && isUserPick && <span className="text-[0.68rem] bg-destructive text-white px-1.5 py-0.2 rounded font-normal">{t("yourChoiceTag")}</span>}
+                                {isAnswer && (
+                                  <span className="text-[0.68rem] bg-emerald-600 text-white px-1.5 py-0.2 rounded font-normal">
+                                    {t("correctAnswerTag")}
+                                  </span>
+                                )}
+                                {!isAnswer && isUserPick && (
+                                  <span className="text-[0.68rem] bg-destructive text-white px-1.5 py-0.2 rounded font-normal">
+                                    {t("yourChoiceTag")}
+                                  </span>
+                                )}
                               </div>
-                            )
+                            );
                           })}
                         </div>
 
                         {/* Explanation */}
                         <div className="rounded-lg bg-muted/40 p-3 border border-border/50 space-y-1">
-                          <p className="font-semibold text-foreground">{t("explanationLabel")}</p>
-                          {showFurigana ? <FuriganaTokenText text={q.explanationMarkup || q.explanationJa} className="text-muted-foreground" /> : <p className="text-muted-foreground">{q.explanationJa}</p>}
+                          <p className="font-semibold text-foreground">
+                            {t("explanationLabel")}
+                          </p>
+                          {showFurigana ? (
+                            <FuriganaTokenText
+                              text={q.explanationMarkup || q.explanationJa}
+                              className="text-muted-foreground"
+                            />
+                          ) : (
+                            <p className="text-muted-foreground">
+                              {q.explanationJa}
+                            </p>
+                          )}
                           {q.explanationId && (
                             <p className="text-muted-foreground pt-1 border-t border-border/40 text-[0.72rem]">
                               {q.explanationId}
@@ -653,14 +1044,13 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
                         </div>
                       </CardContent>
                     </Card>
-                  )
+                  );
                 })}
               </div>
             )}
           </div>
         </div>
       )}
-
       {/* Sticky Bottom Navigation & Action Dock (Prevents layout jump and scroll fatigue) */}
       {!isFinished && (
         <div
@@ -672,7 +1062,12 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
             {/* Left: Feedback / Status Indicator */}
             <div className="flex items-center gap-2 text-xs sm:text-sm">
               {currentGroup ? (
-                <span className="text-xs text-muted-foreground">{t("groupAnswerProgress", { current: answeredInCurrentUnit, total: currentUnit.questions.length })}</span>
+                <span className="text-xs text-muted-foreground">
+                  {t("groupAnswerProgress", {
+                    current: answeredInCurrentUnit,
+                    total: currentUnit.questions.length,
+                  })}
+                </span>
               ) : !isAnswerConfirmed ? (
                 selectedOption === null ? (
                   <div className="flex items-center gap-2 text-muted-foreground">
@@ -721,7 +1116,9 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
                           ? currentQuestion.correctAnswerIndex === 0
                             ? "○"
                             : "×"
-                          : String.fromCharCode(65 + currentQuestion.correctAnswerIndex),
+                          : String.fromCharCode(
+                              65 + currentQuestion.correctAnswerIndex,
+                            ),
                     })}
                   </span>
                   <span className="hidden sm:inline text-[0.7rem] font-normal text-muted-foreground bg-destructive/10 px-1.5 py-0.5 rounded border border-destructive/20">
@@ -733,10 +1130,32 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
 
             {/* Right: Primary Action Button (Fixed position, never moves or hides) */}
             <div className="flex items-center gap-2 shrink-0">
-              <Button variant="outline" size="default" disabled={currentIndex === 0} onClick={handlePreviousQuestion}>{t("previousQuestion")}</Button>
+              <Button
+                variant="outline"
+                size="default"
+                disabled={currentIndex === 0}
+                onClick={handlePreviousQuestion}
+              >
+                {t("previousQuestion")}
+              </Button>
               {currentGroup ? (
-                <Button size="default" disabled={!isCurrentUnitComplete} onClick={handleNextQuestion} className="w-full sm:w-auto gap-2">
-                  {currentIndex + 1 < practiceUnits.length ? <>{t("nextQuestion")}<ArrowRight className="h-4 w-4" /></> : <>{t("viewResults")}<Sparkles className="h-4 w-4" /></>}
+                <Button
+                  size="default"
+                  disabled={!isCurrentUnitComplete}
+                  onClick={handleNextQuestion}
+                  className="w-full sm:w-auto gap-2"
+                >
+                  {currentIndex + 1 < practiceUnits.length ? (
+                    <>
+                      {t("nextQuestion")}
+                      <ArrowRight className="h-4 w-4" />
+                    </>
+                  ) : (
+                    <>
+                      {t("viewResults")}
+                      <Sparkles className="h-4 w-4" />
+                    </>
+                  )}
                 </Button>
               ) : !isAnswerConfirmed ? (
                 <Button
@@ -758,7 +1177,7 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
                     "w-full sm:w-auto gap-2 shadow-xs text-xs sm:text-sm font-semibold h-10 px-5",
                     isCurrentCorrect
                       ? "bg-emerald-600 hover:bg-emerald-700 text-white"
-                      : "bg-primary text-primary-foreground"
+                      : "bg-primary text-primary-foreground",
                   )}
                 >
                   {currentIndex + 1 < practiceUnits.length ? (
@@ -785,5 +1204,5 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
         </div>
       )}
     </PageShell>
-  )
+  );
 }
