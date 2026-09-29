@@ -1,16 +1,16 @@
 # Graph Report - genshu  (2026-09-27)
 
 ## Corpus Check
-- 269 files · ~312,072 words
+- 265 files · ~307,192 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1391 nodes · 1985 edges · 237 communities (137 shown, 99 thin omitted)
+- 1363 nodes · 1955 edges · 243 communities (143 shown, 99 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 27 edges (avg confidence: 0.81)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `52402ad9`
+- Built from commit: `e971c9bc`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -22,11 +22,11 @@
 - dropdown-menu.tsx
 - data-context.tsx
 - dependencies
-- staff/materials/[slug]/page.tsx
+- Genshu Agent Instructions
 - Narrow Effect Dependencies
 - Extract to Memoized Components
 - Cache Repeated Function Calls
-- Release review and remaining work
+- Genshu AI development workflow
 - Use useTransition Over Manual Loading States
 - Prevent Hydration Mismatch Without Flickering
 - Deduplicate Global Event Listeners
@@ -109,14 +109,14 @@
 - content-repository.ts
 - Section Definitions
 - request.ts
-- staff/practice/[id]/page.tsx
-- server.ts
+- 5. Release Scope
+- 6. Language Rules
 - createClient
 - Supabase Postgres Best Practices
 - 2-3
-- practice-actions.test.js
+- 3. Primary Users
 - Commands
-- practice-units.ts
+- 9. Technical Direction
 - advanced-full-text-search.md
 - Genshu — Project Source of Truth
 - advanced-jsonb-indexing.md
@@ -163,12 +163,12 @@
 - import-gentsuki-ready-web.ts
 - sourceFiles
 - assetMeta
-- src/proxy.ts
+- 5141
 - antigravity-rtk-rules.md
 - 1-10
 - 6101
 - next.config.ts
-- 1-1
+- practice-units.ts
 - The Fixes
 - 1-2
 - 1-3
@@ -221,6 +221,7 @@
 - 4481
 - 5011
 - 5101
+- 10. Data Platform
 - 5191
 - 5241
 - 5281
@@ -230,13 +231,14 @@
 - 5471
 - 5481
 - 6051
+- staff/practice/[id]/page.tsx
 - 6161
 - 6201
 - 6251
 - 6301
 - 6361
 - 6401
-- 6451
+- practice-actions.test.js
 - 6471
 - 6481
 - その他の危険 標識
@@ -249,6 +251,10 @@
 - 車両横断禁止 標識
 - 車線減少 警戒標識
 - 転回禁止 標示
+- staff/materials/[slug]/page.tsx
+- server.ts
+- src/proxy.ts
+- 6451
 - verify.ts
 - layout.tsx
 
@@ -271,10 +277,10 @@
   .agents/skills/vercel-react-best-practices/rules/js-cache-function-results.md → .agents/skills/vercel-react-best-practices/rules/js-cache-property-access.md
 - `Cache Repeated Function Calls` --semantically_similar_to--> `Cache Storage API Calls`  [INFERRED] [semantically similar]
   .agents/skills/vercel-react-best-practices/rules/js-cache-function-results.md → .agents/skills/vercel-react-best-practices/rules/js-cache-storage.md
-- `Genshu README` --references--> `Genshu Agent Instructions`  [EXTRACTED]
-  README.md → AGENTS.md
 - `CSS content-visibility for Long Lists` --semantically_similar_to--> `Use useDeferredValue for Expensive Derived Renders`  [INFERRED] [semantically similar]
   .agents/skills/vercel-react-best-practices/rules/rendering-content-visibility.md → .agents/skills/vercel-react-best-practices/rules/rerender-use-deferred-value.md
+- `Use useTransition Over Manual Loading States` --semantically_similar_to--> `Use Transitions for Non-Urgent Updates`  [INFERRED] [semantically similar]
+  .agents/skills/vercel-react-best-practices/rules/rendering-usetransition-loading.md → .agents/skills/vercel-react-best-practices/rules/rerender-transitions.md
 
 ## Import Cycles
 - None detected.
@@ -285,15 +291,15 @@
 - **Derived Dependency Minimization** — agents_skills_vercel_react_best_practices_rules_rerender_dependencies_narrow_effect_dependencies, agents_skills_vercel_react_best_practices_rules_rerender_derived_state_no_effect_calculate_derived_state, agents_skills_vercel_react_best_practices_rules_rerender_derived_state_subscribe_to_derived_state, agents_skills_vercel_react_best_practices_rules_rerender_split_combined_hooks_split_hook_computations [INFERRED 0.85]
 - **React Concurrent Rendering Responsiveness** — agents_skills_vercel_react_best_practices_rules_rendering_usetransition_loading_use_transition_loading, agents_skills_vercel_react_best_practices_rules_rerender_transitions_transitions_for_non_urgent_updates, agents_skills_vercel_react_best_practices_rules_rerender_use_deferred_value_use_deferred_value [INFERRED 0.85]
 
-## Communities (237 total, 99 thin omitted)
+## Communities (243 total, 99 thin omitted)
 
 ### Community 0 - "cohorts/[id]/page.tsx"
 Cohesion: 0.07
 Nodes (81): class-variance-authority, lucide-react, next-intl, react, AssignmentDetailPage(), AssignmentsPage(), SessionRollCallPage(), STATUS_OPTIONS (+73 more)
 
 ### Community 1 - "package.json"
-Cohesion: 0.10
-Nodes (19): ignoreScripts, name, packageManager, private, trustedDependencies, version, babel-plugin-react-compiler, @base-ui/react (+11 more)
+Cohesion: 0.09
+Nodes (21): ignoreScripts, name, packageManager, patchedDependencies, next@16.3.5, private, trustedDependencies, version (+13 more)
 
 ### Community 2 - "components.json"
 Cohesion: 0.09
@@ -311,9 +317,9 @@ Nodes (37): CohortMembers, CohortRosterPanelsProps, StudentProfileDrawerProps, D
 Cohesion: 0.14
 Nodes (14): dependencies, @base-ui/react, class-variance-authority, cn, lucide-react, next, next-intl, next-themes (+6 more)
 
-### Community 7 - "staff/materials/[slug]/page.tsx"
-Cohesion: 0.26
-Nodes (9): field(), saveMaterial(), dynamic, MaterialRow, blank(), MaterialSectionsEditor(), StaffActionForm(), StaffFormState (+1 more)
+### Community 7 - "Genshu Agent Instructions"
+Cohesion: 0.38
+Nodes (5): Architectural Change Rules, Genshu Agent Instructions, Source of Truth Hierarchy, Worker and Reviewer Protocol, Genshu README
 
 ### Community 8 - "Narrow Effect Dependencies"
 Cohesion: 0.33
@@ -327,9 +333,9 @@ Nodes (5): Hoist Static JSX Elements, React Compiler, Extract to Memoized Compon
 Cohesion: 0.50
 Nodes (4): Version and Minimize localStorage Data, Cache Repeated Function Calls, Cache Property Access in Loops, Cache Storage API Calls
 
-### Community 11 - "Release review and remaining work"
-Cohesion: 0.05
-Nodes (40): Architectural Change Rules, Genshu Agent Instructions, Source of Truth Hierarchy, Worker and Reviewer Protocol, Decision boundaries, Development loop, Genshu AI development workflow, Local learning-content database (+32 more)
+### Community 11 - "Genshu AI development workflow"
+Cohesion: 0.22
+Nodes (9): Decision boundaries, Development loop, Genshu AI development workflow, Local learning-content database, Repository knowledge, Reviewer and worker boundaries, Sources and scope, Staff access setup (+1 more)
 
 ### Community 12 - "Use useTransition Over Manual Loading States"
 Cohesion: 0.50
@@ -399,13 +405,13 @@ Nodes (9): 1. Query Performance (query), 2. Connection Management (conn), 3. Sec
 Cohesion: 0.50
 Nodes (3): defaultLocale, Locale, locales
 
-### Community 94 - "staff/practice/[id]/page.tsx"
-Cohesion: 0.23
-Nodes (11): contentField(), field(), optionalDimension(), savePracticeSet(), dynamic, SetRow, blank(), EditableQuestion (+3 more)
+### Community 94 - "5. Release Scope"
+Cohesion: 0.29
+Nodes (7): 5. Release Scope, First live release, First live release: Practice, Later release: Assignments, Later release: Attendance, Later release: Exams, Learning materials
 
-### Community 95 - "server.ts"
-Cohesion: 0.24
-Nodes (6): names, original, @supabase/ssr, Database, Json, Table
+### Community 95 - "6. Language Rules"
+Cohesion: 0.40
+Nodes (5): 6. Language Rules, Application Interface, Assignments and Exams, Furigana, Learning Content
 
 ### Community 96 - "createClient"
 Cohesion: 0.18
@@ -419,21 +425,21 @@ Nodes (5): How to Use, References, Rule Categories by Priority, Supabase Postgre
 Cohesion: 0.50
 Nodes (4): height, sha, width, 2-3
 
-### Community 99 - "practice-actions.test.js"
-Cohesion: 0.15
-Nodes (5): catalogRows, redirectSignal, rpcCalls, storedGroups, storedQuestions
+### Community 99 - "3. Primary Users"
+Cohesion: 0.50
+Nodes (4): 3.1 Gakusei — 学生, 3.2 Sensei — 先生, 3.3 Tantōsha — 担当者, 3. Primary Users
 
 ### Community 100 - "Commands"
 Cohesion: 0.20
 Nodes (10): Commands, Core, DevTools, Keyboard, Mouse, Navigation, Network, Save as (+2 more)
 
-### Community 101 - "practice-units.ts"
-Cohesion: 0.15
-Nodes (17): PracticePlayer(), buildPracticeUnits(), CatalogGroup, CatalogQuestion, catalogGroups, catalogQuestions, group, groupQuestions() (+9 more)
+### Community 101 - "9. Technical Direction"
+Cohesion: 0.50
+Nodes (4): 9. Technical Direction, Application Framework, Runtime and Package Manager, UI
 
 ### Community 103 - "Genshu — Project Source of Truth"
-Cohesion: 0.04
-Nodes (47): 10. Data Platform, 11. Authentication, 12. File Storage, 13. Deployment Direction, 14. Architecture Principle, 15. Anti-Overengineering Rules, 16. UX Principles, 17. Mobile and Desktop (+39 more)
+Cohesion: 0.08
+Nodes (24): 11. Authentication, 12. File Storage, 13. Deployment Direction, 14. Architecture Principle, 15. Anti-Overengineering Rules, 16. UX Principles, 17. Mobile and Desktop, 18. Data Ownership (+16 more)
 
 ### Community 135 - "Cookies"
 Cohesion: 0.06
@@ -485,11 +491,11 @@ Nodes (13): sourceFiles, book_1.json, book_2.json, book_3.json, genchare_1.json,
 
 ### Community 147 - "assetMeta"
 Cohesion: 0.25
-Nodes (7): height, sha, width, assetMeta, 5141, commit, repository
+Nodes (7): height, sha, width, assetMeta, 1-1, commit, repository
 
-### Community 148 - "src/proxy.ts"
-Cohesion: 0.47
-Nodes (4): updateSession(), config, prototypePaths, proxy()
+### Community 148 - "5141"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 5141
 
 ### Community 150 - "1-10"
 Cohesion: 0.50
@@ -503,9 +509,9 @@ Nodes (4): height, sha, width, 6101
 Cohesion: 0.50
 Nodes (3): nextConfig, withNextIntl, next
 
-### Community 154 - "1-1"
-Cohesion: 0.50
-Nodes (4): height, sha, width, 1-1
+### Community 154 - "practice-units.ts"
+Cohesion: 0.15
+Nodes (17): PracticePlayer(), buildPracticeUnits(), CatalogGroup, CatalogQuestion, catalogGroups, catalogQuestions, group, groupQuestions() (+9 more)
 
 ### Community 155 - "The Fixes"
 Cohesion: 0.09
@@ -715,6 +721,10 @@ Nodes (4): height, sha, width, 5011
 Cohesion: 0.50
 Nodes (4): height, sha, width, 5101
 
+### Community 207 - "10. Data Platform"
+Cohesion: 0.67
+Nodes (3): 10. Data Platform, Database Access Layer, Local Development
+
 ### Community 208 - "5191"
 Cohesion: 0.50
 Nodes (4): height, sha, width, 5191
@@ -751,6 +761,10 @@ Nodes (4): height, sha, width, 5481
 Cohesion: 0.50
 Nodes (4): height, sha, width, 6051
 
+### Community 217 - "staff/practice/[id]/page.tsx"
+Cohesion: 0.23
+Nodes (11): contentField(), field(), optionalDimension(), savePracticeSet(), dynamic, SetRow, blank(), EditableQuestion (+3 more)
+
 ### Community 218 - "6161"
 Cohesion: 0.50
 Nodes (4): height, sha, width, 6161
@@ -775,9 +789,9 @@ Nodes (4): height, sha, width, 6361
 Cohesion: 0.50
 Nodes (4): height, sha, width, 6401
 
-### Community 224 - "6451"
-Cohesion: 0.50
-Nodes (4): height, sha, width, 6451
+### Community 224 - "practice-actions.test.js"
+Cohesion: 0.15
+Nodes (5): catalogRows, redirectSignal, rpcCalls, storedGroups, storedQuestions
 
 ### Community 225 - "6471"
 Cohesion: 0.50
@@ -827,6 +841,22 @@ Nodes (4): 車線減少 警戒標識 , height, sha, width
 Cohesion: 0.50
 Nodes (4): 転回禁止 標示 , height, sha, width
 
+### Community 237 - "staff/materials/[slug]/page.tsx"
+Cohesion: 0.26
+Nodes (9): field(), saveMaterial(), dynamic, MaterialRow, blank(), MaterialSectionsEditor(), StaffActionForm(), StaffFormState (+1 more)
+
+### Community 238 - "server.ts"
+Cohesion: 0.24
+Nodes (6): names, original, @supabase/ssr, Database, Json, Table
+
+### Community 239 - "src/proxy.ts"
+Cohesion: 0.47
+Nodes (4): updateSession(), config, prototypePaths, proxy()
+
+### Community 240 - "6451"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 6451
+
 ### Community 263 - "verify.ts"
 Cohesion: 0.36
 Nodes (9): isObject(), JsonObject, keyTypes(), locales, output(), readLocale(), run(), validateLocales() (+1 more)
@@ -836,24 +866,24 @@ Cohesion: 0.28
 Nodes (5): next-themes, metadata, AppHeader(), LegacyDataProvider(), ThemeProvider()
 
 ## Knowledge Gaps
-- **868 isolated node(s):** `names`, `original`, `JsonObject`, `locales`, `$schema` (+863 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 956 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **847 isolated node(s):** `names`, `original`, `JsonObject`, `locales`, `$schema` (+842 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 935 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **99 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `assetMeta` connect `assetMeta` to `2-3`, `1-10`, `6101`, `1-1`, `1-2`, `1-3`, `1-4`, `1-5`, `1-6`, `1-7`, `1-8`, `1-9`, `2-10`, `2-1`, `2-2`, `2-4`, `2-5`, `2-6`, `2-7`, `2-8`, `2-9`, `3031`, `3091`, `3131`, `3211`, `3271`, `3311`, `3381`, `3461`, `3471`, `3481`, `3-10`, `3-11`, `3-1`, `3-2`, `3-3`, `3-4`, `3-5`, `3-6`, `3-7`, `3-8`, `3-9`, `4051`, `4121`, `4161`, `4191`, `4241`, `4271`, `4401`, `4421`, `4451`, `4471`, `4481`, `5011`, `5101`, `5191`, `5241`, `5281`, `5331`, `5401`, `5451`, `5471`, `5481`, `6051`, `6161`, `6201`, `6251`, `6301`, `6361`, `6401`, `6451`, `6471`, `6481`, `その他の危険 標識`, `二輪の自動車以外通行止め 標識`, `合流注意 警戒標識`, `専用通行帯 原付 通行`, `左折可 標識 日本`, `登坂車線 交通標識`, `自転車専用 標識 日本`, `車両横断禁止 標識`, `車線減少 警戒標識`, `転回禁止 標示`?**
-  _High betweenness centrality (0.065) - this node is a cross-community bridge._
+- **Why does `assetMeta` connect `assetMeta` to `2-3`, `5141`, `1-10`, `6101`, `1-2`, `1-3`, `1-4`, `1-5`, `1-6`, `1-7`, `1-8`, `1-9`, `2-10`, `2-1`, `2-2`, `2-4`, `2-5`, `2-6`, `2-7`, `2-8`, `2-9`, `3031`, `3091`, `3131`, `3211`, `3271`, `3311`, `3381`, `3461`, `3471`, `3481`, `3-10`, `3-11`, `3-1`, `3-2`, `3-3`, `3-4`, `3-5`, `3-6`, `3-7`, `3-8`, `3-9`, `4051`, `4121`, `4161`, `4191`, `4241`, `4271`, `4401`, `4421`, `4451`, `4471`, `4481`, `5011`, `5101`, `5191`, `5241`, `5281`, `5331`, `5401`, `5451`, `5471`, `5481`, `6051`, `6161`, `6201`, `6251`, `6301`, `6361`, `6401`, `6471`, `6481`, `その他の危険 標識`, `二輪の自動車以外通行止め 標識`, `合流注意 警戒標識`, `専用通行帯 原付 通行`, `左折可 標識 日本`, `登坂車線 交通標識`, `自転車専用 標識 日本`, `車両横断禁止 標識`, `車線減少 警戒標識`, `転回禁止 標示`, `6451`?**
+  _High betweenness centrality (0.069) - this node is a cross-community bridge._
 - **Why does `react` connect `cohorts/[id]/page.tsx` to `package.json`, `layout.tsx`, `dropdown-menu.tsx`, `data-context.tsx`, `staff/materials/[slug]/page.tsx`, `staff/practice/[id]/page.tsx`?**
-  _High betweenness centrality (0.027) - this node is a cross-community bridge._
+  _High betweenness centrality (0.029) - this node is a cross-community bridge._
 - **Why does `@supabase/supabase-js` connect `import-gentsuki-ready-web.ts` to `package.json`?**
-  _High betweenness centrality (0.025) - this node is a cross-community bridge._
+  _High betweenness centrality (0.026) - this node is a cross-community bridge._
 - **What connects `names`, `original`, `JsonObject` to the rest of the system?**
-  _868 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _847 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `cohorts/[id]/page.tsx` be split into smaller, more focused modules?**
   _Cohesion score 0.07209645669291338 - nodes in this community are weakly interconnected._
 - **Should `package.json` be split into smaller, more focused modules?**
-  _Cohesion score 0.1 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected._
 - **Should `components.json` be split into smaller, more focused modules?**
   _Cohesion score 0.08695652173913043 - nodes in this community are weakly interconnected._

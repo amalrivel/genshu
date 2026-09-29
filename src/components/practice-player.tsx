@@ -303,6 +303,12 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
                         const isCorrect = optionIndex === question.correctAnswerIndex
                         return <button key={optionIndex} type="button" aria-pressed={isSelected} disabled={confirmed}
                           onClick={() => selectAnswer(question.id, optionIndex)}
+                          onKeyDown={(event) => {
+                            if (event.key === "Enter") {
+                              event.preventDefault()
+                              if (!event.repeat) handleConfirmAnswer(question)
+                            }
+                          }}
                           className={cn("min-h-12 rounded-xl border p-3 text-base font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-default", isSelected ? "border-primary bg-primary/10 text-primary ring-2 ring-primary/30" : "border-border bg-card hover:bg-muted/40", confirmed && isCorrect && "border-emerald-500 bg-emerald-50 text-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-200", confirmed && isSelected && !isCorrect && "border-destructive bg-destructive/10 text-destructive")}
                         >{option}</button>
                       })}
@@ -371,6 +377,12 @@ export function PracticePlayer({ practiceSet }: { practiceSet: PublishedPractice
                       aria-pressed={isSelected}
                       disabled={isAnswerConfirmed}
                       onClick={() => selectAnswer(currentQuestion.id, idx)}
+                      onKeyDown={(event) => {
+                        if (event.key === "Enter") {
+                          event.preventDefault()
+                          if (!event.repeat) handleConfirmAnswer(currentQuestion)
+                        }
+                      }}
                       className={cn(
                         "w-full rounded-xl border p-4 text-left text-sm sm:text-base transition-all flex items-center justify-between cursor-pointer disabled:cursor-default",
                         optionStyle

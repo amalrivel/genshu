@@ -412,6 +412,15 @@ TypeScript
 
 Genshu should remain a single full-stack Next.js application unless an explicit architectural decision changes this.
 
+Next.js 16.3.5 has a versioned Bun patch in `patches/next@16.3.5.patch`
+for its bundled React Server Components development profiler. It skips
+errored/aborted component measurements with negative end timestamps, which
+can otherwise break development navigation when an auth guard redirects.
+The patch covers Turbopack and Webpack browser/edge development clients;
+production code and authorization rules are unchanged. Reassess and remove
+the patch when upgrading to a version containing the upstream React fix
+(https://github.com/react/react/issues/37561).
+
 Do not split Genshu into separate frontend and backend applications without a concrete requirement.
 
 Prefer native Next.js capabilities before introducing additional backend frameworks.

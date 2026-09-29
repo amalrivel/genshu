@@ -281,71 +281,6 @@
       "source_location": "L3"
     },
     {
-      "id": "src_lib_practice_units_cataloggroup",
-      "label": "CatalogGroup",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 101,
-      "community_name": "practice-units.ts",
-      "file_type": "code",
-      "norm_label": "cataloggroup",
-      "source_file": "src/lib/practice-units.ts",
-      "source_location": "L17"
-    },
-    {
-      "id": "src_lib_practice_units_catalogquestion",
-      "label": "CatalogQuestion",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 101,
-      "community_name": "practice-units.ts",
-      "file_type": "code",
-      "norm_label": "catalogquestion",
-      "source_file": "src/lib/practice-units.ts",
-      "source_location": "L16"
-    },
-    {
-      "id": "src_lib_practice_units_groupchild",
-      "label": "GroupChild",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 101,
-      "community_name": "practice-units.ts",
-      "file_type": "code",
-      "norm_label": "groupchild",
-      "source_file": "src/lib/practice-units.ts",
-      "source_location": "L9"
-    },
-    {
-      "id": "src_lib_practice_units_practicescore",
-      "label": "PracticeScore",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 101,
-      "community_name": "practice-units.ts",
-      "file_type": "code",
-      "norm_label": "practicescore",
-      "source_file": "src/lib/practice-units.ts",
-      "source_location": "L68"
-    },
-    {
-      "id": "src_lib_practice_units_practiceunit",
-      "label": "PracticeUnit",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 101,
-      "community_name": "practice-units.ts",
-      "file_type": "code",
-      "norm_label": "practiceunit",
-      "source_file": "src/lib/practice-units.ts",
-      "source_location": "L3"
-    },
-    {
       "id": "db_scripts_import_gentsuki_ready_web_bank",
       "label": "Bank",
       "_callable": true,
@@ -435,6 +370,201 @@
       "norm_label": "token",
       "source_file": "db/scripts/import-gentsuki-ready-web.ts",
       "source_location": "L24"
+    },
+    {
+      "id": "src_lib_practice_units_cataloggroup",
+      "label": "CatalogGroup",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "practice-units.ts",
+      "file_type": "code",
+      "norm_label": "cataloggroup",
+      "source_file": "src/lib/practice-units.ts",
+      "source_location": "L17"
+    },
+    {
+      "id": "src_lib_practice_units_catalogquestion",
+      "label": "CatalogQuestion",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "practice-units.ts",
+      "file_type": "code",
+      "norm_label": "catalogquestion",
+      "source_file": "src/lib/practice-units.ts",
+      "source_location": "L16"
+    },
+    {
+      "id": "src_lib_practice_units_groupchild",
+      "label": "GroupChild",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "practice-units.ts",
+      "file_type": "code",
+      "norm_label": "groupchild",
+      "source_file": "src/lib/practice-units.ts",
+      "source_location": "L9"
+    },
+    {
+      "id": "src_lib_practice_units_practicescore",
+      "label": "PracticeScore",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "practice-units.ts",
+      "file_type": "code",
+      "norm_label": "practicescore",
+      "source_file": "src/lib/practice-units.ts",
+      "source_location": "L68"
+    },
+    {
+      "id": "src_lib_practice_units_practiceunit",
+      "label": "PracticeUnit",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "practice-units.ts",
+      "file_type": "code",
+      "norm_label": "practiceunit",
+      "source_file": "src/lib/practice-units.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "src_app_staff_practice_id_page_setrow",
+      "label": "SetRow",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 217,
+      "community_name": "staff/practice/[id]/page.tsx",
+      "file_type": "code",
+      "norm_label": "setrow",
+      "source_file": "src/app/staff/practice/[id]/page.tsx",
+      "source_location": "L13"
+    },
+    {
+      "id": "src_components_practice_questions_editor_editablequestion",
+      "label": "EditableQuestion",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 217,
+      "community_name": "staff/practice/[id]/page.tsx",
+      "file_type": "code",
+      "norm_label": "editablequestion",
+      "source_file": "src/components/practice-questions-editor.tsx",
+      "source_location": "L7"
+    },
+    {
+      "id": "src_lib_content_types_practicequestion",
+      "label": "PracticeQuestion",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 217,
+      "community_name": "staff/practice/[id]/page.tsx",
+      "file_type": "code",
+      "norm_label": "practicequestion",
+      "source_file": "src/lib/content-types.ts",
+      "source_location": "L20"
+    },
+    {
+      "id": "src_lib_content_types_practicequestiongroup",
+      "label": "PracticeQuestionGroup",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 217,
+      "community_name": "staff/practice/[id]/page.tsx",
+      "file_type": "code",
+      "norm_label": "practicequestiongroup",
+      "source_file": "src/lib/content-types.ts",
+      "source_location": "L43"
+    },
+    {
+      "id": "src_app_staff_materials_slug_page_materialrow",
+      "label": "MaterialRow",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 237,
+      "community_name": "staff/materials/[slug]/page.tsx",
+      "file_type": "code",
+      "norm_label": "materialrow",
+      "source_file": "src/app/staff/materials/[slug]/page.tsx",
+      "source_location": "L13"
+    },
+    {
+      "id": "src_components_staff_action_form_staffformstate",
+      "label": "StaffFormState",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 237,
+      "community_name": "staff/materials/[slug]/page.tsx",
+      "file_type": "code",
+      "norm_label": "staffformstate",
+      "source_file": "src/components/staff-action-form.tsx",
+      "source_location": "L4"
+    },
+    {
+      "id": "src_lib_content_types_materialsection",
+      "label": "MaterialSection",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 237,
+      "community_name": "staff/materials/[slug]/page.tsx",
+      "file_type": "code",
+      "norm_label": "materialsection",
+      "source_file": "src/lib/content-types.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_lib_database_types_database",
+      "label": "Database",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 238,
+      "community_name": "server.ts",
+      "file_type": "code",
+      "norm_label": "database",
+      "source_file": "src/lib/database.types.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "src_lib_database_types_json",
+      "label": "Json",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 238,
+      "community_name": "server.ts",
+      "file_type": "code",
+      "norm_label": "json",
+      "source_file": "src/lib/database.types.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_lib_database_types_table",
+      "label": "Table",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 238,
+      "community_name": "server.ts",
+      "file_type": "code",
+      "norm_label": "table",
+      "source_file": "src/lib/database.types.ts",
+      "source_location": "L3"
     },
     {
       "id": "ai_scripts_verify_jsonobject",
@@ -736,45 +866,6 @@
       "source_location": "L1"
     },
     {
-      "id": "src_app_staff_materials_slug_page_materialrow",
-      "label": "MaterialRow",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "staff/materials/[slug]/page.tsx",
-      "file_type": "code",
-      "norm_label": "materialrow",
-      "source_file": "src/app/staff/materials/[slug]/page.tsx",
-      "source_location": "L13"
-    },
-    {
-      "id": "src_components_staff_action_form_staffformstate",
-      "label": "StaffFormState",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "staff/materials/[slug]/page.tsx",
-      "file_type": "code",
-      "norm_label": "staffformstate",
-      "source_file": "src/components/staff-action-form.tsx",
-      "source_location": "L4"
-    },
-    {
-      "id": "src_lib_content_types_materialsection",
-      "label": "MaterialSection",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "staff/materials/[slug]/page.tsx",
-      "file_type": "code",
-      "norm_label": "materialsection",
-      "source_file": "src/lib/content-types.ts",
-      "source_location": "L1"
-    },
-    {
       "id": "src_lib_content_types_publishedmaterial",
       "label": "PublishedMaterial",
       "_callable": true,
@@ -825,97 +916,6 @@
       "norm_label": "locale",
       "source_file": "src/i18n/request.ts",
       "source_location": "L5"
-    },
-    {
-      "id": "src_app_staff_practice_id_page_setrow",
-      "label": "SetRow",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 94,
-      "community_name": "staff/practice/[id]/page.tsx",
-      "file_type": "code",
-      "norm_label": "setrow",
-      "source_file": "src/app/staff/practice/[id]/page.tsx",
-      "source_location": "L13"
-    },
-    {
-      "id": "src_components_practice_questions_editor_editablequestion",
-      "label": "EditableQuestion",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 94,
-      "community_name": "staff/practice/[id]/page.tsx",
-      "file_type": "code",
-      "norm_label": "editablequestion",
-      "source_file": "src/components/practice-questions-editor.tsx",
-      "source_location": "L7"
-    },
-    {
-      "id": "src_lib_content_types_practicequestion",
-      "label": "PracticeQuestion",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 94,
-      "community_name": "staff/practice/[id]/page.tsx",
-      "file_type": "code",
-      "norm_label": "practicequestion",
-      "source_file": "src/lib/content-types.ts",
-      "source_location": "L20"
-    },
-    {
-      "id": "src_lib_content_types_practicequestiongroup",
-      "label": "PracticeQuestionGroup",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 94,
-      "community_name": "staff/practice/[id]/page.tsx",
-      "file_type": "code",
-      "norm_label": "practicequestiongroup",
-      "source_file": "src/lib/content-types.ts",
-      "source_location": "L43"
-    },
-    {
-      "id": "src_lib_database_types_database",
-      "label": "Database",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 95,
-      "community_name": "server.ts",
-      "file_type": "code",
-      "norm_label": "database",
-      "source_file": "src/lib/database.types.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "src_lib_database_types_json",
-      "label": "Json",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 95,
-      "community_name": "server.ts",
-      "file_type": "code",
-      "norm_label": "json",
-      "source_file": "src/lib/database.types.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_lib_database_types_table",
-      "label": "Table",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 95,
-      "community_name": "server.ts",
-      "file_type": "code",
-      "norm_label": "table",
-      "source_file": "src/lib/database.types.ts",
-      "source_location": "L3"
     },
     {
       "id": "src_lib_staff_staffmember",
@@ -1627,90 +1627,6 @@
       "source_location": "L977"
     },
     {
-      "id": "src_components_practice_player_practiceplayer",
-      "label": "PracticePlayer()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 101,
-      "community_name": "practice-units.ts",
-      "file_type": "code",
-      "norm_label": "practiceplayer()",
-      "source_file": "src/components/practice-player.tsx",
-      "source_location": "L38"
-    },
-    {
-      "id": "src_lib_practice_units_buildpracticeunits",
-      "label": "buildPracticeUnits()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 101,
-      "community_name": "practice-units.ts",
-      "file_type": "code",
-      "norm_label": "buildpracticeunits()",
-      "source_file": "src/lib/practice-units.ts",
-      "source_location": "L41"
-    },
-    {
-      "id": "src_lib_practice_units_check_groupquestions",
-      "label": "groupQuestions()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 101,
-      "community_name": "practice-units.ts",
-      "file_type": "code",
-      "norm_label": "groupquestions()",
-      "source_file": "src/lib/practice-units.check.ts",
-      "source_location": "L11"
-    },
-    {
-      "id": "src_lib_practice_units_check_question",
-      "label": "question()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 101,
-      "community_name": "practice-units.ts",
-      "file_type": "code",
-      "norm_label": "question()",
-      "source_file": "src/lib/practice-units.check.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "src_lib_practice_units_countpublishedpracticequestions",
-      "label": "countPublishedPracticeQuestions()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 101,
-      "community_name": "practice-units.ts",
-      "file_type": "code",
-      "norm_label": "countpublishedpracticequestions()",
-      "source_file": "src/lib/practice-units.ts",
-      "source_location": "L19"
-    },
-    {
-      "id": "src_lib_practice_units_hascompletepublishedgroup",
-      "label": "hasCompletePublishedGroup()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 101,
-      "community_name": "practice-units.ts",
-      "file_type": "code",
-      "norm_label": "hascompletepublishedgroup()",
-      "source_file": "src/lib/practice-units.ts",
-      "source_location": "L11"
-    },
-    {
-      "id": "src_lib_practice_units_scorepracticeunits",
-      "label": "scorePracticeUnits()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 101,
-      "community_name": "practice-units.ts",
-      "file_type": "code",
-      "norm_label": "scorepracticeunits()",
-      "source_file": "src/lib/practice-units.ts",
-      "source_location": "L70"
-    },
-    {
       "id": "db_scripts_check_data_api_migration_asuser",
       "label": "asUser()",
       "_callable": true,
@@ -1939,11 +1855,335 @@
       "source_location": "L150"
     },
     {
+      "id": "src_app_page_home",
+      "label": "Home()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 152,
+      "community_name": "app/page.tsx",
+      "file_type": "code",
+      "norm_label": "home()",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L3"
+    },
+    {
+      "id": "src_components_practice_player_practiceplayer",
+      "label": "PracticePlayer()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "practice-units.ts",
+      "file_type": "code",
+      "norm_label": "practiceplayer()",
+      "source_file": "src/components/practice-player.tsx",
+      "source_location": "L38"
+    },
+    {
+      "id": "src_lib_practice_units_buildpracticeunits",
+      "label": "buildPracticeUnits()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "practice-units.ts",
+      "file_type": "code",
+      "norm_label": "buildpracticeunits()",
+      "source_file": "src/lib/practice-units.ts",
+      "source_location": "L41"
+    },
+    {
+      "id": "src_lib_practice_units_check_groupquestions",
+      "label": "groupQuestions()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "practice-units.ts",
+      "file_type": "code",
+      "norm_label": "groupquestions()",
+      "source_file": "src/lib/practice-units.check.ts",
+      "source_location": "L11"
+    },
+    {
+      "id": "src_lib_practice_units_check_question",
+      "label": "question()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "practice-units.ts",
+      "file_type": "code",
+      "norm_label": "question()",
+      "source_file": "src/lib/practice-units.check.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "src_lib_practice_units_countpublishedpracticequestions",
+      "label": "countPublishedPracticeQuestions()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "practice-units.ts",
+      "file_type": "code",
+      "norm_label": "countpublishedpracticequestions()",
+      "source_file": "src/lib/practice-units.ts",
+      "source_location": "L19"
+    },
+    {
+      "id": "src_lib_practice_units_hascompletepublishedgroup",
+      "label": "hasCompletePublishedGroup()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "practice-units.ts",
+      "file_type": "code",
+      "norm_label": "hascompletepublishedgroup()",
+      "source_file": "src/lib/practice-units.ts",
+      "source_location": "L11"
+    },
+    {
+      "id": "src_lib_practice_units_scorepracticeunits",
+      "label": "scorePracticeUnits()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "practice-units.ts",
+      "file_type": "code",
+      "norm_label": "scorepracticeunits()",
+      "source_file": "src/lib/practice-units.ts",
+      "source_location": "L70"
+    },
+    {
+      "id": "src_app_staff_practice_actions_contentfield",
+      "label": "contentField()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 217,
+      "community_name": "staff/practice/[id]/page.tsx",
+      "file_type": "code",
+      "norm_label": "contentfield()",
+      "source_file": "src/app/staff/practice/actions.ts",
+      "source_location": "L15"
+    },
+    {
+      "id": "src_app_staff_practice_actions_field",
+      "label": "field()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 217,
+      "community_name": "staff/practice/[id]/page.tsx",
+      "file_type": "code",
+      "norm_label": "field()",
+      "source_file": "src/app/staff/practice/actions.ts",
+      "source_location": "L9"
+    },
+    {
+      "id": "src_app_staff_practice_actions_optionaldimension",
+      "label": "optionalDimension()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 217,
+      "community_name": "staff/practice/[id]/page.tsx",
+      "file_type": "code",
+      "norm_label": "optionaldimension()",
+      "source_file": "src/app/staff/practice/actions.ts",
+      "source_location": "L21"
+    },
+    {
+      "id": "src_app_staff_practice_actions_savepracticeset",
+      "label": "savePracticeSet()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 217,
+      "community_name": "staff/practice/[id]/page.tsx",
+      "file_type": "code",
+      "norm_label": "savepracticeset()",
+      "source_file": "src/app/staff/practice/actions.ts",
+      "source_location": "L28"
+    },
+    {
+      "id": "src_components_practice_questions_editor_blank",
+      "label": "blank()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 217,
+      "community_name": "staff/practice/[id]/page.tsx",
+      "file_type": "code",
+      "norm_label": "blank()",
+      "source_file": "src/components/practice-questions-editor.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "src_components_practice_questions_editor_practicequestionseditor",
+      "label": "PracticeQuestionsEditor()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 217,
+      "community_name": "staff/practice/[id]/page.tsx",
+      "file_type": "code",
+      "norm_label": "practicequestionseditor()",
+      "source_file": "src/components/practice-questions-editor.tsx",
+      "source_location": "L16"
+    },
+    {
+      "id": "db_scripts_practice_actions_test_eq",
+      "label": "eq()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 224,
+      "community_name": "practice-actions.test.js",
+      "file_type": "code",
+      "norm_label": "eq()",
+      "source_file": "db/scripts/practice-actions.test.js",
+      "source_location": "L18"
+    },
+    {
+      "id": "db_scripts_practice_actions_test_formfor",
+      "label": "formFor()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 224,
+      "community_name": "practice-actions.test.js",
+      "file_type": "code",
+      "norm_label": "formfor()",
+      "source_file": "db/scripts/practice-actions.test.js",
+      "source_location": "L39"
+    },
+    {
+      "id": "db_scripts_practice_actions_test_in",
+      "label": "in()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 224,
+      "community_name": "practice-actions.test.js",
+      "file_type": "code",
+      "norm_label": "in()",
+      "source_file": "db/scripts/practice-actions.test.js",
+      "source_location": "L21"
+    },
+    {
+      "id": "db_scripts_practice_actions_test_not",
+      "label": "not()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 224,
+      "community_name": "practice-actions.test.js",
+      "file_type": "code",
+      "norm_label": "not()",
+      "source_file": "db/scripts/practice-actions.test.js",
+      "source_location": "L19"
+    },
+    {
+      "id": "db_scripts_practice_actions_test_order",
+      "label": "order()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 224,
+      "community_name": "practice-actions.test.js",
+      "file_type": "code",
+      "norm_label": "order()",
+      "source_file": "db/scripts/practice-actions.test.js",
+      "source_location": "L20"
+    },
+    {
+      "id": "db_scripts_practice_actions_test_select",
+      "label": "select()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 224,
+      "community_name": "practice-actions.test.js",
+      "file_type": "code",
+      "norm_label": "select()",
+      "source_file": "db/scripts/practice-actions.test.js",
+      "source_location": "L17"
+    },
+    {
+      "id": "db_scripts_practice_actions_test_then",
+      "label": "then()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 224,
+      "community_name": "practice-actions.test.js",
+      "file_type": "code",
+      "norm_label": "then()",
+      "source_file": "db/scripts/practice-actions.test.js",
+      "source_location": "L23"
+    },
+    {
+      "id": "src_app_staff_materials_actions_field",
+      "label": "field()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 237,
+      "community_name": "staff/materials/[slug]/page.tsx",
+      "file_type": "code",
+      "norm_label": "field()",
+      "source_file": "src/app/staff/materials/actions.ts",
+      "source_location": "L9"
+    },
+    {
+      "id": "src_app_staff_materials_actions_savematerial",
+      "label": "saveMaterial()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 237,
+      "community_name": "staff/materials/[slug]/page.tsx",
+      "file_type": "code",
+      "norm_label": "savematerial()",
+      "source_file": "src/app/staff/materials/actions.ts",
+      "source_location": "L15"
+    },
+    {
+      "id": "src_components_material_sections_editor_blank",
+      "label": "blank()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 237,
+      "community_name": "staff/materials/[slug]/page.tsx",
+      "file_type": "code",
+      "norm_label": "blank()",
+      "source_file": "src/components/material-sections-editor.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "src_components_material_sections_editor_materialsectionseditor",
+      "label": "MaterialSectionsEditor()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 237,
+      "community_name": "staff/materials/[slug]/page.tsx",
+      "file_type": "code",
+      "norm_label": "materialsectionseditor()",
+      "source_file": "src/components/material-sections-editor.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "src_components_staff_action_form_staffactionform",
+      "label": "StaffActionForm()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 237,
+      "community_name": "staff/materials/[slug]/page.tsx",
+      "file_type": "code",
+      "norm_label": "staffactionform()",
+      "source_file": "src/components/staff-action-form.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "src_lib_supabase_client_createclient",
+      "label": "createClient()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 238,
+      "community_name": "server.ts",
+      "file_type": "code",
+      "norm_label": "createclient()",
+      "source_file": "src/lib/supabase/client.ts",
+      "source_location": "L4"
+    },
+    {
       "id": "src_lib_supabase_proxy_updatesession",
       "label": "updateSession()",
       "_callable": true,
       "_origin": "ast",
-      "community": 148,
+      "community": 239,
       "community_name": "src/proxy.ts",
       "file_type": "code",
       "norm_label": "updatesession()",
@@ -1955,24 +2195,12 @@
       "label": "proxy()",
       "_callable": true,
       "_origin": "ast",
-      "community": 148,
+      "community": 239,
       "community_name": "src/proxy.ts",
       "file_type": "code",
       "norm_label": "proxy()",
       "source_file": "src/proxy.ts",
       "source_location": "L6"
-    },
-    {
-      "id": "src_app_page_home",
-      "label": "Home()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 152,
-      "community_name": "app/page.tsx",
-      "file_type": "code",
-      "norm_label": "home()",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L3"
     },
     {
       "id": "ai_scripts_verify_isobject",
@@ -2359,66 +2587,6 @@
       "source_location": "L10"
     },
     {
-      "id": "src_app_staff_materials_actions_field",
-      "label": "field()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "staff/materials/[slug]/page.tsx",
-      "file_type": "code",
-      "norm_label": "field()",
-      "source_file": "src/app/staff/materials/actions.ts",
-      "source_location": "L9"
-    },
-    {
-      "id": "src_app_staff_materials_actions_savematerial",
-      "label": "saveMaterial()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "staff/materials/[slug]/page.tsx",
-      "file_type": "code",
-      "norm_label": "savematerial()",
-      "source_file": "src/app/staff/materials/actions.ts",
-      "source_location": "L15"
-    },
-    {
-      "id": "src_components_material_sections_editor_blank",
-      "label": "blank()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "staff/materials/[slug]/page.tsx",
-      "file_type": "code",
-      "norm_label": "blank()",
-      "source_file": "src/components/material-sections-editor.tsx",
-      "source_location": "L6"
-    },
-    {
-      "id": "src_components_material_sections_editor_materialsectionseditor",
-      "label": "MaterialSectionsEditor()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "staff/materials/[slug]/page.tsx",
-      "file_type": "code",
-      "norm_label": "materialsectionseditor()",
-      "source_file": "src/components/material-sections-editor.tsx",
-      "source_location": "L8"
-    },
-    {
-      "id": "src_components_staff_action_form_staffactionform",
-      "label": "StaffActionForm()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "staff/materials/[slug]/page.tsx",
-      "file_type": "code",
-      "norm_label": "staffactionform()",
-      "source_file": "src/components/staff-action-form.tsx",
-      "source_location": "L6"
-    },
-    {
       "id": "src_app_materials_page_materialspage",
       "label": "MaterialsPage()",
       "_callable": true,
@@ -2537,90 +2705,6 @@
       "norm_label": "listpublishedpracticesets()",
       "source_file": "src/lib/content-repository.ts",
       "source_location": "L58"
-    },
-    {
-      "id": "src_app_staff_practice_actions_contentfield",
-      "label": "contentField()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 94,
-      "community_name": "staff/practice/[id]/page.tsx",
-      "file_type": "code",
-      "norm_label": "contentfield()",
-      "source_file": "src/app/staff/practice/actions.ts",
-      "source_location": "L15"
-    },
-    {
-      "id": "src_app_staff_practice_actions_field",
-      "label": "field()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 94,
-      "community_name": "staff/practice/[id]/page.tsx",
-      "file_type": "code",
-      "norm_label": "field()",
-      "source_file": "src/app/staff/practice/actions.ts",
-      "source_location": "L9"
-    },
-    {
-      "id": "src_app_staff_practice_actions_optionaldimension",
-      "label": "optionalDimension()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 94,
-      "community_name": "staff/practice/[id]/page.tsx",
-      "file_type": "code",
-      "norm_label": "optionaldimension()",
-      "source_file": "src/app/staff/practice/actions.ts",
-      "source_location": "L21"
-    },
-    {
-      "id": "src_app_staff_practice_actions_savepracticeset",
-      "label": "savePracticeSet()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 94,
-      "community_name": "staff/practice/[id]/page.tsx",
-      "file_type": "code",
-      "norm_label": "savepracticeset()",
-      "source_file": "src/app/staff/practice/actions.ts",
-      "source_location": "L28"
-    },
-    {
-      "id": "src_components_practice_questions_editor_blank",
-      "label": "blank()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 94,
-      "community_name": "staff/practice/[id]/page.tsx",
-      "file_type": "code",
-      "norm_label": "blank()",
-      "source_file": "src/components/practice-questions-editor.tsx",
-      "source_location": "L8"
-    },
-    {
-      "id": "src_components_practice_questions_editor_practicequestionseditor",
-      "label": "PracticeQuestionsEditor()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 94,
-      "community_name": "staff/practice/[id]/page.tsx",
-      "file_type": "code",
-      "norm_label": "practicequestionseditor()",
-      "source_file": "src/components/practice-questions-editor.tsx",
-      "source_location": "L16"
-    },
-    {
-      "id": "src_lib_supabase_client_createclient",
-      "label": "createClient()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 95,
-      "community_name": "server.ts",
-      "file_type": "code",
-      "norm_label": "createclient()",
-      "source_file": "src/lib/supabase/client.ts",
-      "source_location": "L4"
     },
     {
       "id": "src_app_login_actions_signin",
@@ -2765,90 +2849,6 @@
       "norm_label": "createclient()",
       "source_file": "src/lib/supabase/server.ts",
       "source_location": "L9"
-    },
-    {
-      "id": "db_scripts_practice_actions_test_eq",
-      "label": "eq()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "practice-actions.test.js",
-      "file_type": "code",
-      "norm_label": "eq()",
-      "source_file": "db/scripts/practice-actions.test.js",
-      "source_location": "L18"
-    },
-    {
-      "id": "db_scripts_practice_actions_test_formfor",
-      "label": "formFor()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "practice-actions.test.js",
-      "file_type": "code",
-      "norm_label": "formfor()",
-      "source_file": "db/scripts/practice-actions.test.js",
-      "source_location": "L39"
-    },
-    {
-      "id": "db_scripts_practice_actions_test_in",
-      "label": "in()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "practice-actions.test.js",
-      "file_type": "code",
-      "norm_label": "in()",
-      "source_file": "db/scripts/practice-actions.test.js",
-      "source_location": "L21"
-    },
-    {
-      "id": "db_scripts_practice_actions_test_not",
-      "label": "not()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "practice-actions.test.js",
-      "file_type": "code",
-      "norm_label": "not()",
-      "source_file": "db/scripts/practice-actions.test.js",
-      "source_location": "L19"
-    },
-    {
-      "id": "db_scripts_practice_actions_test_order",
-      "label": "order()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "practice-actions.test.js",
-      "file_type": "code",
-      "norm_label": "order()",
-      "source_file": "db/scripts/practice-actions.test.js",
-      "source_location": "L20"
-    },
-    {
-      "id": "db_scripts_practice_actions_test_select",
-      "label": "select()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "practice-actions.test.js",
-      "file_type": "code",
-      "norm_label": "select()",
-      "source_file": "db/scripts/practice-actions.test.js",
-      "source_location": "L17"
-    },
-    {
-      "id": "db_scripts_practice_actions_test_then",
-      "label": "then()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "practice-actions.test.js",
-      "file_type": "code",
-      "norm_label": "then()",
-      "source_file": "db/scripts/practice-actions.test.js",
-      "source_location": "L23"
     },
     {
       "id": "src_app_assignments_id_page",
@@ -3478,6 +3478,28 @@
       "source_location": "L47"
     },
     {
+      "id": "package_patcheddependencies",
+      "label": "patchedDependencies",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "patcheddependencies",
+      "source_file": "package.json",
+      "source_location": "L56"
+    },
+    {
+      "id": "package_patcheddependencies_next_16_3_5",
+      "label": "next@16.3.5",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "next@16.3.5",
+      "source_file": "package.json",
+      "source_location": "L57"
+    },
+    {
       "id": "package_private",
       "label": "private",
       "_origin": "ast",
@@ -3774,81 +3796,52 @@
       "source_location": "L105"
     },
     {
-      "id": "src_lib_practice_units",
-      "label": "practice-units.ts",
+      "id": "ai_project_9_technical_direction",
+      "label": "9. Technical Direction",
       "_origin": "ast",
       "community": 101,
-      "community_name": "practice-units.ts",
-      "file_type": "code",
-      "norm_label": "practice-units.ts",
-      "source_file": "src/lib/practice-units.ts",
-      "source_location": "L1"
+      "community_name": "9. Technical Direction",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "9. technical direction",
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L388"
     },
     {
-      "id": "src_lib_practice_units_check",
-      "label": "practice-units.check.ts",
+      "id": "ai_project_application_framework",
+      "label": "Application Framework",
       "_origin": "ast",
       "community": 101,
-      "community_name": "practice-units.ts",
-      "file_type": "code",
-      "norm_label": "practice-units.check.ts",
-      "source_file": "src/lib/practice-units.check.ts",
-      "source_location": "L1"
+      "community_name": "9. Technical Direction",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "application framework",
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L404"
     },
     {
-      "id": "src_lib_practice_units_check_cataloggroups",
-      "label": "catalogGroups",
+      "id": "ai_project_runtime_and_package_manager",
+      "label": "Runtime and Package Manager",
       "_origin": "ast",
       "community": 101,
-      "community_name": "practice-units.ts",
-      "file_type": "code",
-      "norm_label": "cataloggroups",
-      "source_file": "src/lib/practice-units.check.ts",
-      "source_location": "L31"
+      "community_name": "9. Technical Direction",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "runtime and package manager",
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L390"
     },
     {
-      "id": "src_lib_practice_units_check_catalogquestions",
-      "label": "catalogQuestions",
+      "id": "ai_project_ui",
+      "label": "UI",
       "_origin": "ast",
       "community": 101,
-      "community_name": "practice-units.ts",
-      "file_type": "code",
-      "norm_label": "catalogquestions",
-      "source_file": "src/lib/practice-units.check.ts",
-      "source_location": "L32"
-    },
-    {
-      "id": "src_lib_practice_units_check_group",
-      "label": "group",
-      "_origin": "ast",
-      "community": 101,
-      "community_name": "practice-units.ts",
-      "file_type": "code",
-      "norm_label": "group",
-      "source_file": "src/lib/practice-units.check.ts",
-      "source_location": "L10"
-    },
-    {
-      "id": "src_lib_practice_units_check_mixed",
-      "label": "mixed",
-      "_origin": "ast",
-      "community": 101,
-      "community_name": "practice-units.ts",
-      "file_type": "code",
-      "norm_label": "mixed",
-      "source_file": "src/lib/practice-units.check.ts",
-      "source_location": "L27"
-    },
-    {
-      "id": "src_lib_practice_units_check_units",
-      "label": "units",
-      "_origin": "ast",
-      "community": 101,
-      "community_name": "practice-units.ts",
-      "file_type": "code",
-      "norm_label": "units",
-      "source_file": "src/lib/practice-units.check.ts",
-      "source_location": "L23"
+      "community_name": "9. Technical Direction",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "ui",
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L439"
     },
     {
       "id": "agents_skills_supabase_postgres_best_practices_references_advanced_full_text_search",
@@ -3881,18 +3874,6 @@
       "source_location": "L8"
     },
     {
-      "id": "ai_project_10_data_platform",
-      "label": "10. Data Platform",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "Genshu \u2014 Project Source of Truth",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "10. data platform",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L449"
-    },
-    {
       "id": "ai_project_11_authentication",
       "label": "11. Authentication",
       "_origin": "ast",
@@ -3902,7 +3883,7 @@
       "node_kind": "heading",
       "norm_label": "11. authentication",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L536"
+      "source_location": "L545"
     },
     {
       "id": "ai_project_12_file_storage",
@@ -3914,7 +3895,7 @@
       "node_kind": "heading",
       "norm_label": "12. file storage",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L560"
+      "source_location": "L569"
     },
     {
       "id": "ai_project_13_deployment_direction",
@@ -3926,7 +3907,7 @@
       "node_kind": "heading",
       "norm_label": "13. deployment direction",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L577"
+      "source_location": "L586"
     },
     {
       "id": "ai_project_14_architecture_principle",
@@ -3938,7 +3919,7 @@
       "node_kind": "heading",
       "norm_label": "14. architecture principle",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L625"
+      "source_location": "L634"
     },
     {
       "id": "ai_project_15_anti_overengineering_rules",
@@ -3950,7 +3931,7 @@
       "node_kind": "heading",
       "norm_label": "15. anti-overengineering rules",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L646"
+      "source_location": "L655"
     },
     {
       "id": "ai_project_16_ux_principles",
@@ -3962,7 +3943,7 @@
       "node_kind": "heading",
       "norm_label": "16. ux principles",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L680"
+      "source_location": "L689"
     },
     {
       "id": "ai_project_17_mobile_and_desktop",
@@ -3974,7 +3955,7 @@
       "node_kind": "heading",
       "norm_label": "17. mobile and desktop",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L707"
+      "source_location": "L716"
     },
     {
       "id": "ai_project_18_data_ownership",
@@ -3986,7 +3967,7 @@
       "node_kind": "heading",
       "norm_label": "18. data ownership",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L722"
+      "source_location": "L731"
     },
     {
       "id": "ai_project_19_security_and_permissions",
@@ -3998,7 +3979,7 @@
       "node_kind": "heading",
       "norm_label": "19. security and permissions",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L751"
+      "source_location": "L760"
     },
     {
       "id": "ai_project_1_purpose",
@@ -4022,7 +4003,7 @@
       "node_kind": "heading",
       "norm_label": "20. definition of done",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L778"
+      "source_location": "L787"
     },
     {
       "id": "ai_project_21_architectural_changes",
@@ -4034,7 +4015,7 @@
       "node_kind": "heading",
       "norm_label": "21. architectural changes",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L806"
+      "source_location": "L815"
     },
     {
       "id": "ai_project_22_documentation_rules",
@@ -4046,7 +4027,7 @@
       "node_kind": "heading",
       "norm_label": "22. documentation rules",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L837"
+      "source_location": "L846"
     },
     {
       "id": "ai_project_23_project_knowledge_hierarchy",
@@ -4058,7 +4039,7 @@
       "node_kind": "heading",
       "norm_label": "23. project knowledge hierarchy",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L869"
+      "source_location": "L878"
     },
     {
       "id": "ai_project_24_current_release_priorities",
@@ -4070,7 +4051,7 @@
       "node_kind": "heading",
       "norm_label": "24. current release priorities",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L897"
+      "source_location": "L906"
     },
     {
       "id": "ai_project_25_explicit_mvp_non_goals",
@@ -4082,7 +4063,7 @@
       "node_kind": "heading",
       "norm_label": "25. explicit mvp non-goals",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L925"
+      "source_location": "L934"
     },
     {
       "id": "ai_project_26_open_decisions",
@@ -4094,7 +4075,7 @@
       "node_kind": "heading",
       "norm_label": "26. open decisions",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L955"
+      "source_location": "L964"
     },
     {
       "id": "ai_project_27_product_philosophy",
@@ -4106,7 +4087,7 @@
       "node_kind": "heading",
       "norm_label": "27. product philosophy",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L977"
+      "source_location": "L986"
     },
     {
       "id": "ai_project_28_core_principle",
@@ -4118,7 +4099,7 @@
       "node_kind": "heading",
       "norm_label": "28. core principle",
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L1011"
+      "source_location": "L1020"
     },
     {
       "id": "ai_project_2_product_identity",
@@ -4133,54 +4114,6 @@
       "source_location": "L36"
     },
     {
-      "id": "ai_project_3_1_gakusei_\u5b66\u751f",
-      "label": "3.1 Gakusei \u2014 \u5b66\u751f",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "Genshu \u2014 Project Source of Truth",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3.1 gakusei \u2014 \u5b66\u751f",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L69"
-    },
-    {
-      "id": "ai_project_3_2_sensei_\u5148\u751f",
-      "label": "3.2 Sensei \u2014 \u5148\u751f",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "Genshu \u2014 Project Source of Truth",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3.2 sensei \u2014 \u5148\u751f",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L90"
-    },
-    {
-      "id": "ai_project_3_3_tant\u014dsha_\u62c5\u5f53\u8005",
-      "label": "3.3 Tant\u014dsha \u2014 \u62c5\u5f53\u8005",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "Genshu \u2014 Project Source of Truth",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3.3 tantosha \u2014 \u62c5\u5f53\u8005",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L113"
-    },
-    {
-      "id": "ai_project_3_primary_users",
-      "label": "3. Primary Users",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "Genshu \u2014 Project Source of Truth",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. primary users",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L65"
-    },
-    {
       "id": "ai_project_4_long_term_product_vision",
       "label": "4. Long-Term Product Vision",
       "_origin": "ast",
@@ -4191,30 +4124,6 @@
       "norm_label": "4. long-term product vision",
       "source_file": ".ai/PROJECT.md",
       "source_location": "L140"
-    },
-    {
-      "id": "ai_project_5_release_scope",
-      "label": "5. Release Scope",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "Genshu \u2014 Project Source of Truth",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "5. release scope",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L167"
-    },
-    {
-      "id": "ai_project_6_language_rules",
-      "label": "6. Language Rules",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "Genshu \u2014 Project Source of Truth",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "6. language rules",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L278"
     },
     {
       "id": "ai_project_7_product_structure",
@@ -4241,102 +4150,6 @@
       "source_location": "L355"
     },
     {
-      "id": "ai_project_9_technical_direction",
-      "label": "9. Technical Direction",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "Genshu \u2014 Project Source of Truth",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "9. technical direction",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L388"
-    },
-    {
-      "id": "ai_project_application_framework",
-      "label": "Application Framework",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "Genshu \u2014 Project Source of Truth",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "application framework",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L404"
-    },
-    {
-      "id": "ai_project_application_interface",
-      "label": "Application Interface",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "Genshu \u2014 Project Source of Truth",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "application interface",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L280"
-    },
-    {
-      "id": "ai_project_assignments_and_exams",
-      "label": "Assignments and Exams",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "Genshu \u2014 Project Source of Truth",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "assignments and exams",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L307"
-    },
-    {
-      "id": "ai_project_database_access_layer",
-      "label": "Database Access Layer",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "Genshu \u2014 Project Source of Truth",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "database access layer",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L510"
-    },
-    {
-      "id": "ai_project_first_live_release",
-      "label": "First live release",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "Genshu \u2014 Project Source of Truth",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "first live release",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L169"
-    },
-    {
-      "id": "ai_project_first_live_release_practice",
-      "label": "First live release: Practice",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "Genshu \u2014 Project Source of Truth",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "first live release: practice",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L221"
-    },
-    {
-      "id": "ai_project_furigana",
-      "label": "Furigana",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "Genshu \u2014 Project Source of Truth",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "furigana",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L315"
-    },
-    {
       "id": "ai_project_genshu_project_source_of_truth",
       "label": "Genshu \u2014 Project Source of Truth",
       "_origin": "ast",
@@ -4347,102 +4160,6 @@
       "norm_label": "genshu \u2014 project source of truth",
       "source_file": ".ai/PROJECT.md",
       "source_location": "L1"
-    },
-    {
-      "id": "ai_project_later_release_assignments",
-      "label": "Later release: Assignments",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "Genshu \u2014 Project Source of Truth",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "later release: assignments",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L242"
-    },
-    {
-      "id": "ai_project_later_release_attendance",
-      "label": "Later release: Attendance",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "Genshu \u2014 Project Source of Truth",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "later release: attendance",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L204"
-    },
-    {
-      "id": "ai_project_later_release_exams",
-      "label": "Later release: Exams",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "Genshu \u2014 Project Source of Truth",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "later release: exams",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L259"
-    },
-    {
-      "id": "ai_project_learning_content",
-      "label": "Learning Content",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "Genshu \u2014 Project Source of Truth",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "learning content",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L293"
-    },
-    {
-      "id": "ai_project_learning_materials",
-      "label": "Learning materials",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "Genshu \u2014 Project Source of Truth",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "learning materials",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L190"
-    },
-    {
-      "id": "ai_project_local_development",
-      "label": "Local Development",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "Genshu \u2014 Project Source of Truth",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "local development",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L484"
-    },
-    {
-      "id": "ai_project_runtime_and_package_manager",
-      "label": "Runtime and Package Manager",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "Genshu \u2014 Project Source of Truth",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "runtime and package manager",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L390"
-    },
-    {
-      "id": "ai_project_ui",
-      "label": "UI",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "Genshu \u2014 Project Source of Truth",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "ui",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L430"
     },
     {
       "id": "agents_skills_supabase_postgres_best_practices_references_advanced_jsonb_indexing",
@@ -4625,35 +4342,11 @@
       "source_location": "L8"
     },
     {
-      "id": "ai_project",
-      "label": "PROJECT.md",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "project.md",
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "ai_readme",
-      "label": "README.md",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "readme.md",
-      "source_file": ".ai/README.md",
-      "source_location": "L1"
-    },
-    {
       "id": "ai_readme_decision_boundaries",
       "label": "Decision boundaries",
       "_origin": "ast",
       "community": 11,
-      "community_name": "Release review and remaining work",
+      "community_name": "Genshu AI development workflow",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "decision boundaries",
@@ -4665,7 +4358,7 @@
       "label": "Development loop",
       "_origin": "ast",
       "community": 11,
-      "community_name": "Release review and remaining work",
+      "community_name": "Genshu AI development workflow",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "development loop",
@@ -4677,7 +4370,7 @@
       "label": "Genshu AI development workflow",
       "_origin": "ast",
       "community": 11,
-      "community_name": "Release review and remaining work",
+      "community_name": "Genshu AI development workflow",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "genshu ai development workflow",
@@ -4689,7 +4382,7 @@
       "label": "Local learning-content database",
       "_origin": "ast",
       "community": 11,
-      "community_name": "Release review and remaining work",
+      "community_name": "Genshu AI development workflow",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "local learning-content database",
@@ -4701,7 +4394,7 @@
       "label": "Repository knowledge",
       "_origin": "ast",
       "community": 11,
-      "community_name": "Release review and remaining work",
+      "community_name": "Genshu AI development workflow",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "repository knowledge",
@@ -4713,7 +4406,7 @@
       "label": "Reviewer and worker boundaries",
       "_origin": "ast",
       "community": 11,
-      "community_name": "Release review and remaining work",
+      "community_name": "Genshu AI development workflow",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "reviewer and worker boundaries",
@@ -4725,7 +4418,7 @@
       "label": "Sources and scope",
       "_origin": "ast",
       "community": 11,
-      "community_name": "Release review and remaining work",
+      "community_name": "Genshu AI development workflow",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "sources and scope",
@@ -4737,7 +4430,7 @@
       "label": "Staff access setup",
       "_origin": "ast",
       "community": 11,
-      "community_name": "Release review and remaining work",
+      "community_name": "Genshu AI development workflow",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "staff access setup",
@@ -4749,372 +4442,12 @@
       "label": "Verification",
       "_origin": "ast",
       "community": 11,
-      "community_name": "Release review and remaining work",
+      "community_name": "Genshu AI development workflow",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "verification",
       "source_file": ".ai/README.md",
       "source_location": "L80"
-    },
-    {
-      "id": "docs_gentsuki_bank_import",
-      "label": "gentsuki-bank-import.md",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "gentsuki-bank-import.md",
-      "source_file": "docs/gentsuki-bank-import.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_gentsuki_bank_import_evidence_and_acceptance_status",
-      "label": "Evidence and acceptance status",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "evidence and acceptance status",
-      "source_file": "docs/gentsuki-bank-import.md",
-      "source_location": "L52"
-    },
-    {
-      "id": "docs_gentsuki_bank_import_gentsuki_bank_import",
-      "label": "Gentsuki bank import",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "gentsuki bank import",
-      "source_file": "docs/gentsuki-bank-import.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_gentsuki_bank_import_mapping",
-      "label": "Mapping",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "mapping",
-      "source_file": "docs/gentsuki-bank-import.md",
-      "source_location": "L5"
-    },
-    {
-      "id": "docs_gentsuki_bank_import_run",
-      "label": "Run",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "run",
-      "source_file": "docs/gentsuki-bank-import.md",
-      "source_location": "L33"
-    },
-    {
-      "id": "docs_recovery",
-      "label": "recovery.md",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "recovery.md",
-      "source_file": "docs/recovery.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_recovery_application_and_data_rollback",
-      "label": "Application and data rollback",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "application and data rollback",
-      "source_file": "docs/recovery.md",
-      "source_location": "L62"
-    },
-    {
-      "id": "docs_recovery_backup_and_recovery",
-      "label": "Backup and recovery",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "backup and recovery",
-      "source_file": "docs/recovery.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_recovery_environment_inventory_2026_09_27_jst",
-      "label": "Environment inventory \u2014 2026-09-27 JST",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "environment inventory \u2014 2026-09-27 jst",
-      "source_file": "docs/recovery.md",
-      "source_location": "L70"
-    },
-    {
-      "id": "docs_recovery_export_inventory",
-      "label": "Export inventory",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "export inventory",
-      "source_file": "docs/recovery.md",
-      "source_location": "L20"
-    },
-    {
-      "id": "docs_recovery_isolated_restore_rehearsal",
-      "label": "Isolated restore rehearsal",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "isolated restore rehearsal",
-      "source_file": "docs/recovery.md",
-      "source_location": "L37"
-    },
-    {
-      "id": "docs_recovery_status_and_responsibility",
-      "label": "Status and responsibility",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "status and responsibility",
-      "source_file": "docs/recovery.md",
-      "source_location": "L3"
-    },
-    {
-      "id": "docs_release_readiness",
-      "label": "release-readiness.md",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "release-readiness.md",
-      "source_file": "docs/release-readiness.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_release_readiness_evidence_snapshot_2026_09_26_jst",
-      "label": "Evidence snapshot \u2014 2026-09-26 JST",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "evidence snapshot \u2014 2026-09-26 jst",
-      "source_file": "docs/release-readiness.md",
-      "source_location": "L3"
-    },
-    {
-      "id": "docs_release_readiness_evidence_updates",
-      "label": "Evidence updates",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "evidence updates",
-      "source_file": "docs/release-readiness.md",
-      "source_location": "L155"
-    },
-    {
-      "id": "docs_release_readiness_historical_incident_context",
-      "label": "Historical incident context",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "historical incident context",
-      "source_file": "docs/release-readiness.md",
-      "source_location": "L57"
-    },
-    {
-      "id": "docs_release_readiness_local_browser_follow_up_2026_09_27_utc_09",
-      "label": "Local browser follow-up \u2014 2026-09-27 UTC+09",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "local browser follow-up \u2014 2026-09-27 utc+09",
-      "source_file": "docs/release-readiness.md",
-      "source_location": "L179"
-    },
-    {
-      "id": "docs_release_readiness_operational_status_2026_09_27_jst",
-      "label": "Operational status \u2014 2026-09-27 JST",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "operational status \u2014 2026-09-27 jst",
-      "source_file": "docs/release-readiness.md",
-      "source_location": "L66"
-    },
-    {
-      "id": "docs_release_readiness_outstanding_acceptance_criteria",
-      "label": "Outstanding acceptance criteria",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "outstanding acceptance criteria",
-      "source_file": "docs/release-readiness.md",
-      "source_location": "L42"
-    },
-    {
-      "id": "docs_release_readiness_release_review_and_remaining_work",
-      "label": "Release review and remaining work",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "release review and remaining work",
-      "source_file": "docs/release-readiness.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_release_readiness_reviewer_findings_2026_09_27_utc_09",
-      "label": "Reviewer findings \u2014 2026-09-27 UTC+09",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "reviewer findings \u2014 2026-09-27 utc+09",
-      "source_file": "docs/release-readiness.md",
-      "source_location": "L82"
-    },
-    {
-      "id": "docs_release_readiness_reviewer_follow_up_2026_09_27_utc_09",
-      "label": "Reviewer follow-up \u2014 2026-09-27 UTC+09",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "reviewer follow-up \u2014 2026-09-27 utc+09",
-      "source_file": "docs/release-readiness.md",
-      "source_location": "L163"
-    },
-    {
-      "id": "docs_release_readiness_worker_implementation_update_2026_09_27_utc_09",
-      "label": "Worker implementation update \u2014 2026-09-27 UTC+09",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "worker implementation update \u2014 2026-09-27 utc+09",
-      "source_file": "docs/release-readiness.md",
-      "source_location": "L111"
-    },
-    {
-      "id": "docs_worker_next_goal",
-      "label": "worker-next-goal.md",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "worker-next-goal.md",
-      "source_file": "docs/worker-next-goal.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_worker_next_goal_environment_and_limits",
-      "label": "Environment and limits",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "environment and limits",
-      "source_file": "docs/worker-next-goal.md",
-      "source_location": "L39"
-    },
-    {
-      "id": "docs_worker_next_goal_evidence_and_handoff",
-      "label": "Evidence and handoff",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "evidence and handoff",
-      "source_file": "docs/worker-next-goal.md",
-      "source_location": "L51"
-    },
-    {
-      "id": "docs_worker_next_goal_goal",
-      "label": "Goal",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "goal",
-      "source_file": "docs/worker-next-goal.md",
-      "source_location": "L12"
-    },
-    {
-      "id": "docs_worker_next_goal_next_worker_goal_verify_the_corrected_authoring_and_learner_flows_locally",
-      "label": "Next worker goal: verify the corrected authoring and learner flows locally",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "next worker goal: verify the corrected authoring and learner flows locally",
-      "source_file": "docs/worker-next-goal.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_worker_next_goal_required_scenarios",
-      "label": "Required scenarios",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "required scenarios",
-      "source_file": "docs/worker-next-goal.md",
-      "source_location": "L23"
-    },
-    {
-      "id": "docs_worker_next_goal_starting_evidence",
-      "label": "Starting evidence",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "starting evidence",
-      "source_file": "docs/worker-next-goal.md",
-      "source_location": "L3"
     },
     {
       "id": "agents_skills_supabase_postgres_best_practices_references_data_n_plus_one",
@@ -8223,7 +7556,7 @@
       "source_location": "L1"
     },
     {
-      "id": "db_imports_gentsuki_ready_web_manifest_5141_height",
+      "id": "db_imports_gentsuki_ready_web_manifest_1_1_height",
       "label": "height",
       "_origin": "ast",
       "community": 147,
@@ -8231,10 +7564,10 @@
       "file_type": "code",
       "norm_label": "height",
       "source_file": "db/imports/gentsuki-ready-web/manifest.json",
-      "source_location": "L136"
+      "source_location": "L236"
     },
     {
-      "id": "db_imports_gentsuki_ready_web_manifest_5141_sha",
+      "id": "db_imports_gentsuki_ready_web_manifest_1_1_sha",
       "label": "sha",
       "_origin": "ast",
       "community": 147,
@@ -8242,10 +7575,10 @@
       "file_type": "code",
       "norm_label": "sha",
       "source_file": "db/imports/gentsuki-ready-web/manifest.json",
-      "source_location": "L137"
+      "source_location": "L237"
     },
     {
-      "id": "db_imports_gentsuki_ready_web_manifest_5141_width",
+      "id": "db_imports_gentsuki_ready_web_manifest_1_1_width",
       "label": "width",
       "_origin": "ast",
       "community": 147,
@@ -8253,7 +7586,7 @@
       "file_type": "code",
       "norm_label": "width",
       "source_file": "db/imports/gentsuki-ready-web/manifest.json",
-      "source_location": "L135"
+      "source_location": "L235"
     },
     {
       "id": "db_imports_gentsuki_ready_web_manifest_assetmeta",
@@ -8267,15 +7600,15 @@
       "source_location": "L18"
     },
     {
-      "id": "db_imports_gentsuki_ready_web_manifest_assetmeta_5141",
-      "label": "5141",
+      "id": "db_imports_gentsuki_ready_web_manifest_assetmeta_1_1",
+      "label": "1-1",
       "_origin": "ast",
       "community": 147,
       "community_name": "assetMeta",
       "file_type": "code",
-      "norm_label": "5141",
+      "norm_label": "1-1",
       "source_file": "db/imports/gentsuki-ready-web/manifest.json",
-      "source_location": "L134"
+      "source_location": "L234"
     },
     {
       "id": "db_imports_gentsuki_ready_web_manifest_commit",
@@ -8300,48 +7633,48 @@
       "source_location": "L2"
     },
     {
-      "id": "src_lib_supabase_proxy",
-      "label": "supabase/proxy.ts",
+      "id": "db_imports_gentsuki_ready_web_manifest_5141_height",
+      "label": "height",
       "_origin": "ast",
       "community": 148,
-      "community_name": "src/proxy.ts",
+      "community_name": "5141",
       "file_type": "code",
-      "norm_label": "supabase/proxy.ts",
-      "source_file": "src/lib/supabase/proxy.ts",
-      "source_location": "L1"
+      "norm_label": "height",
+      "source_file": "db/imports/gentsuki-ready-web/manifest.json",
+      "source_location": "L136"
     },
     {
-      "id": "src_proxy",
-      "label": "src/proxy.ts",
+      "id": "db_imports_gentsuki_ready_web_manifest_5141_sha",
+      "label": "sha",
       "_origin": "ast",
       "community": 148,
-      "community_name": "src/proxy.ts",
+      "community_name": "5141",
       "file_type": "code",
-      "norm_label": "src/proxy.ts",
-      "source_file": "src/proxy.ts",
-      "source_location": "L1"
+      "norm_label": "sha",
+      "source_file": "db/imports/gentsuki-ready-web/manifest.json",
+      "source_location": "L137"
     },
     {
-      "id": "src_proxy_config",
-      "label": "config",
+      "id": "db_imports_gentsuki_ready_web_manifest_5141_width",
+      "label": "width",
       "_origin": "ast",
       "community": 148,
-      "community_name": "src/proxy.ts",
+      "community_name": "5141",
       "file_type": "code",
-      "norm_label": "config",
-      "source_file": "src/proxy.ts",
-      "source_location": "L17"
+      "norm_label": "width",
+      "source_file": "db/imports/gentsuki-ready-web/manifest.json",
+      "source_location": "L135"
     },
     {
-      "id": "src_proxy_prototypepaths",
-      "label": "prototypePaths",
+      "id": "db_imports_gentsuki_ready_web_manifest_assetmeta_5141",
+      "label": "5141",
       "_origin": "ast",
       "community": 148,
-      "community_name": "src/proxy.ts",
+      "community_name": "5141",
       "file_type": "code",
-      "norm_label": "prototypepaths",
-      "source_file": "src/proxy.ts",
-      "source_location": "L4"
+      "norm_label": "5141",
+      "source_file": "db/imports/gentsuki-ready-web/manifest.json",
+      "source_location": "L134"
     },
     {
       "id": "agents_rules_antigravity_rtk_rules",
@@ -8511,48 +7844,81 @@
       "source_location": "L28"
     },
     {
-      "id": "db_imports_gentsuki_ready_web_manifest_1_1_height",
-      "label": "height",
+      "id": "src_lib_practice_units",
+      "label": "practice-units.ts",
       "_origin": "ast",
       "community": 154,
-      "community_name": "1-1",
+      "community_name": "practice-units.ts",
       "file_type": "code",
-      "norm_label": "height",
-      "source_file": "db/imports/gentsuki-ready-web/manifest.json",
-      "source_location": "L236"
+      "norm_label": "practice-units.ts",
+      "source_file": "src/lib/practice-units.ts",
+      "source_location": "L1"
     },
     {
-      "id": "db_imports_gentsuki_ready_web_manifest_1_1_sha",
-      "label": "sha",
+      "id": "src_lib_practice_units_check",
+      "label": "practice-units.check.ts",
       "_origin": "ast",
       "community": 154,
-      "community_name": "1-1",
+      "community_name": "practice-units.ts",
       "file_type": "code",
-      "norm_label": "sha",
-      "source_file": "db/imports/gentsuki-ready-web/manifest.json",
-      "source_location": "L237"
+      "norm_label": "practice-units.check.ts",
+      "source_file": "src/lib/practice-units.check.ts",
+      "source_location": "L1"
     },
     {
-      "id": "db_imports_gentsuki_ready_web_manifest_1_1_width",
-      "label": "width",
+      "id": "src_lib_practice_units_check_cataloggroups",
+      "label": "catalogGroups",
       "_origin": "ast",
       "community": 154,
-      "community_name": "1-1",
+      "community_name": "practice-units.ts",
       "file_type": "code",
-      "norm_label": "width",
-      "source_file": "db/imports/gentsuki-ready-web/manifest.json",
-      "source_location": "L235"
+      "norm_label": "cataloggroups",
+      "source_file": "src/lib/practice-units.check.ts",
+      "source_location": "L31"
     },
     {
-      "id": "db_imports_gentsuki_ready_web_manifest_assetmeta_1_1",
-      "label": "1-1",
+      "id": "src_lib_practice_units_check_catalogquestions",
+      "label": "catalogQuestions",
       "_origin": "ast",
       "community": 154,
-      "community_name": "1-1",
+      "community_name": "practice-units.ts",
       "file_type": "code",
-      "norm_label": "1-1",
-      "source_file": "db/imports/gentsuki-ready-web/manifest.json",
-      "source_location": "L234"
+      "norm_label": "catalogquestions",
+      "source_file": "src/lib/practice-units.check.ts",
+      "source_location": "L32"
+    },
+    {
+      "id": "src_lib_practice_units_check_group",
+      "label": "group",
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "practice-units.ts",
+      "file_type": "code",
+      "norm_label": "group",
+      "source_file": "src/lib/practice-units.check.ts",
+      "source_location": "L10"
+    },
+    {
+      "id": "src_lib_practice_units_check_mixed",
+      "label": "mixed",
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "practice-units.ts",
+      "file_type": "code",
+      "norm_label": "mixed",
+      "source_file": "src/lib/practice-units.check.ts",
+      "source_location": "L27"
+    },
+    {
+      "id": "src_lib_practice_units_check_units",
+      "label": "units",
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "practice-units.ts",
+      "file_type": "code",
+      "norm_label": "units",
+      "source_file": "src/lib/practice-units.check.ts",
+      "source_location": "L23"
     },
     {
       "id": "agents_skills_mobile_native_skill",
@@ -11320,6 +10686,42 @@
       "source_location": "L129"
     },
     {
+      "id": "ai_project_10_data_platform",
+      "label": "10. Data Platform",
+      "_origin": "ast",
+      "community": 207,
+      "community_name": "10. Data Platform",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "10. data platform",
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L458"
+    },
+    {
+      "id": "ai_project_database_access_layer",
+      "label": "Database Access Layer",
+      "_origin": "ast",
+      "community": 207,
+      "community_name": "10. Data Platform",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "database access layer",
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L519"
+    },
+    {
+      "id": "ai_project_local_development",
+      "label": "Local Development",
+      "_origin": "ast",
+      "community": 207,
+      "community_name": "10. Data Platform",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "local development",
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L493"
+    },
+    {
       "id": "db_imports_gentsuki_ready_web_manifest_5191_height",
       "label": "height",
       "_origin": "ast",
@@ -11716,6 +11118,50 @@
       "source_location": "L179"
     },
     {
+      "id": "src_app_staff_practice_actions",
+      "label": "practice/actions.ts",
+      "_origin": "ast",
+      "community": 217,
+      "community_name": "staff/practice/[id]/page.tsx",
+      "file_type": "code",
+      "norm_label": "practice/actions.ts",
+      "source_file": "src/app/staff/practice/actions.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_staff_practice_id_page",
+      "label": "staff/practice/[id]/page.tsx",
+      "_origin": "ast",
+      "community": 217,
+      "community_name": "staff/practice/[id]/page.tsx",
+      "file_type": "code",
+      "norm_label": "staff/practice/[id]/page.tsx",
+      "source_file": "src/app/staff/practice/[id]/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_staff_practice_id_page_dynamic",
+      "label": "dynamic",
+      "_origin": "ast",
+      "community": 217,
+      "community_name": "staff/practice/[id]/page.tsx",
+      "file_type": "code",
+      "norm_label": "dynamic",
+      "source_file": "src/app/staff/practice/[id]/page.tsx",
+      "source_location": "L11"
+    },
+    {
+      "id": "src_components_practice_questions_editor",
+      "label": "practice-questions-editor.tsx",
+      "_origin": "ast",
+      "community": 217,
+      "community_name": "staff/practice/[id]/page.tsx",
+      "file_type": "code",
+      "norm_label": "practice-questions-editor.tsx",
+      "source_file": "src/components/practice-questions-editor.tsx",
+      "source_location": "L1"
+    },
+    {
       "id": "db_imports_gentsuki_ready_web_manifest_6161_height",
       "label": "height",
       "_origin": "ast",
@@ -11980,48 +11426,70 @@
       "source_location": "L214"
     },
     {
-      "id": "db_imports_gentsuki_ready_web_manifest_6451_height",
-      "label": "height",
+      "id": "db_scripts_practice_actions_test",
+      "label": "practice-actions.test.js",
       "_origin": "ast",
       "community": 224,
-      "community_name": "6451",
+      "community_name": "practice-actions.test.js",
       "file_type": "code",
-      "norm_label": "height",
-      "source_file": "db/imports/gentsuki-ready-web/manifest.json",
-      "source_location": "L221"
+      "norm_label": "practice-actions.test.js",
+      "source_file": "db/scripts/practice-actions.test.js",
+      "source_location": "L1"
     },
     {
-      "id": "db_imports_gentsuki_ready_web_manifest_6451_sha",
-      "label": "sha",
+      "id": "db_scripts_practice_actions_test_catalogrows",
+      "label": "catalogRows",
       "_origin": "ast",
       "community": 224,
-      "community_name": "6451",
+      "community_name": "practice-actions.test.js",
       "file_type": "code",
-      "norm_label": "sha",
-      "source_file": "db/imports/gentsuki-ready-web/manifest.json",
-      "source_location": "L222"
+      "norm_label": "catalogrows",
+      "source_file": "db/scripts/practice-actions.test.js",
+      "source_location": "L8"
     },
     {
-      "id": "db_imports_gentsuki_ready_web_manifest_6451_width",
-      "label": "width",
+      "id": "db_scripts_practice_actions_test_redirectsignal",
+      "label": "redirectSignal",
       "_origin": "ast",
       "community": 224,
-      "community_name": "6451",
+      "community_name": "practice-actions.test.js",
       "file_type": "code",
-      "norm_label": "width",
-      "source_file": "db/imports/gentsuki-ready-web/manifest.json",
-      "source_location": "L220"
+      "norm_label": "redirectsignal",
+      "source_file": "db/scripts/practice-actions.test.js",
+      "source_location": "L9"
     },
     {
-      "id": "db_imports_gentsuki_ready_web_manifest_assetmeta_6451",
-      "label": "6451",
+      "id": "db_scripts_practice_actions_test_rpccalls",
+      "label": "rpcCalls",
       "_origin": "ast",
       "community": 224,
-      "community_name": "6451",
+      "community_name": "practice-actions.test.js",
       "file_type": "code",
-      "norm_label": "6451",
-      "source_file": "db/imports/gentsuki-ready-web/manifest.json",
-      "source_location": "L219"
+      "norm_label": "rpccalls",
+      "source_file": "db/scripts/practice-actions.test.js",
+      "source_location": "L7"
+    },
+    {
+      "id": "db_scripts_practice_actions_test_storedgroups",
+      "label": "storedGroups",
+      "_origin": "ast",
+      "community": 224,
+      "community_name": "practice-actions.test.js",
+      "file_type": "code",
+      "norm_label": "storedgroups",
+      "source_file": "db/scripts/practice-actions.test.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "db_scripts_practice_actions_test_storedquestions",
+      "label": "storedQuestions",
+      "_origin": "ast",
+      "community": 224,
+      "community_name": "practice-actions.test.js",
+      "file_type": "code",
+      "norm_label": "storedquestions",
+      "source_file": "db/scripts/practice-actions.test.js",
+      "source_location": "L5"
     },
     {
       "id": "db_imports_gentsuki_ready_web_manifest_6471_height",
@@ -12574,6 +12042,182 @@
       "source_location": "L435"
     },
     {
+      "id": "src_app_staff_materials_actions",
+      "label": "materials/actions.ts",
+      "_origin": "ast",
+      "community": 237,
+      "community_name": "staff/materials/[slug]/page.tsx",
+      "file_type": "code",
+      "norm_label": "materials/actions.ts",
+      "source_file": "src/app/staff/materials/actions.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_staff_materials_slug_page",
+      "label": "staff/materials/[slug]/page.tsx",
+      "_origin": "ast",
+      "community": 237,
+      "community_name": "staff/materials/[slug]/page.tsx",
+      "file_type": "code",
+      "norm_label": "staff/materials/[slug]/page.tsx",
+      "source_file": "src/app/staff/materials/[slug]/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_staff_materials_slug_page_dynamic",
+      "label": "dynamic",
+      "_origin": "ast",
+      "community": 237,
+      "community_name": "staff/materials/[slug]/page.tsx",
+      "file_type": "code",
+      "norm_label": "dynamic",
+      "source_file": "src/app/staff/materials/[slug]/page.tsx",
+      "source_location": "L11"
+    },
+    {
+      "id": "src_components_material_sections_editor",
+      "label": "material-sections-editor.tsx",
+      "_origin": "ast",
+      "community": 237,
+      "community_name": "staff/materials/[slug]/page.tsx",
+      "file_type": "code",
+      "norm_label": "material-sections-editor.tsx",
+      "source_file": "src/components/material-sections-editor.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_staff_action_form",
+      "label": "staff-action-form.tsx",
+      "_origin": "ast",
+      "community": 237,
+      "community_name": "staff/materials/[slug]/page.tsx",
+      "file_type": "code",
+      "norm_label": "staff-action-form.tsx",
+      "source_file": "src/components/staff-action-form.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "ai_scripts_check_supabase_config",
+      "label": "check-supabase-config.ts",
+      "_origin": "ast",
+      "community": 238,
+      "community_name": "server.ts",
+      "file_type": "code",
+      "norm_label": "check-supabase-config.ts",
+      "source_file": ".ai/scripts/check-supabase-config.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "ai_scripts_check_supabase_config_names",
+      "label": "names",
+      "_origin": "ast",
+      "community": 238,
+      "community_name": "server.ts",
+      "file_type": "code",
+      "norm_label": "names",
+      "source_file": ".ai/scripts/check-supabase-config.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "ai_scripts_check_supabase_config_original",
+      "label": "original",
+      "_origin": "ast",
+      "community": 238,
+      "community_name": "server.ts",
+      "file_type": "code",
+      "norm_label": "original",
+      "source_file": ".ai/scripts/check-supabase-config.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "src_lib_database_types",
+      "label": "database.types.ts",
+      "_origin": "ast",
+      "community": 238,
+      "community_name": "server.ts",
+      "file_type": "code",
+      "norm_label": "database.types.ts",
+      "source_file": "src/lib/database.types.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_lib_supabase_client",
+      "label": "client.ts",
+      "_origin": "ast",
+      "community": 238,
+      "community_name": "server.ts",
+      "file_type": "code",
+      "norm_label": "client.ts",
+      "source_file": "src/lib/supabase/client.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_lib_supabase_server",
+      "label": "server.ts",
+      "_origin": "ast",
+      "community": 238,
+      "community_name": "server.ts",
+      "file_type": "code",
+      "norm_label": "server.ts",
+      "source_file": "src/lib/supabase/server.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "ref_supabase_ssr",
+      "label": "@supabase/ssr",
+      "_origin": "ast",
+      "community": 238,
+      "community_name": "server.ts",
+      "file_type": "concept",
+      "norm_label": "@supabase/ssr",
+      "source_file": "package.json",
+      "source_location": "L23"
+    },
+    {
+      "id": "src_lib_supabase_proxy",
+      "label": "supabase/proxy.ts",
+      "_origin": "ast",
+      "community": 239,
+      "community_name": "src/proxy.ts",
+      "file_type": "code",
+      "norm_label": "supabase/proxy.ts",
+      "source_file": "src/lib/supabase/proxy.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_proxy",
+      "label": "src/proxy.ts",
+      "_origin": "ast",
+      "community": 239,
+      "community_name": "src/proxy.ts",
+      "file_type": "code",
+      "norm_label": "src/proxy.ts",
+      "source_file": "src/proxy.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_proxy_config",
+      "label": "config",
+      "_origin": "ast",
+      "community": 239,
+      "community_name": "src/proxy.ts",
+      "file_type": "code",
+      "norm_label": "config",
+      "source_file": "src/proxy.ts",
+      "source_location": "L17"
+    },
+    {
+      "id": "src_proxy_prototypepaths",
+      "label": "prototypePaths",
+      "_origin": "ast",
+      "community": 239,
+      "community_name": "src/proxy.ts",
+      "file_type": "code",
+      "norm_label": "prototypepaths",
+      "source_file": "src/proxy.ts",
+      "source_location": "L4"
+    },
+    {
       "id": "postcss_config",
       "label": "postcss.config.mjs",
       "_origin": "ast",
@@ -12594,6 +12238,50 @@
       "norm_label": "config",
       "source_file": "postcss.config.mjs",
       "source_location": "L1"
+    },
+    {
+      "id": "db_imports_gentsuki_ready_web_manifest_6451_height",
+      "label": "height",
+      "_origin": "ast",
+      "community": 240,
+      "community_name": "6451",
+      "file_type": "code",
+      "norm_label": "height",
+      "source_file": "db/imports/gentsuki-ready-web/manifest.json",
+      "source_location": "L221"
+    },
+    {
+      "id": "db_imports_gentsuki_ready_web_manifest_6451_sha",
+      "label": "sha",
+      "_origin": "ast",
+      "community": 240,
+      "community_name": "6451",
+      "file_type": "code",
+      "norm_label": "sha",
+      "source_file": "db/imports/gentsuki-ready-web/manifest.json",
+      "source_location": "L222"
+    },
+    {
+      "id": "db_imports_gentsuki_ready_web_manifest_6451_width",
+      "label": "width",
+      "_origin": "ast",
+      "community": 240,
+      "community_name": "6451",
+      "file_type": "code",
+      "norm_label": "width",
+      "source_file": "db/imports/gentsuki-ready-web/manifest.json",
+      "source_location": "L220"
+    },
+    {
+      "id": "db_imports_gentsuki_ready_web_manifest_assetmeta_6451",
+      "label": "6451",
+      "_origin": "ast",
+      "community": 240,
+      "community_name": "6451",
+      "file_type": "code",
+      "norm_label": "6451",
+      "source_file": "db/imports/gentsuki-ready-web/manifest.json",
+      "source_location": "L219"
     },
     {
       "id": "ai_scripts_verify",
@@ -14066,58 +13754,27 @@
       "source_location": "L64"
     },
     {
-      "id": "src_app_staff_materials_actions",
-      "label": "materials/actions.ts",
+      "id": "ai_project",
+      "label": "PROJECT.md",
       "_origin": "ast",
       "community": 7,
-      "community_name": "staff/materials/[slug]/page.tsx",
-      "file_type": "code",
-      "norm_label": "materials/actions.ts",
-      "source_file": "src/app/staff/materials/actions.ts",
+      "community_name": "Genshu Agent Instructions",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "project.md",
+      "source_file": ".ai/PROJECT.md",
       "source_location": "L1"
     },
     {
-      "id": "src_app_staff_materials_slug_page",
-      "label": "staff/materials/[slug]/page.tsx",
+      "id": "ai_readme",
+      "label": "README.md",
       "_origin": "ast",
       "community": 7,
-      "community_name": "staff/materials/[slug]/page.tsx",
-      "file_type": "code",
-      "norm_label": "staff/materials/[slug]/page.tsx",
-      "source_file": "src/app/staff/materials/[slug]/page.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_staff_materials_slug_page_dynamic",
-      "label": "dynamic",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "staff/materials/[slug]/page.tsx",
-      "file_type": "code",
-      "norm_label": "dynamic",
-      "source_file": "src/app/staff/materials/[slug]/page.tsx",
-      "source_location": "L11"
-    },
-    {
-      "id": "src_components_material_sections_editor",
-      "label": "material-sections-editor.tsx",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "staff/materials/[slug]/page.tsx",
-      "file_type": "code",
-      "norm_label": "material-sections-editor.tsx",
-      "source_file": "src/components/material-sections-editor.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_components_staff_action_form",
-      "label": "staff-action-form.tsx",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "staff/materials/[slug]/page.tsx",
-      "file_type": "code",
-      "norm_label": "staff-action-form.tsx",
-      "source_file": "src/components/staff-action-form.tsx",
+      "community_name": "Genshu Agent Instructions",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "readme.md",
+      "source_file": ".ai/README.md",
       "source_location": "L1"
     },
     {
@@ -14724,125 +14381,148 @@
       "source_location": "L4"
     },
     {
-      "id": "src_app_staff_practice_actions",
-      "label": "practice/actions.ts",
+      "id": "ai_project_5_release_scope",
+      "label": "5. Release Scope",
       "_origin": "ast",
       "community": 94,
-      "community_name": "staff/practice/[id]/page.tsx",
-      "file_type": "code",
-      "norm_label": "practice/actions.ts",
-      "source_file": "src/app/staff/practice/actions.ts",
-      "source_location": "L1"
+      "community_name": "5. Release Scope",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "5. release scope",
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L167"
     },
     {
-      "id": "src_app_staff_practice_id_page",
-      "label": "staff/practice/[id]/page.tsx",
+      "id": "ai_project_first_live_release",
+      "label": "First live release",
       "_origin": "ast",
       "community": 94,
-      "community_name": "staff/practice/[id]/page.tsx",
-      "file_type": "code",
-      "norm_label": "staff/practice/[id]/page.tsx",
-      "source_file": "src/app/staff/practice/[id]/page.tsx",
-      "source_location": "L1"
+      "community_name": "5. Release Scope",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "first live release",
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L169"
     },
     {
-      "id": "src_app_staff_practice_id_page_dynamic",
-      "label": "dynamic",
+      "id": "ai_project_first_live_release_practice",
+      "label": "First live release: Practice",
       "_origin": "ast",
       "community": 94,
-      "community_name": "staff/practice/[id]/page.tsx",
-      "file_type": "code",
-      "norm_label": "dynamic",
-      "source_file": "src/app/staff/practice/[id]/page.tsx",
-      "source_location": "L11"
+      "community_name": "5. Release Scope",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "first live release: practice",
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L221"
     },
     {
-      "id": "src_components_practice_questions_editor",
-      "label": "practice-questions-editor.tsx",
+      "id": "ai_project_later_release_assignments",
+      "label": "Later release: Assignments",
       "_origin": "ast",
       "community": 94,
-      "community_name": "staff/practice/[id]/page.tsx",
-      "file_type": "code",
-      "norm_label": "practice-questions-editor.tsx",
-      "source_file": "src/components/practice-questions-editor.tsx",
-      "source_location": "L1"
+      "community_name": "5. Release Scope",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "later release: assignments",
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L242"
     },
     {
-      "id": "ai_scripts_check_supabase_config",
-      "label": "check-supabase-config.ts",
+      "id": "ai_project_later_release_attendance",
+      "label": "Later release: Attendance",
       "_origin": "ast",
-      "community": 95,
-      "community_name": "server.ts",
-      "file_type": "code",
-      "norm_label": "check-supabase-config.ts",
-      "source_file": ".ai/scripts/check-supabase-config.ts",
-      "source_location": "L1"
+      "community": 94,
+      "community_name": "5. Release Scope",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "later release: attendance",
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L204"
     },
     {
-      "id": "ai_scripts_check_supabase_config_names",
-      "label": "names",
+      "id": "ai_project_later_release_exams",
+      "label": "Later release: Exams",
       "_origin": "ast",
-      "community": 95,
-      "community_name": "server.ts",
-      "file_type": "code",
-      "norm_label": "names",
-      "source_file": ".ai/scripts/check-supabase-config.ts",
-      "source_location": "L4"
+      "community": 94,
+      "community_name": "5. Release Scope",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "later release: exams",
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L259"
     },
     {
-      "id": "ai_scripts_check_supabase_config_original",
-      "label": "original",
+      "id": "ai_project_learning_materials",
+      "label": "Learning materials",
       "_origin": "ast",
-      "community": 95,
-      "community_name": "server.ts",
-      "file_type": "code",
-      "norm_label": "original",
-      "source_file": ".ai/scripts/check-supabase-config.ts",
-      "source_location": "L5"
+      "community": 94,
+      "community_name": "5. Release Scope",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "learning materials",
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L190"
     },
     {
-      "id": "src_lib_database_types",
-      "label": "database.types.ts",
+      "id": "ai_project_6_language_rules",
+      "label": "6. Language Rules",
       "_origin": "ast",
       "community": 95,
-      "community_name": "server.ts",
-      "file_type": "code",
-      "norm_label": "database.types.ts",
-      "source_file": "src/lib/database.types.ts",
-      "source_location": "L1"
+      "community_name": "6. Language Rules",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "6. language rules",
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L278"
     },
     {
-      "id": "src_lib_supabase_client",
-      "label": "client.ts",
+      "id": "ai_project_application_interface",
+      "label": "Application Interface",
       "_origin": "ast",
       "community": 95,
-      "community_name": "server.ts",
-      "file_type": "code",
-      "norm_label": "client.ts",
-      "source_file": "src/lib/supabase/client.ts",
-      "source_location": "L1"
+      "community_name": "6. Language Rules",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "application interface",
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L280"
     },
     {
-      "id": "src_lib_supabase_server",
-      "label": "server.ts",
+      "id": "ai_project_assignments_and_exams",
+      "label": "Assignments and Exams",
       "_origin": "ast",
       "community": 95,
-      "community_name": "server.ts",
-      "file_type": "code",
-      "norm_label": "server.ts",
-      "source_file": "src/lib/supabase/server.ts",
-      "source_location": "L1"
+      "community_name": "6. Language Rules",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "assignments and exams",
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L307"
     },
     {
-      "id": "ref_supabase_ssr",
-      "label": "@supabase/ssr",
+      "id": "ai_project_furigana",
+      "label": "Furigana",
       "_origin": "ast",
       "community": 95,
-      "community_name": "server.ts",
-      "file_type": "concept",
-      "norm_label": "@supabase/ssr",
-      "source_file": "package.json",
-      "source_location": "L23"
+      "community_name": "6. Language Rules",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "furigana",
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L315"
+    },
+    {
+      "id": "ai_project_learning_content",
+      "label": "Learning Content",
+      "_origin": "ast",
+      "community": 95,
+      "community_name": "6. Language Rules",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "learning content",
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L293"
     },
     {
       "id": "src_app_login_actions",
@@ -15083,70 +14763,52 @@
       "source_location": "L294"
     },
     {
-      "id": "db_scripts_practice_actions_test",
-      "label": "practice-actions.test.js",
+      "id": "ai_project_3_1_gakusei_\u5b66\u751f",
+      "label": "3.1 Gakusei \u2014 \u5b66\u751f",
       "_origin": "ast",
       "community": 99,
-      "community_name": "practice-actions.test.js",
-      "file_type": "code",
-      "norm_label": "practice-actions.test.js",
-      "source_file": "db/scripts/practice-actions.test.js",
-      "source_location": "L1"
+      "community_name": "3. Primary Users",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3.1 gakusei \u2014 \u5b66\u751f",
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L69"
     },
     {
-      "id": "db_scripts_practice_actions_test_catalogrows",
-      "label": "catalogRows",
+      "id": "ai_project_3_2_sensei_\u5148\u751f",
+      "label": "3.2 Sensei \u2014 \u5148\u751f",
       "_origin": "ast",
       "community": 99,
-      "community_name": "practice-actions.test.js",
-      "file_type": "code",
-      "norm_label": "catalogrows",
-      "source_file": "db/scripts/practice-actions.test.js",
-      "source_location": "L8"
+      "community_name": "3. Primary Users",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3.2 sensei \u2014 \u5148\u751f",
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L90"
     },
     {
-      "id": "db_scripts_practice_actions_test_redirectsignal",
-      "label": "redirectSignal",
+      "id": "ai_project_3_3_tant\u014dsha_\u62c5\u5f53\u8005",
+      "label": "3.3 Tant\u014dsha \u2014 \u62c5\u5f53\u8005",
       "_origin": "ast",
       "community": 99,
-      "community_name": "practice-actions.test.js",
-      "file_type": "code",
-      "norm_label": "redirectsignal",
-      "source_file": "db/scripts/practice-actions.test.js",
-      "source_location": "L9"
+      "community_name": "3. Primary Users",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3.3 tantosha \u2014 \u62c5\u5f53\u8005",
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L113"
     },
     {
-      "id": "db_scripts_practice_actions_test_rpccalls",
-      "label": "rpcCalls",
+      "id": "ai_project_3_primary_users",
+      "label": "3. Primary Users",
       "_origin": "ast",
       "community": 99,
-      "community_name": "practice-actions.test.js",
-      "file_type": "code",
-      "norm_label": "rpccalls",
-      "source_file": "db/scripts/practice-actions.test.js",
-      "source_location": "L7"
-    },
-    {
-      "id": "db_scripts_practice_actions_test_storedgroups",
-      "label": "storedGroups",
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "practice-actions.test.js",
-      "file_type": "code",
-      "norm_label": "storedgroups",
-      "source_file": "db/scripts/practice-actions.test.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "db_scripts_practice_actions_test_storedquestions",
-      "label": "storedQuestions",
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "practice-actions.test.js",
-      "file_type": "code",
-      "norm_label": "storedquestions",
-      "source_file": "db/scripts/practice-actions.test.js",
-      "source_location": "L5"
+      "community_name": "3. Primary Users",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. primary users",
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L65"
     },
     {
       "id": "_agents_skills_vercel_react_best_practices_skill_vercel_react_best_practices_skill",
@@ -15221,81 +14883,6 @@
       "norm_label": "cache storage api calls",
       "source_file": ".agents/skills/vercel-react-best-practices/rules/js-cache-storage.md",
       "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "agents_architectural_change_rules",
-      "label": "Architectural Change Rules",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "architectural change rules",
-      "source_file": "AGENTS.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "agents_source_of_truth",
-      "label": "Source of Truth Hierarchy",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "source of truth hierarchy",
-      "source_file": "AGENTS.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "agents_worker_reviewer_protocol",
-      "label": "Worker and Reviewer Protocol",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "worker and reviewer protocol",
-      "source_file": "AGENTS.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "agents_instructions",
-      "label": "Genshu Agent Instructions",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "contributor": null,
-      "file_type": "document",
-      "norm_label": "genshu agent instructions",
-      "source_file": "AGENTS.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "readme_guidance",
-      "label": "Genshu README",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 11,
-      "community_name": "Release review and remaining work",
-      "contributor": null,
-      "file_type": "document",
-      "norm_label": "genshu readme",
-      "source_file": "README.md",
-      "source_location": "# Getting Started",
       "source_url": null
     },
     {
@@ -16283,6 +15870,81 @@
       "norm_label": "web interface guidelines",
       "source_file": ".agents/skills/web-design-guidelines/SKILL.md",
       "source_location": "# Web Interface Guidelines",
+      "source_url": null
+    },
+    {
+      "id": "agents_architectural_change_rules",
+      "label": "Architectural Change Rules",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 7,
+      "community_name": "Genshu Agent Instructions",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "architectural change rules",
+      "source_file": "AGENTS.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "agents_source_of_truth",
+      "label": "Source of Truth Hierarchy",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 7,
+      "community_name": "Genshu Agent Instructions",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "source of truth hierarchy",
+      "source_file": "AGENTS.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "agents_worker_reviewer_protocol",
+      "label": "Worker and Reviewer Protocol",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 7,
+      "community_name": "Genshu Agent Instructions",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "worker and reviewer protocol",
+      "source_file": "AGENTS.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "agents_instructions",
+      "label": "Genshu Agent Instructions",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 7,
+      "community_name": "Genshu Agent Instructions",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "genshu agent instructions",
+      "source_file": "AGENTS.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "readme_guidance",
+      "label": "Genshu README",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 7,
+      "community_name": "Genshu Agent Instructions",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "genshu readme",
+      "source_file": "README.md",
+      "source_location": "# Getting Started",
       "source_url": null
     },
     {
@@ -17478,7 +17140,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/practice-player.tsx",
-      "source_location": "L498",
+      "source_location": "L510",
       "weight": 1.0
     },
     {
@@ -29492,7 +29154,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L484",
+      "source_location": "L493",
       "weight": 1.0
     },
     {
@@ -29503,7 +29165,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L510",
+      "source_location": "L519",
       "weight": 1.0
     },
     {
@@ -29679,7 +29341,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L430",
+      "source_location": "L439",
       "weight": 1.0
     },
     {
@@ -29690,7 +29352,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L1011",
+      "source_location": "L1020",
       "weight": 1.0
     },
     {
@@ -29778,7 +29440,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L449",
+      "source_location": "L458",
       "weight": 1.0
     },
     {
@@ -29789,7 +29451,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L536",
+      "source_location": "L545",
       "weight": 1.0
     },
     {
@@ -29800,7 +29462,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L560",
+      "source_location": "L569",
       "weight": 1.0
     },
     {
@@ -29811,7 +29473,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L577",
+      "source_location": "L586",
       "weight": 1.0
     },
     {
@@ -29822,18 +29484,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L625",
-      "weight": 1.0
-    },
-    {
-      "source": "ai_project_genshu_project_source_of_truth",
-      "target": "ai_project_15_anti_overengineering_rules",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L646",
+      "source_location": "L634",
       "weight": 1.0
     },
     {
@@ -29849,13 +29500,24 @@
     },
     {
       "source": "ai_project_genshu_project_source_of_truth",
+      "target": "ai_project_15_anti_overengineering_rules",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L655",
+      "weight": 1.0
+    },
+    {
+      "source": "ai_project_genshu_project_source_of_truth",
       "target": "ai_project_16_ux_principles",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L680",
+      "source_location": "L689",
       "weight": 1.0
     },
     {
@@ -29866,7 +29528,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L707",
+      "source_location": "L716",
       "weight": 1.0
     },
     {
@@ -29877,7 +29539,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L722",
+      "source_location": "L731",
       "weight": 1.0
     },
     {
@@ -29888,7 +29550,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L751",
+      "source_location": "L760",
       "weight": 1.0
     },
     {
@@ -29899,7 +29561,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L778",
+      "source_location": "L787",
       "weight": 1.0
     },
     {
@@ -29910,7 +29572,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L806",
+      "source_location": "L815",
       "weight": 1.0
     },
     {
@@ -29921,7 +29583,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L837",
+      "source_location": "L846",
       "weight": 1.0
     },
     {
@@ -29932,18 +29594,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L869",
-      "weight": 1.0
-    },
-    {
-      "source": "ai_project_genshu_project_source_of_truth",
-      "target": "ai_project_24_current_release_priorities",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".ai/PROJECT.md",
-      "source_location": "L897",
+      "source_location": "L878",
       "weight": 1.0
     },
     {
@@ -29959,13 +29610,24 @@
     },
     {
       "source": "ai_project_genshu_project_source_of_truth",
+      "target": "ai_project_24_current_release_priorities",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".ai/PROJECT.md",
+      "source_location": "L906",
+      "weight": 1.0
+    },
+    {
+      "source": "ai_project_genshu_project_source_of_truth",
       "target": "ai_project_25_explicit_mvp_non_goals",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L925",
+      "source_location": "L934",
       "weight": 1.0
     },
     {
@@ -29976,7 +29638,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L955",
+      "source_location": "L964",
       "weight": 1.0
     },
     {
@@ -29987,7 +29649,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".ai/PROJECT.md",
-      "source_location": "L977",
+      "source_location": "L986",
       "weight": 1.0
     },
     {
@@ -35216,292 +34878,6 @@
       "weight": 1.0
     },
     {
-      "source": "docs_gentsuki_bank_import",
-      "target": "docs_gentsuki_bank_import_gentsuki_bank_import",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/gentsuki-bank-import.md",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_gentsuki_bank_import_gentsuki_bank_import",
-      "target": "docs_gentsuki_bank_import_run",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/gentsuki-bank-import.md",
-      "source_location": "L33",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_gentsuki_bank_import_gentsuki_bank_import",
-      "target": "docs_gentsuki_bank_import_mapping",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/gentsuki-bank-import.md",
-      "source_location": "L5",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_gentsuki_bank_import_gentsuki_bank_import",
-      "target": "docs_gentsuki_bank_import_evidence_and_acceptance_status",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/gentsuki-bank-import.md",
-      "source_location": "L52",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_recovery",
-      "target": "docs_recovery_backup_and_recovery",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/recovery.md",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_recovery_backup_and_recovery",
-      "target": "docs_recovery_export_inventory",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/recovery.md",
-      "source_location": "L20",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_recovery_backup_and_recovery",
-      "target": "docs_recovery_status_and_responsibility",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/recovery.md",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_recovery_backup_and_recovery",
-      "target": "docs_recovery_isolated_restore_rehearsal",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/recovery.md",
-      "source_location": "L37",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_recovery_backup_and_recovery",
-      "target": "docs_recovery_application_and_data_rollback",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/recovery.md",
-      "source_location": "L62",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_recovery_backup_and_recovery",
-      "target": "docs_recovery_environment_inventory_2026_09_27_jst",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/recovery.md",
-      "source_location": "L70",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_release_readiness",
-      "target": "docs_release_readiness_release_review_and_remaining_work",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/release-readiness.md",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_release_readiness_release_review_and_remaining_work",
-      "target": "docs_release_readiness_worker_implementation_update_2026_09_27_utc_09",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/release-readiness.md",
-      "source_location": "L111",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_release_readiness_release_review_and_remaining_work",
-      "target": "docs_release_readiness_evidence_updates",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/release-readiness.md",
-      "source_location": "L155",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_release_readiness_release_review_and_remaining_work",
-      "target": "docs_release_readiness_reviewer_follow_up_2026_09_27_utc_09",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/release-readiness.md",
-      "source_location": "L163",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_release_readiness_release_review_and_remaining_work",
-      "target": "docs_release_readiness_local_browser_follow_up_2026_09_27_utc_09",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/release-readiness.md",
-      "source_location": "L179",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_release_readiness_release_review_and_remaining_work",
-      "target": "docs_release_readiness_evidence_snapshot_2026_09_26_jst",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/release-readiness.md",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_release_readiness_release_review_and_remaining_work",
-      "target": "docs_release_readiness_outstanding_acceptance_criteria",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/release-readiness.md",
-      "source_location": "L42",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_release_readiness_release_review_and_remaining_work",
-      "target": "docs_release_readiness_historical_incident_context",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/release-readiness.md",
-      "source_location": "L57",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_release_readiness_release_review_and_remaining_work",
-      "target": "docs_release_readiness_operational_status_2026_09_27_jst",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/release-readiness.md",
-      "source_location": "L66",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_release_readiness_release_review_and_remaining_work",
-      "target": "docs_release_readiness_reviewer_findings_2026_09_27_utc_09",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/release-readiness.md",
-      "source_location": "L82",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_worker_next_goal",
-      "target": "docs_worker_next_goal_next_worker_goal_verify_the_corrected_authoring_and_learner_flows_locally",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/worker-next-goal.md",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_worker_next_goal_next_worker_goal_verify_the_corrected_authoring_and_learner_flows_locally",
-      "target": "docs_worker_next_goal_goal",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/worker-next-goal.md",
-      "source_location": "L12",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_worker_next_goal_next_worker_goal_verify_the_corrected_authoring_and_learner_flows_locally",
-      "target": "docs_worker_next_goal_required_scenarios",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/worker-next-goal.md",
-      "source_location": "L23",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_worker_next_goal_next_worker_goal_verify_the_corrected_authoring_and_learner_flows_locally",
-      "target": "docs_worker_next_goal_starting_evidence",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/worker-next-goal.md",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_worker_next_goal_next_worker_goal_verify_the_corrected_authoring_and_learner_flows_locally",
-      "target": "docs_worker_next_goal_environment_and_limits",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/worker-next-goal.md",
-      "source_location": "L39",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_worker_next_goal_next_worker_goal_verify_the_corrected_authoring_and_learner_flows_locally",
-      "target": "docs_worker_next_goal_evidence_and_handoff",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/worker-next-goal.md",
-      "source_location": "L51",
-      "weight": 1.0
-    },
-    {
       "source": "eslint_config",
       "target": "eslint_config_eslintconfig",
       "relation": "contains",
@@ -35631,6 +35007,17 @@
       "confidence_score": 1.0,
       "source_file": "package.json",
       "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "package",
+      "target": "package_patcheddependencies",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "package.json",
+      "source_location": "L56",
       "weight": 1.0
     },
     {
@@ -35873,6 +35260,17 @@
       "confidence_score": 1.0,
       "source_file": "package.json",
       "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "package_patcheddependencies",
+      "target": "package_patcheddependencies_next_16_3_5",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "package.json",
+      "source_location": "L57",
       "weight": 1.0
     },
     {
@@ -38908,39 +38306,6 @@
       "weight": 1.0
     },
     {
-      "source": "docs_gentsuki_bank_import",
-      "target": "docs_release_readiness",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/gentsuki-bank-import.md",
-      "source_location": "L61",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_release_readiness",
-      "target": "docs_worker_next_goal",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/release-readiness.md",
-      "source_location": "L109",
-      "weight": 1.0
-    },
-    {
-      "source": "readme_guidance",
-      "target": "docs_recovery",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L122",
-      "weight": 1.0
-    },
-    {
       "source": "readme_guidance",
       "target": "agents_instructions",
       "relation": "references",
@@ -38971,39 +38336,6 @@
       "confidence_score": 1.0,
       "source_file": "README.md",
       "source_location": "L127",
-      "weight": 1.0
-    },
-    {
-      "source": "readme_guidance",
-      "target": "docs_worker_next_goal",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L129",
-      "weight": 1.0
-    },
-    {
-      "source": "readme_guidance",
-      "target": "docs_gentsuki_bank_import",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L21",
-      "weight": 1.0
-    },
-    {
-      "source": "readme_guidance",
-      "target": "docs_release_readiness",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L84",
       "weight": 1.0
     },
     {
@@ -39461,5 +38793,5 @@
       "source_file": ".agents/skills/vercel-react-best-practices/rules/rendering-usetransition-loading.md"
     }
   ],
-  "built_at_commit": "52402ad9439b25c4d35c00134257664c82c54f98"
+  "built_at_commit": "e971c9bc124657d6dcc1f2f50452f9364fdfed3e"
 }

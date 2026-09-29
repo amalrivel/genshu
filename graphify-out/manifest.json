@@ -24,9 +24,9 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1790408134.6432173,
-    "seen": 1790408265.3355823,
-    "ast_hash": "5f730fb4c8fb678787a8fe943f811d7a",
+    "mtime": 1790494365.1999948,
+    "seen": 1790494386.7647378,
+    "ast_hash": "a5ecec62683e78696ae29e5943ccc46b",
     "semantic_hash": ""
   },
   "postcss.config.mjs": {
@@ -888,9 +888,9 @@
     "semantic_hash": ""
   },
   ".ai/PROJECT.md": {
-    "mtime": 1790467951.1148078,
-    "seen": 1790467990.8010547,
-    "ast_hash": "952c0c2d10d73ca92828552be77c6303",
+    "mtime": 1790494382.487916,
+    "seen": 1790494386.7728007,
+    "ast_hash": "2383a3d968a4ff7675480f34793fe702",
     "semantic_hash": ""
   },
   ".ai/README.md": {
@@ -966,9 +966,9 @@
     "semantic_hash": ""
   },
   "src/components/practice-player.tsx": {
-    "mtime": 1790429858.6467493,
-    "seen": 1790431170.463984,
-    "ast_hash": "52432d2e9b5eb90e3d71d9e3a5125727",
+    "mtime": 1790494089.3377466,
+    "seen": 1790494105.9648623,
+    "ast_hash": "27ddd00b880d44d55a7039d6b456e262",
     "semantic_hash": ""
   },
   "src/components/ui/furigana-token-text.tsx": {
@@ -1517,12 +1517,6 @@
     "ast_hash": "7180814f19b792d8b60803c7b5a999d4",
     "semantic_hash": ""
   },
-  "docs/gentsuki-bank-import.md": {
-    "mtime": 1790468334.9268973,
-    "seen": 1790468441.201842,
-    "ast_hash": "3d92f0221f45fdd0fbc589fc14fe4a7c",
-    "semantic_hash": ""
-  },
   "public/gentsuki-quiz-assets/02788e0b7a8e60e50c5f16d1edfa42b6f96377e7.jpg": {
     "mtime": 1790417978.4837425,
     "seen": 1790418879.3292968,
@@ -2043,24 +2037,6 @@
     "mtime": 1790467658.6401036,
     "seen": 1790467990.7937195,
     "ast_hash": "03c96344450d6277c396d776610b9ee2",
-    "semantic_hash": ""
-  },
-  "docs/recovery.md": {
-    "mtime": 1790466470.788926,
-    "seen": 1790467990.8011181,
-    "ast_hash": "fc2e6d9f01efaf18e15d2cf7fd614259",
-    "semantic_hash": ""
-  },
-  "docs/release-readiness.md": {
-    "mtime": 1790478055.1499357,
-    "seen": 1790478749.1527693,
-    "ast_hash": "f1b0f406ea36159170d38ccc61138785",
-    "semantic_hash": ""
-  },
-  "docs/worker-next-goal.md": {
-    "mtime": 1790476697.0147257,
-    "seen": 1790478749.15277,
-    "ast_hash": "bac7cb4377e4451d4c61fab382a102ac",
     "semantic_hash": ""
   },
   "db/scripts/practice-actions.test.js": {
