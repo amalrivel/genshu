@@ -27,6 +27,26 @@ export type PracticeQuestion = {
   correctAnswerIndex: number
   explanationJa: string
   explanationId: string
+  explanationMarkup: string
+  context: string
+  contextMarkup: string
+  imageUrl: string
+  imageWidth: number | null
+  imageHeight: number | null
+  isPublished: boolean
+  sourceRef: string
+  sourceDigest: string
+  groupId: string | null
+  groupPosition: number | null
+}
+
+export type PracticeQuestionGroup = {
+  id: string
+  context: string
+  contextMarkup: string
+  imageUrl: string
+  imageWidth: number | null
+  imageHeight: number | null
 }
 
 export type PublishedPracticeSet = {
@@ -35,12 +55,13 @@ export type PublishedPracticeSet = {
   titleId: string
   descriptionJa: string
   descriptionId: string
-  targetLevel: "N5" | "N4" | "N3"
-  topic: "語彙" | "文法" | "文化・マナー" | "漢字"
+  targetLevel: string
+  topic: string
   publishedAt: string
   questions: PracticeQuestion[]
+  questionGroups: PracticeQuestionGroup[]
 }
 
-export type PublishedPracticeSummary = Omit<PublishedPracticeSet, "questions"> & {
+export type PublishedPracticeSummary = Omit<PublishedPracticeSet, "questions" | "questionGroups"> & {
   questionCount: number
 }

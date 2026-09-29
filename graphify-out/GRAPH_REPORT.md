@@ -1,16 +1,16 @@
-# Graph Report - genshu  (2026-09-26)
+# Graph Report - genshu  (2026-09-27)
 
 ## Corpus Check
-- 236 files · ~112,866 words
+- 265 files · ~307,192 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 926 nodes · 1480 edges · 153 communities (53 shown, 99 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 27 edges (avg confidence: 0.81)
+- 1363 nodes · 1955 edges · 243 communities (143 shown, 99 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 27 edges (avg confidence: 0.81)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `3125d001`
+- Built from commit: `e971c9bc`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -22,7 +22,7 @@
 - dropdown-menu.tsx
 - data-context.tsx
 - dependencies
-- createClient
+- Genshu Agent Instructions
 - Narrow Effect Dependencies
 - Extract to Memoized Components
 - Cache Repeated Function Calls
@@ -106,17 +106,17 @@
 - Next.js Logo
 - Vercel Logo
 - Window Icon
-- Genshu README
+- content-repository.ts
 - Section Definitions
 - request.ts
 - 5. Release Scope
-- database.types.ts
-- Genshu Agent Instructions
-- Supabase Postgres Best Practices
 - 6. Language Rules
+- createClient
+- Supabase Postgres Best Practices
+- 2-3
 - 3. Primary Users
+- Commands
 - 9. Technical Direction
-- 10. Data Platform
 - advanced-full-text-search.md
 - Genshu — Project Source of Truth
 - advanced-jsonb-indexing.md
@@ -160,25 +160,115 @@
 - Video Recording
 - Advanced Mocking with run-code
 - check-data-api-migration.js
-- check-data-api.js
-- Attaching to a Running Browser
-- Best Practices
+- import-gentsuki-ready-web.ts
+- sourceFiles
+- assetMeta
+- 5141
+- antigravity-rtk-rules.md
+- 1-10
+- 6101
 - next.config.ts
+- practice-units.ts
 - The Fixes
+- 1-2
+- 1-3
+- 1-4
+- 1-5
+- 1-6
+- 1-7
+- 1-8
+- 1-9
+- 2-10
+- 2-1
+- 2-2
+- 2-4
+- 2-5
+- 2-6
+- 2-7
+- 2-8
+- 2-9
+- 3031
+- 3091
+- 3131
+- 3211
+- 3271
+- 3311
+- 3381
+- 3461
+- 3471
+- 3481
+- 3-10
+- 3-11
+- 3-1
+- 3-2
+- 3-3
+- 3-4
+- 3-5
+- 3-6
+- 3-7
+- 3-8
+- 3-9
+- 4051
+- 4121
+- 4161
+- 4191
+- 4241
+- 4271
+- 4401
+- 4421
+- 4451
+- 4471
+- 4481
+- 5011
+- 5101
+- 10. Data Platform
+- 5191
+- 5241
+- 5281
+- 5331
+- 5401
+- 5451
+- 5471
+- 5481
+- 6051
+- staff/practice/[id]/page.tsx
+- 6161
+- 6201
+- 6251
+- 6301
+- 6361
+- 6401
+- practice-actions.test.js
+- 6471
+- 6481
+- その他の危険 標識
+- 二輪の自動車以外通行止め 標識
+- 合流注意 警戒標識
+- 専用通行帯 原付 通行
+- 左折可 標識 日本
+- 登坂車線 交通標識
+- 自転車専用 標識 日本
+- 車両横断禁止 標識
+- 車線減少 警戒標識
+- 転回禁止 標示
+- staff/materials/[slug]/page.tsx
+- server.ts
+- src/proxy.ts
+- 6451
 - verify.ts
 - layout.tsx
 
 ## God Nodes (most connected - your core abstractions)
-1. `react` - 36 edges
-2. `Genshu — Project Source of Truth` - 29 edges
-3. `lucide-react` - 26 edges
-4. `createClient()` - 23 edges
-5. `next-intl` - 22 edges
-6. `Button()` - 21 edges
-7. `useData()` - 21 edges
-8. `Badge()` - 17 edges
-9. `compilerOptions` - 16 edges
-10. `scripts` - 15 edges
+1. `assetMeta` - 85 edges
+2. `react` - 36 edges
+3. `Genshu — Project Source of Truth` - 29 edges
+4. `lucide-react` - 26 edges
+5. `createClient()` - 24 edges
+6. `next-intl` - 22 edges
+7. `Button()` - 21 edges
+8. `useData()` - 21 edges
+9. `Badge()` - 17 edges
+10. `compilerOptions` - 16 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Version and Minimize localStorage Data` --semantically_similar_to--> `Cache Storage API Calls`  [INFERRED] [semantically similar]
@@ -201,15 +291,15 @@
 - **Derived Dependency Minimization** — agents_skills_vercel_react_best_practices_rules_rerender_dependencies_narrow_effect_dependencies, agents_skills_vercel_react_best_practices_rules_rerender_derived_state_no_effect_calculate_derived_state, agents_skills_vercel_react_best_practices_rules_rerender_derived_state_subscribe_to_derived_state, agents_skills_vercel_react_best_practices_rules_rerender_split_combined_hooks_split_hook_computations [INFERRED 0.85]
 - **React Concurrent Rendering Responsiveness** — agents_skills_vercel_react_best_practices_rules_rendering_usetransition_loading_use_transition_loading, agents_skills_vercel_react_best_practices_rules_rerender_transitions_transitions_for_non_urgent_updates, agents_skills_vercel_react_best_practices_rules_rerender_use_deferred_value_use_deferred_value [INFERRED 0.85]
 
-## Communities (153 total, 99 thin omitted)
+## Communities (243 total, 99 thin omitted)
 
 ### Community 0 - "cohorts/[id]/page.tsx"
 Cohesion: 0.07
-Nodes (82): lucide-react, next-intl, react, AssignmentDetailPage(), AssignmentsPage(), SessionRollCallPage(), STATUS_OPTIONS, AttendancePage() (+74 more)
+Nodes (81): class-variance-authority, lucide-react, next-intl, react, AssignmentDetailPage(), AssignmentsPage(), SessionRollCallPage(), STATUS_OPTIONS (+73 more)
 
 ### Community 1 - "package.json"
-Cohesion: 0.10
-Nodes (20): ignoreScripts, name, packageManager, private, trustedDependencies, version, babel-plugin-react-compiler, @base-ui/react (+12 more)
+Cohesion: 0.09
+Nodes (21): ignoreScripts, name, packageManager, patchedDependencies, next@16.3.5, private, trustedDependencies, version (+13 more)
 
 ### Community 2 - "components.json"
 Cohesion: 0.09
@@ -220,16 +310,16 @@ Cohesion: 0.11
 Nodes (18): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+10 more)
 
 ### Community 5 - "data-context.tsx"
-Cohesion: 0.11
-Nodes (33): DataContext, DataContextType, DataProvider(), getRoleServerSnapshot(), getRoleSnapshot(), notifyRoleListeners(), roleListeners, subscribeRole() (+25 more)
+Cohesion: 0.10
+Nodes (37): CohortMembers, CohortRosterPanelsProps, StudentProfileDrawerProps, DataContext, DataContextType, DataProvider(), getRoleServerSnapshot(), getRoleSnapshot() (+29 more)
 
 ### Community 6 - "dependencies"
 Cohesion: 0.14
 Nodes (14): dependencies, @base-ui/react, class-variance-authority, cn, lucide-react, next, next-intl, next-themes (+6 more)
 
-### Community 7 - "createClient"
-Cohesion: 0.06
-Nodes (52): signIn(), signOut(), dynamic, LoginPage(), MaterialsPage(), dynamic, MaterialPage(), dynamic (+44 more)
+### Community 7 - "Genshu Agent Instructions"
+Cohesion: 0.38
+Nodes (5): Architectural Change Rules, Genshu Agent Instructions, Source of Truth Hierarchy, Worker and Reviewer Protocol, Genshu README
 
 ### Community 8 - "Narrow Effect Dependencies"
 Cohesion: 0.33
@@ -244,8 +334,8 @@ Cohesion: 0.50
 Nodes (4): Version and Minimize localStorage Data, Cache Repeated Function Calls, Cache Property Access in Loops, Cache Storage API Calls
 
 ### Community 11 - "Genshu AI development workflow"
-Cohesion: 0.25
-Nodes (8): Decision boundaries, Development loop, Genshu AI development workflow, Local learning-content database, Repository knowledge, Sources and scope, Staff access setup, Verification
+Cohesion: 0.22
+Nodes (9): Decision boundaries, Development loop, Genshu AI development workflow, Local learning-content database, Repository knowledge, Reviewer and worker boundaries, Sources and scope, Staff access setup (+1 more)
 
 ### Community 12 - "Use useTransition Over Manual Loading States"
 Cohesion: 0.50
@@ -303,6 +393,10 @@ Nodes (15): [0.1.3](https://github.com/supabase/agent-skills/compare/v0.1.2...v0
 Cohesion: 0.12
 Nodes (15): 1. Concrete Transformation Patterns, 2. Error-First Structure, 3. Quantified Impact, 4. Self-Contained Examples, 5. Semantic Naming, Code Example Standards, Comments, Impact Level Guidelines (+7 more)
 
+### Community 91 - "content-repository.ts"
+Cohesion: 0.17
+Nodes (15): MaterialsPage(), MaterialPage(), dynamic, PracticeSetPage(), dynamic, PracticePage(), PracticeCatalog(), checkError() (+7 more)
+
 ### Community 92 - "Section Definitions"
 Cohesion: 0.20
 Nodes (9): 1. Query Performance (query), 2. Connection Management (conn), 3. Security & RLS (security), 4. Schema Design (schema), 5. Concurrency & Locking (lock), 6. Data Access Patterns (data), 7. Monitoring & Diagnostics (monitor), 8. Advanced Features (advanced) (+1 more)
@@ -315,33 +409,33 @@ Nodes (3): defaultLocale, Locale, locales
 Cohesion: 0.29
 Nodes (7): 5. Release Scope, First live release, First live release: Practice, Later release: Assignments, Later release: Attendance, Later release: Exams, Learning materials
 
-### Community 95 - "database.types.ts"
-Cohesion: 0.19
-Nodes (8): @supabase/ssr, Database, Json, Table, updateSession(), config, prototypePaths, proxy()
+### Community 95 - "6. Language Rules"
+Cohesion: 0.40
+Nodes (5): 6. Language Rules, Application Interface, Assignments and Exams, Furigana, Learning Content
 
-### Community 96 - "Genshu Agent Instructions"
-Cohesion: 0.33
-Nodes (4): Architectural Change Rules, Genshu Agent Instructions, Source of Truth Hierarchy, Worker and Reviewer Protocol
+### Community 96 - "createClient"
+Cohesion: 0.18
+Nodes (17): signIn(), signOut(), dynamic, LoginPage(), dynamic, StaffMaterialsPage(), MaterialEditor(), dynamic (+9 more)
 
 ### Community 97 - "Supabase Postgres Best Practices"
 Cohesion: 0.33
 Nodes (5): How to Use, References, Rule Categories by Priority, Supabase Postgres Best Practices, When to Apply
 
-### Community 98 - "6. Language Rules"
-Cohesion: 0.40
-Nodes (5): 6. Language Rules, Application Interface, Assignments and Exams, Furigana, Learning Content
+### Community 98 - "2-3"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 2-3
 
 ### Community 99 - "3. Primary Users"
 Cohesion: 0.50
 Nodes (4): 3.1 Gakusei — 学生, 3.2 Sensei — 先生, 3.3 Tantōsha — 担当者, 3. Primary Users
 
-### Community 100 - "9. Technical Direction"
+### Community 100 - "Commands"
+Cohesion: 0.20
+Nodes (10): Commands, Core, DevTools, Keyboard, Mouse, Navigation, Network, Save as (+2 more)
+
+### Community 101 - "9. Technical Direction"
 Cohesion: 0.50
 Nodes (4): 9. Technical Direction, Application Framework, Runtime and Package Manager, UI
-
-### Community 101 - "10. Data Platform"
-Cohesion: 0.67
-Nodes (3): 10. Data Platform, Database Access Layer, Local Development
 
 ### Community 103 - "Genshu — Project Source of Truth"
 Cohesion: 0.08
@@ -352,16 +446,16 @@ Cohesion: 0.06
 Nodes (35): Advanced: Multiple Cookies or Custom Options, Advanced: Multiple Operations, Authentication State Reuse, Clear All Cookies, Clear All localStorage, Clear sessionStorage, Common Patterns, Cookies (+27 more)
 
 ### Community 136 - "Browser Automation with playwright-cli"
-Cohesion: 0.08
-Nodes (24): Browser Automation with playwright-cli, Browser Sessions, Commands, Core, DevTools, Example: Debugging with DevTools, Example: Form submission, Example: Interactive session (+16 more)
+Cohesion: 0.14
+Nodes (14): Browser Automation with playwright-cli, Browser Sessions, Example: Debugging with DevTools, Example: Form submission, Example: Interactive session, Example: Multi-tab workflow, Installation, Open parameters (+6 more)
 
 ### Community 137 - "3. Heal"
 Cohesion: 0.09
 Nodes (23): 0. How generation works, 1.1 Prerequisite: workspace, 1.2 Prerequisite: seed test, 1.3 Explore the app, 1.4 Write the spec file, 1. Planning, 2.1 Inputs, 2.2 Generate one scenario (+15 more)
 
 ### Community 138 - "Browser Session Management"
-Cohesion: 0.18
-Nodes (11): A/B Testing Sessions, Browser Session Commands, Browser Session Configuration, Browser Session Isolation Properties, Browser Session Management, Common Patterns, Concurrent Scraping, Default Browser Session (+3 more)
+Cohesion: 0.10
+Nodes (20): 1. Name Browser Sessions Semantically, 2. Always Clean Up, 3. Delete Stale Browser Data, A/B Testing Sessions, Attach by channel name, Attach via browser extension, Attach via CDP endpoint, Attaching to a Running Browser (+12 more)
 
 ### Community 139 - "Running Custom Playwright Code"
 Cohesion: 0.15
@@ -384,28 +478,384 @@ Cohesion: 0.25
 Nodes (8): Advanced Mocking with run-code, CLI Route Commands, Conditional Response Based on Request, Delayed Response, Modify Real Response, Request Mocking, Simulate Network Failures, URL Patterns
 
 ### Community 144 - "check-data-api-migration.js"
-Cohesion: 0.38
-Nodes (5): denied(), migrations, practice(), publicChecks(), questions
+Cohesion: 0.15
+Nodes (12): denied(), groupedPractice(), groups(), importedQuestions, importedSet, migrations, ordinaryQuestions, practice() (+4 more)
 
-### Community 145 - "check-data-api.js"
-Cohesion: 0.17
-Nodes (8): material, missing, question, readers, sections, sensei, set, @supabase/supabase-js
+### Community 145 - "import-gentsuki-ready-web.ts"
+Cohesion: 0.05
+Nodes (39): group, groupQuestions, groupSet, material, missing, question, readers, repairQuestions (+31 more)
 
-### Community 146 - "Attaching to a Running Browser"
-Cohesion: 0.40
-Nodes (5): Attach by channel name, Attach via browser extension, Attach via CDP endpoint, Attaching to a Running Browser, Detach
+### Community 146 - "sourceFiles"
+Cohesion: 0.15
+Nodes (13): sourceFiles, book_1.json, book_2.json, book_3.json, genchare_1.json, genchare_2.json, genchare_3.json, genchare_4.json (+5 more)
 
-### Community 147 - "Best Practices"
+### Community 147 - "assetMeta"
+Cohesion: 0.25
+Nodes (7): height, sha, width, assetMeta, 1-1, commit, repository
+
+### Community 148 - "5141"
 Cohesion: 0.50
-Nodes (4): 1. Name Browser Sessions Semantically, 2. Always Clean Up, 3. Delete Stale Browser Data, Best Practices
+Nodes (4): height, sha, width, 5141
 
-### Community 148 - "next.config.ts"
+### Community 150 - "1-10"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 1-10
+
+### Community 151 - "6101"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 6101
+
+### Community 153 - "next.config.ts"
 Cohesion: 0.50
 Nodes (3): nextConfig, withNextIntl, next
+
+### Community 154 - "practice-units.ts"
+Cohesion: 0.15
+Nodes (17): PracticePlayer(), buildPracticeUnits(), CatalogGroup, CatalogQuestion, catalogGroups, catalogQuestions, group, groupQuestions() (+9 more)
 
 ### Community 155 - "The Fixes"
 Cohesion: 0.09
 Nodes (21): 10. Status bar color doesn't match, 11. Right in Chrome, wrong on phone, 1. Hover state stuck after tap, 2. Gray/blue flash on tap, 3. Layout has the wrong height, 4. Page zooms into the input, 5. Tap feels laggy, 6. Pull-to-refresh hijacks scroll (+13 more)
+
+### Community 156 - "1-2"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 1-2
+
+### Community 157 - "1-3"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 1-3
+
+### Community 158 - "1-4"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 1-4
+
+### Community 159 - "1-5"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 1-5
+
+### Community 160 - "1-6"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 1-6
+
+### Community 161 - "1-7"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 1-7
+
+### Community 162 - "1-8"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 1-8
+
+### Community 163 - "1-9"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 1-9
+
+### Community 164 - "2-10"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 2-10
+
+### Community 165 - "2-1"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 2-1
+
+### Community 166 - "2-2"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 2-2
+
+### Community 167 - "2-4"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 2-4
+
+### Community 168 - "2-5"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 2-5
+
+### Community 169 - "2-6"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 2-6
+
+### Community 170 - "2-7"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 2-7
+
+### Community 171 - "2-8"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 2-8
+
+### Community 172 - "2-9"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 2-9
+
+### Community 173 - "3031"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 3031
+
+### Community 174 - "3091"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 3091
+
+### Community 175 - "3131"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 3131
+
+### Community 176 - "3211"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 3211
+
+### Community 177 - "3271"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 3271
+
+### Community 178 - "3311"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 3311
+
+### Community 179 - "3381"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 3381
+
+### Community 180 - "3461"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 3461
+
+### Community 181 - "3471"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 3471
+
+### Community 182 - "3481"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 3481
+
+### Community 183 - "3-10"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 3-10
+
+### Community 184 - "3-11"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 3-11
+
+### Community 185 - "3-1"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 3-1
+
+### Community 186 - "3-2"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 3-2
+
+### Community 187 - "3-3"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 3-3
+
+### Community 188 - "3-4"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 3-4
+
+### Community 189 - "3-5"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 3-5
+
+### Community 190 - "3-6"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 3-6
+
+### Community 191 - "3-7"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 3-7
+
+### Community 192 - "3-8"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 3-8
+
+### Community 193 - "3-9"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 3-9
+
+### Community 194 - "4051"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 4051
+
+### Community 195 - "4121"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 4121
+
+### Community 196 - "4161"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 4161
+
+### Community 197 - "4191"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 4191
+
+### Community 198 - "4241"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 4241
+
+### Community 199 - "4271"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 4271
+
+### Community 200 - "4401"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 4401
+
+### Community 201 - "4421"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 4421
+
+### Community 202 - "4451"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 4451
+
+### Community 203 - "4471"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 4471
+
+### Community 204 - "4481"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 4481
+
+### Community 205 - "5011"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 5011
+
+### Community 206 - "5101"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 5101
+
+### Community 207 - "10. Data Platform"
+Cohesion: 0.67
+Nodes (3): 10. Data Platform, Database Access Layer, Local Development
+
+### Community 208 - "5191"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 5191
+
+### Community 209 - "5241"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 5241
+
+### Community 210 - "5281"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 5281
+
+### Community 211 - "5331"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 5331
+
+### Community 212 - "5401"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 5401
+
+### Community 213 - "5451"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 5451
+
+### Community 214 - "5471"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 5471
+
+### Community 215 - "5481"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 5481
+
+### Community 216 - "6051"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 6051
+
+### Community 217 - "staff/practice/[id]/page.tsx"
+Cohesion: 0.23
+Nodes (11): contentField(), field(), optionalDimension(), savePracticeSet(), dynamic, SetRow, blank(), EditableQuestion (+3 more)
+
+### Community 218 - "6161"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 6161
+
+### Community 219 - "6201"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 6201
+
+### Community 220 - "6251"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 6251
+
+### Community 221 - "6301"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 6301
+
+### Community 222 - "6361"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 6361
+
+### Community 223 - "6401"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 6401
+
+### Community 224 - "practice-actions.test.js"
+Cohesion: 0.15
+Nodes (5): catalogRows, redirectSignal, rpcCalls, storedGroups, storedQuestions
+
+### Community 225 - "6471"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 6471
+
+### Community 226 - "6481"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 6481
+
+### Community 227 - "その他の危険 標識"
+Cohesion: 0.50
+Nodes (4): その他の危険 標識, height, sha, width
+
+### Community 228 - "二輪の自動車以外通行止め 標識"
+Cohesion: 0.50
+Nodes (4): 二輪の自動車以外通行止め 標識, height, sha, width
+
+### Community 229 - "合流注意 警戒標識"
+Cohesion: 0.50
+Nodes (4): 合流注意 警戒標識 , height, sha, width
+
+### Community 230 - "専用通行帯 原付 通行"
+Cohesion: 0.50
+Nodes (4): 専用通行帯 原付 通行 , height, sha, width
+
+### Community 231 - "左折可 標識 日本"
+Cohesion: 0.50
+Nodes (4): 左折可 標識 日本, height, sha, width
+
+### Community 232 - "登坂車線 交通標識"
+Cohesion: 0.50
+Nodes (4): 登坂車線 交通標識 , height, sha, width
+
+### Community 233 - "自転車専用 標識 日本"
+Cohesion: 0.50
+Nodes (4): 自転車専用 標識 日本, height, sha, width
+
+### Community 234 - "車両横断禁止 標識"
+Cohesion: 0.50
+Nodes (4): 車両横断禁止 標識, height, sha, width
+
+### Community 235 - "車線減少 警戒標識"
+Cohesion: 0.50
+Nodes (4): 車線減少 警戒標識 , height, sha, width
+
+### Community 236 - "転回禁止 標示"
+Cohesion: 0.50
+Nodes (4): 転回禁止 標示 , height, sha, width
+
+### Community 237 - "staff/materials/[slug]/page.tsx"
+Cohesion: 0.26
+Nodes (9): field(), saveMaterial(), dynamic, MaterialRow, blank(), MaterialSectionsEditor(), StaffActionForm(), StaffFormState (+1 more)
+
+### Community 238 - "server.ts"
+Cohesion: 0.24
+Nodes (6): names, original, @supabase/ssr, Database, Json, Table
+
+### Community 239 - "src/proxy.ts"
+Cohesion: 0.47
+Nodes (4): updateSession(), config, prototypePaths, proxy()
+
+### Community 240 - "6451"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 6451
 
 ### Community 263 - "verify.ts"
 Cohesion: 0.36
@@ -416,24 +866,24 @@ Cohesion: 0.28
 Nodes (5): next-themes, metadata, AppHeader(), LegacyDataProvider(), ThemeProvider()
 
 ## Knowledge Gaps
-- **533 isolated node(s):** `JsonObject`, `locales`, `$schema`, `style`, `rsc` (+528 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 610 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **847 isolated node(s):** `names`, `original`, `JsonObject`, `locales`, `$schema` (+842 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 935 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **99 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `react` connect `cohorts/[id]/page.tsx` to `package.json`, `layout.tsx`, `dropdown-menu.tsx`, `data-context.tsx`, `createClient`?**
-  _High betweenness centrality (0.043) - this node is a cross-community bridge._
-- **Why does `lucide-react` connect `cohorts/[id]/page.tsx` to `package.json`, `dropdown-menu.tsx`, `createClient`?**
-  _High betweenness centrality (0.018) - this node is a cross-community bridge._
-- **Why does `next-intl` connect `cohorts/[id]/page.tsx` to `package.json`, `layout.tsx`, `createClient`?**
-  _High betweenness centrality (0.013) - this node is a cross-community bridge._
-- **What connects `JsonObject`, `locales`, `$schema` to the rest of the system?**
-  _533 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `assetMeta` connect `assetMeta` to `2-3`, `5141`, `1-10`, `6101`, `1-2`, `1-3`, `1-4`, `1-5`, `1-6`, `1-7`, `1-8`, `1-9`, `2-10`, `2-1`, `2-2`, `2-4`, `2-5`, `2-6`, `2-7`, `2-8`, `2-9`, `3031`, `3091`, `3131`, `3211`, `3271`, `3311`, `3381`, `3461`, `3471`, `3481`, `3-10`, `3-11`, `3-1`, `3-2`, `3-3`, `3-4`, `3-5`, `3-6`, `3-7`, `3-8`, `3-9`, `4051`, `4121`, `4161`, `4191`, `4241`, `4271`, `4401`, `4421`, `4451`, `4471`, `4481`, `5011`, `5101`, `5191`, `5241`, `5281`, `5331`, `5401`, `5451`, `5471`, `5481`, `6051`, `6161`, `6201`, `6251`, `6301`, `6361`, `6401`, `6471`, `6481`, `その他の危険 標識`, `二輪の自動車以外通行止め 標識`, `合流注意 警戒標識`, `専用通行帯 原付 通行`, `左折可 標識 日本`, `登坂車線 交通標識`, `自転車専用 標識 日本`, `車両横断禁止 標識`, `車線減少 警戒標識`, `転回禁止 標示`, `6451`?**
+  _High betweenness centrality (0.069) - this node is a cross-community bridge._
+- **Why does `react` connect `cohorts/[id]/page.tsx` to `package.json`, `layout.tsx`, `dropdown-menu.tsx`, `data-context.tsx`, `staff/materials/[slug]/page.tsx`, `staff/practice/[id]/page.tsx`?**
+  _High betweenness centrality (0.029) - this node is a cross-community bridge._
+- **Why does `@supabase/supabase-js` connect `import-gentsuki-ready-web.ts` to `package.json`?**
+  _High betweenness centrality (0.026) - this node is a cross-community bridge._
+- **What connects `names`, `original`, `JsonObject` to the rest of the system?**
+  _847 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `cohorts/[id]/page.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.07221948818897637 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07209645669291338 - nodes in this community are weakly interconnected._
 - **Should `package.json` be split into smaller, more focused modules?**
-  _Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected._
 - **Should `components.json` be split into smaller, more focused modules?**
   _Cohesion score 0.08695652173913043 - nodes in this community are weakly interconnected._

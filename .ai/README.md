@@ -8,7 +8,9 @@ conversation memory. It is shared across agent tools.
 - `.ai/PROJECT.md`: product truth, release scope, architecture, and open decisions.
 - `AGENTS.md`: short entry point and required verification.
 - `.agents/skills/`: a small set of optional, task-specific web development skills.
-- `.ai/scripts/verify.ts`: canonical deterministic verification.
+- `.ai/scripts/verify.ts`: canonical implementation verification.
+- `.ai/scripts/check-supabase-config.ts`: focused missing-config diagnostic check.
+- `.agents/rules/antigravity-rtk-rules.md`: optional Agy output filtering, with raw-output fallback.
 - `docs/`: detailed feature documentation when a feature needs it.
 
 The `.ai/policies/`, `.ai/skills/`, and `.ai/runs/` directories do not
@@ -44,18 +46,36 @@ for migration and database-check scripts using `psql`. Staff login and
 server-side `staff_members` authorization remain unchanged. Migration 005
 defines public reads of published content, Sensei reads of drafts, and
 Sensei-only authoring. Tantōsha cannot author. Practice-set and question
-replacement is atomic through a restricted database RPC. Migration 005 is
-applied to the configured Supabase project and passes the live permission
-verifier. Local SQL checks cover all five caller roles, JSON round trips, and
-RPC rollback. Live Data API checks pass for all five roles. Local production
-browser checks pass, including expired-session refresh. Production build/start
-pass with `POSTGRES_URL` absent. Repeat deployed-domain checks before claiming
-Vercel release readiness.
+replacement is atomic through a restricted database RPC. Group tables and RPCs now have permission checks and reported five-role Data
+API coverage. Imported-bank authoring and catalog regressions are covered by
+action, RPC, and catalog tests; release evidence is in
+`docs/release-readiness.md`. Repeat those checks against the target after
+applying the forward migration.
 
 User-facing learning data used officially must persist on the server.
 Anonymous practice in the first release has no official student attempt
 history. Treat attendance, assignments, and exams as prototype workflows until
 their own release requirements are verified.
+
+## Reviewer and worker boundaries
+
+Use the role assigned in the current task. For a reviewer/support task, inspect
+core application code, migrations, import data, and verification scripts
+read-only. Documentation edits are allowed when the user authorizes them.
+Implementation and database mutations belong to the worker's authorized task.
+Do not turn a review into a code change or deployment without that scope.
+
+For a worker task, preserve existing worktree changes, identify the relevant
+acceptance criteria, implement the authorized work, and hand off an actual
+diff plus evidence. Treat prior successful runs as historical context until
+checked against the current revision and target environment. Do not repeatedly
+continue a loop that needs unavailable credentials; state the missing access
+precisely and continue independent work.
+
+For imported content, compare the pinned source data and its original renderer.
+Preserve groups, answer keys, assets, and source wording. Do not turn unused
+source metadata into student-facing hints. Requirements and current behavior
+must be documented separately until all acceptance checks pass.
 
 ## Verification
 
@@ -67,8 +87,17 @@ If a sandbox prohibits Turbopack's worker port binding, use
 `bun run verify --webpack` to run the same checks with Next.js's supported
 Webpack build option.
 
-Report what actually passed. If a required check cannot run or fails, state
-the blocker and do not call the implementation complete.
+The full verifier writes tracked Graphify output and is not a read-only check.
+For documentation-only work, validate links, referenced commands, consistency,
+and `git diff --check`; no application build is required solely for prose edits.
+For a read-only review, run focused checks that do not rewrite tracked files
+and explicitly list checks omitted because they mutate the worktree.
+
+Report the command, outcome, source revision/worktree state, date, environment,
+and coverage limitations. Do not equate HTTP 200, successful import counts,
+or typecheck/build success with browser interaction or role authorization.
+If a required check cannot run or fails, state the blocker and do not call the
+implementation complete.
 
 ## Repository knowledge
 
@@ -89,7 +118,9 @@ project truth. Do not duplicate active instructions across these files.
 4. Run `bun run db:verify` to validate local sample publication state, or
    `bun run db:verify-permissions` to check RLS and public-role grants without
    requiring or changing sample content. The permissions check is read-only and
-   can also be run against the configured Supabase project.
+   can also be run against the configured Supabase project. Its coverage includes
+   illustration groups and RPC grants. This inspection does not establish that
+   the editor can save imported banks; consult `docs/release-readiness.md`.
 5. Start the app with `bun run dev`; `/` opens the published materials catalog.
 
 The app uses the Data API with the caller's cookie session and RLS. Never put a

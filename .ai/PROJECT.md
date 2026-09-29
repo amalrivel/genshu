@@ -1,7 +1,7 @@
 # Genshu — Project Source of Truth
 
 **Status:** Active  
-**Version:** 0.3  
+**Version:** 0.4
 **Last updated:** September 2026
 
 ---
@@ -193,12 +193,11 @@ Students should be able to find and read published Japanese learning materials
 comfortably on phones and desktop browsers. Supporting Indonesian explanations
 and optional furigana may be used where appropriate. Staff need a simple way to
 publish and correct materials. Staff login and authoring UI now exist in code.
-The Supabase schema and Sensei/Tantōsha mappings are provisioned. Production
-browser checks on 2026-09-26 verified these workflows against the prior direct
-PostgreSQL integration. Re-run them against the Supabase Data API before
-claiming the migrated release is verified. Temporary QA content was removed.
-Sample content is managed through versioned local SQL seed data. The exact authoring model should follow real
-content needs, without a speculative course hierarchy.
+The Supabase schema and Sensei/Tantōsha mappings are provisioned. Runtime
+access uses Supabase Data API. Verification belongs to the specific source
+revision and environment checked; see `docs/release-readiness.md` for the
+current review and remaining release work. Local sample content uses the
+versioned SQL seed; imported banks use their dedicated importer.
 
 ---
 
@@ -413,6 +412,15 @@ TypeScript
 
 Genshu should remain a single full-stack Next.js application unless an explicit architectural decision changes this.
 
+Next.js 16.3.5 has a versioned Bun patch in `patches/next@16.3.5.patch`
+for its bundled React Server Components development profiler. It skips
+errored/aborted component measurements with negative end timestamps, which
+can otherwise break development navigation when an auth guard redirects.
+The patch covers Turbopack and Webpack browser/edge development clients;
+production code and authorization rules are unchanged. Reassess and remove
+the patch when upgrading to a version containing the upstream React fix
+(https://github.com/react/react/issues/37561).
+
 Do not split Genshu into separate frontend and backend applications without a concrete requirement.
 
 Prefer native Next.js capabilities before introducing additional backend frameworks.
@@ -458,8 +466,27 @@ current browser session only; they are not official records. Other workflows
 outside the first live release may still use prototype mock data and
 `localStorage`.
 
-Development uses local PostgreSQL and versioned repository migrations.
-Supabase is the selected initial production database host.
+Imported driving-license practice keeps its source categories `book`,
+`genchare`, and `menkyo_blog` and level `NON_JLPT`; do not assign a JLPT level
+or reinterpret source categories. Provenance, conversion, and editorial draft
+exceptions are described in `docs/gentsuki-bank-import.md`.
+
+An illustration is one shared situation and image with three ordered child
+questions. The intended answering flow displays the shared content once with
+all three children and keeps an independent answer for each child. A standard
+question earns one point; a complete illustration group earns two points only
+when all three answers are correct. An incomplete or partly unpublished group
+must not be served or scored as a complete public group. Authoring and database
+validation must preserve group membership and same-set relationships.
+
+Content fidelity requires checking both source data and its renderer. Metadata
+that was not displayed in the source must not become a hint, prompt, or
+explanation. Do not invent translations, answer keys, or furigana. These are
+product requirements; their implementation and verification status are tracked
+separately in `docs/release-readiness.md`.
+
+Development uses an isolated Supabase runtime and versioned repository SQL
+migrations. Supabase is the initial production database host.
 
 ---
 
@@ -474,10 +501,10 @@ server is only a migration/check target; it cannot serve the app's runtime
 queries. `POSTGRES_URL` is configured separately for administration scripts.
 Do not point a local authoring session at production content.
 
-Preferred database environment:
+Preferred runtime environment:
 
 ```text
-Local PostgreSQL
+Local Supabase stack or isolated development Supabase project
 ```
 
 Development should not depend on manually editing a hosted production
@@ -497,17 +524,12 @@ cookie-aware `@supabase/ssr` server client per request; the browser client is
 available for client-side needs. PostgreSQL connections are limited to the
 repository's administration scripts for applying versioned SQL migrations and
 running database checks. `POSTGRES_URL` is not a Vercel runtime requirement.
-Migration 005 is applied to the configured Supabase project. Its live grants
-and policies pass the read-only permission verifier, and the original content
-and staff row hashes are unchanged after application.
-Local SQL checks pass for anon, authenticated non-staff, active Sensei,
-active Tantōsha, and inactive staff. Live Data API checks also pass for all
-five roles; read-only administrator checks confirm the non-staff and inactive
-QA identities have the intended membership state.
-Local production browser checks pass for authoring, anonymous reading and
-practice, login/logout, and expired-session refresh. Production build/start
-also pass with `POSTGRES_URL` absent. The full verifier passes with `--webpack`;
-default Turbopack is blocked by this sandbox's worker-port restriction.
+Migration 005 introduced Data API grants and RLS. Migrations 006–013 in the
+current worktree add import provenance, illustration groups, and repair/policy
+changes. File presence does not prove a migration has been applied: inspect
+`genshu_schema_migrations` on the intended target before running the migrator.
+Do not edit applied migrations; use a new forward migration for corrections.
+See `docs/release-readiness.md` for review evidence and coverage gaps.
 Published content is filtered in queries and protected by RLS; staff-only
 content and writes are also restricted by policies. Practice-set replacement
 uses a Sensei-authorized transaction RPC so the set and child questions commit
@@ -546,7 +568,9 @@ The exact invitation and account-recovery workflows may evolve during MVP implem
 
 ## 12. File Storage
 
-Persistent file storage is not implemented and its provider is undecided.
+Imported illustration JPEGs are bundled under `public/gentsuki-quiz-assets/`
+and referenced by source Git blob ID. User-uploaded persistent file storage is
+not implemented and its provider is undecided.
 
 Examples may include:
 
@@ -568,15 +592,15 @@ root, Next.js preset, `main` as the production branch,
 only `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` for
 database access and Auth. `POSTGRES_URL` is reserved for administration
 scripts and must not be configured as an application runtime dependency. The
-existing `genshu` Vercel project has a READY deployment at `genshu.vercel.app`;
-production environment variables and post-migration deployed flows must be
-verified before treating beta as usable.
+existing `genshu` Vercel project uses `genshu.vercel.app`. Identify the current
+production deployment and its source commit from Vercel before claiming that
+worktree changes have shipped. Recheck environment variables and the affected
+flows on that deployment before treating a new beta revision as usable.
 
-The configured Supabase project is on the Free plan. Supabase does not provide
-downloadable automatic backups for Free projects. Arrange and rehearse an
-off-site export and restore to an isolated database before relying on real
-production content. A code rollback does not reverse database migrations or
-content edits.
+Verify the current backup facilities and rehearse an off-site export and
+restore to an isolated Supabase target before relying on production content.
+Follow `docs/recovery.md`; a code rollback does not reverse database migrations
+or content edits. A backup file alone is not proof that restoration works.
 
 The exact production pricing tier remains an operational decision rather than a project architecture rule.
 
@@ -814,7 +838,8 @@ A proposal should explain:
 - migration impact,
 - and new complexity introduced.
 
-Detailed behavioral rules for AI Workers and Reviewers belong in `.ai/policies/`.
+The current agent workflow and reviewer/worker boundaries are defined in
+`.ai/README.md`. `.ai/policies/` is empty and defines no active policy.
 
 ---
 
@@ -854,7 +879,8 @@ Examples:
 
 This hierarchy describes project and product truth.
 
-AI operating instructions are governed separately by `.ai/README.md`, `.ai/policies/`, and applicable Agent Skills.
+AI operating instructions are governed by `AGENTS.md`, `.ai/README.md`,
+and applicable Agent Skills. Empty directories define no additional workflow.
 
 Project knowledge should normally be interpreted in this order:
 
@@ -884,7 +910,7 @@ Current development priority follows this rough order:
 ```text
 confirm first-release content and access needs
     ↓
-local PostgreSQL workflow and versioned migrations
+isolated Supabase runtime and versioned migrations
     ↓
 published material and practice persistence
     ↓

@@ -52,6 +52,12 @@ export default function AssignmentsPage() {
   const [searchQuery, setSearchQuery] = React.useState("")
   const [createModalOpen, setCreateModalOpen] = React.useState(false)
 
+  /* 
+    REVIEW: mengapa semua varibel yang rata2 menggunakan useState lalu useEffect disini itu 
+    dibuat disini? mengapa tidak dibuat berada didalam folder ai yang berhubungan dengan backend juga.
+    mungkin lebih baik dibuat disitu karena ini membuat alur mobile app dan web app menjadi alur yang sama,
+    karena stuktur dari data itu berasal dari tempat dan algoritma yang sama juga.
+  */
   // Create Assignment Form State
   const [title, setTitle] = React.useState("")
   const [japanesePrompt, setJapanesePrompt] = React.useState("")

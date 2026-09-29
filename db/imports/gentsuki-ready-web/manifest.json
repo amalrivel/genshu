@@ -1,0 +1,440 @@
+{
+  "repository": "amalrivel/gentsuki-ready-web",
+  "commit": "f085af618ff11e594868eeed653a945d6daaa682",
+  "sourceFiles": {
+    "book_1.json": "a81d8d5c7f2d156cc5b2464c9b4e3da26376ff3b",
+    "book_2.json": "33ccffc2447c65ff27d87f6a37d15d0da1a96d2a",
+    "book_3.json": "26f53bf1395d82a0900e8116b0a6ccbc0544e6cb",
+    "genchare_1.json": "7080cb310f09275d895416bc9d8749e088a5b3a8",
+    "genchare_2.json": "fcde209736a40a77dca7668d5f730369ed9fba74",
+    "genchare_3.json": "38d60d973e8fdbabd11d7851bc5ac3e4b06dcec3",
+    "genchare_4.json": "aa63fd2f6920ea4447d8996a58d161474fa3d7ff",
+    "menkyo_blog_1.json": "84024eac6004be0c9c18ee07287a73a6fae1da48",
+    "menkyo_blog_2.json": "e2a0f0afebde4ed911bed5f99a8f7f7320a4399b",
+    "menkyo_blog_3.json": "1d7c3e99057ce11c535ed623bdba33763c2eae0c",
+    "menkyo_blog_4.json": "c0829515f169435508b329cd0208f4050c6afa7a",
+    "menkyo_blog_5.json": "9113e9f8137fad9a6a79cc637671cf0bbb9e5740"
+  },
+  "assetMeta": {
+    "3031": {
+      "width": 150,
+      "height": 150,
+      "sha": "c7faee8b0889533938af90177772d6076d20bd17"
+    },
+    "3091": {
+      "width": 150,
+      "height": 150,
+      "sha": "14e1332efc27d33fc51af4163cce1b17632c0f6f"
+    },
+    "3131": {
+      "width": 150,
+      "height": 150,
+      "sha": "651f78b56ed32300ac194b3dbebaddc90f8d7551"
+    },
+    "3211": {
+      "width": 150,
+      "height": 150,
+      "sha": "186f466b6b65fa7066578ec328fa8a6cd952ee1e"
+    },
+    "3271": {
+      "width": 150,
+      "height": 150,
+      "sha": "ed727725de4a6d017909b5b872217f0be79bc5a1"
+    },
+    "3311": {
+      "width": 150,
+      "height": 150,
+      "sha": "d69da10e001260287cef97735864b369cc01accb"
+    },
+    "3381": {
+      "width": 150,
+      "height": 150,
+      "sha": "617c62a93d012deb5df72fa1a62306340883f6a7"
+    },
+    "3461": {
+      "width": 150,
+      "height": 150,
+      "sha": "02cbfef242620fe7860bf5e364f83a3b8c143164"
+    },
+    "3471": {
+      "width": 400,
+      "height": 200,
+      "sha": "c638a7b95f5653ff5bad6c035f6220d55fc0d60a"
+    },
+    "3481": {
+      "width": 401,
+      "height": 200,
+      "sha": "a2b3c05777adf5c7d621ea40963aa72c2bd17a58"
+    },
+    "4051": {
+      "width": 150,
+      "height": 150,
+      "sha": "fa52d493b04ef2d33941dc868790a9f1f25baff5"
+    },
+    "4121": {
+      "width": 150,
+      "height": 150,
+      "sha": "d3920f84d93d3a445a722838d8815cfb1def810d"
+    },
+    "4161": {
+      "width": 150,
+      "height": 150,
+      "sha": "7da1ee0fb75fc25ce8c85f54cca397101aae7c64"
+    },
+    "4191": {
+      "width": 150,
+      "height": 150,
+      "sha": "5b92c921806e1c30eadc0f4b6bb85faf40089923"
+    },
+    "4241": {
+      "width": 350,
+      "height": 150,
+      "sha": "e47bdd7353b32b13facc51a196ee52363814eda5"
+    },
+    "4271": {
+      "width": 150,
+      "height": 150,
+      "sha": "2fda5accdc73ffdb65983db6c6d2a8deabe38f5f"
+    },
+    "4401": {
+      "width": 150,
+      "height": 150,
+      "sha": "f0d3da7fc7f9445a3d3c4c0381147b01a6a8091a"
+    },
+    "4421": {
+      "width": 150,
+      "height": 150,
+      "sha": "b15bce637a259ee520d6970e8ae3a0c46acfd1af"
+    },
+    "4451": {
+      "width": 150,
+      "height": 150,
+      "sha": "dcb4ef6ab9e6e4a6903c2e21e21aab52abaae81e"
+    },
+    "4471": {
+      "width": 400,
+      "height": 200,
+      "sha": "c66123ae5bb86a445503ccddb69192c1c460a3bb"
+    },
+    "4481": {
+      "width": 400,
+      "height": 200,
+      "sha": "876d22eba713b00d211412d5334531d2b9645889"
+    },
+    "5011": {
+      "width": 150,
+      "height": 150,
+      "sha": "eea7d2d7fb15813926353aecee70cd0e0f2299f0"
+    },
+    "5101": {
+      "width": 150,
+      "height": 150,
+      "sha": "38a341abf328e2134c266cef59203e3bc9788f2c"
+    },
+    "5141": {
+      "width": 150,
+      "height": 150,
+      "sha": "a9df3e0aba1ef1d30bfa9714d6459c80b636e6d8"
+    },
+    "5191": {
+      "width": 150,
+      "height": 150,
+      "sha": "93f43d799d52e90a43ccbfa27ff7f0c7703a881d"
+    },
+    "5241": {
+      "width": 150,
+      "height": 150,
+      "sha": "80fb66b8aa434ba29278f51fd1a74b048c1d3c35"
+    },
+    "5281": {
+      "width": 150,
+      "height": 150,
+      "sha": "363de4e14142c42d719f835753c0258b309735da"
+    },
+    "5331": {
+      "width": 150,
+      "height": 150,
+      "sha": "9816f5b91fa6b0cf47bd05016edb28da8421300d"
+    },
+    "5401": {
+      "width": 150,
+      "height": 150,
+      "sha": "9b172cb9c1cd1bf0acd8e126f9c330e82be399ac"
+    },
+    "5451": {
+      "width": 150,
+      "height": 150,
+      "sha": "80bed20e146ed494ff67d8aafa647352e367de55"
+    },
+    "5471": {
+      "width": 400,
+      "height": 200,
+      "sha": "c654884c2b955d3efb7959e0bf7637af1d979469"
+    },
+    "5481": {
+      "width": 400,
+      "height": 200,
+      "sha": "b16df538b96a324ce08e3baf8c3df90a1752175f"
+    },
+    "6051": {
+      "width": 150,
+      "height": 150,
+      "sha": "ebda689d3f45e6d06b901bf46102d872e9662326"
+    },
+    "6101": {
+      "width": 150,
+      "height": 150,
+      "sha": "a3bf482221c178b10e11085980c6c10ead669c3e"
+    },
+    "6161": {
+      "width": 150,
+      "height": 150,
+      "sha": "d6e77008f7284347d8d7eba714d2e17fafdee808"
+    },
+    "6201": {
+      "width": 150,
+      "height": 150,
+      "sha": "c45c5c98db2faa4e8f93d0432387e544720ab6d9"
+    },
+    "6251": {
+      "width": 150,
+      "height": 150,
+      "sha": "02788e0b7a8e60e50c5f16d1edfa42b6f96377e7"
+    },
+    "6301": {
+      "width": 150,
+      "height": 150,
+      "sha": "d68446de56d680cfbc08330d840281fe99e57ca8"
+    },
+    "6361": {
+      "width": 150,
+      "height": 150,
+      "sha": "7f001809fb3f67f96e4158611967401dd3e8526e"
+    },
+    "6401": {
+      "width": 150,
+      "height": 150,
+      "sha": "d413428010434504ed971fb5c4783de700a11863"
+    },
+    "6451": {
+      "width": 150,
+      "height": 150,
+      "sha": "0e466a0828caf4c953ad4eae8596d045b9e687cc"
+    },
+    "6471": {
+      "width": 400,
+      "height": 200,
+      "sha": "661f460c8f561cab51f730072638c63fcaa97c26"
+    },
+    "6481": {
+      "width": 400,
+      "height": 200,
+      "sha": "97a3890ed246115d324129da50a8a788dbb0b919"
+    },
+    "1-1": {
+      "width": 160,
+      "height": 191,
+      "sha": "6afb028b01c9b154941cbb64a29cda151b9dba71"
+    },
+    "1-2": {
+      "width": 82,
+      "height": 74,
+      "sha": "bfeff2598dd3c44d220535b381b2b50d62c6aabd"
+    },
+    "1-3": {
+      "width": 99,
+      "height": 79,
+      "sha": "82fb726d9efc0407d0e4f09e9b7a6ffcb959b96e"
+    },
+    "1-4": {
+      "width": 85,
+      "height": 78,
+      "sha": "46d8406e3d0cf7bdd08f0f6d1808dedcdb08df43"
+    },
+    "1-5": {
+      "width": 132,
+      "height": 73,
+      "sha": "5bd85e0adc07f4b166f1ca2d47d53854ae2bc13d"
+    },
+    "1-6": {
+      "width": 81,
+      "height": 77,
+      "sha": "69b3c37f7ccdab3e19a46315b257534c08c86560"
+    },
+    "1-7": {
+      "width": 87,
+      "height": 74,
+      "sha": "0ae5326411bcd33153be7f427df0a9e6e0211815"
+    },
+    "1-8": {
+      "width": 155,
+      "height": 135,
+      "sha": "da26d477475b9cdc095bdd5b82325d4970622d67"
+    },
+    "1-9": {
+      "width": 277,
+      "height": 132,
+      "sha": "204579daed6df3f4147c360cce458549421b56d5"
+    },
+    "1-10": {
+      "width": 271,
+      "height": 134,
+      "sha": "46acf974df9ef79fb75744af108a45cf0f301386"
+    },
+    "2-1": {
+      "width": 91,
+      "height": 71,
+      "sha": "2ed4ad419369c3a06e262deeb1cd811ad5fa1708"
+    },
+    "2-2": {
+      "width": 116,
+      "height": 148,
+      "sha": "aa957a5176657b305132e75f8ec8ebc56e412431"
+    },
+    "2-3": {
+      "width": 84,
+      "height": 76,
+      "sha": "449eff08ba3058e821ab6951a25f41e33a34580f"
+    },
+    "2-4": {
+      "width": 86,
+      "height": 76,
+      "sha": "a571bfb95ba4caee09358b958567b125bb4a306d"
+    },
+    "2-5": {
+      "width": 108,
+      "height": 107,
+      "sha": "b8c9ead2e095781f49c20fa159e3d338e199c128"
+    },
+    "2-6": {
+      "width": 74,
+      "height": 71,
+      "sha": "191ae63eb3c89bcb6c57f60cb5c48b28e78b4dc1"
+    },
+    "2-7": {
+      "width": 90,
+      "height": 79,
+      "sha": "4d1d82c7f34fd95f6e88664b46b410489ac9c89a"
+    },
+    "2-8": {
+      "width": 110,
+      "height": 141,
+      "sha": "30303b61e1193fcdbf8722ea62f677c20e34659e"
+    },
+    "2-9": {
+      "width": 270,
+      "height": 104,
+      "sha": "c181d807f1618ccd1df8154983be2c51722fdeb7"
+    },
+    "2-10": {
+      "width": 268,
+      "height": 133,
+      "sha": "b935bb212dff7c6de5250e1828b972bbebe1058a"
+    },
+    "3-1": {
+      "width": 177,
+      "height": 162,
+      "sha": "6ec1deb8982f21bd168d8d9c8e81e5d3cf5a9d9a"
+    },
+    "3-2": {
+      "width": 82,
+      "height": 71,
+      "sha": "fa28321471a20eb0a03fcef33c0c0da66787d095"
+    },
+    "3-3": {
+      "width": 166,
+      "height": 146,
+      "sha": "f4c3cef3bb160e38142e2c47d84725b42b303e03"
+    },
+    "3-4": {
+      "width": 84,
+      "height": 78,
+      "sha": "9b43458ee9c4b038dad608fd57409da43619da59"
+    },
+    "3-5": {
+      "width": 78,
+      "height": 108,
+      "sha": "1367c725f17e74b4492caa937d832d28b4d3041b"
+    },
+    "3-6": {
+      "width": 106,
+      "height": 167,
+      "sha": "329d310a5fcff412bc19e59c4b8932dc878256a6"
+    },
+    "3-7": {
+      "width": 83,
+      "height": 78,
+      "sha": "432a254c0fc1ffc6bfe927dd5a74ee55221cdb9f"
+    },
+    "3-8": {
+      "width": 74,
+      "height": 74,
+      "sha": "c49e73ade4d0b961d13847faa1c56d8127ac16af"
+    },
+    "3-9": {
+      "width": 122,
+      "height": 147,
+      "sha": "4ad1ae3902f3fe2e79436297ea71a71b8e251ec9"
+    },
+    "3-10": {
+      "width": 269,
+      "height": 131,
+      "sha": "4ce0745b815ee7ba35737bd8363428b460f26ad8"
+    },
+    "3-11": {
+      "width": 274,
+      "height": 135,
+      "sha": "9d4f05983db10e943b26ee6ac872b3372a443d83"
+    },
+    "その他の危険 標識": {
+      "width": 225,
+      "height": 225,
+      "sha": "cd37b4fe0360a4829cae7facaeb8a159bf223d86"
+    },
+    "二輪の自動車以外通行止め 標識": {
+      "width": 225,
+      "height": 225,
+      "sha": "099054a3c92bdc6e8ee465ea9e44b9db503fc457"
+    },
+    "合流注意 警戒標識 ": {
+      "width": 225,
+      "height": 225,
+      "sha": "1cbbe8342ddca92d25d6d494df550f1bbe455575"
+    },
+    "専用通行帯 原付 通行 ": {
+      "width": 960,
+      "height": 960,
+      "sha": "a665a0a7ace64dd6d0c254333acb570cb19a2883"
+    },
+    "左折可 標識 日本": {
+      "width": 275,
+      "height": 183,
+      "sha": "61ae222a93488eca9c8528c03c3f0e60dd1b0edd"
+    },
+    "登坂車線 交通標識 ": {
+      "width": 340,
+      "height": 340,
+      "sha": "44f3cfa12394ca3e4c3907f3325e67e839e086cc"
+    },
+    "自転車専用 標識 日本": {
+      "width": 225,
+      "height": 225,
+      "sha": "afe84888b7314f789809b4d965ba1b92d69348bb"
+    },
+    "車両横断禁止 標識": {
+      "width": 224,
+      "height": 224,
+      "sha": "2bb829f62de440735031eae8c866240daeb2ef3f"
+    },
+    "車線減少 警戒標識 ": {
+      "width": 960,
+      "height": 960,
+      "sha": "8586e1107a890d40a557ec8247bef86d87e7498c"
+    },
+    "転回禁止 標示 ": {
+      "width": 227,
+      "height": 598,
+      "sha": "725db7af9a51e5ee861b708cb691f965cdfd9154"
+    }
+  }
+}

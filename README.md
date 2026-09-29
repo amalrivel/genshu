@@ -1,188 +1,129 @@
 # Genshu
 
-Genshu is a learning-management workspace for Indonesian students in Japanese scholarship learning programs. The first live release provides public materials and anonymous practice, with Sensei content authoring and Tantōsha staff access. Attendance, assignments, exams, cohorts, and user management remain prototype workflows.
+Genshu supports Indonesian students in Japanese scholarship learning programs.
+The first release provides published materials and anonymous practice, with
+Sensei content authoring and Tantōsha staff access. Student answers and scores
+are temporary browser-session state, not official academic records.
+Attendance, assignments, exams, cohorts, and user management remain prototype
+workflows and are not operational release features.
 
-## Current release work
+## Architecture and content
 
-Published materials and anonymous practice read shared content from
-PostgreSQL. The Supabase schema is provisioned with one published material and
-one published practice set. Student answers are temporary and are not official
-records. Staff login and content authoring use Supabase Auth plus server-side
-role checks; Sensei and Tantōsha identities are mapped. Production-browser
-checks passed on 2026-09-26 for Sensei authoring/publishing, Tantōsha
-authoring denial, anonymous student reading/practice, and hidden drafts. Those
-local production checks have now been repeated through Data API, including
-expired-session refresh and desktop/mobile practice. They do not verify the
-current Vercel deployment.
-Attendance, assignments, exams, cohort
-management, and user management still use prototype data and are hidden in
-production until released separately.
+The application uses Next.js 16, React 19, TypeScript, Bun, Tailwind CSS 4,
+shadcn/Base UI, next-intl, and next-themes. Runtime data access uses Supabase
+Data API through `@supabase/supabase-js`; cookie sessions use `@supabase/ssr`.
+Authorization is enforced in server actions and RLS using active
+`staff_members` roles. Tantōsha cannot author content.
 
-Vercel and Supabase PostgreSQL are the initial deployment targets. Development
-remains local-first with versioned database migrations.
-
-The interface supports Indonesian and Japanese, dark mode, responsive navigation,
-and mobile-oriented student workflows.
+The imported Gentsuki baseline contains 12 sets, 614 child/standard questions,
+and 14 illustration groups. Of those questions, 602 are published and 12 remain
+editorial drafts. These counts describe the imported baseline, not all live
+content or future Sensei edits. See [import documentation](docs/gentsuki-bank-import.md).
+Illustration JPEGs are bundled with the application; uploaded file storage is
+not implemented.
 
 ## Development
 
-Use Bun for local development:
+Use a local Supabase stack or isolated development Supabase project for Auth
+and Data API. Plain PostgreSQL alone cannot serve runtime requests. Copy
+`.env.example` to `.env.local` and configure:
 
-```bash
-bun install
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+
+`POSTGRES_URL` is administration-only for SQL migrations/checks with `psql`.
+It is not required by the application or Vercel runtime. Keep credentials and
+QA passwords in untracked environment files.
+
+```sh
+bun install --frozen-lockfile
 bun run dev
 ```
 
-Open <http://localhost:3000>. Before handing off changes, run:
+Open http://localhost:3000. Apply versioned migrations separately with
+`bun run db:migrate` after confirming the target and its migration ledger.
+`bun run db:seed` is only for local sample data; never seed the hosted project.
+Use the dedicated importer for Gentsuki content, not the sample seed.
 
-```bash
+## Verification
+
+For implementation work:
+
+```sh
 bun run verify
 ```
 
-The project uses Next.js 16, React 19, TypeScript, Tailwind CSS 4, shadcn/Base UI primitives, `next-intl`, and `next-themes`.
+This runs typecheck, lint, locale validation, Graphify update, diff checks, and
+production build. It writes tracked Graphify files. If sandbox restrictions
+prevent Turbopack worker-port binding, document the failure and use
+`bun run verify --webpack`; this does not verify Vercel's remote build.
+Documentation-only changes require consistency/link checks and `git diff --check`.
 
-## Vercel production status and setup
+Additional checks:
 
-Run `bun run db:check-data-api` to check migrations, RLS with all five role
-cases, JSON round trips, and RPC rollback in a temporary local PostgreSQL
-database. This needs PostgreSQL binaries (`POSTGRES_BIN` can override their
-directory) and permission to create a local Unix socket. It does not connect
-to Supabase or replace direct Data API and browser verification.
+- `bun run db:check-data-api`: creates a temporary local PostgreSQL database
+  and tests migrations plus the existing five-role SQL fixtures.
+- `bun run db:verify-permissions`: read-only grants/RLS inspection against the
+  database selected by administration `POSTGRES_URL`.
+- `bun run db:check-data-api-live`: authenticates QA roles, creates temporary
+  test content, and cleans it afterward. It is not a read-only review command.
+- `bun db/scripts/import-gentsuki-ready-web.ts --check`: validates local import.
+- `bun db/scripts/import-gentsuki-ready-web.ts --verify-live`: authenticates
+  Sensei and reads the stored import plus anonymous visibility; no content writes.
+- `bun .ai/scripts/check-supabase-config.ts`: tests missing-variable diagnostics
+  without disclosing values.
 
-`bun run db:check-data-api-live` uses the publishable key and QA Auth sessions
-to check direct API permissions, JSON, and atomic replacement. Provide
-`SENSEI_EMAIL`/`SENSEI_PASSWORD`, `TANTOSHA_EMAIL`/`TANTOSHA_PASSWORD`,
-`NONSTAFF_EMAIL`/`NONSTAFF_PASSWORD`, and
-`INACTIVE_STAFF_EMAIL`/`INACTIVE_STAFF_PASSWORD` in local env only. The script
-creates uniquely named QA content and deletes it afterward; missing roles
-cause an incomplete-coverage exit. It never creates identities or modifies
-staff membership.
+Live role checks require local `SENSEI_EMAIL`/`SENSEI_PASSWORD`,
+`TANTOSHA_EMAIL`/`TANTOSHA_PASSWORD`, `NONSTAFF_EMAIL`/`NONSTAFF_PASSWORD`, and
+`INACTIVE_STAFF_EMAIL`/`INACTIVE_STAFF_PASSWORD`. Non-staff must have no staff
+membership; inactive staff must have `is_active=false`. Never modify real staff
+accounts to create test cases.
 
-Verification on 2026-09-26: local SQL checks pass for all five roles; live Data
-API checks pass for all five roles. QA content has been removed and
-original row hashes remain unchanged. Local production browser checks and
-build/start with `POSTGRES_URL` absent pass. `bun run verify --webpack` passes;
-the default Turbopack build cannot bind its worker port in this sandbox.
+The existing permission fixtures do not yet cover illustration groups and
+repair RPCs. A passing legacy verifier is insufficient for the group release.
+Current evidence and remaining work are in [release readiness](docs/release-readiness.md).
 
-1. In the existing `genshu` project, verify the `amalrivel/genshu` Git
-   connection, Next.js preset, repository root, and `main` production branch.
-   Use `bun install --frozen-lockfile` for installation and `bun run build` for
-   the build. Keep the default Next.js Node.js runtime; using Bun for
-   installation/build does not require Bun runtime.
-2. Add `NEXT_PUBLIC_SUPABASE_URL` and
-   `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` to each Vercel environment that will
-   access the app. Runtime database queries use Supabase Data API with RLS;
-   Vercel does not need a PostgreSQL connection string. Keep test-account
-   passwords out of GitHub and Vercel.
-3. Apply schema migrations separately with `bun run db:migrate` from a trusted
-   administration environment with `POSTGRES_URL` and `psql`. This connection
-   is for migrations and database checks only, not application runtime. Do not
-   run migrations or local sample seeds as part of the Vercel build. Migration
-   `005_supabase_data_api.sql` grants minimum Data API access and configures RLS.
-4. Set the Supabase Auth Site URL to the deployment's final URL. Configure
-   allowed redirect URLs when using invitations or password recovery.
-5. On the deployed domain, check Sensei login/logout and create/edit/publish,
-   Tantōsha authoring denial, anonymous material reading and practice, draft
-   detail 404s, Indonesian/Japanese display, and phone navigation. Confirm
-   attendance, assignments, and exams redirect to materials. Local production
-   checks do not verify Vercel environment variables or deployed cookies.
+## Vercel setup
 
-### Supabase Auth and preview safety
+Use the existing `genshu` project linked to `amalrivel/genshu`, the Next.js
+preset, repository root, and `main` production branch. Install with
+`bun install --frozen-lockfile`, build with `bun run build`, and retain the
+standard Next.js Node.js runtime.
 
-Set Supabase Auth **Site URL** to the final HTTPS production domain. Add that
-exact domain to **Authentication → URL Configuration → Redirect URLs**, along
-with `http://localhost:3000/**` for local development. Add a Vercel preview
-wildcard only if preview authentication is needed; prefer an exact production
-URL and keep preview allow-list entries scoped to the Vercel team/account slug.
-The Site URL is the fallback for email links and recovery flows.
+Configure the two Supabase runtime values in the appropriate Vercel environment
+scope. Verify their availability in the deployed build; local `.env` values do
+not configure Vercel. Changing variables requires a new deployment, including
+for public variables embedded at build time. Do not upload QA passwords or
+administration `POSTGRES_URL` to Vercel. Builds must not run migrations or seeds.
 
-Vercel Preview and Production have separate environment scopes. Do not put the
-   production administration `POSTGRES_URL` in Preview: previews connected to production can read
-published content and staff authoring can change live content. Give previews a
-separate database, or omit production credentials and do not use previews for
-flows that require database access.
+Apply required migrations separately after checking the target ledger. The
+current worktree includes migrations 001–013; presence here is not proof of
+application to a target or inclusion in a deployment.
 
-### Logs, feedback, and rollback
+Set Supabase Auth Site URL to the final production HTTPS URL and configure
+redirect URLs for the invitation/recovery flows actually used. Scope preview
+redirects to the project/team. Preview and Production have separate environment
+scopes; preview authoring still changes live data if it points to production
+Supabase. Prefer isolated development/preview projects.
 
-Open the Vercel project **Deployments** page for build logs. Use **Logs** to
-filter runtime requests by deployment, domain, route, status, or error. Vercel
-retains runtime logs for a limited period, so include the deployment URL, route,
-approximate time, locale, and steps to reproduce when reporting an issue. The
-repository is public and GitHub Issues are enabled, so use
-<https://github.com/amalrivel/genshu/issues> for non-sensitive beta feedback.
-Do not include student information, credentials, or private content in a public
-issue. No private feedback or security-reporting channel has been confirmed;
-establish one before collecting sensitive reports.
+Before release, identify the exact deployment ID and source commit, then test
+anonymous catalogs/details/practice, draft privacy, staff login/logout/session
+refresh, Sensei authoring, and Tantōsha denial. Test Indonesian/Japanese and
+phone/desktop viewports. HTTP 200 alone does not prove these interactions.
 
-For an application rollback, use Vercel Deployments to promote the last known
-good deployment. This only rolls back application code. It does not reverse
-database migrations, published content, or other database changes; recover
-those separately from a verified database export or restore.
+## Feedback and recovery
 
-### Database backup and recovery
+Use the project's GitHub Issues for non-sensitive beta feedback. Include route,
+time, locale, and reproduction steps; keep private data and credentials out of
+public reports. Confirm a private reporting channel with the owner when needed.
 
-The configured Supabase organization is currently on the Free plan. Free
-projects do not have downloadable scheduled database backups. Install the
-Supabase CLI and Docker on an authenticated, trusted workstation. Export weekly
-and before each migration or significant content change; the CLI excludes
-Supabase-managed schemas:
+Inspect Vercel build/runtime logs for the deployment involved. Roll back to a
+verified compatible deployment when required; code rollback does not reverse
+migrations or content edits. Follow [backup and recovery](docs/recovery.md).
 
-```sh
-umask 077
-backup_dir="/path/to/restricted/genshu-$(date +%F)"
-mkdir -p "$backup_dir"
-supabase db dump --db-url "$POSTGRES_URL" -f "$backup_dir/roles.sql" --role-only
-supabase db dump --db-url "$POSTGRES_URL" -f "$backup_dir/schema.sql"
-supabase db dump --db-url "$POSTGRES_URL" -f "$backup_dir/data.sql" \
-  --use-copy --data-only -x "storage.buckets_vectors" -x "storage.vector_indexes"
-```
+## Agent workflow
 
-Encrypt the files before moving them to restricted off-site storage; never put
-the dump or its connection URL in Git. `db dump` does not include Supabase Auth
-users or project Auth settings, so record the staff account IDs and be ready to
-recreate/invite those accounts and reapply their `staff_members` mappings after
-a project-level recovery.
-
-Rehearse by restoring the export into a separate, isolated Supabase project or
-local Supabase stack, never production. On the isolated target, revoke default
-public table grants before restoring, then apply the three files in order:
-
-```sh
-psql "$RESTORE_DB_URL" --set ON_ERROR_STOP=1 \
-  --command 'ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE ALL ON TABLES FROM anon, authenticated'
-psql --single-transaction --variable ON_ERROR_STOP=1 \
-  --file "$backup_dir/roles.sql" \
-  --file "$backup_dir/schema.sql" \
-  --command 'SET session_replication_role = replica' \
-  --file "$backup_dir/data.sql" \
-  --dbname "$RESTORE_DB_URL"
-```
-
-Verify the four `genshu_schema_migrations` rows and published content. Run the
-RLS/no-public-grant check against the restore:
-
-```sh
-POSTGRES_URL="$RESTORE_DB_URL" bun run db:verify-permissions
-```
-
-The CLI export excludes Supabase Auth users and settings. If restoring to a new
-Supabase project, invite staff there and map their new Auth UUIDs to their
-`staff_members` roles. Follow Supabase's current
-[database backup and restore guide](https://supabase.com/docs/guides/platform/backups)
-and [CLI dump reference](https://supabase.com/docs/reference/cli/supabase-db-dump)
-for target setup and any extensions or Auth customizations.
-This environment has no running local PostgreSQL service or Docker/Supabase
-stack, and the Supabase Free project has no automatic downloadable backups, so
-no restore rehearsal has been completed. A restore rehearsal remains a gate
-before relying on real content.
-
-### Current deployment status
-
-The existing `genshu` Vercel project has a READY production deployment from
-`main` at `genshu.vercel.app`, running commit `3125d00`. Its `/materials` route
-returns HTTP 500; runtime errors show that `NEXT_PUBLIC_SUPABASE_URL` and
-`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` are missing. The live migration ledger
-now includes migration 005, whose Data API grants and policies pass the live
-permission verifier. Original content and staff row hashes are unchanged.
-Configure the required Production values and retest the deployed flows.
-Builds must not run migrations or seed data.
+Read [AGENTS.md](AGENTS.md), [project decisions](.ai/PROJECT.md), and
+[AI workflow](.ai/README.md). Reviewer documentation edits and worker code
+changes have separate task scopes. The next bounded worker goal is in
+[worker-next-goal.md](docs/worker-next-goal.md).

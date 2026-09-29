@@ -36,3 +36,10 @@ For meaningful implementation work, run `bun run verify` before claiming
 completion. Report changed files, behavior, checks actually run, and remaining
 limitations. Do not claim a prototype flow is ready for official use based
 on rendering or a passing build alone.
+
+For reviewer/support tasks, keep core code, migrations, datasets, and scripts
+read-only; edit documentation only when authorized. For documentation-only
+changes, check links, consistency, and `git diff --check`. The full verifier
+writes Graphify output, so it is not a read-only review command. See
+`.ai/README.md` for role boundaries and `docs/release-readiness.md` for dated
+review evidence and unresolved acceptance criteria.

@@ -35,7 +35,9 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+             {/* REVIEW: mengapa ini bernama legacy? mengapa masih digunakan kalau ini legacy? */}
             <LegacyDataProvider>
+              {/*  REVIEW: mengapa anda menggunakan tag a disini? bukannya nextjs sudah punya tag khusus untuk hal ini, yakni Link di library nextjs. */}
               <a
                 href="#main-content"
                 className="sr-only fixed left-4 top-4 z-[100] rounded-md bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground focus:not-sr-only"
