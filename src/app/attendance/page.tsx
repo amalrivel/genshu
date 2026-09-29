@@ -1,4 +1,3 @@
-// TODO: ini masih kelihatan atau diakses jika saya langsung mengetik url langsung ke route ini, mohon benar2 disembungikan dulu, tapi jangan dihapus, karena menurut saya ini masih berguna wkwk.
 
 "use client"
 

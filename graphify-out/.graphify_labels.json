@@ -99,7 +99,7 @@
   "97": "Supabase Postgres Best Practices",
   "98": "2-3",
   "99": "3. Primary Users",
-  "100": "Commands",
+  "100": "Attaching to a Running Browser",
   "101": "9. Technical Direction",
   "102": "advanced-full-text-search.md",
   "103": "Genshu — Project Source of Truth",
@@ -158,7 +158,7 @@
   "156": "1-2",
   "157": "1-3",
   "158": "1-4",
-  "159": "1-5",
+  "159": "Best Practices",
   "160": "1-6",
   "161": "1-7",
   "162": "1-8",
@@ -240,6 +240,8 @@
   "238": "server.ts",
   "239": "src/proxy.ts",
   "240": "6451",
+  "241": "Trace Output Files",
+  "242": "1-1",
   "263": "verify.ts",
   "385": "layout.tsx"
 }
