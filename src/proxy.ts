@@ -5,7 +5,7 @@ const prototypePaths = ["/attendance", "/assignments", "/exams", "/cohorts", "/u
 
 export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname
-  if (process.env.NODE_ENV === "production" && prototypePaths.some((path) => pathname === path || pathname.startsWith(path + "/"))) {
+  if (prototypePaths.some((path) => pathname === path || pathname.startsWith(path + "/"))) {
     return NextResponse.redirect(new URL("/materials", request.url))
   }
   if (["/login", "/materials", "/practice", "/staff"].some((path) => pathname === path || pathname.startsWith(path + "/"))) {

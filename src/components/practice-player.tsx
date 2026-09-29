@@ -25,7 +25,6 @@ import {
 } from "@/components/layout/page-frame";
 import { cn } from "@/lib/utils";
 import { useLocale, useTranslations } from "next-intl";
-import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import type { PublishedPracticeSet } from "@/lib/content-types";
 import { buildPracticeUnits, scorePracticeUnits } from "@/lib/practice-units";
 
@@ -61,7 +60,6 @@ export function PracticePlayer({
     : practiceSet.descriptionId;
   const t = useTranslations("practicePlayer");
   const tPractice = useTranslations("practice");
-  const tNav = useTranslations("nav");
   const practiceUnits = React.useMemo(
     () => buildPracticeUnits(practiceSet.questions, practiceSet.questionGroups),
     [practiceSet],
@@ -92,15 +90,16 @@ export function PracticePlayer({
 
   const selectAnswer = React.useCallback(
     (questionId: string, option: number) => {
+      if (answers[questionId] !== undefined) return;
       setSelectedOptions((prev) => ({ ...prev, [questionId]: option }));
     },
-    [],
+    [answers],
   );
 
   const handleConfirmAnswer = React.useCallback(
     (question: PublishedPracticeSet["questions"][number]) => {
       const selected = selectedOptions[question.id] ?? answers[question.id];
-      if (selected === undefined) return;
+      if (selected === undefined || answers[question.id] !== undefined) return;
       setAnswers((prev) => ({ ...prev, [question.id]: selected }));
     },
     [answers, selectedOptions],
@@ -108,11 +107,14 @@ export function PracticePlayer({
 
   const handleNextQuestion = React.useCallback(() => {
     const unit = practiceUnits[currentIndex];
-    if (
-      !unit ||
-      unit.questions.some((question) => answers[question.id] === undefined)
-    )
+    if (!unit) return;
+    const nextQuestion = unit.questions.find(
+      (question) => answers[question.id] === undefined,
+    );
+    if (nextQuestion) {
+      setActiveQuestionId(nextQuestion.id);
       return;
+    }
     if (currentIndex + 1 < practiceUnits.length) {
       setCurrentIndex((prev) => prev + 1);
       setActiveQuestionId(
@@ -130,25 +132,6 @@ export function PracticePlayer({
       }
     }
   }, [practiceUnits, currentIndex, answers]);
-
-  // TODO: balik kesoal selanjutnya juga ga dibutuhkan saat ini. saya juga inginnya ini hanya 1 arah dulu, tidak bisa balik. nanti baru perbaikan.
-  const handlePreviousQuestion = React.useCallback(() => {
-    if (currentIndex === 0) return;
-    setCurrentIndex((index) => index - 1);
-    const previous = practiceUnits[currentIndex - 1];
-    setActiveQuestionId(
-      previous.questions.find((question) => answers[question.id] === undefined)
-        ?.id ?? previous.questions[0].id,
-    );
-  }, [practiceUnits, currentIndex, answers]);
-
-  // TODO: jangan buat gakkusei bisa merubah jawabannya. sudah cukup dengan konfirmasi jawaban setelah gakkusei menjawab pertanyaan nya. kalau sudah di kunci, tidak bisa berubah lagi, itu khusus untuk practice. kalau mock exam itu beda lagi yaa...
-  const handleEditAnswer = (questionId: string) =>
-    setAnswers((prev) => {
-      const next = { ...prev };
-      delete next[questionId];
-      return next;
-    });
 
   const handleRestartQuiz = () => {
     setCurrentIndex(0);
@@ -210,11 +193,7 @@ export function PracticePlayer({
       } else {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          const nextUnanswered = unit.questions.find(
-            (question) => answers[question.id] === undefined,
-          );
-          if (nextUnanswered) setActiveQuestionId(nextUnanswered.id);
-          else handleNextQuestion();
+          handleNextQuestion();
         }
       }
     };
@@ -234,10 +213,16 @@ export function PracticePlayer({
   ]);
 
   const currentUnit = practiceUnits[currentIndex];
-  const currentQuestion = currentUnit.questions[0];
+  const currentQuestion =
+    currentUnit.questions.find((question) => question.id === activeQuestionId) ??
+    currentUnit.questions.find((question) => answers[question.id] === undefined) ??
+    currentUnit.questions[0];
   const totalQuestions = playableQuestions.length;
+  const questionNumber = playableQuestions.findIndex(
+    (question) => question.id === currentQuestion.id,
+  ) + 1;
   const progressPercent = Math.round(
-    ((currentIndex + 1) / practiceUnits.length) * 100,
+    (questionNumber / totalQuestions) * 100,
   );
   const localizedTopic =
     practiceSet.topic in TOPIC_TRANSLATION_KEYS
@@ -253,8 +238,10 @@ export function PracticePlayer({
   const answeredInCurrentUnit = currentUnit.questions.filter(
     (question) => answers[question.id] !== undefined,
   ).length;
-  const isCurrentUnitComplete =
-    answeredInCurrentUnit === currentUnit.questions.length;
+  const hasNextQuestionInUnit = currentUnit.questions.some(
+    (question) =>
+      question.id !== currentQuestion.id && answers[question.id] === undefined,
+  );
 
   const {
     correctCount,
@@ -273,15 +260,9 @@ export function PracticePlayer({
 
   return (
     <PageShell className={cn("max-w-4xl", !isFinished && "pb-28 sm:pb-32")}>
-      // TODO: Breadcrumbs juga tidak dibutuhkan asat ini, karena nested route
-      nya tidak begitu dalam, cukup hanya dengan back button saya sudah cukup
-      untuk saat ini.
-      <Breadcrumbs
-        items={[
-          { label: tNav("practice"), href: "/practice" },
-          { label: localizedTitle },
-        ]}
-      />
+      <Link href="/practice" className={cn(buttonVariants({ variant: "ghost" }), "-ml-3 mb-2 min-h-11")}>
+        ← {t("backToList")}
+      </Link>
       <PageHeader
         className="practice-player-header"
         eyebrow={
@@ -301,8 +282,8 @@ export function PracticePlayer({
             {!isFinished && (
               <span className="font-semibold text-primary">
                 {t("questionProgress", {
-                  current: currentIndex + 1,
-                  total: practiceUnits.length,
+                  current: questionNumber,
+                  total: totalQuestions,
                 })}
               </span>
             )}
@@ -360,8 +341,8 @@ export function PracticePlayer({
             aria-valuemax={100}
             aria-valuenow={progressPercent}
             aria-label={t("questionProgress", {
-              current: currentIndex + 1,
-              total: practiceUnits.length,
+              current: questionNumber,
+              total: totalQuestions,
             })}
             className="h-2 w-full rounded-full bg-muted overflow-hidden"
           >
@@ -398,7 +379,7 @@ export function PracticePlayer({
                 </div>
               </CardHeader>
               <CardContent className="space-y-6 p-6 pt-2">
-                {currentUnit.questions.map((question) => {
+                {currentUnit.questions.filter((question) => question.id === currentQuestion.id).map((question) => {
                   const selected =
                     selectedOptions[question.id] ??
                     answers[question.id] ??
@@ -442,20 +423,15 @@ export function PracticePlayer({
                             <button
                               key={optionIndex}
                               type="button"
+                              aria-label={question.type === "TRUE_FALSE" ? t(optionIndex === 0 ? "trueChoice" : "falseChoice") : undefined}
                               aria-pressed={isSelected}
                               disabled={confirmed}
                               onClick={() =>
                                 selectAnswer(question.id, optionIndex)
                               }
-                              onKeyDown={(event) => {
-                                if (event.key === "Enter") {
-                                  event.preventDefault();
-                                  if (!event.repeat)
-                                    handleConfirmAnswer(question);
-                                }
-                              }}
                               className={cn(
                                 "min-h-12 rounded-xl border p-3 text-base font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-default",
+                                question.type === "TRUE_FALSE" && "min-h-24 sm:min-h-28 flex items-center gap-4 text-left text-lg sm:text-xl",
                                 isSelected
                                   ? "border-primary bg-primary/10 text-primary ring-2 ring-primary/30"
                                   : "border-border bg-card hover:bg-muted/40",
@@ -468,21 +444,19 @@ export function PracticePlayer({
                                   "border-destructive bg-destructive/10 text-destructive",
                               )}
                             >
-                              {option}
+                              {question.type === "TRUE_FALSE" ? (
+                                <>
+                                  <span aria-hidden="true" className="flex size-12 shrink-0 items-center justify-center rounded-full border text-2xl sm:size-14 sm:text-3xl">
+                                    {optionIndex === 0 ? "○" : "×"}
+                                  </span>
+                                  {t(optionIndex === 0 ? "trueChoice" : "falseChoice")}
+                                </>
+                              ) : option}
                             </button>
                           );
                         })}
                       </div>
-                      {!confirmed ? (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          disabled={selected === null}
-                          onClick={() => handleConfirmAnswer(question)}
-                        >
-                          {t("confirmAnswer")}
-                        </Button>
-                      ) : (
+                      {confirmed && (
                         <div className="space-y-3 rounded-xl border border-border/80 bg-muted/30 p-4">
                           <div
                             className={cn(
@@ -521,13 +495,6 @@ export function PracticePlayer({
                               </p>
                             )}
                           </div>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => handleEditAnswer(question.id)}
-                          >
-                            {t("editAnswer")}
-                          </Button>
                         </div>
                       )}
                     </section>
@@ -596,9 +563,6 @@ export function PracticePlayer({
               {/* Options List */}
               <CardContent className="p-6 pt-2 space-y-3">
                 <div className="grid grid-cols-1 gap-2.5">
-                  {/* TODO: Tolong revisi bagaimana bentuk pilihan atau options dalam soal maru/batsu. 
-                  karena ini hanya punya 2 nilai, lebih baik pilihannya dibuat lebih besar dan jelas, baik secara
-                  visual ataupun juga ukuran dan lainnya juga. */}
                   {currentQuestion.options.map((optionText, idx) => {
                     const isSelected = selectedOption === idx;
                     const isCorrect =
@@ -626,25 +590,22 @@ export function PracticePlayer({
                       <button
                         key={idx}
                         type="button"
+                        aria-label={currentQuestion.type === "TRUE_FALSE" ? t(idx === 0 ? "trueChoice" : "falseChoice") : undefined}
                         aria-pressed={isSelected}
                         disabled={isAnswerConfirmed}
                         onClick={() => selectAnswer(currentQuestion.id, idx)}
-                        onKeyDown={(event) => {
-                          if (event.key === "Enter") {
-                            event.preventDefault();
-                            if (!event.repeat)
-                              handleConfirmAnswer(currentQuestion);
-                          }
-                        }}
                         className={cn(
                           "w-full rounded-xl border p-4 text-left text-sm sm:text-base transition-all flex items-center justify-between cursor-pointer disabled:cursor-default",
+                          currentQuestion.type === "TRUE_FALSE" && "min-h-28 sm:min-h-36 text-lg sm:text-xl",
                           optionStyle,
                         )}
                       >
                         <div className="flex items-center gap-3">
                           <span
+                            aria-hidden="true"
                             className={cn(
                               "flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold shrink-0 border",
+                              currentQuestion.type === "TRUE_FALSE" && "h-14 w-14 text-3xl sm:h-16 sm:w-16",
                               isSelected
                                 ? "bg-primary text-primary-foreground border-primary"
                                 : "border-border text-muted-foreground bg-muted/30",
@@ -656,12 +617,9 @@ export function PracticePlayer({
                                 : "×"
                               : String.fromCharCode(65 + idx)}
                           </span>
-                          <span>
-                            {currentQuestion.type === "TRUE_FALSE" &&
-                            optionText === (idx === 0 ? "○" : "×")
-                              ? ""
-                              : optionText}
-                          </span>
+                          {currentQuestion.type === "TRUE_FALSE" ? (
+                            <span>{t(idx === 0 ? "trueChoice" : "falseChoice")}</span>
+                          ) : <span>{optionText}</span>}
                         </div>
 
                         {/* Right indicator: Keyboard shortcut hint or Revealed Status Icon */}
@@ -735,15 +693,6 @@ export function PracticePlayer({
                       )}
                     </div>
                   </div>
-                )}
-                {isAnswerConfirmed && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleEditAnswer(currentQuestion.id)}
-                  >
-                    {t("editAnswer")}
-                  </Button>
                 )}
               </CardContent>
             </Card>
@@ -1130,34 +1079,7 @@ export function PracticePlayer({
 
             {/* Right: Primary Action Button (Fixed position, never moves or hides) */}
             <div className="flex items-center gap-2 shrink-0">
-              <Button
-                variant="outline"
-                size="default"
-                disabled={currentIndex === 0}
-                onClick={handlePreviousQuestion}
-              >
-                {t("previousQuestion")}
-              </Button>
-              {currentGroup ? (
-                <Button
-                  size="default"
-                  disabled={!isCurrentUnitComplete}
-                  onClick={handleNextQuestion}
-                  className="w-full sm:w-auto gap-2"
-                >
-                  {currentIndex + 1 < practiceUnits.length ? (
-                    <>
-                      {t("nextQuestion")}
-                      <ArrowRight className="h-4 w-4" />
-                    </>
-                  ) : (
-                    <>
-                      {t("viewResults")}
-                      <Sparkles className="h-4 w-4" />
-                    </>
-                  )}
-                </Button>
-              ) : !isAnswerConfirmed ? (
+              {!isAnswerConfirmed ? (
                 <Button
                   size="default"
                   disabled={selectedOption === null}
@@ -1180,7 +1102,7 @@ export function PracticePlayer({
                       : "bg-primary text-primary-foreground",
                   )}
                 >
-                  {currentIndex + 1 < practiceUnits.length ? (
+                  {hasNextQuestionInUnit || currentIndex + 1 < practiceUnits.length ? (
                     <>
                       {t("nextQuestion")}
                       <ArrowRight className="h-4 w-4" />

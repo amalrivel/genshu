@@ -1,16 +1,16 @@
-# Graph Report - genshu  (2026-09-27)
+# Graph Report - genshu  (2026-09-29)
 
 ## Corpus Check
-- 265 files · ~307,192 words
+- 266 files · ~307,978 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1363 nodes · 1955 edges · 243 communities (143 shown, 99 thin omitted)
+- 1366 nodes · 1966 edges · 245 communities (145 shown, 99 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 27 edges (avg confidence: 0.81)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `e971c9bc`
+- Built from commit: `3144f2ff`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -115,7 +115,7 @@
 - Supabase Postgres Best Practices
 - 2-3
 - 3. Primary Users
-- Commands
+- Attaching to a Running Browser
 - 9. Technical Direction
 - advanced-full-text-search.md
 - Genshu — Project Source of Truth
@@ -173,7 +173,7 @@
 - 1-2
 - 1-3
 - 1-4
-- 1-5
+- Best Practices
 - 1-6
 - 1-7
 - 1-8
@@ -255,6 +255,8 @@
 - server.ts
 - src/proxy.ts
 - 6451
+- Trace Output Files
+- 1-1
 - verify.ts
 - layout.tsx
 
@@ -262,12 +264,12 @@
 1. `assetMeta` - 85 edges
 2. `react` - 36 edges
 3. `Genshu — Project Source of Truth` - 29 edges
-4. `lucide-react` - 26 edges
+4. `lucide-react` - 27 edges
 5. `createClient()` - 24 edges
 6. `next-intl` - 22 edges
-7. `Button()` - 21 edges
+7. `Button()` - 22 edges
 8. `useData()` - 21 edges
-9. `Badge()` - 17 edges
+9. `Badge()` - 18 edges
 10. `compilerOptions` - 16 edges
 
 ## Surprising Connections (you probably didn't know these)
@@ -291,11 +293,11 @@
 - **Derived Dependency Minimization** — agents_skills_vercel_react_best_practices_rules_rerender_dependencies_narrow_effect_dependencies, agents_skills_vercel_react_best_practices_rules_rerender_derived_state_no_effect_calculate_derived_state, agents_skills_vercel_react_best_practices_rules_rerender_derived_state_subscribe_to_derived_state, agents_skills_vercel_react_best_practices_rules_rerender_split_combined_hooks_split_hook_computations [INFERRED 0.85]
 - **React Concurrent Rendering Responsiveness** — agents_skills_vercel_react_best_practices_rules_rendering_usetransition_loading_use_transition_loading, agents_skills_vercel_react_best_practices_rules_rerender_transitions_transitions_for_non_urgent_updates, agents_skills_vercel_react_best_practices_rules_rerender_use_deferred_value_use_deferred_value [INFERRED 0.85]
 
-## Communities (243 total, 99 thin omitted)
+## Communities (245 total, 99 thin omitted)
 
 ### Community 0 - "cohorts/[id]/page.tsx"
 Cohesion: 0.07
-Nodes (81): class-variance-authority, lucide-react, next-intl, react, AssignmentDetailPage(), AssignmentsPage(), SessionRollCallPage(), STATUS_OPTIONS (+73 more)
+Nodes (86): class-variance-authority, lucide-react, next-intl, react, AssignmentDetailPage(), AssignmentsPage(), SessionRollCallPage(), STATUS_OPTIONS (+78 more)
 
 ### Community 1 - "package.json"
 Cohesion: 0.09
@@ -310,8 +312,8 @@ Cohesion: 0.11
 Nodes (18): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+10 more)
 
 ### Community 5 - "data-context.tsx"
-Cohesion: 0.10
-Nodes (37): CohortMembers, CohortRosterPanelsProps, StudentProfileDrawerProps, DataContext, DataContextType, DataProvider(), getRoleServerSnapshot(), getRoleSnapshot() (+29 more)
+Cohesion: 0.11
+Nodes (33): DataContext, DataContextType, DataProvider(), getRoleServerSnapshot(), getRoleSnapshot(), notifyRoleListeners(), roleListeners, subscribeRole() (+25 more)
 
 ### Community 6 - "dependencies"
 Cohesion: 0.14
@@ -414,8 +416,8 @@ Cohesion: 0.40
 Nodes (5): 6. Language Rules, Application Interface, Assignments and Exams, Furigana, Learning Content
 
 ### Community 96 - "createClient"
-Cohesion: 0.18
-Nodes (17): signIn(), signOut(), dynamic, LoginPage(), dynamic, StaffMaterialsPage(), MaterialEditor(), dynamic (+9 more)
+Cohesion: 0.17
+Nodes (18): signIn(), signOut(), dynamic, LoginPage(), dynamic, StaffMaterialsPage(), MaterialEditor(), dynamic (+10 more)
 
 ### Community 97 - "Supabase Postgres Best Practices"
 Cohesion: 0.33
@@ -429,9 +431,9 @@ Nodes (4): height, sha, width, 2-3
 Cohesion: 0.50
 Nodes (4): 3.1 Gakusei — 学生, 3.2 Sensei — 先生, 3.3 Tantōsha — 担当者, 3. Primary Users
 
-### Community 100 - "Commands"
-Cohesion: 0.20
-Nodes (10): Commands, Core, DevTools, Keyboard, Mouse, Navigation, Network, Save as (+2 more)
+### Community 100 - "Attaching to a Running Browser"
+Cohesion: 0.40
+Nodes (5): Attach by channel name, Attach via browser extension, Attach via CDP endpoint, Attaching to a Running Browser, Detach
 
 ### Community 101 - "9. Technical Direction"
 Cohesion: 0.50
@@ -446,24 +448,24 @@ Cohesion: 0.06
 Nodes (35): Advanced: Multiple Cookies or Custom Options, Advanced: Multiple Operations, Authentication State Reuse, Clear All Cookies, Clear All localStorage, Clear sessionStorage, Common Patterns, Cookies (+27 more)
 
 ### Community 136 - "Browser Automation with playwright-cli"
-Cohesion: 0.14
-Nodes (14): Browser Automation with playwright-cli, Browser Sessions, Example: Debugging with DevTools, Example: Form submission, Example: Interactive session, Example: Multi-tab workflow, Installation, Open parameters (+6 more)
+Cohesion: 0.08
+Nodes (24): Browser Automation with playwright-cli, Browser Sessions, Commands, Core, DevTools, Example: Debugging with DevTools, Example: Form submission, Example: Interactive session (+16 more)
 
 ### Community 137 - "3. Heal"
 Cohesion: 0.09
 Nodes (23): 0. How generation works, 1.1 Prerequisite: workspace, 1.2 Prerequisite: seed test, 1.3 Explore the app, 1.4 Write the spec file, 1. Planning, 2.1 Inputs, 2.2 Generate one scenario (+15 more)
 
 ### Community 138 - "Browser Session Management"
-Cohesion: 0.10
-Nodes (20): 1. Name Browser Sessions Semantically, 2. Always Clean Up, 3. Delete Stale Browser Data, A/B Testing Sessions, Attach by channel name, Attach via browser extension, Attach via CDP endpoint, Attaching to a Running Browser (+12 more)
+Cohesion: 0.18
+Nodes (11): A/B Testing Sessions, Browser Session Commands, Browser Session Configuration, Browser Session Isolation Properties, Browser Session Management, Common Patterns, Concurrent Scraping, Default Browser Session (+3 more)
 
 ### Community 139 - "Running Custom Playwright Code"
 Cohesion: 0.15
 Nodes (13): Clipboard, Complex Workflows, Error Handling, File Downloads, Frames and Iframes, Geolocation, JavaScript Execution, Media Emulation (+5 more)
 
 ### Community 140 - "Tracing"
-Cohesion: 0.12
-Nodes (16): 1. Start Tracing Before the Problem, 2. Clean Up Old Traces, Analyzing Performance, Basic Usage, Best Practices, Capturing Evidence, Debugging Failed Actions, Limitations (+8 more)
+Cohesion: 0.15
+Nodes (12): 1. Start Tracing Before the Problem, 2. Clean Up Old Traces, Analyzing Performance, Basic Usage, Best Practices, Capturing Evidence, Debugging Failed Actions, Limitations (+4 more)
 
 ### Community 141 - "playwright-cli/SKILL.md"
 Cohesion: 0.24
@@ -491,7 +493,7 @@ Nodes (13): sourceFiles, book_1.json, book_2.json, book_3.json, genchare_1.json,
 
 ### Community 147 - "assetMeta"
 Cohesion: 0.25
-Nodes (7): height, sha, width, assetMeta, 1-1, commit, repository
+Nodes (7): height, sha, width, assetMeta, 1-5, commit, repository
 
 ### Community 148 - "5141"
 Cohesion: 0.50
@@ -529,9 +531,9 @@ Nodes (4): height, sha, width, 1-3
 Cohesion: 0.50
 Nodes (4): height, sha, width, 1-4
 
-### Community 159 - "1-5"
+### Community 159 - "Best Practices"
 Cohesion: 0.50
-Nodes (4): height, sha, width, 1-5
+Nodes (4): 1. Name Browser Sessions Semantically, 2. Always Clean Up, 3. Delete Stale Browser Data, Best Practices
 
 ### Community 160 - "1-6"
 Cohesion: 0.50
@@ -857,6 +859,14 @@ Nodes (4): updateSession(), config, prototypePaths, proxy()
 Cohesion: 0.50
 Nodes (4): height, sha, width, 6451
 
+### Community 241 - "Trace Output Files"
+Cohesion: 0.50
+Nodes (4): `resources/`, Trace Output Files, `trace-{timestamp}.network`, `trace-{timestamp}.trace`
+
+### Community 242 - "1-1"
+Cohesion: 0.50
+Nodes (4): height, sha, width, 1-1
+
 ### Community 263 - "verify.ts"
 Cohesion: 0.36
 Nodes (9): isObject(), JsonObject, keyTypes(), locales, output(), readLocale(), run(), validateLocales() (+1 more)
@@ -866,23 +876,23 @@ Cohesion: 0.28
 Nodes (5): next-themes, metadata, AppHeader(), LegacyDataProvider(), ThemeProvider()
 
 ## Knowledge Gaps
-- **847 isolated node(s):** `names`, `original`, `JsonObject`, `locales`, `$schema` (+842 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 935 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **848 isolated node(s):** `names`, `original`, `JsonObject`, `locales`, `$schema` (+843 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 936 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **99 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `assetMeta` connect `assetMeta` to `2-3`, `5141`, `1-10`, `6101`, `1-2`, `1-3`, `1-4`, `1-5`, `1-6`, `1-7`, `1-8`, `1-9`, `2-10`, `2-1`, `2-2`, `2-4`, `2-5`, `2-6`, `2-7`, `2-8`, `2-9`, `3031`, `3091`, `3131`, `3211`, `3271`, `3311`, `3381`, `3461`, `3471`, `3481`, `3-10`, `3-11`, `3-1`, `3-2`, `3-3`, `3-4`, `3-5`, `3-6`, `3-7`, `3-8`, `3-9`, `4051`, `4121`, `4161`, `4191`, `4241`, `4271`, `4401`, `4421`, `4451`, `4471`, `4481`, `5011`, `5101`, `5191`, `5241`, `5281`, `5331`, `5401`, `5451`, `5471`, `5481`, `6051`, `6161`, `6201`, `6251`, `6301`, `6361`, `6401`, `6471`, `6481`, `その他の危険 標識`, `二輪の自動車以外通行止め 標識`, `合流注意 警戒標識`, `専用通行帯 原付 通行`, `左折可 標識 日本`, `登坂車線 交通標識`, `自転車専用 標識 日本`, `車両横断禁止 標識`, `車線減少 警戒標識`, `転回禁止 標示`, `6451`?**
+- **Why does `assetMeta` connect `assetMeta` to `2-3`, `5141`, `1-10`, `6101`, `1-2`, `1-3`, `1-4`, `1-6`, `1-7`, `1-8`, `1-9`, `2-10`, `2-1`, `2-2`, `2-4`, `2-5`, `2-6`, `2-7`, `2-8`, `2-9`, `3031`, `3091`, `3131`, `3211`, `3271`, `3311`, `3381`, `3461`, `3471`, `3481`, `3-10`, `3-11`, `3-1`, `3-2`, `3-3`, `3-4`, `3-5`, `3-6`, `3-7`, `3-8`, `3-9`, `4051`, `4121`, `4161`, `4191`, `4241`, `4271`, `4401`, `4421`, `4451`, `4471`, `4481`, `5011`, `5101`, `5191`, `5241`, `5281`, `5331`, `5401`, `5451`, `5471`, `5481`, `6051`, `6161`, `6201`, `6251`, `6301`, `6361`, `6401`, `6471`, `6481`, `その他の危険 標識`, `二輪の自動車以外通行止め 標識`, `合流注意 警戒標識`, `専用通行帯 原付 通行`, `左折可 標識 日本`, `登坂車線 交通標識`, `自転車専用 標識 日本`, `車両横断禁止 標識`, `車線減少 警戒標識`, `転回禁止 標示`, `6451`, `1-1`?**
   _High betweenness centrality (0.069) - this node is a cross-community bridge._
 - **Why does `react` connect `cohorts/[id]/page.tsx` to `package.json`, `layout.tsx`, `dropdown-menu.tsx`, `data-context.tsx`, `staff/materials/[slug]/page.tsx`, `staff/practice/[id]/page.tsx`?**
-  _High betweenness centrality (0.029) - this node is a cross-community bridge._
+  _High betweenness centrality (0.031) - this node is a cross-community bridge._
 - **Why does `@supabase/supabase-js` connect `import-gentsuki-ready-web.ts` to `package.json`?**
   _High betweenness centrality (0.026) - this node is a cross-community bridge._
 - **What connects `names`, `original`, `JsonObject` to the rest of the system?**
-  _847 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _848 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `cohorts/[id]/page.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.07209645669291338 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06789361463359893 - nodes in this community are weakly interconnected._
 - **Should `package.json` be split into smaller, more focused modules?**
   _Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected._
 - **Should `components.json` be split into smaller, more focused modules?**
