@@ -1,3 +1,9 @@
+/*
+
+REVIEW: UI/UX untuk staff masih tidak bagus dan ini benar2 seadanya. Okay sih seadanya kalau UX nya bagus, ini keduanya sama2 tidak bagus. Maaf, mungkin lebih baik difokuskan dulu ke UX.
+
+*/
+
 import Link from "next/link"
 import { getTranslations } from "next-intl/server"
 import { requireStaff } from "@/lib/staff"
