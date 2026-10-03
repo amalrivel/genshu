@@ -11,13 +11,13 @@ export default async function ActivityPage({
   params,
 }: {
   params: Promise<{
-    id: string;
+    activityId: string;
   }>;
 }) {
-  const { id } = await params;
+  const { activityId } = await params;
 
   const activity =
-    await getActivity(id);
+    await getActivity(activityId);
 
   if (!activity) {
     notFound();

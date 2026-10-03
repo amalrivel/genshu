@@ -5,6 +5,7 @@ import { activities } from "./data";
 import type {
   Activity,
   ActivitySummary,
+  ActivityType,
 } from "./types";
 
 export async function getActivities(): Promise<
@@ -47,4 +48,11 @@ export async function getActivity(
       }),
     ),
   };
+}
+
+// NOTE: Data contoh masih memakai satu type per activity.
+// TODO: Sesuaikan query relasi setelah model activity–type diputuskan.
+export async function getActivitiesByType(type: ActivityType): Promise<ActivitySummary[]> {
+  const summaries = await getActivities();
+  return summaries.filter((activity) => activity.type === type);
 }

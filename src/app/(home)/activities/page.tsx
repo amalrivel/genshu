@@ -1,29 +1,28 @@
-// NOTE: Halaman ini mengambil dan menampilkan daftar activity.
-// State pengerjaan soal berada di runner dan useActivity.
-import { ActivityCard } from "@/components/activities/activity-card";
-import { getActivities } from "@/lib/activities/queries";
+import Link from "next/link";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { activityTypes } from "@/lib/activities/activity-types";
 
-
-export default async function Activities() {
-  const activities = await getActivities();
-
+// NOTE: Halaman ini hanya menampilkan pilihan jenis activity.
+// Daftar berada di type/[type]; pengerjaan berada di [activityId].
+export default function ActivitiesPage() {
   return (
-    <>
-      <section className="space-y-4">
-        <header>
-          <h1>Activities</h1>
-          <p>Choose an activity to start learning and practicing.</p>
-        </header>
-        {activities.length === 0 ? (
-          <p>No activities available yet.</p>
-        ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {activities.map((activity) => (
-              <ActivityCard key={activity.id} activity={activity} />
-            ))}
-          </div>
-        )}
-      </section>
-    </>
+    <section className="space-y-4">
+      <header>
+        <h1>Activities</h1>
+        <p>Choose the type of activity you want to work on.</p>
+      </header>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {activityTypes.map((type) => (
+          <Link key={type.id} href={`/activities/type/${type.id}`}>
+            <Card className="h-full">
+              <CardHeader>
+                <CardTitle>{type.title}</CardTitle>
+                <CardDescription>{type.description}</CardDescription>
+              </CardHeader>
+            </Card>
+          </Link>
+        ))}
+      </div>
+    </section>
   );
 }
