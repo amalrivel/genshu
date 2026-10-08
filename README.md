@@ -1,3 +1,43 @@
+## Local database setup
+
+This project uses MariaDB, Prisma 7, and a Better Auth Prisma adapter.
+Configure `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, and `DB_DATABASE` in
+`.env`. These existing MariaDB settings are used by both Prisma CLI and runtime;
+the PostgreSQL starter `DATABASE_URL` is not used.
+
+```bash
+bun install
+bun run db:deploy
+bun dev
+```
+
+The initial migration creates empty Activities and authentication tables.
+No example data is inserted by migrations. To apply pending migrations and seed
+master categories plus example Activities with one command:
+
+```bash
+bun run db:seed
+```
+
+The seed is transactional and can be rerun. It preserves existing categories,
+Activities, and their questions; it never resets the database. The example
+questions are test content, not authoritative exam material. No users or
+passwords are seeded. Category navigation reads labels and descriptions from the database. The
+ActivityType enum controls supported category IDs; constants are seed defaults only.
+
+For subsequent schema changes, use
+`bun run db:migrate --name describe_change`, then `bun run db:generate`.
+Migration deployment is explicit; starting the app does not modify the database.
+
+Better Auth is configured with the database adapter only. Login methods, auth
+routes, registration policy, roles, and attempt persistence remain TODOs.
+The inactive Prisma 8 contract and guide are retained for reference; the active
+schema is `src/prisma/schema.prisma`.
+
+The old copied `types/validator.ts` is excluded from TypeScript because its
+relative imports are stale. Next.js-generated validators under `.next/types`
+and `.next/dev/types` remain included.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

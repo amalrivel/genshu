@@ -1,3 +1,6 @@
+import "server-only";
+
+// NOTE: Seed fixtures only; runtime queries/submissions read the database.
 // src/lib/activities/data.ts
 
 import type { ActivityType } from "./types";

@@ -1,8 +1,12 @@
+// NOTE: Kategori tidak valid/tidak ada adalah 404, sedangkan kategori tanpa
+// Activity adalah keadaan kosong yang normal. Database gagal dibaca adalah
+// error operasional dan ditangani boundary; ketiganya perlu dibedakan agar
+// pengguna mendapat petunjuk yang benar dan masalah server tidak tersembunyi.
+
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ActivityCard } from "@/components/activities/activity-card";
-import { getActivityType } from "@/lib/activities/activity-types";
-import { getActivitiesByType } from "@/lib/activities/queries";
+import { getActivityCategory, getActivitiesByType } from "@/lib/activities/queries";
 
 // NOTE: Daftar berdasarkan jenis; URL pengerjaan tidak bergantung pada jenis.
 export default async function ActivitiesByTypePage({
@@ -11,7 +15,7 @@ export default async function ActivitiesByTypePage({
   params: Promise<{ type: string }>;
 }) {
   const { type } = await params;
-  const activityType = getActivityType(type);
+  const activityType = await getActivityCategory(type);
   if (!activityType) notFound();
   const activities = await getActivitiesByType(activityType.id);
 

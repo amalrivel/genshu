@@ -1,3 +1,7 @@
+// NOTE: Kartu memakai ringkasan agar daftar tidak mengambil seluruh soal atau
+// kunci jawaban. Link hanya navigasi; izin pengerjaan harus dicek server ketika
+// route detail dibuka dan ketika submit, bukan berdasarkan keberadaan kartu.
+
 // src/components/activities/activity-card.tsx
 
 import Link from "next/link";

@@ -1,6 +1,10 @@
+// NOTE: Route menangani ID dan menyusun halaman; tidak menyimpan state jawaban.
+// Tidak adanya record adalah 404. Kegagalan query dibiarkan menuju error.tsx,
+// supaya gangguan database tidak disamarkan sebagai Activity yang tidak tersedia.
+// TODO: Saat autentikasi tersedia, periksa izin sebelum mengirim soal ke runner.
+
 // NOTE: Halaman ini mengambil activity berdasarkan ID,
 // menangani data yang tidak ditemukan, dan menampilkan runner.
-
 
 import { notFound } from "next/navigation";
 

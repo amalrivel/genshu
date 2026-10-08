@@ -27,7 +27,7 @@ export default function HomeHeader() {
           <li>
             <Link
               className={buttonVariants({ variant: "link", size: "sm" })}
-              href="/learns"
+              href="/learn"
             >
               Learns
             </Link>

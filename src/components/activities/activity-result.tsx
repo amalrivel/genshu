@@ -1,3 +1,8 @@
+// NOTE: Komponen ini hanya menampilkan hasil server, bukan menghitung ulang nilai.
+// TODO: Saat hasil dipersistenkan, buka kembali berdasarkan attempt milik pengguna.
+// Tombol retry sekarang memulai ulang state lokal; aturan jumlah percobaan dan
+// waktu harus tetap diperiksa server sebelum retry dibolehkan untuk exam/assignment.
+
 // src/components/activities/activity-result.tsx
 
 import { Button } from "@/components/ui/button";

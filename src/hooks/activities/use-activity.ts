@@ -2,6 +2,13 @@
 
 "use client";
 
+// NOTE: Hook hanya mengelola state interaksi browser, bukan hak akses atau nilai.
+// State lokal membuat navigasi ringan, tetapi refresh/unmount menghapus jawaban.
+// TODO: Setelah model attempt diputuskan, tambahkan mekanisme resume/draft dengan
+// identitas attempt yang jelas. Jangan memakai state browser sebagai bukti resmi
+// jawaban yang dinilai; server tetap memvalidasi kepemilikan dan status attempt.
+
+
 import { useState } from "react";
 
 import type {

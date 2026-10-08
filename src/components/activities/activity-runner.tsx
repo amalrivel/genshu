@@ -35,6 +35,7 @@ export function ActivityRunner({
 }: {
   activity: Activity;
 }) {
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [
     result,
     setResult,
@@ -64,15 +65,23 @@ export function ActivityRunner({
   } = useActivity(activity);
 
   function handleSubmit() {
+    if (isPending) return;
+    setSubmitError(null);
     startTransition(
       async () => {
-        const result =
-          await submitActivity(
-            activity.id,
-            answers,
-          );
-
-        setResult(result);
+        // NOTE: Kegagalan event submit ditangani di sini, bukan lewat error.tsx.
+        // Jangan reset hook ketika gagal: pengguna harus bisa mengirim ulang
+        // jawaban yang sama tanpa mengulang pengerjaan. Pesan driver/database
+        // tidak ditampilkan karena bisa memuat detail internal atau kredensial.
+        try {
+          const result = await submitActivity(activity.id, answers);
+          setResult(result);
+        } catch {
+          setSubmitError("Could not submit your answers. Your answers are still here. Please try submitting again.");
+        }
+        // TODO: Saat attempt disimpan, server perlu menangani submit idempotent.
+        // Tombol disabled hanya menjaga UI; koneksi terputus setelah penyimpanan
+        // bisa membuat pengguna mengirim ulang attempt yang sebenarnya berhasil.
       },
     );
   }
@@ -80,6 +89,7 @@ export function ActivityRunner({
   function handleRetry() {
     reset();
     setResult(null);
+    setSubmitError(null);
   }
 
   if (result) {
@@ -100,7 +110,7 @@ export function ActivityRunner({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" aria-busy={isPending}>
       <header>
         <p>{activity.type}</p>
 
@@ -134,14 +144,21 @@ export function ActivityRunner({
           ]
         }
         onAnswer={answer}
+        disabled={isPending}
       />
 
+      {submitError ? <p role="alert">{submitError}</p> : null}
+      {isPending ? <p role="status">Submitting your answers...</p> : null}
+
+      {/* NOTE: Bekukan jawaban dan navigasi selama submit supaya tampilan tetap
+          sesuai dengan snapshot jawaban yang dikirim. Ini bukan pengganti
+          validasi atau pembatasan percobaan di server. */}
       <div className="flex justify-between">
         <Button
           type="button"
           variant="outline"
           disabled={
-            isFirstQuestion
+            isFirstQuestion || isPending
           }
           onClick={previous}
         >
@@ -153,6 +170,7 @@ export function ActivityRunner({
             <Button
               type="button"
               onClick={next}
+              disabled={isPending}
             >
               Next
             </Button>

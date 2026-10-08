@@ -1,58 +1,78 @@
-// src/lib/activities/queries.ts
+// NOTE: Query memilih field secara eksplisit untuk menjaga kontrak data UI.
+// Modul server-only mencegah impor database ke client, tetapi tidak menyaring
+// data respons secara otomatis; select tetap menentukan apa yang diterima browser.
+// TODO: Saat akses siswa/admin diterapkan, batasi data berdasarkan pengguna dan
+// status publikasi. Jangan menganggap mengetahui ID berarti memiliki izin akses.
 
-import { activities } from "./data";
+import "server-only";
+import { prisma } from "@/lib/db";
+import { ActivityType as SupportedActivityType } from "@/generated/prisma/enums";
+import type { Activity, ActivitySummary, ActivityType } from "./types";
+import type { GradingQuestion } from "./grading";
 
-import type {
-  Activity,
-  ActivitySummary,
-  ActivityType,
-} from "./types";
+type ActivityCategory = { id: ActivityType; title: string; description: string };
 
-export async function getActivities(): Promise<
-  ActivitySummary[]
-> {
-  return activities.map((activity) => ({
-    id: activity.id,
-    title: activity.title,
-    description: activity.description,
-    type: activity.type,
+function isActivityType(id: string): id is ActivityType {
+  return Object.values(SupportedActivityType).some((type) => type === id);
+}
 
-    questionCount:
-      activity.questions.length,
+export async function getActivityCategories(): Promise<ActivityCategory[]> {
+  const categories = await prisma.activityCategory.findMany({
+    select: { id: true, title: true, description: true },
+  });
+  // NOTE: Database owns labels; the schema enum controls supported behavior
+  // and the display order. Unsupported master IDs cannot create usable routes.
+  return Object.values(SupportedActivityType).flatMap((id) => {
+    const category = categories.find((category) => category.id === id);
+    return category ? [{ ...category, id }] : [];
+  });
+}
+
+export async function getActivityCategory(id: string): Promise<ActivityCategory | null> {
+  if (!isActivityType(id)) return null;
+  const category = await prisma.activityCategory.findUnique({
+    where: { id }, select: { id: true, title: true, description: true },
+  });
+  return category ? { ...category, id } : null;
+}
+
+async function listActivities(type?: ActivityType): Promise<ActivitySummary[]> {
+  const rows = await prisma.activity.findMany({
+    where: type ? { type } : undefined,
+    select: {
+      id: true, title: true, description: true, type: true,
+      _count: { select: { questions: true } },
+    },
+    orderBy: { id: "asc" },
+  });
+  return rows.map(({ _count, ...activity }) => ({
+    ...activity, questionCount: _count.questions,
   }));
 }
 
-export async function getActivity(
-  id: string,
-): Promise<Activity | null> {
-  const activity = activities.find(
-    (activity) => activity.id === id,
-  );
-
-  if (!activity) {
-    return null;
-  }
-
-  return {
-    id: activity.id,
-    title: activity.title,
-    description: activity.description,
-    type: activity.type,
-
-    // NOTE:
-    // correctAnswer sengaja tidak dikirim.
-    questions: activity.questions.map(
-      (question) => ({
-        id: question.id,
-        question: question.question,
-      }),
-    ),
-  };
+export async function getActivities(): Promise<ActivitySummary[]> {
+  return listActivities();
 }
 
-// NOTE: Data contoh masih memakai satu type per activity.
-// TODO: Sesuaikan query relasi setelah model activity–type diputuskan.
 export async function getActivitiesByType(type: ActivityType): Promise<ActivitySummary[]> {
-  const summaries = await getActivities();
-  return summaries.filter((activity) => activity.type === type);
+  return listActivities(type);
+}
+
+export async function getActivity(id: string): Promise<Activity | null> {
+  // NOTE: Only these fields reach the runner; answer keys are excluded.
+  return prisma.activity.findUnique({
+    where: { id },
+    select: {
+      id: true, title: true, description: true, type: true,
+      questions: { select: { id: true, question: true }, orderBy: { position: "asc" } },
+    },
+  });
+}
+
+export async function getGradingQuestions(activityId: string): Promise<GradingQuestion[]> {
+  return prisma.activityQuestion.findMany({
+    where: { activityId },
+    select: { id: true, question: true, correctAnswer: true },
+    orderBy: { position: "asc" },
+  });
 }

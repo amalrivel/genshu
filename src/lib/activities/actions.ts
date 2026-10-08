@@ -1,105 +1,37 @@
-// src/lib/activities/actions.ts
-
-// NOTE: Action ini menghitung hasil berdasarkan jawaban yang dikirim.
-// TODO: Validasi user dan simpan attempt/jawaban setelah alur
-// autentikasi dan penyimpanan diputuskan bersama pemilik proyek.
-
 "use server";
 
-import { activities } from "./data";
+// NOTE: Server Action adalah pintu masuk jaringan, sehingga tipe TypeScript dan
+// kontrol disabled di UI tidak cukup: payload tetap divalidasi di server.
+// TODO: Periksa session serta hak akses di action ini sebelum pemakaian nyata.
+// TODO: Simpan attempt, jawaban, dan hasil dalam satu transaksi agar kegagalan
+// tidak menghasilkan riwayat parsial. Beri identitas submit yang stabil supaya
+// retry setelah gangguan jaringan tidak membuat hasil tersimpan dua kali.
 
-import type {
-  ActivityResult,
-  Answers,
-} from "./types";
+
+import { getActivity, getGradingQuestions } from "./queries";
+import { gradeActivity } from "./grading";
+import type { ActivityResult, Answers } from "./types";
 
 export async function submitActivity(
   activityId: string,
   answers: Answers,
 ): Promise<ActivityResult> {
-  const activity =
-    activities.find(
-      (activity) =>
-        activity.id === activityId,
-    );
-
-  if (!activity) {
-    throw new Error(
-      "Activity not found",
-    );
+  if (typeof activityId !== "string" || !activityId ||
+      !answers || typeof answers !== "object" || Array.isArray(answers) ||
+      Object.values(answers).some((answer) => typeof answer !== "boolean")) {
+    throw new Error("Invalid activity submission");
   }
-
-  let correct = 0;
-  let incorrect = 0;
-  let unanswered = 0;
-
-  const questionResults =
-    activity.questions.map(
-      (question) => {
-        const hasAnswer =
-          Object.prototype.hasOwnProperty.call(
-            answers,
-            question.id,
-          );
-
-        const userAnswer =
-          hasAnswer
-            ? answers[
-                question.id
-              ]
-            : null;
-
-        const isCorrect =
-          userAnswer ===
-          question.correctAnswer;
-
-        if (
-          userAnswer === null
-        ) {
-          unanswered += 1;
-        } else if (
-          isCorrect
-        ) {
-          correct += 1;
-        } else {
-          incorrect += 1;
-        }
-
-        return {
-          questionId:
-            question.id,
-
-          userAnswer,
-
-          correctAnswer:
-            question.correctAnswer,
-
-          isCorrect,
-        };
-      },
-    );
-
-  const total =
-    activity.questions.length;
-
-  const score =
-    total === 0
-      ? 0
-      : Math.round(
-          (correct / total) * 100,
-        );
-
-  return {
-    activityId,
-
-    total,
-    correct,
-    incorrect,
-    unanswered,
-
-    score,
-
-    questions:
-      questionResults,
-  };
+  // TODO: Authenticate the user and check access, deadlines, and attempt limits.
+  const activity = await getActivity(activityId);
+  if (!activity) throw new Error("Activity not found");
+  const questions = await getGradingQuestions(activityId);
+  const questionIds = new Set(questions.map((question) => question.id));
+  if (Object.keys(answers).some((id) => !questionIds.has(id))) {
+    throw new Error("Unknown question in submission");
+  }
+  const result = gradeActivity(activityId, questions, answers);
+  // TODO: Persist the attempt and answers atomically once identity and schema are decided.
+  // TODO: Decide when each activity type may reveal correct answers.
+  // NOTE: Results remain in browser memory; this action does not save them yet.
+  return result;
 }
