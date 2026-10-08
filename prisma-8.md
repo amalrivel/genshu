@@ -1,5 +1,3 @@
-> NOTE: Archived starter guidance. This project uses Prisma 7 with MariaDB; see prisma.config.ts and src/prisma/schema.prisma. The commands below are not used.
-
 # Welcome to Prisma ORM!
 
 Prisma ORM lets you query your database in simple, easy-to-read TypeScript. Define what your data looks like, and Prisma ORM gives you a fully typed client — with autocomplete for every table, column, and relation.

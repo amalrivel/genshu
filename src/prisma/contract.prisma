@@ -1,4 +1,3 @@
-// NOTE: Inactive Prisma 8 starter. The MariaDB schema is schema.prisma.
 // use prisma-8
 
 model User {
