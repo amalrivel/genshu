@@ -1,12 +1,7 @@
-/* 
-NOTE: sejujurnya saya tidak tau ingin memberi nama
-apa untuk route ini, karena saya inginnya route ini
-berisi, latihan biasa, mock test or exam, dan tugas.
-segala bentuk yang berhubungan dengan interaksi user
-dan soal, akan berada disini. jadinya saya tidak tau
-practices cocok apa tidak, menurut saya kurang cocok
-mohon disesuaikan kembali.
-*/
+// NOTE: Current behavior: placeholder; no announcement data is displayed.
+// TODO: List published announcements newest first and link to full content;
+// teachers manage drafts/publication, and Home shows previews.
+// See docs/developer-guide.md, Announcements.
 
 export default function Announcements() {
   return <section>asd</section>;

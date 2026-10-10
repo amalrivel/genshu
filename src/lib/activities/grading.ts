@@ -2,8 +2,9 @@
 // sehingga aturan penilaian bisa diuji terpisah dari transport dan penyimpanan.
 // TODO: Penilaian attempt perlu memakai versi/snapshot soal saat mulai mengerjakan.
 // Menggunakan kunci terbaru bisa mengubah hasil jika admin mengedit soal di tengah
-// pengerjaan. Kebijakan membuka kunci jawaban ditentukan sebelum hasil dikirim;
-// menyembunyikannya di UI saja tidak menyembunyikan data di respons jaringan.
+// pengerjaan. V1 membuka feedback practice setelah submit tersimpan; aturan exam
+// ditunda. Menyembunyikan kunci di UI tidak menyembunyikannya di respons jaringan.
+// See docs/developer-guide.md, Activities.
 
 import type { ActivityResult, Answers, Question } from "./types";
 

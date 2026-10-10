@@ -1,3 +1,5 @@
+// NOTE: Current behavior: legacy Prisma queries import a client/enum no longer present.
+// TODO: Reconcile with the Prisma 8 contract/runtime; see docs/developer-guide.md, Data integration.
 // NOTE: Query memilih field secara eksplisit untuk menjaga kontrak data UI.
 // Modul server-only mencegah impor database ke client, tetapi tidak menyaring
 // data respons secara otomatis; select tetap menentukan apa yang diterima browser.

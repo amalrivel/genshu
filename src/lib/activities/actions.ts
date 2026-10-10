@@ -21,7 +21,7 @@ export async function submitActivity(
       Object.values(answers).some((answer) => typeof answer !== "boolean")) {
     throw new Error("Invalid activity submission");
   }
-  // TODO: Authenticate the user and check access, deadlines, and attempt limits.
+  // TODO: Authenticate and validate practice attempt ownership/state; exam policies are deferred.
   const activity = await getActivity(activityId);
   if (!activity) throw new Error("Activity not found");
   const questions = await getGradingQuestions(activityId);
@@ -31,7 +31,7 @@ export async function submitActivity(
   }
   const result = gradeActivity(activityId, questions, answers);
   // TODO: Persist the attempt and answers atomically once identity and schema are decided.
-  // TODO: Decide when each activity type may reveal correct answers.
+  // TODO: Show immediate saved feedback for practice; define disclosure rules before enabling exams.
   // NOTE: Results remain in browser memory; this action does not save them yet.
   return result;
 }

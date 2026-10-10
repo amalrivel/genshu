@@ -5,8 +5,9 @@ import { prisma } from "@/lib/db";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, { provider: "mysql" }),
-  // TODO: Decide registration, login methods, roles, and password reset email.
-  // No login method is enabled until those decisions are made.
+  // NOTE: Email/password is enabled here, but the client import/adapter is stale.
+  // TODO: Complete the supported PostgreSQL/auth integration, disable public signup,
+  // and enforce managed account roles. See docs/developer-guide.md, Login and Data integration.
   emailAndPassword: { 
     enabled: true, 
   }, 

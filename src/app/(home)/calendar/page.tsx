@@ -1,12 +1,7 @@
-/* 
-NOTE: sejujurnya saya tidak tau ingin memberi nama
-apa untuk route ini, karena saya inginnya route ini
-berisi, latihan biasa, mock test or exam, dan tugas.
-segala bentuk yang berhubungan dengan interaksi user
-dan soal, akan berada disini. jadinya saya tidak tau
-practices cocok apa tidak, menurut saya kurang cocok
-mohon disesuaikan kembali.
-*/
+// NOTE: Current behavior: placeholder; no calendar events are displayed.
+// TODO: Show a chronological agenda of published lessons/events with valid
+// start/end times displayed in Asia/Tokyo, plus an empty state.
+// See docs/developer-guide.md, Calendar.
 
 export default function Calendar() {
   return <section>asd</section>;

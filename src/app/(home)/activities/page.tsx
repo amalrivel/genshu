@@ -1,3 +1,6 @@
+// TODO: For v1, expose ready practice only; formal exam/mock exam/assignment
+// policies are deferred. Keep the category routes. See docs/developer-guide.md, Activities.
+
 // NOTE: Database adalah sumber label kategori; konstanta hanya nilai awal seed.
 // Enum membatasi jenis yang benar-benar didukung aplikasi. Menambah label di
 // database saja tidak menciptakan aturan baru untuk jenis pengerjaan tersebut.

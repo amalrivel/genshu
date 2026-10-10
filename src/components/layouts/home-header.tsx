@@ -1,4 +1,6 @@
-// TODO: make home header prettier.
+// NOTE: Current behavior: static navigation, sample avatar, and inactive account actions.
+// TODO: Add mobile navigation, real identity/logout, and the Class recordings label;
+// remove inactive account items. See docs/developer-guide.md, Shared layout.
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { buttonVariants } from "@/components/ui/button";

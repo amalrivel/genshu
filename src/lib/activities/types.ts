@@ -1,7 +1,8 @@
 // NOTE: Tipe ini adalah kontrak UI/action, bukan schema database atau validasi
 // runtime. Question sengaja tidak memuat kunci jawaban. ActivityResult saat ini
-// memuat kunci; TODO: tentukan kontrak hasil terpisah jika exam belum boleh
-// membuka pembahasan. Data yang dikirim tetap terlihat walau UI tidak merendernya.
+// memuat kunci untuk feedback practice. TODO: perluas kontrak untuk attempt tersimpan;
+// aturan/kontrak exam ditunda. Data respons tetap terlihat walau UI tidak merendernya.
+// See docs/developer-guide.md, Activities.
 
 // src/lib/activities/types.ts
 

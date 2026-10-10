@@ -28,29 +28,19 @@ export default async function Material({
         <h2>Subject: {subject}</h2>
       </section>
 
-      {/* NOTE: isi dari materi yang disampaikan ada disini
-      rencana awalnya itu menggunakan markdown, tapi saya masih
-      kurang tau gimana bagusnya.
-      karena terdapat furigana untuk kanji juga
-      dan beberapa penyesuaian lainnya juga.
-      tapi saya juga kepikiran, kalau admin bisa membuat
-      materi atau soal dulu di ms word. lalu export
-      ke bentuk tertentu, lalu update ke app ini,
-      dan app ini menjadikannya markdown atau bentuk
-      yang dapat dibaca oleh website ini.
-      */}
+      {/* NOTE: The material is checked above, but this page still renders placeholders.
+          TODO: Render reviewed, published lesson content with readable titles and
+          breadcrumbs. Word import must preserve furigana and warn before publication.
+          See docs/developer-guide.md, Learn. */}
       <section className="grid  grid-cols-4 gap-4">
-        {/* NOTE: Konten dari materi */}
+        {/* TODO: Render material content; reserve skeletons for actual loading. */}
         <div className="flex flex-col gap-2 col-span-3">
           <Skeleton className="h-4 w-full" />
           <Skeleton className="h-4 w-full" />
           <Skeleton className="h-4 w-3/4" />
         </div>
-        {/* NOTE: ini aside, mungkin lebih baik membuatnya
-        menjadi aside ya. ini berguna sebagai quick move
-        menuju header dari konten materi yang ingin dibaca
-        mungkin bias h1, h2, h3 dan sejenisnya
-        buat juga ini sticky kali ya bagusnya. */}
+        {/* TODO: Use an aside with chapter links generated from material headings;
+            provide stable anchors and a usable narrow-screen layout. */}
         <Card className="p-4">
           <p>Chapter</p>
           <ul className="gap-2 flex flex-col">

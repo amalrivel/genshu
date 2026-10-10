@@ -1,3 +1,7 @@
+// NOTE: Current behavior: these queries read local arrays, not published database content.
+// TODO: Enforce session/publication visibility when integrating the content store.
+// See docs/developer-guide.md, Learn and Data integration.
+
 import {
   topics,
   subjects,

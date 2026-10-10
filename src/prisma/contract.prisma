@@ -1,4 +1,7 @@
 // use prisma-8
+// NOTE: Current behavior: starter User/Post models, not the learning/auth domain.
+// TODO: Model managed accounts, published content, and saved practice attempts;
+// review migration/data effects. See docs/developer-guide.md, Data integration.
 
 model User {
   id        Int      @id @default(autoincrement())

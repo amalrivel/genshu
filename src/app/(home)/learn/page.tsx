@@ -1,3 +1,8 @@
+// NOTE: Current behavior: navigation reads static Learn fixtures.
+// TODO: Correct /learns links to /learn, show readable titles/descriptions and
+// breadcrumbs, and handle published content plus empty states.
+// See docs/developer-guide.md, Learn.
+
 import { Card, CardTitle } from "@/components/ui/card";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -14,17 +19,13 @@ export default function Learn() {
 
   return (
     <>
-      {/* 
-    NOTE: Title and a little word about this page.
-    */}
+      {/* TODO: Show the page title and description from content data. */}
       <section>
         <h2>Learn</h2>
         <p></p>
       </section>
 
-      {/* 
-      NOTE: Big topics are can chosen with a little bit word of explanation.
-      */}
+      {/* NOTE: Topic selection is the first step of the Learn hierarchy. */}
       <section>
         <h3>Topics</h3>
         <div className=" grid grid-cols-3 gap-4 mt-2">

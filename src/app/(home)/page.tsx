@@ -6,13 +6,9 @@ import { Button } from "@/components/ui/button";
 export default function Home() {
   return (
     <>
-      {/* NOTE: this section for news information or 
-        something important 
-        sensei or tantosha want
-        to say to gakusei or user.
-        And also notification from system or developer, 
-        what must user to do. 
-      */}
+      {/* TODO: Replace this unconditional success alert with published announcement
+          previews. Current behavior is static, not a real account-update result.
+          See docs/developer-guide.md, Home. */}
       <section>
         <Alert className="max-w">
           <CheckCircle2Icon />
@@ -24,17 +20,14 @@ export default function Home() {
         </Alert>
       </section>
 
-      {/* NOTE: Fast button to specific route,
-      this routes must be often visit by user*/}
+      {/* TODO: Give these shortcuts labels and links to Learn and Activities. */}
       <section className="flex justify-end gap-2">
         <Button></Button>
         <Button></Button>
       </section>
 
-      {/* NOTE: basic information about attendance or homework
-        or 
-        something else about study or important think.
-           */}
+      {/* TODO: Show upcoming events and this student's saved practice results;
+          use meaningful empty states. Attendance is deferred. */}
       <section>
         <Card></Card>
         <Card></Card>

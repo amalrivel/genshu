@@ -1,3 +1,7 @@
+// NOTE: This layout currently adds the shared header/footer without session checks.
+// TODO: Protect student content and replace scaffold metadata; data operations must
+// also authorize requests. See docs/developer-guide.md, Login and Shared layout.
+
 import HomeFooter from "@/components/layouts/home-footer";
 import HomeHeader from "@/components/layouts/home-header";
 import type { Metadata } from "next";

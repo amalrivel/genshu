@@ -1,3 +1,6 @@
+// TODO: Replace scaffold metadata with Genshu defaults and meaningful route titles.
+// See docs/developer-guide.md, Shared layout.
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";

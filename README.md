@@ -1,4 +1,14 @@
-## Local database setup
+# Genshu
+
+See [the developer guide](docs/developer-guide.md) for current behavior,
+required v1 features, deferred work, and acceptance scenarios on branch `fresh`.
+
+**Current setup warning:** the MariaDB/Prisma 7 instructions below are historical
+and do not describe the current Prisma 8/PostgreSQL configuration. Database
+queries, authentication, and package scripts have not yet been reconciled with
+that transition. Do not use the historical commands as a verified setup workflow.
+
+## Historical local database setup (needs replacement)
 
 This project uses MariaDB, Prisma 7, and a Better Auth Prisma adapter.
 Configure `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, and `DB_DATABASE` in

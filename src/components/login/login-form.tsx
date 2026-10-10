@@ -1,3 +1,7 @@
+// NOTE: Current behavior: this form has no authentication submission handler.
+// TODO: Connect managed email/password login and recoverable errors; remove inactive
+// Google/signup/reset controls until supported. See docs/developer-guide.md, Login.
+
 import { cn } from "cn"
 
 import { Button } from "@/components/ui/button"
