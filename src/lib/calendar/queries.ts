@@ -1,8 +1,19 @@
-// NOTE: Guidance-only module; no event queries are implemented.
-// TODO: Read published events chronologically for authenticated students;
-// draft reads require management permission. Keep start/end instants unambiguous
-// for Asia/Tokyo display; select fields and distinguish empty results from failure.
-// Recurring events and external calendar synchronization are deferred.
-// See docs/developer-guide.md, Calendar and Data integration.
+import "server-only";
+import { db } from "@/prisma/db";
 
-export {};
+export async function getUpcomingEvents(limit = 20) {
+  const now = new Date().toISOString();
+  return db.orm.public.CalendarEvent.where({ published: true })
+    .where((event) => event.endsAt.gte(now))
+    .select("id", "title", "details", "startsAt", "endsAt")
+    .orderBy((event) => event.startsAt.asc())
+    .limit(limit)
+    .all();
+}
+
+export async function getEventDrafts() {
+  return db.orm.public.CalendarEvent.where({ published: false })
+    .select("id", "title", "details", "startsAt", "endsAt")
+    .orderBy((event) => event.startsAt.asc())
+    .all();
+}

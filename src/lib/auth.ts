@@ -1,14 +1,26 @@
 import "server-only";
 import { betterAuth } from "better-auth";
-import { prismaAdapter } from "better-auth/adapters/prisma";
-import { prisma } from "@/lib/db";
+import { admin } from "better-auth/plugins";
+import { adminAc, defaultAc, userAc } from "better-auth/plugins/admin/access";
+import { Pool } from "pg";
+
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 export const auth = betterAuth({
-  database: prismaAdapter(prisma, { provider: "mysql" }),
-  // NOTE: Email/password is enabled here, but the client import/adapter is stale.
-  // TODO: Complete the supported PostgreSQL/auth integration, disable public signup,
-  // and enforce managed account roles. See docs/developer-guide.md, Login and Data integration.
-  emailAndPassword: { 
-    enabled: true, 
-  }, 
+  appName: "Genshu",
+  secret: process.env.BETTER_AUTH_SECRET,
+  baseURL: process.env.BETTER_AUTH_URL,
+  database: pool,
+  emailAndPassword: { enabled: true, disableSignUp: true },
+  user: { modelName: "genshu_user" },
+  session: { modelName: "genshu_session" },
+  account: { modelName: "genshu_account" },
+  verification: { modelName: "genshu_verification" },
+  plugins: [
+    admin({
+      defaultRole: "student",
+      adminRoles: ["admin"],
+      roles: { student: defaultAc.newRole({}), teacher: defaultAc.newRole({}), admin: adminAc, user: userAc },
+    }),
+  ],
 });

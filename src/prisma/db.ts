@@ -1,6 +1,4 @@
-// NOTE: Current behavior: Prisma 8/PostgreSQL runtime; legacy callers are not wired here.
-// TODO: Reconcile queries/auth/contracts/scripts before use; do not reset existing data.
-// See docs/developer-guide.md, Data integration.
+// Prisma 8/PostgreSQL is the shared runtime for Genshu domain data.
 
 import 'dotenv/config';
 import postgres from '@prisma/orm-postgres/runtime';

@@ -1,99 +1,58 @@
-// NOTE: Current behavior: static navigation, sample avatar, and inactive account actions.
-// TODO: Add mobile navigation, real identity/logout, and the Class recordings label;
-// remove inactive account items. See docs/developer-guide.md, Shared layout.
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { buttonVariants } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { LogoutButton } from "./logout-button";
 
-export default function HomeHeader() {
+const links = [
+  ["/learn", "Learn"],
+  ["/activities", "Practice"],
+  ["/recording", "Class recordings"],
+  ["/announcements", "Announcements"],
+  ["/calendar", "Calendar"],
+] as const;
+
+export default function HomeHeader({
+  name,
+  email,
+  role,
+}: {
+  name: string;
+  email: string;
+  role: string;
+}) {
+  const navLinks = role === "teacher" || role === "admin"
+    ? [...links, ["/admin", "Management"] as const]
+    : links;
   return (
-    <header className="flex justify-between container  mx-auto px-4 my-2">
-      <Link
-        className={buttonVariants({ variant: "link", size: "sm" })}
-        href="/"
-      >
-        <h1>Genshu</h1>
-      </Link>
-
-      <nav className="flex justify-end flex-row gap-4">
-        <ul className="flex justify-end flex-row gap-3">
-          <li>
-            <Link
-              className={buttonVariants({ variant: "link", size: "sm" })}
-              href="/learn"
-            >
-              Learns
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={buttonVariants({ variant: "link", size: "sm" })}
-              href="/activities"
-            >
-              Activities
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={buttonVariants({ variant: "link", size: "sm" })}
-              href="/recording"
-            >
-              Recording
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={buttonVariants({ variant: "link", size: "sm" })}
-              href="/announcements"
-            >
-              Announcements
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={buttonVariants({ variant: "link", size: "sm" })}
-              href="/calendar"
-            >
-              Calendar
-            </Link>
-          </li>
-        </ul>
-        <DropdownMenu>
-          <DropdownMenuTrigger
-            render={
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <Avatar>
-                  <AvatarImage
-                    src="https://github.com/shadcn.png"
-                    alt="shadcn"
-                  />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-              </Button>
-            }
-          />
-          <DropdownMenuContent className="w-32">
-            <DropdownMenuGroup>
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem>Billing</DropdownMenuItem>
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem variant="destructive">Log out</DropdownMenuItem>
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </nav>
+    <header className="border-b">
+      <div className="container mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
+        <Link className={buttonVariants({ variant: "link", size: "sm" })} href="/">
+          <span className="text-lg font-semibold">Genshu</span>
+        </Link>
+        <nav aria-label="Main navigation" className="hidden lg:block">
+          <ul className="flex items-center gap-1">
+            {navLinks.map(([href, label]) => <li key={href}>
+              <Link className={buttonVariants({ variant: "link", size: "sm" })} href={href}>{label}</Link>
+            </li>)}
+          </ul>
+        </nav>
+        <div className="flex items-center gap-2">
+          <details className="relative lg:hidden">
+            <summary className="cursor-pointer rounded-md border px-3 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2">Menu</summary>
+            <nav aria-label="Mobile navigation" className="absolute right-0 z-10 mt-2 min-w-52 rounded-lg border bg-background p-2 shadow-lg">
+              <ul className="flex flex-col">
+                {navLinks.map(([href, label]) => <li key={href}>
+                  <Link className="block rounded px-3 py-2 text-sm hover:bg-muted focus-visible:outline-2" href={href}>{label}</Link>
+                </li>)}
+              </ul>
+            </nav>
+          </details>
+          <div className="max-w-20 truncate text-right text-xs sm:max-w-48 sm:text-sm">
+            <p className="truncate font-medium">{name}</p>
+            <p className="hidden truncate text-xs text-muted-foreground sm:block">{email}</p>
+          </div>
+          <LogoutButton />
+        </div>
+      </div>
     </header>
   );
 }

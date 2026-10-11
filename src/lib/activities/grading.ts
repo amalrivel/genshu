@@ -1,9 +1,7 @@
 // NOTE: Fungsi murni ini menghitung skor tanpa mengakses database atau session,
 // sehingga aturan penilaian bisa diuji terpisah dari transport dan penyimpanan.
-// TODO: Penilaian attempt perlu memakai versi/snapshot soal saat mulai mengerjakan.
-// Menggunakan kunci terbaru bisa mengubah hasil jika admin mengedit soal di tengah
-// pengerjaan. V1 membuka feedback practice setelah submit tersimpan; aturan exam
-// ditunda. Menyembunyikan kunci di UI tidak menyembunyikannya di respons jaringan.
+// Server callers grade the immutable question snapshot saved when an attempt starts.
+// Feedback is returned only after a successful, persisted practice submission.
 // See docs/developer-guide.md, Activities.
 
 import type { ActivityResult, Answers, Question } from "./types";
@@ -22,6 +20,7 @@ export function gradeActivity(
       : null;
     return {
       questionId: question.id,
+      question: question.question,
       userAnswer,
       correctAnswer: question.correctAnswer,
       isCorrect: userAnswer === question.correctAnswer,

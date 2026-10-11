@@ -1,194 +1,107 @@
-// src/components/activities/activity-runner.tsx
-
 "use client";
 
-import {
-  useState,
-  useTransition,
-} from "react";
-
+import { useEffect, useRef, useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-
 import { useActivity } from "@/hooks/activities/use-activity";
+import { saveAttempt, startPractice, submitAttempt } from "@/lib/activities/actions";
+import type { Activity, ActivityResult, Answers } from "@/lib/activities/types";
+import { ActivityResultView } from "./activity-result";
+import { QuestionCard } from "./question-card";
 
-import {
-  submitActivity,
-} from "@/lib/activities/actions";
-
-import type {
-  Activity,
-  ActivityResult,
-} from "@/lib/activities/types";
-
-import {
-  ActivityResultView,
-} from "./activity-result";
-
-import {
-  QuestionCard,
-} from "./question-card";
-
-// NOTE: Runner mengirim jawaban dan menampilkan hasil di halaman yang sama.
-// Hasil berada di memori browser dan hilang saat halaman dimuat ulang.
 export function ActivityRunner({
   activity,
+  attemptId,
+  initialAnswers,
+  initialResult,
 }: {
   activity: Activity;
+  attemptId: string;
+  initialAnswers: Answers;
+  initialResult: ActivityResult | null;
 }) {
+  const router = useRouter();
+  const [result, setResult] = useState<ActivityResult | null>(initialResult);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [
-    result,
-    setResult,
-  ] =
-    useState<ActivityResult | null>(
-      null,
-    );
-
-  const [
-    isPending,
-    startTransition,
-  ] = useTransition();
-
+  const [saveStatus, setSaveStatus] = useState("Draft saved");
+  const [isPending, startTransition] = useTransition();
+  const queue = useRef<Promise<unknown>>(Promise.resolve());
+  const sequence = useRef(0);
   const {
     currentQuestionIndex,
     currentQuestion,
-
     answers,
-
     isFirstQuestion,
     isLastQuestion,
-
     answer,
     next,
     previous,
-    reset,
-  } = useActivity(activity);
+  } = useActivity(activity, initialAnswers);
+
+  useEffect(() => {
+    if (result) return;
+    const version = ++sequence.current;
+    const timer = setTimeout(() => {
+      setSaveStatus("Saving draft…");
+      const snapshot = answers;
+      queue.current = queue.current.catch(() => undefined).then(async () => {
+        try {
+          await saveAttempt(attemptId, snapshot);
+          if (sequence.current === version) setSaveStatus("Draft saved");
+        } catch {
+          if (sequence.current === version) setSaveStatus("Draft not saved. Your answers are still on this page; try again.");
+        }
+      });
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [answers, attemptId, result]);
 
   function handleSubmit() {
     if (isPending) return;
     setSubmitError(null);
-    startTransition(
-      async () => {
-        // NOTE: Kegagalan event submit ditangani di sini, bukan lewat error.tsx.
-        // Jangan reset hook ketika gagal: pengguna harus bisa mengirim ulang
-        // jawaban yang sama tanpa mengulang pengerjaan. Pesan driver/database
-        // tidak ditampilkan karena bisa memuat detail internal atau kredensial.
-        try {
-          const result = await submitActivity(activity.id, answers);
-          setResult(result);
-        } catch {
-          setSubmitError("Could not submit your answers. Your answers are still here. Please try submitting again.");
-        }
-        // TODO: Saat attempt disimpan, server perlu menangani submit idempotent.
-        // Tombol disabled hanya menjaga UI; koneksi terputus setelah penyimpanan
-        // bisa membuat pengguna mengirim ulang attempt yang sebenarnya berhasil.
-      },
-    );
+    startTransition(async () => {
+      try {
+        await queue.current.catch(() => undefined);
+        const saved = await submitAttempt(attemptId, answers);
+        setResult(saved);
+      } catch {
+        setSubmitError("Could not submit your answers. They are still here. Please try again.");
+      }
+    });
   }
 
   function handleRetry() {
-    reset();
-    setResult(null);
-    setSubmitError(null);
+    startTransition(async () => {
+      const nextAttempt = await startPractice(activity.id);
+      router.replace(`/activities/${activity.id}?attempt=${nextAttempt.attemptId}`);
+      router.refresh();
+    });
   }
 
-  if (result) {
-    return (
-      <ActivityResultView
-        result={result}
-        onRetry={handleRetry}
-      />
-    );
-  }
-
-  if (!currentQuestion) {
-    return (
-      <p>
-        No questions available.
-      </p>
-    );
-  }
+  if (result) return <ActivityResultView result={result} onRetry={handleRetry} />;
+  if (!currentQuestion) return <p>No questions are available for this practice.</p>;
 
   return (
-    <div className="space-y-6" aria-busy={isPending}>
+    <section className="space-y-6" aria-busy={isPending}>
       <header>
-        <p>{activity.type}</p>
-
-        <h1>{activity.title}</h1>
-
-        <p>
-          {activity.description}
-        </p>
+        <p>Practice</p>
+        <h1 className="text-2xl font-semibold">{activity.title}</h1>
+        <p>{activity.description}</p>
       </header>
-
-      <div>
-        <p>
-          Question{" "}
-          {currentQuestionIndex +
-            1}{" "}
-          of{" "}
-          {
-            activity.questions
-              .length
-          }
-        </p>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <p>Question {currentQuestionIndex + 1} of {activity.questions.length}</p>
+        <p role="status" aria-live="polite">{saveStatus}</p>
       </div>
-
-      <QuestionCard
-        question={
-          currentQuestion.question
-        }
-        answer={
-          answers[
-            currentQuestion.id
-          ]
-        }
-        onAnswer={answer}
-        disabled={isPending}
-      />
-
+      <QuestionCard question={currentQuestion.question} answer={answers[currentQuestion.id]} onAnswer={answer} disabled={isPending} />
       {submitError ? <p role="alert">{submitError}</p> : null}
-      {isPending ? <p role="status">Submitting your answers...</p> : null}
-
-      {/* NOTE: Bekukan jawaban dan navigasi selama submit supaya tampilan tetap
-          sesuai dengan snapshot jawaban yang dikirim. Ini bukan pengganti
-          validasi atau pembatasan percobaan di server. */}
-      <div className="flex justify-between">
-        <Button
-          type="button"
-          variant="outline"
-          disabled={
-            isFirstQuestion || isPending
-          }
-          onClick={previous}
-        >
-          Previous
-        </Button>
-
+      {isPending ? <p role="status">Saving your result…</p> : null}
+      <div className="flex justify-between gap-2">
+        <Button type="button" variant="outline" disabled={isFirstQuestion || isPending} onClick={previous}>Previous</Button>
         <div className="flex gap-2">
-          {!isLastQuestion && (
-            <Button
-              type="button"
-              onClick={next}
-              disabled={isPending}
-            >
-              Next
-            </Button>
-          )}
-
-          <Button
-            type="button"
-            disabled={isPending}
-            onClick={
-              handleSubmit
-            }
-          >
-            {isPending
-              ? "Submitting..."
-              : "Submit"}
-          </Button>
+          {!isLastQuestion ? <Button type="button" onClick={next} disabled={isPending}>Next</Button> : null}
+          <Button type="button" disabled={isPending} onClick={handleSubmit}>{isPending ? "Submitting…" : "Submit"}</Button>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

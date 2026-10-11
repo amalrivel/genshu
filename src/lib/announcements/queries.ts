@@ -1,8 +1,23 @@
-// NOTE: Guidance-only module; no announcement queries are implemented.
-// TODO: List published summaries newest first and read full content by ID for
-// authenticated students; draft reads require management permission. Select
-// response fields explicitly and distinguish missing records from query failures.
-// Reuse summaries for Home; no visibility enforcement solely in the UI.
-// See docs/developer-guide.md, Announcements and Data integration.
+import "server-only";
+import { db } from "@/prisma/db";
 
-export {};
+export async function getPublishedAnnouncements(limit = 10) {
+  return db.orm.public.Announcement.where({ published: true })
+    .select("id", "title", "summary", "publishedAt")
+    .orderBy((announcement) => announcement.publishedAt.desc())
+    .limit(limit)
+    .all();
+}
+
+export async function getPublishedAnnouncement(id: string) {
+  return db.orm.public.Announcement.where({ id, published: true })
+    .select("id", "title", "summary", "content", "publishedAt")
+    .first();
+}
+
+export async function getAnnouncementDrafts() {
+  return db.orm.public.Announcement.where({ published: false })
+    .select("id", "title", "summary", "content", "createdAt")
+    .orderBy((announcement) => announcement.updatedAt.desc())
+    .all();
+}

@@ -28,7 +28,8 @@
       ]
     },
     "types": [
-      "node"
+      "node",
+      "bun"
     ]
   },
   "include": [

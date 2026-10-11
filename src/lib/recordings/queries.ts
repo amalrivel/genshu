@@ -1,8 +1,16 @@
-// NOTE: Guidance-only module; no recording queries are implemented.
-// TODO: Read published recording summaries for authenticated students; drafts
-// require management permission. Select title, description, lesson date, and
-// validated provider links; database failures must not become empty collections.
-// Provider permissions control video access, even when the listing is protected.
-// See docs/developer-guide.md, Class recordings and Data integration.
+import "server-only";
+import { db } from "@/prisma/db";
 
-export {};
+export async function getPublishedRecordings() {
+  return db.orm.public.Recording.where({ published: true })
+    .select("id", "title", "description", "lessonDate", "url")
+    .orderBy((recording) => recording.lessonDate.desc())
+    .all();
+}
+
+export async function getRecordingDrafts() {
+  return db.orm.public.Recording.where({ published: false })
+    .select("id", "title", "description", "lessonDate", "url")
+    .orderBy((recording) => recording.updatedAt.desc())
+    .all();
+}

@@ -1,9 +1,9 @@
 # Genshu developer guide — branch `fresh`
 
-This is a requirements handoff, not a statement that the features below already work.
-**Current behavior** describes the checked-in code; **Required for v1** describes
-the agreed target; **Deferred** identifies work outside the first version.
-Source comments point here and identify local responsibilities or missing behavior.
+This guide is the v1 product specification and implementation record for branch
+`fresh`. **Scaffold before implementation** describes the starting templates;
+**Required for v1** remains the agreed implementation scope; **Deferred** stays
+outside v1. The status section at the end records implementation and verification.
 
 ## Product and implementation boundaries
 
@@ -27,7 +27,7 @@ and assignments are also deferred until their policies are specified.
 
 ### Home `/`
 
-**Current behavior:** a static account-update success alert, empty buttons, and
+**Scaffold before implementation:** a static account-update success alert, empty buttons, and
 empty cards. The alert is not evidence that an account update occurred.
 
 **Required for v1:** show published announcement previews, upcoming events,
@@ -37,7 +37,7 @@ empty state; do not invent attendance or other statistics without real data.
 
 ### Learn `/learn`, `/learn/[topic]`, `/learn/[topic]/[subject]`
 
-**Current behavior:** topics, subjects, and materials come from static arrays.
+**Scaffold before implementation:** topics, subjects, and materials come from static arrays.
 Topic and subject links incorrectly use `/learns`. Missing records invoke 404;
 the material page checks the material but displays skeletons instead of its content.
 
@@ -62,13 +62,7 @@ content untouched. Markdown is not a mandated intermediate format.
 
 ### Activities `/activities`, `/activities/type/[type]`, `/activities/[activityId]`
 
-**Current behavior:** these routes select a category, list its activities, and
-open a runner. The hook manages local answers/navigation; the runner handles
-submit/results. Queries exclude answer keys from initial questions. The server
-validates submissions and calculates scores with a pure grading function, but
-does not authenticate or save attempts. Refresh loses answers/results. Results
-include correct answers, even though the UI currently shows only aggregate scores.
-The database imports are broken; this is not yet a working end-to-end flow.
+**Scaffold before implementation:** these routes originally selected categories and opened a local-only runner. The current implementation persists authenticated attempts and question snapshots.
 
 **Required for v1:** keep these URLs and module responsibilities. Expose only
 ready practice content in student navigation; do not advertise the other three
@@ -93,7 +87,7 @@ before those categories are exposed; practice behavior is not an exam policy.
 
 ### Class recordings `/recording`
 
-**Current behavior:** a placeholder; no recording collection or playback exists.
+**Scaffold before implementation:** a placeholder; no recording collection or playback exists.
 
 **Required for v1:** keep `/recording`, label navigation “Class recordings”, and
 let teachers publish title, description, lesson date, and an externally hosted
@@ -104,7 +98,7 @@ student-only playback, and hiding it in Genshu cannot revoke a copied link.
 
 ### Announcements `/announcements`
 
-**Current behavior:** a placeholder with a copied Activities comment.
+**Scaffold before implementation:** a placeholder with a copied Activities comment.
 
 **Required for v1:** teachers create drafts and explicitly publish them. Students
 see published announcements newest first and can open full content. Use a detail
@@ -113,7 +107,7 @@ Distinguish an empty collection from an unavailable item or a server failure.
 
 ### Calendar `/calendar`
 
-**Current behavior:** a placeholder with a copied Activities comment.
+**Scaffold before implementation:** a placeholder with a copied Activities comment.
 
 **Required for v1:** a chronological agenda of published teacher-created lessons
 and events, including title, details, and start/end times. Validate the time range.
@@ -123,7 +117,7 @@ an empty state and dashboard links to upcoming events.
 
 ### Login `/login` and account access
 
-**Current behavior:** the form is not connected to authentication. It offers
+**Scaffold before implementation:** the form is not connected to authentication. It offers
 inactive Google login and placeholder signup/reset links. Better Auth enables
 email/password in configuration but imports a missing client and still specifies
 a MySQL adapter; session enforcement and auth routes are absent.
@@ -139,7 +133,7 @@ requests must enforce the same permissions as pages. Do not log or expose passwo
 
 ### Management `/admin` (new)
 
-**Current behavior:** no management route exists.
+**Scaffold before implementation:** no management route exists.
 
 **Required for v1:** an area restricted to authorized teachers/administrators for
 managing topics, subjects, imported materials, practice questions, recording
@@ -151,7 +145,7 @@ never let public requests assign privileged roles.
 
 ### Shared layout and account navigation
 
-**Current behavior:** desktop-oriented navigation, a sample avatar, inactive
+**Scaffold before implementation:** desktop-oriented navigation, a sample avatar, inactive
 account actions, and scaffold page metadata. Footer information is static.
 
 **Required for v1:** mobile navigation, meaningful page titles, accessible controls
@@ -160,48 +154,33 @@ Settings, and other inactive account actions until supported. Keep student
 navigation separate from authorized management navigation. Footer version/identity
 text must reflect the application rather than imply unsupported functionality.
 
-## Unwired developer templates
+## Implemented modules and route connections
 
-**Current behavior:** the following files are organizational starting points.
-Components export named functions and render labeled template cards; they have
-no data props, working controls, or route imports. Supporting modules contain
-guidance and `export {}` only, not functioning queries/actions. Their presence
-does not mean the corresponding feature is implemented.
+The prepared components now render data from server-only query modules and are
+connected to their routes:
 
-Paths below are relative to `src/`:
+| Area | Route and responsibility |
+|---|---|
+| Home | `/` loads published announcement previews, upcoming events, recent student results, and Learn/Activities links. |
+| Learn | `/learn` → `/learn/[topic]` → `/learn/[topic]/[subject]` reads published records; material HTML is sanitized and headings create the chapter navigation. |
+| Practice | Existing Activities URLs expose practice only; server actions own draft save, submission, grading, and retry behavior. |
+| Recordings | `/recording` lists published provider links and labels dates. |
+| Announcements | `/announcements` lists published items and `/announcements/[announcementId]` renders detail. |
+| Calendar | `/calendar` lists published events in chronological Asia/Tokyo time. |
+| Management | `/admin` gates content editing to teachers/admins and account management to admins. Word import creates reviewed drafts. |
 
-| Area | Component files | Connection during implementation |
-|---|---|---|
-| Home | `components/home/home-dashboard.tsx` | Compose published announcement/event summaries and the student's saved practice summaries in `/`. |
-| Learn | `components/learn/topic-card.tsx`, `subject-card.tsx` | Connect established topic/subject props to the existing Learn lists; correct links to `/learn`. |
-| Materials | `components/learn/material-content.tsx`, `chapter-navigation.tsx` | Replace permanent material skeletons with sanitized published content and heading-derived chapter links. |
-| Recordings | `components/recordings/recording-card.tsx` | Use published summaries in `/recording`; add validated external provider links. |
-| Announcements | `components/announcements/announcement-card.tsx`, `announcement-content.tsx` | Use previews in the list/Home; connect full content after creating the authorized detail route. |
-| Calendar | `components/calendar/event-card.tsx` | Populate the chronological `/calendar` agenda and display Asia/Tokyo times. |
-| Management | `components/admin/student-account-form.tsx`, `content-publish-controls.tsx`, `material-import-form.tsx` | Connect only inside authorized management routes once the matching server operations exist. |
+Query modules remain server-only. Server actions repeat authorization checks at
+mutation boundaries; pages are not the only permission layer. Imported content is
+sanitized both before it is stored and when rendered. Empty collections have
+purpose-built states; operational failures use route error boundaries where
+provided.
 
-**Required for v1:** implement publication-filtered, authorized reads in
-`lib/recordings/queries.ts`, `lib/announcements/queries.ts`, and
-`lib/calendar/queries.ts`. Implement validated management mutations in
-`lib/admin/actions.ts` and reviewed Word-to-draft conversion in
-`lib/learn/material-import.ts`. Introduce server-only boundaries and server action
-directives when those modules gain executable server responsibilities. Do not
-import database clients into display components.
-
-Define props from established domain contracts when data integration is ready;
-replace the template label/message with actual rendering and appropriate page
-states. Add client boundaries only for working interactive controls. Keep account
-creation administrator-only, require Word preview/review before publication,
-and preserve saved practice snapshots during content edits. No new hooks or
-generic services are needed merely to connect these templates.
-
-**Deferred in this scaffold pass:** wiring templates into routes, creating
-`/admin` or announcement detail routes, changing Activities/Login interfaces,
-and adding database models, dependencies, uploads, or fake data.
+**Deferred:** formal exam, mock exam, assignment, attendance, class membership,
+calendar sync, and video upload behavior remain outside v1.
 
 ## Data integration and page-state rules
 
-**Current behavior:** Prisma configuration/runtime target Prisma 8/PostgreSQL;
+**Scaffold before implementation:** Prisma configuration/runtime target Prisma 8/PostgreSQL;
 the contract has only User/Post starter models. Activities still import missing
 `@/lib/db` and generated enums. Auth still configures MySQL. Package scripts and
 README describe an older generation/migration setup and MariaDB/Prisma 7.
@@ -245,15 +224,44 @@ explicitly; a TypeScript type is not runtime validation or authorization.
    set to another timezone. Dashboard summaries use real data. Keyboard and
    narrow-screen navigation work across student and management routes.
 
-### Documentation verification baseline
+## Implementation status — 2026-10-10
 
-On this branch before documentation changes, TypeScript reported five errors:
-missing database/enum imports and resulting implicit-any errors in Activities
-queries and auth. ESLint on `src` reported four `no-empty-object-type` errors in
-generated `src/prisma/contract.d.ts`. Resolve generated-file lint policy rather
-than hand-editing generated types. Rerun checks after implementation; do not treat
-this baseline as permission to introduce additional failures.
+The v1 student routes, protected management area, account provisioning, content
+draft/publication flows, practice attempts, and dashboard data reads are connected
+to the Prisma 8 PostgreSQL contract. Better Auth uses its Kysely adapter and a
+PostgreSQL Pool because the installed Better Auth Prisma adapter is incompatible
+with Prisma 8. Auth tables are mapped to separate `genshu_*` tables; the existing
+starter `User` and `Post` models are retained. Public sign-up is disabled and
+roles can be assigned only through the authorized server-side provisioning flow.
 
-This pass deliberately skips feature implementation, migrations, dependencies,
-and browser testing. Main risks remain database/auth compatibility, Word import
-fidelity, and external recording permissions.
+The local setup, first-administrator, and recovery procedures are in the README.
+The DOCX converter accepts `.docx` files up to 10 MiB, limits expanded ZIP content
+to 50 MiB and 2,000 entries, blocks external file access, preserves Word ruby as
+semantic `<ruby>` markup, sanitizes converted content, and stores an unpublished
+draft for preview. Material publication is a separate reviewed transaction.
+Practice categories expose only `practice`; saved attempts retain question
+snapshots and server-computed results. Calendar instants are interpreted and
+displayed in Asia/Tokyo.
+
+Unit tests cover true/false/unanswered scoring and a generated Word document with
+furigana and invalid-file rejection. TypeScript, lint, and production build pass.
+An isolated PostgreSQL database (`genshu_v1_test_20261010`) was initialized after
+reviewing a dry run of 49 additive operations. The configured development
+database was also found empty, then initialized with those additive operations
+and the idempotent `practice` category seed. No reset or destructive migration
+was run. Browser checks on the isolated app covered sign-in/out,
+student management denial, draft announcement hiding, topic/subject/material
+navigation, rendered ruby and table content, draft resume, saved result reload,
+repeat attempt, mobile navigation, dashboard data, and Asia/Tokyo event display
+with the server running in America/Los_Angeles. The repeat-attempt check exposed
+and verified a fix for stale result state when switching attempts.
+
+The DOCX upload control could not be exercised in the browser because this
+browser profile blocks local file chooser access; conversion itself was checked
+with a generated `.docx` fixture. Idempotent submission is enforced in the
+transactional server action, but simultaneous duplicate HTTP submissions were
+not stress-tested. Other Word structures, operational database failure recovery,
+and every direct authorization path still need broader production-like coverage.
+The isolated test database is separate from the configured application database.
+Before applying schema changes to any data-bearing database, review the dry-run
+operations, confirm the target, and take a backup.

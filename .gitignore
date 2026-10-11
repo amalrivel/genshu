@@ -45,3 +45,5 @@ dist/
 
 # Prisma client is generated during installation/build
 /src/generated/prisma/
+# Playwright CLI output (may contain credentials)
+.playwright-cli/

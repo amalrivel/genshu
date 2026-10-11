@@ -1,17 +1,15 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-// NOTE: Unwired developer template. Display a published class recording summary and external provider link.
-// TODO: Add title, description, lesson date, and a validated link; provider controls video access.
-// See docs/developer-guide.md, Class recordings.
-export function RecordingCard() {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle><h2>Class recording — template</h2></CardTitle>
-      </CardHeader>
-      <CardContent>
-        <p>Recording data and provider links are not connected yet.</p>
-      </CardContent>
-    </Card>
-  );
+export function RecordingCard({ recording }: { recording: { title: string; description: string; lessonDate: string; url: string } }) {
+  const date = new Date(recording.lessonDate);
+  return <Card>
+    <CardHeader>
+      <CardTitle>{recording.title}</CardTitle>
+      <time dateTime={recording.lessonDate} className="text-sm text-muted-foreground">{new Intl.DateTimeFormat("en", { dateStyle: "long", timeZone: "Asia/Tokyo" }).format(date)}</time>
+    </CardHeader>
+    <CardContent className="space-y-3">
+      <p>{recording.description}</p>
+      <a href={recording.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">Open recording (external site)</a>
+    </CardContent>
+  </Card>;
 }

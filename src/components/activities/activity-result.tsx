@@ -1,11 +1,11 @@
 // NOTE: Komponen ini hanya menampilkan hasil server, bukan menghitung ulang nilai.
-// TODO: Saat hasil dipersistenkan, buka kembali berdasarkan attempt milik pengguna.
-// Tombol retry sekarang memulai ulang state lokal; aturan jumlah percobaan dan
-// waktu harus tetap diperiksa server sebelum retry dibolehkan untuk exam/assignment.
+// Retry creates a new server-owned practice attempt; deferred categories have no
+// retry policy and are not exposed to students.
 
 // src/components/activities/activity-result.tsx
 
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import Link from "next/link";
 
 import type {
   ActivityResult,
@@ -48,13 +48,20 @@ export function ActivityResultView({
         </p>
       </div>
 
-      <Button
-        type="button"
-        className="mt-6"
-        onClick={onRetry}
-      >
-        Try Again
-      </Button>
+      <ol className="mt-6 space-y-3">
+        {result.questions.map((question, index) => (
+          <li key={question.questionId} className="rounded-lg border p-4">
+            <h2 className="font-medium">{index + 1}. {question.question}</h2>
+            <p>{question.isCorrect ? "Correct" : "Incorrect"}; your answer: {question.userAnswer === null ? "unanswered" : question.userAnswer ? "True" : "False"}</p>
+            <p>Correct answer: {question.correctAnswer ? "True" : "False"}</p>
+          </li>
+        ))}
+      </ol>
+
+      <div className="mt-6 flex flex-wrap gap-2">
+        <Button type="button" onClick={onRetry}>Try again</Button>
+        <Link className={buttonVariants({ variant: "outline" })} href="/activities">Back to practice</Link>
+      </div>
     </section>
   );
 }

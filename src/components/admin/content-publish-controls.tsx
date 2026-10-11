@@ -1,17 +1,24 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+"use client";
 
-// NOTE: Unwired developer template. Template only: no publishing controls or mutation are active.
-// TODO: Add management-authorized draft review/publication; validate content and preserve saved attempts.
-// See docs/developer-guide.md, Management.
-export function ContentPublishControls() {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle><h2>Content publication — template</h2></CardTitle>
-      </CardHeader>
-      <CardContent>
-        <p>Draft review and publication are not connected yet.</p>
-      </CardContent>
-    </Card>
-  );
+import { useState, useTransition } from "react";
+import { publishContent } from "@/lib/admin/actions";
+import { Button } from "@/components/ui/button";
+
+export function ContentPublishControls({ kind, id, title }: { kind: string; id: string; title: string }) {
+  const [pending, startTransition] = useTransition();
+  const [error, setError] = useState(false);
+  function publish() {
+    setError(false);
+    const form = new FormData();
+    form.set("kind", kind);
+    form.set("id", id);
+    startTransition(async () => {
+      try { await publishContent(form); }
+      catch { setError(true); }
+    });
+  }
+  return <span className="inline-flex items-center gap-2">
+    <Button type="button" variant="outline" size="sm" disabled={pending} onClick={publish}>{pending ? "Publishing…" : `Publish ${title}`}</Button>
+    {error ? <span role="alert">Could not publish. Check the item and try again.</span> : null}
+  </span>;
 }

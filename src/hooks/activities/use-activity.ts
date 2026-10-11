@@ -2,11 +2,8 @@
 
 "use client";
 
-// NOTE: Hook hanya mengelola state interaksi browser, bukan hak akses atau nilai.
-// State lokal membuat navigasi ringan, tetapi refresh/unmount menghapus jawaban.
-// TODO: Setelah model attempt diputuskan, tambahkan mekanisme resume/draft dengan
-// identitas attempt yang jelas. Jangan memakai state browser sebagai bukti resmi
-// jawaban yang dinilai; server tetap memvalidasi kepemilikan dan status attempt.
+// The hook restores answers from the server-provided attempt snapshot; persistence
+// and permission checks stay in server actions.
 
 
 import { useState } from "react";
@@ -20,6 +17,7 @@ import type {
 // Pengiriman jawaban dan tampilan hasil dikelola oleh runner.
 export function useActivity(
   activity: Activity,
+  initialAnswers: Answers = {},
 ) {
   const [
     currentQuestionIndex,
@@ -27,7 +25,7 @@ export function useActivity(
   ] = useState(0);
 
   const [answers, setAnswers] =
-    useState<Answers>({});
+    useState<Answers>(initialAnswers);
 
   const currentQuestion =
     activity.questions[

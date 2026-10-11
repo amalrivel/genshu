@@ -1,7 +1,7 @@
 // NOTE: Tipe ini adalah kontrak UI/action, bukan schema database atau validasi
 // runtime. Question sengaja tidak memuat kunci jawaban. ActivityResult saat ini
-// memuat kunci untuk feedback practice. TODO: perluas kontrak untuk attempt tersimpan;
-// aturan/kontrak exam ditunda. Data respons tetap terlihat walau UI tidak merendernya.
+// memuat kunci untuk feedback practice. Attempt persistence is represented by
+// server query/action data; formal exam contracts remain deferred.
 // See docs/developer-guide.md, Activities.
 
 // src/lib/activities/types.ts
@@ -45,6 +45,7 @@ export type ActivitySummary = {
 
 export type QuestionResult = {
   questionId: string;
+  question: string;
 
   userAnswer: boolean | null;
   correctAnswer: boolean;

@@ -1,86 +1,87 @@
 # Genshu
 
-See [the developer guide](docs/developer-guide.md) for current behavior,
-required v1 features, deferred work, and acceptance scenarios on branch `fresh`.
+Genshu is a managed student learning portal. Administrators provision accounts;
+students sign in with email and password. See the [developer guide](docs/developer-guide.md)
+for the v1 scope, security boundaries, and acceptance coverage.
 
-**Current setup warning:** the MariaDB/Prisma 7 instructions below are historical
-and do not describe the current Prisma 8/PostgreSQL configuration. Database
-queries, authentication, and package scripts have not yet been reconciled with
-that transition. Do not use the historical commands as a verified setup workflow.
+## Local setup
 
-## Historical local database setup (needs replacement)
+Requirements: Bun, Docker Compose, and PostgreSQL 15 or newer. The repository's
+Compose service publishes PostgreSQL on `127.0.0.1:5433` and persists it in the
+`postgres_data` volume.
 
-This project uses MariaDB, Prisma 7, and a Better Auth Prisma adapter.
-Configure `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, and `DB_DATABASE` in
-`.env`. These existing MariaDB settings are used by both Prisma CLI and runtime;
-the PostgreSQL starter `DATABASE_URL` is not used.
-
-```bash
+```sh
+cp .env.example .env
+# Set POSTGRES_USER, POSTGRES_PASSWORD, and POSTGRES_DB in .env to match DATABASE_URL.
+docker compose up -d db
 bun install
-bun run db:deploy
-bun dev
+bun run contract:emit
+bun run db:init:preview
 ```
 
-The initial migration creates empty Activities and authentication tables.
-No example data is inserted by migrations. To apply pending migrations and seed
-master categories plus example Activities with one command:
+Review the additive operations from the preview and confirm `DATABASE_URL` points
+at the intended database. Back up existing data first. `db init` creates missing
+contract objects, preserves compatible existing tables, stops on changes that
+would need destructive operations, and signs the resulting schema. After reviewing
+the preview:
 
-```bash
+```sh
+bun run db:init
 bun run db:seed
-```
-
-The seed is transactional and can be rerun. It preserves existing categories,
-Activities, and their questions; it never resets the database. The example
-questions are test content, not authoritative exam material. No users or
-passwords are seeded. Category navigation reads labels and descriptions from the database. The
-ActivityType enum controls supported category IDs; constants are seed defaults only.
-
-For subsequent schema changes, use
-`bun run db:migrate --name describe_change`, then `bun run db:generate`.
-Migration deployment is explicit; starting the app does not modify the database.
-
-Better Auth is configured with the database adapter only. Login methods, auth
-routes, registration policy, roles, and attempt persistence remain TODOs.
-The inactive Prisma 8 contract and guide are retained for reference; the active
-schema is `src/prisma/schema.prisma`.
-
-The old copied `types/validator.ts` is excluded from TypeScript because its
-relative imports are stale. Next.js-generated validators under `.next/types`
-and `.next/dev/types` remain included.
-
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+bun run account:create-first-admin
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The seed inserts only the `practice` activity category and does not overwrite
+existing categories or create sample questions, users, or passwords. Starting or
+building the app does not migrate the database. Never use reset or destructive
+schema commands against an existing database. The v1 contract leaves the starter
+`User` and `Post` tables intact and adds Genshu tables.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`DATABASE_URL`, `BETTER_AUTH_SECRET` (a unique random secret of at least 32
+characters), and `BETTER_AUTH_URL` are required. The example values are for local
+development only. Production secrets must be configured through the deployment
+environment.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Accounts and recovery
 
-## Learn More
+There is no public registration. Use the management page to provision student and
+teacher accounts; administrators alone can provision accounts or reset passwords.
+The first administrator is created with the interactive, non-echoing
+`bun run account:create-first-admin` command, which refuses to create another
+administrator. To recover a student's or teacher's password, an administrator can
+reset it in `/admin`. If all administrators are locked out, an operator with
+database access can run `bun run account:reset-password` interactively; it updates
+only the credential password and revokes that account's sessions. Protect the
+database credentials and rotate the recovered password through an administrator.
 
-To learn more about Next.js, take a look at the following resources:
+## Database and authentication
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The app uses the Prisma 8 contract/runtime against PostgreSQL. Better Auth 1.7's
+Prisma adapter supports Prisma 5–7, so Genshu uses its supported Kysely adapter
+with `pg` Pool against the same PostgreSQL database. This keeps auth and domain
+data on one database without relying on the incompatible Prisma adapter.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+For subsequent schema changes, use `bun run db:plan --name <change>` to plan
+contract changes, inspect them with `prisma migration show <migration>`, and apply
+reviewed pending migrations with `bun run db:migrate`. `bun run db:status` inspects
+local migration state. `bun run db:generate` emits contract types. Database
+commands operate on `DATABASE_URL` in `.env`; verify the target and backup first.
 
-## Deploy on Vercel
+## Local demo data
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Run `bun run db:seed:demo` after the local schema exists, then `bun run demo:docx`
+to generate a Word upload fixture. This adds managed demo accounts, published and
+draft content, practice drafts/results, recordings, and relative-date events
+without resetting existing data. It refuses remote/production targets.
+See [demo accounts and the behavior checklist](docs/demo-testing.md) for login
+details, rerun behavior, and scenarios. `bun run db:seed` remains category-only.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Checks
+
+```sh
+bun run test
+bun run tsc --noEmit
+bun run lint
+bun run build
+```

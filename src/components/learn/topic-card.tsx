@@ -1,17 +1,11 @@
+import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-// NOTE: Unwired developer template. Display a topic summary and navigate to its subjects.
-// TODO: Add established topic props, readable title/description, and a /learn link.
-// See docs/developer-guide.md, Learn.
-export function TopicCard() {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle><h2>Topic — template</h2></CardTitle>
-      </CardHeader>
-      <CardContent>
-        <p>Topic data and navigation are not connected yet.</p>
-      </CardContent>
+export function TopicCard({ topic }: { topic: { id: string; title: string; description: string } }) {
+  return <Link href={`/learn/${encodeURIComponent(topic.id)}`} className="rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2">
+    <Card className="h-full transition-colors hover:bg-muted/40">
+      <CardHeader><CardTitle><h2>{topic.title}</h2></CardTitle></CardHeader>
+      <CardContent><p className="text-muted-foreground">{topic.description}</p></CardContent>
     </Card>
-  );
+  </Link>;
 }

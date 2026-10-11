@@ -1,37 +1,72 @@
 "use server";
 
-// NOTE: Server Action adalah pintu masuk jaringan, sehingga tipe TypeScript dan
-// kontrol disabled di UI tidak cukup: payload tetap divalidasi di server.
-// TODO: Periksa session serta hak akses di action ini sebelum pemakaian nyata.
-// TODO: Simpan attempt, jawaban, dan hasil dalam satu transaksi agar kegagalan
-// tidak menghasilkan riwayat parsial. Beri identitas submit yang stabil supaya
-// retry setelah gangguan jaringan tidak membuat hasil tersimpan dua kali.
-
-
-import { getActivity, getGradingQuestions } from "./queries";
+import { db } from "@/prisma/db";
+import { requireUser } from "@/lib/auth-session";
 import { gradeActivity } from "./grading";
-import type { ActivityResult, Answers } from "./types";
+import {
+  createAttempt,
+  getAttempt,
+  parseAttemptQuestions,
+  parseAttemptResult,
+} from "./queries";
+import type { Answers } from "./types";
 
-export async function submitActivity(
-  activityId: string,
-  answers: Answers,
-): Promise<ActivityResult> {
-  if (typeof activityId !== "string" || !activityId ||
-      !answers || typeof answers !== "object" || Array.isArray(answers) ||
-      Object.values(answers).some((answer) => typeof answer !== "boolean")) {
-    throw new Error("Invalid activity submission");
+function validateAnswers(answers: unknown, questionIds: Set<string>): asserts answers is Answers {
+  if (!answers || typeof answers !== "object" || Array.isArray(answers)) throw new Error("Invalid answers");
+  const entries = Object.entries(answers);
+  if (entries.some(([id, value]) => !questionIds.has(id) || typeof value !== "boolean")) {
+    throw new Error("Answers do not match this attempt");
   }
-  // TODO: Authenticate and validate practice attempt ownership/state; exam policies are deferred.
-  const activity = await getActivity(activityId);
-  if (!activity) throw new Error("Activity not found");
-  const questions = await getGradingQuestions(activityId);
-  const questionIds = new Set(questions.map((question) => question.id));
-  if (Object.keys(answers).some((id) => !questionIds.has(id))) {
-    throw new Error("Unknown question in submission");
-  }
-  const result = gradeActivity(activityId, questions, answers);
-  // TODO: Persist the attempt and answers atomically once identity and schema are decided.
-  // TODO: Show immediate saved feedback for practice; define disclosure rules before enabling exams.
-  // NOTE: Results remain in browser memory; this action does not save them yet.
-  return result;
+}
+
+export async function startPractice(activityId: string) {
+  const session = await requireUser();
+  if (typeof activityId !== "string" || !activityId) throw new Error("Invalid activity");
+  const attempt = await createAttempt(session.user.id, activityId);
+  if (!attempt) throw new Error("Practice is unavailable");
+  return { attemptId: attempt.id };
+}
+
+export async function saveAttempt(attemptId: string, answers: Answers) {
+  const session = await requireUser();
+  if (typeof attemptId !== "string" || !attemptId) throw new Error("Invalid attempt");
+  const attempt = await getAttempt(attemptId, session.user.id);
+  if (!attempt || attempt.status !== "in_progress") throw new Error("Draft is unavailable");
+  const questions = parseAttemptQuestions(attempt.questionsSnapshot);
+  validateAnswers(answers, new Set(questions.map((question) => question.id)));
+  const updated = await db.orm.public.ActivityAttempt
+    .where({ id: attemptId, userId: session.user.id, status: "in_progress" })
+    .update({ answers, savedAt: new Date().toISOString() });
+  if (!updated) throw new Error("Draft could not be saved");
+  return { savedAt: updated.savedAt };
+}
+
+export async function submitAttempt(attemptId: string, answers: Answers) {
+  const session = await requireUser();
+  if (typeof attemptId !== "string" || !attemptId) throw new Error("Invalid attempt");
+  return db.transaction(async (tx) => {
+    const attempt = await tx.orm.public.ActivityAttempt
+      .where({ id: attemptId, userId: session.user.id })
+      .first();
+    if (!attempt) throw new Error("Attempt not found");
+    if (attempt.status === "submitted") {
+      const saved = parseAttemptResult(attempt.result);
+      if (saved) return saved;
+      throw new Error("Saved result is unavailable");
+    }
+    if (attempt.status !== "in_progress") throw new Error("Attempt is not open");
+    const questions = parseAttemptQuestions(attempt.questionsSnapshot);
+    if (!questions.length) throw new Error("Attempt has no questions");
+    validateAnswers(answers, new Set(questions.map((question) => question.id)));
+    const result = gradeActivity(attempt.activityId, questions, answers);
+    const now = new Date().toISOString();
+    const saved = await tx.orm.public.ActivityAttempt
+      .where({ id: attemptId, userId: session.user.id, status: "in_progress" })
+      .update({ answers, result, status: "submitted", submittedAt: now, savedAt: now });
+    if (saved) return result;
+    const raced = await tx.orm.public.ActivityAttempt.where({ id: attemptId, userId: session.user.id }).first();
+    const existing = raced?.status === "submitted" ? parseAttemptResult(raced.result) : null;
+    if (existing) return existing;
+    throw new Error("Attempt could not be submitted");
+  });
 }
