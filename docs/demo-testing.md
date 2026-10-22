@@ -1,5 +1,10 @@
 # Data demo untuk mencoba behavior Genshu
 
+Panduan ini berisi skenario pengujian, bukan bukti bahwa semua skenario sudah
+lulus pada source terbaru. Ruang lingkup dan keputusan produk ada di
+[PRD](PRD.md); batas teknis dan sumber implementasi ada di
+[ARCHITECTURE](ARCHITECTURE.md). Persiapan environment ada di [README](../README.md).
+
 Jalankan dari branch `fresh` setelah database lokal dikonfigurasi dan schema
 Genshu sudah tersedia:
 
@@ -36,7 +41,7 @@ Password ini khusus demo lokal, bukan untuk deployment publik.
 ## Tombol akun testing di login
 
 Saat `bun run dev`, halaman `/login` otomatis menampilkan empat tombol akun demo.
-Tombol mengisi email/password; tekan **Sign in** untuk login lewat autentikasi
+Tombol mengisi email/password; tekan **Masuk** untuk login lewat autentikasi
 normal. Tombol tidak membuat akun dan tidak melewati pemeriksaan role/session.
 Jika password demo telah diubah, masukkan password baru secara manual.
 
@@ -56,22 +61,22 @@ fitur ini.
 
 1. **Home:** login sebagai student-demo. Dua pengumuman published, event yang
    belum selesai, dan tiga hasil pribadi muncul. Login new-student-demo untuk
-   melihat keadaan kosong pada Recent practice.
+   melihat keadaan kosong pada hasil latihan pribadi.
 2. **Learn:** buka Bahasa Jepang → Kosakata. Periksa furigana/ruby, format teks,
    daftar, tabel, gambar fixture kecil, link, dan anchor untuk heading berulang.
    Buka Sapaan untuk materi kedua. Topic tanpa materi menguji empty state.
    Topic, subject, dan materi draft tidak seharusnya muncul untuk student.
-3. **Practice:** buka Latihan True / False sebagai student-demo → Resume draft.
+3. **Practice:** buka Latihan True / False sebagai student-demo lalu lanjutkan draft.
    Jawaban pertama True dan kedua False sudah tersimpan. Ubah jawaban, tunggu
    status saved, reload, lalu submit. Hasil memiliki benar/salah/belum dijawab.
-   Buka hasil lama dari Home dan coba Try again. Latihan baru belum punya attempt
+   Buka hasil lama dari Home dan coba Ulangi latihan. Latihan baru belum punya attempt
    seed. Latihan draft/latihan kosong hanya tersedia di Management.
 4. **Management:** teacher-demo bisa mengelola konten; hanya admin-demo melihat
    form akun. Student-demo yang membuka `/admin` seharusnya kembali ke Home.
    Coba Publish latihan tanpa soal untuk memeriksa penolakan. Periksa perubahan
    published versus draft lewat akun student lain, bukan hanya menu admin.
-5. **Word:** gunakan `tests/fixtures/demo-lesson.docx` pada form Import a Word
-   lesson. Pilih subject Kosakata atau Sapaan. Periksa preview furigana, tabel,
+5. **Word:** gunakan `tests/fixtures/demo-lesson.docx` pada form Tambah materi.
+   Pilih subject Kosakata atau Sapaan. Periksa preview furigana, tabel,
    gambar dan warnings, centang review, lalu publish. Publikasi mengganti materi
    demo subject tersebut. Draft revisi dengan warning contoh sudah disediakan
    juga untuk mencoba review tanpa upload.
@@ -98,11 +103,29 @@ Fixture tidak membuat session login dan tidak mengaktifkan exam/assignment/mock 
 
 ```sh
 bun run test
-bun run tsc --noEmit
+bunx tsc --noEmit --incremental false
 bun run lint
 ```
 
-Known issues dari review sebelumnya tetap perlu diperbaiki: validasi admin dapat
-menghasilkan error halaman, batas upload Server Action belum diselaraskan dengan
-10 MiB, dan akses materi/attempt setelah perubahan publikasi perlu diverifikasi.
-Seed sengaja tidak memperbaiki atau menyamarkan behavior tersebut.
+Audit repository sebelum penulisan dokumentasi ini menjalankan 23 tes / 254
+assertions, TypeScript, dan ESLint dengan hasil lulus. Suite saat ini menguji
+helper, fixture, konversi DOCX, serta render UI; bukan integrasi auth/database
+atau pengujian browser menyeluruh. Pemeriksaan metadata database lokal pada audit
+tersebut gagal terhubung (`ECONNREFUSED`). Hasil browser/build/integrasi sebelumnya
+tetap memiliki tanggal dan batas cakupannya sendiri; lihat
+[indeks bukti historis](developer-guide.md#historical-verification).
+
+Validasi formulir admin sekarang mengembalikan pesan/field error terstruktur;
+pernyataan lama bahwa validasi selalu menjadi error halaman tidak lagi mewakili
+alur tersebut. Batas upload tetap belum selaras: converter/UI menyebut 10 MiB,
+sedangkan request Server Action default dibatasi 1 MB tanpa override konfigurasi.
+Gunakan fixture kecil untuk checklist ini; keberhasilan fixture tidak membuktikan
+unggahan 10 MiB berfungsi melalui browser.
+
+Materi langsung hanya terbuka jika topik, subjek, dan materinya terbit. Halaman
+latihan/hasil memerlukan latihan terbit, tetapi action simpan/kirim attempt yang
+sudah ada tidak memeriksa ulang publikasi. Kebijakan kelanjutan dan akses riwayat
+setelah perubahan publikasi masih [belum diputuskan](PRD.md#unresolved-product-decisions).
+Seed tidak memperbaiki atau menyamarkan perbedaan ini. Bootstrap administrator
+pertama dan pemulihan operator produksi juga belum tersedia; jangan gunakan seed
+demo sebagai prosedur produksi.

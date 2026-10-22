@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+export const metadata: Metadata = { title: "Latihan" };
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ActivityRunner } from "@/components/activities/activity-runner";
@@ -18,11 +20,10 @@ export default async function ActivityPage({
 
   if (!attemptId) {
     const draft = await getOpenAttempt(activityId, session.user.id);
-    return <section className="space-y-4">
-      <Link href="/activities" className="underline">Back to practice</Link>
-      <h1 className="text-2xl font-semibold">{activity.title}</h1>
-      <p>{activity.description}</p>
-      <p>{activity.questions.length} questions</p>
+    return <section className="flex flex-col gap-4">
+      <Link href="/activities" className="inline-flex min-h-11 items-center text-sm font-medium text-primary underline">← Kembali ke latihan</Link>
+      <header className="page-header"><h1>{activity.title}</h1><p>{activity.description}</p></header>
+      <p className="text-sm text-muted-foreground">{activity.questions.length} soal</p>
       <PracticeLaunch activityId={activity.id} resumeAttemptId={draft?.id} />
     </section>;
   }

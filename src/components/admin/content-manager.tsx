@@ -1,97 +1,81 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
+import type { ReactNode } from "react";
+import { FieldGroup } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { ContentPublishControls } from "@/components/admin/content-publish-controls";
+import { NativeSelect } from "@/components/ui/native-select";
+import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@/components/ui/badge";
+import { CollectionEmpty } from "@/components/layouts/collection-empty";
+import { ContentPublishControls } from "./content-publish-controls";
+import { ContentDeleteControls } from "./content-delete-controls";
+import { AdminField, ManagementForm, RecordEditor } from "./management-form";
+import { QuestionEditor } from "./question-editor";
 import { saveAnnouncement, saveEvent, savePractice, saveRecording, saveSubject, saveTopic } from "@/lib/admin/actions";
+import type { ManagementContent, ManagementSection } from "@/lib/admin/types";
 
-function dateOnly(instant: string) {
-  return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date(instant));
+function RecordRow({ title, description, published, kind, id, children }: { title: string; description?: string; published: boolean; kind: string; id: string; children: ReactNode }) {
+  return <li className="flex flex-col gap-4 rounded-xl border bg-card p-5"><div className="flex flex-wrap items-start justify-between gap-3"><div className="min-w-0 flex-1"><h3 className="break-words text-base font-semibold">{title}</h3>{description ? <p className="mt-1 break-words text-sm text-muted-foreground">{description}</p> : null}</div><Badge variant={published ? "success" : "warning"}>{published ? "Terbit" : "Draft"}</Badge></div><RecordEditor title={title} actions={<>{!published ? <ContentPublishControls kind={kind} id={id} title={title} /> : null}<ContentDeleteControls kind={kind} id={id} title={title} /></>}>{children}</RecordEditor></li>;
 }
 
-function dateTimeLocal(instant: string) {
-  return new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(new Date(instant)).replace(" ", "T");
-}
+function dateOnly(instant?: string) { return instant ? new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date(instant)) : ""; }
+function dateTime(instant?: string) { return instant ? new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(new Date(instant)).replace(" ", "T") : ""; }
 
-export function ContentManager({ content }: { content: Awaited<ReturnType<typeof import("@/lib/admin/queries").getManagementContent>> }) {
-  return <div className="space-y-8">
-    <section className="space-y-4">
-      <h2 className="text-xl font-semibold">Topics and subjects</h2>
-      <div className="grid gap-4 lg:grid-cols-2">
-        <Card><CardHeader><CardTitle>Topics</CardTitle></CardHeader><CardContent className="space-y-4">
-          <form action={saveTopic} className="space-y-3">
-            <h3 className="font-medium">Create topic</h3>
-            <FieldGroup><Field><FieldLabel htmlFor="new-topic-id">ID</FieldLabel><Input id="new-topic-id" name="id" required placeholder="traffic-signs" /></Field><Field><FieldLabel htmlFor="new-topic-title">Title</FieldLabel><Input id="new-topic-title" name="title" required maxLength={160} /></Field><Field><FieldLabel htmlFor="new-topic-description">Description</FieldLabel><Input id="new-topic-description" name="description" required maxLength={500} /></Field><Button type="submit">Save as draft</Button></FieldGroup>
-          </form>
-          {content.topics.map((topic) => <form key={topic.id} action={saveTopic} className="space-y-2 border-t pt-3">
-            <input type="hidden" name="originalId" value={topic.id} /><input type="hidden" name="id" value={topic.id} />
-            <p className="font-medium">{topic.title} — {topic.published ? "Published" : "Draft"}</p>
-            <label className="sr-only" htmlFor={`topic-title-${topic.id}`}>Topic title</label><Input id={`topic-title-${topic.id}`} name="title" required defaultValue={topic.title} maxLength={160} />
-            <label className="sr-only" htmlFor={`topic-desc-${topic.id}`}>Topic description</label><Input id={`topic-desc-${topic.id}`} name="description" required defaultValue={topic.description} maxLength={500} />
-            <Button type="submit" variant="outline" size="sm">Save topic draft</Button>
-            {!topic.published ? <ContentPublishControls kind="topic" id={topic.id} title={topic.title} /> : null}
-          </form>)}
-        </CardContent></Card>
-
-        <Card><CardHeader><CardTitle>Subjects</CardTitle></CardHeader><CardContent className="space-y-4">
-          <form action={saveSubject} className="space-y-3">
-            <h3 className="font-medium">Create subject</h3>
-            <FieldGroup><Field><FieldLabel htmlFor="new-subject-topic">Topic</FieldLabel><select id="new-subject-topic" name="topicId" required className="h-9 rounded-md border bg-background px-3"><option value="">Choose topic</option>{content.topics.map((topic) => <option key={topic.id} value={topic.id}>{topic.title}</option>)}</select></Field><Field><FieldLabel htmlFor="new-subject-id">ID</FieldLabel><Input id="new-subject-id" name="id" required placeholder="prohibition-signs" /></Field><Field><FieldLabel htmlFor="new-subject-title">Title</FieldLabel><Input id="new-subject-title" name="title" required maxLength={160} /></Field><Field><FieldLabel htmlFor="new-subject-description">Description</FieldLabel><Input id="new-subject-description" name="description" required maxLength={500} /></Field><Button type="submit">Save as draft</Button></FieldGroup>
-          </form>
-          {content.subjects.map((subject) => <form key={subject.id} action={saveSubject} className="space-y-2 border-t pt-3">
-            <input type="hidden" name="originalId" value={subject.id} /><input type="hidden" name="id" value={subject.id} />
-            <p className="font-medium">{subject.topic?.title} / {subject.title} — {subject.published ? "Published" : "Draft"}</p>
-            <label className="sr-only" htmlFor={`subject-topic-${subject.id}`}>Topic</label><select id={`subject-topic-${subject.id}`} name="topicId" defaultValue={subject.topicId} className="h-9 w-full rounded-md border bg-background px-3">{content.topics.map((topic) => <option key={topic.id} value={topic.id}>{topic.title}</option>)}</select>
-            <label className="sr-only" htmlFor={`subject-title-${subject.id}`}>Subject title</label><Input id={`subject-title-${subject.id}`} name="title" required defaultValue={subject.title} maxLength={160} />
-            <label className="sr-only" htmlFor={`subject-desc-${subject.id}`}>Subject description</label><Input id={`subject-desc-${subject.id}`} name="description" required defaultValue={subject.description} maxLength={500} />
-            <Button type="submit" variant="outline" size="sm">Save subject draft</Button>
-            {!subject.published ? <ContentPublishControls kind="subject" id={subject.id} title={subject.title} /> : null}
-          </form>)}
-        </CardContent></Card>
-      </div>
-    </section>
-
-    <section className="space-y-4">
-      <h2 className="text-xl font-semibold">Practice</h2>
-      <Card><CardHeader><CardTitle>Create practice or replace its questions</CardTitle><p className="text-sm text-muted-foreground">One question per line: true|Question text or false|Question text. Existing attempts keep their question snapshots.</p></CardHeader><CardContent>
-        <form action={savePractice}><FieldGroup>
-          <Field><FieldLabel htmlFor="practice-title">Title</FieldLabel><Input id="practice-title" name="title" required maxLength={160} /></Field>
-          <Field><FieldLabel htmlFor="practice-description">Description</FieldLabel><Input id="practice-description" name="description" required maxLength={500} /></Field>
-          <Field><FieldLabel htmlFor="practice-questions">Questions and answer key</FieldLabel><textarea id="practice-questions" name="questions" required rows={8} className="rounded-md border bg-background p-3 font-mono text-sm" placeholder={'true|A red light means stop.\nfalse|A blue sign is a warning.'} /></Field>
-          <Button type="submit">Save practice draft</Button>
-        </FieldGroup></form>
-        <div className="mt-5 space-y-5">{content.activities.map((activity) => <form key={activity.id} action={savePractice} className="space-y-2 border-t pt-3">
-          <input type="hidden" name="id" value={activity.id} /><p className="font-medium">{activity.title} · {activity.published ? "Published" : "Draft"}</p>
-          <label className="sr-only" htmlFor={`practice-title-${activity.id}`}>Practice title</label><Input id={`practice-title-${activity.id}`} name="title" required defaultValue={activity.title} maxLength={160} />
-          <label className="sr-only" htmlFor={`practice-description-${activity.id}`}>Practice description</label><Input id={`practice-description-${activity.id}`} name="description" required defaultValue={activity.description} maxLength={500} />
-          <label className="sr-only" htmlFor={`practice-questions-${activity.id}`}>Questions and answer key</label><textarea id={`practice-questions-${activity.id}`} name="questions" required rows={6} className="w-full rounded-md border bg-background p-3 font-mono text-sm" defaultValue={activity.questions.map((question) => `${question.correctAnswer ? "true" : "false"}|${question.question}`).join("\n")} />
-          <Button type="submit" variant="outline" size="sm">Save practice draft</Button>{!activity.published ? <ContentPublishControls kind="activity" id={activity.id} title={activity.title} /> : null}
-        </form>)}</div>
-      </CardContent></Card>
-    </section>
-
-    <section className="space-y-4">
-      <h2 className="text-xl font-semibold">Announcements</h2>
-      <Card><CardHeader><CardTitle>Create or edit an announcement</CardTitle></CardHeader><CardContent className="space-y-4">
-        <form action={saveAnnouncement}><FieldGroup><Field><FieldLabel htmlFor="announcement-title">Title</FieldLabel><Input id="announcement-title" name="title" required maxLength={160} /></Field><Field><FieldLabel htmlFor="announcement-summary">Summary</FieldLabel><Input id="announcement-summary" name="summary" required maxLength={400} /></Field><Field><FieldLabel htmlFor="announcement-content">Full content</FieldLabel><textarea id="announcement-content" name="content" required rows={5} maxLength={20000} className="rounded-md border bg-background p-3" /></Field><Button type="submit">Save as draft</Button></FieldGroup></form>
-        <div className="space-y-4">{content.announcements.map((a) => <form key={a.id} action={saveAnnouncement} className="space-y-2 border-t pt-3"><input type="hidden" name="id" value={a.id} /><p className="font-medium">{a.title} · {a.published ? "Published" : "Draft"}</p><label className="sr-only" htmlFor={`announcement-title-${a.id}`}>Announcement title</label><Input id={`announcement-title-${a.id}`} name="title" required defaultValue={a.title} maxLength={160} /><label className="sr-only" htmlFor={`announcement-summary-${a.id}`}>Announcement summary</label><Input id={`announcement-summary-${a.id}`} name="summary" required defaultValue={a.summary} maxLength={400} /><label className="sr-only" htmlFor={`announcement-content-${a.id}`}>Announcement content</label><textarea id={`announcement-content-${a.id}`} name="content" required rows={5} maxLength={20000} className="w-full rounded-md border bg-background p-3" defaultValue={a.content} /><Button type="submit" variant="outline" size="sm">Save as draft</Button>{!a.published ? <ContentPublishControls kind="announcement" id={a.id} title={a.title} /> : null}</form>)}</div>
-      </CardContent></Card>
-    </section>
-
-    <section className="space-y-4">
-      <h2 className="text-xl font-semibold">Class recordings</h2>
-      <Card><CardHeader><CardTitle>Create or edit a recording link</CardTitle><p className="text-sm text-muted-foreground">Only HTTPS links are accepted. Date is interpreted in Asia/Tokyo.</p></CardHeader><CardContent className="space-y-4">
-        <form action={saveRecording}><FieldGroup><Field><FieldLabel htmlFor="recording-title">Title</FieldLabel><Input id="recording-title" name="title" required maxLength={160} /></Field><Field><FieldLabel htmlFor="recording-description">Description</FieldLabel><Input id="recording-description" name="description" required maxLength={1000} /></Field><Field><FieldLabel htmlFor="recording-date">Lesson date (Asia/Tokyo)</FieldLabel><Input id="recording-date" name="lessonDate" type="date" required /></Field><Field><FieldLabel htmlFor="recording-url">HTTPS video URL</FieldLabel><Input id="recording-url" name="url" type="url" required maxLength={2048} placeholder="https://…" /></Field><Button type="submit">Save as draft</Button></FieldGroup></form>
-        <div className="space-y-4">{content.recordings.map((r) => <form key={r.id} action={saveRecording} className="space-y-2 border-t pt-3"><input type="hidden" name="id" value={r.id} /><p className="font-medium">{r.title} · {r.published ? "Published" : "Draft"}</p><label className="sr-only" htmlFor={`recording-title-${r.id}`}>Recording title</label><Input id={`recording-title-${r.id}`} name="title" required defaultValue={r.title} maxLength={160} /><label className="sr-only" htmlFor={`recording-description-${r.id}`}>Recording description</label><Input id={`recording-description-${r.id}`} name="description" required defaultValue={r.description} maxLength={1000} /><label className="sr-only" htmlFor={`recording-date-${r.id}`}>Lesson date (Asia/Tokyo)</label><Input id={`recording-date-${r.id}`} name="lessonDate" type="date" required defaultValue={dateOnly(r.lessonDate)} /><label className="sr-only" htmlFor={`recording-url-${r.id}`}>HTTPS video URL</label><Input id={`recording-url-${r.id}`} name="url" type="url" required defaultValue={r.url} maxLength={2048} /><Button type="submit" variant="outline" size="sm">Save as draft</Button>{!r.published ? <ContentPublishControls kind="recording" id={r.id} title={r.title} /> : null}</form>)}</div>
-      </CardContent></Card>
-    </section>
-
-    <section className="space-y-4">
-      <h2 className="text-xl font-semibold">Lessons and events</h2>
-      <Card><CardHeader><CardTitle>Create or edit an event</CardTitle><p className="text-sm text-muted-foreground">Both date and time fields use Asia/Tokyo.</p></CardHeader><CardContent className="space-y-4">
-        <form action={saveEvent}><FieldGroup><Field><FieldLabel htmlFor="event-title">Title</FieldLabel><Input id="event-title" name="title" required maxLength={160} /></Field><Field><FieldLabel htmlFor="event-details">Details</FieldLabel><textarea id="event-details" name="details" required rows={4} maxLength={4000} className="rounded-md border bg-background p-3" /></Field><Field><FieldLabel htmlFor="event-start">Starts (Asia/Tokyo)</FieldLabel><Input id="event-start" name="startsAt" type="datetime-local" required /></Field><Field><FieldLabel htmlFor="event-end">Ends (Asia/Tokyo)</FieldLabel><Input id="event-end" name="endsAt" type="datetime-local" required /></Field><Button type="submit">Save as draft</Button></FieldGroup></form>
-        <div className="space-y-4">{content.events.map((e) => <form key={e.id} action={saveEvent} className="space-y-2 border-t pt-3"><input type="hidden" name="id" value={e.id} /><p className="font-medium">{e.title} · {e.published ? "Published" : "Draft"}</p><label className="sr-only" htmlFor={`event-title-${e.id}`}>Event title</label><Input id={`event-title-${e.id}`} name="title" required defaultValue={e.title} maxLength={160} /><label className="sr-only" htmlFor={`event-details-${e.id}`}>Event details</label><textarea id={`event-details-${e.id}`} name="details" required rows={4} maxLength={4000} className="w-full rounded-md border bg-background p-3" defaultValue={e.details} /><label className="sr-only" htmlFor={`event-start-${e.id}`}>Starts (Asia/Tokyo)</label><Input id={`event-start-${e.id}`} name="startsAt" type="datetime-local" required defaultValue={dateTimeLocal(e.startsAt)} /><label className="sr-only" htmlFor={`event-end-${e.id}`}>Ends (Asia/Tokyo)</label><Input id={`event-end-${e.id}`} name="endsAt" type="datetime-local" required defaultValue={dateTimeLocal(e.endsAt)} /><Button type="submit" variant="outline" size="sm">Save as draft</Button>{!e.published ? <ContentPublishControls kind="event" id={e.id} title={e.title} /> : null}</form>)}</div>
-      </CardContent></Card>
-    </section>
-  </div>;
+export function ContentManager({ content, section }: { content: ManagementContent; section: ManagementSection }) {
+  if (section === "topics") {
+    const form = (topic?: ManagementContent["topics"][number]) => <ManagementForm action={saveTopic} resetOnSuccess={!topic} published={topic?.published}><FieldGroup>
+      {topic ? <input type="hidden" name="originalId" value={topic.id} /> : null}
+      <AdminField name="id" label="ID topik" hint="Huruf kecil, angka, dan tanda hubung. ID tidak dapat diubah setelah dibuat."><Input required maxLength={80} defaultValue={topic?.id} readOnly={!!topic} /></AdminField>
+      <AdminField name="title" label="Judul topik"><Input required maxLength={160} defaultValue={topic?.title} /></AdminField>
+      <AdminField name="description" label="Deskripsi"><Textarea required maxLength={500} defaultValue={topic?.description} /></AdminField>
+    </FieldGroup></ManagementForm>;
+    return <div className="page-stack"><RecordEditor title="Tambah topik" create>{form()}</RecordEditor>{content.topics.length ? <ul className="flex flex-col gap-3">{content.topics.map((topic) => <RecordRow key={topic.id} {...topic} kind="topic">{form(topic)}</RecordRow>)}</ul> : <CollectionEmpty title="Topik tidak ditemukan" description="Tambahkan topik baru atau ubah kata pencarian." />}</div>;
+  }
+  if (section === "subjects") {
+    const form = (subject?: ManagementContent["subjects"][number]) => <ManagementForm action={saveSubject} resetOnSuccess={!subject} published={subject?.published}><FieldGroup>
+      {subject ? <input type="hidden" name="originalId" value={subject.id} /> : null}
+      <AdminField name="topicId" label="Topik"><NativeSelect required defaultValue={subject?.topicId ?? ""}><option value="" disabled>Pilih topik</option>{content.topicOptions.map((topic) => <option key={topic.id} value={topic.id}>{topic.title}</option>)}</NativeSelect></AdminField>
+      <AdminField name="id" label="ID subjek" hint="ID tidak dapat diubah setelah dibuat."><Input required maxLength={80} defaultValue={subject?.id} readOnly={!!subject} /></AdminField>
+      <AdminField name="title" label="Judul subjek"><Input required maxLength={160} defaultValue={subject?.title} /></AdminField>
+      <AdminField name="description" label="Deskripsi"><Textarea required maxLength={500} defaultValue={subject?.description} /></AdminField>
+    </FieldGroup></ManagementForm>;
+    return <div className="page-stack"><RecordEditor title="Tambah subjek" create>{form()}</RecordEditor>{content.subjects.length ? <ul className="flex flex-col gap-3">{content.subjects.map((subject) => <RecordRow key={subject.id} {...subject} description={`${subject.topic?.title ?? "Topik"} · ${subject.description}`} kind="subject">{form(subject)}</RecordRow>)}</ul> : <CollectionEmpty title="Subjek tidak ditemukan" description="Tambahkan subjek baru atau ubah kata pencarian." />}</div>;
+  }
+  if (section === "practice") {
+    const form = (activity?: ManagementContent["activities"][number]) => <ManagementForm action={savePractice} resetOnSuccess={!activity} published={activity?.published}><FieldGroup>
+      {activity ? <input type="hidden" name="id" value={activity.id} /> : null}
+      <AdminField name="title" label="Judul latihan"><Input required maxLength={160} defaultValue={activity?.title} /></AdminField>
+      <AdminField name="description" label="Deskripsi"><Textarea required maxLength={500} defaultValue={activity?.description} /></AdminField>
+      <QuestionEditor initialQuestions={activity?.questions} />
+    </FieldGroup></ManagementForm>;
+    return <div className="page-stack"><p className="text-sm text-muted-foreground">Perubahan soal berlaku untuk latihan baru. Latihan siswa yang sudah dimulai tetap menggunakan soal sebelumnya.</p><RecordEditor title="Tambah latihan" create>{form()}</RecordEditor>{content.activities.length ? <ul className="flex flex-col gap-3">{content.activities.map((activity) => <RecordRow key={activity.id} {...activity} description={`${activity.questions.length} soal · ${activity.description}`} kind="activity">{form(activity)}</RecordRow>)}</ul> : <CollectionEmpty title="Latihan tidak ditemukan" description="Tambahkan latihan baru atau ubah kata pencarian." />}</div>;
+  }
+  if (section === "announcements") {
+    const form = (item?: ManagementContent["announcements"][number]) => <ManagementForm action={saveAnnouncement} resetOnSuccess={!item} published={item?.published}><FieldGroup>
+      {item ? <input type="hidden" name="id" value={item.id} /> : null}
+      <AdminField name="title" label="Judul pengumuman"><Input required maxLength={160} defaultValue={item?.title} /></AdminField>
+      <AdminField name="summary" label="Ringkasan"><Textarea required maxLength={400} defaultValue={item?.summary} /></AdminField>
+      <AdminField name="content" label="Isi pengumuman"><Textarea required rows={8} maxLength={20000} defaultValue={item?.content} /></AdminField>
+    </FieldGroup></ManagementForm>;
+    return <div className="page-stack"><RecordEditor title="Tambah pengumuman" create>{form()}</RecordEditor>{content.announcements.length ? <ul className="flex flex-col gap-3">{content.announcements.map((item) => <RecordRow key={item.id} {...item} description={item.summary} kind="announcement">{form(item)}</RecordRow>)}</ul> : <CollectionEmpty title="Pengumuman tidak ditemukan" description="Tambahkan pengumuman baru atau ubah kata pencarian." />}</div>;
+  }
+  if (section === "recordings") {
+    const form = (item?: ManagementContent["recordings"][number]) => <ManagementForm action={saveRecording} resetOnSuccess={!item} published={item?.published}><FieldGroup>
+      {item ? <input type="hidden" name="id" value={item.id} /> : null}
+      <AdminField name="title" label="Judul rekaman"><Input required maxLength={160} defaultValue={item?.title} /></AdminField>
+      <AdminField name="description" label="Deskripsi"><Textarea required maxLength={1000} defaultValue={item?.description} /></AdminField>
+      <AdminField name="lessonDate" label="Tanggal kelas" hint="Tanggal mengikuti waktu Jepang (Asia/Tokyo)."><Input type="date" required defaultValue={dateOnly(item?.lessonDate)} /></AdminField>
+      <AdminField name="url" label="Tautan video HTTPS"><Input type="url" required maxLength={2048} placeholder="https://…" defaultValue={item?.url} /></AdminField>
+    </FieldGroup></ManagementForm>;
+    return <div className="page-stack"><RecordEditor title="Tambah rekaman" create>{form()}</RecordEditor>{content.recordings.length ? <ul className="flex flex-col gap-3">{content.recordings.map((item) => <RecordRow key={item.id} {...item} kind="recording">{form(item)}</RecordRow>)}</ul> : <CollectionEmpty title="Rekaman tidak ditemukan" description="Tambahkan rekaman baru atau ubah kata pencarian." />}</div>;
+  }
+  if (section === "events") {
+    const form = (item?: ManagementContent["events"][number]) => <ManagementForm action={saveEvent} resetOnSuccess={!item} published={item?.published}><FieldGroup>
+      {item ? <input type="hidden" name="id" value={item.id} /> : null}
+      <AdminField name="title" label="Judul kegiatan"><Input required maxLength={160} defaultValue={item?.title} /></AdminField>
+      <AdminField name="details" label="Keterangan"><Textarea required maxLength={4000} defaultValue={item?.details} /></AdminField>
+      <AdminField name="startsAt" label="Waktu mulai" hint="Waktu Jepang (Asia/Tokyo)."><Input type="datetime-local" required defaultValue={dateTime(item?.startsAt)} /></AdminField>
+      <AdminField name="endsAt" label="Waktu selesai" hint="Harus setelah waktu mulai, dalam waktu Jepang."><Input type="datetime-local" required defaultValue={dateTime(item?.endsAt)} /></AdminField>
+    </FieldGroup></ManagementForm>;
+    return <div className="page-stack"><RecordEditor title="Tambah kegiatan" create>{form()}</RecordEditor>{content.events.length ? <ul className="flex flex-col gap-3">{content.events.map((item) => <RecordRow key={item.id} {...item} description={item.details} kind="event">{form(item)}</RecordRow>)}</ul> : <CollectionEmpty title="Jadwal tidak ditemukan" description="Tambahkan kegiatan baru atau ubah kata pencarian." />}</div>;
+  }
+  return null;
 }

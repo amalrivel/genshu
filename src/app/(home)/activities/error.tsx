@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 // NOTE: Boundary ini menangani kegagalan render/pemuatan di Activities dan
 // route turunannya, misalnya database tidak tersedia. Data yang tidak ditemukan
@@ -17,11 +18,11 @@ export default function ActivitiesError({ retry }: {
   // error.message mentah karena detail database tidak dibutuhkan pengguna.
   // TODO: Hubungkan digest dengan pelaporan error server saat observability dibuat.
   return (
-    <section className="space-y-4">
-      <h1>Could not load activity content</h1>
-      <p role="alert">Please try again. If the problem continues, come back later.</p>
-      <Button type="button" onClick={retry}>Try again</Button>
-      <Link href="/activities" className="block underline">Back to Activities</Link>
+    <section className="flex flex-col gap-4">
+      <h1>Latihan belum dapat dimuat</h1>
+      <Alert variant="destructive"><AlertDescription>Silakan coba lagi. Jika masih gagal, periksa koneksi Anda atau kembali beberapa saat lagi.</AlertDescription></Alert>
+      <Button type="button" onClick={retry}>Coba lagi</Button>
+      <Link href="/activities" className="block underline">Kembali ke latihan</Link>
     </section>
   );
 }

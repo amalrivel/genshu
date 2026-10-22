@@ -22,7 +22,7 @@ export function useActivity(
   const [
     currentQuestionIndex,
     setCurrentQuestionIndex,
-  ] = useState(0);
+  ] = useState(() => Math.max(0, activity.questions.findIndex((question) => typeof initialAnswers[question.id] !== "boolean")));
 
   const [answers, setAnswers] =
     useState<Answers>(initialAnswers);

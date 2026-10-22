@@ -1,6 +1,7 @@
 // src/components/activities/question-card.tsx
 
-import { Button } from "@/components/ui/button";
+import { Field, FieldLegend, FieldSet, FieldLabel } from "@/components/ui/field";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Card,
   CardContent,
@@ -34,42 +35,27 @@ export function QuestionCard({
       </CardHeader>
 
       <CardContent>
-        <div className="grid grid-cols-2 gap-4">
-          <Button
-            type="button"
-            // NOTE: Warna saja tidak menyampaikan jawaban terpilih kepada
-            // pembaca layar. aria-pressed menyatakan status pilihan; disabled
-            // mencegah perubahan jawaban ketika server sedang menilai.
-            aria-pressed={answer === true}
+        <FieldSet>
+          <FieldLegend className="sr-only">Pilih Benar atau Salah</FieldLegend>
+          <RadioGroup
+            value={answer === undefined ? null : String(answer)}
+            onValueChange={(value) => {
+              if (value === "true") onAnswer(true);
+              if (value === "false") onAnswer(false);
+            }}
             disabled={disabled}
-            variant={
-              answer === true
-                ? "default"
-                : "outline"
-            }
-            onClick={() =>
-              onAnswer(true)
-            }
+            className="grid grid-cols-1 gap-3 sm:grid-cols-2"
           >
-            True
-          </Button>
-
-          <Button
-            type="button"
-            aria-pressed={answer === false}
-            disabled={disabled}
-            variant={
-              answer === false
-                ? "default"
-                : "outline"
-            }
-            onClick={() =>
-              onAnswer(false)
-            }
-          >
-            False
-          </Button>
-        </div>
+            {[["true", "Benar"], ["false", "Salah"]].map(([value, label]) => (
+              <FieldLabel key={value} className="min-h-11 cursor-pointer rounded-md border bg-card px-3 py-2 hover:bg-muted has-[[data-checked]]:border-primary has-[[data-checked]]:bg-muted">
+                <Field orientation="horizontal" className="items-center">
+                  <RadioGroupItem value={value} />
+                  <span>{label}</span>
+                </Field>
+              </FieldLabel>
+            ))}
+          </RadioGroup>
+        </FieldSet>
       </CardContent>
     </Card>
   );

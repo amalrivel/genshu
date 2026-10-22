@@ -1,5 +1,3 @@
 export default function HomeFooter() {
-  return <footer className="container mx-auto max-w-6xl px-4 py-6 text-center text-sm text-muted-foreground">
-    Genshu learning portal
-  </footer>;
+  return <footer className="px-4 pb-28 pt-4 text-center text-xs text-muted-foreground md:pb-6">Genshu · Ruang belajar bahasa Jepang</footer>;
 }

@@ -5,11 +5,11 @@ import Link from "next/link";
 
 export default function ActivityNotFound() {
   return (
-    <section className="space-y-4">
-      <h1>Activity content not found</h1>
-      <p>The requested activity or activity type is not available. Check the URL or choose another activity.</p>
+    <section className="flex flex-col gap-4">
+      <h1>Latihan tidak ditemukan</h1>
+      <p>Latihan ini tidak tersedia. Periksa alamat atau pilih latihan lainnya.</p>
       <Link href="/activities" className="underline">
-        Back to Activities
+        Kembali ke latihan
       </Link>
     </section>
   );

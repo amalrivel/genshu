@@ -28,9 +28,9 @@ export async function getSubjectsByTopic(topicId: string) {
 export async function getMaterial(topicId: string, subjectId: string) {
   const subject = await db.orm.public.Subject.where({ id: subjectId, topicId, published: true })
     .select("id", "title", "description")
-    .include("topic", (topic) => topic.select("id", "title"))
+    .include("topic", (topic) => topic.select("id", "title", "published"))
     .first();
-  if (!subject?.topic) return null;
+  if (!subject?.topic?.published) return null;
   const material = await db.orm.public.Material.where({ subjectId, published: true })
     .select("id", "title", "description", "contentHtml")
     .first();

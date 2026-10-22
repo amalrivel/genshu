@@ -123,3 +123,13 @@ export function parseAttemptResult(value: unknown): ActivityResult | null {
 export function clientQuestions(questions: SnapshotQuestion[]): Question[] {
   return questions.map(({ id, question }) => ({ id, question }));
 }
+
+export async function getLatestOpenAttempt(userId: string) {
+  const row = await db.orm.public.ActivityAttempt.where({ userId, status: "in_progress" })
+    .where((attempt) => attempt.activity.some((activity) => activity.published.eq(true)))
+    .select("id", "activityId", "savedAt")
+    .include("activity", (activity) => activity.select("title"))
+    .orderBy((attempt) => attempt.savedAt.desc())
+    .first();
+  return row?.activity ? { id: row.id, activityId: row.activityId, title: row.activity.title, savedAt: row.savedAt } : null;
+}

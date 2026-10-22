@@ -8,6 +8,9 @@ const alertVariants = cva(
     variants: {
       variant: {
         default: "bg-card text-card-foreground",
+        success: "border-success/30 bg-success-background text-success *:data-[slot=alert-description]:text-success",
+        warning:
+          "border-warning/40 bg-warning-background text-warning *:data-[slot=alert-description]:text-warning",
         destructive:
           "bg-card text-destructive *:data-[slot=alert-description]:text-destructive/90 *:[svg]:text-current",
       },
@@ -26,7 +29,7 @@ function Alert({
   return (
     <div
       data-slot="alert"
-      role="alert"
+      role={variant === "success" ? "status" : "alert"}
       className={cn(alertVariants({ variant }), className)}
       {...props}
     />

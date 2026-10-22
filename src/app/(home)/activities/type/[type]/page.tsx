@@ -7,6 +7,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ActivityCard } from "@/components/activities/activity-card";
 import { getActivityCategory, getActivitiesByType } from "@/lib/activities/queries";
+import { CollectionEmpty } from "@/components/layouts/collection-empty";
 
 // NOTE: Daftar berdasarkan jenis; URL pengerjaan tidak bergantung pada jenis.
 export default async function ActivitiesByTypePage({
@@ -20,14 +21,14 @@ export default async function ActivitiesByTypePage({
   const activities = await getActivitiesByType(activityType.id);
 
   return (
-    <section className="space-y-4">
-      <Link href="/activities" className="underline">Back to activity types</Link>
+    <section className="flex flex-col gap-4">
+      <Link href="/activities" className="inline-flex min-h-11 items-center text-sm font-medium text-primary underline">← Semua latihan</Link>
       <header>
         <h1>{activityType.title}</h1>
-        <p>{activityType.description}</p>
+        <p className="text-muted-foreground">{activityType.description}</p>
       </header>
       {activities.length === 0 ? (
-        <p>No activities available for this type yet.</p>
+        <CollectionEmpty title="Belum ada latihan" description="Latihan akan muncul setelah diterbitkan oleh guru Anda." />
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {activities.map((activity) => (
