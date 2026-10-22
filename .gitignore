@@ -32,7 +32,6 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
-!.env.example
 
 # vercel
 .vercel
@@ -40,9 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+node_modules/
+dist/
+.env
+
+# Prisma client is generated during installation/build
+/src/generated/prisma/
 # Playwright CLI output (may contain credentials)
 .playwright-cli/
-
-# Generated Graphify backups and AST caches
-graphify-out/20??-??-??/
-graphify-out/cache/ast/

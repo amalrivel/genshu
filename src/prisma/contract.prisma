@@ -1,0 +1,221 @@
+// use prisma-8
+
+// Keep the original starter tables intact. Genshu's managed account tables use
+// distinct names so adding v1 cannot rename or discard existing rows.
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  username  String?
+  name      String?
+  posts     Post[]
+  createdAt TimestamptzString @default(now())
+  updatedAt temporal.updatedAtString()
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String?
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int
+  createdAt TimestamptzString @default(now())
+  updatedAt temporal.updatedAtString()
+}
+
+model GenshuUser {
+  id            String   @id
+  name          String
+  email         String   @unique
+  emailVerified Boolean  @default(false)
+  image         String?
+  role          String   @default("student")
+  banned        Boolean  @default(false)
+  banReason     String?
+  banExpires    TimestamptzString?
+  createdAt     TimestamptzString @default(now())
+  updatedAt     TimestamptzString @default(now())
+  sessions      GenshuSession[]
+  accounts      GenshuAccount[]
+  attempts      ActivityAttempt[]
+  @@map("genshu_user")
+}
+
+model GenshuSession {
+  id             String   @id
+  expiresAt      TimestamptzString
+  token          String   @unique
+  createdAt      TimestamptzString @default(now())
+  updatedAt      TimestamptzString @default(now())
+  ipAddress      String?
+  userAgent      String?
+  userId         String
+  impersonatedBy String?
+  user           GenshuUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId])
+  @@map("genshu_session")
+}
+
+model GenshuAccount {
+  id                    String   @id
+  accountId             String
+  providerId            String
+  userId                String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  TimestamptzString?
+  refreshTokenExpiresAt TimestamptzString?
+  scope                 String?
+  password              String?
+  createdAt             TimestamptzString @default(now())
+  updatedAt             TimestamptzString @default(now())
+  user                  GenshuUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId])
+  @@map("genshu_account")
+}
+
+model GenshuVerification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  TimestamptzString
+  createdAt  TimestamptzString @default(now())
+  updatedAt  TimestamptzString @default(now())
+  @@index([identifier])
+  @@map("genshu_verification")
+}
+
+model Topic {
+  id          String   @id
+  title       String
+  description String
+  published   Boolean  @default(false)
+  subjects    Subject[]
+  createdAt   TimestamptzString @default(now())
+  updatedAt   TimestamptzString @default(now())
+}
+
+model Subject {
+  id          String   @id
+  topicId     String
+  title       String
+  description String
+  published   Boolean  @default(false)
+  topic       Topic    @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  material    Material?
+  createdAt   TimestamptzString @default(now())
+  updatedAt   TimestamptzString @default(now())
+  @@index([topicId])
+}
+
+model Material {
+  id          String   @id @default(uuid())
+  subjectId   String   @unique
+  title       String
+  description String
+  contentHtml String
+  warnings    Json
+  published   Boolean  @default(false)
+  subject     Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  createdAt   TimestamptzString @default(now())
+  updatedAt   TimestamptzString @default(now())
+}
+
+model MaterialDraft {
+  id          String   @id @default(uuid())
+  subjectId   String
+  title       String
+  description String
+  contentHtml String
+  warnings    Json
+  subject     Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  createdAt   TimestamptzString @default(now())
+  updatedAt   TimestamptzString @default(now())
+  @@index([subjectId, updatedAt])
+}
+
+model ActivityCategory {
+  id          String   @id
+  title       String
+  description String
+  activities  Activity[]
+}
+
+model Activity {
+  id          String   @id @default(uuid())
+  type        String
+  title       String
+  description String
+  published   Boolean  @default(false)
+  questions   ActivityQuestion[]
+  attempts    ActivityAttempt[]
+  category    ActivityCategory @relation(fields: [type], references: [id])
+  createdAt   TimestamptzString @default(now())
+  updatedAt   TimestamptzString @default(now())
+  @@index([type, published])
+}
+
+model ActivityQuestion {
+  id            String   @id @default(uuid())
+  activityId    String
+  position      Int
+  question      String
+  correctAnswer Boolean
+  activity      Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  @@unique([activityId, position])
+  @@index([activityId])
+}
+
+model ActivityAttempt {
+  id               String   @id @default(uuid())
+  activityId       String
+  userId           String
+  status           String   @default("in_progress")
+  questionsSnapshot Json
+  answers          Json
+  result           Json?
+  startedAt        TimestamptzString @default(now())
+  savedAt          TimestamptzString @default(now())
+  submittedAt      TimestamptzString?
+  activity         Activity @relation(fields: [activityId], references: [id], onDelete: Restrict)
+  user             GenshuUser @relation(fields: [userId], references: [id], onDelete: Restrict)
+  @@index([userId, status])
+  @@index([userId, submittedAt])
+  @@index([activityId])
+}
+
+model Announcement {
+  id          String   @id @default(uuid())
+  title       String
+  summary     String
+  content     String
+  published   Boolean  @default(false)
+  publishedAt TimestamptzString?
+  createdAt   TimestamptzString @default(now())
+  updatedAt   TimestamptzString @default(now())
+  @@index([published, publishedAt])
+}
+
+model Recording {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  lessonDate  TimestamptzString
+  url         String
+  published   Boolean  @default(false)
+  createdAt   TimestamptzString @default(now())
+  updatedAt   TimestamptzString @default(now())
+  @@index([published, lessonDate])
+}
+
+model CalendarEvent {
+  id          String   @id @default(uuid())
+  title       String
+  details     String
+  startsAt    TimestamptzString
+  endsAt      TimestamptzString
+  published   Boolean  @default(false)
+  createdAt   TimestamptzString @default(now())
+  updatedAt   TimestamptzString @default(now())
+  @@index([published, startsAt])
+}

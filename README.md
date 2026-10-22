@@ -1,188 +1,127 @@
 # Genshu
 
-Genshu is a learning-management workspace for Indonesian students in Japanese scholarship learning programs. The first live release provides public materials and anonymous practice, with Sensei content authoring and Tantōsha staff access. Attendance, assignments, exams, cohorts, and user management remain prototype workflows.
+Genshu is a managed Japanese-learning portal with an Indonesian interface.
+Administrators provision accounts; students sign in with email and password.
 
-## Current release work
+## Documentation
 
-Published materials and anonymous practice read shared content from
-PostgreSQL. The Supabase schema is provisioned with one published material and
-one published practice set. Student answers are temporary and are not official
-records. Staff login and content authoring use Supabase Auth plus server-side
-role checks; Sensei and Tantōsha identities are mapped. Production-browser
-checks passed on 2026-09-26 for Sensei authoring/publishing, Tantōsha
-authoring denial, anonymous student reading/practice, and hidden drafts. Those
-local production checks have now been repeated through Data API, including
-expired-session refresh and desktop/mobile practice. They do not verify the
-current Vercel deployment.
-Attendance, assignments, exams, cohort
-management, and user management still use prototype data and are hidden in
-production until released separately.
+- [Product requirements](docs/PRD.md): current scope, roles, journeys, acceptance criteria and unresolved decisions.
+- [Architecture](docs/ARCHITECTURE.md): routes, auth/data boundaries, publication, practice persistence and technical limits.
+- [Agent instructions](AGENTS.md): development conventions and when to read each document.
+- [Design](DESIGN.md): UI and interaction requirements.
+- [Demo and testing](docs/demo-testing.md): local fixtures, demo accounts and browser checklist.
+- [Developer guide](docs/developer-guide.md): compatibility links and dated verification evidence.
 
-Vercel and Supabase PostgreSQL are the initial deployment targets. Development
-remains local-first with versioned database migrations.
+## Local setup
 
-The interface supports Indonesian and Japanese, dark mode, responsive navigation,
-and mobile-oriented student workflows.
+Requirements: Bun (package manager pinned to 1.4.2), Docker Compose, and PostgreSQL
+15 or newer. The repository's Compose service uses PostgreSQL 18, publishes it on
+`127.0.0.1:5433`, and persists it in the `postgres_data` volume.
 
-## Development
+Create a local, ignored `.env` with `DATABASE_URL`, `BETTER_AUTH_SECRET` and
+`BETTER_AUTH_URL`. For Compose, also set `POSTGRES_USER`, `POSTGRES_PASSWORD` and
+`POSTGRES_DB` to match the connection URL and use port 5433. Use a unique random
+auth secret of at least 32 characters; for local development the auth URL is
+`http://localhost:3000`. Do not commit secrets. The local `.env.example` is currently
+ignored/untracked, so fresh-clone setup cannot depend on copying that file.
 
-Use Bun for local development:
-
-```bash
+```sh
+docker compose up -d db
 bun install
+bun run db:generate
+bun run db:init:preview
+```
+
+Review the additive operations from the preview and confirm `DATABASE_URL` points
+at the intended database. Back up existing data first. `db init` creates missing
+contract objects, preserves compatible existing tables, stops on changes that
+would need destructive operations, and signs the resulting schema. After reviewing
+the preview:
+
+```sh
+bun run db:init
+bun run db:seed
 bun run dev
 ```
 
-Open <http://localhost:3000>. Before handing off changes, run:
+The seed inserts only the `practice` activity category and does not overwrite
+existing categories or create sample questions, users, or passwords. Starting or
+building the app does not migrate the database. Never use reset or destructive
+schema commands against an existing database. The v1 contract leaves the starter
+`User` and `Post` tables intact and adds Genshu tables.
 
-```bash
-bun run verify
-```
+Production secrets and its actual public `BETTER_AUTH_URL` must be configured
+through the deployment environment.
 
-The project uses Next.js 16, React 19, TypeScript, Tailwind CSS 4, shadcn/Base UI primitives, `next-intl`, and `next-themes`.
+For local development, set `BETTER_AUTH_URL="http://localhost:3000"` in `.env`.
+The dev configuration also allows `127.0.0.1` for Next.js resources and
+authentication requests on port 3000. Restart `bun run dev` after changing
+environment variables or configuration. Production must use its actual public
+URL; the additional local authentication origins apply only in development.
 
-## Vercel production status and setup
+## Accounts and recovery
 
-Run `bun run db:check-data-api` to check migrations, RLS with all five role
-cases, JSON round trips, and RPC rollback in a temporary local PostgreSQL
-database. This needs PostgreSQL binaries (`POSTGRES_BIN` can override their
-directory) and permission to create a local Unix socket. It does not connect
-to Supabase or replace direct Data API and browser verification.
+There is no public registration. An existing administrator can use `/admin` to
+provision student and teacher accounts or reset their passwords.
 
-`bun run db:check-data-api-live` uses the publishable key and QA Auth sessions
-to check direct API permissions, JSON, and atomic replacement. Provide
-`SENSEI_EMAIL`/`SENSEI_PASSWORD`, `TANTOSHA_EMAIL`/`TANTOSHA_PASSWORD`,
-`NONSTAFF_EMAIL`/`NONSTAFF_PASSWORD`, and
-`INACTIVE_STAFF_EMAIL`/`INACTIVE_STAFF_PASSWORD` in local env only. The script
-creates uniquely named QA content and deletes it afterward; missing roles
-cause an incomplete-coverage exit. It never creates identities or modifies
-staff membership.
+Administrators can also update a student's or teacher's name, email, and role,
+or delete an account that has no practice attempts/results. Changing an email or
+role revokes the target account's sessions; password resets remain a separate
+action. Administrator accounts are protected from profile/role edits and deletion
+in this management flow. Deleting a managed account also removes its sign-in
+credentials and sessions; practice history is preserved by refusing deletion of
+accounts that have attempts.
 
-Verification on 2026-09-26: local SQL checks pass for all five roles; live Data
-API checks pass for all five roles. QA content has been removed and
-original row hashes remain unchanged. Local production browser checks and
-build/start with `POSTGRES_URL` absent pass. `bun run verify --webpack` passes;
-the default Turbopack build cannot bind its worker port in this sandbox.
+For local evaluation, run `bun run db:seed:demo` after initializing the schema,
+then sign in with the administrator account described in
+[demo accounts](docs/demo-testing.md#akun-pengujian). This seed is for a local demo
+database only and preserves existing accounts and passwords.
 
-1. In the existing `genshu` project, verify the `amalrivel/genshu` Git
-   connection, Next.js preset, repository root, and `main` production branch.
-   Use `bun install --frozen-lockfile` for installation and `bun run build` for
-   the build. Keep the default Next.js Node.js runtime; using Bun for
-   installation/build does not require Bun runtime.
-2. Add `NEXT_PUBLIC_SUPABASE_URL` and
-   `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` to each Vercel environment that will
-   access the app. Runtime database queries use Supabase Data API with RLS;
-   Vercel does not need a PostgreSQL connection string. Keep test-account
-   passwords out of GitHub and Vercel.
-3. Apply schema migrations separately with `bun run db:migrate` from a trusted
-   administration environment with `POSTGRES_URL` and `psql`. This connection
-   is for migrations and database checks only, not application runtime. Do not
-   run migrations or local sample seeds as part of the Vercel build. Migration
-   `005_supabase_data_api.sql` grants minimum Data API access and configures RLS.
-4. Set the Supabase Auth Site URL to the deployment's final URL. Configure
-   allowed redirect URLs when using invitations or password recovery.
-5. On the deployed domain, check Sensei login/logout and create/edit/publish,
-   Tantōsha authoring denial, anonymous material reading and practice, draft
-   detail 404s, Indonesian/Japanese display, and phone navigation. Confirm
-   attendance, assignments, and exams redirect to materials. Local production
-   checks do not verify Vercel environment variables or deployed cookies.
+This checkout does not provide a first-administrator or operator password-recovery
+script. Production setup requires a separate administrator-provisioning procedure;
+do not use the demo seed for production. If all administrators lose access, an
+operator recovery procedure is also required. Public self-service password reset
+is not available.
 
-### Supabase Auth and preview safety
+## Database and authentication
 
-Set Supabase Auth **Site URL** to the final HTTPS production domain. Add that
-exact domain to **Authentication → URL Configuration → Redirect URLs**, along
-with `http://localhost:3000/**` for local development. Add a Vercel preview
-wildcard only if preview authentication is needed; prefer an exact production
-URL and keep preview allow-list entries scoped to the Vercel team/account slug.
-The Site URL is the fallback for email links and recovery flows.
+The app uses the Prisma 8 contract/runtime against PostgreSQL. Better Auth receives
+a `pg` Pool directly and uses its built-in SQL/Kysely integration against the same
+database; Genshu does not use a Better Auth Prisma adapter. See
+[architecture](docs/ARCHITECTURE.md#authentication-and-database-integration) for
+the separate runtime boundaries and authoritative files.
 
-Vercel Preview and Production have separate environment scopes. Do not put the
-   production administration `POSTGRES_URL` in Preview: previews connected to production can read
-published content and staff authoring can change live content. Give previews a
-separate database, or omit production credentials and do not use previews for
-flows that require database access.
+For subsequent schema changes, use `bun run db:plan --name <change>` to plan
+contract changes, inspect them with `bunx prisma migration show <migration>`, and apply
+reviewed pending migrations with `bun run db:migrate`. `bun run db:status` inspects
+local migration state. `bun run db:generate` emits contract types. Database
+commands use `DATABASE_URL` from the process environment, with `.env` loaded by
+the Prisma configuration; verify the target and backup first. No migration
+directory is currently present, so these commands do not establish a deployed
+migration history. `dev` does not automatically emit the contract; generate it
+after contract changes. `build` emits it before compiling the app.
 
-### Logs, feedback, and rollback
+## Local demo data
 
-Open the Vercel project **Deployments** page for build logs. Use **Logs** to
-filter runtime requests by deployment, domain, route, status, or error. Vercel
-retains runtime logs for a limited period, so include the deployment URL, route,
-approximate time, locale, and steps to reproduce when reporting an issue. The
-repository is public and GitHub Issues are enabled, so use
-<https://github.com/amalrivel/genshu/issues> for non-sensitive beta feedback.
-Do not include student information, credentials, or private content in a public
-issue. No private feedback or security-reporting channel has been confirmed;
-establish one before collecting sensitive reports.
+Run `bun run db:seed:demo` after the local schema exists, then `bun run demo:docx`
+to generate a Word upload fixture. This adds managed demo accounts, published and
+draft content, practice drafts/results, recordings, and relative-date events
+without resetting existing data. It refuses remote/production targets.
+See [demo accounts and the behavior checklist](docs/demo-testing.md) for login
+details, rerun behavior, and scenarios. `bun run db:seed` remains category-only.
 
-For an application rollback, use Vercel Deployments to promote the last known
-good deployment. This only rolls back application code. It does not reverse
-database migrations, published content, or other database changes; recover
-those separately from a verified database export or restore.
-
-### Database backup and recovery
-
-The configured Supabase organization is currently on the Free plan. Free
-projects do not have downloadable scheduled database backups. Install the
-Supabase CLI and Docker on an authenticated, trusted workstation. Export weekly
-and before each migration or significant content change; the CLI excludes
-Supabase-managed schemas:
+## Checks
 
 ```sh
-umask 077
-backup_dir="/path/to/restricted/genshu-$(date +%F)"
-mkdir -p "$backup_dir"
-supabase db dump --db-url "$POSTGRES_URL" -f "$backup_dir/roles.sql" --role-only
-supabase db dump --db-url "$POSTGRES_URL" -f "$backup_dir/schema.sql"
-supabase db dump --db-url "$POSTGRES_URL" -f "$backup_dir/data.sql" \
-  --use-copy --data-only -x "storage.buckets_vectors" -x "storage.vector_indexes"
+bun run test
+bunx tsc --noEmit --incremental false
+bun run lint
+bun run build
 ```
 
-Encrypt the files before moving them to restricted off-site storage; never put
-the dump or its connection URL in Git. `db dump` does not include Supabase Auth
-users or project Auth settings, so record the staff account IDs and be ready to
-recreate/invite those accounts and reapply their `staff_members` mappings after
-a project-level recovery.
-
-Rehearse by restoring the export into a separate, isolated Supabase project or
-local Supabase stack, never production. On the isolated target, revoke default
-public table grants before restoring, then apply the three files in order:
-
-```sh
-psql "$RESTORE_DB_URL" --set ON_ERROR_STOP=1 \
-  --command 'ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE ALL ON TABLES FROM anon, authenticated'
-psql --single-transaction --variable ON_ERROR_STOP=1 \
-  --file "$backup_dir/roles.sql" \
-  --file "$backup_dir/schema.sql" \
-  --command 'SET session_replication_role = replica' \
-  --file "$backup_dir/data.sql" \
-  --dbname "$RESTORE_DB_URL"
-```
-
-Verify the four `genshu_schema_migrations` rows and published content. Run the
-RLS/no-public-grant check against the restore:
-
-```sh
-POSTGRES_URL="$RESTORE_DB_URL" bun run db:verify-permissions
-```
-
-The CLI export excludes Supabase Auth users and settings. If restoring to a new
-Supabase project, invite staff there and map their new Auth UUIDs to their
-`staff_members` roles. Follow Supabase's current
-[database backup and restore guide](https://supabase.com/docs/guides/platform/backups)
-and [CLI dump reference](https://supabase.com/docs/reference/cli/supabase-db-dump)
-for target setup and any extensions or Auth customizations.
-This environment has no running local PostgreSQL service or Docker/Supabase
-stack, and the Supabase Free project has no automatic downloadable backups, so
-no restore rehearsal has been completed. A restore rehearsal remains a gate
-before relying on real content.
-
-### Current deployment status
-
-The existing `genshu` Vercel project has a READY production deployment from
-`main` at `genshu.vercel.app`, running commit `3125d00`. Its `/materials` route
-returns HTTP 500; runtime errors show that `NEXT_PUBLIC_SUPABASE_URL` and
-`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` are missing. The live migration ledger
-now includes migration 005, whose Data API grants and policies pass the live
-permission verifier. Original content and staff row hashes are unchanged.
-Configure the required Production values and retest the deployed flows.
-Builds must not run migrations or seed data.
+Run relevant checks and record their scope. Unit/render tests do not prove live
+auth, database concurrency, browser uploads or deployment readiness. Historical
+build/browser results remain in the [developer guide](docs/developer-guide.md#historical-verification).
+Known limits, including the DOCX converter/request-size mismatch, are recorded in
+[architecture](docs/ARCHITECTURE.md#limits-and-verification); product decisions
+remain in [PRD](docs/PRD.md#unresolved-product-decisions).

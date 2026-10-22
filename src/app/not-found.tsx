@@ -1,21 +1,6 @@
-import Link from "next/link"
-import { SearchX } from "lucide-react"
-import { getTranslations } from "next-intl/server"
-import { Button } from "@/components/ui/button"
-import { PageShell } from "@/components/layout/page-frame"
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
 
-export default async function NotFound() {
-  const t = await getTranslations("common")
-
-  return (
-    <PageShell>
-      <div className="empty-state min-h-[60vh]">
-        <div className="empty-state-icon"><SearchX className="size-5" /></div>
-        <h1 className="text-lg font-semibold">{t("notFoundTitle")}</h1>
-        <p className="mt-1 max-w-md text-sm text-muted-foreground">{t("notFoundDesc")}</p>
-        <Link href="/"><Button className="mt-4">{t("home")}</Button></Link>
-      </div>
-    </PageShell>
-  )
+export default function NotFound() {
+  return <main className="mx-auto flex min-h-svh max-w-xl flex-col justify-center gap-5 p-6"><p className="text-sm text-muted-foreground">Genshu · 404</p><h1>Halaman tidak ditemukan</h1><p>Periksa kembali alamat halaman atau mulai dari beranda.</p><div><Link className={buttonVariants()} href="/">Kembali ke beranda</Link></div></main>;
 }
-
