@@ -1,40 +1,40 @@
-# Graph Report - genshu  (2026-10-22)
+# Graph Report - genshu  (2026-10-24)
 
 ## Corpus Check
-- 670 files · ~1,248,408 words
+- 679 files · ~1,253,356 words
 - Verdict: corpus is large enough that graph structure adds value.
-- Unclassified: 60 file(s) not represented in the graph (top: .csv 53, .css 2, (none) 2)
+- Unclassified: 62 file(s) not represented in the graph (top: .csv 53, (none) 4, .css 2)
 
 ## Summary
-- 9629 nodes · 13924 edges · 573 communities (519 shown, 54 thin omitted)
+- 9633 nodes · 14047 edges · 575 communities (520 shown, 55 thin omitted)
 - Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 594 edges (avg confidence: 0.92)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `e8a9f107`
+- Built from commit: `1eeb7153`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - ShadcnInstaller
-- next
+- activity-result.tsx
 - 8.0.0-rc.1 → 8.0.0-rc.2 — User upgrade instructions
-- db.ts
+- CollectionEmpty
 - package.json
 - components.json
 - sidebar.tsx
 - compilerOptions
 - dependencies
-- test_relevance_evaluator.py
+- test_style_taxonomy.py
 - routes.d.ts
 - devDependencies
 - .claude/skills/prisma-8/upgrading/app/upgrades/8.0.0-rc.14-to-8.0.0-rc.15/scripts/data-type-in-contract/data-type-in-contract.ts
 - Local Database Setup
 - validator.ts
 - .agents/skills/prisma-8/upgrading/app/upgrades/8.0.0-rc.14-to-8.0.0-rc.15/scripts/data-type-in-contract/data-type-in-contract.ts
-- Route requirements
+- Genshu architecture
 - postcss.config.mjs
-- scripts
+- db.ts
 - .agents/skills/prisma-8/upgrading/extension/upgrades/8.0.0-rc.14-to-8.0.0-rc.15/scripts/data-type-in-contract/data-type-in-contract.ts
 - activity-runner.tsx
 - scripts/core.py
@@ -46,16 +46,16 @@
 - unstable_cacheLife
 - unstable_cacheTag
 - validate_data.py
-- DesignSystemGenerator
+- test_design_system_mode.py
 - auth-session.ts
 - gray
 - 8.0.0-rc.14 → 8.0.0-rc.15 — Extension author upgrade instructions
 - extension/upgrades/0.8-to-0.9/strip-inline-contracts.ts
 - ref_node_path
 - 0.13 → 0.14 — User upgrade instructions
-- content-manager.tsx
+- react
 - 8.0.0-rc.14 → 8.0.0-rc.15 — User upgrade instructions
-- test_style_taxonomy.py
+- accordion
 - .claude/skills/prisma-8/upgrading/extension/upgrades/8.0.0-rc.14-to-8.0.0-rc.15/scripts/data-type-in-contract/data-type-in-contract.ts
 - slider
 - 8.0.0-rc.11 → 8.0.0-rc.12 — Extension author upgrade instructions
@@ -65,7 +65,7 @@
 - 0.11 → 0.12 — Extension-author upgrade instructions
 - Design
 - Canvas Design System
-- pathlib
+- json
 - ref_node_fs
 - color-pair.tsx
 - Form & Input Components
@@ -76,14 +76,14 @@
 - Typography Specifications
 - 8.0.0-rc.11 → 8.0.0-rc.12 — User upgrade instructions
 - Logo Usage Rules
-- dropdown-menu (Radix `DropdownMenu` → Base UI `Menu`)
+- material-import-form.tsx
 - Component Specifications
 - html-token-validator.py
 - shadcn/ui Accessibility Patterns
 - .devin/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/strip-migration-labels-hints.ts
 - Prisma 8 — Migration Authoring
 - .agents/skills/prisma-8/upgrading/app/upgrades/8.0.0-rc.11-to-8.0.0-rc.12/scripts/psl-verbatim-table-names/add-model-map.mjs
-- cip/core.py
+- csv
 - Asset Approval Checklist
 - Logo AI Prompt Engineering
 - 8.0.0-rc.12 → 8.0.0-rc.13 — Extension author upgrade instructions
@@ -100,7 +100,7 @@
 - .claude/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-postgres-public-default.ts
 - spacing
 - TestTailwindConfigGenerator
-- csv
+- fetch-background.py
 - Routing by Task Type
 - Prisma 8 — Contract Authoring
 - Prisma 8 — Feedback (Bug Reports, Feature Requests, Team Q&A)
@@ -119,14 +119,14 @@
 - Brand Consistency Checklist
 - CIP Mockup Prompt Engineering
 - Color Semantics
-- ref_node_crypto
+- .agents/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/strip-migration-labels-hints.ts
 - Commands
 - Design Principles
 - Design Principles
 - fontSize
 - extension/upgrades/8.0.0-rc.11-to-8.0.0-rc.12/scripts/psl-verbatim-table-names/add-model-map.mjs
-- design_system.py
-- Prisma 8 — Runtime (`db.ts` Wiring)
+- DesignSystemGenerator
+- Contract
 - extract-colors.cjs
 - CIP Design Reference
 - Icon Design Reference
@@ -134,7 +134,7 @@
 - Copywriting Formulas
 - .cursor/skills/prisma-8/upgrading/app/upgrades/8.0.0-rc.14-to-8.0.0-rc.15/scripts/data-type-in-contract/data-type-in-contract.ts
 - CatalogRefreshTest
-- admin/page.tsx
+- next-intl
 - .agents/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-domain-namespaced-contracts.ts
 - .agents/skills/prisma-8/upgrading/app/upgrades/0.9-to-0.10/stamp-storage-types-kind.ts
 - .agents/skills/prisma-8/upgrading/extension/upgrades/0.9-to-0.10/stamp-storage-types-kind.ts
@@ -145,13 +145,13 @@
 - Layout Patterns
 - Tailwind Integration
 - radius
-- select
+- toast
 - Customization & Theming
 - .agents/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-closed-mongo-contracts.ts
 - .agents/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-postgres-public-default.ts
 - Styling & Customization
 - 0.12 → 0.13 — Extension-author upgrade instructions
-- AggregateTypes
+- 8.0.0-rc.1 → 8.0.0-rc.2 — Extension-author upgrade instructions
 - Layout Patterns
 - TailwindConfigGenerator
 - TestWebStackFreshness
@@ -161,14 +161,14 @@
 - design-tokens-starter.json
 - Per-component notes
 - Prisma 8 — The Migration Graph and Refs (Mental Model)
-- .agents/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/strip-migration-labels-hints.ts
+- ref_node_crypto
 - 0.12 → 0.13 — User upgrade instructions
 - re-emit-mti-variant-link-columns.ts
 - 0.13 → 0.14 — User upgrade instructions
 - .agents/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/regenerate-extension-public-baseline.ts
 - .test_node_check_parses_generated_config
 - .cursor/skills/prisma-8/upgrading/extension/upgrades/8.0.0-rc.14-to-8.0.0-rc.15/scripts/data-type-in-contract/data-type-in-contract.ts
-- Contract
+- Prisma 8 — Runtime (`db.ts` Wiring)
 - .devin/skills/prisma-8/upgrading/app/upgrades/8.0.0-rc.14-to-8.0.0-rc.15/scripts/data-type-in-contract/data-type-in-contract.ts
 - .devin/skills/prisma-8/upgrading/extension/upgrades/8.0.0-rc.14-to-8.0.0-rc.15/scripts/data-type-in-contract/data-type-in-contract.ts
 - Primitive Tokens
@@ -212,7 +212,7 @@
 - Slide Strategies
 - 8.0.0-rc.14 → 8.0.0-rc.15 — User upgrade instructions
 - 0.11 → 0.12 — Extension-author upgrade instructions
-- Component Composition
+- .claude/skills/prisma-8/upgrading/app/upgrades/0.13-to-0.14/migration-op-factories-to-methods.ts
 - hover-card → preview-card
 - Registry Authoring and Addresses
 - Chat & Messaging
@@ -231,18 +231,18 @@
 - Class-string rewrites (layer 2)
 - display-misc.md
 - 8.0.0-rc.1 → 8.0.0-rc.2 — User upgrade instructions
-- value
+- dropdown-menu (Radix `DropdownMenu` → Base UI `Menu`)
 - Prisma 8 — Debug
 - load
 - Radix UI -> Base UI migration
 - HTML Slide Template
-- material-import-form.tsx
+- .cursor/skills/prisma-8/upgrading/app/upgrades/0.13-to-0.14/migration-op-factories-to-methods.ts
 - Query Contract
 - Consumer-side prop changes (call sites, not wrappers)
 - Slides
-- admin/actions.ts
+- value
 - 0.13 → 0.14 — Extension-author upgrade instructions
-- test_core.py
+- design_system.py
 - 8.0.0-rc.11 → 8.0.0-rc.12 — Extension author upgrade instructions
 - Pre-Delivery Checklist
 - Prerequisites
@@ -260,14 +260,14 @@
 - padding-y
 - 8.0.0-rc.15 → 8.0.0-rc.16 — Extension author upgrade instructions
 - Prisma 8 — Runtime (`db.ts` Wiring)
-- 8.0.0-rc.1 → 8.0.0-rc.2 — User upgrade instructions
+- AggregateTypes
 - 8.0.0-rc.11 → 8.0.0-rc.12 — User upgrade instructions
 - Prisma 8 — Queries (Mongo)
 - 8.0.0-rc.11 → 8.0.0-rc.12 — User upgrade instructions
 - Prisma 8 — Feedback (Bug Reports, Feature Requests, Team Q&A)
 - Tips for Better Results
-- 0.17 → 8.0.0-rc.1 — Extension-author upgrade instructions
-- logo/core.py
+- render.ts
+- .devin/skills/prisma-8/upgrading/app/upgrades/0.13-to-0.14/migration-op-factories-to-methods.ts
 - 0.17 → 8.0.0-rc.1 — Extension-author upgrade instructions
 - .devin/skills/prisma-8/upgrading/extension/upgrades/0.13-to-0.14/migration-op-factories-to-methods.ts
 - destructive
@@ -300,7 +300,7 @@
 - 8.0.0-rc.12 → 8.0.0-rc.13 — Extension author upgrade instructions
 - .claude/skills/prisma-8/upgrading/app/upgrades/8.0.0-rc.12-to-8.0.0-rc.13/scripts/execution-ref-entry-field/rename-execution-ref-keys.ts
 - .claude/skills/prisma-8/upgrading/extension/upgrades/8.0.0-rc.12-to-8.0.0-rc.13/scripts/execution-ref-entry-field/rename-execution-ref-keys.ts
-- .claude/skills/prisma-8/upgrading/extension/upgrades/0.13-to-0.14/migration-op-factories-to-methods.ts
+- scroll-area
 - 0.8 → 0.9 — Extension-author upgrade instructions
 - 0.9 → 0.10 — Extension-author upgrade instructions
 - 8.0.0-rc.4 → 8.0.0-rc.5 — Extension author upgrade instructions
@@ -331,7 +331,7 @@
 - .devin/skills/prisma-8/upgrading/extension/upgrades/0.16-to-0.17/strip-sha256-hash-prefixes.ts
 - Prisma 8 — Migration Review (Deployment + Concurrency)
 - Prisma 8 — Quickstart (Adoption)
-- generate-slide.py
+- .devin/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-domain-namespaced-contracts.ts
 - .claude/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-domain-namespaced-contracts.ts
 - .claude/skills/prisma-8/upgrading/app/upgrades/0.9-to-0.10/stamp-storage-types-kind.ts
 - 0.10 → 0.11 — User upgrade instructions
@@ -346,7 +346,7 @@
 - 8.0.0-rc.7 → 8.0.0-rc.8 — Extension author upgrade instructions
 - .claude/skills/prisma-8/upgrading/extension/upgrades/0.9-to-0.10/stamp-storage-types-kind.ts
 - Prisma 8 — Runtime (`db.ts` Wiring)
-- Penyempurnaan alur latihan — 21 Oktober 2026
+- select
 - .cursor/skills/prisma-8/upgrading/app/upgrades/0.9-to-0.10/stamp-storage-types-kind.ts
 - .cursor/skills/prisma-8/upgrading/extension/upgrades/0.9-to-0.10/stamp-storage-types-kind.ts
 - app/layout.tsx
@@ -369,16 +369,16 @@
 - 8.0.0-rc.1 → 8.0.0-rc.2 — Extension-author upgrade instructions
 - StorageHash
 - Prisma 8 — The Migration Graph and Refs (Mental Model)
-- .claude/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-closed-mongo-contracts.ts
+- ref_node_util
 - .claude/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/strip-migration-labels-hints.ts
 - 0.12 → 0.13 — User upgrade instructions
 - .claude/skills/prisma-8/upgrading/app/upgrades/0.12-to-0.13/re-emit-mti-variant-link-columns.ts
 - .claude/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/regenerate-extension-public-baseline.ts
 - .claude/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/strip-migration-labels-hints.ts
-- .agents/skills/prisma-8/upgrading/extension/upgrades/0.13-to-0.14/migration-op-factories-to-methods.ts
+- .agents/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/migrate-contract-testing-imports.ts
 - Prisma 8 — The Migration Graph and Refs (Mental Model)
 - 8.0.0-rc.4 → 8.0.0-rc.5 — User upgrade instructions
-- ref_node_util
+- .cursor/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-closed-mongo-contracts.ts
 - .cursor/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/strip-migration-labels-hints.ts
 - 0.12 → 0.13 — User upgrade instructions
 - .cursor/skills/prisma-8/upgrading/app/upgrades/0.12-to-0.13/re-emit-mti-variant-link-columns.ts
@@ -391,7 +391,7 @@
 - 0.12 → 0.13 — User upgrade instructions
 - .devin/skills/prisma-8/upgrading/app/upgrades/0.12-to-0.13/re-emit-mti-variant-link-columns.ts
 - .devin/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/regenerate-extension-public-baseline.ts
-- form
+- QueryOperationTypes
 - Prisma 8 — Build-System Integration
 - .claude/skills/prisma-8/SKILL.md
 - Prisma 8 — Queries (Postgres)
@@ -411,14 +411,14 @@
 - .devin/skills/prisma-8/SKILL.md
 - Prisma 8 — Queries (Postgres)
 - Prisma 8 — Supabase
-- .claude/skills/prisma-8/upgrading/app/upgrades/0.13-to-0.14/migration-op-factories-to-methods.ts
+- .cursor/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/migrate-contract-testing-imports.ts
 - .devin/skills/prisma-8/upgrading/app/upgrades/8.0.0-rc.11-to-8.0.0-rc.12/scripts/psl-verbatim-table-names/add-model-map.mjs
-- 0.17 → 8.0.0-rc.1 — Extension-author upgrade instructions
+- .devin/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/migrate-contract-testing-imports.ts
 - .devin/skills/prisma-8/upgrading/extension/upgrades/8.0.0-rc.11-to-8.0.0-rc.12/scripts/psl-verbatim-table-names/add-model-map.mjs
 - Prisma Platform core concepts
 - Prisma 8 — Queries
 - 8.0.0-rc.12 → 8.0.0-rc.13 — User upgrade instructions
-- .devin/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-domain-namespaced-contracts.ts
+- TestDomainDetection
 - 0.16 → 0.17 — Extension-author upgrade instructions
 - Prisma 8 — Queries
 - Prisma 8 — Supabase
@@ -426,7 +426,7 @@
 - 0.16 → 0.17 — Extension-author upgrade instructions
 - Prisma 8 — Queries
 - 8.0.0-rc.12 → 8.0.0-rc.13 — User upgrade instructions
-- TestNativeDesktopStackFreshness
+- TestSearchDomains
 - 0.16 → 0.17 — Extension-author upgrade instructions
 - Prisma 8 — Debug
 - Prisma Composer core concepts
@@ -439,7 +439,7 @@
 - .claude/skills/prisma-8/upgrading/app/upgrades/0.8-to-0.9/strip-inline-contracts.ts
 - 0.13 → 0.14 — Extension-author upgrade instructions
 - .claude/skills/prisma-8/upgrading/extension/upgrades/0.8-to-0.9/strip-inline-contracts.ts
-- QueryOperationTypes
+- .claude/skills/prisma-8/upgrading/extension/upgrades/0.13-to-0.14/migration-op-factories-to-methods.ts
 - 8.0.0-rc.13 → 8.0.0-rc.14 — Extension author upgrade instructions
 - .cursor/skills/prisma-8/upgrading/app/upgrades/0.8-to-0.9/strip-inline-contracts.ts
 - 0.13 → 0.14 — Extension-author upgrade instructions
@@ -457,12 +457,12 @@
 - cip/generate.py
 - Prisma 8 — Queries (Mongo)
 - Upgrade Prisma 8 (extension)
-- .cursor/skills/prisma-8/upgrading/app/upgrades/0.13-to-0.14/migration-op-factories-to-methods.ts
-- Prisma 8 — Queries (Mongo)
 - .cursor/skills/prisma-8/upgrading/extension/upgrades/0.13-to-0.14/migration-op-factories-to-methods.ts
-- accordion
 - Prisma 8 — Queries (Mongo)
-- .claude/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/migrate-contract-testing-imports.ts
+- progress
+- `strip-sha256-hash-prefixes`
+- Prisma 8 — Queries (Mongo)
+- form
 - CodecTypes
 - Upgrade Prisma 8 (user app)
 - Upgrade Prisma 8 (extension)
@@ -481,21 +481,22 @@
 - .claude/skills/prisma-8/upgrading/app/upgrades/8.0.0-rc.9-to-8.0.0-rc.10/instructions.md
 - .cursor/skills/prisma-8/upgrading/app/upgrades/8.0.0-rc.9-to-8.0.0-rc.10/instructions.md
 - .devin/skills/prisma-8/upgrading/app/upgrades/8.0.0-rc.9-to-8.0.0-rc.10/instructions.md
-- .cursor/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/migrate-contract-testing-imports.ts
-- .devin/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/migrate-contract-testing-imports.ts
+- avatar
+- Separator.Root → Separator
 - 0.8 → 0.9 — Extension-author upgrade instructions
 - 0.9 → 0.10 — Extension-author upgrade instructions
 - 8.0.0-rc.4 → 8.0.0-rc.5 — Extension author upgrade instructions
-- Critical Rules
+- `strip-sha256-hash-prefixes`
 - 0.8 → 0.9 — Extension-author upgrade instructions
 - 0.9 → 0.10 — Extension-author upgrade instructions
 - 8.0.0-rc.4 → 8.0.0-rc.5 — Extension author upgrade instructions
-- Pencarian admin dan CRUD akun — 21 Oktober 2026
+- (new) Fieldset.Root and Fieldset.Legend
 - Base vs Radix
 - 0.8 → 0.9 — Extension-author upgrade instructions
 - 0.9 → 0.10 — Extension-author upgrade instructions
 - 8.0.0-rc.4 → 8.0.0-rc.5 — Extension author upgrade instructions
 - `remove-capabilities-from-define-contract`
+- `strip-sha256-hash-prefixes`
 - `runtime-qualified-sql-default-namespace`
 - `remove-capabilities-from-define-contract`
 - `strip-inline-contracts-from-migration-manifests`
@@ -548,15 +549,16 @@
 - 8.0.0-rc.4 → 8.0.0-rc.5 — User upgrade instructions
 - 8.0.0-rc.4 → 8.0.0-rc.5 — User upgrade instructions
 - material-import.ts
+- `strip-sha256-hash-prefixes`
 - lg
 - sm
-- Penghapusan konten admin — 21 Oktober 2026
+- DefaultLiteralValue
 - xl
 - none
+- Critical Rules
 - 16
 - 1
 - 3
-- Verifikasi perbaikan UI/UX — 15 Oktober 2026
 - 8
 
 ## God Nodes (most connected - your core abstractions)
@@ -586,47 +588,47 @@
 ## Import Cycles
 - None detected.
 
-## Communities (573 total, 54 thin omitted)
+## Communities (575 total, 55 thin omitted)
 
 ### Community 0 - "ShadcnInstaller"
 Cohesion: 0.05
 Nodes (3): main(), ShadcnInstaller, TestShadcnInstaller
 
-### Community 1 - "next"
-Cohesion: 0.07
-Nodes (49): Component Structure → [composition.md](./rules/composition.md), nextConfig, lucide-react, next, ActivitiesPage(), metadata, ActivitiesByTypePage(), AnnouncementsPage() (+41 more)
+### Community 1 - "activity-result.tsx"
+Cohesion: 0.23
+Nodes (21): Component Structure → [composition.md](./rules/composition.md), lucide-react, ActivityCard(), ActivityResultView(), QuestionCard(), Announcement, HomeDashboard(), OpenAttempt (+13 more)
 
 ### Community 2 - "8.0.0-rc.1 → 8.0.0-rc.2 — User upgrade instructions"
 Cohesion: 0.12
 Nodes (15): 8.0.0-rc.1 → 8.0.0-rc.2 — User upgrade instructions, `aggregate-defaults-are-js-native-numbers`, `aggregate-methods-come-from-the-emitted-contract`, `codec-ids-are-checked-where-they-are-authored`, `config-file-is-prisma-config-with-an-orm-section`, `count-over-a-field-counts-that-field`, If you are upgrading from before 8.0.0-rc.1, `integer-columns-refuse-the-wrong-js-type` (+7 more)
 
-### Community 3 - "db.ts"
-Cohesion: 0.09
-Nodes (17): dotenv, @prisma/cli-engine, @prisma/orm-postgres, AnnouncementDetail(), generateMetadata(), CalendarPage(), metadata, AnnouncementContent() (+9 more)
+### Community 3 - "CollectionEmpty"
+Cohesion: 0.08
+Nodes (21): ActivitiesPage(), ActivitiesByTypePage(), CalendarPage(), LearnPage(), RecordingPage(), EventCard(), CollectionEmpty(), Empty() (+13 more)
 
 ### Community 4 - "package.json"
-Cohesion: 0.08
-Nodes (25): eslintConfig, ignoreScripts, name, packageManager, private, trustedDependencies, type, version (+17 more)
+Cohesion: 0.06
+Nodes (33): eslintConfig, ignoreScripts, name, packageManager, private, trustedDependencies, type, version (+25 more)
 
 ### Community 5 - "components.json"
 Cohesion: 0.09
 Nodes (21): aliases, components, hooks, lib, ui, utils, iconLibrary, menuAccent (+13 more)
 
 ### Community 6 - "sidebar.tsx"
-Cohesion: 0.05
-Nodes (62): Composition: asChild (radix) vs render (base), Items always inside their Group component, No sizing classes on icons inside components, No manual z-index on overlay components, Component Selection, @base-ui/react, cn, HomeLoading() (+54 more)
+Cohesion: 0.04
+Nodes (76): Composition: asChild (radix) vs render (base), Avatar always needs AvatarFallback, Button has no isPending or isLoading prop, Callouts use Alert, Card structure, Component Composition, Contents, Dialog, Sheet, and Drawer always need a Title (+68 more)
 
 ### Community 7 - "compilerOptions"
 Cohesion: 0.10
 Nodes (19): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+11 more)
 
 ### Community 8 - "dependencies"
-Cohesion: 0.10
-Nodes (20): dependencies, @base-ui/react, better-auth, class-variance-authority, cn, dotenv, jszip, lucide-react (+12 more)
+Cohesion: 0.05
+Nodes (39): dependencies, @base-ui/react, better-auth, class-variance-authority, cn, dotenv, jszip, lucide-react (+31 more)
 
-### Community 9 - "test_relevance_evaluator.py"
-Cohesion: 0.12
-Nodes (3): TestFixtureValidation, TestMetricMath, TestThresholdGate
+### Community 9 - "test_style_taxonomy.py"
+Cohesion: 0.07
+Nodes (5): TestFixtureValidation, TestMetricMath, TestThresholdGate, read_rows(), TestStyleTaxonomy
 
 ### Community 10 - "routes.d.ts"
 Cohesion: 0.17
@@ -634,7 +636,7 @@ Nodes (11): AppRoutes, LayoutProps, LayoutRoutes, LayoutSlotMap, PageProps, Page
 
 ### Community 11 - "devDependencies"
 Cohesion: 0.12
-Nodes (16): devDependencies, babel-plugin-react-compiler, eslint, eslint-config-next, prisma, @prisma/cli-engine, tailwindcss, @tailwindcss/postcss (+8 more)
+Nodes (17): devDependencies, babel-plugin-react-compiler, eslint, eslint-config-next, prettier, prisma, @prisma/cli-engine, tailwindcss (+9 more)
 
 ### Community 12 - ".claude/skills/prisma-8/upgrading/app/upgrades/8.0.0-rc.14-to-8.0.0-rc.15/scripts/data-type-in-contract/data-type-in-contract.ts"
 Cohesion: 0.05
@@ -652,13 +654,13 @@ Nodes (7): ../../src/app/layout.js, ../../src/app/page.js, AppPageConfig, __Chec
 Cohesion: 0.05
 Nodes (86): Block, bracketEnd(), canonicalizeJson(), COLUMN_DEFAULT_VALUE, COLUMN_PATHS, columnBlockKey(), columnCardinalities(), compareByName() (+78 more)
 
-### Community 16 - "Route requirements"
+### Community 16 - "Genshu architecture"
 Cohesion: 0.07
-Nodes (26): Akun pengujian, Checklist browser, Data demo untuk mencoba behavior Genshu, Menjalankan ulang dan batas pengujian, Tombol akun testing di login, Acceptance scenarios and implementation order, Activities `/activities`, `/activities/type/[type]`, `/activities/[activityId]`, Announcements `/announcements` (+18 more)
+Nodes (30): Genshu, Authentication and database integration, Content reads, publication and revision, Genshu architecture, Interface localization, Limits and verification, Practice flow, Routes and authorization (+22 more)
 
-### Community 18 - "scripts"
-Cohesion: 0.12
-Nodes (16): scripts, build, db:generate, db:init, db:init:preview, db:migrate, db:plan, db:seed (+8 more)
+### Community 18 - "db.ts"
+Cohesion: 0.22
+Nodes (6): dotenv, @prisma/cli-engine, @prisma/orm-postgres, activityTypes, ActivityType, db
 
 ### Community 19 - ".agents/skills/prisma-8/upgrading/extension/upgrades/8.0.0-rc.14-to-8.0.0-rc.15/scripts/data-type-in-contract/data-type-in-contract.ts"
 Cohesion: 0.05
@@ -666,23 +668,23 @@ Nodes (86): Block, bracketEnd(), canonicalizeJson(), COLUMN_DEFAULT_VALUE, COLUM
 
 ### Community 20 - "activity-runner.tsx"
 Cohesion: 0.08
-Nodes (42): ActivityPage(), metadata, HomePage(), metadata, ActivityRunner(), retry(), submit(), PracticeLaunch() (+34 more)
+Nodes (40): ActivityPage(), ActivityRunner(), choose(), move(), submit(), launch(), Progress(), ProgressIndicator() (+32 more)
 
 ### Community 21 - "scripts/core.py"
 Cohesion: 0.06
 Nodes (31): BM25, _contains_phrase(), detect_domain(), _domain_keywords(), _exact_match_diagnostic(), _exact_row_identity(), _exact_stack_identifier(), _file_signature() (+23 more)
 
 ### Community 31 - "validate_data.py"
-Cohesion: 0.06
-Nodes (50): `codec-without-params-has-no-params-schema`, `engine-pin-moves-to-0-6-1`, read_rows(), TestAccessibilityGuidance, TestChartsTypographyAndIcons, TestCurrentReactGuidance, TestSemanticColors, _catalog_date() (+42 more)
-
-### Community 32 - "DesignSystemGenerator"
 Cohesion: 0.05
-Nodes (12): _contrast_ratio(), _derive_dark_palette(), DesignSystemGenerator, _filter_anti_patterns_for_mode(), _palette_is_dark(), _relative_luminance(), _select_palette_for_mode(), TestReasoningMatch (+4 more)
+Nodes (51): `codec-without-params-has-no-params-schema`, `engine-pin-moves-to-0-6-1`, read_rows(), TestAccessibilityGuidance, TestChartsTypographyAndIcons, TestCurrentReactGuidance, TestSemanticColors, _catalog_date() (+43 more)
+
+### Community 32 - "test_design_system_mode.py"
+Cohesion: 0.07
+Nodes (14): _contrast_ratio(), _derive_dark_palette(), _filter_anti_patterns_for_mode(), _palette_is_dark(), _query_wants_dark(), _relative_luminance(), _resolve_color_mode(), _select_palette_for_mode() (+6 more)
 
 ### Community 33 - "auth-session.ts"
-Cohesion: 0.08
-Nodes (23): better-auth, pg, server-only, assertDemoDatabase(), createDemoData(), GET, POST, HomeLayout() (+15 more)
+Cohesion: 0.12
+Nodes (12): assertDemoDatabase(), createDemoData(), Login(), gradeActivity(), AccountRole, getSession(), demoPassword, demoUsers (+4 more)
 
 ### Community 34 - "gray"
 Cohesion: 0.05
@@ -698,31 +700,31 @@ Nodes (11): dryRun, findManifests(), walk(), jsonValueEnd(), looksLikeMigrationM
 
 ### Community 37 - "ref_node_path"
 Cohesion: 0.13
-Nodes (12): dryRun, findSourceFiles(), walk(), projectRoot, SKIP_DIRS, targets, components, missing (+4 more)
+Nodes (12): components, missing, source, [uiArg, ...roots], uiDir, walk(), dryRun, findSourceFiles() (+4 more)
 
 ### Community 38 - "0.13 → 0.14 — User upgrade instructions"
 Cohesion: 0.12
-Nodes (16): 0.13 → 0.14 — User upgrade instructions, 1. Convert the schema syntax, 2. Migrate the database off the native type, 3. Verify, `create-runtime-removed`, `enum-becomes-domain-concept`, `generated-models-export-removed`, How to migrate (+8 more)
+Nodes (15): 0.13 → 0.14 — User upgrade instructions, 1. Convert the schema syntax, 2. Migrate the database off the native type, 3. Verify, `create-runtime-removed`, `enum-becomes-domain-concept`, How to migrate, `migration-op-factories-to-methods` (+7 more)
 
-### Community 39 - "content-manager.tsx"
-Cohesion: 0.09
-Nodes (48): Step 5: Map Component Recipes to Variants, Buttons inside inputs use InputGroup + InputGroupAddon, Contents, Field validation and disabled states, FieldSet + FieldLegend for grouping related fields, Forms & Inputs, Forms use FieldGroup + Field, InputGroup requires InputGroupInput/InputGroupTextarea (+40 more)
+### Community 39 - "react"
+Cohesion: 0.07
+Nodes (53): Step 5: Map Component Recipes to Variants, Buttons inside inputs use InputGroup + InputGroupAddon, Contents, Field validation and disabled states, FieldSet + FieldLegend for grouping related fields, Forms & Inputs, Forms use FieldGroup + Field, InputGroup requires InputGroupInput/InputGroupTextarea (+45 more)
 
 ### Community 40 - "8.0.0-rc.14 → 8.0.0-rc.15 — User upgrade instructions"
 Cohesion: 0.04
 Nodes (55): 8.0.0-rc.14 → 8.0.0-rc.15 — User upgrade instructions, `apply-is-a-collection-member`, `cache-annotation-skip-renamed-bypass`, `cache-annotation-ttl-removed`, `cache-middleware-store-options`, `cache-store-object-arguments`, `chaining-methods-take-no-explicit-type-arguments`, `char-reads-drop-only-padding` (+47 more)
 
-### Community 41 - "test_style_taxonomy.py"
-Cohesion: 0.10
-Nodes (6): _query_wants_dark(), _resolve_color_mode(), _style_is_dark_primary(), TestModeResolution, read_rows(), TestStyleTaxonomy
+### Community 41 - "accordion"
+Cohesion: 0.05
+Nodes (36): accordion, Accordion.Content → Accordion.Panel, Accordion.Header → Accordion.Header, Accordion.Item → Accordion.Item, Accordion.Root → Accordion.Root, Accordion.Trigger → Accordion.Trigger, Base UI only props worth knowing, Base UI only props worth knowing (+28 more)
 
 ### Community 42 - ".claude/skills/prisma-8/upgrading/extension/upgrades/8.0.0-rc.14-to-8.0.0-rc.15/scripts/data-type-in-contract/data-type-in-contract.ts"
 Cohesion: 0.05
 Nodes (86): Block, bracketEnd(), canonicalizeJson(), COLUMN_DEFAULT_VALUE, COLUMN_PATHS, columnBlockKey(), columnCardinalities(), compareByName() (+78 more)
 
 ### Community 43 - "slider"
-Cohesion: 0.10
-Nodes (19): Base UI only props worth knowing (checkbox), Base UI only props worth knowing (slider), Base UI only props worth knowing (switch), checkbox, Checkbox.Indicator → Checkbox.Indicator, Checkbox.Root → Checkbox.Root, Data-attribute mapping (checkbox), Data-attribute mapping (slider) (+11 more)
+Cohesion: 0.08
+Nodes (25): Base UI only props worth knowing (checkbox), Base UI only props worth knowing (radio-group), Base UI only props worth knowing (slider), Base UI only props worth knowing (switch), checkbox, Checkbox.Indicator → Checkbox.Indicator, Checkbox.Root → Checkbox.Root, Data-attribute mapping (checkbox) (+17 more)
 
 ### Community 44 - "8.0.0-rc.11 → 8.0.0-rc.12 — Extension author upgrade instructions"
 Cohesion: 0.06
@@ -752,13 +754,13 @@ Nodes (35): Banner Design (Built-in), Banner: Design Rules, Banner: Quick Size R
 Cohesion: 0.06
 Nodes (35): 1. Visual Communication First, 2. Minimal Text Integration, 3. Expert Craftsmanship, 4. Systematic Patterns, Analog Meditation, Approach, Canvas Boundaries, Canvas Design System (+27 more)
 
-### Community 51 - "pathlib"
-Cohesion: 0.09
-Nodes (5): test_sync_parses_bundled_starter_template(), main(), _run(), test_flags_hardcoded_hex_sharing_line_with_token(), test_token_only_line_reports_no_violation()
+### Community 51 - "json"
+Cohesion: 0.05
+Nodes (23): test_sync_parses_bundled_starter_template(), generate_html(), get_deliverable_info(), get_image_base64(), main(), format_brief(), format_results(), main() (+15 more)
 
 ### Community 52 - "ref_node_fs"
 Cohesion: 0.06
-Nodes (32): files, raw, replacements, files, raw, replacements, files, raw (+24 more)
+Nodes (32): files, raw, replacements, applyRewrites(), FACTORY_NAMES, files, processFile(), raw (+24 more)
 
 ### Community 53 - "color-pair.tsx"
 Cohesion: 0.31
@@ -781,8 +783,8 @@ Cohesion: 0.06
 Nodes (32): 1. Mobile-First Design, 2. Consistent Breakpoint Usage, 3. Test at Breakpoint Boundaries, 4. Use Container for Content Width, 5. Progressive Enhancement, 6. Avoid Too Many Breakpoints, Best Practices, Breakpoint System (+24 more)
 
 ### Community 58 - "re"
-Cohesion: 0.06
-Nodes (20): generate_html(), get_deliverable_info(), get_image_base64(), main(), format_brief(), format_results(), main(), apply_color() (+12 more)
+Cohesion: 0.11
+Nodes (13): apply_color(), apply_viewbox_size(), extract_svgs(), generate_batch(), generate_icon(), generate_sizes(), load_env(), main() (+5 more)
 
 ### Community 59 - "Typography Specifications"
 Cohesion: 0.06
@@ -796,9 +798,9 @@ Nodes (28): 8.0.0-rc.11 → 8.0.0-rc.12 — User upgrade instructions, `a-decima
 Cohesion: 0.07
 Nodes (28): Absolute Don'ts, Approved Backgrounds, Before Using Logo, Clear Space, Co-branding, Color Rules, Color Usage, Color Variants (+20 more)
 
-### Community 62 - "dropdown-menu (Radix `DropdownMenu` → Base UI `Menu`)"
-Cohesion: 0.10
-Nodes (20): Arrow → Menu.Arrow, Base UI only props worth knowing (Menu), CheckboxItem → Menu.CheckboxItem, Content → Menu.Portal > Menu.Positioner > Menu.Popup, CSS variable mapping (per menu flavor: `dropdown-menu` / `context-menu` / `menubar`), Data-attribute mapping (dropdown/context/menubar menus), dropdown-menu (Radix `DropdownMenu` → Base UI `Menu`), Group → Menu.Group (+12 more)
+### Community 62 - "material-import-form.tsx"
+Cohesion: 0.09
+Nodes (63): Choosing between overlay components, Use Components, Not Custom Markup → [composition.md](./rules/composition.md), ActivitiesError(), HomeError(), ActivityReviewDialog(), PracticeLaunch(), AccountDeleteControls(), remove() (+55 more)
 
 ### Community 63 - "Component Specifications"
 Cohesion: 0.07
@@ -824,9 +826,9 @@ Nodes (27): Checklist, Common Pitfalls, `@@control` and DDL scope, Decision — 
 Cohesion: 0.29
 Nodes (14): addMapToSingleLineModel(), addModelMaps(), addModelMapsWithReport(), bodyIndent(), closingBraceIndex(), expandPatterns(), isModelDeclaration(), lowerFirst() (+6 more)
 
-### Community 69 - "cip/core.py"
-Cohesion: 0.12
-Nodes (7): BM25, detect_domain(), get_cip_brief(), _load_csv(), search(), search_all(), _search_csv()
+### Community 69 - "csv"
+Cohesion: 0.05
+Nodes (16): BM25, detect_domain(), get_cip_brief(), _load_csv(), search(), search_all(), _search_csv(), BM25 (+8 more)
 
 ### Community 70 - "Asset Approval Checklist"
 Cohesion: 0.08
@@ -888,9 +890,9 @@ Nodes (16): contractJsonCandidates(), dryRun, emitKeys, execFileAsync, findPrism
 Cohesion: 0.09
 Nodes (22): $type, $value, $type, $value, $type, $value, $type, $value (+14 more)
 
-### Community 86 - "csv"
-Cohesion: 0.09
-Nodes (12): generate_css_for_background(), get_background_image(), get_curated_images(), get_overlay_css(), get_pexels_search_url(), load_backgrounds_config(), load_brand_colors(), main() (+4 more)
+### Community 86 - "fetch-background.py"
+Cohesion: 0.16
+Nodes (9): generate_css_for_background(), get_background_image(), get_curated_images(), get_overlay_css(), get_pexels_search_url(), load_backgrounds_config(), load_brand_colors(), main() (+1 more)
 
 ### Community 87 - "Routing by Task Type"
 Cohesion: 0.10
@@ -921,16 +923,16 @@ Cohesion: 0.09
 Nodes (21): 8.0.0-rc.13 → 8.0.0-rc.14 — User upgrade instructions, `contract-artifacts-restamp`, `contract-source-warnings-are-diagnostics`, `date-time-default-refused-text`, `date-time-default-stored-in-canonical-form`, `date-time-ts-default-stored-in-canonical-form`, `engine-pin-moves-to-0-6-2`, `mongo-codecs-check-value-types` (+13 more)
 
 ### Community 94 - "0.16 → 0.17 — Extension-author upgrade instructions"
-Cohesion: 0.10
-Nodes (21): 0.16 → 0.17 — Extension-author upgrade instructions, `adopt-sql-json-projection-ast-foundations`, `codec-json-projections-must-agree-with-encode-json`, Committed contract spaces, Contract IR: `Index` / `IndexSchema`, Database marker/ledger, `default-literal-value-resolves-through-the-codec-json-channel`, Incidental lint-config bumps (+13 more)
+Cohesion: 0.13
+Nodes (15): 0.16 → 0.17 — Extension-author upgrade instructions, `adopt-sql-json-projection-ast-foundations`, `codec-json-projections-must-agree-with-encode-json`, Committed contract spaces, Contract IR: `Index` / `IndexSchema`, `default-literal-value-resolves-through-the-codec-json-channel`, Incidental lint-config bumps, Incidental release version bump to 0.17.0 (+7 more)
 
 ### Community 95 - ".agents/skills/prisma-8/upgrading/extension/upgrades/0.16-to-0.17/strip-sha256-hash-prefixes.ts"
 Cohesion: 0.15
 Nodes (21): canonicalizeJson(), computeMigrationHash(), dryRun, emit(), findMigrationArtifacts(), walk(), isJsonObject(), migrationHashMap (+13 more)
 
 ### Community 96 - "navigation-menu (Radix `NavigationMenu` → Base UI `NavigationMenu`)"
-Cohesion: 0.09
-Nodes (22): Arrow / Item / Group / Label / CheckboxItem / RadioGroup / RadioItem / ItemIndicator / Separator / Sub / SubTrigger / SubContent, Base UI only, data attributes, CSS variables, Base UI only props worth knowing (NavigationMenu), Content → ContextMenu.Portal > Positioner > Popup, Content → NavigationMenu.Content, context-menu (Radix `ContextMenu` → Base UI `ContextMenu`), CSS variable mapping (navigation-menu), Data-attribute mapping (navigation-menu) (+14 more)
+Cohesion: 0.14
+Nodes (14): Base UI only props worth knowing (NavigationMenu), Content → NavigationMenu.Content, CSS variable mapping (navigation-menu), Data-attribute mapping (navigation-menu), Gaps / caveats, Indicator → NavigationMenu.Icon (per wrapper ground truth), Item → NavigationMenu.Item, Link → NavigationMenu.Link (+6 more)
 
 ### Community 97 - "shadcn/ui Theming & Customization"
 Cohesion: 0.10
@@ -964,8 +966,8 @@ Nodes (17): Apparel (Polo/T-Shirt), Base Prompt Structure, Business Card, CIP Mo
 Cohesion: 0.11
 Nodes (17): Accent, Applying Semantic Tokens, Background & Foreground, Border & Ring, Color Semantics, Dark Mode Overrides, Destructive, Interactive States (+9 more)
 
-### Community 105 - "ref_node_crypto"
-Cohesion: 0.16
+### Community 105 - ".agents/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/strip-migration-labels-hints.ts"
+Cohesion: 0.18
 Nodes (16): canonicalizeJson(), computeMigrationHash(), dryRun, findMigrationManifests(), walk(), isJsonObject(), processFile(), projectRoot (+8 more)
 
 ### Community 106 - "Commands"
@@ -988,13 +990,13 @@ Nodes (16): $type, $value, $type, $value, $type, $value, $type, $value (+8 more)
 Cohesion: 0.29
 Nodes (14): addMapToSingleLineModel(), addModelMaps(), addModelMapsWithReport(), bodyIndent(), closingBraceIndex(), expandPatterns(), isModelDeclaration(), lowerFirst() (+6 more)
 
-### Community 113 - "design_system.py"
-Cohesion: 0.04
-Nodes (25): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_master_md(), format_page_override_md(), _generate_intelligent_overrides(), hex_to_ansi(), persist_design_system() (+17 more)
+### Community 113 - "DesignSystemGenerator"
+Cohesion: 0.06
+Nodes (13): DesignSystemGenerator, apply_decision_rules(), _object_without_duplicates(), parse_decision_rules(), _validate_action(), TestReasoningMatch, read_rows(), split_values() (+5 more)
 
-### Community 114 - "Prisma 8 — Runtime (`db.ts` Wiring)"
+### Community 114 - "Contract"
 Cohesion: 0.10
-Nodes (20): `await using` on a `postgres()` client is **block-scoped** — do not put it inside a request handler, Common Pitfalls, Key Concepts, Prisma 8 — Runtime (`db.ts` Wiring), Reference Files, What Prisma 8 doesn't do yet, When Not to Use, When to Use (+12 more)
+Nodes (22): `await using` on a `postgres()` client is **block-scoped** — do not put it inside a request handler, Checklist, Common Pitfalls, Key Concepts, Prisma 8 — Runtime (`db.ts` Wiring), Reference Files, What Prisma 8 doesn't do yet, When Not to Use (+14 more)
 
 ### Community 115 - "extract-colors.cjs"
 Cohesion: 0.20
@@ -1020,9 +1022,9 @@ Nodes (14): AIDA (Attention-Interest-Desire-Action), Before-After-Bridge, Contra
 Cohesion: 0.05
 Nodes (86): Block, bracketEnd(), canonicalizeJson(), COLUMN_DEFAULT_VALUE, COLUMN_PATHS, columnBlockKey(), columnCardinalities(), compareByName() (+78 more)
 
-### Community 122 - "admin/page.tsx"
-Cohesion: 0.13
-Nodes (30): sanitize-html, AdminPage(), metadata, TopicPage(), generateMetadata(), MaterialPage(), ChapterNavigation(), MaterialContent() (+22 more)
+### Community 122 - "next-intl"
+Cohesion: 0.07
+Nodes (41): nextConfig, withNextIntl, next, next-intl, AdminPage(), AnnouncementDetail(), generateMetadata(), AnnouncementsPage() (+33 more)
 
 ### Community 123 - ".agents/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-domain-namespaced-contracts.ts"
 Cohesion: 0.16
@@ -1064,9 +1066,9 @@ Nodes (13): Animation Tokens, Base Layer, Button Example, Component Classes, CSS
 Cohesion: 0.19
 Nodes (14): $type, $value, $type, $value, $type, $value, primitive, radius (+6 more)
 
-### Community 133 - "select"
-Cohesion: 0.11
-Nodes (19): Base UI only props worth knowing (select), CSS variable mapping (select), Data-attribute mapping (select), select, Select.Arrow → Select.Arrow, Select.Content → Select.Portal > Select.Positioner > Select.Popup (moved/split), Select.Group → Select.Group, Select.Icon → Select.Icon (+11 more)
+### Community 133 - "toast"
+Cohesion: 0.18
+Nodes (11): Base UI only props worth knowing, CSS variables, Data attributes, toast, Toast.Action → Toast.Action, Toast.Close → Toast.Close, Toast.Description → Toast.Description, Toast.Provider → Toast.Provider (+3 more)
 
 ### Community 134 - "Customization & Theming"
 Cohesion: 0.14
@@ -1088,13 +1090,17 @@ Nodes (12): Built-in variants first, className for layout only, Contents, No man
 Cohesion: 0.11
 Nodes (17): 0.12 → 0.13 — Extension-author upgrade instructions, `CodecDescriptorRegistry.codecRefForColumn`, `codecRefForStorageColumn`, Declarative PSL-block SPI (additive), Many-to-many contracts (additive), Re-emit your extension contract, Re-emit your extension contract, Re-pin migration baselines (+9 more)
 
-### Community 139 - "AggregateTypes"
-Cohesion: 0.06
-Nodes (30): 0.17 → 8.0.0-rc.1 — User upgrade instructions, `aggregate-results-carry-their-target-s-codec`, `native-enum-codec-is-not-textual`, 8.0.0-rc.1 → 8.0.0-rc.2 — Extension-author upgrade instructions, `aggregate-defaults-are-js-native-numbers`, `aggregate-surfaces-derive-from-the-contract-s-operation-map`, `config-file-is-prisma-config-with-an-orm-section`, `contributed-aggregate-operations-carry-a-lowering-hook` (+22 more)
+### Community 139 - "8.0.0-rc.1 → 8.0.0-rc.2 — Extension-author upgrade instructions"
+Cohesion: 0.11
+Nodes (17): 8.0.0-rc.1 → 8.0.0-rc.2 — Extension-author upgrade instructions, `aggregate-defaults-are-js-native-numbers`, `aggregate-surfaces-derive-from-the-contract-s-operation-map`, `config-file-is-prisma-config-with-an-orm-section`, `contributed-aggregate-operations-carry-a-lowering-hook`, `count-over-a-field-counts-that-field`, Hand-written checks are visible now, If your target pack authors checks (+9 more)
 
 ### Community 140 - "Layout Patterns"
 Cohesion: 0.14
 Nodes (13): Card Styles, Component Variants, CSS Structures, Feature Grid (3 columns), Layout Decision Flow, Layout Patterns, Layout Selection by Use Case, Metric Styles (+5 more)
+
+### Community 142 - "TestWebStackFreshness"
+Cohesion: 0.08
+Nodes (4): _rows(), TestNativeDesktopStackFreshness, _rows(), TestWebStackFreshness
 
 ### Community 143 - "update.md"
 Cohesion: 0.15
@@ -1120,8 +1126,8 @@ Nodes (24): accordion, asChild -> render, breadcrumb / marker (Slot users), Cove
 Cohesion: 0.12
 Nodes (16): Checklist, Common Pitfalls, How `migration plan` picks its origin, Key Concepts, Prisma 8 — The Migration Graph and Refs (Mental Model), Refs — version-controlled pointers, The graph is a static artifact, The trap — a greenfield plan over existing migrations (+8 more)
 
-### Community 149 - ".agents/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/strip-migration-labels-hints.ts"
-Cohesion: 0.18
+### Community 149 - "ref_node_crypto"
+Cohesion: 0.16
 Nodes (16): canonicalizeJson(), computeMigrationHash(), dryRun, findMigrationManifests(), walk(), isJsonObject(), processFile(), projectRoot (+8 more)
 
 ### Community 150 - "0.12 → 0.13 — User upgrade instructions"
@@ -1134,7 +1140,7 @@ Nodes (16): contractJsonCandidates(), contractNeedsMtiLinkColumns(), dryRun, emi
 
 ### Community 152 - "0.13 → 0.14 — User upgrade instructions"
 Cohesion: 0.12
-Nodes (16): 0.13 → 0.14 — User upgrade instructions, 1. Convert the schema syntax, 2. Migrate the database off the native type, 3. Verify, `create-runtime-removed`, `enum-becomes-domain-concept`, `generated-models-export-removed`, How to migrate (+8 more)
+Nodes (15): 0.13 → 0.14 — User upgrade instructions, 1. Convert the schema syntax, 2. Migrate the database off the native type, 3. Verify, `create-runtime-removed`, `enum-becomes-domain-concept`, How to migrate, `migration-op-factories-to-methods` (+7 more)
 
 ### Community 153 - ".agents/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/regenerate-extension-public-baseline.ts"
 Cohesion: 0.15
@@ -1144,9 +1150,9 @@ Nodes (14): dryRun, execFileAsync, ExtensionRoot, extensionRoots, findMigrationD
 Cohesion: 0.05
 Nodes (86): Block, bracketEnd(), canonicalizeJson(), COLUMN_DEFAULT_VALUE, COLUMN_PATHS, columnBlockKey(), columnCardinalities(), compareByName() (+78 more)
 
-### Community 156 - "Contract"
-Cohesion: 0.09
-Nodes (25): Checklist, Checklist, Key Concepts, `await using` on a `postgres()` client is **block-scoped** — do not put it inside a request handler, Checklist, Common Pitfalls, Key Concepts, Prisma 8 — Runtime (`db.ts` Wiring) (+17 more)
+### Community 156 - "Prisma 8 — Runtime (`db.ts` Wiring)"
+Cohesion: 0.10
+Nodes (21): `await using` on a `postgres()` client is **block-scoped** — do not put it inside a request handler, Checklist, Common Pitfalls, Key Concepts, Prisma 8 — Runtime (`db.ts` Wiring), Reference Files, What Prisma 8 doesn't do yet, When Not to Use (+13 more)
 
 ### Community 157 - ".devin/skills/prisma-8/upgrading/app/upgrades/8.0.0-rc.14-to-8.0.0-rc.15/scripts/data-type-in-contract/data-type-in-contract.ts"
 Cohesion: 0.05
@@ -1316,9 +1322,9 @@ Nodes (55): 8.0.0-rc.14 → 8.0.0-rc.15 — User upgrade instructions, `apply-is
 Cohesion: 0.04
 Nodes (46): 0.11 → 0.12 — Extension-author upgrade instructions, `any-expression-exhaustive-switch-add-window-func-case`, Before 0.12, Before 0.12, Before 0.12, Before 0.12 — `createRuntime(...)` call inside the wrapper, Before 0.12 — type import and options interface, Confirm every manifest is migrated (+38 more)
 
-### Community 201 - "Component Composition"
-Cohesion: 0.15
-Nodes (13): Avatar always needs AvatarFallback, Button has no isPending or isLoading prop, Callouts use Alert, Card structure, Choosing between overlay components, Component Composition, Contents, Dialog, Sheet, and Drawer always need a Title (+5 more)
+### Community 201 - ".claude/skills/prisma-8/upgrading/app/upgrades/0.13-to-0.14/migration-op-factories-to-methods.ts"
+Cohesion: 0.24
+Nodes (8): applyRewrites(), FACTORY_NAMES, files, processFile(), raw, Rewrite, rewrites, stripFactoriesFromImports()
 
 ### Community 202 - "hover-card → preview-card"
 Cohesion: 0.22
@@ -1385,16 +1391,16 @@ Cohesion: 0.29
 Nodes (6): Animation idiom, Class-string rewrites (layer 2), CSS variables, Data-attribute selectors, Disabled-state hooks, Element changes kill pseudo-class variants
 
 ### Community 218 - "display-misc.md"
-Cohesion: 0.05
-Nodes (38): AccessibleIcon (radix `AccessibleIcon.Root`: `label` required), AspectRatio (radix `AspectRatio.Root`: `asChild`, `ratio` default `1`), avatar, Avatar.Fallback → Avatar.Fallback, Avatar.Image → Avatar.Image, Avatar.Root → Avatar.Root, Base UI only props worth knowing, Base UI only props worth knowing (+30 more)
+Cohesion: 0.29
+Nodes (6): AccessibleIcon (radix `AccessibleIcon.Root`: `label` required), AspectRatio (radix `AspectRatio.Root`: `asChild`, `ratio` default `1`), Label (radix `Label.Root`: `asChild`, `htmlFor`), No Base UI counterpart, Radix UI → Base UI props mapping: progress, scroll-area, separator, avatar, toast, form, VisuallyHidden (radix `VisuallyHidden.Root`: `asChild`)
 
 ### Community 219 - "8.0.0-rc.1 → 8.0.0-rc.2 — User upgrade instructions"
 Cohesion: 0.12
 Nodes (15): 8.0.0-rc.1 → 8.0.0-rc.2 — User upgrade instructions, `aggregate-defaults-are-js-native-numbers`, `aggregate-methods-come-from-the-emitted-contract`, `codec-ids-are-checked-where-they-are-authored`, `config-file-is-prisma-config-with-an-orm-section`, `count-over-a-field-counts-that-field`, If you are upgrading from before 8.0.0-rc.1, `integer-columns-refuse-the-wrong-js-type` (+7 more)
 
-### Community 220 - "value"
-Cohesion: 0.07
-Nodes (33): Base UI only props worth knowing, Base UI only props worth knowing, CSS var mapping, CSS var mapping, Data-attribute mapping, Data-attribute mapping, tabs, Tabs.Content → Tabs.Panel (+25 more)
+### Community 220 - "dropdown-menu (Radix `DropdownMenu` → Base UI `Menu`)"
+Cohesion: 0.06
+Nodes (34): Arrow / Item / Group / Label / CheckboxItem / RadioGroup / RadioItem / ItemIndicator / Separator / Sub / SubTrigger / SubContent, Arrow → Menu.Arrow, Base UI only, data attributes, CSS variables, Base UI only props worth knowing (Menu), CheckboxItem → Menu.CheckboxItem, Content → ContextMenu.Portal > Positioner > Popup, Content → Menu.Portal > Menu.Positioner > Menu.Popup, context-menu (Radix `ContextMenu` → Base UI `ContextMenu`) (+26 more)
 
 ### Community 221 - "Prisma 8 — Debug"
 Cohesion: 0.14
@@ -1412,9 +1418,9 @@ Nodes (6): Hard rules, Modes, Preflight (always), Radix UI -> Base UI migration,
 Cohesion: 0.29
 Nodes (6): Animation Classes, Background Images, Base Structure, Chart.js Integration, CSS Variables Reference, HTML Slide Template
 
-### Community 226 - "material-import-form.tsx"
-Cohesion: 0.11
-Nodes (54): Use Components, Not Custom Markup → [composition.md](./rules/composition.md), react, ActivitiesError(), HomeError(), ActivityReviewDialog(), AccountDeleteControls(), ContentDeleteControls(), deletionDetails (+46 more)
+### Community 226 - ".cursor/skills/prisma-8/upgrading/app/upgrades/0.13-to-0.14/migration-op-factories-to-methods.ts"
+Cohesion: 0.24
+Nodes (8): applyRewrites(), FACTORY_NAMES, files, processFile(), raw, Rewrite, rewrites, stripFactoriesFromImports()
 
 ### Community 227 - "Query Contract"
 Cohesion: 0.29
@@ -1428,17 +1434,17 @@ Nodes (5): Callback signature rule, Consumer-side prop changes (call sites, not 
 Cohesion: 0.33
 Nodes (5): References (Knowledge Base), Routing, Slides, Subcommands, When to Use
 
-### Community 230 - "admin/actions.ts"
-Cohesion: 0.17
-Nodes (34): remove(), remove(), publish(), remove(), publish(), convertMaterialFile(), deleteAccount(), deleteContent() (+26 more)
+### Community 230 - "value"
+Cohesion: 0.22
+Nodes (31): convertMaterialFile(), deleteAccount(), deleteContent(), deleteMaterial(), externalHttpsUrl(), importMaterial(), optionalValue(), previewMaterialDraft() (+23 more)
 
 ### Community 231 - "0.13 → 0.14 — Extension-author upgrade instructions"
-Cohesion: 0.15
-Nodes (12): 0.13 → 0.14 — Extension-author upgrade instructions, `contract-model-definitions-removed`, `create-runtime-removed`, `enum-becomes-domain-concept`, Migrate query-building call sites, `migration-op-factories-to-methods`, `namespace-entries-open-dict`, `namespaced-type-resolution` (+4 more)
+Cohesion: 0.17
+Nodes (11): 0.13 → 0.14 — Extension-author upgrade instructions, `create-runtime-removed`, `enum-becomes-domain-concept`, Migrate query-building call sites, `migration-op-factories-to-methods`, `namespace-entries-open-dict`, `namespaced-type-resolution`, `qualify-flat-builder-accessors` (+3 more)
 
-### Community 233 - "test_core.py"
+### Community 233 - "design_system.py"
 Cohesion: 0.04
-Nodes (8): format_markdown(), generate_design_system(), TestBm25CoreBehavior, TestDiagnosticsContracts, TestDomainDetection, TestPersistence, TestSearchDomains, TestTokenizer
+Nodes (19): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), generate_design_system(), _generate_intelligent_overrides() (+11 more)
 
 ### Community 234 - "8.0.0-rc.11 → 8.0.0-rc.12 — Extension author upgrade instructions"
 Cohesion: 0.06
@@ -1506,11 +1512,11 @@ Nodes (10): 8.0.0-rc.15 → 8.0.0-rc.16 — Extension author upgrade instruction
 
 ### Community 250 - "Prisma 8 — Runtime (`db.ts` Wiring)"
 Cohesion: 0.10
-Nodes (20): `await using` on a `postgres()` client is **block-scoped** — do not put it inside a request handler, Common Pitfalls, Key Concepts, Prisma 8 — Runtime (`db.ts` Wiring), Reference Files, What Prisma 8 doesn't do yet, When Not to Use, When to Use (+12 more)
+Nodes (21): `await using` on a `postgres()` client is **block-scoped** — do not put it inside a request handler, Checklist, Common Pitfalls, Key Concepts, Prisma 8 — Runtime (`db.ts` Wiring), Reference Files, What Prisma 8 doesn't do yet, When Not to Use (+13 more)
 
-### Community 251 - "8.0.0-rc.1 → 8.0.0-rc.2 — User upgrade instructions"
-Cohesion: 0.12
-Nodes (15): 8.0.0-rc.1 → 8.0.0-rc.2 — User upgrade instructions, `aggregate-defaults-are-js-native-numbers`, `aggregate-methods-come-from-the-emitted-contract`, `codec-ids-are-checked-where-they-are-authored`, `config-file-is-prisma-config-with-an-orm-section`, `count-over-a-field-counts-that-field`, If you are upgrading from before 8.0.0-rc.1, `integer-columns-refuse-the-wrong-js-type` (+7 more)
+### Community 251 - "AggregateTypes"
+Cohesion: 0.05
+Nodes (38): 0.17 → 8.0.0-rc.1 — User upgrade instructions, `aggregate-results-carry-their-target-s-codec`, 0.17 → 8.0.0-rc.1 — Extension-author upgrade instructions, `aggregate-result-codecs-are-target-declared`, `codec-conformance-harness-moves-to-testkit-packages`, `driver-spi-splits-query-and-execute`, `rendered-ts-literals-are-double-quoted`, `native-enum-codec-is-not-textual` (+30 more)
 
 ### Community 252 - "8.0.0-rc.11 → 8.0.0-rc.12 — User upgrade instructions"
 Cohesion: 0.07
@@ -1532,13 +1538,13 @@ Nodes (28): 1. Pick the channel, 2. Classify (issue path only), 3. Collect the m
 Cohesion: 0.50
 Nodes (4): Common Sticking Points, Pre-Delivery Checklist, Query Strategy, Tips for Better Results
 
-### Community 257 - "0.17 → 8.0.0-rc.1 — Extension-author upgrade instructions"
-Cohesion: 0.33
-Nodes (5): 0.17 → 8.0.0-rc.1 — Extension-author upgrade instructions, `aggregate-result-codecs-are-target-declared`, `codec-conformance-harness-moves-to-testkit-packages`, `driver-spi-splits-query-and-execute`, `rendered-ts-literals-are-double-quoted`
+### Community 257 - "render.ts"
+Cohesion: 0.36
+Nodes (5): sanitize-html, MaterialContent(), allowedTags, Chapter, renderLessonHtml()
 
-### Community 258 - "logo/core.py"
-Cohesion: 0.12
-Nodes (6): BM25, detect_domain(), _load_csv(), search(), search_all(), _search_csv()
+### Community 258 - ".devin/skills/prisma-8/upgrading/app/upgrades/0.13-to-0.14/migration-op-factories-to-methods.ts"
+Cohesion: 0.24
+Nodes (8): applyRewrites(), FACTORY_NAMES, files, processFile(), raw, Rewrite, rewrites, stripFactoriesFromImports()
 
 ### Community 259 - "0.17 → 8.0.0-rc.1 — Extension-author upgrade instructions"
 Cohesion: 0.33
@@ -1569,8 +1575,8 @@ Cohesion: 0.22
 Nodes (9): Exact-pin rule, Failure surfaces, Per-step flow, Role detection, Step 0 — Upgrade to the newest instructions, then re-read, Transition chain, Upgrade Prisma 8 (extension), Version detection (+1 more)
 
 ### Community 266 - "previous"
-Cohesion: 0.12
-Nodes (14): `sign-databases-after-upgrade`, `control-family-instance-sign-spaces`, `sign-databases-after-upgrade`, `control-family-instance-sign-spaces`, `sign-databases-after-upgrade`, `control-family-instance-sign-spaces`, `sign-databases-after-upgrade`, `control-family-instance-sign-spaces` (+6 more)
+Cohesion: 0.22
+Nodes (9): `sign-databases-after-upgrade`, `control-family-instance-sign-spaces`, `sign-databases-after-upgrade`, `control-family-instance-sign-spaces`, `sign-databases-after-upgrade`, `control-family-instance-sign-spaces`, `sign-databases-after-upgrade`, `control-family-instance-sign-spaces` (+1 more)
 
 ### Community 267 - "primary-foreground"
 Cohesion: 0.67
@@ -1617,8 +1623,8 @@ Cohesion: 0.07
 Nodes (27): Checklist, Common Pitfalls, `@@control` and DDL scope, Decision — which path do you take?, Dev → ship transition (the `db` ref pattern), Diagnostic codes you route on, Graph and history commands, Key Concepts (+19 more)
 
 ### Community 281 - "toolbar"
-Cohesion: 0.08
-Nodes (23): Base UI only props worth knowing, Base UI only props worth knowing, Base UI only props worth knowing, collapsible, Collapsible.Content → Collapsible.Panel, Collapsible.Root → Collapsible.Root, Collapsible.Trigger → Collapsible.Trigger, CSS var mapping (+15 more)
+Cohesion: 0.20
+Nodes (10): Base UI only props worth knowing, CSS var mapping, Data-attribute mapping, toolbar, Toolbar.Button → Toolbar.Button, Toolbar.Link → Toolbar.Link, Toolbar.Root → Toolbar.Root, Toolbar.Separator → Toolbar.Separator (+2 more)
 
 ### Community 282 - "0.16 → 0.17 — User upgrade instructions"
 Cohesion: 0.08
@@ -1656,9 +1662,9 @@ Nodes (22): check, closingQuote(), commentEnd(), DEFAULT_ELEMENT_PATH, execution
 Cohesion: 0.15
 Nodes (22): check, closingQuote(), commentEnd(), DEFAULT_ELEMENT_PATH, executionDefaultRefs(), findMigrationFiles(), isContractFile(), isDefaultElement() (+14 more)
 
-### Community 291 - ".claude/skills/prisma-8/upgrading/extension/upgrades/0.13-to-0.14/migration-op-factories-to-methods.ts"
-Cohesion: 0.24
-Nodes (8): applyRewrites(), FACTORY_NAMES, files, processFile(), raw, Rewrite, rewrites, stripFactoriesFromImports()
+### Community 291 - "scroll-area"
+Cohesion: 0.22
+Nodes (9): Base UI only props worth knowing, CSS variables, Data attributes, scroll-area, ScrollArea.Corner → ScrollArea.Corner, ScrollArea.Root → ScrollArea.Root, ScrollArea.Viewport → ScrollArea.Viewport, ScrollAreaScrollbar → ScrollArea.Scrollbar (+1 more)
 
 ### Community 292 - "0.8 → 0.9 — Extension-author upgrade instructions"
 Cohesion: 0.33
@@ -1780,9 +1786,9 @@ Nodes (21): Checklist, Common Pitfalls, Concept — concurrent migrations on the
 Cohesion: 0.09
 Nodes (21): Anti-patterns on this path, Canonical on-disk layout, Checklist, Commands you'll use day-to-day, Common Pitfalls, Concept — what to communicate first, Decision — PSL vs TypeScript authoring, Key Concepts (+13 more)
 
-### Community 322 - "generate-slide.py"
-Cohesion: 0.13
-Nodes (11): _e(), generate_chart_slide(), generate_cta_slide(), generate_deck(), generate_metrics_slide(), generate_problem_slide(), generate_solution_slide(), generate_testimonial_slide() (+3 more)
+### Community 322 - ".devin/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-domain-namespaced-contracts.ts"
+Cohesion: 0.16
+Nodes (19): configDirNeedsDomainPlaneMigration(), contractDtsCandidates(), contractDtsNeedsDomainPlaneMigration(), contractJsonCandidates(), contractJsonNeedsDomainPlaneMigration(), dryRun, emitKeys, execFileAsync (+11 more)
 
 ### Community 323 - ".claude/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-domain-namespaced-contracts.ts"
 Cohesion: 0.16
@@ -1838,11 +1844,11 @@ Nodes (19): CONTRACT_FILES, dryRun, findContractSnapshots(), walk(), formatJson(
 
 ### Community 336 - "Prisma 8 — Runtime (`db.ts` Wiring)"
 Cohesion: 0.10
-Nodes (20): `await using` on a `postgres()` client is **block-scoped** — do not put it inside a request handler, Checklist, Common Pitfalls, Prisma 8 — Runtime (`db.ts` Wiring), Reference Files, What Prisma 8 doesn't do yet, When Not to Use, When to Use (+12 more)
+Nodes (21): `await using` on a `postgres()` client is **block-scoped** — do not put it inside a request handler, Checklist, Common Pitfalls, Key Concepts, Prisma 8 — Runtime (`db.ts` Wiring), Reference Files, What Prisma 8 doesn't do yet, When Not to Use (+13 more)
 
-### Community 337 - "Penyempurnaan alur latihan — 21 Oktober 2026"
-Cohesion: 0.29
-Nodes (6): Cakupan, Cakupan visual dan batas pemeriksaan, Pemeriksaan akhir, Pemeriksaan awal, Penyempurnaan alur latihan — 21 Oktober 2026, Tujuan
+### Community 337 - "select"
+Cohesion: 0.11
+Nodes (19): Base UI only props worth knowing (select), CSS variable mapping (select), Data-attribute mapping (select), select, Select.Arrow → Select.Arrow, Select.Content → Select.Portal > Select.Positioner > Select.Popup (moved/split), Select.Group → Select.Group, Select.Icon → Select.Icon (+11 more)
 
 ### Community 338 - ".cursor/skills/prisma-8/upgrading/app/upgrades/0.9-to-0.10/stamp-storage-types-kind.ts"
 Cohesion: 0.13
@@ -1854,7 +1860,7 @@ Nodes (19): CONTRACT_FILES, dryRun, findContractSnapshots(), walk(), formatJson(
 
 ### Community 340 - "app/layout.tsx"
 Cohesion: 0.38
-Nodes (4): next-themes, metadata, RootLayout(), ThemeProvider()
+Nodes (3): next-themes, RootLayout(), ThemeProvider()
 
 ### Community 341 - ".devin/skills/prisma-8/upgrading/app/upgrades/0.9-to-0.10/stamp-storage-types-kind.ts"
 Cohesion: 0.13
@@ -1932,8 +1938,8 @@ Nodes (17): Apply the validator migration, `re-emit-closed-mongo-contracts`, Re-
 Cohesion: 0.12
 Nodes (16): Checklist, Common Pitfalls, How `migration plan` picks its origin, Key Concepts, Prisma 8 — The Migration Graph and Refs (Mental Model), Refs — version-controlled pointers, The graph is a static artifact, The trap — a greenfield plan over existing migrations (+8 more)
 
-### Community 360 - ".claude/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-closed-mongo-contracts.ts"
-Cohesion: 0.17
+### Community 360 - "ref_node_util"
+Cohesion: 0.16
 Nodes (15): contractJsonCandidates(), contractLooksClosed(), isClosed(), dryRun, execFileAsync, findPrismaNextConfigDirs(), walk(), isJsonObject() (+7 more)
 
 ### Community 361 - ".claude/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/strip-migration-labels-hints.ts"
@@ -1956,16 +1962,16 @@ Nodes (14): dryRun, execFileAsync, ExtensionRoot, extensionRoots, findMigrationD
 Cohesion: 0.18
 Nodes (16): canonicalizeJson(), computeMigrationHash(), dryRun, findMigrationManifests(), walk(), isJsonObject(), processFile(), projectRoot (+8 more)
 
-### Community 366 - ".agents/skills/prisma-8/upgrading/extension/upgrades/0.13-to-0.14/migration-op-factories-to-methods.ts"
-Cohesion: 0.24
-Nodes (8): applyRewrites(), FACTORY_NAMES, files, processFile(), raw, Rewrite, rewrites, stripFactoriesFromImports()
+### Community 366 - ".agents/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/migrate-contract-testing-imports.ts"
+Cohesion: 0.29
+Nodes (6): dryRun, findSourceFiles(), walk(), projectRoot, SKIP_DIRS, targets
 
 ### Community 367 - "Prisma 8 — The Migration Graph and Refs (Mental Model)"
 Cohesion: 0.12
 Nodes (16): Checklist, Common Pitfalls, How `migration plan` picks its origin, Key Concepts, Prisma 8 — The Migration Graph and Refs (Mental Model), Refs — version-controlled pointers, The graph is a static artifact, The trap — a greenfield plan over existing migrations (+8 more)
 
-### Community 369 - "ref_node_util"
-Cohesion: 0.16
+### Community 369 - ".cursor/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-closed-mongo-contracts.ts"
+Cohesion: 0.17
 Nodes (15): contractJsonCandidates(), contractLooksClosed(), isClosed(), dryRun, execFileAsync, findPrismaNextConfigDirs(), walk(), isJsonObject() (+7 more)
 
 ### Community 370 - ".cursor/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/strip-migration-labels-hints.ts"
@@ -1989,8 +1995,8 @@ Cohesion: 0.18
 Nodes (16): canonicalizeJson(), computeMigrationHash(), dryRun, findMigrationManifests(), walk(), isJsonObject(), processFile(), projectRoot (+8 more)
 
 ### Community 375 - "FieldOutputTypes"
-Cohesion: 0.30
-Nodes (7): Upgrade 0.14 → 0.15, Upgrade 0.14 → 0.15, Upgrade 0.14 → 0.15, Upgrade 0.14 → 0.15, FieldInputTypes, FieldOutputTypes, StorageColumnTypes
+Cohesion: 0.22
+Nodes (16): `generated-models-export-removed`, Upgrade 0.14 → 0.15, `contract-model-definitions-removed`, `generated-models-export-removed`, Upgrade 0.14 → 0.15, `contract-model-definitions-removed`, `generated-models-export-removed`, Upgrade 0.14 → 0.15 (+8 more)
 
 ### Community 376 - "Prisma 8 — The Migration Graph and Refs (Mental Model)"
 Cohesion: 0.12
@@ -2016,9 +2022,9 @@ Nodes (16): contractJsonCandidates(), contractNeedsMtiLinkColumns(), dryRun, emi
 Cohesion: 0.15
 Nodes (14): dryRun, execFileAsync, ExtensionRoot, extensionRoots, findMigrationDirs(), findPackageJsonFiles(), walk(), isJsonObject() (+6 more)
 
-### Community 388 - "form"
-Cohesion: 0.17
-Nodes (12): Base UI only props worth knowing (form-wide), CSS variables, Data attributes, form, Form.Control → Field.Control, Form.Field → Field.Root, Form.Label → Field.Label, Form.Message → Field.Error (+4 more)
+### Community 388 - "QueryOperationTypes"
+Cohesion: 0.22
+Nodes (9): Nothing for an extension author to translate., `query-operation-types-move-to-the-postgres-target`, Nothing for an extension author to translate., `query-operation-types-move-to-the-postgres-target`, Nothing for an extension author to translate., `query-operation-types-move-to-the-postgres-target`, Nothing for an extension author to translate., `query-operation-types-move-to-the-postgres-target` (+1 more)
 
 ### Community 389 - "Prisma 8 — Build-System Integration"
 Cohesion: 0.12
@@ -2038,7 +2044,7 @@ Nodes (15): Checklist, Common Pitfalls, Key Concepts, Prisma 8 — Supabase, Ref
 
 ### Community 393 - "0.13 → 0.14 — User upgrade instructions"
 Cohesion: 0.12
-Nodes (16): 0.13 → 0.14 — User upgrade instructions, 1. Convert the schema syntax, 2. Migrate the database off the native type, 3. Verify, `create-runtime-removed`, `enum-becomes-domain-concept`, `generated-models-export-removed`, How to migrate (+8 more)
+Nodes (15): 0.13 → 0.14 — User upgrade instructions, 1. Convert the schema syntax, 2. Migrate the database off the native type, 3. Verify, `create-runtime-removed`, `enum-becomes-domain-concept`, How to migrate, `migration-op-factories-to-methods` (+7 more)
 
 ### Community 394 - ".claude/skills/prisma-8/upgrading/app/upgrades/8.0.0-rc.11-to-8.0.0-rc.12/scripts/psl-verbatim-table-names/add-model-map.mjs"
 Cohesion: 0.29
@@ -2066,7 +2072,7 @@ Nodes (16): Checklist, Common Pitfalls (Postgres), Computed projections and join
 
 ### Community 400 - "0.13 → 0.14 — User upgrade instructions"
 Cohesion: 0.12
-Nodes (16): 0.13 → 0.14 — User upgrade instructions, 1. Convert the schema syntax, 2. Migrate the database off the native type, 3. Verify, `create-runtime-removed`, `enum-becomes-domain-concept`, `generated-models-export-removed`, How to migrate (+8 more)
+Nodes (15): 0.13 → 0.14 — User upgrade instructions, 1. Convert the schema syntax, 2. Migrate the database off the native type, 3. Verify, `create-runtime-removed`, `enum-becomes-domain-concept`, How to migrate, `migration-op-factories-to-methods` (+7 more)
 
 ### Community 401 - ".cursor/skills/prisma-8/upgrading/app/upgrades/8.0.0-rc.11-to-8.0.0-rc.12/scripts/psl-verbatim-table-names/add-model-map.mjs"
 Cohesion: 0.29
@@ -2096,17 +2102,17 @@ Nodes (16): Checklist, Common Pitfalls (Postgres), Computed projections and join
 Cohesion: 0.12
 Nodes (15): Checklist, Common Pitfalls, Key Concepts, Prisma 8 — Supabase, Reference Files, What Prisma 8 doesn't do yet, When Not to Use, When to Use (+7 more)
 
-### Community 408 - ".claude/skills/prisma-8/upgrading/app/upgrades/0.13-to-0.14/migration-op-factories-to-methods.ts"
-Cohesion: 0.24
-Nodes (8): applyRewrites(), FACTORY_NAMES, files, processFile(), raw, Rewrite, rewrites, stripFactoriesFromImports()
+### Community 408 - ".cursor/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/migrate-contract-testing-imports.ts"
+Cohesion: 0.29
+Nodes (6): dryRun, findSourceFiles(), walk(), projectRoot, SKIP_DIRS, targets
 
 ### Community 409 - ".devin/skills/prisma-8/upgrading/app/upgrades/8.0.0-rc.11-to-8.0.0-rc.12/scripts/psl-verbatim-table-names/add-model-map.mjs"
 Cohesion: 0.29
 Nodes (14): addMapToSingleLineModel(), addModelMaps(), addModelMapsWithReport(), bodyIndent(), closingBraceIndex(), expandPatterns(), isModelDeclaration(), lowerFirst() (+6 more)
 
-### Community 410 - "0.17 → 8.0.0-rc.1 — Extension-author upgrade instructions"
-Cohesion: 0.33
-Nodes (5): 0.17 → 8.0.0-rc.1 — Extension-author upgrade instructions, `aggregate-result-codecs-are-target-declared`, `codec-conformance-harness-moves-to-testkit-packages`, `driver-spi-splits-query-and-execute`, `rendered-ts-literals-are-double-quoted`
+### Community 410 - ".devin/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/migrate-contract-testing-imports.ts"
+Cohesion: 0.29
+Nodes (6): dryRun, findSourceFiles(), walk(), projectRoot, SKIP_DIRS, targets
 
 ### Community 411 - ".devin/skills/prisma-8/upgrading/extension/upgrades/8.0.0-rc.11-to-8.0.0-rc.12/scripts/psl-verbatim-table-names/add-model-map.mjs"
 Cohesion: 0.29
@@ -2124,13 +2130,9 @@ Nodes (15): Checklist, Common Pitfalls (cross-target), Consuming the result: `aw
 Cohesion: 0.13
 Nodes (14): 8.0.0-rc.12 → 8.0.0-rc.13 — User upgrade instructions, `config-contract-source-requires-format`, `contract-artifacts-restamp`, `contract-format-formats-prisma7-schema`, `create-mongo-runner-deps-removed`, `cursor-rejects-expression-orders`, `execution-ref-entry-field`, `mongo-codec-subpaths-move-to-target` (+6 more)
 
-### Community 415 - ".devin/skills/prisma-8/upgrading/app/upgrades/0.11-to-0.12/re-emit-domain-namespaced-contracts.ts"
-Cohesion: 0.16
-Nodes (19): configDirNeedsDomainPlaneMigration(), contractDtsCandidates(), contractDtsNeedsDomainPlaneMigration(), contractJsonCandidates(), contractJsonNeedsDomainPlaneMigration(), dryRun, emitKeys, execFileAsync (+11 more)
-
 ### Community 416 - "0.16 → 0.17 — Extension-author upgrade instructions"
-Cohesion: 0.10
-Nodes (21): 0.16 → 0.17 — Extension-author upgrade instructions, `adopt-sql-json-projection-ast-foundations`, `codec-json-projections-must-agree-with-encode-json`, Committed contract spaces, Contract IR: `Index` / `IndexSchema`, Database marker/ledger, `default-literal-value-resolves-through-the-codec-json-channel`, Incidental lint-config bumps (+13 more)
+Cohesion: 0.13
+Nodes (15): 0.16 → 0.17 — Extension-author upgrade instructions, `adopt-sql-json-projection-ast-foundations`, `codec-json-projections-must-agree-with-encode-json`, Committed contract spaces, Contract IR: `Index` / `IndexSchema`, `default-literal-value-resolves-through-the-codec-json-channel`, Incidental lint-config bumps, Incidental release version bump to 0.17.0 (+7 more)
 
 ### Community 417 - "Prisma 8 — Queries"
 Cohesion: 0.13
@@ -2145,8 +2147,8 @@ Cohesion: 0.13
 Nodes (14): 8.0.0-rc.12 → 8.0.0-rc.13 — User upgrade instructions, `config-contract-source-requires-format`, `contract-artifacts-restamp`, `contract-format-formats-prisma7-schema`, `create-mongo-runner-deps-removed`, `cursor-rejects-expression-orders`, `execution-ref-entry-field`, `mongo-codec-subpaths-move-to-target` (+6 more)
 
 ### Community 420 - "0.16 → 0.17 — Extension-author upgrade instructions"
-Cohesion: 0.10
-Nodes (21): 0.16 → 0.17 — Extension-author upgrade instructions, `adopt-sql-json-projection-ast-foundations`, `codec-json-projections-must-agree-with-encode-json`, Committed contract spaces, Contract IR: `Index` / `IndexSchema`, Database marker/ledger, `default-literal-value-resolves-through-the-codec-json-channel`, Incidental lint-config bumps (+13 more)
+Cohesion: 0.13
+Nodes (15): 0.16 → 0.17 — Extension-author upgrade instructions, `adopt-sql-json-projection-ast-foundations`, `codec-json-projections-must-agree-with-encode-json`, Committed contract spaces, Contract IR: `Index` / `IndexSchema`, `default-literal-value-resolves-through-the-codec-json-channel`, Incidental lint-config bumps, Incidental release version bump to 0.17.0 (+7 more)
 
 ### Community 421 - "Prisma 8 — Queries"
 Cohesion: 0.13
@@ -2157,8 +2159,8 @@ Cohesion: 0.14
 Nodes (13): 8.0.0-rc.12 → 8.0.0-rc.13 — User upgrade instructions, `contract-artifacts-restamp`, `contract-format-formats-prisma7-schema`, `create-mongo-runner-deps-removed`, `cursor-rejects-expression-orders`, `execution-ref-entry-field`, `mongo-codec-subpaths-move-to-target`, `mongo-create-runner-needs-adapter-on-stack` (+5 more)
 
 ### Community 424 - "0.16 → 0.17 — Extension-author upgrade instructions"
-Cohesion: 0.08
-Nodes (22): 0.16 → 0.17 — Extension-author upgrade instructions, `adopt-sql-json-projection-ast-foundations`, `codec-json-projections-must-agree-with-encode-json`, Committed contract spaces, Contract IR: `Index` / `IndexSchema`, Database marker/ledger, `default-literal-value-resolves-through-the-codec-json-channel`, Incidental lint-config bumps (+14 more)
+Cohesion: 0.13
+Nodes (15): 0.16 → 0.17 — Extension-author upgrade instructions, `adopt-sql-json-projection-ast-foundations`, `codec-json-projections-must-agree-with-encode-json`, Committed contract spaces, Contract IR: `Index` / `IndexSchema`, `default-literal-value-resolves-through-the-codec-json-channel`, Incidental lint-config bumps, Incidental release version bump to 0.17.0 (+7 more)
 
 ### Community 425 - "Prisma 8 — Debug"
 Cohesion: 0.14
@@ -2197,16 +2199,16 @@ Cohesion: 0.21
 Nodes (11): dryRun, findManifests(), walk(), jsonValueEnd(), looksLikeMigrationManifest(), processManifest(), projectRoot, REMOVED_KEYS (+3 more)
 
 ### Community 434 - "0.13 → 0.14 — Extension-author upgrade instructions"
-Cohesion: 0.15
-Nodes (12): 0.13 → 0.14 — Extension-author upgrade instructions, `contract-model-definitions-removed`, `create-runtime-removed`, `enum-becomes-domain-concept`, Migrate query-building call sites, `migration-op-factories-to-methods`, `namespace-entries-open-dict`, `namespaced-type-resolution` (+4 more)
+Cohesion: 0.17
+Nodes (11): 0.13 → 0.14 — Extension-author upgrade instructions, `create-runtime-removed`, `enum-becomes-domain-concept`, Migrate query-building call sites, `migration-op-factories-to-methods`, `namespace-entries-open-dict`, `namespaced-type-resolution`, `qualify-flat-builder-accessors` (+3 more)
 
 ### Community 435 - ".claude/skills/prisma-8/upgrading/extension/upgrades/0.8-to-0.9/strip-inline-contracts.ts"
 Cohesion: 0.21
 Nodes (11): dryRun, findManifests(), walk(), jsonValueEnd(), looksLikeMigrationManifest(), processManifest(), projectRoot, REMOVED_KEYS (+3 more)
 
-### Community 436 - "QueryOperationTypes"
-Cohesion: 0.22
-Nodes (9): Nothing for an extension author to translate., `query-operation-types-move-to-the-postgres-target`, Nothing for an extension author to translate., `query-operation-types-move-to-the-postgres-target`, Nothing for an extension author to translate., `query-operation-types-move-to-the-postgres-target`, Nothing for an extension author to translate., `query-operation-types-move-to-the-postgres-target` (+1 more)
+### Community 436 - ".claude/skills/prisma-8/upgrading/extension/upgrades/0.13-to-0.14/migration-op-factories-to-methods.ts"
+Cohesion: 0.24
+Nodes (8): applyRewrites(), FACTORY_NAMES, files, processFile(), raw, Rewrite, rewrites, stripFactoriesFromImports()
 
 ### Community 437 - "8.0.0-rc.13 → 8.0.0-rc.14 — Extension author upgrade instructions"
 Cohesion: 0.17
@@ -2217,8 +2219,8 @@ Cohesion: 0.21
 Nodes (11): dryRun, findManifests(), walk(), jsonValueEnd(), looksLikeMigrationManifest(), processManifest(), projectRoot, REMOVED_KEYS (+3 more)
 
 ### Community 439 - "0.13 → 0.14 — Extension-author upgrade instructions"
-Cohesion: 0.15
-Nodes (12): 0.13 → 0.14 — Extension-author upgrade instructions, `contract-model-definitions-removed`, `create-runtime-removed`, `enum-becomes-domain-concept`, Migrate query-building call sites, `migration-op-factories-to-methods`, `namespace-entries-open-dict`, `namespaced-type-resolution` (+4 more)
+Cohesion: 0.17
+Nodes (11): 0.13 → 0.14 — Extension-author upgrade instructions, `create-runtime-removed`, `enum-becomes-domain-concept`, Migrate query-building call sites, `migration-op-factories-to-methods`, `namespace-entries-open-dict`, `namespaced-type-resolution`, `qualify-flat-builder-accessors` (+3 more)
 
 ### Community 440 - ".cursor/skills/prisma-8/upgrading/extension/upgrades/0.8-to-0.9/strip-inline-contracts.ts"
 Cohesion: 0.21
@@ -2233,8 +2235,8 @@ Cohesion: 0.21
 Nodes (11): dryRun, findManifests(), walk(), jsonValueEnd(), looksLikeMigrationManifest(), processManifest(), projectRoot, REMOVED_KEYS (+3 more)
 
 ### Community 444 - "0.13 → 0.14 — Extension-author upgrade instructions"
-Cohesion: 0.15
-Nodes (12): 0.13 → 0.14 — Extension-author upgrade instructions, `contract-model-definitions-removed`, `create-runtime-removed`, `enum-becomes-domain-concept`, Migrate query-building call sites, `migration-op-factories-to-methods`, `namespace-entries-open-dict`, `namespaced-type-resolution` (+4 more)
+Cohesion: 0.17
+Nodes (11): 0.13 → 0.14 — Extension-author upgrade instructions, `create-runtime-removed`, `enum-becomes-domain-concept`, Migrate query-building call sites, `migration-op-factories-to-methods`, `namespace-entries-open-dict`, `namespaced-type-resolution`, `qualify-flat-builder-accessors` (+3 more)
 
 ### Community 445 - ".devin/skills/prisma-8/upgrading/extension/upgrades/0.8-to-0.9/strip-inline-contracts.ts"
 Cohesion: 0.21
@@ -2272,7 +2274,7 @@ Nodes (10): Checklist, Common Pitfalls (Mongo), Key Concepts, Prisma 8 — Queri
 Cohesion: 0.22
 Nodes (9): Exact-pin rule, Failure surfaces, Per-step flow, Role detection, Step 0 — Upgrade to the newest instructions, then re-read, Transition chain, Upgrade Prisma 8 (extension), Version detection (+1 more)
 
-### Community 454 - ".cursor/skills/prisma-8/upgrading/app/upgrades/0.13-to-0.14/migration-op-factories-to-methods.ts"
+### Community 454 - ".cursor/skills/prisma-8/upgrading/extension/upgrades/0.13-to-0.14/migration-op-factories-to-methods.ts"
 Cohesion: 0.24
 Nodes (8): applyRewrites(), FACTORY_NAMES, files, processFile(), raw, Rewrite, rewrites, stripFactoriesFromImports()
 
@@ -2280,21 +2282,21 @@ Nodes (8): applyRewrites(), FACTORY_NAMES, files, processFile(), raw, Rewrite, r
 Cohesion: 0.20
 Nodes (10): Checklist, Common Pitfalls (Mongo), Key Concepts, Prisma 8 — Queries (Mongo), Reference Files, Workflow — Aggregates, Workflow — Eager-loading relations (`.include`), Workflow — ORM reads (+2 more)
 
-### Community 456 - ".cursor/skills/prisma-8/upgrading/extension/upgrades/0.13-to-0.14/migration-op-factories-to-methods.ts"
-Cohesion: 0.24
-Nodes (8): applyRewrites(), FACTORY_NAMES, files, processFile(), raw, Rewrite, rewrites, stripFactoriesFromImports()
+### Community 456 - "progress"
+Cohesion: 0.33
+Nodes (6): Base UI only props worth knowing, CSS variables, Data attributes, progress, Progress.Indicator → Progress.Indicator, Progress.Root → Progress.Root
 
-### Community 457 - "accordion"
-Cohesion: 0.22
-Nodes (9): accordion, Accordion.Content → Accordion.Panel, Accordion.Header → Accordion.Header, Accordion.Item → Accordion.Item, Accordion.Root → Accordion.Root, Accordion.Trigger → Accordion.Trigger, Base UI only props worth knowing, CSS var mapping (+1 more)
+### Community 457 - "`strip-sha256-hash-prefixes`"
+Cohesion: 0.33
+Nodes (6): Database marker/ledger, Migrate checked-in `migrations/` trees — before the layout migrator, Re-emit committed contract artefacts, `strip-sha256-hash-prefixes`, Update hash literals your pack hard-codes, Validation
 
 ### Community 458 - "Prisma 8 — Queries (Mongo)"
 Cohesion: 0.20
 Nodes (10): Checklist, Common Pitfalls (Mongo), Key Concepts, Prisma 8 — Queries (Mongo), Reference Files, Workflow — Aggregates, Workflow — Eager-loading relations (`.include`), Workflow — ORM reads (+2 more)
 
-### Community 459 - ".claude/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/migrate-contract-testing-imports.ts"
-Cohesion: 0.29
-Nodes (6): dryRun, findSourceFiles(), walk(), projectRoot, SKIP_DIRS, targets
+### Community 459 - "form"
+Cohesion: 0.25
+Nodes (8): form, Form.Control → Field.Control, Form.Field → Field.Root, Form.Label → Field.Label, Form.Message → Field.Error, Form.Root → Form, Form.Submit → (none), Form.ValidityState → Field.Validity
 
 ### Community 460 - "CodecTypes"
 Cohesion: 0.22
@@ -2368,13 +2370,13 @@ Nodes (6): `contract-dts-exports-models`, `env-vars-drop-next-infix`, `primer-fi
 Cohesion: 0.29
 Nodes (6): `contract-dts-exports-models`, `env-vars-drop-next-infix`, `primer-file-prisma-8-md`, `reemit-supabase-extension-version`, `schema-header-use-prisma-8`, `to-one-relations-record-nullable`
 
-### Community 478 - ".cursor/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/migrate-contract-testing-imports.ts"
+### Community 478 - "avatar"
 Cohesion: 0.29
-Nodes (6): dryRun, findSourceFiles(), walk(), projectRoot, SKIP_DIRS, targets
+Nodes (7): avatar, Avatar.Fallback → Avatar.Fallback, Avatar.Image → Avatar.Image, Avatar.Root → Avatar.Root, Base UI only props worth knowing, CSS variables, Data attributes
 
-### Community 479 - ".devin/skills/prisma-8/upgrading/extension/upgrades/0.11-to-0.12/migrate-contract-testing-imports.ts"
-Cohesion: 0.29
-Nodes (6): dryRun, findSourceFiles(), walk(), projectRoot, SKIP_DIRS, targets
+### Community 479 - "Separator.Root → Separator"
+Cohesion: 0.40
+Nodes (5): Base UI only props worth knowing, CSS variables, Data attributes, separator, Separator.Root → Separator
 
 ### Community 480 - "0.8 → 0.9 — Extension-author upgrade instructions"
 Cohesion: 0.33
@@ -2388,9 +2390,9 @@ Nodes (5): 0.9 → 0.10 — Extension-author upgrade instructions, `stamp-storag
 Cohesion: 0.33
 Nodes (5): 8.0.0-rc.4 → 8.0.0-rc.5 — Extension author upgrade instructions, `distinct-on-requires-postgres-capability`, `groupby-post-group-pagination-requires-order-by`, `groupby-pre-group-pagination-now-scopes-rows`, `wrap-pg-constructions-with-suppress-idle-connection-errors`
 
-### Community 483 - "Critical Rules"
-Cohesion: 0.40
-Nodes (5): Chat & Messaging → [chat.md](./rules/chat.md), CLI, Critical Rules, Icons → [icons.md](./rules/icons.md), Styling & Tailwind → [styling.md](./rules/styling.md)
+### Community 483 - "`strip-sha256-hash-prefixes`"
+Cohesion: 0.33
+Nodes (6): Database marker/ledger, Migrate checked-in `migrations/` trees — before the layout migrator, Re-emit committed contract artefacts, `strip-sha256-hash-prefixes`, Update hash literals your pack hard-codes, Validation
 
 ### Community 484 - "0.8 → 0.9 — Extension-author upgrade instructions"
 Cohesion: 0.33
@@ -2404,9 +2406,9 @@ Nodes (5): 0.9 → 0.10 — Extension-author upgrade instructions, `stamp-storag
 Cohesion: 0.33
 Nodes (5): 8.0.0-rc.4 → 8.0.0-rc.5 — Extension author upgrade instructions, `distinct-on-requires-postgres-capability`, `groupby-post-group-pagination-requires-order-by`, `groupby-pre-group-pagination-now-scopes-rows`, `wrap-pg-constructions-with-suppress-idle-connection-errors`
 
-### Community 487 - "Pencarian admin dan CRUD akun — 21 Oktober 2026"
-Cohesion: 0.40
-Nodes (4): Akun, Pencarian, Pencarian admin dan CRUD akun — 21 Oktober 2026, Verifikasi
+### Community 487 - "(new) Fieldset.Root and Fieldset.Legend"
+Cohesion: 0.50
+Nodes (4): Base UI only props worth knowing (form-wide), CSS variables, Data attributes, (new) Fieldset.Root and Fieldset.Legend
 
 ### Community 488 - "Base vs Radix"
 Cohesion: 0.25
@@ -2427,6 +2429,10 @@ Nodes (5): 8.0.0-rc.4 → 8.0.0-rc.5 — Extension author upgrade instructions, 
 ### Community 492 - "`remove-capabilities-from-define-contract`"
 Cohesion: 0.40
 Nodes (5): Before 0.12, Re-emit your contract, `remove-capabilities-from-define-contract`, Starting at 0.12, Validation
+
+### Community 493 - "`strip-sha256-hash-prefixes`"
+Cohesion: 0.33
+Nodes (6): Database marker/ledger, Migrate checked-in `migrations/` trees — before the layout migrator, Re-emit committed contract artefacts, `strip-sha256-hash-prefixes`, Update hash literals your pack hard-codes, Validation
 
 ### Community 494 - "`runtime-qualified-sql-default-namespace`"
 Cohesion: 0.40
@@ -2624,6 +2630,10 @@ Nodes (3): 8.0.0-rc.7 → 8.0.0-rc.8 — Extension author upgrade instructions, 
 Cohesion: 0.27
 Nodes (9): jszip, mammoth, yauzl, createDemoDocx(), addRubySupport(), convertLessonDocx(), escapeHtml(), preflightZip() (+1 more)
 
+### Community 564 - "`strip-sha256-hash-prefixes`"
+Cohesion: 0.33
+Nodes (6): Database marker/ledger, Migrate checked-in `migrations/` trees — before the layout migrator, Re-emit committed contract artefacts, `strip-sha256-hash-prefixes`, Update hash literals your pack hard-codes, Validation
+
 ### Community 565 - "lg"
 Cohesion: 0.60
 Nodes (5): lg, $type, $value, lg, lg
@@ -2632,10 +2642,6 @@ Nodes (5): lg, $type, $value, lg, lg
 Cohesion: 0.60
 Nodes (5): sm, sm, sm, $type, $value
 
-### Community 567 - "Penghapusan konten admin — 21 Oktober 2026"
-Cohesion: 0.33
-Nodes (5): Batas pengujian browser, Penghapusan konten admin — 21 Oktober 2026, Perbaikan, Perlindungan relasi, Verifikasi
-
 ### Community 568 - "xl"
 Cohesion: 0.67
 Nodes (4): xl, xl, $type, $value
@@ -2643,6 +2649,10 @@ Nodes (4): xl, xl, $type, $value
 ### Community 569 - "none"
 Cohesion: 0.67
 Nodes (4): $type, $value, none, none
+
+### Community 570 - "Critical Rules"
+Cohesion: 0.40
+Nodes (5): Chat & Messaging → [chat.md](./rules/chat.md), CLI, Critical Rules, Icons → [icons.md](./rules/icons.md), Styling & Tailwind → [styling.md](./rules/styling.md)
 
 ### Community 572 - "16"
 Cohesion: 0.67
@@ -2656,33 +2666,29 @@ Nodes (3): $type, $value, 1
 Cohesion: 0.67
 Nodes (3): $type, $value, 3
 
-### Community 576 - "Verifikasi perbaikan UI/UX — 15 Oktober 2026"
-Cohesion: 0.20
-Nodes (8): Genshu, Batas verifikasi dan konfigurasi, Implementasi, Pemeriksaan browser dan data nyata, Pemeriksaan yang lulus, Tindak lanjut: CRUD materi, Tindak lanjut: lokasi materi dan editor pengelolaan, Verifikasi perbaikan UI/UX — 15 Oktober 2026
-
 ### Community 577 - "8"
 Cohesion: 0.67
 Nodes (3): $type, $value, 8
 
 ## Knowledge Gaps
-- **32 isolated node(s):** `ADR-0221`, `ADR-0221`, `ADR-0221`, `ADR-0221`, `shadcn` (+27 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 5910 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **54 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **35 isolated node(s):** `ADR-0221`, `ADR-0221`, `ADR-0221`, `ADR-0221`, `shadcn` (+30 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 5901 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **55 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `validate()` connect `validate_data.py` to `design_system.py`, `QueryOperationTypes`, `form`, `re`?**
-  _High betweenness centrality (0.138) - this node is a cross-community bridge._
+- **Why does `validate()` connect `validate_data.py` to `re`, `form`, `QueryOperationTypes`, `(new) Fieldset.Root and Fieldset.Legend`?**
+  _High betweenness centrality (0.148) - this node is a cross-community bridge._
 - **What connects `ADR-0221`, `ADR-0221`, `ADR-0221` to the rest of the system?**
-  _32 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _35 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `ShadcnInstaller` be split into smaller, more focused modules?**
   _Cohesion score 0.053555750658472345 - nodes in this community are weakly interconnected._
 - **Why does `jszip` connect `material-import.ts` to `package.json`?**
-  _High betweenness centrality (0.137) - this node is a cross-community bridge._
-- **Should `next` be split into smaller, more focused modules?**
-  _Cohesion score 0.06793206793206794 - nodes in this community are weakly interconnected._
-- **Why does `Contract` connect `Contract` to `8.0.0-rc.1 → 8.0.0-rc.2 — User upgrade instructions`, `db.ts`, `Prisma 8 — Queries (Postgres)`, `AggregateTypes`, `8.0.0-rc.1 → 8.0.0-rc.2 — User upgrade instructions`, `Prisma 8 — Queries (Postgres)`, `Prisma 8 — Queries (Postgres)`, `Prisma 8 — Debug`, `Prisma 8 — Debug`, `Prisma 8 — Contract Authoring`, ``namespace-kind-required-on-handcrafted-contract-literals``, `Prisma 8 — Debug`, `0.13 → 0.14 — Extension-author upgrade instructions`, `Prisma 8 — Contract Authoring`, `Prisma 8 — Queries (Postgres)`, `0.13 → 0.14 — Extension-author upgrade instructions`, `contract.d.ts`, `Prisma 8 — Contract Authoring`, `0.13 → 0.14 — Extension-author upgrade instructions`, `Prisma 8 — Runtime (`db.ts` Wiring)`, ``namespace-kind-required-on-handcrafted-contract-literals``, ``namespace-kind-required-on-handcrafted-contract-literals``, `Prisma 8 — Contract Authoring`, `8.0.0-rc.1 → 8.0.0-rc.2 — User upgrade instructions`, `Prisma 8 — Debug`, `8.0.0-rc.1 → 8.0.0-rc.2 — Extension-author upgrade instructions`, `8.0.0-rc.1 → 8.0.0-rc.2 — Extension-author upgrade instructions`, `8.0.0-rc.1 → 8.0.0-rc.2 — Extension-author upgrade instructions`, `0.13 → 0.14 — Extension-author upgrade instructions`, `Prisma 8 — Runtime (`db.ts` Wiring)`, ``namespace-kind-required-on-handcrafted-contract-literals``, `Prisma 8 — Runtime (`db.ts` Wiring)`, `8.0.0-rc.1 → 8.0.0-rc.2 — User upgrade instructions`?**
-  _High betweenness centrality (0.133) - this node is a cross-community bridge._
+  _High betweenness centrality (0.146) - this node is a cross-community bridge._
 - **Should `8.0.0-rc.1 → 8.0.0-rc.2 — User upgrade instructions` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._
+- **Why does `Contract` connect `Contract` to `8.0.0-rc.1 → 8.0.0-rc.2 — User upgrade instructions`, `Prisma 8 — Queries (Postgres)`, `8.0.0-rc.1 → 8.0.0-rc.2 — Extension-author upgrade instructions`, `8.0.0-rc.1 → 8.0.0-rc.2 — User upgrade instructions`, `Prisma 8 — Queries (Postgres)`, `db.ts`, `Prisma 8 — Queries (Postgres)`, `Prisma 8 — Runtime (`db.ts` Wiring)`, `Prisma 8 — Debug`, `Prisma 8 — Debug`, `Prisma 8 — Contract Authoring`, ``namespace-kind-required-on-handcrafted-contract-literals``, `Prisma 8 — Debug`, `Prisma 8 — Contract Authoring`, `Prisma 8 — Queries (Postgres)`, `contract.d.ts`, `Prisma 8 — Contract Authoring`, `Prisma 8 — Runtime (`db.ts` Wiring)`, ``namespace-kind-required-on-handcrafted-contract-literals``, ``namespace-kind-required-on-handcrafted-contract-literals``, `Prisma 8 — Contract Authoring`, `8.0.0-rc.1 → 8.0.0-rc.2 — User upgrade instructions`, `Prisma 8 — Debug`, `8.0.0-rc.1 → 8.0.0-rc.2 — Extension-author upgrade instructions`, `8.0.0-rc.1 → 8.0.0-rc.2 — Extension-author upgrade instructions`, `8.0.0-rc.1 → 8.0.0-rc.2 — Extension-author upgrade instructions`, ``namespace-kind-required-on-handcrafted-contract-literals``, `FieldOutputTypes`, `Prisma 8 — Runtime (`db.ts` Wiring)`, `AggregateTypes`?**
+  _High betweenness centrality (0.140) - this node is a cross-community bridge._
+- **Should `CollectionEmpty` be split into smaller, more focused modules?**
+  _Cohesion score 0.08084163898117387 - nodes in this community are weakly interconnected._

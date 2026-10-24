@@ -9,7 +9,10 @@ export async function getUpcomingEvents(limit = 20) {
     .orderBy((event) => event.startsAt.asc())
     .limit(limit)
     .all();
-  return rows.map((event) => ({ ...event, ongoing: new Date(event.startsAt).getTime() <= now.getTime() }));
+  return rows.map((event) => ({
+    ...event,
+    ongoing: new Date(event.startsAt).getTime() <= now.getTime(),
+  }));
 }
 
 export async function getEventDrafts() {

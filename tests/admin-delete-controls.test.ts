@@ -2,10 +2,18 @@ import { expect, test } from "bun:test";
 
 test("every content section offers deletion for drafts and published records with its impact explained", () => {
   const root = new URL("..", import.meta.url).pathname;
-  const rendered = Bun.spawnSync([process.execPath, "--eval", `
+  const rendered = Bun.spawnSync(
+    [
+      process.execPath,
+      "--eval",
+      `
     import { mock } from "bun:test";
     import { createElement } from "react";
     import { renderToStaticMarkup } from "react-dom/server";
+    import { NextIntlClientProvider } from "next-intl";
+    import messages from "./messages/id.json";
+    const renderWithLocale = element => renderToStaticMarkup(createElement(NextIntlClientProvider, {locale:"id", messages, timeZone:"Asia/Tokyo"}, element));
+
     mock.module(${JSON.stringify(`${root}src/lib/admin/actions.ts`)}, () => Object.fromEntries([
       "deleteContent", "publishContent", "saveTopic", "saveSubject", "savePractice", "saveAnnouncement", "saveRecording", "saveEvent",
     ].map(name => [name, async () => ({ success: true })])));
@@ -24,11 +32,14 @@ test("every content section offers deletion for drafts and published records wit
     for (const [section, key] of Object.entries(sections)) {
       for (const published of [false, true]) {
         const content = {topics:[], subjects:[], activities:[], announcements:[], recordings:[], events:[], topicOptions:[], subjectOptions:[], materialDrafts:[], materials:[], accounts:[], hasNext:false, [key]:[{...fixture,published}]};
-        output[section + published] = renderToStaticMarkup(createElement(ContentManager, {section,content}));
+        output[section + published] = renderWithLocale(createElement(ContentManager, {section,content}));
       }
     }
     console.log(JSON.stringify(output));
-  `], { cwd: root });
+  `,
+    ],
+    { cwd: root },
+  );
   expect(rendered.exitCode).toBe(0);
   expect(rendered.stderr.toString()).toBe("");
   const html: Record<string, string> = JSON.parse(rendered.stdout.toString());

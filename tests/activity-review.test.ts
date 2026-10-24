@@ -5,10 +5,18 @@ let html: Record<string, string>;
 beforeAll(() => {
   const root = new URL("..", import.meta.url).pathname;
   // Render client components separately from the suite's react-server condition.
-  const rendered = Bun.spawnSync([process.execPath, "--eval", `
+  const rendered = Bun.spawnSync(
+    [
+      process.execPath,
+      "--eval",
+      `
     import { mock } from "bun:test";
     import { createElement } from "react";
     import { renderToStaticMarkup } from "react-dom/server";
+    import { NextIntlClientProvider } from "next-intl";
+    import messages from "./messages/id.json";
+    const renderWithLocale = element => renderToStaticMarkup(createElement(NextIntlClientProvider, {locale:"id", messages, timeZone:"Asia/Tokyo"}, element));
+
     // Portal focus and interaction are covered in browser QA; expose its content here.
     mock.module(${JSON.stringify(`${root}src/components/ui/alert-dialog.tsx`)}, () => {
       const shell = ({ children }) => createElement("div", null, children);
@@ -28,7 +36,7 @@ beforeAll(() => {
     const answers = { yes: true, no: false };
     const reviewProps = { open: true, pending: false, questions, answers,
       onOpenChange() {}, onEdit() {}, onSubmit() {} };
-    const render = (Component, props) => renderToStaticMarkup(createElement(Component, props));
+    const render = (Component, props) => renderWithLocale(createElement(Component, props));
     console.log(JSON.stringify({
       review: render(ActivityReviewDialog, reviewProps),
       pending: render(ActivityReviewDialog, { ...reviewProps, pending: true }),
@@ -36,7 +44,10 @@ beforeAll(() => {
       result: render(ActivityResultView, { activityTitle: "Latihan negasi", result: gradeActivity("test", questions, answers),
         onRetry() {}, pending: false, error: null }),
     }));
-  `], { cwd: root });
+  `,
+    ],
+    { cwd: root },
+  );
   expect(rendered.exitCode).toBe(0);
   expect(rendered.stderr.toString()).toBe("");
   html = JSON.parse(rendered.stdout.toString());

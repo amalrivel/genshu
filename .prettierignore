@@ -1,0 +1,34 @@
+# Dependencies and build/test output
+node_modules/
+.next/
+out/
+build/
+dist/
+coverage/
+.vercel/
+.playwright-cli/
+*.tsbuildinfo
+next-env.d.ts
+types/
+
+# Generated Prisma files; regenerate instead of formatting
+src/generated/
+src/prisma/contract.json
+src/prisma/contract.d.ts
+
+# Generated knowledge graph and installed agent skills
+graphify-out/
+.agents/skills/
+.claude/
+.cursor/
+.devin/
+.codex/
+skills-lock.json
+
+# Package-manager output and local secrets
+bun.lock
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+.env*
+*.pem

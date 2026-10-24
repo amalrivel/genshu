@@ -1,7 +1,8 @@
-const tokyoDate = new Intl.DateTimeFormat("id-ID", { timeZone: "Asia/Tokyo", dateStyle: "medium" });
-const tokyoTime = new Intl.DateTimeFormat("id-ID", { timeZone: "Asia/Tokyo", hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
-
-export function formatTokyoEventRange(startsAt: string, endsAt: string) {
+export function formatTokyoEventRange(startsAt: string, endsAt: string, locale = "id") {
+  const tokyoDate = new Intl.DateTimeFormat(locale, { timeZone: "Asia/Tokyo", dateStyle: "medium" });
+  const tokyoTime = new Intl.DateTimeFormat(locale, {
+    timeZone: "Asia/Tokyo", hour: "2-digit", minute: "2-digit", hourCycle: "h23",
+  });
   const start = new Date(startsAt);
   const end = new Date(endsAt);
   const startDate = tokyoDate.format(start);

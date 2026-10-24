@@ -1,20 +1,26 @@
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/components/theme-provider";
 
 import "./globals.css";
 
-export const metadata: Metadata = {
-  title: { default: "Genshu", template: "%s | Genshu" },
-  description: "Ruang belajar dan latihan bahasa Jepang Anda.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("UI");
+  return {
+    title: { default: "Genshu", template: "%s | Genshu" },
+    description: t("Ruang_belajar_dan_latihan_bahasa_Jepang_Anda"),
+  };
+}
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const locale = await getLocale();
   return (
-    <html lang="id" className="h-full antialiased font-sans" suppressHydrationWarning>
-
-
+    <html lang={locale} className="h-full antialiased font-sans" suppressHydrationWarning>
       <body className="min-h-full flex flex-col">
-        <ThemeProvider
+        <NextIntlClientProvider>
+          <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
@@ -22,6 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           >
             {children}
           </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

@@ -30,7 +30,10 @@ export function gradeActivity(
   const correct = results.filter((question) => question.isCorrect).length;
   const unanswered = results.filter((question) => question.userAnswer === null).length;
   return {
-    activityId, total, correct, unanswered,
+    activityId,
+    total,
+    correct,
+    unanswered,
     incorrect: total - correct - unanswered,
     score: total === 0 ? 0 : Math.round((correct / total) * 100),
     questions: results,

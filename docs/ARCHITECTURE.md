@@ -1,186 +1,164 @@
 # Genshu architecture
 
-Source review: branch `fresh`, 23 October 2026 (JST). This describes the current
-working tree, including existing uncommitted implementation. It is not evidence
-of a deployed system. Product scope and unresolved policies are in [PRD.md](PRD.md).
+Source reviewed on branch `fresh`, 23 October 2026 (JST); this is not a deployed-system
+claim. Product policy lives in [PRD.md](PRD.md); test evidence and limits in
+[demo-testing.md](demo-testing.md#ringkasan-verifikasi-historis).
 
 ## Stack and structure
 
-Genshu is one Next.js App Router application with server-rendered pages and client
-components for interaction. There is no separate application API service.
+One Next.js App Router application serves server-rendered pages and interactive
+client components. Domain mutations use Server Actions; the only route handler
+is authentication. There is no separate application API service.
 
-| Concern | Current choice and authority |
-|---|---|
-| Runtime/tooling | Bun 1.4.2, TypeScript strict mode, ESLint; [package.json](../package.json), [tsconfig.json](../tsconfig.json) |
-| Framework | Next.js 16.3.7, React 19.2.8, React Compiler enabled; [next.config.ts](../next.config.ts) |
-| UI | Tailwind 4, shadcn `base-nova`, Base UI, Lucide, next-themes; [components.json](../components.json), [DESIGN.md](../DESIGN.md) |
-| Domain persistence | Prisma 8 contract/runtime (`@prisma/orm-postgres` rc.16; CLI rc.21), PostgreSQL; [prisma.config.ts](../prisma.config.ts) |
-| Authentication | Better Auth 1.7.7 with its own `pg` Pool, using the same database URL |
-| Lesson conversion | Mammoth, JSZip, yauzl and sanitize-html; [material-import.ts](../src/lib/learn/material-import.ts) |
+| Concern     | Reviewed choice / authority                                                                                                    |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Tooling     | Bun 1.4.2, strict TypeScript, ESLint; [package.json](../package.json), [tsconfig.json](../tsconfig.json)                       |
+| Framework   | Next.js 16.3.7, React 19.2.8, React Compiler; [next.config.ts](../next.config.ts)                                              |
+| UI          | Tailwind 4, shadcn `base-nova`, Base UI, Lucide, next-themes; [components.json](../components.json), [DESIGN.md](../DESIGN.md) |
+| Domain data | Prisma 8 PostgreSQL runtime rc.16 / CLI rc.21; [prisma.config.ts](../prisma.config.ts)                                         |
+| Auth        | Better Auth 1.7.7 with a separate `pg` Pool                                                                                    |
+| Lessons     | Mammoth, JSZip, yauzl, sanitize-html; [material-import.ts](../src/lib/learn/material-import.ts)                                |
 
-Version details are a reviewed snapshot; package.json and bun.lock own dependency
-declarations/resolution. Read installed Next.js guides and the matching Prisma 8
-skill before changing integrations rather than assuming older APIs.
+Package declarations and bun.lock own versions; the table is a review snapshot.
+Imports use `@/*` for `src/*`. Keep the existing feature boundaries:
 
-| Location | Responsibility |
-|---|---|
-| `src/app` | Route composition, metadata and loading/error/not-found boundaries |
-| `src/components/<feature>` | Feature UI; `ui` holds reusable primitives and `layouts` the shell |
-| `src/hooks` | Client interaction state and unsaved-change handling |
-| `src/lib/<feature>/queries.ts` | Server-only reads, projections and publication/ownership filters |
-| `src/lib/<feature>/actions.ts` | Server Actions, boundary validation, authorization, transactions and cache invalidation |
-| `src/prisma` | Contract source, emitted JSON/types, shared domain runtime |
-| `scripts`, `tests` | Local seeds/fixture generation and Bun helper/fixture/render tests |
+| Location                       | Responsibility                                                      |
+| ------------------------------ | ------------------------------------------------------------------- |
+| `src/app`                      | Routes, metadata and loading/error/not-found boundaries             |
+| `src/components`, `src/hooks`  | Feature UI, shared primitives/layouts and client state              |
+| `src/lib/<feature>/queries.ts` | Server-only reads and projections                                   |
+| `src/lib/<feature>/actions.ts` | Authorization, validation, mutations, transactions and invalidation |
+| `src/prisma`                   | Contract, emitted JSON/types and domain runtime                     |
+| `scripts`, `tests`             | Local seeds/fixtures and Bun helper/render tests                    |
 
-Reuse these feature boundaries; there is no generic repository/service layer.
-Imports use the `@/*` alias for `src/*`. Client components call Server Actions for
-domain mutations; the only route handler delegates authentication to Better Auth.
+## Interface localization
+
+[next.config.ts](../next.config.ts) applies the next-intl plugin.
+[request.ts](../src/i18n/request.ts) reads the validated `genshu-locale` cookie,
+loads the Indonesian/Japanese message catalog and fixes the timezone to Asia/Tokyo.
+The root layout sets `html.lang` and provides messages through
+`NextIntlClientProvider`. URLs are unchanged; no locale routing or proxy is added.
+[setLocale](../src/i18n/actions.ts) accepts only `id`/`ja` and writes a one-year,
+HTTP-only, SameSite=Lax cookie (Secure in production); switching refreshes the
+rendered UI without changing the route.
+
+UI components use `useTranslations`, while async pages and metadata use
+`getTranslations`. [feedback.ts](../src/i18n/feedback.ts) translates known action
+feedback at the UI boundary, retaining the current server response contracts.
+Database content, grading, snapshots, permissions and form date serialization
+remain unchanged. Unknown feedback and provider conversion warnings pass through.
 
 ## Routes and authorization
 
-The `(home)` group does not appear in URLs. Its [layout](../src/app/(home)/layout.tsx)
-calls `requireUser` and supplies identity/management navigation to the shared UI.
+The `(home)` [layout](<../src/app/(home)/layout.tsx>) checks the session and supplies
+identity/navigation. Route groups do not appear in URLs.
 
-| URL | Boundary and behavior |
-|---|---|
-| `/login` | Redirects existing sessions home; normal email/password form otherwise |
-| `/api/auth/[...all]` | Better Auth GET/POST handler; endpoint-specific auth behavior |
-| `/` | Signed-in dashboard; personal attempt/result queries receive the session user ID |
-| `/learn`, `/learn/[topic]`, `/learn/[topic]/[subject]` | Signed-in shell; published topic/subject/material queries; unavailable records use 404 |
-| `/activities`, `/activities/type/[type]` | Published practice only; unsupported category is 404 |
-| `/activities/[activityId]?attempt=<id>` | Repeats session check; published activity plus owner/activity match for an attempt |
-| `/announcements`, `/announcements/[announcementId]` | Published list/detail; unavailable detail is 404 |
-| `/recording`, `/calendar` | Published external recordings and upcoming/ongoing agenda |
-| `/admin?section=...&q=...&page=...&status=...` | Teacher/admin page and query guard; accounts section additionally requires admin |
+| URL                                                    | Boundary / behavior                                                 |
+| ------------------------------------------------------ | ------------------------------------------------------------------- |
+| `/login`                                               | Redirect existing sessions home; email/password form otherwise      |
+| `/api/auth/[...all]`                                   | Better Auth GET/POST, endpoint-specific permissions                 |
+| `/`                                                    | Signed-in dashboard; personal queries receive the session user ID   |
+| `/learn`, `/learn/[topic]`, `/learn/[topic]/[subject]` | Signed-in shell; published hierarchy; unavailable records use 404   |
+| `/activities`, `/activities/type/[type]`               | Published practice; unsupported category is 404                     |
+| `/activities/[activityId]?attempt=<id>`                | Repeats session check; published activity and owner/activity match  |
+| `/announcements`, `/announcements/[announcementId]`    | Published list/detail; unavailable detail uses 404                  |
+| `/recording`, `/calendar`                              | Published links and upcoming/ongoing agenda                         |
+| `/admin?section=...&q=...&page=...&status=...`         | Teacher/admin page/query guard; accounts additionally require admin |
 
-[auth-session.ts](../src/lib/auth-session.ts) defines the role helpers. Mutation
-actions repeat authorization; hiding navigation is not the mutation boundary.
-Management queries guard themselves; published-content query helpers generally
-rely on route callers for sessions and are not individually authenticated APIs.
-Practice helpers accept owner IDs supplied by server callers. `server-only`
-prevents client imports; it is not authorization or database row-level security.
+[auth-session.ts](../src/lib/auth-session.ts) owns role helpers. Actions repeat
+permission checks; management queries guard themselves. Published-content helpers
+rely on route callers for sessions, and practice helpers receive owner IDs from
+server callers. Neither navigation visibility, `server-only`, nor TypeScript types
+establish authorization or database row-level security.
 
 ## Authentication and database integration
 
-[auth.ts](../src/lib/auth.ts) passes a `pg` Pool directly to Better Auth rather than
-using a Prisma adapter. Better Auth uses its built-in SQL/Kysely integration;
-domain reads/writes use [db.ts](../src/prisma/db.ts). Both use `DATABASE_URL` but
-have separate runtime/pool lifecycles. Email/password is enabled, public signup
-disabled, and extra localhost/127.0.0.1 auth origins apply only in development.
-The auth handler is [route.ts](../src/app/api/auth/[...all]/route.ts).
+[auth.ts](../src/lib/auth.ts) passes a `pg` Pool to Better Auth's SQL/Kysely integration;
+domain queries use Prisma [db.ts](../src/prisma/db.ts). Both use `DATABASE_URL`, with
+separate runtime/pool lifecycles. Public signup is disabled; extra loopback auth
+origins apply only in development. [route.ts](../src/app/api/auth/[...all]/route.ts)
+delegates GET/POST to Better Auth.
 
-The admin plugin defaults to student. Genshu account actions create student/teacher
-accounts and manage eligible targets; Better Auth's HTTP update-user, set-role and
-remove-user paths are disabled in favor of those transactional actions. This does
-not disable all admin-plugin endpoints. Account updates/deletes lock the target;
-email/role changes revoke sessions transactionally. Password reset delegates to
-Better Auth then deletes sessions as a separate operation.
+The admin plugin defaults to student. Its update-user, set-role and remove-user HTTP
+paths are disabled in favor of Genshu actions; other plugin endpoints remain.
+Account updates/deletes lock targets, and email/role updates revoke sessions in the
+transaction. Password reset delegates to Better Auth, then deletes sessions separately.
 
-[contract.prisma](../src/prisma/contract.prisma) is authoritative for models,
-relations, uniqueness and deletion rules. Its 17 models comprise:
+[contract.prisma](../src/prisma/contract.prisma) owns 17 models and their constraints:
+retained starter `User`/`Post`; four managed `Genshu*` auth models mapped to `genshu_*`;
+`Topic` → `Subject` → one `Material` plus `MaterialDraft`; activity category/activity/
+ordered questions and owner-bound attempts; announcements, recordings and events.
+Roles are strings. Attempt snapshot/answers/result are JSON.
 
-- Preserved starter `User`/`Post`, separate from managed authentication.
-- `GenshuUser`, `GenshuSession`, `GenshuAccount`, `GenshuVerification`, mapped to
-  `genshu_*` tables. Roles are strings, not database enums.
-- `Topic` → `Subject` → one `Material`, with separate `MaterialDraft` records.
-- `ActivityCategory` → `Activity` → ordered `ActivityQuestion`; `ActivityAttempt`
-  belongs to a user/activity and stores snapshot, answers and result as JSON.
-- `Announcement`, `Recording` and `CalendarEvent`.
-
-The emitted [contract.json](../src/prisma/contract.json) and
-[contract.d.ts](../src/prisma/contract.d.ts) are generated artifacts. `db:generate`
-emits them; `build` emits them before Next.js compilation. `dev` does not include
-an emission step, and no framework auto-emission plugin is configured. Neither
-start nor build applies database migrations. No migration directory is currently
-present; command availability does not establish deployed migration history.
-See [README](../README.md#database-and-authentication) for commands and safeguards.
+[contract.json](../src/prisma/contract.json) and [contract.d.ts](../src/prisma/contract.d.ts)
+are generated. `db:generate` emits them; `build` emits before compilation; `dev` has
+no auto-emission plugin. Start/build do not migrate. No migration directory is present;
+available commands do not establish deployed history. Commands and data safeguards
+are in [README](../README.md#database-and-authentication).
 
 ## Content reads, publication and revision
 
-Pages call feature queries, which select the fields needed by UI. Learn queries
-check publication at each parent level; subject lists also require published
-material. [learn/queries.ts](../src/lib/learn/queries.ts) owns those rules.
-Announcements render plain text; lesson HTML is sanitized when converted and
-again by [render.ts](../src/lib/learn/render.ts), which also creates unique heading
-anchors. Recordings open HTTPS provider links; Genshu does not proxy or revoke
-provider playback. Calendar queries select published events whose end has not
-passed, order by start, and identify ongoing events. Inputs and displayed dates
-use explicit Asia/Tokyo handling.
+[Learn queries](../src/lib/learn/queries.ts) enforce published parents/materials and
+omit subjects without published material. Announcements render plain text. Lesson
+HTML is sanitized during conversion and again by [render.ts](../src/lib/learn/render.ts),
+which creates unique heading anchors. Recordings open HTTPS provider links; Genshu
+cannot revoke copied links or provider playback. Calendar uses explicit Asia/Tokyo
+inputs/display, orders by start and selects published events not yet ended.
 
-[admin/queries.ts](../src/lib/admin/queries.ts) loads the active management section,
-escapes search wildcard characters and fetches 21 rows to display 20 with next-page
-detection. Material published/draft lists are separate; draft HTML loads on preview.
-[admin/actions.ts](../src/lib/admin/actions.ts) owns content mutations:
+[Management queries](../src/lib/admin/queries.ts) load one section, escape wildcard
+search characters and fetch 21 rows to display 20 plus next-page detection. Published
+material/draft lists are separate; HTML loads on preview.
+[Management actions](../src/lib/admin/actions.ts) implement these flows:
 
-1. Validate input and role. Most saves set the existing record to draft immediately;
-   publication is a separate action. Account changes take effect directly.
-2. Material import creates `MaterialDraft`. Editing a published material creates a
-   draft revision; subsequent editor saves update that draft. Conversion failure
-   leaves the published material unchanged.
-3. The UI previews content/warnings and requires acknowledgement. Publishing checks
-   published parents, updates/creates the subject's single material and deletes
-   that draft in a transaction. Existing material identity is retained. There is
-   no persisted review acknowledgement or revision approval token.
-4. Topic/subject deletion locks and checks children; activity/account deletion
-   checks attempts and preserves history. Material/draft deletion targets one ID.
-5. Actions use `revalidatePath` to refresh affected pages. This is framework cache
-   invalidation, not a background publication or notification service.
+1. Authorize and validate. Most saves immediately return existing content to draft;
+   account edits apply directly. Publication is separate.
+2. Import creates `MaterialDraft`; editing published material creates a revision
+   while the published version stays available. Repeated editor saves update that draft.
+3. UI preview requires acknowledgement. Publication checks published parents,
+   replaces/creates the subject's material and deletes the draft transactionally,
+   retaining an existing material ID. No approval record/token is stored.
+4. Parent deletion locks and checks dependencies; activity/account deletion refuses
+   attempts. Material/draft deletion targets one ID. Actions refresh affected routes
+   with `revalidatePath`, without a background publication/notification service.
 
-DOCX conversion accepts up to 10 MiB, preflights ZIP entries and actual expansion
-(50 MiB / 2,000 entries), rejects unsafe archives, preserves recognized Word ruby,
-disables Mammoth external file access, sanitizes output and returns warnings.
-Images may be embedded in stored HTML. There is no object-storage upload service
-or guarantee of identical Word layout or complete unsupported-structure detection.
+DOCX conversion checks extension/archive, a 10 MiB input cap, 50 MiB actual expanded
+ZIP cap and 2,000 entries. It preserves recognized ruby, disables Mammoth external
+file access, sanitizes output and returns warnings. Images may be embedded in HTML;
+there is no object storage or guarantee of complete Word layout/structure preservation.
 
 ## Practice flow
 
-Authorities: [queries](../src/lib/activities/queries.ts),
-[actions](../src/lib/activities/actions.ts), [grading](../src/lib/activities/grading.ts),
-[runner](../src/components/activities/activity-runner.tsx),
+Sources: [queries](../src/lib/activities/queries.ts), [actions](../src/lib/activities/actions.ts),
+[grading](../src/lib/activities/grading.ts), [runner](../src/components/activities/activity-runner.tsx),
 [draft saver](../src/lib/activities/draft-saver.ts).
 
-1. Starting checks for published practice with questions and creates an owner-bound
-   `in_progress` attempt. Its question snapshot contains text, order and answer keys;
-   client question projections omit keys until result feedback.
-2. An explicit attempt URL restores its stored answers/result. Without an attempt
-   ID, the page offers the latest open attempt for that activity. Starting again
-   may create another attempt; there is no single-open-attempt uniqueness rule.
-3. Client edits debounce for 500 ms and serialize writes within that runner.
-   The server checks owner, state, question membership and boolean answer values.
-   Failed saves retain client input and allow retry; there is no offline store.
-4. Review displays choices without correctness. Submission flushes pending saves,
-   then sends the full answers for transactional server grading against the snapshot.
-   Missing answers receive no credit; score is rounded `correct / total × 100`.
-5. Conditional state update stores answers/result/timestamps together. Already
-   submitted attempts return saved results; the race fallback reads the winner.
-   Retry creates a new attempt, leaving previous results intact.
+1. Start requires published practice with questions. Create an owner-bound
+   `in_progress` attempt containing question text/order/keys; client projections omit keys.
+2. An attempt URL restores saved answers/result. Without its ID, offer the latest
+   open attempt for the activity. Multiple open attempts are possible.
+3. Edits debounce 500 ms and serialize writes within one runner. Save checks owner,
+   state, membership and booleans; failures retain input for retry. No offline store
+   or cross-tab conflict resolution exists.
+4. Review shows choices without correctness. Submit flushes pending saves, sends
+   full answers and grades the snapshot server-side. Missing answers score zero;
+   score is rounded `correct / total × 100`.
+5. A conditional state update saves answers/result/timestamps transactionally.
+   Repeated submission returns the stored result, with a race fallback reading the
+   winner. Retry creates a new attempt; source-question edits do not change snapshots.
 
-Teacher question edits replace source questions but not existing snapshots. Client
-write serialization is per runner, not cross-tab conflict resolution. Unpublishing
-blocks the activity page while existing save/submit actions do not recheck activity
-publication; the desired continuation/history policy remains unresolved in PRD.
+Unpublishing blocks the page while save/submit does not recheck publication. The
+continuation/history policy is [unresolved](PRD.md#unresolved-product-decisions).
 
 ## Limits and verification
 
-- **Upload mismatch:** installed Next.js documents a default 1 MB Server Action
-  request limit; next.config.ts has no override. The converter/UI 10 MiB limit is
-  not an end-to-end upload guarantee. Deployment/proxy limits are unverified.
-- **Operations:** first-admin bootstrap, operator recovery, production backup/restore
-  procedure, deployment topology and monitoring are not implemented/documented as
-  working procedures. No CI workflow is present. Do not infer a hosting provider.
-- **Setup:** Compose defines PostgreSQL 18 on loopback port 5433. The local
-  `.env.example` is ignored/untracked; README lists required variables without
-  depending on it. No environment values should be committed.
-- **Runtime assurance:** the preceding audit passed 23 tests / 254 assertions,
-  TypeScript and ESLint, but the local database metadata check was refused
-  (`ECONNREFUSED`). Actual schema state, production build and deployment were not
-  verified in that audit. No database verification is implied by this document.
-- **Coverage:** Bun tests exercise helpers, fixtures, DOCX conversion and static
-  component rendering, often mocking actions/dialogs. Database auth, concurrency,
-  provider behavior, browser file upload and complete accessibility need separate
-  checks. Prior browser/integration/build results are dated evidence, indexed in
-  [developer-guide.md](developer-guide.md#historical-verification).
-
-Use [demo-testing.md](demo-testing.md) for reproducible local scenarios and
-[DESIGN.md](../DESIGN.md) for interaction requirements. Keep new verification claims
-scoped to the actual source, environment and commands tested.
+- Next.js defaults to a 1 MB Server Action request limit; next.config.ts has no
+  override. The 10 MiB converter/UI limit is not an end-to-end upload guarantee;
+  deployment/proxy limits are unverified.
+- First-admin bootstrap, operator recovery, production backup/restore, hosting
+  topology and monitoring have no verified operational procedure. No CI workflow
+  is present. Do not infer a hosting provider.
+- Compose defines PostgreSQL 18 on loopback port 5433. The ignored/untracked local
+  `.env.example` is not a fresh-clone prerequisite; use README's variable names.
+- Helper/render tests do not prove real auth, concurrency, browser uploads or complete
+  accessibility. Historical results and remaining coverage gaps are centralized in
+  [demo-testing.md](demo-testing.md#ringkasan-verifikasi-historis).

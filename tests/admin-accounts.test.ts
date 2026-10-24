@@ -2,10 +2,18 @@ import { expect, test } from "bun:test";
 
 test("account management offers profile and deletion controls only for managed roles", () => {
   const root = new URL("..", import.meta.url).pathname;
-  const rendered = Bun.spawnSync([process.execPath, "--eval", `
+  const rendered = Bun.spawnSync(
+    [
+      process.execPath,
+      "--eval",
+      `
     import { mock } from "bun:test";
     import { createElement } from "react";
     import { renderToStaticMarkup } from "react-dom/server";
+    import { NextIntlClientProvider } from "next-intl";
+    import messages from "./messages/id.json";
+    const renderWithLocale = element => renderToStaticMarkup(createElement(NextIntlClientProvider, {locale:"id", messages, timeZone:"Asia/Tokyo"}, element));
+
     mock.module(${JSON.stringify(`${root}src/lib/admin/actions.ts`)}, () => Object.fromEntries([
       "provisionAccount", "resetAccountPassword", "updateAccount", "deleteAccount",
     ].map(name => [name, async () => ({success:true})])));
@@ -17,9 +25,12 @@ test("account management offers profile and deletion controls only for managed r
     });
     const { StudentAccountForm } = await import(${JSON.stringify(`${root}src/components/admin/student-account-form.tsx`)});
     const output={};
-    for(const role of ["student","teacher","admin","unknown"]) output[role]=renderToStaticMarkup(createElement(StudentAccountForm,{accounts:[{id:role,name:"Akun fixture",email:"fixture@example.invalid",role}]}));
+    for(const role of ["student","teacher","admin","unknown"]) output[role]=renderWithLocale(createElement(StudentAccountForm,{accounts:[{id:role,name:"Akun fixture",email:"fixture@example.invalid",role}]}));
     console.log(JSON.stringify(output));
-  `], { cwd: root });
+  `,
+    ],
+    { cwd: root },
+  );
   expect(rendered.exitCode).toBe(0);
   expect(rendered.stderr.toString()).toBe("");
   const html: Record<string, string> = JSON.parse(rendered.stdout.toString());

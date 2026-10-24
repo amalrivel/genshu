@@ -1,6 +1,13 @@
 import "server-only";
 import { db } from "@/prisma/db";
-import type { Activity, ActivitySummary, ActivityType, Answers, Question, ActivityResult } from "./types";
+import type {
+  Activity,
+  ActivitySummary,
+  ActivityType,
+  Answers,
+  Question,
+  ActivityResult,
+} from "./types";
 import type { GradingQuestion } from "./grading";
 
 type PracticeCategory = { id: "practice"; title: string; description: string };
@@ -50,7 +57,9 @@ export async function getActivitiesByType(type: ActivityType): Promise<ActivityS
 export async function getActivity(id: string): Promise<Activity | null> {
   const activity = await db.orm.public.Activity.where({ id, type: "practice", published: true })
     .select("id", "title", "description", "type")
-    .include("questions", (questions) => questions.select("id", "question").orderBy((question) => question.position.asc()))
+    .include("questions", (questions) =>
+      questions.select("id", "question").orderBy((question) => question.position.asc()),
+    )
     .first();
   return activity ? { ...activity, type: "practice" } : null;
 }
@@ -79,7 +88,10 @@ export async function createAttempt(userId: string, activityId: string) {
 }
 
 export async function getAttempt(attemptId: string, userId: string): Promise<AttemptRow | null> {
-  return db.orm.public.ActivityAttempt.where({ id: attemptId, userId }).first() as Promise<AttemptRow | null>;
+  return db.orm.public.ActivityAttempt.where({
+    id: attemptId,
+    userId,
+  }).first() as Promise<AttemptRow | null>;
 }
 
 export async function getOpenAttempt(activityId: string, userId: string) {
@@ -95,7 +107,10 @@ export async function getRecentResults(userId: string, limit = 5) {
     .orderBy((attempt) => attempt.submittedAt.desc())
     .limit(limit)
     .all();
-  return rows.map(({ activity, ...attempt }) => ({ ...attempt, activityTitle: activity?.title ?? "Unavailable practice" }));
+  return rows.map(({ activity, ...attempt }) => ({
+    ...attempt,
+    activityTitle: activity?.title ?? "Unavailable practice",
+  }));
 }
 
 export function parseAttemptAnswers(value: unknown): Answers {
@@ -107,10 +122,14 @@ export function parseAttemptAnswers(value: unknown): Answers {
 
 export function parseAttemptQuestions(value: unknown): SnapshotQuestion[] {
   if (!Array.isArray(value)) return [];
-  return value.filter((question): question is SnapshotQuestion =>
-    !!question && typeof question === "object" &&
-    typeof question.id === "string" && typeof question.question === "string" &&
-    typeof question.correctAnswer === "boolean" && Number.isInteger(question.position),
+  return value.filter(
+    (question): question is SnapshotQuestion =>
+      !!question &&
+      typeof question === "object" &&
+      typeof question.id === "string" &&
+      typeof question.question === "string" &&
+      typeof question.correctAnswer === "boolean" &&
+      Number.isInteger(question.position),
   );
 }
 
@@ -131,5 +150,7 @@ export async function getLatestOpenAttempt(userId: string) {
     .include("activity", (activity) => activity.select("title"))
     .orderBy((attempt) => attempt.savedAt.desc())
     .first();
-  return row?.activity ? { id: row.id, activityId: row.activityId, title: row.activity.title, savedAt: row.savedAt } : null;
+  return row?.activity
+    ? { id: row.id, activityId: row.activityId, title: row.activity.title, savedAt: row.savedAt }
+    : null;
 }

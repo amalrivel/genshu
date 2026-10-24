@@ -4,7 +4,9 @@ import { convertLessonDocx } from "../src/lib/learn/material-import";
 
 test("Word fixture exercises headings, furigana, tables, images, formatting, and links", async () => {
   const buffer = await createDemoDocx();
-  const file = new File([new Uint8Array(buffer)], "demo-lesson.docx", { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
+  const file = new File([new Uint8Array(buffer)], "demo-lesson.docx", {
+    type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  });
   const result = await convertLessonDocx(file);
   expect(result.html).toContain("<h1>Demo Word lesson</h1>");
   expect(result.html).toContain("<ruby>日本語<rt>にほんご</rt></ruby>");

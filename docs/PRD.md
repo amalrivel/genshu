@@ -1,111 +1,96 @@
 # Genshu product requirements
 
-Reviewed against the working tree on branch `fresh`, 23 October 2026 (JST).
-**Implemented** means present in source. **Tested** identifies specific evidence,
-not a guarantee that every browser, database, or production scenario works.
-**Deferred** is outside current scope; **unresolved** requires a product decision.
+Implementation reviewed on branch `fresh`, 23 October 2026 (JST). **Implemented**
+means present in source, not fully tested. Historical test evidence is summarized
+in [demo-testing.md](demo-testing.md#ringkasan-verifikasi-historis).
 
 ## Purpose and users
 
-Genshu is a managed Japanese-learning portal. Its core journey is material →
-practice → saved feedback. Students use accounts provided by an administrator;
-teachers manage learning content. The interface is Indonesian, while teacher
-content retains its original language. The intended audience is teenagers and
-adults, as described in [DESIGN.md](../DESIGN.md); age eligibility is not enforced.
-
-Published content is shared across managed users. There is no class membership
-or class-specific visibility model. See [ARCHITECTURE.md](ARCHITECTURE.md) for
-source references and [demo-testing.md](demo-testing.md) for local evaluation.
+Genshu is a managed Japanese-learning portal: material → practice → saved feedback.
+Students use administrator-provided accounts; teachers manage content. The interface
+supports Indonesian (default) and Japanese; teacher content retains its original language. The intended audience
+is teenagers and adults ([DESIGN.md](../DESIGN.md)); age eligibility is not enforced.
+Published content is shared across managed users, without class-specific visibility.
 
 ## Roles and permissions
 
-These describe the implemented Genshu flows, not every capability of Better Auth.
+These describe Genshu flows, not every Better Auth plugin capability.
 
-| Role | Learning and practice | Content management | Account management |
-|---|---|---|---|
-| Visitor | Login only; no public signup | None | None |
-| Student | Published content; own attempts/results | None | Administrator-assisted recovery |
-| Teacher | Same signed-in learning routes and own practice | Topics, subjects, materials, practice, announcements, recordings, events | No Genshu account management |
-| Admin | Same signed-in learning routes and own practice | Same content operations as teacher | Create student/teacher accounts, edit managed profiles/roles, reset passwords, delete eligible accounts |
+| Role    | Learning                                        | Management                                                                                                   |
+| ------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Visitor | Login; no public signup                         | None                                                                                                         |
+| Student | Published content and own attempts/results      | Administrator-assisted account recovery                                                                      |
+| Teacher | Same signed-in learning routes and own practice | Topics, subjects, materials, practice, announcements, recordings and events                                  |
+| Admin   | Same learning access as teacher                 | Content plus student/teacher provisioning, profile/role edits, password resets and eligible account deletion |
 
-Account profile/role edits and deletion reject the current account, administrator
-targets, and unsupported target roles. New/edited roles in these forms are limited
-to student or teacher. Password reset is a separate admin action, including for
-administrator accounts; it revokes target sessions. Email or role changes also
-revoke sessions; name-only edits preserve them. Accounts with any practice attempt
-cannot be deleted. There is no implemented first-admin bootstrap or operator
-recovery procedure; the local demo seed is not a production substitute.
+Profile/role edits and deletion reject the current account, administrator targets
+and unsupported roles. Forms only assign student/teacher. Password reset is a
+separate admin action and can target administrators. Password resets and email/role
+changes revoke target sessions; name-only edits preserve them. Accounts with any
+practice attempt cannot be deleted. First-admin bootstrap and operator recovery
+remain missing; the local demo seed is not a production substitute.
+
+## Interface localization
+
+next-intl translates application UI in Indonesian and Japanese. The login page and
+account menu expose the language switch. A browser cookie stores the choice;
+invalid/missing values fall back to Indonesian. URLs, access checks and database
+content are unchanged. User-facing dates use the selected locale and Asia/Tokyo.
+Names, titles, lessons, questions, descriptions and imported content are not
+translated. Third-party document-conversion warnings remain as received.
 
 ## Implemented journeys
 
-| Journey | Current behavior |
-|---|---|
-| Sign in and return | Email/password login, logout, session redirect, real signed-in identity. Development login offers seeded demo credentials; this does not create accounts or bypass authentication. |
-| Continue learning | Home shows published announcements, upcoming/ongoing events, the user's recent practice results, an available unfinished attempt, and learning links. |
-| Read a lesson | `/learn` → topic → subject/material, with readable titles, breadcrumbs, sanitized lesson content, ruby/furigana, and heading navigation. Subjects without a published material are omitted from the student list. |
-| Import and revise | Teacher/admin imports DOCX into a draft, previews warnings/content, acknowledges review in the UI, and publishes separately. Published material edits create revisions; the old version stays available until replacement publication. |
-| Practice | Browse published true/false practice, start or resume an attempt, navigate questions, autosave, review choices before submission, then see saved score and question feedback. Retry creates a new attempt. |
-| Manage content | `/admin` uses sections, title search, pagination, full-screen editors, draft/publication controls, and confirmed deletion. Account search matches name or email. |
-| Follow class updates | Read published announcements and full details, open external recording links, and view a chronological agenda in Asia/Tokyo. |
-
-The legacy category URL `/activities/type/practice` remains supported alongside
-the direct `/activities` list. Other activity categories are not exposed.
+| Journey        | Current behavior                                                                                                                                                                                                                                                                                                                         |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Sign in        | Email/password login, logout, session redirects and real user identity. Development demo buttons only fill credentials; they do not create accounts or bypass auth.                                                                                                                                                                      |
+| Continue       | Home shows published announcements, personal recent results, an available unfinished attempt and a practice entry point. Learn and calendar entry points are temporarily hidden from navigation and Home; direct routes and management remain available.                                                                                 |
+| Learn          | `/learn` → topic → subject/material, with titles, breadcrumbs, sanitized lessons, ruby/furigana and heading navigation. Subjects without published material are omitted.                                                                                                                                                                 |
+| Import/revise  | DOCX creates a draft with preview/warnings. UI review precedes separate publication; material revisions leave the old version available until replacement.                                                                                                                                                                               |
+| Practice       | Published true/false practice supports start/resume, question navigation, autosave, pre-submit review, saved scoring/feedback and new repeat attempts. `/activities/type/practice` remains supported.                                                                                                                                    |
+| Manage         | `/admin` defaults to practice; navigation temporarily shows practice, announcements, recordings and admin-only accounts. Material/topic/subject/event management remains accessible by direct URL. It has sections, title search (name/email for accounts), 20-item pagination, full-screen editors, publication and confirmed deletion. |
+| Follow updates | Published announcements have detail pages; recordings open external links; the chronological agenda uses Asia/Tokyo.                                                                                                                                                                                                                     |
 
 ## Business rules and acceptance criteria
 
-The rules below are implemented in source. The evidence column distinguishes
-automated coverage from behavior that still needs integration/browser verification.
+These rules are implemented; coverage varies. Source references are in
+[ARCHITECTURE.md](ARCHITECTURE.md), rather than duplicated here.
 
-| Area | Acceptance criterion | Evidence and limits |
-|---|---|---|
-| Access | Missing sessions redirect to login; students cannot use content management; only admins use account actions. Attempts are selected by signed-in owner. | Source guards; dated integration reports. The current automated suite does not exercise real auth/HTTP boundaries. |
-| Visibility | A lesson requires published topic, subject, and material. Student announcements, recordings, and events require publication. | Query/action source; material UI render coverage. |
-| Publication | Most content edits return that record to draft. Material revisions preserve the published version. Material publication requires published parents and replaces the subject's single material, retaining its ID when present. | Source transactions; historical material integration evidence. Review acknowledgement is a UI control, not a persisted approval. |
-| Word import | Import failure leaves published material untouched. Conversion checks DOCX extension/archive, size and expansion limits, blocks external file access, sanitizes HTML, and returns warnings for review. | Generated DOCX test covers headings, ruby, table, image, formatting and link. It does not prove all Word structures or the full advertised upload size; see technical limits. |
-| Practice readiness | New attempts require published practice with questions; publication rejects practice without questions. | Query/action source; historical integration evidence. |
-| Answers | Both `true` and `false` count as answers. Unknown question IDs and non-boolean values are rejected. Missing answers are allowed and receive no credit. | Validation/grading source; fixture, review and draft-saver tests. |
-| Scoring | Score is rounded `correct / total × 100`; incorrect and unanswered counts remain separate. Feedback/keys appear after persisted submission. | Pure grading source plus fixture/render tests. No correctness feedback during question entry. |
-| Persistence | Attempts retain their initial question text/order/keys. Submission stores answers/result/state in one transaction; repeated submission returns the saved outcome. Retry uses a new ID. | Action source and historical integration reports; no repeatable database concurrency test in the current suite. |
-| Deletion | Refuse topic deletion with subjects, subject deletion with material/drafts, and activity/account deletion with attempts. Removing a recording deletes its listing, not the provider video. | Action/contract source; UI render tests and dated integration reports. |
-| Dates | Recording dates and event inputs are interpreted in Asia/Tokyo; event end must follow start. Agenda includes events not yet ended and labels ongoing events. | Validation/query source and Tokyo date-range tests. |
-| Failure states | Distinguish loading, empty collections, unavailable records, and operational errors. Failed form/save/submit operations retain client input and offer recovery feedback. | Implemented components/boundaries and focused tests; full failure/navigation coverage remains incomplete. |
+| Area            | Acceptance criterion                                                                                                                                                                                                                                                              |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Access          | Missing sessions redirect to login. Students cannot manage content; account actions require admin. Attempts are selected by signed-in owner.                                                                                                                                      |
+| Visibility      | Lessons require published topic, subject and material. Student announcements, recordings and events require publication.                                                                                                                                                          |
+| Publication     | Most content edits return the record to draft. Material revisions preserve the published version; publication requires published parents, replaces the subject's single material and retains its existing ID. UI acknowledgement is not a stored approval.                        |
+| DOCX            | Failed conversion leaves published material untouched. Validate archive/type/resource limits, sanitize HTML and show conversion warnings for review. Preserve supported text, headings, formatting, lists, links, images, tables and ruby; exact Word pagination is not required. |
+| Readiness       | Starting requires published practice with questions; publication rejects practice without questions.                                                                                                                                                                              |
+| Answers/scoring | `true` and `false` both count. Reject unknown question IDs/non-booleans. Missing answers receive no credit. Score is rounded `correct / total × 100`; incorrect and unanswered counts stay separate. Feedback/keys follow persisted submission.                                   |
+| Persistence     | Retain initial question text/order/keys in snapshots. Submit answers/result/state transactionally; repeated submission returns the saved outcome. Retry creates a new attempt.                                                                                                    |
+| Deletion        | Refuse topics with subjects, subjects with material/drafts, and activities/accounts with attempts. Deleting a recording removes its listing, not the provider video.                                                                                                              |
+| Dates           | Interpret recording/event inputs in Asia/Tokyo. Event end must follow start; the agenda includes events not yet ended and marks ongoing ones.                                                                                                                                     |
+| Failures        | Distinguish loading, empty collections, 404 and operational errors. Failed form/save/submit operations retain client input and offer recovery.                                                                                                                                    |
 
-Interaction requirements remain in [DESIGN.md](../DESIGN.md): accessible focus,
-keyboard controls, narrow-screen navigation, readable lessons, reduced motion,
-and clear pending/error/success states. These are intended quality requirements;
-the existence of components or token tests is not a complete accessibility audit.
+[DESIGN.md](../DESIGN.md) owns interaction requirements, including accessible focus,
+keyboard/mobile navigation, readable lessons and reduced motion. Components/token
+checks do not establish complete accessibility or production readiness.
 
 ## Deferred or unsupported
 
-- Formal exams, mock exams and assignments, including deadlines, attempt limits,
-  delayed disclosure and grading policies. Existing type names are placeholders
-  for future behavior, not implemented product capabilities.
+- Exams, mock exams and assignments: existing type names do not implement deadlines,
+  attempt limits, delayed answer disclosure or grading policies.
 - Class membership, attendance, class-specific content and billing.
-- Public registration, Google login and self-service email password recovery.
-- Recurring events, calendar synchronization, hosted video uploads and playback
-  access enforcement at an external provider.
-- Importing question sets from Word or reproducing exact Word pagination.
+- Public signup, Google login and self-service email password recovery.
+- Recurring events, calendar sync, video uploads and provider playback enforcement.
+- Word question-set import and exact Word pagination.
 
 ## Unresolved product decisions
 
-1. **Unpublished practice:** its page and result links become unavailable, but
-   existing save/submit actions do not recheck publication. Decide whether ongoing
-   attempts may continue and whether saved history must always remain readable.
-2. **Review approval:** decide whether UI acknowledgement is sufficient or whether
-   publishing must record/enforce review of a specific revision on the server.
-3. **Operational access:** choose and implement first-admin provisioning and
-   recovery when no administrator can sign in. No procedure is implied here.
-4. **Upload promise:** choose an end-to-end supported size and align request,
-   converter, deployment and UI limits. Current 10 MiB converter/UI wording is
-   constrained by the unconfigured 1 MB Server Action request limit.
-5. **History retention:** deletion currently refuses accounts/activities with
-   attempts. No retention period, archival or anonymization policy is defined.
-
-## Verification status
-
-The preceding repository audit ran 23 tests / 254 assertions, TypeScript and ESLint
-successfully. Tests cover pure helpers, fixtures, conversion and rendered UI;
-they do not constitute an end-to-end acceptance suite. The audit's read-only local
-database check returned `ECONNREFUSED`; database state and production behavior
-were not verified. Browser/build claims in older reports retain their original
-dates and scope; see the [evidence index](developer-guide.md#historical-verification).
+1. **Unpublished practice:** its page/results become unavailable, but existing
+   save/submit actions do not recheck publication. Decide continuation and history access.
+2. **Review approval:** decide whether acknowledgement needs server enforcement and
+   a record tied to a specific revision.
+3. **Operational access:** define and implement first-admin provisioning and recovery
+   when no administrator can sign in.
+4. **Upload promise:** align converter, request, deployment and UI limits. The current
+   10 MiB converter/UI wording exceeds the unconfigured 1 MB Server Action limit.
+5. **Retention:** define archival/anonymization or retention periods; current deletion
+   simply refuses accounts/activities with attempts.

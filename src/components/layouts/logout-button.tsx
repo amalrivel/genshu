@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "next-intl";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -9,17 +10,42 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const authClient = createAuthClient();
 export function LogoutButton() {
+  const t = useTranslations("UI");
+
   const router = useRouter();
   const [pending, setPending] = useState(false);
   const [error, setError] = useState(false);
   async function logout() {
-    setPending(true); setError(false);
+    setPending(true);
+    setError(false);
     try {
       const result = await authClient.signOut();
       if (result.error) throw new Error("Sign out failed");
-      router.replace("/login"); router.refresh();
-    } catch { setError(true); }
-    finally { setPending(false); }
+      router.replace("/login");
+      router.refresh();
+    } catch {
+      setError(true);
+    } finally {
+      setPending(false);
+    }
   }
-  return <div className="flex flex-col gap-2"><Button type="button" variant="outline" onClick={logout} disabled={pending}>{pending ? <><Spinner aria-hidden="true" />Keluar…</> : "Keluar"}</Button>{error ? <Alert variant="destructive"><AlertDescription>Belum berhasil keluar. Coba lagi.</AlertDescription></Alert> : null}</div>;
+  return (
+    <div className="flex flex-col gap-2">
+      <Button type="button" variant="outline" onClick={logout} disabled={pending}>
+        {pending ? (
+          <>
+            <Spinner aria-hidden="true" />
+            {t("Keluar")}
+          </>
+        ) : (
+          t("Keluar294")
+        )}
+      </Button>
+      {error ? (
+        <Alert variant="destructive">
+          <AlertDescription>{t("Belum_berhasil_keluar_Coba_lagi")}</AlertDescription>
+        </Alert>
+      ) : null}
+    </div>
+  );
 }

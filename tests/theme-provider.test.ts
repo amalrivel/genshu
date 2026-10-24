@@ -3,7 +3,11 @@ import { expect, test } from "bun:test";
 test("theme bootstrap runs in server HTML and is inert on client renders", () => {
   // Isolate React's client exports from the suite's react-server condition.
   const providerPath = new URL("../src/components/theme-provider.tsx", import.meta.url).pathname;
-  const result = Bun.spawnSync([process.execPath, "--eval", String.raw`
+  const result = Bun.spawnSync(
+    [
+      process.execPath,
+      "--eval",
+      String.raw`
     import { createElement } from "react";
     import { renderToStaticMarkup } from "react-dom/server";
     import { runInNewContext } from "node:vm";
@@ -39,7 +43,10 @@ test("theme bootstrap runs in server HTML and is inert on client renders", () =>
     console.log(JSON.stringify({
       html, saved, system, clientScriptProps: client.props.scriptProps,
     }));
-  `], { cwd: new URL("..", import.meta.url).pathname });
+  `,
+    ],
+    { cwd: new URL("..", import.meta.url).pathname },
+  );
 
   expect(result.stderr.toString()).toBe("");
   expect(result.exitCode).toBe(0);

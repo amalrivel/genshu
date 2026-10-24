@@ -3,16 +3,12 @@
 import { db } from "@/prisma/db";
 import { requireUser } from "@/lib/auth-session";
 import { gradeActivity } from "./grading";
-import {
-  createAttempt,
-  getAttempt,
-  parseAttemptQuestions,
-  parseAttemptResult,
-} from "./queries";
+import { createAttempt, getAttempt, parseAttemptQuestions, parseAttemptResult } from "./queries";
 import type { Answers } from "./types";
 
 function validateAnswers(answers: unknown, questionIds: Set<string>): asserts answers is Answers {
-  if (!answers || typeof answers !== "object" || Array.isArray(answers)) throw new Error("Invalid answers");
+  if (!answers || typeof answers !== "object" || Array.isArray(answers))
+    throw new Error("Invalid answers");
   const entries = Object.entries(answers);
   if (entries.some(([id, value]) => !questionIds.has(id) || typeof value !== "boolean")) {
     throw new Error("Answers do not match this attempt");
@@ -34,9 +30,11 @@ export async function saveAttempt(attemptId: string, answers: Answers) {
   if (!attempt || attempt.status !== "in_progress") throw new Error("Draft is unavailable");
   const questions = parseAttemptQuestions(attempt.questionsSnapshot);
   validateAnswers(answers, new Set(questions.map((question) => question.id)));
-  const updated = await db.orm.public.ActivityAttempt
-    .where({ id: attemptId, userId: session.user.id, status: "in_progress" })
-    .update({ answers, savedAt: new Date().toISOString() });
+  const updated = await db.orm.public.ActivityAttempt.where({
+    id: attemptId,
+    userId: session.user.id,
+    status: "in_progress",
+  }).update({ answers, savedAt: new Date().toISOString() });
   if (!updated) throw new Error("Draft could not be saved");
   return { savedAt: updated.savedAt };
 }
@@ -45,9 +43,10 @@ export async function submitAttempt(attemptId: string, answers: Answers) {
   const session = await requireUser();
   if (typeof attemptId !== "string" || !attemptId) throw new Error("Invalid attempt");
   return db.transaction(async (tx) => {
-    const attempt = await tx.orm.public.ActivityAttempt
-      .where({ id: attemptId, userId: session.user.id })
-      .first();
+    const attempt = await tx.orm.public.ActivityAttempt.where({
+      id: attemptId,
+      userId: session.user.id,
+    }).first();
     if (!attempt) throw new Error("Attempt not found");
     if (attempt.status === "submitted") {
       const saved = parseAttemptResult(attempt.result);
@@ -60,11 +59,16 @@ export async function submitAttempt(attemptId: string, answers: Answers) {
     validateAnswers(answers, new Set(questions.map((question) => question.id)));
     const result = gradeActivity(attempt.activityId, questions, answers);
     const now = new Date().toISOString();
-    const saved = await tx.orm.public.ActivityAttempt
-      .where({ id: attemptId, userId: session.user.id, status: "in_progress" })
-      .update({ answers, result, status: "submitted", submittedAt: now, savedAt: now });
+    const saved = await tx.orm.public.ActivityAttempt.where({
+      id: attemptId,
+      userId: session.user.id,
+      status: "in_progress",
+    }).update({ answers, result, status: "submitted", submittedAt: now, savedAt: now });
     if (saved) return result;
-    const raced = await tx.orm.public.ActivityAttempt.where({ id: attemptId, userId: session.user.id }).first();
+    const raced = await tx.orm.public.ActivityAttempt.where({
+      id: attemptId,
+      userId: session.user.id,
+    }).first();
     const existing = raced?.status === "submitted" ? parseAttemptResult(raced.result) : null;
     if (existing) return existing;
     throw new Error("Attempt could not be submitted");

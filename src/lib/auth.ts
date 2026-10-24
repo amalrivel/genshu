@@ -10,8 +10,10 @@ export const auth = betterAuth({
   appName: "Genshu",
   secret: process.env.BETTER_AUTH_SECRET,
   baseURL: process.env.BETTER_AUTH_URL,
-  trustedOrigins: process.env.NODE_ENV === "development"
-    ? ["http://localhost:3000", "http://127.0.0.1:3000"] : [],
+  trustedOrigins:
+    process.env.NODE_ENV === "development"
+      ? ["http://localhost:3000", "http://127.0.0.1:3000"]
+      : [],
   database: pool,
   emailAndPassword: { enabled: true, disableSignUp: true },
   // These mutations use Genshu's transactional account actions and history checks.
@@ -24,7 +26,12 @@ export const auth = betterAuth({
     admin({
       defaultRole: "student",
       adminRoles: ["admin"],
-      roles: { student: defaultAc.newRole({}), teacher: defaultAc.newRole({}), admin: adminAc, user: userAc },
+      roles: {
+        student: defaultAc.newRole({}),
+        teacher: defaultAc.newRole({}),
+        admin: adminAc,
+        user: userAc,
+      },
     }),
   ],
 });
