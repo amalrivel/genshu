@@ -1,6 +1,6 @@
 # Genshu
 
-Ruang belajar bahasa Jepang untuk remaja dan dewasa. Bahasa antarmuka Indonesia;
+Ruang belajar bahasa Jepang untuk remaja dan dewasa. Bahasa antarmuka Indonesia (bawaan) dan Jepang;
 judul dan isi materi milik guru tetap sebagaimana ditulis.
 
 - Gunakan shadcn `base-nova`, Base UI, dan Lucide. Komposisikan komponen yang ada.
@@ -11,7 +11,7 @@ judul dan isi materi milik guru tetap sebagaimana ditulis.
   lebar baca 68ch. Judul maksimal 36 px; hierarki heading berurutan.
 - Ritme jarak 4/8 px. Kontrol utama 44 px; kartu 24 px dengan radius 12 px.
   Hindari gradasi, ilustrasi dekoratif, dan bayangan berlebihan.
-- HP: navigasi bawah Beranda/Belajar/Latihan/Lainnya. Desktop mulai 768 px:
+- HP: navigasi bawah Beranda/Latihan/Rekaman kelas/Lainnya. Desktop mulai 768 px:
   Sidebar. Sisakan ruang safe area dan fokus yang tidak tertutup elemen tetap.
 - Satu tindakan utama per konteks. Tindakan sekunder outline/ghost.
   Setiap tindakan menyediakan fokus, pending, sukses, dan kesalahan yang relevan.
@@ -48,3 +48,14 @@ judul dan isi materi milik guru tetap sebagaimana ditulis.
 - Loading memakai Skeleton; koleksi kosong memakai Empty; kegagalan memakai
   Alert dan coba lagi. Jangan menyamarkan kegagalan sebagai koleksi kosong.
 - Gerak singkat hanya untuk umpan balik; hormati prefers-reduced-motion.
+
+- Sementara, Belajar dan Jadwal disembunyikan dari navigasi serta Beranda.
+  Halaman langsung dan pengelolaan tetap tersedia; data tidak dihapus.
+
+- Menu Pengelolaan sementara hanya menampilkan Latihan, Pengumuman, Rekaman,
+  serta Akun untuk admin. Halaman awalnya Latihan; pengelolaan Materi, Topik,
+  Subjek, dan Jadwal tetap dapat diakses lewat URL langsung.
+
+- Pilihan bahasa ada pada login dan menu akun, tersimpan di cookie browser.
+  Terjemahkan label, status, validasi, metadata dan tanggal tampilan; judul, isi,
+  pertanyaan dan jawaban dari database tetap sebagaimana ditulis. URL tetap sama.

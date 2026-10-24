@@ -1,12 +1,12 @@
-# Data demo untuk mencoba behavior Genshu
+# Demo dan pengujian Genshu
 
-Panduan ini berisi skenario pengujian, bukan bukti bahwa semua skenario sudah
-lulus pada source terbaru. Ruang lingkup dan keputusan produk ada di
-[PRD](PRD.md); batas teknis dan sumber implementasi ada di
-[ARCHITECTURE](ARCHITECTURE.md). Persiapan environment ada di [README](../README.md).
+Panduan skenario lokal, bukan bukti seluruh alur sudah lulus pada source terbaru.
+Setup ada di [README](../README.md); perilaku produk di [PRD](PRD.md), sumber dan
+batas teknis di [ARCHITECTURE](ARCHITECTURE.md).
 
-Jalankan dari branch `fresh` setelah database lokal dikonfigurasi dan schema
-Genshu sudah tersedia:
+## Menjalankan demo
+
+Setelah environment dan schema database lokal tersedia, jalankan dari root:
 
 ```sh
 bun run db:seed:demo
@@ -14,92 +14,60 @@ bun run demo:docx
 bun run dev
 ```
 
-Seed menggunakan `DATABASE_URL` dari `.env`. Ia menolak target remote dan
-`NODE_ENV=production`, tidak menjalankan migrasi/reset, dan menambahkan data
-beserta credential dalam satu transaksi. Seluruh ID demo memakai prefix `demo-`;
-judul konten diberi label `[Demo]` atau `[Demo Draft]`. `db:seed` tetap hanya
-mengisi kategori practice, tanpa akun atau konten demo.
+Seed memakai `DATABASE_URL`, menolak target remote/`NODE_ENV=production`, dan
+menambahkan akun serta konten dalam satu transaksi tanpa migrasi/reset. `db:seed`
+biasa hanya menambahkan kategori practice. Gunakan database demo tanpa data pribadi;
+seed bukan bootstrap administrator atau prosedur pemulihan produksi.
 
 ## Akun pengujian
 
-Password awal seluruh akun di bawah: **`GenshuDemo!2026`**.
+Password awal: **`GenshuDemo!2026`**, khusus fixture lokal.
 
-| Email | Role | Behavior yang dapat dilihat |
-|---|---|---|
-| `admin-demo@genshu.local` | admin | Management konten dan akun; satu hasil practice di Home |
-| `teacher-demo@genshu.local` | teacher | Management konten tanpa form pengelolaan akun |
-| `student-demo@genshu.local` | student | Draft practice dan hasil 100%, 40%, serta 0%; tidak boleh mengakses Management |
-| `new-student-demo@genshu.local` | student | Belum ada attempt/hasil pribadi; coba alur dari awal |
+| Email                           | Role    | Skenario awal                                      |
+| ------------------------------- | ------- | -------------------------------------------------- |
+| `admin-demo@genshu.local`       | admin   | Kelola konten/akun; satu hasil latihan             |
+| `teacher-demo@genshu.local`     | teacher | Kelola konten tanpa pengelolaan akun               |
+| `student-demo@genshu.local`     | student | Draft dan hasil 100%, 40%, 0%; pengelolaan ditolak |
+| `new-student-demo@genshu.local` | student | Belum punya attempt/hasil                          |
 
-Akun `admin-test` dan data lama tidak diubah. Password demo disimpan dengan hash
-Better Auth yang sama dengan login aplikasi. Akun/credential yang sudah ada tidak
-direset. Jika email demo dimiliki akun lain dengan ID berbeda, seed membatalkan
-transaksi daripada mengambil alih akun tersebut. Password di atas berlaku saat
-pertama dibuat; setelah Anda menggantinya, seed tidak mengembalikan password lama.
-Password ini khusus demo lokal, bukan untuk deployment publik.
+Akun/kredensial yang sudah ada tidak direset; benturan email/ID membatalkan transaksi.
+Password yang sudah diganti tidak dikembalikan. Rerun mempertahankan perubahan dan
+menambah data yang hilang, tanpa menambahkan soal demo ke latihan yang sudah diedit.
+Draft terbit tidak dibuat ulang selama materi masih memakai judul revisi demo.
+Tanggal event relatif hanya saat pertama dimasukkan; rerun tidak memajukannya.
 
-## Tombol akun testing di login
-
-Saat `bun run dev`, halaman `/login` otomatis menampilkan empat tombol akun demo.
-Tombol mengisi email/password; tekan **Masuk** untuk login lewat autentikasi
-normal. Tombol tidak membuat akun dan tidak melewati pemeriksaan role/session.
-Jika password demo telah diubah, masukkan password baru secara manual.
-
-Untuk server dengan `NODE_ENV=production`, tombol tidak tersedia secara default.
-Pada deployment demo terisolasi yang sudah memiliki akun demo, set environment
-server `GENSHU_ENABLE_DEMO_LOGIN=true` lalu restart/redeploy. Flag ini dibaca di
-server; saat nonaktif daftar akun/password tidak dikirim sebagai props ke browser.
-Tidak ada toggle melalui Inspect atau parameter URL.
-
-Saat flag aktif, semua pengunjung halaman login dapat memakai akun demo, termasuk
-admin. Gunakan hanya database demo tanpa data pribadi. Menonaktifkan flag hanya
-menghapus pilihan akun dari halaman; akun yang sudah ada tetap dapat login dengan
-credential-nya. Seed tetap menolak target production/remote dan tidak diubah untuk
-fitur ini.
+Login development menawarkan tombol pengisi kredensial; tekan **Masuk** untuk auth
+normal. Di luar development, tombol hanya aktif jika server mengatur
+`GENSHU_ENABLE_DEMO_LOGIN=true`. Flag mengirim kredensial demo, termasuk admin, ke
+pengunjung login; gunakan hanya deployment demo terisolasi. Menonaktifkannya tidak
+menghapus akun atau mencegah login dengan kredensial yang sudah diketahui.
 
 ## Checklist browser
 
-1. **Home:** login sebagai student-demo. Dua pengumuman published, event yang
-   belum selesai, dan tiga hasil pribadi muncul. Login new-student-demo untuk
-   melihat keadaan kosong pada hasil latihan pribadi.
-2. **Learn:** buka Bahasa Jepang → Kosakata. Periksa furigana/ruby, format teks,
-   daftar, tabel, gambar fixture kecil, link, dan anchor untuk heading berulang.
-   Buka Sapaan untuk materi kedua. Topic tanpa materi menguji empty state.
-   Topic, subject, dan materi draft tidak seharusnya muncul untuk student.
-3. **Practice:** buka Latihan True / False sebagai student-demo lalu lanjutkan draft.
-   Jawaban pertama True dan kedua False sudah tersimpan. Ubah jawaban, tunggu
-   status saved, reload, lalu submit. Hasil memiliki benar/salah/belum dijawab.
-   Buka hasil lama dari Home dan coba Ulangi latihan. Latihan baru belum punya attempt
-   seed. Latihan draft/latihan kosong hanya tersedia di Management.
-4. **Management:** teacher-demo bisa mengelola konten; hanya admin-demo melihat
-   form akun. Student-demo yang membuka `/admin` seharusnya kembali ke Home.
-   Coba Publish latihan tanpa soal untuk memeriksa penolakan. Periksa perubahan
-   published versus draft lewat akun student lain, bukan hanya menu admin.
-5. **Word:** gunakan `tests/fixtures/demo-lesson.docx` pada form Tambah materi.
-   Pilih subject Kosakata atau Sapaan. Periksa preview furigana, tabel,
-   gambar dan warnings, centang review, lalu publish. Publikasi mengganti materi
-   demo subject tersebut. Draft revisi dengan warning contoh sudah disediakan
-   juga untuk mencoba review tanpa upload.
-6. **Announcements:** buka pengumuman published sampai detail; draft hanya terlihat
-   di Management. Publish draft untuk melihatnya muncul di halaman student/Home.
-7. **Recordings:** buka video contoh eksternal; provider mengontrol akses video.
-   Video ini bukan rekaman pelajaran Genshu. Draft harus tersembunyi dari student.
-8. **Calendar:** waktu ditampilkan dalam Asia/Tokyo. Event mendatang dan yang sedang
-   berlangsung muncul; event lampau dan draft tidak masuk daftar upcoming.
-9. **Mobile dan logout:** coba lebar 390 px, menu navigasi, lalu logout. Halaman
-   terlindungi mengarahkan ke login. Signup publik tetap ditolak.
+Gunakan fixture demo; publikasi/hapus mengubah data. Checklist bukan hasil pengujian.
 
-## Menjalankan ulang dan batas pengujian
+1. **Home:** periksa pengumuman, event belum berakhir, hasil pribadi dan lanjutkan
+   draft; akun new-student menguji hasil kosong.
+2. **Learn:** Bahasa Jepang → Kosakata/Sapaan; periksa ruby, format, tabel/gambar,
+   link, heading berulang dan empty state. Topik/subjek/materi draft harus tersembunyi.
+3. **Practice:** lanjutkan draft dengan pilihan True/False tersimpan, ubah jawaban,
+   tunggu status simpan, reload, tinjau dan kirim. Periksa benar/keliru/kosong,
+   hasil lama, klik kirim berulang dan attempt baru melalui Ulangi latihan.
+4. **Management:** siswa ditolak; guru mengelola konten, admin mengelola akun.
+   Periksa pencarian/paginasi/back-forward, validasi, isian gagal simpan, konfirmasi
+   buang perubahan, pemisahan draft/terbit dan penolakan publikasi latihan tanpa soal.
+5. **Word:** impor fixture kecil `tests/fixtures/demo-lesson.docx`; periksa preview,
+   ruby/tabel/gambar/warnings dan review. Publikasi mengganti materi subject tujuan;
+   revisi harus mempertahankan materi lama hingga terbit. Uji metadata tanpa file,
+   file tidak valid, dan penolakan jika induk belum terbit.
+6. **Penghapusan/akun:** gunakan fixture terpisah. Periksa batal, izin, proteksi
+   dependensi/riwayat dan pencabutan sesi setelah email/peran/password berubah.
+7. **Kabar/jadwal:** detail pengumuman, link rekaman eksternal, event mendatang/
+   berlangsung dalam Asia/Tokyo; draft/event lampau tidak masuk agenda.
+8. **Interaksi:** keyboard/fokus, mobile, tema, zoom dan reduced motion; logout lalu
+   buka halaman terlindungi. Signup publik tetap ditolak.
 
-Record yang sudah ada dipertahankan, termasuk jawaban, hasil, hash password,
-judul, dan status publikasi yang Anda ubah. Data yang hilang dapat ditambahkan
-kembali; seed bukan reset. Soal demo lama tidak ditambahkan ke latihan yang telah
-diganti soalnya lewat Management. Draft yang dipublikasikan tidak ditambahkan
-kembali selama materi masih menggunakan judul revisi demo tersebut.
-
-Waktu event dihitung relatif saat **pertama** dimasukkan. Rerun tidak memajukan
-tanggal event lama; ubah tanggal melalui Management bila fixture sudah kedaluwarsa.
-Fixture tidak membuat session login dan tidak mengaktifkan exam/assignment/mock exam.
+## Pemeriksaan otomatis dan batas
 
 ```sh
 bun run test
@@ -107,25 +75,47 @@ bunx tsc --noEmit --incremental false
 bun run lint
 ```
 
-Audit repository sebelum penulisan dokumentasi ini menjalankan 23 tes / 254
-assertions, TypeScript, dan ESLint dengan hasil lulus. Suite saat ini menguji
-helper, fixture, konversi DOCX, serta render UI; bukan integrasi auth/database
-atau pengujian browser menyeluruh. Pemeriksaan metadata database lokal pada audit
-tersebut gagal terhubung (`ECONNREFUSED`). Hasil browser/build/integrasi sebelumnya
-tetap memiliki tanggal dan batas cakupannya sendiri; lihat
-[indeks bukti historis](developer-guide.md#historical-verification).
+Suite menguji helper, fixture, konversi DOCX dan render UI, sering dengan action/
+dialog mock; bukan suite integrasi auth/database/browser. Batas upload converter/UI
+10 MiB belum selaras dengan request Server Action default 1 MB: fixture kecil tidak
+membuktikan upload maksimal. Kebijakan attempt setelah unpublish dan approval review
+server masih [belum diputuskan](PRD.md#unresolved-product-decisions).
 
-Validasi formulir admin sekarang mengembalikan pesan/field error terstruktur;
-pernyataan lama bahwa validasi selalu menjadi error halaman tidak lagi mewakili
-alur tersebut. Batas upload tetap belum selaras: converter/UI menyebut 10 MiB,
-sedangkan request Server Action default dibatasi 1 MB tanpa override konfigurasi.
-Gunakan fixture kecil untuk checklist ini; keberhasilan fixture tidak membuktikan
-unggahan 10 MiB berfungsi melalui browser.
+## Ringkasan verifikasi historis
 
-Materi langsung hanya terbuka jika topik, subjek, dan materinya terbit. Halaman
-latihan/hasil memerlukan latihan terbit, tetapi action simpan/kirim attempt yang
-sudah ada tidak memeriksa ulang publikasi. Kebijakan kelanjutan dan akses riwayat
-setelah perubahan publikasi masih [belum diputuskan](PRD.md#unresolved-product-decisions).
-Seed tidak memperbaiki atau menyamarkan perbedaan ini. Bootstrap administrator
-pertama dan pemulihan operator produksi juga belum tersedia; jangan gunakan seed
-demo sebagai prosedur produksi.
+Diringkas dari laporan sesi 10–23 Oktober 2026 yang telah digabungkan ke dokumen
+utama. Ini catatan hasil terdahulu, **tidak dijalankan ulang saat perapian dokumen**.
+
+| Tanggal (JST)             | Cakupan yang dilaporkan                                                                                                                                                                                                                                                      | Batas bukti                                                                                                                                                                    |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 10 Okt                    | Init database uji setelah dry-run 49 operasi aditif; login/logout, penolakan siswa, materi/ruby/tabel, resume/hasil/retry, mobile dan waktu Tokyo dengan server di zona lain.                                                                                                | Tidak reset; file picker DOCX, duplicate HTTP serentak dan pemulihan kegagalan belum tercakup penuh.                                                                           |
+| 15 Okt + tindak lanjut    | 19 tes/152 assertions; validasi, antrean simpan, kontras token, tema; integrasi draft/publication/material CRUD, snapshot, submission serentak, pencarian literal dan paginasi 20+1, proteksi role/owner. Editor materi diperiksa 375–1440 px dan fokus dialog.              | Integrasi action memakai header serta cache/redirect simulasi, bukan tes HTTP; bukan audit responsivitas/aksesibilitas seluruh aplikasi. Hapus browser hanya konfirmasi/batal. |
+| 21 Okt, latihan           | 21 tes/177 assertions; review tanpa kunci, pilihan false/kosong, fokus/keyboard; klik ganda menghasilkan satu hasil, retry attempt baru; tema gelap 390/768/1440 px.                                                                                                         | Tema terang, zoom 200% dan reduced motion tidak diuji ulang di sesi ini.                                                                                                       |
+| 21 Okt, hapus konten      | 22 tes/234 assertions; 51 pemeriksaan action/database untuk enam jenis konten, dependensi, riwayat, cascade soal, role dan race insert anak; dialog/fokus/batal desktop/mobile.                                                                                              | Hapus nyata lewat action fixture, bukan klik hapus permanen di browser.                                                                                                        |
+| 21–22 Okt, akun/pencarian | 23 tes/254 assertions; 68 pemeriksaan action/database termasuk normalisasi email, role, sesi, kredensial tetap, cascade/race riwayat; 16 kelompok browser/auth mencakup pencarian, form select, edit/cancel dan login email baru. Tiga endpoint admin terlarang memberi 404. | 68 pemeriksaan berasal dari 21 Okt, bukan diulang semuanya pada 22 Okt; browser production dan klik hapus permanen tidak diuji.                                                |
+| 23 Okt, audit             | 23 tes/254 assertions, TypeScript dan ESLint lulus.                                                                                                                                                                                                                          | Metadata database lokal gagal terhubung (`ECONNREFUSED`); browser/build/production tidak diverifikasi pada audit tersebut.                                                     |
+
+Laporan sesi 21–22 Okt mencatat build **Webpack** lulus. Build default Turbopack
+pada sesi 21 Okt gagal karena sandbox menolak binding port (`EPERM`); keberhasilan
+Webpack tidak membuktikan build default berhasil. Fixture/sesi sementara dilaporkan
+dibersihkan; laporan tersebut tidak mencatat deployment produksi. Jangan memakai
+hasil historis sebagai bukti source/environment terbaru lulus.
+
+## Verifikasi internationalization, 24 Oktober 2026
+
+Antarmuka Indonesia/Jepang memakai next-intl; pilihan bahasa ada pada login dan
+menu akun. Konten database tidak diterjemahkan. Suite otomatis setelah perubahan:
+27 tes lulus (1.201 assertions), termasuk kesamaan kunci katalog, render pesan ICU,
+validasi locale, feedback admin, serta judul/soal asli yang tetap utuh pada kedua
+bahasa. Tes render memakai provider next-intl dan mock dialog/action.
+
+Browser lokal yang sudah berjalan: Indonesia → Jepang berhasil pada Beranda,
+pilihan bertahan setelah reload, atribut html.lang menjadi ja, metadata dan tanggal
+mengikuti bahasa, dan menu Pengelolaan tampil dalam Jepang. Tidak melakukan
+mutasi konten atau database. Login/logout dan seluruh formulir belum diuji ulang.
+Pemeriksaan browser berikutnya terputus saat restart koneksi.
+
+TypeScript dan ESLint lulus. Build Webpack di sandbox awalnya gagal membaca
+output TypeScript --showConfig; percobaan ulang di luar sandbox selesai dan lulus
+sebelum penghentian pengujian tambahan. Tidak ada pemeriksaan lanjutan setelah
+permintaan untuk membatasi pengujian. Build Turbopack belum dipastikan.

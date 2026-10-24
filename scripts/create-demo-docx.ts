@@ -3,29 +3,43 @@ import JSZip from "jszip";
 
 export async function createDemoDocx() {
   const zip = new JSZip();
-  zip.file("[Content_Types].xml", `<?xml version="1.0" encoding="UTF-8"?>
+  zip.file(
+    "[Content_Types].xml",
+    `<?xml version="1.0" encoding="UTF-8"?>
     <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
       <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
       <Default Extension="xml" ContentType="application/xml"/>
       <Default Extension="png" ContentType="image/png"/>
       <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
       <Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>
-    </Types>`);
-  zip.file("_rels/.rels", `<?xml version="1.0" encoding="UTF-8"?>
+    </Types>`,
+  );
+  zip.file(
+    "_rels/.rels",
+    `<?xml version="1.0" encoding="UTF-8"?>
     <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
       <Relationship Id="document" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
-    </Relationships>`);
-  zip.file("word/styles.xml", `<?xml version="1.0" encoding="UTF-8"?>
+    </Relationships>`,
+  );
+  zip.file(
+    "word/styles.xml",
+    `<?xml version="1.0" encoding="UTF-8"?>
     <w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
       <w:style w:type="paragraph" w:styleId="Heading1"><w:name w:val="heading 1"/></w:style>
-    </w:styles>`);
-  zip.file("word/_rels/document.xml.rels", `<?xml version="1.0" encoding="UTF-8"?>
+    </w:styles>`,
+  );
+  zip.file(
+    "word/_rels/document.xml.rels",
+    `<?xml version="1.0" encoding="UTF-8"?>
     <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
       <Relationship Id="styles" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>
       <Relationship Id="demo-link" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink" Target="https://example.com" TargetMode="External"/>
       <Relationship Id="demo-image" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/demo.png"/>
-    </Relationships>`);
-  zip.file("word/document.xml", `<?xml version="1.0" encoding="UTF-8"?>
+    </Relationships>`,
+  );
+  zip.file(
+    "word/document.xml",
+    `<?xml version="1.0" encoding="UTF-8"?>
     <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
       xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
       xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing"
@@ -50,8 +64,15 @@ export async function createDemoDocx() {
             <pic:blipFill><a:blip r:embed="demo-image"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill>
             <pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="304800" cy="304800"/></a:xfrm><a:prstGeom prst="rect"/></pic:spPr>
           </pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>
-      <w:sectPr/></w:body></w:document>`);
-  zip.file("word/media/demo.png", Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a3l0AAAAASUVORK5CYII=", "base64"));
+      <w:sectPr/></w:body></w:document>`,
+  );
+  zip.file(
+    "word/media/demo.png",
+    Buffer.from(
+      "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a3l0AAAAASUVORK5CYII=",
+      "base64",
+    ),
+  );
   return zip.generateAsync({ type: "nodebuffer", compression: "DEFLATE" });
 }
 

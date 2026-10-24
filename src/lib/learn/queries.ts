@@ -22,7 +22,9 @@ export async function getSubjectsByTopic(topicId: string) {
     .include("material", (material) => material.select("id", "published"))
     .orderBy((subject) => subject.title.asc())
     .all();
-  return subjects.filter(({ material }) => material?.published).map(({ id, topicId, title, description }) => ({ id, topicId, title, description }));
+  return subjects
+    .filter(({ material }) => material?.published)
+    .map(({ id, topicId, title, description }) => ({ id, topicId, title, description }));
 }
 
 export async function getMaterial(topicId: string, subjectId: string) {

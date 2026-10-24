@@ -1,6 +1,6 @@
 # Genshu
 
-Genshu is a managed Japanese-learning portal with an Indonesian interface.
+Genshu is a managed Japanese-learning portal with Indonesian and Japanese interfaces.
 Administrators provision accounts; students sign in with email and password.
 
 ## Documentation
@@ -10,7 +10,6 @@ Administrators provision accounts; students sign in with email and password.
 - [Agent instructions](AGENTS.md): development conventions and when to read each document.
 - [Design](DESIGN.md): UI and interaction requirements.
 - [Demo and testing](docs/demo-testing.md): local fixtures, demo accounts and browser checklist.
-- [Developer guide](docs/developer-guide.md): compatibility links and dated verification evidence.
 
 ## Local setup
 
@@ -110,6 +109,40 @@ without resetting existing data. It refuses remote/production targets.
 See [demo accounts and the behavior checklist](docs/demo-testing.md) for login
 details, rerun behavior, and scenarios. `bun run db:seed` remains category-only.
 
+## Interface languages
+
+The interface uses next-intl with Indonesian (`id`, default) and Japanese (`ja`).
+Choose the language on the login page or in the account menu. A validated
+`genshu-locale` cookie remembers the preference for one year in that browser.
+URLs and authentication routes are unchanged; there is no language field in the
+database or automatic translation of stored content.
+
+Edit [messages/id.json](messages/id.json) and [messages/ja.json](messages/ja.json)
+together. Synchronous components use `useTranslations`; async server components
+and metadata use `getTranslations`. Dates displayed to users follow the chosen
+language while keeping Asia/Tokyo. Date input serialization remains unchanged.
+Known Server Action feedback is translated at the UI boundary; new feedback must
+be added to `src/i18n/feedback-keys.ts` and both catalogs. Unknown feedback and
+third-party DOCX conversion warnings are displayed as received.
+
+## Formatting
+
+Prettier uses two-space indentation, double quotes, semicolons, trailing commas,
+LF line endings and a target line width of 100. Configuration lives in
+[.prettierrc](.prettierrc); [.prettierignore](.prettierignore) excludes generated
+Prisma files, graphify output, installed agent skills, build output and lockfiles.
+
+```sh
+bun run format        # Format supported project files
+bun run format:check  # Check formatting without writing; suitable for CI
+```
+
+VS Code workspace settings enable formatting on save with the recommended
+Prettier extension (`esbenp.prettier-vscode`); install that extension to activate it.
+CLI scripts use the project's installed Prettier. ESLint remains a separate check.
+Existing files may need an initial `bun run format` before the full formatting
+check passes.
+
 ## Checks
 
 ```sh
@@ -121,7 +154,7 @@ bun run build
 
 Run relevant checks and record their scope. Unit/render tests do not prove live
 auth, database concurrency, browser uploads or deployment readiness. Historical
-build/browser results remain in the [developer guide](docs/developer-guide.md#historical-verification).
+results and their limits are summarized in [testing](docs/demo-testing.md#ringkasan-verifikasi-historis).
 Known limits, including the DOCX converter/request-size mismatch, are recorded in
 [architecture](docs/ARCHITECTURE.md#limits-and-verification); product decisions
 remain in [PRD](docs/PRD.md#unresolved-product-decisions).

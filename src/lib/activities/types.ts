@@ -6,11 +6,7 @@
 
 // src/lib/activities/types.ts
 
-export type ActivityType =
-  | "practice"
-  | "mock_exam"
-  | "exam"
-  | "assignment";
+export type ActivityType = "practice" | "mock_exam" | "exam" | "assignment";
 
 export type Question = {
   id: string;

@@ -15,6 +15,7 @@ This project has a knowledge graph at graphify-out/ with god nodes, community st
 When the user types `/graphify`, use the installed graphify skill or instructions before doing anything else.
 
 Rules:
+
 - For codebase questions, first run `graphify query "<question>"` when graphify-out/graph.json exists. Use `graphify path "<A>" "<B>"` for relationships and `graphify explain "<concept>"` for focused concepts. These return a scoped subgraph, usually much smaller than GRAPH_REPORT.md or raw grep output.
 - Dirty graphify-out/ files are expected after hooks or incremental updates; dirty graph files are not a reason to skip graphify. Only skip graphify if the task is about stale or incorrect graph output, or the user explicitly says not to use it.
 - If graphify-out/wiki/index.md exists, use it for broad navigation instead of raw source browsing.
@@ -27,7 +28,7 @@ Rules:
 - [PRD](docs/PRD.md): read before changing product behavior, roles, publication or practice policies; unresolved decisions are not requirements to implement silently.
 - [Architecture](docs/ARCHITECTURE.md): read before changing routes, auth, persistence, imports or cross-module data flows; follow its source links for details.
 - [Design](DESIGN.md): read for UI changes; reuse the existing shadcn Base UI components and semantic tokens.
-- [Demo/testing](docs/demo-testing.md): read for seed behavior, demo accounts and browser scenarios. The developer guide indexes dated verification evidence; do not load all historical reports by default.
+- [Demo/testing](docs/demo-testing.md): read for seed behavior, demo accounts and browser scenarios. Historical evidence and its limits are summarized there; read it only for testing tasks.
 
 ## Development boundaries
 
@@ -43,16 +44,16 @@ Rules:
 
 Run from the repository root with Bun. Package scripts are authoritative.
 
-| Purpose | Command |
-|---|---|
-| Development | `bun run dev` |
-| Automated tests | `bun run test` (includes the required `react-server` condition) |
-| Type check without writing incremental state | `bunx tsc --noEmit --incremental false` |
-| Lint | `bun run lint` |
-| Production build | `bun run build` (emits contract artifacts; does not migrate) |
-| Whitespace check | `git diff --check` |
-| Emit contract artifacts after contract changes | `bun run db:generate` |
-| Inspect schema initialization / migration state | `bun run db:init:preview` / `bun run db:status` |
+| Purpose                                         | Command                                                         |
+| ----------------------------------------------- | --------------------------------------------------------------- |
+| Development                                     | `bun run dev`                                                   |
+| Automated tests                                 | `bun run test` (includes the required `react-server` condition) |
+| Type check without writing incremental state    | `bunx tsc --noEmit --incremental false`                         |
+| Lint                                            | `bun run lint`                                                  |
+| Production build                                | `bun run build` (emits contract artifacts; does not migrate)    |
+| Whitespace check                                | `git diff --check`                                              |
+| Emit contract artifacts after contract changes  | `bun run db:generate`                                           |
+| Inspect schema initialization / migration state | `bun run db:init:preview` / `bun run db:status`                 |
 
 Database apply/seed commands are in README; do not run them merely to check docs.
 Choose checks for the change and report what actually ran. Helper/render tests do

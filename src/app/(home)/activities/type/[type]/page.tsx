@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 // NOTE: Kategori tidak valid/tidak ada adalah 404, sedangkan kategori tanpa
 // Activity adalah keadaan kosong yang normal. Database gagal dibaca adalah
 // error operasional dan ditangani boundary; ketiganya perlu dibedakan agar
@@ -15,6 +16,8 @@ export default async function ActivitiesByTypePage({
 }: {
   params: Promise<{ type: string }>;
 }) {
+  const t = await getTranslations("UI");
+
   const { type } = await params;
   const activityType = await getActivityCategory(type);
   if (!activityType) notFound();
@@ -22,13 +25,21 @@ export default async function ActivitiesByTypePage({
 
   return (
     <section className="flex flex-col gap-4">
-      <Link href="/activities" className="inline-flex min-h-11 items-center text-sm font-medium text-primary underline">← Semua latihan</Link>
+      <Link
+        href="/activities"
+        className="inline-flex min-h-11 items-center text-sm font-medium text-primary underline"
+      >
+        {t("Semua_latihan")}
+      </Link>
       <header>
         <h1>{activityType.title}</h1>
         <p className="text-muted-foreground">{activityType.description}</p>
       </header>
       {activities.length === 0 ? (
-        <CollectionEmpty title="Belum ada latihan" description="Latihan akan muncul setelah diterbitkan oleh guru Anda." />
+        <CollectionEmpty
+          title={t("Belum_ada_latihan")}
+          description={t("Latihan_akan_muncul_setelah_diterbitkan_oleh_guru_Anda")}
+        />
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {activities.map((activity) => (
